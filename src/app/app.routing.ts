@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'real-time', loadChildren: () => import('./components/real-time/real-time.module').then(m => m.RealTimeModule) },
+  { path: 'area-monitoring', loadChildren: () => import('@npt/npt-net').then(m => m.NptNetModule) },
 ];
 
 @NgModule({

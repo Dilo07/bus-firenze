@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { MaterialModule, TemplateNptModule } from '@npt/npt-template';
+import { ConfigInitService, getPropertyFromConfig, MaterialModule, TemplateNptModule } from '@npt/npt-template';
 import { MenuItemService } from './npt-template-menu/menu-item.service';
 import { environment } from 'src/environments/environment';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -40,6 +40,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     }),
   ],
   providers: [
+    // npt-net
+    { provide: 'viewOuter', useValue: 'viewOuter'},
+    {
+      provide: 'viewOuterData',
+      useFactory: getPropertyFromConfig, multi: false, deps: ['viewOuter', ConfigInitService]
+    },
+    { provide: 'net-geometry', useValue: 'Polygon' },  // Polygon, LineString, Point, MultiSelection
+    // npt template
     { provide: 'menuService', useClass: MenuItemService },
     { provide: 'header', useValue: environment.header },
     { provide: 'footer', useValue: environment.footer },

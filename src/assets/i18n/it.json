@@ -8,7 +8,8 @@
     },
     "MENU": {
         "Dashboard": "Dashboard",
-        "Real-time": "Real Time"
+        "Real-time": "Real Time",
+        "Area-monitoring": "Monitoriggio aree"
     },
     "ACCOUNT": {
         "PROFILE": "Profilo",
