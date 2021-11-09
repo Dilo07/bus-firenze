@@ -22,13 +22,17 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "allowedCommonJsDependencies": [
+              "keycloak-js",
+              "file-saver"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/@npt/npt-template/assets/styles/style.scss"
+              "node_modules/@npt/npt-template/assets/styles/style.scss",
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -91,8 +95,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/@npt/npt-template/assets/styles/style.scss"
+              "node_modules/@npt/npt-template/assets/styles/style.scss",
+              "src/styles.css"
             ],
             "scripts": []
           }

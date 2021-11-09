@@ -11,6 +11,9 @@ const SUBMENU_ROUTES = [
 const MENUITEMS = [
   {
     state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'home', children: [], roles: []
+  },
+  {
+    state: 'real-time', name: 'Real-time', type: 'link', icon: 'location_on', children: [], roles: []
   }
 ];
 

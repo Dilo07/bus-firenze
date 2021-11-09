@@ -9,7 +9,7 @@ export const environment = {
     configFile: 'assets/config/test/config-app.json',
   },
   header: {
-    img: 'assets/images/npt-dec-logo-mini.png',
+    img: 'assets/images/Logo_BUS_Firenze.png',
     title: 'BUS Firenze'
   },
   footer: {

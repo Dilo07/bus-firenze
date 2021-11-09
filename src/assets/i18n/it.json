@@ -8,8 +8,7 @@
     },
     "MENU": {
         "Dashboard": "Dashboard",
-        "Obu-summary": "Elenco Obu",
-        "Obu-details": "Dettagli Obu"
+        "Real-time": "Real Time"
     },
     "ACCOUNT": {
         "PROFILE": "Profilo",
