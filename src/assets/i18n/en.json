@@ -1,0 +1,44 @@
+{
+    "LANG": {
+        "EN": "English",
+        "IT": "Italian"
+    },
+    "WELCOME": {
+        "TITLE": "Welcome on APP"
+    },
+    "MENU": {
+        "Dashboard": "Dashboard",
+        "Obu-summary": "Obu summary",
+        "Obu-details": "Obu details"
+    },
+    "ACCOUNT": {
+        "PROFILE": "Profile",
+        "LOGOUT": "Log Out",
+        "DARK": "Dark theme",
+        "OLD-PASSWORD": "Insert old password",
+        "NEW-PASSWORD": "Insert new password",
+        "INSERT-PASSWORD": "Insert a password",
+        "CONFIRM-PASSWORD": "Confirm password",
+        "INCORRECT-PASSWORD": "The password not is correct",
+        "CHANGE-PASSWORD": "Change password",
+        "CANCEL": "Cancel",
+        "RULE-PASSWORD": "The password must have 8 carapter with almost one uppercase, on lowercase and one number",
+        "PASSWORD-DIFFERENT": "The two password inserted are different",
+        "ERROR": "password change not performed correctly",
+        "SUCCESS": "Password changed successfully"
+    },
+    "error": {
+        "generic": "Error server site"
+    },
+    "ERROR": {
+        "BE_ERROR": "Unreachable services"
+    },
+    "PAGINATOR": {
+        "ITEM": "Item for page",
+        "NEXT_PAGE": "Next page",
+        "PREVIOUS_PAGE": "Previous page",
+        "FIRST_PAGE": "First pagina",
+        "LAST_PAGE": "Last pagina",
+        "OF": "of"
+    }
+}

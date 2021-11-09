@@ -1,0 +1,44 @@
+{
+    "LANG": {
+        "EN": "Inglese",
+        "IT": "Italiano"
+    },
+    "WELCOME": {
+        "TITLE": "Benvenuto nell'APP"
+    },
+    "MENU": {
+        "Dashboard": "Dashboard",
+        "Obu-summary": "Elenco Obu",
+        "Obu-details": "Dettagli Obu"
+    },
+    "ACCOUNT": {
+        "PROFILE": "Profilo",
+        "LOGOUT": "Esci",
+        "DARK": "Tema scuro",
+        "OLD-PASSWORD": "Inserisci la vecchia password",
+        "NEW-PASSWORD": "Inserisci la nuova password",
+        "INSERT-PASSWORD": "Inserisci una password",
+        "CONFIRM-PASSWORD": "Conferma password",
+        "INCORRECT-PASSWORD": "La password non è corretta",
+        "CHANGE-PASSWORD": "Cambia password",
+        "CANCEL": "Annulla",
+        "RULE-PASSWORD": "E' richiesta una password di almeno 8 caratteri con almeno una lettera maiuscola, una minuscola ed un numero",
+        "PASSWORD-DIFFERENT": "Le password inserite sono diverse",
+        "ERROR": "Cambio password non eseguito correttamente",
+        "SUCCESS": "Password modificata correttamente"
+    },
+    "error": {
+        "generic": "Errore lato server"
+    },
+    "ERROR": {
+        "BE_ERROR": "Servizi non raggiungibili"
+    },
+    "PAGINATOR": {
+        "ITEM": "Elementi per pagina",
+        "NEXT_PAGE": "Pagina successiva",
+        "PREVIOUS_PAGE": "Pagina precedente",
+        "FIRST_PAGE": "Prima pagina",
+        "LAST_PAGE": "Ultima pagina",
+        "OF": "di"
+    }
+}

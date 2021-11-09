@@ -1,0 +1,21 @@
+{
+  "keycloak_url": "https://n4800038.gruppo.autostrade.it",
+  "keycloak_realm": "genova-dev-realm",
+  "keycloak_clientId": "genova-lacele-id",
+  "be_url": "http://localhost:9093",
+  "context_app": "",
+  "viewOuter" : false,
+  "rangeDateStatisticVehicle": null,
+  "no_auth": {
+    "roles": ["comune", "installer", "movyon", "fleet"],
+    "user": {
+      "id": "myID",
+      "username": "TEST USERNAME",
+      "email": "movyon@movyon.it",
+      "firstName": "movyon",
+      "lastName": "movyon",
+      "enabled": true,
+      "emailVerified": true
+    }
+  }
+}

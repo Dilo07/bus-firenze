@@ -1,0 +1,47 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppRoutingModule } from './app.routing';
+import { AppComponent } from './app.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MaterialModule, TemplateNptModule } from '@npt/npt-template';
+import { MenuItemService } from './npt-template-menu/menu-item.service';
+import { environment } from 'src/environments/environment';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    DashboardComponent
+  ],
+  imports: [
+    TemplateNptModule,
+    MaterialModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
+  ],
+  providers: [
+    { provide: 'menuService', useClass: MenuItemService },
+    { provide: 'header', useValue: environment.header },
+    { provide: 'footer', useValue: environment.footer },
+    { provide: 'dashboard', useValue: '/dashboard'},
+    { provide: 'env', useValue: environment.security },
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
