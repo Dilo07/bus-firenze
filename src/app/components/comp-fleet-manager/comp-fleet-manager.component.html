@@ -52,7 +52,7 @@
 						<button mat-icon-button matTooltip="Edit">
 							<mat-icon style="color: #0066CC;">edit</mat-icon>
 						</button>
-						<button mat-icon-button matTooltip="Veicoli" [routerLink]="['vehicles']">
+						<button mat-icon-button matTooltip="Veicoli" [routerLink]="['vehicles']" [state]="{fleetManager: element}">
 							<mat-icon style="color: #0066CC;">directions_car</mat-icon>
 						</button>
 						<button mat-icon-button matTooltip="Cancella">

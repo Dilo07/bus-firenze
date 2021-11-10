@@ -12,7 +12,23 @@ export interface FleetManager {
     vehicleId?: number;
 }
 
-export interface Contact{
+export interface Contact {
     code: number;
     value: string;
+}
+
+export interface Vehicle {
+    id: number;
+    fleetManagerId: number;
+    lpn: string;
+    lpnNat: string;
+    euroClass: number;
+    europeanGroup: number;
+    europeanGroupLabel: string;
+    numAxis: number;
+    maxWeight: number;
+    associationDate: Date;
+    appointmentDate: Date;
+    obuId: string;
+    hardware: number;
 }
