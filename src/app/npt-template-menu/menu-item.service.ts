@@ -15,6 +15,7 @@ const SUBMENU_ROUTES = [
   { state: 'change-obu', name: 'Change-obu', icon: 'build', roles: [ROLES.INSTALLER] },
   { state: 'remove-obu', name: 'Remove-obu', icon: 'build', roles: [ROLES.INSTALLER] },
   { state: 'change-plate', name: 'Change-plate', icon: 'build', roles: [ROLES.INSTALLER] },
+  { state: 'vehicles', name: 'Vehicles', icon: 'build', roles: [ROLES.FLEETMNG] },
 ];
 
 const MENUITEMS = [
@@ -28,7 +29,12 @@ const MENUITEMS = [
     state: 'area-monitoring', name: 'Area-monitoring', type: 'link', icon: 'assignment', children: [], roles: []
   },
   {
-    state: 'fleet-manager', name: 'Fleet-manager', type: 'link', icon: 'manage_accounts', children: [], roles: []
+    state: 'fleet-manager', name: 'Fleet-manager', type: 'link', icon: 'manage_accounts',
+    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+  },
+  {
+    state: 'vehicles-fleet-manager', name: 'Vehicles-Fleet', type: 'submenu', icon: 'manage_accounts',
+    children: [SUBMENU_ROUTES[4]], roles: [ROLES.FLEETMNG]
   },
   {
     state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'assignment',

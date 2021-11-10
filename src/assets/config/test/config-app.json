@@ -7,7 +7,7 @@
   "viewOuter" : false,
   "rangeDateStatisticVehicle": null,
   "no_auth": {
-    "roles": ["comune", "installer", "movyon", "fleet"],
+    "roles": ["comune", "installer", "movyon"],
     "user": {
       "id": "myID",
       "username": "TEST USERNAME",

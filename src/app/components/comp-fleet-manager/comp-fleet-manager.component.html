@@ -5,20 +5,22 @@
 			<span fxFlex="20">
 				<button mat-button class="greenButtons"> nuovo </button>
 			</span>
-			<div fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+			<form [formGroup]="Search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field fxFlex="30">
-					<input matInput type="search" [(ngModel)]="searchFleet" placeholder="cerca" autocomplete="off">
+					<input matInput type="search" formControlName="CtrlSearch" placeholder="cerca" autocomplete="off">
 				</mat-form-field>
 				<button mat-icon-button (click)="callGetFleetManager()">
 					<mat-icon matPrefix>search</mat-icon>
 				</button>
-			</div>
-			<table mat-table [dataSource]="fleetManagerList" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc">
+			</form>
+			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+			<table mat-table [dataSource]="fleetManagerList" style="background-color: beige;" class="mat-elevation-z8"
+				matSort matSortActive="id" matSortDirection="asc">
 				<ng-container matColumnDef="id">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
 					<td mat-cell *matCellDef="let element"> {{element.id}} </td>
 				</ng-container>
-			
+
 				<ng-container matColumnDef="name">
 					<th mat-header-cell *matHeaderCellDef> name </th>
 					<td mat-cell *matCellDef="let element"> {{ element.name}} </td>
@@ -28,10 +30,43 @@
 					<th mat-header-cell *matHeaderCellDef> surname </th>
 					<td mat-cell *matCellDef="let element"> {{ element.surname}} </td>
 				</ng-container>
-			
-				<tr mat-header-row *matHeaderRowDef="displayedColumns" [style.display]="fleetManagerList.data.length === 0 ? 'none' : '' "></tr>
+
+				<ng-container matColumnDef="companyName">
+					<th mat-header-cell *matHeaderCellDef> companyName </th>
+					<td mat-cell *matCellDef="let element"> {{ element.companyName}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="city">
+					<th mat-header-cell *matHeaderCellDef> city </th>
+					<td mat-cell *matCellDef="let element"> {{ element.city}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="district">
+					<th mat-header-cell *matHeaderCellDef> district </th>
+					<td mat-cell *matCellDef="let element"> {{ element.district}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="actions">
+					<th mat-header-cell *matHeaderCellDef> </th>
+					<td mat-cell *matCellDef="let element" style="text-align: end;">
+						<button mat-icon-button matTooltip="Edit">
+							<mat-icon style="color: #0066CC;">edit</mat-icon>
+						</button>
+						<button mat-icon-button matTooltip="Veicoli" [routerLink]="['vehicles']">
+							<mat-icon style="color: #0066CC;">directions_car</mat-icon>
+						</button>
+						<button mat-icon-button matTooltip="Cancella">
+							<mat-icon style="color: red;">delete</mat-icon>
+						</button>
+					</td>
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"
+					[style.display]="fleetManagerList.data.length === 0 ? 'none' : '' "></tr>
 				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 			</table>
+			<mat-paginator [style.display]="fleetManagerList.data.length === 0 ? 'none' : '' "
+				[pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
 		</div>
 	</mat-card-content>
 </mat-card>
