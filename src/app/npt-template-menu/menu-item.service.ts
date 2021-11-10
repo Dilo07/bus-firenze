@@ -11,10 +11,10 @@ export const ROLES = Object.freeze({
 });
 
 const SUBMENU_ROUTES = [
-  { state: 'assign-obu', name: 'Assign-obu', icon: 'build', roles: [] },
-  { state: 'change-obu', name: 'Change-obu', icon: 'build', roles: [] },
-  { state: 'remove-obu', name: 'Remove-obu', icon: 'build', roles: [] },
-  { state: 'change-plate', name: 'Change-plate', icon: 'build', roles: [] },
+  { state: 'assign-obu', name: 'Assign-obu', icon: 'build', roles: [ROLES.INSTALLER] },
+  { state: 'change-obu', name: 'Change-obu', icon: 'build', roles: [ROLES.INSTALLER] },
+  { state: 'remove-obu', name: 'Remove-obu', icon: 'build', roles: [ROLES.INSTALLER] },
+  { state: 'change-plate', name: 'Change-plate', icon: 'build', roles: [ROLES.INSTALLER] },
 ];
 
 const MENUITEMS = [
@@ -33,7 +33,7 @@ const MENUITEMS = [
   {
     state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'assignment',
     children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1], SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]],
-    roles: []
+    roles: [ROLES.INSTALLER]
   },
 ];
 

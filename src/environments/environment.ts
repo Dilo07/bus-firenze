@@ -1,12 +1,14 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+const packageObj = require('../../package.json');
+const version = packageObj.version;
 
 export const environment = {
   production: false,
   security: {
     type: 'noAuth', // noAuth - keycloak.
-    configFile: 'assets/config/test/config-app.json',
+    configFile: 'assets/config/test/config-app.json?version=' + version
   },
   header: {
     img: 'assets/images/Logo_BUS_Firenze.png',
