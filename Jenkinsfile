@@ -20,7 +20,7 @@ pipeline {
         VERSION  = '0.0.0'       
         MASTER_BRANCH_NAME = 'main'
         NEXUS_DEPLOY = true
-        UPDATE_GIT = false
+        UPDATE_GIT = true
         MOVE_JIRA_ISSUE = false
         COPY_ARTIFACT = false
         FOLDER_ARTIFACT_COPY = "dev-tech/ATECH-NPT/Dev/${ARTIFACT}"
