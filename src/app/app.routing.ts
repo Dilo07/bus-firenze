@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'fleet-manager',
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
+  },
+  {
+    path: 'manage-obu',
+    loadChildren: () => import('./components/compo-manage-obu/manage-obu.module').then(m => m.ManageObuModule)
   }
 ];
 

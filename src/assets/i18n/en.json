@@ -10,7 +10,12 @@
         "Dashboard": "Dashboard",
         "Real-time": "Real Time",
         "Area-monitoring": "Area monitoring",
-        "Fleet-manager": "Fleet manager"
+        "Fleet-manager": "Fleet manager",
+        "Manage-obu": "Manage obu",
+        "Assign-obu": "Assign obu",
+        "Change-obu": "Change obu",
+        "Remove-obu": "Remove obu",
+        "Change-plate": "Change plate"
     },
     "ACCOUNT": {
         "PROFILE": "Profile",

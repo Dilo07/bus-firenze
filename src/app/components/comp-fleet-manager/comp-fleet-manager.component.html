@@ -1,5 +1,18 @@
 <mat-card>
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
 	<mat-card-content>
-    </mat-card-content>
+		<div fxLayout="column" fxLayoutGap="20px">
+			<span fxFlex="20">
+				<button mat-button class="greenButtons"> nuovo </button>
+			</span>
+			<form fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+				<mat-form-field fxFlex="30">
+					<input matInput type="search" placeholder="cerca per nome" autocomplete="off">
+				</mat-form-field>
+				<button mat-icon-button>
+					<mat-icon matPrefix>search</mat-icon>
+				</button>
+			</form>
+		</div>
+	</mat-card-content>
 </mat-card>
