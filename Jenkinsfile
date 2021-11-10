@@ -20,9 +20,9 @@ pipeline {
         VERSION  = '0.0.0'       
         MASTER_BRANCH_NAME = 'main'
         NEXUS_DEPLOY = true
-        UPDATE_GIT = false
-        MOVE_JIRA_ISSUE = false
-        COPY_ARTIFACT = false
+        UPDATE_GIT = true
+        MOVE_JIRA_ISSUE = true
+        COPY_ARTIFACT = true
         FOLDER_ARTIFACT_COPY = "dev-tech/ATECH-NPT/Dev/${ARTIFACT}"
         FOLDER = "dist"
         ARTIFACT_INCLUDE_GLO="*.zip"
@@ -35,7 +35,6 @@ pipeline {
                     echo "Set Environment "
                     def packageJSON = readJSON file: 'package.json'
                     echo "version: ${packageJSON['version']}"
-                    ARTIFACT = "${packageJSON.name}"
                     VERSION = packageJSON['version']
                     echo "Environment ${ARTIFACT} - ${VERSION}"
                 }
