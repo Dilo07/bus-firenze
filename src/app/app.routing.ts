@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/comp-dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'real-time', loadChildren: () => import('./components/real-time/real-time.module').then(m => m.RealTimeModule) },
+  { path: 'real-time', loadChildren: () => import('./components/comp-real-time/real-time.module').then(m => m.RealTimeModule) },
   { path: 'area-monitoring', loadChildren: () => import('@npt/npt-net').then(m => m.NptNetModule) },
+  {
+    path: 'fleet-manager',
+    loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
+  }
 ];
 
 @NgModule({

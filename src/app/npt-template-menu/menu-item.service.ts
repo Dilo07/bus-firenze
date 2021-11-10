@@ -3,7 +3,11 @@ import { IMenuItemService, Menu } from '@npt/npt-template';
 
 /* Roles allowed by the application */
 export const ROLES = Object.freeze({
-  DRIVER: 'driver'
+  DRIVER: 'driver',
+  INSTALLER: 'installer',
+  MOVYON: 'movyon',
+  OPER_MOVYON: 'op_movyon',
+  FLEETMNG: 'fleet'
 });
 
 const SUBMENU_ROUTES = [
@@ -18,6 +22,9 @@ const MENUITEMS = [
   },
   {
     state: 'area-monitoring', name: 'Area-monitoring', type: 'link', icon: 'assignment', children: [], roles: []
+  },
+  {
+    state: 'fleet-manager', name: 'Fleet-manager', type: 'link', icon: 'manage_accounts', children: [], roles: []
   }
 ];
 

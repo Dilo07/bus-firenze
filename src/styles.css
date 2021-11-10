@@ -1,5 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* npt-template style */
 .topbar {
     background-color: #E4010B !important;
+}
+
+/* snackbar */
+
+.ERROR {
+    background-color: #FF0000 !important;
+    color: white !important;
 }

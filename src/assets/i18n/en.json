@@ -9,7 +9,8 @@
     "MENU": {
         "Dashboard": "Dashboard",
         "Real-time": "Real Time",
-        "Area-monitoring": "Area monitoring"
+        "Area-monitoring": "Area monitoring",
+        "Fleet-manager": "Fleet manager"
     },
     "ACCOUNT": {
         "PROFILE": "Profile",

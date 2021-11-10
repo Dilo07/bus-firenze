@@ -9,7 +9,8 @@
     "MENU": {
         "Dashboard": "Dashboard",
         "Real-time": "Real Time",
-        "Area-monitoring": "Monitoriggio aree"
+        "Area-monitoring": "Monitoriggio aree",
+        "Fleet-manager": "Fleet manager"
     },
     "ACCOUNT": {
         "PROFILE": "Profilo",
