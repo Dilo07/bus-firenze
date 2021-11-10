@@ -5,6 +5,7 @@ import { FleetManagerRoutingModule } from './fleet-manager.routing';
 import { FleetManagerComponent } from './comp-fleet-manager.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@npt/npt-template';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,6 +16,8 @@ import { MaterialModule } from '@npt/npt-template';
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     FleetManagerRoutingModule
   ]
 })

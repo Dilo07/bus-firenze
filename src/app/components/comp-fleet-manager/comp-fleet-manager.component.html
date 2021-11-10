@@ -5,14 +5,33 @@
 			<span fxFlex="20">
 				<button mat-button class="greenButtons"> nuovo </button>
 			</span>
-			<form fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+			<div fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field fxFlex="30">
-					<input matInput type="search" placeholder="cerca per nome" autocomplete="off">
+					<input matInput type="search" [(ngModel)]="searchFleet" placeholder="cerca" autocomplete="off">
 				</mat-form-field>
-				<button mat-icon-button>
+				<button mat-icon-button (click)="callGetFleetManager()">
 					<mat-icon matPrefix>search</mat-icon>
 				</button>
-			</form>
+			</div>
+			<table mat-table [dataSource]="fleetManagerList" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc">
+				<ng-container matColumnDef="id">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
+					<td mat-cell *matCellDef="let element"> {{element.id}} </td>
+				</ng-container>
+			
+				<ng-container matColumnDef="name">
+					<th mat-header-cell *matHeaderCellDef> name </th>
+					<td mat-cell *matCellDef="let element"> {{ element.name}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="surname">
+					<th mat-header-cell *matHeaderCellDef> surname </th>
+					<td mat-cell *matCellDef="let element"> {{ element.surname}} </td>
+				</ng-container>
+			
+				<tr mat-header-row *matHeaderRowDef="displayedColumns" [style.display]="fleetManagerList.data.length === 0 ? 'none' : '' "></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
 		</div>
 	</mat-card-content>
 </mat-card>
