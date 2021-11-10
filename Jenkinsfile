@@ -16,11 +16,11 @@ pipeline {
    
     environment { 
         GIT_AUTH = credentials('GIT_CREDENTIALS') 
-        ARTIFACT = "bus-firenze-gui"
+        ARTIFACT = "${params.RNM_SUBCOMPONENT}"
         VERSION  = '0.0.0'       
         MASTER_BRANCH_NAME = 'main'
         NEXUS_DEPLOY = true
-        UPDATE_GIT = true
+        UPDATE_GIT = false
         MOVE_JIRA_ISSUE = false
         COPY_ARTIFACT = false
         FOLDER_ARTIFACT_COPY = "dev-tech/ATECH-NPT/Dev/${ARTIFACT}"
@@ -60,7 +60,7 @@ pipeline {
                     if (env.NEXUS_DEPLOY.toBoolean()) {
                         nodejs(nodeJSInstallationName: 'Node-14.17.0', configId: 'd1fbb428-bc33-489b-bb11-e2e807e439d9') {
                             echo "Zip ${ARTIFACT} - ${VERSION}"
-                            zip zipFile: "${ARTIFACT}.zip", archive: false, dir: "dist"                               
+                            zip zipFile: "${ARTIFACT}.zip", archive: false, dir: "${FOLDER}"                               
                         }
                     }
                 }
@@ -85,7 +85,7 @@ pipeline {
                     if (env.NEXUS_DEPLOY.toBoolean()) {
                         nodejs(nodeJSInstallationName: 'Node-14.17.0', configId: 'd1fbb428-bc33-489b-bb11-e2e807e439d9') {
                             echo "Zip ${ARTIFACT} - ${VERSION}"
-                            zip zipFile: "${ARTIFACT}-AWS.zip", archive: false, dir: "dist"                               
+                            zip zipFile: "${ARTIFACT}-AWS.zip", archive: false, dir: "${FOLDER}"                               
                         }
                     }
                 }
