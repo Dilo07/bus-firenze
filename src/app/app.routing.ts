@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@npt/npt-template';
 import { DashboardComponent } from './components/comp-dashboard/dashboard.component';
+import { ROLES } from './npt-template-menu/menu-item.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'dashboard', component: DashboardComponent,
+    canActivate: [AuthGuard], data: { roles: [ROLES.DRIVER, ROLES.FLEETMNG, ROLES.INSTALLER, ROLES.OPER_MOVYON, ROLES.MOVYON] }
+  },
   { path: 'real-time', loadChildren: () => import('./components/comp-real-time/real-time.module').then(m => m.RealTimeModule) },
   { path: 'area-monitoring', loadChildren: () => import('@npt/npt-net').then(m => m.NptNetModule) },
   {

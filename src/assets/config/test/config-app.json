@@ -5,6 +5,7 @@
   "be_url": "http://localhost:9093",
   "context_app": "",
   "viewOuter" : false,
+  "flow_implicit": false,
   "rangeDateStatisticVehicle": null,
   "no_auth": {
     "roles": ["driver", "movyon", "op_movyon"],

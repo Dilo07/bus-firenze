@@ -52,7 +52,7 @@
 						<button mat-icon-button matTooltip="Edit" [routerLink]="['form-Fleet']" [state]="{fleetManager: element}">
 							<mat-icon style="color: #0066CC;">edit</mat-icon>
 						</button>
-						<button mat-icon-button matTooltip="Cancella">
+						<button mat-icon-button matTooltip="Cancella" (click)="deleteFleetManager(element.id)">
 							<mat-icon style="color: red;">delete</mat-icon>
 						</button>
 						<button mat-icon-button matTooltip="Veicoli" [routerLink]="['vehicles']" [state]="{fleetManager: element}">

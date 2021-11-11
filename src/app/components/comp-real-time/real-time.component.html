@@ -1,6 +1,11 @@
 <mat-card>
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Real-Time</mat-card-title>
 	<mat-card-content>
-        <lib-npt-map [zoom]=15 [center]="[11.206119915108518, 43.81031349352526]"></lib-npt-map>
+        <div fxLayout="column" fxLayoutGap="20px">
+			<span fxFlex="20">
+				<button mat-button class="backButton" (click)="backFromRealTime()">{{'FLEET-MANAGER.BACK' | translate}}</button>
+			</span>
+            <lib-npt-map [zoom]=15 [center]="[11.206119915108518, 43.81031349352526]"></lib-npt-map>
+        </div>
     </mat-card-content>
 </mat-card>

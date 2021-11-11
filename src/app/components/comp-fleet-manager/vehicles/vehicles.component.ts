@@ -26,14 +26,7 @@ export class VehiclesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getVehiclesByManagerId();
-    /* if (this.router.url === '/fleet-manager/vehicles'){
-      this.getVehiclesByManagerId();
-    }
-    if (this.router.url === '/vehicles-fleet-manager/vehicles'){
-      // for fleet user
-      this.getVehiclesFleet();
-    } */
+    this.getVehiclesByManagerId(); // sia per fleet che op_movyon
   }
 
   public getVehiclesByManagerId(): void{

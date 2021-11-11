@@ -21,3 +21,12 @@
 .greenButtons:hover {
     background-color: rgb(46, 175, 46);
 }
+
+.backButton {
+    background-color: gray;
+    color: white;
+}
+
+.backButton:hover {
+    background-color: #616161;
+}

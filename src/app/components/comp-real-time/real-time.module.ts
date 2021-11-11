@@ -6,6 +6,7 @@ import { RealTimeComponent } from './real-time.component';
 import { NptMapModule } from '@npt/npt-map';
 import { MaterialModule } from '@npt/npt-template';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     NptMapModule,
     MaterialModule,
     FlexLayoutModule,
+    TranslateModule,
     RealTimeRoutingModule
   ]
 })

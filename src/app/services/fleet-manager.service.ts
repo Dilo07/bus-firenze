@@ -4,7 +4,6 @@ import { HttpUtils } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FleetManager, Vehicle } from '../components/domain/bus-firenze-domain';
-import { getFleetManager, getVehicles } from './mokup/getFleetmanager';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,6 @@ export class FleetManagerService {
   searchFleetManager(keywords: string): Observable<FleetManager[]> {
     return this.http.get<FleetManager[]>(this.apiUrl + '/search/?keyword=' + keywords)
       .pipe(catchError(err => { throw err; }));
-    /* return of(this.fleetManager); */
   }
 
   getVehiclesById(onlyActive: boolean, fleetManagerId?: number, keywords?: string): Observable<Vehicle[]> {
@@ -33,6 +31,10 @@ export class FleetManagerService {
     return this.http.get<Vehicle[]>(
       this.apiUrl + url + '/vehicles/' + onlyActive, options)
       .pipe(catchError(err => { throw err; }));
-    /* return of(this.vehicles); */
+  }
+
+  deleteFleetManager(id: number): Observable<void> {
+    return this.http.delete<void>(this.apiUrl + '/delete/' + id)
+      .pipe(catchError(err => { throw err; }));
   }
 }

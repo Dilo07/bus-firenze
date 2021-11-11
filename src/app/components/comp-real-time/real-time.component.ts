@@ -18,4 +18,10 @@ export class RealTimeComponent implements OnInit {
     console.log(this.fleetManager);
   }
 
+  public backFromRealTime(): void {
+    if (this.fleetManager) {
+      this.router.navigate(['../fleet-manager'], { state: { fleetManager: this.fleetManager } });
+    }
+  }
+
 }

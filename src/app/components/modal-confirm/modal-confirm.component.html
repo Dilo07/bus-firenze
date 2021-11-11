@@ -1,0 +1,9 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <p> {{data.text | translate}}</p>
+    <div fxLayout="row" fxLayoutGap="20px">
+        <button mat-button (click)="dialogRef.close(true)" class="actionConfirmYes">
+            {{'COMMON.ACTION.YES' | translate}}
+        </button>
+        <button mat-button (click)="dialogRef.close(false)" class="actionConfirmNo"> no </button>
+    </div>
+</div>
