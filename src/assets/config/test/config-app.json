@@ -1,14 +1,15 @@
 {
   "keycloak_url": "https://n4800038.gruppo.autostrade.it",
-  "keycloak_realm": "genova-dev-realm",
-  "keycloak_clientId": "genova-lacele-id",
+  "keycloak_realm": "bus-firenze-dev-realm",
+  "keycloak_clientId": "bus-firenze-locale-id",
+  "flow_implicit": false,
   "be_url": "http://localhost:9093",
   "context_app": "",
   "viewOuter" : false,
   "flow_implicit": false,
   "rangeDateStatisticVehicle": null,
   "no_auth": {
-    "roles": ["driver", "movyon", "op_movyon"],
+    "roles": ["comune", "installer", "movyon", "fleet"],
     "user": {
       "id": "myID",
       "username": "TEST USERNAME",

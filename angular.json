@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ztl-busFi-gui": {
+    "bus-firenze-gui": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -16,13 +16,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ztl-busFi-gui",
+            "outputPath": "dist/bus-firenze-gui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "allowedCommonJsDependencies": [
+              "rxjs-compat",
+              "rxjs",
               "keycloak-js",
               "file-saver"
             ],
@@ -70,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ztl-busFi-gui:build"
+            "browserTarget": "bus-firenze-gui:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ztl-busFi-gui:build:production"
+              "browserTarget": "bus-firenze-gui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ztl-busFi-gui:build"
+            "browserTarget": "bus-firenze-gui:build"
           }
         },
         "test": {
@@ -119,16 +121,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ztl-busFi-gui:serve"
+            "devServerTarget": "bus-firenze-gui:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ztl-busFi-gui:serve:production"
+              "devServerTarget": "bus-firenze-gui:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "ztl-busFi-gui"
+  "defaultProject": "bus-firenze-gui"
 }
