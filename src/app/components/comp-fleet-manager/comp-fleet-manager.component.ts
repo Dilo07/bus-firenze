@@ -8,10 +8,10 @@ import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FleetManager } from '../domain/bus-firenze-domain';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SessionService } from '@npt/npt-template';
-import { FIRENZE_SESSION } from '../domain/bus-firenze-constants';
 import { Subscription } from 'rxjs';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 import { TranslateService } from '@ngx-translate/core';
+import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
 
 @Component({
   selector: 'app-comp-fleet-manager',
@@ -43,7 +43,7 @@ export class FleetManagerComponent implements OnInit {
 
   ngOnInit(): void {
     this.Search = this.formBuilder.group({
-      CtrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.FLEETSEARCH), Validators.required],
+      CtrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.FLEETSEARCH)],
     });
     if (this.Search.get('CtrlSearch').value) {
       this.callGetFleetManager();

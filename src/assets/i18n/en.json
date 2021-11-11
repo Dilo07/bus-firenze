@@ -87,6 +87,10 @@
         "VEHICLESIZE": "# Vehicles",
         "CONTACT": "Contact"
     },
+    "VEHICLE":{
+        "TITLE": "Vehicles",
+        "SEARCH": "Search for plate or Obu Id"
+    },
     "COMMON": {
         "ACTION": {
             "YES": "Yes"

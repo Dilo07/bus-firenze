@@ -1,10 +1,20 @@
 <mat-card>
-	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Vehicles</mat-card-title>
+	<mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
 			<span fxFlex="20">
 				<button mat-button class="backButton" [routerLink]="['../']">{{'FLEET-MANAGER.BACK' |translate}}</button>
 			</span>
+			<form [formGroup]="Search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+				<mat-form-field appearance="fill" fxFlex="30">
+					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>
+					<input matInput type="search" formControlName="CtrlSearch" placeholder="cerca" autocomplete="off">
+				</mat-form-field>
+				<button mat-icon-button (click)="getVehiclesByManagerId()">
+					<mat-icon matPrefix>search</mat-icon>
+				</button>
+			</form>
+			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<table mat-table [dataSource]="vehicleList" style="background-color: beige;" class="mat-elevation-z8"
 				matSort matSortActive="id" matSortDirection="asc">
 				<ng-container matColumnDef="id">

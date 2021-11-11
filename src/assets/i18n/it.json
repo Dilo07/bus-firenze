@@ -87,6 +87,10 @@
         "VEHICLESIZE": "N° Veicoli",
         "CONTACT": "Contatto"
     },
+    "VEHICLE":{
+        "TITLE": "Veicoli",
+        "SEARCH": "Ricerca per targa o Obu Id"
+    },
     "COMMON": {
         "ACTION": {
             "YES": "Si"

@@ -26,7 +26,8 @@ const MENUITEMS = [
     state: 'real-time', name: 'Real-time', type: 'link', icon: 'location_on', children: [], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'area-monitoring', name: 'Area-monitoring', type: 'link', icon: 'assignment', children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    state: 'area-monitoring', name: 'Area-monitoring', type: 'link', icon: 'assignment',
+    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
     state: 'fleet-manager', name: 'Fleet-manager', type: 'link', icon: 'manage_accounts',

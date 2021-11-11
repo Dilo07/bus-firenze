@@ -5,7 +5,21 @@
 			<span fxFlex="20">
 				<button mat-button class="backButton" (click)="backFromRealTime()">{{'FLEET-MANAGER.BACK' | translate}}</button>
 			</span>
-            <lib-npt-map [zoom]=15 [center]="[11.206119915108518, 43.81031349352526]"></lib-npt-map>
+			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+			<mat-tab-group mat-align-tabs="center">
+				<mat-tab label="mappa">
+					<mat-card fxFlex.gt-lg="100" fxFlex.gt-md="100" fxFlex.gt-xs="100" fxFlex="100">
+						<lib-npt-map [zoom]=15 [center]="[11.206119915108518, 43.81031349352526]" (mapReady)="onMapReady($event)"></lib-npt-map>
+					</mat-card>
+				</mat-tab>
+				<mat-tab label="tabella">
+					<mat-card>
+						<mat-card-content>
+							tabella
+						</mat-card-content>
+					</mat-card>
+				</mat-tab>
+			</mat-tab-group>
         </div>
     </mat-card-content>
 </mat-card>
