@@ -7,7 +7,7 @@
   "viewOuter" : false,
   "rangeDateStatisticVehicle": null,
   "no_auth": {
-    "roles": ["driver", "movyon", "op_movyon"],
+    "roles": ["driver", "installer", "fleet", "movyon", "op_movyon"],
     "user": {
       "id": "myID",
       "username": "TEST USERNAME",

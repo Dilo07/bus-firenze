@@ -4,6 +4,7 @@ import { HttpUtils } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FleetManager, Vehicle } from '../components/domain/bus-firenze-domain';
+import { getFleetManager, getVehicles } from './mokup/getFleetmanager';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +15,24 @@ export class FleetManagerService {
 
   private apiUrl = this.url + '/api/fleet';
 
-  searchFleetManager(keywords: string): Observable<FleetManager[]>{
+  searchFleetManager(keywords: string): Observable<FleetManager[]> {
     return this.http.get<FleetManager[]>(this.apiUrl + '/search/?keyword=' + keywords)
-            .pipe(catchError(err => { throw err; }));
+      .pipe(catchError(err => { throw err; }));
+    /* return of(this.fleetManager); */
   }
 
-  getVehiclesById(fleetManagerId: number, onlyActive: boolean, keywords?: string): Observable<Vehicle[]> {
+  getVehiclesById(onlyActive: boolean, fleetManagerId?: number, keywords?: string): Observable<Vehicle[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ keywords })
-  };
+    };
+    let url = '';
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
     return this.http.get<Vehicle[]>(
-      this.apiUrl + '/' + fleetManagerId + '/vehicles/' + onlyActive, options)
+      this.apiUrl + url + '/vehicles/' + onlyActive, options)
       .pipe(catchError(err => { throw err; }));
+    /* return of(this.vehicles); */
   }
 }

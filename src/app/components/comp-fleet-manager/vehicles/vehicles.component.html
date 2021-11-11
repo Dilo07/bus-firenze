@@ -18,6 +18,17 @@
 					<td mat-cell *matCellDef="let element"> {{ element.lpnNat}} </td>
 				</ng-container>
 
+				<ng-container matColumnDef="euroClass">
+					<th mat-header-cell *matHeaderCellDef> euroClass </th>
+					<td mat-cell *matCellDef="let element"> {{ element.euroClass}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="obuId">
+					<th mat-header-cell *matHeaderCellDef> obuId </th>
+					<td mat-cell *matCellDef="let element"> {{ element.obuId}} </td>
+				</ng-container>
+				
+
 				<tr mat-header-row *matHeaderRowDef="displayedColumns"
 					[style.display]="vehicleList.data.length === 0 ? 'none' : '' "></tr>
 				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

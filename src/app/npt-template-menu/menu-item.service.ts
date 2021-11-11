@@ -23,7 +23,7 @@ const MENUITEMS = [
     state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'home', children: [], roles: []
   },
   {
-    state: 'real-time', name: 'Real-time', type: 'link', icon: 'location_on', children: [], roles: []
+    state: 'real-time', name: 'Real-time', type: 'link', icon: 'location_on', children: [], roles: [ROLES.FLEETMNG]
   },
   {
     state: 'area-monitoring', name: 'Area-monitoring', type: 'link', icon: 'assignment', children: [], roles: []

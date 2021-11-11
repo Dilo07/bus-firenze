@@ -9,7 +9,6 @@ export interface FleetManager {
     district: string;
     cap: string;
     contacts: Contact[];
-    vehicleId?: number;
 }
 
 export interface Contact {
