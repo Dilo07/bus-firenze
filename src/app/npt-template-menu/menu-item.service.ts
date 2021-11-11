@@ -6,16 +6,16 @@ export const ROLES = Object.freeze({
   DRIVER: 'driver',
   INSTALLER: 'installer',
   MOVYON: 'movyon',
-  OPER_MOVYON: 'op_movyon',
+  OPER_MOVYON: 'opmovyon',
   FLEETMNG: 'fleet'
 });
 
 const SUBMENU_ROUTES = [
-  { state: 'assign-obu', name: 'Assign-obu', icon: 'build', roles: [ROLES.INSTALLER] },
-  { state: 'change-obu', name: 'Change-obu', icon: 'build', roles: [ROLES.INSTALLER] },
-  { state: 'remove-obu', name: 'Remove-obu', icon: 'build', roles: [ROLES.INSTALLER] },
-  { state: 'change-plate', name: 'Change-plate', icon: 'build', roles: [ROLES.INSTALLER] },
-  { state: 'vehicles', name: 'Vehicles', icon: 'build', roles: [ROLES.FLEETMNG] },
+  { state: 'assign-obu', name: 'Assign-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'change-obu', name: 'Change-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'remove-obu', name: 'Remove-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'change-plate', name: 'Change-plate', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'vehicles', name: 'Vehicles', icon: 'build', roles: [ROLES.MOVYON, ROLES.FLEETMNG] },
 ];
 
 const MENUITEMS = [
@@ -26,7 +26,7 @@ const MENUITEMS = [
     state: 'real-time', name: 'Real-time', type: 'link', icon: 'location_on', children: [], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'area-monitoring', name: 'Area-monitoring', type: 'link', icon: 'assignment', children: [], roles: []
+    state: 'area-monitoring', name: 'Area-monitoring', type: 'link', icon: 'assignment', children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
     state: 'fleet-manager', name: 'Fleet-manager', type: 'link', icon: 'manage_accounts',
@@ -39,7 +39,7 @@ const MENUITEMS = [
   {
     state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'assignment',
     children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1], SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]],
-    roles: [ROLES.INSTALLER]
+    roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
 ];
 
