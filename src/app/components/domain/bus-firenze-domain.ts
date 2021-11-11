@@ -1,3 +1,5 @@
+import { Coordinate } from '@npt/npt-map';
+
 export interface FleetManager {
     id: number;
     name: string;
@@ -30,4 +32,27 @@ export interface Vehicle {
     appointmentDate: Date;
     obuId: string;
     hardware: number;
+}
+
+export class VehicleTripPersistence {
+    id: number;
+    start: number;
+    end: number;
+    obuId: string;
+    type: string;
+    shape: LineString;
+    duration: number;
+    engine: boolean;
+    tripLength: number;
+}
+
+export class LineString {
+    SRID: number;
+    points: Points;
+}
+
+export class Points {
+    dimension: number;
+    measures: number;
+    coordinates: Coordinate[];
 }
