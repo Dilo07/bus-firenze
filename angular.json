@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ztl-busFi-gui": {
+    "bus-firenze-gui": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -16,13 +16,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ztl-busFi-gui",
+            "outputPath": "dist/bus-firenze-gui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "allowedCommonJsDependencies": [
+              "rxjs-compat",
+              "rxjs",
               "keycloak-js",
               "file-saver"
             ],
