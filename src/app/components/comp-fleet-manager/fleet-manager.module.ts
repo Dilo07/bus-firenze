@@ -8,12 +8,15 @@ import { MaterialModule } from '@npt/npt-template';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manager.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
   declarations: [
     FleetManagerComponent,
-    VehiclesComponent
+    VehiclesComponent,
+    FormFleetManagerComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
     FleetManagerRoutingModule
   ]
 })

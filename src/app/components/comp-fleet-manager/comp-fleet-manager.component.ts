@@ -5,6 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FleetManager } from '../domain/bus-firenze-domain';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SessionService } from '@npt/npt-template';
+import { FIRENZE_SESSION } from '../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-comp-fleet-manager',
@@ -19,7 +21,10 @@ export class FleetManagerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private fleetManagerService: FleetManagerService, private formBuilder: FormBuilder) { }
+  constructor(
+    private fleetManagerService: FleetManagerService,
+    private formBuilder: FormBuilder,
+    private sessionService: SessionService) { }
 
   public fleetManagerList = new MatTableDataSource<FleetManager>();
   public displayedColumns = ['id', 'name', 'surname', 'companyName', 'city', 'district', 'actions'];
@@ -28,8 +33,11 @@ export class FleetManagerComponent implements OnInit {
 
   ngOnInit(): void {
     this.Search = this.formBuilder.group({
-      CtrlSearch: ['', Validators.required],
+      CtrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.FLEETSEARCH), Validators.required],
     });
+    if (this.Search.get('CtrlSearch').value) {
+      this.callGetFleetManager();
+    }
   }
 
   public callGetFleetManager(): void {
@@ -46,6 +54,7 @@ export class FleetManagerComponent implements OnInit {
       },
       () => this.complete = true,
       () => this.complete = true);
+      this.sessionService.setSessionStorage(FIRENZE_SESSION.FLEETSEARCH, search);
     }
   }
 }
