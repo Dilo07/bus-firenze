@@ -1,5 +1,5 @@
 {
-  "keycloak_url": "https://n4800038.gruppo.autostrade.it",
+  "keycloak_url": "http://localhost:8080",
   "keycloak_realm": "bus-firenze-dev-realm",
   "keycloak_clientId": "bus-firenze-locale-id",
   "be_url": "http://localhost:9093",
@@ -8,7 +8,7 @@
   "flow_implicit": false,
   "rangeDateStatisticVehicle": null,
   "no_auth": {
-    "roles": ["comune", "installer", "movyon", "fleet"],
+    "roles": ["driver", "opmovyon", "installer", "movyon", "fleet"],
     "user": {
       "id": "myID",
       "username": "TEST USERNAME",

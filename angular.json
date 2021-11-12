@@ -29,6 +29,7 @@
               "file-saver"
             ],
             "assets": [
+              "src/register-page/register.html",
               "src/favicon.ico",
               "src/assets"
             ],
