@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
@@ -10,6 +10,7 @@ import { FleetManager } from '../../domain/bus-firenze-domain';
   styleUrls: ['./form-fleet-manager.component.css']
 })
 export class FormFleetManagerComponent implements OnInit {
+  @Input() register = false;
 
   public data: FleetManager;
   public FormGroup: FormGroup;

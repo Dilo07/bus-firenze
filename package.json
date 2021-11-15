@@ -27,7 +27,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "@npt/npt-map": "0.0.37",
     "@npt/npt-net": "0.0.37",
-    "@npt/npt-template": "0.0.37",
+    "@npt/npt-template": "file:../npt-template-0.0.38.tgz",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

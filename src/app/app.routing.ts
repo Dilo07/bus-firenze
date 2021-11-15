@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@npt/npt-template';
+import { RegisterComponent } from 'src/app/components/register-page/register.component';
 import { DashboardComponent } from './components/comp-dashboard/dashboard.component';
 import { ROLES } from './npt-template-menu/menu-item.service';
 
 const routes: Routes = [
+  { path: 'register', loadChildren: () => import('../app/components/register-page/register.module').then(m => m.RegisterModule) },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'dashboard', component: DashboardComponent,

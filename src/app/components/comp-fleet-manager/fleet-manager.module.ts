@@ -29,6 +29,7 @@ import { ModalFormVehicleComponent } from './vehicles/modal-form-vehicle/modal-f
     ReactiveFormsModule,
     TranslateModule,
     FleetManagerRoutingModule
-  ]
+  ],
+  exports: [FormFleetManagerComponent]
 })
 export class FleetManagerModule { }

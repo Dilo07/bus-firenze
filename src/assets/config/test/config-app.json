@@ -4,6 +4,7 @@
   "keycloak_clientId": "bus-firenze-locale-id",
   "be_url": "http://localhost:9093",
   "context_app": "",
+  "register_url": "#/register",
   "viewOuter" : false,
   "flow_implicit": false,
   "rangeDateStatisticVehicle": null,
