@@ -45,7 +45,6 @@ export class VehiclesComponent implements OnInit {
     this.complete = false;
     const keyword = this.Search.get('CtrlSearch').value;
     this.fleetManagerService.getVehiclesById(true, this.fleetManager?.id, keyword).subscribe(data => {
-      console.log(data);
       this.vehicleList.data = data;
       this.vehicleList.sort = this.sort;
     },

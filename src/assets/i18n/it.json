@@ -89,11 +89,28 @@
     },
     "VEHICLE":{
         "TITLE": "Veicoli",
-        "SEARCH": "Ricerca per targa o Obu Id"
+        "SEARCH": "Ricerca per targa o Obu Id",
+        "LPN": "Targa",
+        "LPN NAT": "Nazione",
+        "EURO-CLASS": "EuroClass",
+        "EUROPEAN-GROUP": "Categoria",
+        "AXIS": "Numero di Assi",
+        "WEIGHT": "Massa complessiva a pieno carico (kg)",
+        "INSERT LPN": "Inserisci una Targa",
+        "INSERT LPN NAT": "Inserisci una Nazione",
+        "INSERT EURO-CLASS": "Inserisci una EuroClass",
+        "INSERT EUROPEAN-GROUP": "Inserisci una Categoria",
+        "INSERT AXIS": "Inserisci un Numero di Assi",
+        "INSERT WEIGHT": "Inserisci la massa complessiva a pieno carico",
+        "ERROR_NEGATIVE": "Inserisci un numero maggiore di 0"
     },
     "COMMON": {
         "ACTION": {
-            "YES": "Si"
+            "YES": "Si",
+            "BACK": "Indietro",
+            "CANCEL": "Cancella",
+            "SAVE": "Salva",
+            "EDIT": "Modifica"
         }
     }
 }

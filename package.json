@@ -25,9 +25,10 @@
     "@angular/router": "~11.2.14",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
-    "@npt/npt-map": "0.0.37",
-    "@npt/npt-net": "0.0.37",
-    "@npt/npt-template": "file:../npt-template-0.0.38.tgz",
+    "@npt/npt-map": "0.0.38",
+    "@npt/npt-net": "0.0.38",
+    "@npt/npt-template": "0.0.38",
+    "flag-icon-css": "^4.1.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

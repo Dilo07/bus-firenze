@@ -89,11 +89,28 @@
     },
     "VEHICLE":{
         "TITLE": "Vehicles",
-        "SEARCH": "Search for plate or Obu Id"
+        "SEARCH": "Search for plate or Obu Id",
+        "LPN": "Plate",
+        "LPN NAT": "Country Plate",
+        "EURO-CLASS": "EuroClass",
+        "EUROPEAN-GROUP": "Category",
+        "AXIS": "Axis Number",
+        "WEIGHT": "Total mass fully loaded (Kg)",
+        "INSERT LPN": "Insert a Plate",
+        "INSERT LPN NAT": "Insert a Country Plate",
+        "INSERT EURO-CLASS": "Insert an EuroClass",
+        "INSERT EUROPEAN-GROUP": "Insert a Category",
+        "INSERT AXIS": "Insert an Axis Number",
+        "INSERT WEIGHT": "Insert the total mass with fully loaded",
+        "ERROR_NEGATIVE": "Insert a numero greater than 0"
     },
     "COMMON": {
         "ACTION": {
-            "YES": "Yes"
+            "YES": "Yes",
+            "BACK": "Back",
+            "CANCEL": "Cancel",
+            "SAVE": "Save",
+            "EDIT": "Edit"
         }
     }
 }

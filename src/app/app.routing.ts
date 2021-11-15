@@ -27,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'manage-obu',
-    loadChildren: () => import('./components/compo-manage-obu/manage-obu.module').then(m => m.ManageObuModule)
+    loadChildren: () => import('./components/comp-manage-obu/manage-obu.module').then(m => m.ManageObuModule)
   }
 ];
 
