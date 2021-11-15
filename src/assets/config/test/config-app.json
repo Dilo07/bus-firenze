@@ -1,8 +1,8 @@
 {
-  "keycloak_url": "http://localhost:8080",
+  "keycloak_url": "https://n4800038.gruppo.autostrade.it",
   "keycloak_realm": "bus-firenze-dev-realm",
   "keycloak_clientId": "bus-firenze-locale-id",
-  "be_url": "http://localhost:9093",
+  "be_url": "http://localhost:9094",
   "context_app": "",
   "register_url": "#/register",
   "viewOuter" : false,

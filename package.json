@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4202",
     "start-dev": "ng serve --base-href /bus-firenze-gui/",
     "build": "npm install && ng build --configuration production --source-map --base-href /bus-firenze-gui/",
     "build-aws": "npm install && ng build --configuration production --source-map",

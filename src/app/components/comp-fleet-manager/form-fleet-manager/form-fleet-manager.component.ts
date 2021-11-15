@@ -67,4 +67,38 @@ export class FormFleetManagerComponent implements OnInit {
     return res;
   }
 
+  public insertFleetManager(): void {
+    if (this.register) {
+
+    } else {
+      const newFleetManager = this.generateFleetManager();
+      this.fleetManagerService.insertFleetManager(newFleetManager).subscribe(
+        () => { this.router.navigate(['../fleet-manager']); },
+      );
+
+    }
+  }
+
+  private generateFleetManager(): FleetManager {
+    const fleetManager = new FleetManager();
+
+    fleetManager.id = this.data?.id;
+    fleetManager.name = this.FormGroup.get('CtrlName').value;
+    fleetManager.surname = this.FormGroup.get('CtrlSurname').value;
+    fleetManager.pIva = this.FormGroup.get('CtrlpIva').value;
+    fleetManager.companyName = this.FormGroup.get('CtrlCompanyName').value;
+    fleetManager.address = this.FormGroup.get('CtrlAddress').value;
+    fleetManager.city = this.FormGroup.get('CtrlCity').value;
+    fleetManager.district = this.FormGroup.get('CtrlDistrict').value;
+    fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
+    fleetManager.contacts = [];
+
+    const cell = { code: 1, value: this.FormGroup.get('CtrlCell').value };
+    const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
+    const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
+
+    fleetManager.contacts.push(cell, office, mail);
+    return fleetManager;
+  }
+
 }

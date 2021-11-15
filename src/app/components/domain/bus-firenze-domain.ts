@@ -1,6 +1,19 @@
 import { Coordinate } from '@npt/npt-map';
 
-export interface FleetManager {
+export class FleetManager {
+
+    constructor() {
+        this.name = '';
+        this.surname = '';
+        this.pIva = '';
+        this.companyName = '';
+        this.address = '';
+        this.city = '';
+        this.district = '';
+        this.cap = '';
+        this.contacts = [];
+    }
+
     id: number;
     name: string;
     surname: string;

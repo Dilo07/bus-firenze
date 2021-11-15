@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manager.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalFormVehicleComponent } from './vehicles/modal-form-vehicle/modal-form-vehicle.component';
+import { RegisterComponent } from './register-page/register.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ModalFormVehicleComponent } from './vehicles/modal-form-vehicle/modal-f
     FleetManagerComponent,
     VehiclesComponent,
     FormFleetManagerComponent,
-    ModalFormVehicleComponent
+    ModalFormVehicleComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

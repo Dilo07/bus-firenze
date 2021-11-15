@@ -18,6 +18,10 @@
     color: white;
 }
 
+.greenButtons[disabled]:hover {
+    background-color: green;
+}
+
 .greenButtons:hover {
     background-color: rgb(46, 175, 46);
 }
