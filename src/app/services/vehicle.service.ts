@@ -22,4 +22,10 @@ export class VehicleService {
     return this.http.put<void>(this.apiUrl + '/vehicle/update', vehicle)
       .pipe(catchError(err => { throw err; }));
   }
+
+  getVehicles(isAssociated: boolean, keywords?: string): Observable<Vehicle[]> {
+    return this.http.get<Vehicle[]>
+      (this.apiUrl + '/vehicles/search?isAssociated=' + isAssociated + (keywords ? '&keyword=' + keywords : ''))
+      .pipe(catchError(err => { throw err; }));
+  }
 }

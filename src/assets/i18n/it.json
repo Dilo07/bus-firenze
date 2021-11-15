@@ -92,6 +92,7 @@
     },
     "VEHICLE":{
         "TITLE": "Veicoli",
+        "NO_DATA": "Nessun veicolo presente",
         "SEARCH": "Ricerca per targa o Obu Id",
         "LPN": "Targa",
         "LPN NAT": "Nazione",
@@ -112,6 +113,20 @@
         "EDIT_ERROR": "Errore nella modifica veicolo",
         "EDIT_SUCCESS": "Veicolo modificato correttamente"
     },
+    "OBU": {
+        "ASSIGN": "Assegna Obu",
+        "ASSIGN_SUCCESS": "Obu assegnato correttamente",
+        "CHANGE": "Cambia Obu",
+        "CHANGE_SUCCESS": "Obu modificato correttamente",
+        "CHANGE_PLATE": "Cambia Targa",
+        "CHANGE_PLATE_SUCCESS": "Targa modificata correttamente",
+        "REMOVE": "Rimuovi Obu",
+        "REMOVE_SUCCESS": "Obu rimosso correttamente",
+        "REMOVE CONFIRM": "Sei sicuro di voler rimuovere questo Obu?",
+        "INSERT_OBU": "Inserisci un Obu",
+        "ATTENTION_PLATE1": "Attenzione: verrà rimosso il veicolo con targa",
+        "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita."
+      },
     "COMMON": {
         "ACTION": {
             "YES": "Si",

@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FleetManagerService } from 'src/app/services/fleet-manager.service';
-import { FleetManager } from '../domain/bus-firenze-domain';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { TranslateService } from '@ngx-translate/core';
 import { SessionService } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
-import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
-import { TranslateService } from '@ngx-translate/core';
+import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
+import { FleetManager } from '../domain/bus-firenze-domain';
+import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-comp-fleet-manager',

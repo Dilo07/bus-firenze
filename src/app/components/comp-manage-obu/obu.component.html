@@ -1,5 +1,72 @@
 <mat-card>
-	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Manage Obu</mat-card-title>
+	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Veicoli</mat-card-title>
 	<mat-card-content>
-    </mat-card-content>
+		<div fxLayout="column" fxLayoutGap="20px">
+			<form [formGroup]="Search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+				<mat-form-field appearance="fill" fxFlex="30">
+					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>
+					<input matInput type="search" formControlName="CtrlSearch" placeholder="cerca" autocomplete="off">
+				</mat-form-field>
+				<button mat-icon-button (click)="getVehiclesInstaller(!assignObuEnabled)">
+					<mat-icon matPrefix>search</mat-icon>
+				</button>
+			</form>
+			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+			<table mat-table [dataSource]="vehicleList" style="background-color: beige;" class="mat-elevation-z8"
+				matSort matSortActive="id" matSortDirection="asc">
+				<ng-container matColumnDef="id">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
+					<td mat-cell *matCellDef="let element"> {{element.id}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="plate">
+					<th mat-header-cell *matHeaderCellDef> plate </th>
+					<td mat-cell *matCellDef="let element"> {{ element.lpn}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="nat">
+					<th mat-header-cell *matHeaderCellDef> nat </th>
+					<td mat-cell *matCellDef="let element"> {{ element.lpnNat}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="euroClass">
+					<th mat-header-cell *matHeaderCellDef> euroClass </th>
+					<td mat-cell *matCellDef="let element"> {{ element.euroClass}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="obuId">
+					<th mat-header-cell *matHeaderCellDef> obuId </th>
+					<td mat-cell *matCellDef="let element"> {{ element.obuId}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="actions">
+					<th mat-header-cell *matHeaderCellDef> </th>
+					<td mat-cell *matCellDef="let element" style="text-align: end;">
+						<button *ngIf="assignObuEnabled" mat-button (click)="addObu(element.id)"
+							matTooltip="{{'OBU.ASSIGN' | translate}}">
+							<mat-icon style="color: #0066CC;">keyboard_tab</mat-icon>
+						</button>
+						<button *ngIf="changeObuEnabled" mat-button (click)="changeObu(element.id, element.obuId)"
+							matTooltip="{{'OBU.CHANGE' | translate}}">
+							<mat-icon style="color: #0066CC;">loop</mat-icon>
+						</button>
+						<button *ngIf="removeObuEnabled" mat-button matTooltip="{{'OBU.REMOVE' | translate}}"
+							(click)="removeObu(element.id)">
+							<mat-icon style="color: red;">delete</mat-icon>
+						</button>
+						<button *ngIf="changePlateEnabled" mat-button matTooltip="{{'OBU.CHANGE_PLATE' | translate}}"
+							(click)="changePlate(element.id, element.obuId, element.lpn, element.lpnNat)">
+							<mat-icon style="color: #0066CC;">more</mat-icon>
+						</button>
+					</td>
+				</ng-container>
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"
+					[style.display]="vehicleList.data.length === 0 ? 'none' : '' "></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
+			<div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
+			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' "
+				[pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+		</div>
+	</mat-card-content>
 </mat-card>
