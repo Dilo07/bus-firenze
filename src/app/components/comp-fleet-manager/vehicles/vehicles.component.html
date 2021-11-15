@@ -2,7 +2,7 @@
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<div fxLayout="row" fxLayoutGap="20px">
+			<div fxLayout="row" fxLayoutGap="20px" *ngIf="fleetManager">
 				<button mat-button class="backButton" [routerLink]="['../']">{{'FLEET-MANAGER.BACK' |translate}}</button>
 				<button mat-button class="greenButtons" (click)="addVehicle()">nuovo</button>
 			</div>

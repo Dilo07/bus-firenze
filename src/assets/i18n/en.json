@@ -36,7 +36,10 @@
         "SUCCESS": "Password changed successfully"
     },
     "error": {
-        "generic": "Error server site"
+        "generic": "Error server site",
+        "live": {
+            "store": "Error on receive data"
+        }
     },
     "ERROR": {
         "BE_ERROR": "Unreachable services"
@@ -102,7 +105,12 @@
         "INSERT EUROPEAN-GROUP": "Insert a Category",
         "INSERT AXIS": "Insert an Axis Number",
         "INSERT WEIGHT": "Insert the total mass with fully loaded",
-        "ERROR_NEGATIVE": "Insert a numero greater than 0"
+        "ERROR_NEGATIVE": "Insert a numero greater than 0",
+        "DELETE_SUCCESS": "Vehicle remove correctly",
+        "ADD_ERROR": "vehicle entry error",
+        "ADD_SUCCESS": "Vehicle inserted correctly",
+        "EDIT_ERROR": "vehicle edit error",
+        "EDIT_SUCCESS": "Vehicle edited correctly"
     },
     "COMMON": {
         "ACTION": {

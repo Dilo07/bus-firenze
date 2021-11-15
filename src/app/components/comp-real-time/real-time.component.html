@@ -2,7 +2,7 @@
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Real-Time</mat-card-title>
 	<mat-card-content>
         <div fxLayout="column" fxLayoutGap="20px">
-			<span fxFlex="20">
+			<span fxFlex="20" *ngIf="fleetManager">
 				<button mat-button class="backButton" (click)="backFromRealTime()">{{'FLEET-MANAGER.BACK' | translate}}</button>
 			</span>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>

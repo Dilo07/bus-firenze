@@ -36,7 +36,10 @@
         "SUCCESS": "Password modificata correttamente"
     },
     "error": {
-        "generic": "Errore lato server"
+        "generic": "Errore lato server",
+        "live": {
+            "store": "Errore nella ricezione dei dati"
+        }
     },
     "ERROR": {
         "BE_ERROR": "Servizi non raggiungibili"
@@ -102,7 +105,12 @@
         "INSERT EUROPEAN-GROUP": "Inserisci una Categoria",
         "INSERT AXIS": "Inserisci un Numero di Assi",
         "INSERT WEIGHT": "Inserisci la massa complessiva a pieno carico",
-        "ERROR_NEGATIVE": "Inserisci un numero maggiore di 0"
+        "ERROR_NEGATIVE": "Inserisci un numero maggiore di 0",
+        "DELETE_SUCCESS": "Veicolo rimosso correttamente",
+        "ADD_ERROR": "Errore nell'inserimento veicolo",
+        "ADD_SUCCESS": "Veicolo inserito correttamente",
+        "EDIT_ERROR": "Errore nella modifica veicolo",
+        "EDIT_SUCCESS": "Veicolo modificato correttamente"
     },
     "COMMON": {
         "ACTION": {

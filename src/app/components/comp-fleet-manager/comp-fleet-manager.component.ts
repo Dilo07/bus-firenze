@@ -79,7 +79,7 @@ export class FleetManagerComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
         this.subscription.push(this.fleetManagerService.deleteFleetManager(id).subscribe(
-          () => this.showMessage('FLEET-MANAGER.DELETE_SUCCESS', 'SUCCESS'),
+          () => this.showMessage('FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
           (error: any) => console.log(error),
           () => this.callGetFleetManager()));
       }

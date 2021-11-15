@@ -53,17 +53,36 @@ export class VehiclesComponent implements OnInit {
   }
 
   public addVehicle(): void {
-    this.dialog.open(ModalFormVehicleComponent, {
+    const dialogRef = this.dialog.open(ModalFormVehicleComponent, {
       width: '90%',
-      height: '90%'
+      height: '90%',
+      data: { fleetManagerId: this.fleetManager.id }
+    });
+    dialogRef.afterClosed().subscribe((add) => {
+      if (add) {
+        this.getVehiclesByManagerId();
+        this.resetSearchField();
+      }
     });
   }
 
   public editVehicle(vehicle: Vehicle): void {
-    this.dialog.open(ModalFormVehicleComponent, {
+    const dialogRef = this.dialog.open(ModalFormVehicleComponent, {
       width: '90%',
       height: '90%',
       data: vehicle
+    });
+    dialogRef.afterClosed().subscribe((edit) => {
+      if (edit) {
+        this.getVehiclesByManagerId();
+        this.resetSearchField();
+      }
+    });
+  }
+
+  private resetSearchField(): void {
+    this.Search.patchValue({
+      CtrlSearch: ''
     });
   }
 }

@@ -31,7 +31,7 @@ export interface Contact {
     value: string;
 }
 
-export interface Vehicle {
+export class Vehicle {
     id: number;
     fleetManagerId: number;
     lpn: string;

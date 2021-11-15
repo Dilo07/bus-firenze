@@ -17,9 +17,8 @@ export class FleetManagerService {
   private fleetManager = getFleetManager;
 
   searchFleetManager(keywords: string): Observable<FleetManager[]> {
-    /* return this.http.get<FleetManager[]>(this.apiUrl + '/search/?keyword=' + keywords)
-      .pipe(catchError(err => { throw err; })); */
-    return of(this.fleetManager);
+    return this.http.get<FleetManager[]>(this.apiUrl + '/search/?keyword=' + keywords)
+      .pipe(catchError(err => { throw err; }));
   }
 
   getVehiclesById(onlyActive: boolean, fleetManagerId?: number, keyword?: string): Observable<Vehicle[]> {
