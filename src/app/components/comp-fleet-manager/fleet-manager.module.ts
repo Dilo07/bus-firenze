@@ -12,6 +12,7 @@ import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manag
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalFormVehicleComponent } from './vehicles/modal-form-vehicle/modal-form-vehicle.component';
 import { RegisterComponent } from './register-page/register.component';
+import { ValidFleetManagerComponent } from './valid-fleet-manager/valid-fleet-manager.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { RegisterComponent } from './register-page/register.component';
     VehiclesComponent,
     FormFleetManagerComponent,
     ModalFormVehicleComponent,
-    RegisterComponent
+    RegisterComponent,
+    ValidFleetManagerComponent
   ],
   imports: [
     CommonModule,

@@ -4,10 +4,13 @@ import { AuthGuard } from '@npt/npt-template';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerComponent } from './comp-fleet-manager.component';
 import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manager.component';
+import { ValidFleetManagerComponent } from './valid-fleet-manager/valid-fleet-manager.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 
 const routes: Routes = [
-  { path: '', component: FleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
+  { path: '', redirectTo: 'manage', pathMatch: 'full' },
+  { path: 'manage', component: FleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
+  { path: 'valid', component: ValidFleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
   {
     path: 'form-Fleet',
     component: FormFleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
