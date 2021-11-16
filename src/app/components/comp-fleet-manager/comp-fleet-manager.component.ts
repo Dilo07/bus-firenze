@@ -46,8 +46,8 @@ export class FleetManagerComponent implements OnInit {
     private sessionService: SessionService) { }
 
   ngOnInit(): void {
-    this.validFleet = this.router.url === '/fleet-manager/valid';
-    this.manageFleet = this.router.url === '/fleet-manager/manage';
+    this.validFleet = this.router.url === '/fleet-manager-valid';
+    this.manageFleet = this.router.url === '/fleet-manager-manage';
     this.Search = this.formBuilder.group({
       CtrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.FLEETSEARCH)],
     });

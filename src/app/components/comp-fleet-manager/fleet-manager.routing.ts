@@ -7,9 +7,7 @@ import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manag
 import { VehiclesComponent } from './vehicles/vehicles.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'manage', pathMatch: 'full' },
-  { path: 'manage', component: FleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
-  { path: 'valid', component: FleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
+  { path: '', component: FleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
   {
     path: 'form-Fleet',
     component: FormFleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }

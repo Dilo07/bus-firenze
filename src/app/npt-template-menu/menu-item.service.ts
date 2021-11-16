@@ -11,13 +11,13 @@ export const ROLES = Object.freeze({
 });
 
 const SUBMENU_ROUTES = [
+  { state: 'fleet-manager-manage', name: 'Manage-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
+  { state: 'fleet-manager-valid', name: 'Valid-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
+  { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
   { state: 'assign-obu', name: 'Assign-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'change-obu', name: 'Change-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'remove-obu', name: 'Remove-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'change-plate', name: 'Change-plate', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'manage', name: 'Manage-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
-  { state: 'valid', name: 'Valid-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
-  { state: 'vehicles', name: 'Vehicles', icon: 'build', roles: [ROLES.MOVYON, ROLES.FLEETMNG] },
 ];
 
 const MENUITEMS = [
@@ -32,16 +32,16 @@ const MENUITEMS = [
     children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
-    state: 'fleet-manager', name: 'Fleet-manager', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[4], SUBMENU_ROUTES[5]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    state: '', name: 'Fleet-manager', type: 'submenu', icon: 'manage_accounts',
+    children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
     state: 'vehicles-fleet-manager', name: 'Vehicles-Fleet', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[6]], roles: [ROLES.FLEETMNG]
+    children: [SUBMENU_ROUTES[2]], roles: [ROLES.FLEETMNG]
   },
   {
     state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'assignment',
-    children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1], SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]],
+    children: [SUBMENU_ROUTES[3], SUBMENU_ROUTES[4], SUBMENU_ROUTES[5], SUBMENU_ROUTES[6]],
     roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
 ];

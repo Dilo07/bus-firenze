@@ -18,11 +18,11 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
-    path: 'fleet-manager',
+    path: 'fleet-manager-manage',
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
-    path: 'valid-fleet-manager',
+    path: 'fleet-manager-valid',
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
