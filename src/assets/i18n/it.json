@@ -109,6 +109,7 @@
         "INSERT AXIS": "Inserisci un Numero di Assi",
         "INSERT WEIGHT": "Inserisci la massa complessiva a pieno carico",
         "ERROR_NEGATIVE": "Inserisci un numero maggiore di 0",
+        "DELETE_CONFIRM": "Sei sicuro di voler cancellare questo Fleet-Manager?",
         "DELETE_SUCCESS": "Veicolo rimosso correttamente",
         "ADD_ERROR": "Errore nell'inserimento veicolo",
         "ADD_SUCCESS": "Veicolo inserito correttamente",

@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FleetManager } from '../../domain/bus-firenze-domain';
 
@@ -9,11 +10,13 @@ import { FleetManager } from '../../domain/bus-firenze-domain';
   templateUrl: './form-fleet-manager.component.html',
   styleUrls: ['./form-fleet-manager.component.css']
 })
-export class FormFleetManagerComponent implements OnInit {
+export class FormFleetManagerComponent implements OnInit, OnDestroy {
   @Input() register = false;
 
   public data: FleetManager;
   public FormGroup: FormGroup;
+
+  private subscription: Subscription[] = [];
 
   constructor(
     private router: Router,
@@ -56,6 +59,12 @@ export class FormFleetManagerComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+  }
+
 
   private findContactValue(code: number): string {
     let res = '';
@@ -72,11 +81,17 @@ export class FormFleetManagerComponent implements OnInit {
 
     } else {
       const newFleetManager = this.generateFleetManager();
-      this.fleetManagerService.insertFleetManager(newFleetManager).subscribe(
+      this.subscription.push(this.fleetManagerService.insertFleetManager(newFleetManager).subscribe(
         () => { this.router.navigate(['../fleet-manager']); },
-      );
-
+      ));
     }
+  }
+
+  public updateFleetManager(): void {
+    const fleetManagerEdit = this.generateFleetManager();
+    this.subscription.push(this.fleetManagerService.updateFleetManager(fleetManagerEdit).subscribe(
+      () => { this.router.navigate(['../fleet-manager']); }
+    ));
   }
 
   private generateFleetManager(): FleetManager {

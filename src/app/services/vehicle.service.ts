@@ -23,6 +23,11 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  deleteVehicle(id: number): Observable<void> {
+    return this.http.delete<void>(this.apiUrl + '/vehicle/delete/' + id)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   getVehicles(isAssociated: boolean, keywords?: string): Observable<Vehicle[]> {
     return this.http.get<Vehicle[]>
       (this.apiUrl + '/vehicles/search?isAssociated=' + isAssociated + (keywords ? '&keyword=' + keywords : ''))

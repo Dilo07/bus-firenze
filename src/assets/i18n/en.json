@@ -107,6 +107,7 @@
         "INSERT AXIS": "Insert an Axis Number",
         "INSERT WEIGHT": "Insert the total mass with fully loaded",
         "ERROR_NEGATIVE": "Insert a numero greater than 0",
+        "DELETE_CONFIRM": "Are you sure of delete this Vehicle?",
         "DELETE_SUCCESS": "Vehicle remove correctly",
         "ADD_ERROR": "vehicle entry error",
         "ADD_SUCCESS": "Vehicle inserted correctly",

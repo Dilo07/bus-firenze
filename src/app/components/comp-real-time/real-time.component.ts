@@ -52,8 +52,8 @@ export class RealTimeComponent implements OnInit {
         this.geometry = data;
         this.drawGeom();
       },
-      error => { console.log(error);  this.complete = true; },
-      () =>  { this.getTrip(); this.complete = true; } // chiamata le due funziona una volta terminata la subscribe
+      () => this.complete = true,
+      () =>  { this.getTrip(); this.complete = true; }
     ));
   }
 

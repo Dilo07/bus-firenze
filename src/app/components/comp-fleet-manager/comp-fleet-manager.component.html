@@ -8,7 +8,7 @@
 			<form [formGroup]="Search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field appearance="fill" fxFlex="30">
 					<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
-					<input matInput type="search" formControlName="CtrlSearch" placeholder="cerca" autocomplete="off">
+					<input matInput type="search" formControlName="CtrlSearch" autocomplete="off">
 				</mat-form-field>
 				<button mat-icon-button (click)="callGetFleetManager()">
 					<mat-icon matPrefix>search</mat-icon>

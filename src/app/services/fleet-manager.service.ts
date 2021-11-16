@@ -40,6 +40,11 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  updateFleetManager(fleetManager: FleetManager): Observable<void> {
+    return this.http.put<void>(this.apiUrl + '/update', fleetManager)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   deleteFleetManager(id: number): Observable<void> {
     return this.http.delete<void>(this.apiUrl + '/delete/' + id)
       .pipe(catchError(err => { throw err; }));
