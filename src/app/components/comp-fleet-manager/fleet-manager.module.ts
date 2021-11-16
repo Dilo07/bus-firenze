@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { FleetManagerRoutingModule } from './fleet-manager.routing';
 import { FleetManagerComponent } from './comp-fleet-manager.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -12,7 +11,6 @@ import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manag
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalFormVehicleComponent } from './vehicles/modal-form-vehicle/modal-form-vehicle.component';
 import { RegisterComponent } from './register-page/register.component';
-import { ValidFleetManagerComponent } from './valid-fleet-manager/valid-fleet-manager.component';
 
 
 @NgModule({
@@ -21,8 +19,7 @@ import { ValidFleetManagerComponent } from './valid-fleet-manager/valid-fleet-ma
     VehiclesComponent,
     FormFleetManagerComponent,
     ModalFormVehicleComponent,
-    RegisterComponent,
-    ValidFleetManagerComponent
+    RegisterComponent
   ],
   imports: [
     CommonModule,

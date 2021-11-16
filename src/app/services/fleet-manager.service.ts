@@ -16,8 +16,12 @@ export class FleetManagerService {
   private apiUrl = this.url + '/api/fleet';
   private fleetManager = getFleetManager;
 
-  searchFleetManager(keywords: string): Observable<FleetManager[]> {
-    return this.http.get<FleetManager[]>(this.apiUrl + '/search/?keyword=' + keywords)
+  searchFleetManager(keyword: string, valid?: boolean): Observable<FleetManager[]> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ keyword, valid })
+    };
+    return this.http.get<FleetManager[]>(this.apiUrl + '/search', options)
       .pipe(catchError(err => { throw err; }));
   }
 

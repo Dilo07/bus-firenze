@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionService } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
@@ -26,7 +27,17 @@ export class FleetManagerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  public fleetManagerList = new MatTableDataSource<FleetManager>();
+  public displayedColumns = ['id', 'name', 'surname', 'companyName', 'city', 'district', 'actions'];
+  public Search: FormGroup;
+  public complete = true;
+  public validFleet: boolean;
+  public manageFleet: boolean;
+
+  private subscription: Subscription[] = [];
+
   constructor(
+    private router: Router,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private translate: TranslateService,
@@ -34,14 +45,9 @@ export class FleetManagerComponent implements OnInit {
     private formBuilder: FormBuilder,
     private sessionService: SessionService) { }
 
-  public fleetManagerList = new MatTableDataSource<FleetManager>();
-  public displayedColumns = ['id', 'name', 'surname', 'companyName', 'city', 'district', 'actions'];
-  public Search: FormGroup;
-  public complete = true;
-
-  private subscription: Subscription[] = [];
-
   ngOnInit(): void {
+    this.validFleet = this.router.url === '/fleet-manager/valid';
+    this.manageFleet = this.router.url === '/fleet-manager/manage';
     this.Search = this.formBuilder.group({
       CtrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.FLEETSEARCH)],
     });
@@ -62,8 +68,8 @@ export class FleetManagerComponent implements OnInit {
         this.fleetManagerList.sort = this.sort;
         this.fleetManagerList.paginator = this.paginator;
       },
-      () => this.complete = true,
-      () => this.complete = true);
+        () => this.complete = true,
+        () => this.complete = true);
       this.sessionService.setSessionStorage(FIRENZE_SESSION.FLEETSEARCH, search);
     }
   }
