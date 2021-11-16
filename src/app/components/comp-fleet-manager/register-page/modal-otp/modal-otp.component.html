@@ -1,0 +1,11 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <p>Abbiamo inviato un sms al numero +39 {{data.cell}}</p>
+    <div fxLayout="row wrap" fxLayoutGap="20px">
+        <mat-form-field appearance="fill" fxFlex="100">
+            <mat-label>Codice OTP</mat-label>
+            <input matInput type="password" [(ngModel)]="otp" maxlength="6" [readonly]="readonly" (ngModelChange)="onChangeEvent()">
+        </mat-form-field>
+        <mat-error *ngIf="errorOtp"> codice non valido </mat-error>
+    </div>
+</div>
+

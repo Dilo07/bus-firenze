@@ -58,20 +58,15 @@ export class FleetManagerComponent implements OnInit {
 
   public callGetFleetManager(): void {
     const search = this.Search.get('CtrlSearch').value;
-    if (search === undefined || search === null || search.trim() === '') {
-      this.fleetManagerList = new MatTableDataSource<FleetManager>([]);
-      return;
-    } else {
-      this.complete = false;
-      this.fleetManagerService.searchFleetManager(search).subscribe((data) => {
-        this.fleetManagerList.data = data;
-        this.fleetManagerList.sort = this.sort;
-        this.fleetManagerList.paginator = this.paginator;
-      },
-        () => this.complete = true,
-        () => this.complete = true);
-      this.sessionService.setSessionStorage(FIRENZE_SESSION.FLEETSEARCH, search);
-    }
+    this.complete = false;
+    this.fleetManagerService.searchFleetManager(search).subscribe((data) => {
+      this.fleetManagerList.data = data;
+      this.fleetManagerList.sort = this.sort;
+      this.fleetManagerList.paginator = this.paginator;
+    },
+      () => this.complete = true,
+      () => this.complete = true);
+    this.sessionService.setSessionStorage(FIRENZE_SESSION.FLEETSEARCH, search);
   }
 
   public deleteFleetManager(id: number): void {

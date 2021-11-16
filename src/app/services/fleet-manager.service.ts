@@ -39,8 +39,8 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  insertFleetManager(fleetManager: FleetManager): Observable<number> {
-    return this.http.post<number>(this.apiUrl + '/add', fleetManager)
+  insertFleetManager(fleetManager: FleetManager): Observable<void> {
+    return this.http.post<void>(this.apiUrl + '/add', fleetManager)
       .pipe(catchError(err => { throw err; }));
   }
 

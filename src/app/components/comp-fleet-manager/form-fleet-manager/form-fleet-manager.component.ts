@@ -1,9 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
+import { RegisterService } from 'src/app/services/register.service';
 import { FleetManager } from '../../domain/bus-firenze-domain';
+import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -15,12 +18,15 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
   public data: FleetManager;
   public FormGroup: FormGroup;
+  public verifyOtp = false;
 
   private subscription: Subscription[] = [];
 
   constructor(
     private router: Router,
+    private registerService: RegisterService,
     private formBuilder: FormBuilder,
+    private dialog: MatDialog,
     private fleetManagerService: FleetManagerService) {
     this.data = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
   }
@@ -78,11 +84,14 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
   public insertFleetManager(): void {
     if (this.register) {
-
+      const newFleetManager = this.generateFleetManager();
+      this.subscription.push(this.registerService.registerFleet(newFleetManager).subscribe(
+        () => { this.router.navigate(['../']); }
+      ));
     } else {
       const newFleetManager = this.generateFleetManager();
       this.subscription.push(this.fleetManagerService.insertFleetManager(newFleetManager).subscribe(
-        () => { this.router.navigate(['../fleet-manager']); },
+        () => { this.router.navigate(['../fleet-manager-manage']); },
       ));
     }
   }
@@ -90,7 +99,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public updateFleetManager(): void {
     const fleetManagerEdit = this.generateFleetManager();
     this.subscription.push(this.fleetManagerService.updateFleetManager(fleetManagerEdit).subscribe(
-      () => { this.router.navigate(['../fleet-manager']); }
+      () => { this.router.navigate(['../fleet-manager-manage']); }
     ));
   }
 
@@ -114,6 +123,29 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
     fleetManager.contacts.push(cell, office, mail);
     return fleetManager;
+  }
+
+  public modalOTP(): void {
+    const Cell = this.FormGroup.get('CtrlCell').value;
+    this.subscription.push(this.registerService.getOtpCode(Cell).subscribe(
+      code => {
+        const dialogRef = this.dialog.open(ModalOTPComponent, {
+          width: '80%',
+          height: '50%',
+          data: { otp: code, cell: Cell },
+          autoFocus: false
+        });
+        dialogRef.afterClosed().subscribe(
+          verify => {
+            if (verify) {
+              this.verifyOtp = true;
+            }
+          }
+        );
+      },
+      () => null,
+      () => this.ngOnDestroy()
+    ));
   }
 
 }
