@@ -39,6 +39,7 @@
     "@angular/compiler-cli": "~11.2.14",
     "@types/node": "^12.20.37",
     "codelyzer": "^6.0.0",
+    "codice-fiscale-js": "^2.3.9",
     "ts-md5": "^1.2.10",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
