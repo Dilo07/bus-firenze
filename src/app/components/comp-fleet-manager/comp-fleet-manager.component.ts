@@ -28,7 +28,7 @@ export class FleetManagerComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public fleetManagerList = new MatTableDataSource<FleetManager>();
-  public displayedColumns = ['id', 'name', 'surname', 'companyName', 'city', 'district', 'actions'];
+  public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'city', 'district', 'actions'];
   public Search: FormGroup;
   public complete = true;
   public validFleet: boolean;
@@ -49,24 +49,27 @@ export class FleetManagerComponent implements OnInit {
     this.validFleet = this.router.url === '/fleet-manager-valid';
     this.manageFleet = this.router.url === '/fleet-manager-manage';
     this.Search = this.formBuilder.group({
-      CtrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.FLEETSEARCH)],
+      CtrlSearch: [
+        this.sessionService.getSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID)
+      ],
     });
-    if (this.Search.get('CtrlSearch').value) {
+    /* if ((this.Search.get('CtrlSearch').value && this.manageFleet) || this.validFleet) {
       this.callGetFleetManager();
-    }
+    } */
+    this.callGetFleetManager();
   }
 
   public callGetFleetManager(): void {
     const search = this.Search.get('CtrlSearch').value;
     this.complete = false;
-    this.fleetManagerService.searchFleetManager(search).subscribe((data) => {
+    this.fleetManagerService.searchFleetManager(search, this.manageFleet).subscribe((data) => {
       this.fleetManagerList.data = data;
       this.fleetManagerList.sort = this.sort;
       this.fleetManagerList.paginator = this.paginator;
     },
       () => this.complete = true,
       () => this.complete = true);
-    this.sessionService.setSessionStorage(FIRENZE_SESSION.FLEETSEARCH, search);
+    this.sessionService.setSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
   }
 
   public deleteFleetManager(id: number): void {
@@ -87,6 +90,14 @@ export class FleetManagerComponent implements OnInit {
     });
   }
 
+  public validateFleet(id: number, valid: boolean): void {
+    this.fleetManagerService.validInvalidFleetManager(id, valid).subscribe(
+      () => null,
+      () => null,
+      () => this.callGetFleetManager()
+    );
+  }
+
   private showMessage(i18nKey: string, level: string): void {
 
     this.snackBar.open(this.translate.instant(i18nKey),
@@ -97,5 +108,15 @@ export class FleetManagerComponent implements OnInit {
         verticalPosition: 'top',
         panelClass: [level]
       });
+  }
+
+  public findContactValue(fleetManager: FleetManager, code: number): string {
+    let res = '';
+    fleetManager.contacts.find(contact => {
+      if (contact.code === code) {
+        res = contact.value;
+      }
+    });
+    return res;
   }
 }

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { FleetManager } from '../../domain/bus-firenze-domain';
+import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
 
 @Component({
@@ -84,10 +85,20 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
   public insertFleetManager(): void {
     if (this.register) {
-      const newFleetManager = this.generateFleetManager();
-      this.subscription.push(this.registerService.registerFleet(newFleetManager).subscribe(
-        () => { this.router.navigate(['../']); }
-      ));
+      const dialogRef = this.dialog.open(ModalConfirmComponent, {
+        width: '50%',
+        height: '30%',
+        data: { text: 'FLEET-MANAGER.CONFIRM_REGISTRATION' },
+        autoFocus: false
+      });
+      dialogRef.afterClosed().subscribe((resp) => {
+        if (resp) {
+          const newFleetManager = this.generateFleetManager();
+          this.subscription.push(this.registerService.registerFleet(newFleetManager).subscribe(
+            () => { this.router.navigate(['../']); }
+          ));
+        }
+      });
     } else {
       const newFleetManager = this.generateFleetManager();
       this.subscription.push(this.fleetManagerService.insertFleetManager(newFleetManager).subscribe(

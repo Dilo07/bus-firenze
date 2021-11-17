@@ -61,6 +61,7 @@
         "INITIAL MESSAGE": "Insert a new Fleet Manager or search for an existing one",
         "MESSAGE_NEW": "Insert the data of new Fleet Manager",
         "MESSAGE_EDIT": "Edit the data of the Fleet Manager",
+        "CONFIRM_REGISTRATION": "Once the form is confirmed, movyon will verify the inserted data. You will receive an mail to log in. Do you want continue?",
         "EDIT": "Edit",
         "DELETE": "Delete",
         "DELETE CONFIRM": "Are you sure of delete this Fleet Manager?",

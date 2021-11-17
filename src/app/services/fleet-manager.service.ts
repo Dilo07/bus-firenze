@@ -16,12 +16,12 @@ export class FleetManagerService {
   private apiUrl = this.url + '/api/fleet';
   private fleetManager = getFleetManager;
 
-  searchFleetManager(keyword: string, valid?: boolean): Observable<FleetManager[]> {
+  searchFleetManager(keyword: string, valid: boolean): Observable<FleetManager[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ keyword, valid })
+      params: HttpUtils.createHttpParams({ keyword })
     };
-    return this.http.get<FleetManager[]>(this.apiUrl + '/search', options)
+    return this.http.get<FleetManager[]>(this.apiUrl + '/search/valid/' + valid, options)
       .pipe(catchError(err => { throw err; }));
   }
 
@@ -51,6 +51,11 @@ export class FleetManagerService {
 
   deleteFleetManager(id: number): Observable<void> {
     return this.http.delete<void>(this.apiUrl + '/delete/' + id)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  validInvalidFleetManager(id: number, valid: boolean): Observable<void> {
+    return this.http.put<void>(this.apiUrl + `/${id}/valid/${valid}`, null)
       .pipe(catchError(err => { throw err; }));
   }
 }

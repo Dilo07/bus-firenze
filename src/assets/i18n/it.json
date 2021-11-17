@@ -63,6 +63,7 @@
         "INITIAL MESSAGE": "Inserisci un nuovo Fleet-Manager o cercane uno esistente",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Fleet Manager",
         "MESSAGE_EDIT": "Modifica le informazioni del Fleet Manager",
+        "CONFIRM_REGISTRATION": "Una volta confermata la registrazione movyon verificherà i dati. Riceverai una mail per eseguire l'accesso. Vuoi proseguire?",
         "EDIT": "Modifica",
         "DELETE": "Cancella",
         "DELETE CONFIRM": "Sei sicuro di voler cancellare questo Fleet-Manager?",
