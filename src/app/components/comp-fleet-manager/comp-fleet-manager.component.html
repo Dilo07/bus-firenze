@@ -2,7 +2,7 @@
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<span fxFlex="20">
+			<span fxFlex="20" *ngIf="manageFleet">
 				<button mat-button class="greenButtons" [routerLink]="['form-Fleet']"> nuovo </button>
 			</span>
 			<form [formGroup]="Search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
@@ -86,6 +86,7 @@
 			</table>
 			<mat-paginator [style.display]="fleetManagerList.data.length === 0 ? 'none' : '' "
 				[pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+			<div *ngIf="fleetManagerList.data.length === 0 && complete"> Nessun fleet-manager presente</div>
 		</div>
 	</mat-card-content>
 </mat-card>

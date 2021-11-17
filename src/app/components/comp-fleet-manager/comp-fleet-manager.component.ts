@@ -92,7 +92,7 @@ export class FleetManagerComponent implements OnInit {
 
   public validateFleet(id: number, valid: boolean): void {
     this.fleetManagerService.validInvalidFleetManager(id, valid).subscribe(
-      () => null,
+      () => this.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
       () => null,
       () => this.callGetFleetManager()
     );

@@ -5,6 +5,7 @@ export const getFleetManager: FleetManager[] = [
         id: 1,
         name: 'Andrea',
         surname: 'Di Lorenzo',
+        fiscalCode: 'tttt',
         pIva: 'test',
         companyName: 'test',
         address: 'via tal de tali',

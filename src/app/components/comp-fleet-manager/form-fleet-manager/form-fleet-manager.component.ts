@@ -1,7 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import CodiceFiscale from 'codice-fiscale-js';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { RegisterService } from 'src/app/services/register.service';
@@ -38,6 +39,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.FormGroup = this.formBuilder.group({
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
+        CtrlCF: [this.data.fiscalCode, [this.fiscaleCodeValidator]],
         CtrlpIva: [this.data.pIva, Validators.required],
         CtrlCompanyName: [this.data.companyName, Validators.required],
         CtrlCell: [this.findContactValue(1), Validators.required],
@@ -53,6 +55,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.FormGroup = this.formBuilder.group({
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
+        CtrlCF: ['', [this.fiscaleCodeValidator]],
         CtrlpIva: ['', Validators.required],
         CtrlCompanyName: ['', Validators.required],
         CtrlCell: ['', Validators.required],
@@ -157,6 +160,20 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       () => null,
       () => this.ngOnDestroy()
     ));
+  }
+
+  private fiscaleCodeValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    let cf: CodiceFiscale;
+    if (control.value.length === 16){
+      try {
+        cf = new CodiceFiscale(control.value);
+        return null;
+      } catch (error) {
+        return { fiscalCode: true };
+      }
+    }else{
+      return { fiscalCode: true };
+    }
   }
 
 }

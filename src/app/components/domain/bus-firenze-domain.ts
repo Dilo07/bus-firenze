@@ -17,6 +17,7 @@ export class FleetManager {
     id: number;
     name: string;
     surname: string;
+    fiscalCode: string;
     pIva: string;
     companyName: string;
     address: string;
