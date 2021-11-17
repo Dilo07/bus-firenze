@@ -1,5 +1,6 @@
 export const Nations = [
     { value: 'IT' },
+    { value: 'AL' },
     { value: 'AT' },
     { value: 'BE' },
     { value: 'BG' },
@@ -9,7 +10,9 @@ export const Nations = [
     { value: 'ES' },
     { value: 'FR' },
     { value: 'GB' },
+    { value: 'HR' },
     { value: 'HU' },
     { value: 'NL' },
-    { value: 'PT' }
+    { value: 'PT' },
+    { value: 'SI' }
 ];

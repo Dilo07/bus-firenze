@@ -123,6 +123,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     fleetManager.id = this.data?.id;
     fleetManager.name = this.FormGroup.get('CtrlName').value;
     fleetManager.surname = this.FormGroup.get('CtrlSurname').value;
+    fleetManager.fiscalCode = this.FormGroup.get('CtrlCF').value.toUpperCase();
     fleetManager.pIva = this.FormGroup.get('CtrlpIva').value;
     fleetManager.companyName = this.FormGroup.get('CtrlCompanyName').value;
     fleetManager.address = this.FormGroup.get('CtrlAddress').value;
@@ -164,7 +165,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
   private fiscaleCodeValidator(control: AbstractControl): { [key: string]: boolean } | null {
     let cf: CodiceFiscale;
-    if (control.value.length === 16){
+    if (control.value?.length === 16){
       try {
         cf = new CodiceFiscale(control.value);
         return null;
