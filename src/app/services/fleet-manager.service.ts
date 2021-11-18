@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { FleetManager, Vehicle } from '../components/domain/bus-firenze-domain';
+import { ColumnSort, FleetManager, Vehicle } from '../components/domain/bus-firenze-domain';
 import { getFleetManager } from './mokup/getFleetmanager';
 
 @Injectable({
@@ -16,11 +16,14 @@ export class FleetManagerService {
   private apiUrl = this.url + '/api/fleet';
   private fleetManager = getFleetManager;
 
-  searchFleetManager(keyword: string, valid: boolean, offset?: number, limit?: number): Observable<FleetManager[]> {
+  searchFleetManager(keyword: string, valid: boolean, offset: number, limit: number, columnOrder: ColumnSort): Observable<FleetManager[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ keyword, offset, limit })
     };
+    options.params = options.params.append('sort', columnOrder.active );
+    options.params = options.params.append('direction', String(columnOrder.direction) );
+
     return this.http.get<FleetManager[]>(this.apiUrl + '/search/valid/' + valid, options)
       .pipe(catchError(err => { throw err; }));
   }

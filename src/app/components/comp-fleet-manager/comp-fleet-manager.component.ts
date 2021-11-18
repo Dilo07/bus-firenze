@@ -11,7 +11,7 @@ import { SessionService } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
-import { FleetManager } from '../domain/bus-firenze-domain';
+import { ColumnSort, FleetManager } from '../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 
 @Component({
@@ -20,6 +20,7 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
   styles: [`
   table {
     width: 100%;
+    background-color: beige;
   }
   `]
 })
@@ -27,13 +28,18 @@ export class FleetManagerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  public fleetManagerList = new MatTableDataSource<FleetManager>();
+  public dataSource = new MatTableDataSource<FleetManager>();
+  public fleetManagerList: FleetManager[] = [];
   public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'city', 'district', 'actions'];
   public Search: FormGroup;
   public complete = true;
   public validFleet: boolean;
   public manageFleet: boolean;
 
+  private offset = 0;
+  private limit = 5;
+  private columnOrder: ColumnSort = { active: 'id', direction: -1 };
+  private endTable = false;
   private subscription: Subscription[] = [];
 
   constructor(
@@ -53,23 +59,53 @@ export class FleetManagerComponent implements OnInit {
         this.sessionService.getSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID)
       ],
     });
-    /* if ((this.Search.get('CtrlSearch').value && this.manageFleet) || this.validFleet) {
-      this.callGetFleetManager();
-    } */
     this.callGetFleetManager();
   }
 
   public callGetFleetManager(): void {
     const search = this.Search.get('CtrlSearch').value;
     this.complete = false;
-    this.fleetManagerService.searchFleetManager(search, this.manageFleet).subscribe((data) => {
-      this.fleetManagerList.data = data;
-      this.fleetManagerList.sort = this.sort;
-      this.fleetManagerList.paginator = this.paginator;
-    },
-      () => this.complete = true,
-      () => this.complete = true);
+    const currentSize = this.offset * this.limit;
+    this.subscription.push(
+      this.fleetManagerService.searchFleetManager(
+        search,
+        this.manageFleet,
+        this.offset,
+        this.limit,
+        this.columnOrder).subscribe((data) => {
+          this.fleetManagerList.length = currentSize;
+          this.fleetManagerList = this.fleetManagerList.concat(data);
+          if (data.length < this.limit) {
+            this.paginator.length = this.fleetManagerList.length;
+            this.endTable = true;
+          } else {
+            this.paginator.length = ((this.offset + 1) * this.limit) + 1;
+          }
+          this.dataSource.data = data;
+        },
+          () => this.complete = true,
+          () => { this.complete = true; this.unSubscribe(); })
+    );
     this.sessionService.setSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
+  }
+
+  public pageChanged(event: {lengrh: number, pageIndex: number, pageSize: number, previousPageIndex: number}): void {
+    this.offset = event.pageIndex;
+    this.limit = event.pageSize;
+    const currentSize = this.offset * this.limit;
+    const nextSize = (this.offset + 1) * this.limit; // dimensione pagina successiva
+    // se fleetManagerList ha già i dati o l'utente è arrivato alla fine della tabella non chiama l'API
+    if (nextSize <= this.fleetManagerList.length || this.endTable) {
+      this.dataSource.data = this.fleetManagerList.slice(currentSize, nextSize);
+      if (this.endTable) {
+        // se è arrivato alla fine lascia la length della tabella completa
+        this.paginator.length = this.fleetManagerList.length;
+      } else {
+        this.paginator.length = this.fleetManagerList.length + 1;
+      }
+    } else {
+      this.callGetFleetManager();
+    }
   }
 
   public deleteFleetManager(id: number): void {
@@ -98,6 +134,37 @@ export class FleetManagerComponent implements OnInit {
     );
   }
 
+  public findContactValue(fleetManager: FleetManager, code: number): string {
+    let res = '';
+    fleetManager.contacts.find(contact => {
+      if (contact.code === code) {
+        res = contact.value;
+      }
+    });
+    return res;
+  }
+
+  public sortData(event: {active: string, direction: string}): void {
+    this.columnOrder.active = event.active;
+    this.columnOrder.direction = event.direction === 'asc' ? 1 : -1;
+    this.refreshTable();
+  }
+
+  public refreshTable(): void {
+    this.reset();
+    this.callGetFleetManager();
+  }
+
+  private reset(): void {
+    this.paginator.pageIndex = 0;
+    this.paginator.length = 0;
+    this.fleetManagerList = [];
+    this.dataSource.data = [];
+    this.endTable = false;
+    this.offset = 0;
+    this.limit = this.paginator.pageSize;
+  }
+
   private showMessage(i18nKey: string, level: string): void {
 
     this.snackBar.open(this.translate.instant(i18nKey),
@@ -110,13 +177,9 @@ export class FleetManagerComponent implements OnInit {
       });
   }
 
-  public findContactValue(fleetManager: FleetManager, code: number): string {
-    let res = '';
-    fleetManager.contacts.find(contact => {
-      if (contact.code === code) {
-        res = contact.value;
-      }
+  private unSubscribe(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
     });
-    return res;
   }
 }

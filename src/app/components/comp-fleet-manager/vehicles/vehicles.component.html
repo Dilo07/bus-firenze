@@ -2,9 +2,10 @@
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<div fxLayout="row" fxLayoutGap="20px" *ngIf="fleetManager">
-				<button mat-button class="backButton" [routerLink]="['../']">{{'FLEET-MANAGER.BACK'
-					|translate}}</button>
+			<div fxLayout="row" fxLayoutGap="20px">
+				<button mat-button class="backButton" *ngIf="fleetManager" [routerLink]="['../']">
+					{{'FLEET-MANAGER.BACK' |translate}}
+				</button>
 				<button mat-button class="greenButtons" (click)="addVehicle()">nuovo</button>
 			</div>
 			<form [formGroup]="Search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
@@ -47,7 +48,7 @@
 				<ng-container matColumnDef="actions">
 					<th mat-header-cell *matHeaderCellDef> </th>
 					<td mat-cell *matCellDef="let element" style="text-align: end;">
-						<button	mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
+						<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
 							(click)="deleteVehicle(element.id)">
 							<mat-icon style="color: red;">delete</mat-icon>
 						</button>

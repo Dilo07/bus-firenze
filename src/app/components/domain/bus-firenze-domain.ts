@@ -70,3 +70,8 @@ export class Points {
     measures: number;
     coordinates: Coordinate[];
 }
+
+export interface ColumnSort {
+    active: string;
+    direction: 1 | -1;
+}

@@ -63,7 +63,7 @@ export class VehiclesComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalFormVehicleComponent, {
       width: '90%',
       height: '90%',
-      data: { fleetManagerId: this.fleetManager.id }
+      data: { fleetManagerId: this.fleetManager?.id }
     });
     dialogRef.afterClosed().subscribe((add) => {
       if (add) {

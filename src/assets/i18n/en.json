@@ -35,15 +35,6 @@
         "ERROR": "password change not performed correctly",
         "SUCCESS": "Password changed successfully"
     },
-    "error": {
-        "generic": "Error server site",
-        "live": {
-            "store": "Verify if present an active network!"
-        }
-    },
-    "ERROR": {
-        "BE_ERROR": "Unreachable services"
-    },
     "PAGINATOR": {
         "ITEM": "Item for page",
         "NEXT_PAGE": "Next page",
@@ -144,6 +135,70 @@
             "CANCEL": "Cancel",
             "SAVE": "Save",
             "EDIT": "Edit"
+        }
+    },
+    "ERROR": {
+        "BE_ERROR": "Unreachable services"
+    },
+    "error": {
+        "generic": "Error server site",
+        "live": {
+            "store": "Verify if present an active network!"
+        },
+        "fleetmanager": {
+            "duplicate-email": "Email already exist"
+        },
+        "ines": {
+            "GENERIC": "Error on Ines system",
+            "ERR_AUTHORIZATION_NOT_DUPPORTED": "Autentication type not support",
+            "ERR_USER_NOT_AUTHORIZED": "User not autorized",
+            "ERR_CREDENTIALS_NOT_ACCEPTED": "Credential not accepted",
+            "ERR_USER_NOT_ACTIVE": "User inactive",
+            "ERR_NO_RECORD_FOUND": "No vehicle found",
+            "ERR_SERIAL_FIELD_NOT_VALORIZED": "The serial field it's not valorized",
+            "ERR_STATUS_NOT_SUPPORTED": "State not support",
+            "ERR_PLATE_NUMBER_NOT_VALORIZED": "The plate field it's not valorized",
+            "ERR_NO_OBU_MANAGER_ASSOCIED_WITH_CODE": "Nobody management OBU associated for code",
+            "ERR_NO_OBU_MANAGER_ASSOCIED_WITH_PLATE": "Nobody management OBU associated for plate",
+            "ERR_NOT_VALID_TOKEN": "Token not is valid",
+            "ERR_OBU_NOT_FOUND": "Entity OBU not found",
+            "ERR_OBU_ALREADY_ASSOCIATED": "Entity OBU just associated to another management",
+            "ERR_OBU_ALREADY_ASSOCIATED_TO_OTHER_PLATE": "Entity OBU just associated to other plate",
+            "ERR_COORDINATES_NOT_VALID": "Coordinate group not valorized or invalid",
+            "ERR_NO_COORDINATES": "Wrong Coordinate or not present",
+            "ERR_NO_TOKEN": "Token not valorized",
+            "ERR_NOT_YET_VALID_TOKEN": "Token not yet valid",
+            "ERR_TOKEN_EXPIRED": "Token expired",
+            "ERR_NO_OBU_MANAGER_FOUND":  "Management OBU not found",
+            "ERR_NO_OBU_FOUND_WITH_SERIAL": "Nobody OBU found for serial number inserted",
+            "ERR_NO_OBU_FOUND": "OBU not found",
+            "ERR_OBU_DATE_BEFORE_LAST_CHANGE_STATE": "The inserted date is lower then already exist change state",
+            "ERR_OBU_NOT_INSTALLED": "Obu haven't 'INSTALLATO' state",
+            "ERR_OBU_NOT_ACTIVE_IN_BUS": "OBU on Bus not active",
+            "ERR_NO_ACTIVE_OBU_IN_BUS": "Nobody OBU active for this Bus",
+            "ERR_NO_BUS_FOUND": "Turistic Bus not found",
+            "ERR_NO_SERIAL_OR_PLATE_PROVIDED": "Nobody serial OBU or plate Bus in the request",
+            "ERR_BUS_NOT_VALIDATE": "The validation Bus is expired",
+            "ERR_BUS_NON_IN_STATO_CENSITO": "The validation Bus not is on 'Censito' state",
+            "ERR_NO_OBU_OWNER_FOUND": "Nobody owner OBU found",
+            "ERR_NO_OBU_SERVICE_FOUND": "Nobody service linked to owner found",
+            "ERR_NO_OBU_USER_FOUND": "Nobody user connected to service found",
+            "ERR_NO_OBU_WALLET_FOUND": "Nobody wallet OBU found",
+            "ERR_NO_AMOUNT_IN_WALLET": "The wallet not has amount",
+            "ERR_NO_ABBONAMENTO_FOUND": "Nobody subscription active for the plate",
+            "ERR_BUS_STATE_ERROR": "Not it's possible insert State: The Bus has'nt state 'Censito' or 'Validazione Provvisoria'",
+            "ERR_BUS_STATE_STEP_ERROR": "The state sent not is compatible with the previus OBU state",
+            "ERR_BUS_STATE_ALREADY_EXIST": "The OBU is just on state",
+            "ERR_BUS_STATE_NON_IN_INSTALLAZIONE":  "Si sta inserendo un nuovo OBU con stato diverso da 'IN_INSTALLAZIONE'",
+            "ERR_BUS_STATE_RIMOSSO_NON_MODIFICABILE": "Lo stato 'RIMOSSO' non è modificabile",
+            "ERR_BUS_VALIDITA_PROVVISORIA_SCADUTA": "La validità provvisoria del Bus è scaduta",
+            "ERR_CONTRASSEGNO_SCADUTO": "Il contrassegno richiesto è scaduto",
+            "ERR_CONTRASSEGNO_NON_ANCORA_VALIDO": "Il contrassegno richiesto non è ancora valido",
+            "ERR_CONTRASSEGNO_NOT_VALID": "Contrassegno non valido",
+            "ERR_CONTRASSEGNO_NOT_FOUND": "Contrassegno non trovato con il codice",
+            "ERR_CONTRASSEGNO_ALREADY_USED": "Esista già una corsa attiva per il codice Contrassegno",
+            "ERR_TARIFFA_NON_OBU": "La tariffa associata al Contrassegno non è esposta verso OBU",
+            "ERR_NO_TARIFFA_FOUND": "Errore nell'identificare la tariffa"
         }
     }
 }
