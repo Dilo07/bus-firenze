@@ -26,8 +26,8 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}</mat-label>
-                    <input matInput type="text" formControlName="CtrlCF" #input [value]="input.value.toUpperCase()"
-                        required>
+                    <input matInput type="text" formControlName="CtrlCF"
+                        (input)="FormGroup.patchValue({CtrlCF: $event.target.value.toUpperCase()})" required>
                     <mat-error>{{'FLEET-MANAGER.INSERT_FISCALCODE' | translate}}</mat-error>
                 </mat-form-field>
             </div>

@@ -38,7 +38,7 @@
     "error": {
         "generic": "Error server site",
         "live": {
-            "store": "Error on receive data"
+            "store": "Verify if present an active network!"
         }
     },
     "ERROR": {

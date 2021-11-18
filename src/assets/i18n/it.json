@@ -40,7 +40,7 @@
     "error": {
         "generic": "Errore lato server",
         "live": {
-            "store": "Errore nella ricezione dei dati"
+            "store": "Verifica la presenza di una rete attiva!"
         }
     },
     "ERROR": {
