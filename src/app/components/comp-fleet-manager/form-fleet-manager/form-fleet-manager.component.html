@@ -5,12 +5,11 @@
     <mat-card-title *ngIf="data !== undefined && data !== null" fxLayout="row" fxLayoutAlign="center center">
         {{'FLEET-MANAGER.MESSAGE_EDIT' | translate}}</mat-card-title>
     <mat-card-title *ngIf="register" fxLayout="row" fxLayoutAlign="center center">
-        Registrazione
+        {{'FLEET-MANAGER.REGISTRATION' | translate}}
     </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
         <div fxLayout="row" fxLayoutAlign="center" *ngIf="register">
-            Compila il form e verifica il numero di cellulare. Una volta confermato l'otp via sms puoi effettuare la
-            registrazione.
+            {{'FLEET-MANAGER.REGISTRATION_HEADER' | translate}}
         </div>
         <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">

@@ -1,3 +1,16 @@
-<div>
+<div fxLayout="column">
+    <span fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
+        <button mat-icon-button [matMenuTriggerFor]="menuLingua" aria-label="Example icon-button with a menu">
+            <span>{{getLang() | slice : 0 : 2}}</span>
+        </button>
+        <mat-menu #menuLingua="matMenu">
+            <span *ngFor="let lang of langs">
+                <button mat-menu-item (click)="changeLang(lang)">
+                    <a class="dropdown-item use-cursor-pointer"  translate>LANG.{{lang | uppercase}}</a>
+                </button>
+            </span>
+        </mat-menu>
+        <span fxFlex="1"></span>
+    </span>
     <app-form-fleet-manager [register]="true"></app-form-fleet-manager>
 </div>
