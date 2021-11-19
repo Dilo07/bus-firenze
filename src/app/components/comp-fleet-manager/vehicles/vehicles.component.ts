@@ -18,6 +18,7 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   styles: [`
   table {
     width: 100%;
+    background-color: beige;
   }
   `]
 })
@@ -97,7 +98,7 @@ export class VehiclesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
           this.vehicleService.deleteVehicle(vehicleId).subscribe(
-            () => this.showMessage('VEHICLE.DELETE_SUCCESS', 'SUCCESS'),
+            () => this.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
             () => null,
             () => {
               this.getVehiclesByManagerId();

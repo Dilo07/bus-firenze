@@ -46,7 +46,7 @@
         "OF": "di"
     },
     "FLEET-MANAGER": {
-        "BACK": "Indietro" ,
+        "BACK": "Indietro",
         "NEW": "Nuovo",
         "SAVE": "Salva",
         "CLEAN": "Ripulisci",
@@ -92,7 +92,7 @@
         "VEHICLESIZE": "N° Veicoli",
         "CONTACT": "Contatto"
     },
-    "VEHICLE":{
+    "VEHICLE": {
         "TITLE": "Veicoli",
         "NO_DATA": "Nessun veicolo presente",
         "SEARCH": "Ricerca per targa o Obu Id",
@@ -129,7 +129,11 @@
         "INSERT_OBU": "Inserisci un Obu",
         "ATTENTION_PLATE1": "Attenzione: verrà rimosso il veicolo con targa",
         "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita."
-      },
+    },
+    "STATISTIC": {
+        "KM_STATISTIC": "km percorsi nell'area interna",
+        "DURATION_STATISTIC": "Durata percorso nell'area interna"
+    },
     "COMMON": {
         "ACTION": {
             "YES": "Si",
@@ -171,7 +175,7 @@
             "ERR_NO_TOKEN": "Token non valorizzato",
             "ERR_NOT_YET_VALID_TOKEN": "Token non ancora valido",
             "ERR_TOKEN_EXPIRED": "Token scaduto",
-            "ERR_NO_OBU_MANAGER_FOUND":  "Gestore OBU non trovato",
+            "ERR_NO_OBU_MANAGER_FOUND": "Gestore OBU non trovato",
             "ERR_NO_OBU_FOUND_WITH_SERIAL": "Nessun OBU trovato con questo seriale",
             "ERR_NO_OBU_FOUND": "Nessun OBU trovato",
             "ERR_OBU_DATE_BEFORE_LAST_CHANGE_STATE": "La data inserita è inferiore ad un cambio stato già esistente",
@@ -191,7 +195,7 @@
             "ERR_BUS_STATE_ERROR": "Stato non censibile: Il Bus non ha lo stato 'Censito' o 'Validazione Provvisoria'",
             "ERR_BUS_STATE_STEP_ERROR": "Lo stato inviato non è compatibile con il precedente stato dell'OBU",
             "ERR_BUS_STATE_ALREADY_EXIST": "L'OBU è già nello stato",
-            "ERR_BUS_STATE_NON_IN_INSTALLAZIONE":  "Si sta inserendo un nuovo OBU con stato diverso da 'IN_INSTALLAZIONE'",
+            "ERR_BUS_STATE_NON_IN_INSTALLAZIONE": "Si sta inserendo un nuovo OBU con stato diverso da 'IN_INSTALLAZIONE'",
             "ERR_BUS_STATE_RIMOSSO_NON_MODIFICABILE": "Lo stato 'RIMOSSO' non è modificabile",
             "ERR_BUS_VALIDITA_PROVVISORIA_SCADUTA": "La validità provvisoria del Bus è scaduta",
             "ERR_CONTRASSEGNO_SCADUTO": "Il contrassegno richiesto è scaduto",

@@ -12,6 +12,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalFormVehicleComponent } from './vehicles/modal-form-vehicle/modal-form-vehicle.component';
 import { RegisterComponent } from './register-page/register.component';
 import { ModalOTPComponent } from './register-page/modal-otp/modal-otp.component';
+import { PanelStatisticComponent } from './vehicles/panel-statistic/panel-statistic.component';
+import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
+import { StatisticComponent } from './vehicles/statistic/statistic.component';
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { ModalOTPComponent } from './register-page/modal-otp/modal-otp.component
     FormFleetManagerComponent,
     ModalFormVehicleComponent,
     RegisterComponent,
-    ModalOTPComponent
+    ModalOTPComponent,
+    PanelStatisticComponent,
+    TripStatisticComponent,
+    StatisticComponent
   ],
   imports: [
     CommonModule,

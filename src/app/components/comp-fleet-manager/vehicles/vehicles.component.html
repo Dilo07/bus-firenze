@@ -2,6 +2,7 @@
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
+			<app-panel-statistic [fleetManager]="fleetManager"></app-panel-statistic>
 			<div fxLayout="row" fxLayoutGap="20px">
 				<button mat-button class="backButton" *ngIf="fleetManager" [routerLink]="['../']">
 					{{'FLEET-MANAGER.BACK' |translate}}
@@ -18,7 +19,7 @@
 				</button>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<table mat-table [dataSource]="vehicleList" style="background-color: beige;" class="mat-elevation-z8"
+			<table mat-table [dataSource]="vehicleList" class="mat-elevation-z8"
 				matSort matSortActive="id" matSortDirection="asc">
 				<ng-container matColumnDef="id">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
@@ -54,6 +55,9 @@
 						</button>
 						<button mat-icon-button matTooltip="Edit" (click)="editVehicle(element)">
 							<mat-icon style="color: #0066CC;">edit</mat-icon>
+						</button>
+						<button mat-icon-button matTooltip="Statistiche" [routerLink]="['statistic']" >
+							<mat-icon style="color: #0066CC;">poll</mat-icon>
 						</button>
 					</td>
 				</ng-container>

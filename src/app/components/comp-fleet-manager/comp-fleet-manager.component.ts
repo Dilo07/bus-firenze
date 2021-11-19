@@ -37,8 +37,8 @@ export class FleetManagerComponent implements OnInit {
   public manageFleet: boolean;
 
   private offset = 0;
-  private limit = 5;
-  private columnOrder: ColumnSort = { active: 'id', direction: -1 };
+  private limit = 10;
+  private columnOrder: ColumnSort = { active: 'id', direction: 1 };
   private endTable = false;
   private subscription: Subscription[] = [];
 

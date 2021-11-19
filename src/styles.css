@@ -1,4 +1,10 @@
+/* app */
+
 html, body { height: 100% !important}
+
+mat-card-content {
+    border-radius: 10px !important;
+}
 
 /* npt-template style */
 

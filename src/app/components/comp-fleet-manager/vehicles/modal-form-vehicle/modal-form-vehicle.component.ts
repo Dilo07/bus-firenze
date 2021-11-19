@@ -51,13 +51,13 @@ export class ModalFormVehicleComponent implements OnInit {
 
   public addVehicle(): void {
     const newVehicle = new Vehicle();
-    newVehicle.fleetManagerId = this.data.fleetManagerId;
+    /* newVehicle.fleetManagerId = this.data.fleetManagerId; */
     newVehicle.lpn = this.FormGroup.get('CtrlLpn').value;
     newVehicle.lpnNat = this.FormGroup.get('CtrlLpnNat').value;
     newVehicle.euroClass = this.FormGroup.get('CtrlEuroClass').value;
     newVehicle.numAxis = this.FormGroup.get('CtrlNumAxis').value;
     newVehicle.maxWeight = this.FormGroup.get('CtrlMaxWeight').value;
-    this.subscription.push(this.vehicleService.addVehicle(newVehicle).subscribe(
+    this.subscription.push(this.vehicleService.addVehicle(newVehicle, this.data?.fleetManagerId).subscribe(
       () => null,
       () => this.showMessage('VEHICLE.ADD_ERROR', 'ERROR'),
       () => { this.showMessage('VEHICLE.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
@@ -69,7 +69,7 @@ export class ModalFormVehicleComponent implements OnInit {
     editVehicle.euroClass = this.FormGroup.get('CtrlEuroClass').value;
     editVehicle.numAxis = this.FormGroup.get('CtrlNumAxis').value;
     editVehicle.maxWeight = this.FormGroup.get('CtrlMaxWeight').value;
-    this.subscription.push(this.vehicleService.updateVehicle(editVehicle).subscribe(
+    this.subscription.push(this.vehicleService.updateVehicle(editVehicle, this.data?.fleetManagerId).subscribe(
       () => null,
       () => this.showMessage('VEHICLE.EDIT_ERROR', 'ERROR'),
       () => { this.showMessage('VEHICLE.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }));

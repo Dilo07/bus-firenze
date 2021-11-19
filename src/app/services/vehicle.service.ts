@@ -13,13 +13,21 @@ export class VehicleService {
 
   private apiUrl = this.url + '/api/fleet';
 
-  addVehicle(vehicle: Vehicle): Observable<void> {
-    return this.http.post<void>(this.apiUrl + '/vehicle/add', vehicle)
+  addVehicle(vehicle: Vehicle, fleetManagerId?: number): Observable<void> {
+    let url = '';
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
+    return this.http.post<void>(this.apiUrl + url + '/vehicle/add', vehicle)
       .pipe(catchError(err => { throw err; }));
   }
 
-  updateVehicle(vehicle: Vehicle): Observable<void> {
-    return this.http.put<void>(this.apiUrl + '/vehicle/update', vehicle)
+  updateVehicle(vehicle: Vehicle, fleetManagerId?: number): Observable<void> {
+    let url = '';
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
+    return this.http.put<void>(this.apiUrl + url + '/vehicle/update', vehicle)
       .pipe(catchError(err => { throw err; }));
   }
 
