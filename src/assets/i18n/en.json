@@ -193,16 +193,16 @@
             "ERR_BUS_STATE_ERROR": "Not it's possible insert State: The Bus has'nt state 'Censito' or 'Validazione Provvisoria'",
             "ERR_BUS_STATE_STEP_ERROR": "The state sent not is compatible with the previus OBU state",
             "ERR_BUS_STATE_ALREADY_EXIST": "The OBU is just on state",
-            "ERR_BUS_STATE_NON_IN_INSTALLAZIONE":  "Si sta inserendo un nuovo OBU con stato diverso da 'IN_INSTALLAZIONE'",
-            "ERR_BUS_STATE_RIMOSSO_NON_MODIFICABILE": "Lo stato 'RIMOSSO' non è modificabile",
-            "ERR_BUS_VALIDITA_PROVVISORIA_SCADUTA": "La validità provvisoria del Bus è scaduta",
-            "ERR_CONTRASSEGNO_SCADUTO": "Il contrassegno richiesto è scaduto",
-            "ERR_CONTRASSEGNO_NON_ANCORA_VALIDO": "Il contrassegno richiesto non è ancora valido",
-            "ERR_CONTRASSEGNO_NOT_VALID": "Contrassegno non valido",
-            "ERR_CONTRASSEGNO_NOT_FOUND": "Contrassegno non trovato con il codice",
-            "ERR_CONTRASSEGNO_ALREADY_USED": "Esista già una corsa attiva per il codice Contrassegno",
-            "ERR_TARIFFA_NON_OBU": "La tariffa associata al Contrassegno non è esposta verso OBU",
-            "ERR_NO_TARIFFA_FOUND": "Errore nell'identificare la tariffa"
+            "ERR_BUS_STATE_NON_IN_INSTALLAZIONE":  "The new OBU hasn't the correct state 'IN_INSTALLAZIONE'",
+            "ERR_BUS_STATE_RIMOSSO_NON_MODIFICABILE": "The state 'RIMOSSO' not is editable",
+            "ERR_BUS_VALIDITA_PROVVISORIA_SCADUTA": "the bus temporary validity is expired",
+            "ERR_CONTRASSEGNO_SCADUTO": "The request mark is expired",
+            "ERR_CONTRASSEGNO_NON_ANCORA_VALIDO": "The request mark is not yet valid",
+            "ERR_CONTRASSEGNO_NOT_VALID": "The request mark is invalid",
+            "ERR_CONTRASSEGNO_NOT_FOUND": "Mark don't found for this code",
+            "ERR_CONTRASSEGNO_ALREADY_USED": "It's already exist an active trip for mark code",
+            "ERR_TARIFFA_NON_OBU": "The ammount associated to mark not is on OBU",
+            "ERR_NO_TARIFFA_FOUND": "Error on ammount identification"
         }
     }
 }
