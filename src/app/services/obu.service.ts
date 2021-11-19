@@ -19,4 +19,19 @@ export class ObuService {
     return this.http.get<void>(this.apiUrl + '/' + id + '/test')
       .pipe(catchError(err => { throw err; }));
   }
+
+  addObu(id: string, vehicle: number): Observable<void> {
+    return this.http.put<void>(this.apiUrl + '/' + id + '/vehicle/' + vehicle, '')
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  updateObu(id: string, vehicle: number, newId: string): Observable<void> {
+    return this.http.put<void>(this.apiUrl + '/' + id + '/vehicle/' + vehicle + '/change/' + newId, '')
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  deleteObu(vehicle: number): Observable<void> {
+    return this.http.delete<void>(this.apiUrl + '/delete/vehicle/' + vehicle)
+      .pipe(catchError(err => { throw err; }));
+  }
 }

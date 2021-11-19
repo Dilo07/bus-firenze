@@ -18,10 +18,8 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
   selector: 'app-comp-fleet-manager',
   templateUrl: './comp-fleet-manager.component.html',
   styles: [`
-  table {
-    width: 100%;
-    background-color: beige;
-  }
+  table { width: 100%; background-color: beige; }
+  mat-card { z-index: 2;}
   `]
 })
 export class FleetManagerComponent implements OnInit {

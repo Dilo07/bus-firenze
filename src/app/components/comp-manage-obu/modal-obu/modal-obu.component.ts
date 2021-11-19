@@ -4,7 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { Subscription } from 'rxjs';
 import { ObuService } from 'src/app/services/obu.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Obu } from '../../domain/bus-firenze-domain';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-modal-obu',
@@ -35,6 +37,8 @@ export class ModalObuComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private obuService: ObuService,
     private cdr: ChangeDetectorRef,
+    private snackBar: MatSnackBar,
+    private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public data: Obu) { }
 
   ngOnInit(): void {
@@ -60,6 +64,33 @@ export class ModalObuComponent implements OnInit, OnDestroy {
     if (this.scanner) {
       this.scanner.enable = false;
     }
+  }
+
+  public addObu(): void {
+    const newObu = this.FormGroup.get('CtrlObuId').value;
+    this.subscription.push(this.obuService.addObu(newObu, this.data.vehicleId).subscribe(
+      () => {
+        this.showMessage('OBU.ASSIGN_SUCCESS', 'SUCCESS');
+      },
+      error => console.log(error),
+      () => this.dialogRef.close(true)));
+  }
+
+  public changeObu(): void {
+    const oldObu = this.data.obuId;
+    const newObu = this.FormGroup.get('CtrlObuId').value;
+    this.subscription.push(this.obuService.updateObu(oldObu, this.data.vehicleId, newObu).subscribe(
+      () => {
+        this.showMessage('OBU.CHANGE_SUCCESS', 'SUCCESS');
+      },
+      error => console.log(error),
+      () => this.dialogRef.close(true)));
+  }
+
+  public cleanObu(): void {
+    this.FormGroup.patchValue({
+      CtrlObuId: ''
+    });
   }
 
   /* Funzione per verificare se l'obu è presente nel db e se non è già associato.
@@ -134,6 +165,18 @@ export class ModalObuComponent implements OnInit, OnDestroy {
         this.interval = setTimeout(() => { this.complete = true; }, 1500);
       }));
     }
+  }
+
+  private showMessage(i18nKey: string, level: string): void {
+
+    this.snackBar.open(this.translate.instant(i18nKey),
+      '✖',
+      {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: [level]
+      });
   }
 
 }

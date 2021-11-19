@@ -145,7 +145,11 @@
     },
     "STATISTIC": {
         "KM_STATISTIC": "km percorsi nell'area interna",
-        "DURATION_STATISTIC": "Durata percorso nell'area interna"
+        "DURATION_STATISTIC": "Durata percorso nell'area interna",
+        "VEHICLE": "Statistiche veicolo",
+        "LABEL-RANGE": "Inserisci un range di date",
+        "INVALID_START": "Data di inizio range non valida",
+        "INVALID_END": "Data di fine range non valida"
     },
     "COMMON": {
         "ACTION": {
@@ -162,10 +166,39 @@
     "error": {
         "generic": "Errore lato server",
         "live": {
-            "store": "Verifica la presenza di una rete attiva!"
+            "store": "Errore nella ricezione dei dati"
+        },
+        "net": {
+            "verify-finalize": "Errore nella finalizzazione della rete",
+            "finalize": "Errore nella modifica fine validità",
+            "delete": "Errore nella cancellazione della rete",
+            "finalizesize": "Non è possibile finalizzare più di una rete"
+        },
+        "shapefile": {
+          "opening": "Errore nella lettura dello shapefile",
+          "writing": "Errore nella scrittura dello shapefile",
+          "invalid": "Contenuto dello shapefile non valido",
+          "export": "Errore nell'export dello shapefile"
         },
         "fleetmanager": {
-            "duplicate-email": "Email già esistente"
+          "insert" : "Non è possibile inserire il fleet manager",
+          "email" : "Email obbligatoria",
+          "duplicate-email": "Questa email è già usata. Per favore, inserisci un'altra email",
+          "delete" : "Non è possibile cancellare un fleet manager con veicoli associati"
+        },
+        "vehicle": {
+          "update": "Aggiornamento dei dati del veicolo fallito",
+          "not_associated" : "Il veicolo non è associato a un Obu",
+          "delete": "Non è possibile cancellare un veicolo con un Obu associato",
+          "duplicate": "La targa inserita è già associata"
+        },
+        "obu": {
+          "not_found" : "Obu Id non presente",
+          "not_associated": "L'obu non è associato a un veicolo",
+          "already_associated" : "L'obu è già associato a un altro veicolo",
+          "association" : "Errore nell'associazione obu-veicolo",
+          "match" : "Errore nel cambio di targa",
+          "remove": "non è possibile rimuovere l'obu"
         },
         "ines": {
             "GENERIC": "Errore sul sistema Ines",

@@ -15,6 +15,7 @@ import { ModalOTPComponent } from './register-page/modal-otp/modal-otp.component
 import { PanelStatisticComponent } from './vehicles/panel-statistic/panel-statistic.component';
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { StatisticComponent } from './vehicles/statistic/statistic.component';
+import { NptMapModule } from '@npt/npt-map';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { StatisticComponent } from './vehicles/statistic/statistic.component';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
+    NptMapModule,
     FleetManagerRoutingModule
   ],
   exports: [FormFleetManagerComponent]

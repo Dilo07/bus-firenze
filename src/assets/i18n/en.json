@@ -143,7 +143,11 @@
     },
     "STATISTIC": {
         "KM_STATISTIC": "km traveled in the inner area",
-        "DURATION_STATISTIC": "Route duration in the inner area"
+        "DURATION_STATISTIC": "Route duration in the inner area",
+        "VEHICLE": "Vehicle statistic",
+        "LABEL-RANGE": "Insert a range dates",
+        "INVALID_START": "Start range date invalid",
+        "INVALID_END": "End range date invalid"
     },
     "COMMON": {
         "ACTION": {
@@ -160,10 +164,39 @@
     "error": {
         "generic": "Error server site",
         "live": {
-            "store": "Verify if present an active network!"
+            "store": "Error on receive data"
+        },
+        "net": {
+            "verify-finalize": "Error in finalizing the network",
+            "finalize": "Error in changing end validity",
+            "delete": "Error on delete network",
+            "finalizesize": "Cannot finalize more than one network"
+        },
+        "shapefile": {
+          "opening": "Error opening the shapefile",
+          "writing": "Error writing the shapefile",
+          "invalid": "Invalid shapefile",
+          "export": "Error in shapefile's export"
         },
         "fleetmanager": {
-            "duplicate-email": "Email already exist"
+          "insert" : "Failed to insert a fleet manager",
+          "email" : "Error: Email is mandatory",
+          "duplicate-email": "Email is already used. Please try another one",
+          "delete" : "Cannot delete a fleet manager with assigned vehicles"
+        },
+        "vehicle": {
+          "update": "Failed to update the vehicle",
+          "not_associated" : "vehicle is not associated",
+          "delete": "Cannot delete a vehicle with an associated Obu",
+          "duplicate": "The entered plate is already associated"
+        },
+        "obu": {
+          "not_found" : "Obu Id doesn't exist",
+          "not_associated": "Failed to retrieve vehicle associated to obu",
+          "already_associated" : "Obu is already associated",
+          "association" : "Error in obu-vehicle association",
+          "match" : "Error on change plate",
+          "remove": "Cannot remove the obu"
         },
         "ines": {
             "GENERIC": "Error on Ines system",

@@ -56,7 +56,8 @@
 						<button mat-icon-button matTooltip="Edit" (click)="editVehicle(element)">
 							<mat-icon style="color: #0066CC;">edit</mat-icon>
 						</button>
-						<button mat-icon-button matTooltip="Statistiche" [routerLink]="['statistic']" >
+						<button mat-icon-button matTooltip="Statistiche" [routerLink]="['statistic']" 
+							[state]="{vehicle: element, fleetManager: fleetManager}">
 							<mat-icon style="color: #0066CC;">poll</mat-icon>
 						</button>
 					</td>

@@ -26,7 +26,7 @@ export class ModalFormVehicleComponent implements OnInit {
     private vehicleService: VehicleService,
     private snackBar: MatSnackBar,
     private translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public data: { vehicle: Vehicle, fleetManagerId: number}) { }
+    @Inject(MAT_DIALOG_DATA) public data: { vehicle: Vehicle, fleetManagerId: number }) { }
 
   ngOnInit(): void {
     // se ci sono dati è un edit form altrimenti è un add form
@@ -58,7 +58,11 @@ export class ModalFormVehicleComponent implements OnInit {
     newVehicle.maxWeight = this.FormGroup.get('CtrlMaxWeight').value;
     this.subscription.push(this.vehicleService.addVehicle(newVehicle, this.data?.fleetManagerId).subscribe(
       () => null,
-      () => this.showMessage('VEHICLE.ADD_ERROR', 'ERROR'),
+      (err) => {
+        if (err.error) {
+          this.showMessage(err.error.i18nKey, 'ERROR');
+        }
+      },
       () => { this.showMessage('VEHICLE.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
     ));
   }
@@ -70,7 +74,11 @@ export class ModalFormVehicleComponent implements OnInit {
     editVehicle.vehicle.maxWeight = this.FormGroup.get('CtrlMaxWeight').value;
     this.subscription.push(this.vehicleService.updateVehicle(editVehicle.vehicle, this.data?.fleetManagerId).subscribe(
       () => null,
-      () => this.showMessage('VEHICLE.EDIT_ERROR', 'ERROR'),
+      (err) => {
+        if (err.error) {
+          this.showMessage(err.error.i18nKey, 'ERROR');
+        }
+      },
       () => { this.showMessage('VEHICLE.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }));
   }
 

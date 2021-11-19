@@ -87,6 +87,21 @@ export class ObuComponent implements OnInit, OnDestroy {
     });
   }
 
+  public changeObu(VehicleId: number, ObuId: string): void {
+    const dialogRef = this.dialog.open(ModalObuComponent, {
+      width: '70%',
+      height: '70%',
+      data: {vehicleId: VehicleId, obuId: ObuId}
+    });
+    // chiama il modal form in caso si edit aggiorna la table chiamando il service
+    dialogRef.afterClosed().subscribe((edit) => {
+      if (edit) {
+        this.resetSearchField();
+        this.getVehiclesInstaller(true);
+      }
+    });
+  }
+
   private resetSearchField(): void {
     this.Search.patchValue({
       CtrlSearch: ''
