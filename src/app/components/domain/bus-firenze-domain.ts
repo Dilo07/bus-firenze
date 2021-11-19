@@ -75,3 +75,8 @@ export interface ColumnSort {
     active: string;
     direction: 1 | -1;
 }
+
+export class Obu {
+    vehicleId: number;
+    obuId: string;
+}

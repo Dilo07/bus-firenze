@@ -7,24 +7,24 @@
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
                     <mat-label> {{'VEHICLE.LPN' | translate}}</mat-label>
-                    <input *ngIf="!data.id" matInput type="text" #input [value]="input.value.toUpperCase()"
+                    <input *ngIf="!data.vehicle" matInput type="text" #input [value]="input.value.toUpperCase()"
                         formControlName="CtrlLpn" maxlength="20" autocomplete="off" required>
-                    <input *ngIf="data.id" matInput type="text" formControlName="CtrlLpn" style="opacity: 0.5" readonly>
+                    <input *ngIf="data.vehicle" matInput type="text" formControlName="CtrlLpn" style="opacity: 0.5" readonly>
                     <mat-error> {{'VEHICLE.INSERT LPN' | translate}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
                     <mat-label> {{'VEHICLE.LPN NAT' | translate}}</mat-label>
-                    <mat-select formControlName="CtrlLpnNat" *ngIf="!data.id" required>
+                    <mat-select formControlName="CtrlLpnNat" *ngIf="!data.vehicle" required>
                         <mat-option *ngFor="let nation of nations" [value]="nation.value">
                             <!-- selezione nazione -->
                             {{nation.value | translate}}
                             <span [ngClass]="'flag-icon flag-icon-' + nation.value.toLowerCase()"></span>
                         </mat-option>
                     </mat-select>
-                    <span fxLayout="row" *ngIf="data.id">
+                    <span fxLayout="row" *ngIf="data.vehicle">
                         <!-- readonly nazione -->
                         <input matInput type="text" formControlName="CtrlLpnNat" style="opacity: 0.5" readonly>
-                        <span [ngClass]="'flag-icon flag-icon-' + data.lpnNat.toLowerCase()"></span>
+                        <span [ngClass]="'flag-icon flag-icon-' + data.vehicle.lpnNat.toLowerCase()"></span>
                     </span>
                 </mat-form-field>
             </div>
@@ -62,9 +62,9 @@
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">
                     {{'COMMON.ACTION.BACK' | translate}}</button>
-                <button *ngIf="!data.id" mat-button [disabled]="FormGroup.invalid" class="greenButtons"
+                <button *ngIf="!data.vehicle" mat-button [disabled]="FormGroup.invalid" class="greenButtons"
                     (click)="addVehicle()"> {{'COMMON.ACTION.SAVE' | translate}}</button>
-                <button *ngIf="data.id" mat-button [disabled]="FormGroup.invalid || !FormGroup.dirty" class="greenButtons"
+                <button *ngIf="data.vehicle" mat-button [disabled]="FormGroup.invalid || !FormGroup.dirty" class="greenButtons"
                     (click)="updateVehicle()"> {{'COMMON.ACTION.EDIT' | translate}}</button>
             </div>
         </form>

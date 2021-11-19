@@ -1,12 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { Vehicle } from '../domain/bus-firenze-domain';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { ModalObuComponent } from './modal-obu/modal-obu.component';
 
 @Component({
   selector: 'app-obu',
@@ -14,7 +16,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styles: [
   ]
 })
-export class ObuComponent implements OnInit {
+export class ObuComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public assignObuEnabled = false;
@@ -28,13 +30,23 @@ export class ObuComponent implements OnInit {
 
   private subscription: Subscription[] = [];
 
-  constructor(public router: Router, private vehicleService: VehicleService, private formBuilder: FormBuilder) { }
+  constructor(
+    public router: Router,
+    public dialog: MatDialog,
+    private vehicleService: VehicleService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.Search = this.formBuilder.group({
       CtrlSearch: ['']
     });
     this.callTableInstaller();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
 
   private callTableInstaller(): void {
@@ -58,6 +70,27 @@ export class ObuComponent implements OnInit {
       },
       () => this.complete = true,
       () => this.complete = true));
+  }
+
+  public addObu(VehicleId: number): void {
+    const dialogRef = this.dialog.open(ModalObuComponent, {
+      width: '70%',
+      height: '70%',
+      data: {vehicleId: VehicleId}
+    });
+    // chiama il modal form in caso si edit aggiorna la table chiamando il service
+    dialogRef.afterClosed().subscribe((add) => {
+      if (add) {
+        this.resetSearchField();
+        this.getVehiclesInstaller(false);
+      }
+    });
+  }
+
+  private resetSearchField(): void {
+    this.Search.patchValue({
+      CtrlSearch: ''
+    });
   }
 
 }

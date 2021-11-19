@@ -64,7 +64,7 @@ export class VehiclesComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalFormVehicleComponent, {
       width: '90%',
       height: '90%',
-      data: { fleetManagerId: this.fleetManager?.id }
+      data: { vehicle: null, fleetManagerId: this.fleetManager?.id }
     });
     dialogRef.afterClosed().subscribe((add) => {
       if (add) {
@@ -74,11 +74,11 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
-  public editVehicle(vehicle: Vehicle): void {
+  public editVehicle(vEhicle: Vehicle): void {
     const dialogRef = this.dialog.open(ModalFormVehicleComponent, {
       width: '90%',
       height: '90%',
-      data: vehicle
+      data: { vehicle: vEhicle, fleetManagerId: this.fleetManager?.id }
     });
     dialogRef.afterClosed().subscribe((edit) => {
       if (edit) {
