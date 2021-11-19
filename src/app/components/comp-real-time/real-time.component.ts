@@ -75,7 +75,7 @@ export class RealTimeComponent implements OnInit {
   public getTrip(): void {
     this.mapChild.removeLayers([FirenzeMapUtils.LayerEnum.LINE_REAL_TIME, FirenzeMapUtils.LayerEnum.POINT_REAL_TIME]);
 
-    this.subscription.push(this.liveStreamService.getStreamLive(this.fleetManager.id).subscribe(data => {
+    this.subscription.push(this.liveStreamService.getStreamLive(this.fleetManager?.id).subscribe(data => {
       this.vehicleTrip = data;
       this.drawLine();
       this.drawPoint();

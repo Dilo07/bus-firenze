@@ -29,12 +29,12 @@
             <zxing-scanner *ngIf="scannerEnabled" #scanner (scanSuccess)="scanSuccessHandler($event)"
                 [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']"></zxing-scanner>
             <div fxLayout="row" fxLayoutGap="20px">
-                <button mat-button (click)="dialogRef.close(false);" class="deleteButton">
-                    {{'common.action.cancel' | translate}}</button>
-                <button *ngIf="data.obuId === undefined" mat-button [disabled]="!validObu" class="saveButton"
-                    (click)="addObu()">{{'common.action.save' | translate}}</button>
-                <button *ngIf="data.obuId !== undefined" mat-button [disabled]="!validObu" class="saveButton"
-                    (click)="changeObu()">{{'common.action.modify' | translate}}</button>
+                <button mat-button (click)="dialogRef.close(false);" class="redButtons">
+                    {{'COMMON.ACTION.CANCEL' | translate}}</button>
+                <button *ngIf="data.obuId === undefined" mat-button [disabled]="!validObu" class="greenButtons"
+                    (click)="addObu()">{{'COMMON.ACTION.SAVE' | translate}}</button>
+                <button *ngIf="data.obuId !== undefined" mat-button [disabled]="!validObu" class="greenButtons"
+                    (click)="changeObu()">{{'COMMON.ACTION.EDIT' | translate}}</button>
             </div>
         </form>
     </mat-card-content>

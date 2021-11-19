@@ -9,14 +9,20 @@ import { Obu } from '../../domain/bus-firenze-domain';
 @Component({
   selector: 'app-modal-obu',
   templateUrl: './modal-obu.component.html',
-  styles: [
+  styles: [`
+  :host zxing-scanner::ng-deep {
+    /* max-height: 70vh; */
+    /* width: 70%; */
+    object-fit: contain;
+}
+  `
   ]
 })
 export class ModalObuComponent implements OnInit, OnDestroy {
   @ViewChild(ZXingScannerComponent) scanner: ZXingScannerComponent;
 
   public FormGroup: FormGroup;
-  public validObu: boolean = undefined;
+  public validObu: boolean;
   public complete = true;
   public scannerEnabled = false;
 
