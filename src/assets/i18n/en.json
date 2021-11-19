@@ -128,6 +128,19 @@
         "ATTENTION_PLATE1": "Attention: Will be remove the vehicle with plate",
         "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number."
     },
+    "REAL-TIME": {
+        "NO_DATA": "No vehicle in area",
+        "REFRESH": "Refresh",
+        "STOP": "Stop refresh",
+        "PLAY": "Play refresh",
+        "MAP": "Real-Time Map",
+        "TABLE": "Real-Time Table",
+        "SELECT": "Select Time of Map refresh",
+        "1 Minute": "One Minute",
+        "5 Minutes": "5 Minutes",
+        "10 Minutes": "10 Minutes",
+        "30 Minutes": "30 Minutes"
+    },
     "STATISTIC": {
         "KM_STATISTIC": "km traveled in the inner area",
         "DURATION_STATISTIC": "Route duration in the inner area"

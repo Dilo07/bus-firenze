@@ -20,10 +20,10 @@ export class RealTimeComponent implements OnInit {
 
   public fleetManager: FleetManager;
   public complete = true;
+  public vehicleTrip: VehicleTripPersistence[] = [];
 
   private subscription: Subscription[] = [];
   private geometry: Geometry[] = [];
-  private vehicleTrip: VehicleTripPersistence[] = [];
 
   constructor(
     private router: Router,

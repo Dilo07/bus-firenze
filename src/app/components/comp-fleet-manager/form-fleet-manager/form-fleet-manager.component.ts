@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import CodiceFiscale from 'codice-fiscale-js';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
@@ -29,6 +30,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     private registerService: RegisterService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
+    private translateService: TranslateService,
     private fleetManagerService: FleetManagerService) {
     this.data = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
   }
@@ -142,7 +144,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
   public modalOTP(): void {
     const Cell = this.FormGroup.get('CtrlCell').value;
-    this.subscription.push(this.registerService.getOtpCode(Cell).subscribe(
+    const lang = this.translateService.currentLang;
+    this.subscription.push(this.registerService.getOtpCode(Cell, lang).subscribe(
       code => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',

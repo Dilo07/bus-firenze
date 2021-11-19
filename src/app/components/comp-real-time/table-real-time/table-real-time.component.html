@@ -1,0 +1,41 @@
+<div class="mat-elevation-z8 example-container">
+    <mat-table #table [dataSource]="vehicleTable">
+        <ng-container matColumnDef="OBUID">
+            <mat-header-cell *matHeaderCellDef> OBUID </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">Obu Id</span>
+                {{element.obuId}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Start">
+            <mat-header-cell *matHeaderCellDef> {{'common.date.start' | translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'common.date.start' | translate}}</span>
+                {{element.start | date: 'dd/MM/yyyy HH:mm:ss' }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="End">
+            <mat-header-cell *matHeaderCellDef> {{'common.date.end' | translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'common.date.end' | translate}}</span>
+                {{element.end | date: 'dd/MM/yyyy HH:mm:ss'}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-button (click)="viewDetails(element.obuId)" matTooltip="{{'VEHICLE.DETAILS' | translate}}">
+                    <mat-icon style="color: #0066CC;">find_in_page</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row class="mobileHeader" [style.display]="vehicleTable.length === 0 ? 'none' : '' "
+            *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
+<div *ngIf="vehicleTable.length === 0"> {{'REAL-TIME.NO_DATA' | translate}}</div>

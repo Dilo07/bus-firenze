@@ -6,6 +6,29 @@ mat-card-content {
     border-radius: 10px !important;
 }
 
+.mobile-label {
+    display: none;
+}
+
+@media(max-width: 1180px) {
+    mat-cell:first-of-type{
+        padding-left: 0 !important;
+    }
+    .mobile-label {
+        width: 80px;
+        display: inline-block;
+        font-weight: bold;
+    }
+    .mobileHeader {
+        display: none;
+    }
+    .mat-row {
+        flex-direction: column;
+        align-items: start;
+        padding: 8px 24px;
+    }
+}
+
 /* npt-template style */
 
 .topbar {

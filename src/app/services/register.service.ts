@@ -13,8 +13,8 @@ export class RegisterService {
 
   private apiUrl = this.url + '/noauth';
 
-  getOtpCode(contact: string): Observable<string> {
-    return this.http.post<string>(this.apiUrl + '/register/code', contact)
+  getOtpCode(contact: string, lang: string): Observable<string> {
+    return this.http.post<string>(this.apiUrl + '/register/code/' + lang, contact)
       .pipe(catchError(err => { throw err; }));
   }
 

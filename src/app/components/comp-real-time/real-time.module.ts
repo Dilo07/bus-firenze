@@ -7,11 +7,13 @@ import { NptMapModule } from '@npt/npt-map';
 import { MaterialModule } from '@npt/npt-template';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
+import { TableRealTimeComponent } from './table-real-time/table-real-time.component';
 
 
 @NgModule({
   declarations: [
-    RealTimeComponent
+    RealTimeComponent,
+    TableRealTimeComponent
   ],
   imports: [
     CommonModule,

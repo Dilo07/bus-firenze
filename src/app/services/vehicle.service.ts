@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { HttpUtils } from '@npt/npt-template';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Vehicle } from '../components/domain/bus-firenze-domain';
@@ -36,9 +37,12 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getVehicles(isAssociated: boolean, keywords?: string): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>
-      (this.apiUrl + '/vehicles/search?isAssociated=' + isAssociated + (keywords ? '&keyword=' + keywords : ''))
+  getVehicles(isAssociated: boolean, keyword?: string): Observable<Vehicle[]> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ isAssociated, keyword })
+    };
+    return this.http.get<Vehicle[]>(this.apiUrl + '/vehicles/search', options)
       .pipe(catchError(err => { throw err; }));
   }
 }
