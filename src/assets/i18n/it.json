@@ -149,7 +149,17 @@
         "VEHICLE": "Statistiche veicolo",
         "LABEL-RANGE": "Inserisci un range di date",
         "INVALID_START": "Data di inizio range non valida",
-        "INVALID_END": "Data di fine range non valida"
+        "INVALID_END": "Data di fine range non valida",
+        "TABLE_ROUTES": "Tabella percorsi",
+        "START": "Inizio",
+        "END": "Fine",
+        "ROAD": "Tratta",
+        "STOP": "Fermata",
+        "TRIP_LENGHT": "Lunghezza viaggio",
+        "DURATION": "Durata",
+        "METERS": "Metri",
+        "SECONDS": "Secondi",
+        "SECOND": "Secondo"
     },
     "COMMON": {
         "DATE": {

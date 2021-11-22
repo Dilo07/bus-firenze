@@ -14,8 +14,9 @@ import { RegisterComponent } from './register-page/register.component';
 import { ModalOTPComponent } from './register-page/modal-otp/modal-otp.component';
 import { PanelStatisticComponent } from './vehicles/panel-statistic/panel-statistic.component';
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
-import { StatisticComponent } from './vehicles/statistic/statistic.component';
+import { StatisticComponent } from './vehicles/page-statistic/statistic.component';
 import { NptMapModule } from '@npt/npt-map';
+import { TableStatisticComponent } from './vehicles/table-statistic/table-statistic.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { NptMapModule } from '@npt/npt-map';
     ModalOTPComponent,
     PanelStatisticComponent,
     TripStatisticComponent,
-    StatisticComponent
+    StatisticComponent,
+    TableStatisticComponent
   ],
   imports: [
     CommonModule,

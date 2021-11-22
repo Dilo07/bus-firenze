@@ -25,7 +25,7 @@
                 </mat-error>
             </mat-form-field>
         </form>
-        <mat-tab-group mat-align-tabs="center">
+        <mat-tab-group mat-align-tabs="center" [selectedIndex]="index" (selectedTabChange)="tabChange($event)">
             <mat-tab label="Mappa">
                 <div style="margin-top: 1%;">
                     <lib-npt-map></lib-npt-map>
@@ -37,7 +37,7 @@
                         <app-trip-statistic [vehicleStatTrip]="vehicleStatTrip" [viewOuter]="viewOuter"></app-trip-statistic>
                     </div>
                     <div fxFlex.gt-lg="50" fxFlex.gt-md="50" fxFlex.gt-xs="100" fxFlex="100">
-                        Tabella percorsi
+                        <app-table-statistic [TripPersistence]="vehicleTripPersistence"></app-table-statistic>
                     </div>
                 </div>
             </mat-tab>

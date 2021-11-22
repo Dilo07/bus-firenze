@@ -147,7 +147,17 @@
         "VEHICLE": "Vehicle statistic",
         "LABEL-RANGE": "Insert a range dates",
         "INVALID_START": "Start range date invalid",
-        "INVALID_END": "End range date invalid"
+        "INVALID_END": "End range date invalid",
+        "TABLE_ROUTES": "Routes table",
+        "START": "Start",
+        "END": "End",
+        "ROAD": "Road",
+        "STOP": "Stop",
+        "TRIP_LENGHT": "Trip lenght",
+        "DURATION": "Duration",
+        "METERS": "Meters",
+        "SECONDS": "Seconds",
+        "SECOND": "Second"
     },
     "COMMON": {
         "DATE": {

@@ -1,11 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { NptMapComponent } from '@npt/npt-map';
 import * as moment from 'moment';
 import { forkJoin, Subscription } from 'rxjs';
 import { FleetManager, TripStat, Vehicle, VehicleTripPersistence } from 'src/app/components/domain/bus-firenze-domain';
 import { StatisticService } from 'src/app/services/statistic.service';
+import { FirenzeMapUtils } from 'src/app/shared/utils/map/Firenze-map.utils';
 
 @Component({
   selector: 'app-statistic',
@@ -14,6 +18,7 @@ import { StatisticService } from 'src/app/services/statistic.service';
   ]
 })
 export class StatisticComponent implements OnInit {
+  @ViewChild(NptMapComponent) mapChild: NptMapComponent;
   public FormGroup: FormGroup;
   public start = moment(moment.now()).subtract(1, 'day');
   public end = moment(moment.now());
@@ -21,6 +26,7 @@ export class StatisticComponent implements OnInit {
   public fleetManager: FleetManager;
   public vehicle: Vehicle;
   public complete = true;
+  public index = 0;
   public vehicleStatTrip: TripStat;
   public vehicleTripPersistence: VehicleTripPersistence[];
 
@@ -29,6 +35,7 @@ export class StatisticComponent implements OnInit {
   constructor(
     private router: Router,
     private statisticService: StatisticService,
+    private translate: TranslateService,
     @Inject('viewOuterData') public viewOuter: boolean
   ) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
@@ -55,13 +62,47 @@ export class StatisticComponent implements OnInit {
       .subscribe(({ req1, req2 }) => {
         this.vehicleStatTrip = req1;
         this.vehicleTripPersistence = req2;
-        /* this.drawLineTrip(); */
+        this.drawLineTrip();
       },
         () => this.complete = true,
         () => this.complete = true
       ));
   }
 
+  private drawLineTrip(): void {
+    if (this.mapChild) {
+      this.mapChild.removeLayers([FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE]);
+    }
+
+    this.vehicleTripPersistence.forEach((trip: VehicleTripPersistence) => {
+      const text = this.generateLineStringText(trip);
+      this.mapChild.drawLine(
+        [trip.shape.points], FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE, FirenzeMapUtils.Style.SECTION_LINKS, text);
+    });
+  }
+
+  private generateLineStringText(trip: VehicleTripPersistence): string {
+    return `<h3>${this.translate.instant('STATISTIC.ROAD')}</h3>
+    <table><tr><th>${this.translate.instant('STATISTIC.TRIP_LENGHT')}</th><th> ${this.translate.instant('STATISTIC.START')} </th>
+    <th> ${this.translate.instant('STATISTIC.END')} </th><th> ${this.translate.instant('STATISTIC.DURATION')} (HH:mm:ss)</th></tr>
+    <tr> <td> ${(trip.tripLength / 1000).toFixed(1)} km</td>
+    <td> ${moment(trip.start).format('DD/MM/yyy HH:mm:ss')} </td> <td> ${moment(trip.end).format('DD/MM/yyy HH:mm:ss')} </td>
+    <td> ${moment.utc(trip.duration * 1000).format('HH:mm:ss')} </td>
+    </tr></table><hr><br>`;
+  }
+
   public changeDate(e: MatDatepickerInputEvent<any>): void {
+    if (e.value && !this.FormGroup.invalid) {
+      this.start = this.FormGroup.get('start').value;
+      this.end = this.FormGroup.get('end').value;
+      if (this.index === 1) {
+        this.index = 0;
+      }
+      this.getGraph();
+    }
+  }
+
+  public tabChange(event: MatTabChangeEvent): void {
+    this.index = event.index;
   }
 }
