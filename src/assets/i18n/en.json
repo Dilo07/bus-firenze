@@ -150,6 +150,10 @@
         "INVALID_END": "End range date invalid"
     },
     "COMMON": {
+        "DATE": {
+            "START": "Start",
+            "END": "End"
+        },
         "ACTION": {
             "YES": "Yes",
             "BACK": "Back",

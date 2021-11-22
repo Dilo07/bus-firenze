@@ -80,3 +80,10 @@ export class Obu {
     vehicleId: number;
     obuId: string;
 }
+
+export interface TripStat {
+    innerLength: number;
+    outerLength: number;
+    innerDuration: number;
+    outerDuration: number;
+}

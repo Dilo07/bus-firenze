@@ -152,6 +152,10 @@
         "INVALID_END": "Data di fine range non valida"
     },
     "COMMON": {
+        "DATE": {
+            "START": "Inizio",
+            "END": "Fine"
+        },
         "ACTION": {
             "YES": "Si",
             "BACK": "Indietro",

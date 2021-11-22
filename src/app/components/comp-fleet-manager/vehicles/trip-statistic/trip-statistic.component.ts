@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TripStat } from 'src/app/components/domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-trip-statistic',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class TripStatisticComponent implements OnInit {
+  @Input() vehicleStatTrip: TripStat;
+  @Input() viewOuter: boolean;
 
   constructor() { }
 

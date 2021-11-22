@@ -21,9 +21,11 @@ export class RealTimeComponent implements OnInit {
   public fleetManager: FleetManager;
   public complete = true;
   public vehicleTrip: VehicleTripPersistence[] = [];
+  public center = [11.206119915108518, 43.81031349352526];
 
   private subscription: Subscription[] = [];
   private geometry: Geometry[] = [];
+  public layersPopup = [FirenzeMapUtils.LayerEnum.POINT_REAL_TIME];
 
   constructor(
     private router: Router,
@@ -115,7 +117,7 @@ export class RealTimeComponent implements OnInit {
   }
 
   private generateText(trip: VehicleTripPersistence): string {
-    return `<table><tr><th> OBU </th><th> ${this.translate.instant('common.date.start')} </th><th> ${this.translate.instant('common.date.end')} </th></tr>
+    return `<table><tr><th> OBU </th><th> ${this.translate.instant('COMMON.DATE.START')} </th><th> ${this.translate.instant('COMMON.DATE.END')} </th></tr>
         <tr><td> ${trip.obuId} </td>
         <td> ${moment(trip.start).format('HH:mm:ss')} </td> <td> ${moment(trip.end).format('HH:mm:ss')} </td>
         </tr></table><hr><br>`;
