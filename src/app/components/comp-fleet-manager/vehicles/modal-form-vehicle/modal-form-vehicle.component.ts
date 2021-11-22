@@ -5,8 +5,7 @@ import { Nations } from 'src/app/components/domain/bus-firenze-constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { Subscription } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 
 @Component({
   selector: 'app-modal-form-vehicle',
@@ -24,8 +23,7 @@ export class ModalFormVehicleComponent implements OnInit {
     public dialogRef: MatDialogRef<ModalFormVehicleComponent>,
     private formBuilder: FormBuilder,
     private vehicleService: VehicleService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private snackBar: SnackBar,
     @Inject(MAT_DIALOG_DATA) public data: { vehicle: Vehicle, fleetManagerId: number }) { }
 
   ngOnInit(): void {
@@ -60,10 +58,10 @@ export class ModalFormVehicleComponent implements OnInit {
       () => null,
       (err) => {
         if (err.error) {
-          this.showMessage(err.error.i18nKey, 'ERROR');
+          this.snackBar.showMessage(err.error.i18nKey, 'ERROR');
         }
       },
-      () => { this.showMessage('VEHICLE.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
+      () => { this.snackBar.showMessage('VEHICLE.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
     ));
   }
 
@@ -76,22 +74,10 @@ export class ModalFormVehicleComponent implements OnInit {
       () => null,
       (err) => {
         if (err.error) {
-          this.showMessage(err.error.i18nKey, 'ERROR');
+          this.snackBar.showMessage(err.error.i18nKey, 'ERROR');
         }
       },
-      () => { this.showMessage('VEHICLE.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }));
-  }
-
-  private showMessage(i18nKey: string, level: string): void {
-
-    this.snackBar.open(this.translate.instant(i18nKey),
-      '✖',
-      {
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-        panelClass: [level]
-      });
+      () => { this.snackBar.showMessage('VEHICLE.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }));
   }
 
 }

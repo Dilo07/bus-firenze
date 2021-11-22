@@ -13,7 +13,7 @@
                     <mat-label>Obu ID</mat-label>
                     <div fxLayout="row">
                         <input matInput type="text" formControlName="CtrlObuId" required maxlength="15"
-                            pattern="^\d{15}$" (ngModelChange)="testObu()">
+                            pattern="^\d{15}$" (ngModelChange)="testObu()" autocomplete="off">
                         <mat-icon *ngIf="validObu === true" style="color: green;">check</mat-icon>
                         <button mat-icon-button *ngIf="validObu === false" (click)="cleanObu()">
                             <mat-icon>close</mat-icon>

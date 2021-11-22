@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehicle.component';
@@ -33,8 +32,7 @@ export class VehiclesComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private snackBar: SnackBar,
     private fleetManagerService: FleetManagerService,
     private vehicleService: VehicleService,
     private formBuilder: FormBuilder,
@@ -98,7 +96,7 @@ export class VehiclesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
           this.vehicleService.deleteVehicle(vehicleId).subscribe(
-            () => this.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
+            () => this.snackBar.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
             () => null,
             () => {
               this.getVehiclesByManagerId();
@@ -114,14 +112,4 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
-  private showMessage(i18nKey: string, level: string): void {
-    this.snackBar.open(this.translate.instant(i18nKey),
-      '✖',
-      {
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-        panelClass: [level]
-      });
-  }
 }

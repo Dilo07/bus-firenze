@@ -8,12 +8,14 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ManageObuRoutingModule } from './manage-obu-routing';
 import { ModalObuComponent } from './modal-obu/modal-obu.component';
 import { ObuComponent } from './obu.component';
+import { ModalPlateComponent } from './modal-plate/modal-plate.component';
 
 
 @NgModule({
   declarations: [
     ObuComponent,
-    ModalObuComponent
+    ModalObuComponent,
+    ModalPlateComponent
   ],
   imports: [
     CommonModule,

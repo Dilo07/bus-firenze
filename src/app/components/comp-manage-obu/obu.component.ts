@@ -6,9 +6,13 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ObuService } from 'src/app/services/obu.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { Vehicle } from '../domain/bus-firenze-domain';
+import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
+import { Obu, Vehicle } from '../domain/bus-firenze-domain';
+import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 import { ModalObuComponent } from './modal-obu/modal-obu.component';
+import { ModalPlateComponent } from './modal-plate/modal-plate.component';
 
 @Component({
   selector: 'app-obu',
@@ -34,6 +38,8 @@ export class ObuComponent implements OnInit, OnDestroy {
     public router: Router,
     public dialog: MatDialog,
     private vehicleService: VehicleService,
+    private obuService: ObuService,
+    private snackBar: SnackBar,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -76,7 +82,7 @@ export class ObuComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ModalObuComponent, {
       width: '70%',
       height: '70%',
-      data: {vehicleId: VehicleId}
+      data: { vehicleId: VehicleId }
     });
     // chiama il modal form in caso si edit aggiorna la table chiamando il service
     dialogRef.afterClosed().subscribe((add) => {
@@ -91,11 +97,50 @@ export class ObuComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ModalObuComponent, {
       width: '70%',
       height: '70%',
-      data: {vehicleId: VehicleId, obuId: ObuId}
+      data: { vehicleId: VehicleId, obuId: ObuId }
     });
     // chiama il modal form in caso si edit aggiorna la table chiamando il service
     dialogRef.afterClosed().subscribe((edit) => {
       if (edit) {
+        this.resetSearchField();
+        this.getVehiclesInstaller(true);
+      }
+    });
+  }
+
+  public removeObu(vehicleId: number): void {
+    const dialogRef = this.dialog.open(ModalConfirmComponent, {
+      width: '50%',
+      height: '30%',
+      data: { text: 'OBU.REMOVE CONFIRM' }
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        this.subscription.push(
+          this.obuService.deleteObu(vehicleId).subscribe(
+            () => this.snackBar.showMessage('OBU.REMOVE_SUCCESS', 'ERROR'),
+            () => null,
+            () => {
+              this.resetSearchField();
+              this.getVehiclesInstaller(true);
+            }));
+      }
+    });
+  }
+
+  public changePlate(vehicleId: number, obuId: string, Lpn: string, LpnNat: string): void {
+    const obu = new Obu();
+    obu.vehicleId = vehicleId;
+    obu.obuId = obuId;
+    const dialogRef = this.dialog.open(ModalPlateComponent, {
+      width: '70%',
+      height: '70%',
+      data: { Obu: obu, lpn: Lpn, lpnNat: LpnNat }
+    });
+    // chiama il modal form in caso si edit aggiorna la table chiamando il service
+    dialogRef.afterClosed().subscribe((edit) => {
+      if (edit) {
+        this.snackBar.showMessage('OBU.CHANGE_PLATE_SUCCESS', 'INFO');
         this.resetSearchField();
         this.getVehiclesInstaller(true);
       }

@@ -2,15 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { SessionService } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
+import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ColumnSort, FleetManager } from '../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 
@@ -43,8 +42,7 @@ export class FleetManagerComponent implements OnInit {
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
+    private snackBar: SnackBar,
     private fleetManagerService: FleetManagerService,
     private formBuilder: FormBuilder,
     private sessionService: SessionService) { }
@@ -117,7 +115,7 @@ export class FleetManagerComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
         this.subscription.push(this.fleetManagerService.deleteFleetManager(id).subscribe(
-          () => this.showMessage('FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
+          () => this.snackBar.showMessage('FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
           () => null,
           () => this.callGetFleetManager()));
       }
@@ -126,7 +124,7 @@ export class FleetManagerComponent implements OnInit {
 
   public validateFleet(id: number, valid: boolean): void {
     this.fleetManagerService.validInvalidFleetManager(id, valid).subscribe(
-      () => this.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
+      () => this.snackBar.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
       () => null,
       () => this.callGetFleetManager()
     );
@@ -161,18 +159,6 @@ export class FleetManagerComponent implements OnInit {
     this.endTable = false;
     this.offset = 0;
     this.limit = this.paginator.pageSize;
-  }
-
-  private showMessage(i18nKey: string, level: string): void {
-
-    this.snackBar.open(this.translate.instant(i18nKey),
-      '✖',
-      {
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-        panelClass: [level]
-      });
   }
 
   private unSubscribe(): void {
