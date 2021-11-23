@@ -14,6 +14,7 @@ const SUBMENU_ROUTES = [
   { state: 'fleet-manager-manage', name: 'Manage-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'fleet-manager-valid', name: 'Valid-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
+  { state: 'anagraphic', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.FLEETMNG] },
   { state: 'assign-obu', name: 'Assign-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'change-obu', name: 'Change-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'remove-obu', name: 'Remove-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
@@ -36,12 +37,12 @@ const MENUITEMS = [
     children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
-    state: 'vehicles-fleet-manager', name: 'Vehicles-Fleet', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[2]], roles: [ROLES.FLEETMNG]
+    state: 'user-fleet-manager', name: 'User-Fleet', type: 'submenu', icon: 'manage_accounts',
+    children: [SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]], roles: [ROLES.FLEETMNG]
   },
   {
     state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'assignment',
-    children: [SUBMENU_ROUTES[3], SUBMENU_ROUTES[4], SUBMENU_ROUTES[5], SUBMENU_ROUTES[6]],
+    children: [SUBMENU_ROUTES[4], SUBMENU_ROUTES[5], SUBMENU_ROUTES[6], SUBMENU_ROUTES[7]],
     roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
 ];

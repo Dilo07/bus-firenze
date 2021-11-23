@@ -1,0 +1,84 @@
+<mat-card>
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">
+        {{'FLEET-MANAGER.MESSAGE_EDIT_ANAGRAPHIC' | translate}}
+    </mat-card-title>
+    <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="FormGroup">
+        <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
+            <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.NAME' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlName" required>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_NAME' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.SURNAME' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlSurname" required>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_SURNAME' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlCF"
+                        (input)="FormGroup.patchValue({CtrlCF: $event.target.value.toUpperCase()})" required>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_FISCALCODE' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="20px">
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>E-Mail</mat-label>
+                    <input matInput type="text" formControlName="CtrlMail" readonly>
+                    <mat-error *ngIf="FormGroup.get('CtrlMail').invalid">{{'FLEET-MANAGER.INSERT_MAIL' | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.CELL' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlCell" readonly>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_CELL' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.OFFICE' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlOffice" maxlength="100">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="20px">
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.COMPANY_NAME' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlCompanyName" maxlength="100" required>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_COMPANY_NAME' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.ADDRESS' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlAddress" maxlength="100" required>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_ADDRESS' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlpIva" maxlength="11" required>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="20px">
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.CITY' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlCity" maxlength="100" required>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_CITY' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.DISTRICT' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlDistrict" maxlength="100" required>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_DISTRICT' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label>{{'FLEET-MANAGER.POSTAL_CODE' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlCAP" maxlength="5" required>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_POSTAL_CODE' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+            <button mat-button [disabled]="FormGroup.invalid || !FormGroup.dirty" class="greenButtons" (click)="updateFleetManager()">
+                {{'FLEET-MANAGER.EDIT' | translate}}
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>
