@@ -57,8 +57,8 @@ export class StatisticComponent implements OnInit {
     const inner = !this.viewOuter ? 'INNER' : '';
     this.complete = false;
     this.subscription.push(forkJoin({
-      req1: this.statisticService.getVehicleTrip(this.vehicle.id, start, end),
-      req2: this.statisticService.getVehicleTripList(this.vehicle.id, inner, start, end)
+      req1: this.statisticService.getVehicleTrip(this.vehicle.id, start, end, this.fleetManager?.id),
+      req2: this.statisticService.getVehicleTripList(this.vehicle.id, inner, start, end, this.fleetManager?.id)
     })
       .subscribe(({ req1, req2 }) => {
         this.vehicleStatTrip = req1;
