@@ -151,6 +151,7 @@
         "INVALID_START": "Data di inizio range non valida",
         "INVALID_END": "Data di fine range non valida",
         "TABLE_ROUTES": "Tabella percorsi",
+        "TRIP_NO_DATA": "Nessun percorso disponibile",
         "START": "Inizio",
         "END": "Fine",
         "ROAD": "Tratta",

@@ -37,5 +37,6 @@
                 [style.display]="dataSource.data.length === 0 ? 'none' : '' "></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <div *ngIf="dataSource.data.length === 0"> {{'STATISTIC.TRIP_NO_DATA' | translate}} </div>
     </mat-card-content>
 </mat-card>

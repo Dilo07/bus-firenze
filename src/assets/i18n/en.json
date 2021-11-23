@@ -149,6 +149,7 @@
         "INVALID_START": "Start range date invalid",
         "INVALID_END": "End range date invalid",
         "TABLE_ROUTES": "Routes table",
+        "TRIP_NO_DATA": "No availble trip data",
         "START": "Start",
         "END": "End",
         "ROAD": "Road",

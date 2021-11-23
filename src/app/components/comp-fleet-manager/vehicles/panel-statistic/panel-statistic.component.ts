@@ -1,6 +1,8 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 import { FleetManager, TripStat } from 'src/app/components/domain/bus-firenze-domain';
+import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { StatisticService } from 'src/app/services/statistic.service';
 
 @Component({
@@ -13,10 +15,12 @@ import { StatisticService } from 'src/app/services/statistic.service';
   `
   ]
 })
-export class PanelStatisticComponent implements OnInit {
+export class PanelStatisticComponent implements OnInit, OnDestroy {
   @Input() fleetManager: FleetManager;
   public panelOpenState = false;
   public tripStat: TripStat;
+
+  private subscription: Subscription[] = [];
 
   constructor(
     @Inject('viewOuterData') public viewOuter: boolean,
@@ -26,13 +30,19 @@ export class PanelStatisticComponent implements OnInit {
     this.getStatistic();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+  }
+
   private getStatistic(): void {
     const start = moment(moment.now()).subtract(1, 'month').format('yyyy-MM-DD');
     const end = moment(moment.now()).format('yyyy-MM-DD');
     const inner = !this.viewOuter ? 'INNER' : '';
-    this.statisticService.getTripInfoByFleetId(inner, start, end, this.fleetManager.id).subscribe(
+    this.subscription.push(this.statisticService.getTripInfoByFleetId(inner, start, end, this.fleetManager?.id).subscribe(
       (data) => this.tripStat = data
-    );
+    ));
   }
 
 }

@@ -16,13 +16,18 @@ export class FleetManagerService {
   private apiUrl = this.url + '/api/fleet';
   private fleetManager = getFleetManager;
 
+  getFleetManagerInfo(): Observable<FleetManager> {
+    return this.http.get<FleetManager>(this.apiUrl)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   searchFleetManager(keyword: string, valid: boolean, offset: number, limit: number, columnOrder: ColumnSort): Observable<FleetManager[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ keyword, offset, limit })
     };
-    options.params = options.params.append('sort', columnOrder.active );
-    options.params = options.params.append('direction', String(columnOrder.direction) );
+    options.params = options.params.append('sort', columnOrder.active);
+    options.params = options.params.append('direction', String(columnOrder.direction));
 
     return this.http.get<FleetManager[]>(this.apiUrl + '/search/valid/' + valid, options)
       .pipe(catchError(err => { throw err; }));
@@ -39,6 +44,11 @@ export class FleetManagerService {
     }
     return this.http.get<Vehicle[]>(
       this.apiUrl + url + '/vehicles/' + onlyActive, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  getVehicleByObu(obuId: string): Observable<Vehicle> {
+    return this.http.get<Vehicle>(this.apiUrl + '/vehicle/' + obuId)
       .pipe(catchError(err => { throw err; }));
   }
 

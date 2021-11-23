@@ -29,6 +29,7 @@ export class StatisticComponent implements OnInit {
   public index = 0;
   public vehicleStatTrip: TripStat;
   public vehicleTripPersistence: VehicleTripPersistence[];
+  public layersToCheck = [FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE];
 
   private subscription: Subscription[] = [];
 
@@ -79,6 +80,11 @@ export class StatisticComponent implements OnInit {
       this.mapChild.drawLine(
         [trip.shape.points], FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE, FirenzeMapUtils.Style.SECTION_LINKS, text);
     });
+
+    this.mapChild.changeFeatureColorPointEvent('click', [FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE],
+      FirenzeMapUtils.Style.SECTION_LINKS, FirenzeMapUtils.Style.SECTION_LINKS_LIGHT);
+
+    this.mapChild.zoomToLayer(FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE, 10);
   }
 
   private generateLineStringText(trip: VehicleTripPersistence): string {
@@ -95,9 +101,10 @@ export class StatisticComponent implements OnInit {
     if (e.value && !this.FormGroup.invalid) {
       this.start = this.FormGroup.get('start').value;
       this.end = this.FormGroup.get('end').value;
-      if (this.index === 1) {
+      /* if (this.index === 1) {
         this.index = 0;
-      }
+      } */ // in caso di utilizzo chartist
+      this.mapChild.removeLayers(['layerPoint']);
       this.getGraph();
     }
   }

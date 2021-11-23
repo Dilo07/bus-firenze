@@ -23,7 +23,6 @@ export class TableStatisticComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    console.log(this.TripPersistence);
     if (this.TripPersistence) {
       this.dataSource.data = this.TripPersistence;
       this.dataSource.sort = this.sort;
