@@ -1,13 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
-import { CompleteFleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { CompleteFleetManager, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-appointments-list',
@@ -22,8 +22,9 @@ import { CompleteFleetManager, Vehicle } from '../../domain/bus-firenze-domain';
   ],
 })
 export class AppointmentsListComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   public appointmentList = new MatTableDataSource<CompleteFleetManager>([]);
-  public displayedColumns: string[] = ['id', 'name', 'surname', 'companyName', 'city', 'address', 'size', 'button'];
+  public displayedColumns: string[] = ['id', 'name', 'surname', 'mobile', 'companyName', 'city', 'address', 'size', 'button'];
   public hasAppointment: boolean;
   public CtrlDateSelection: Date;
   public vehicleSelected: Vehicle;
@@ -48,6 +49,7 @@ export class AppointmentsListComponent implements OnInit {
     this.subscription.push(this.fleetService.getAppointmentList(this.hasAppointment, this.onlyActive).subscribe(
       (data) => {
         this.appointmentList.data = data;
+        this.appointmentList.paginator = this.paginator;
       },
       () => this.complete = true,
       () => this.complete = true));
@@ -82,6 +84,16 @@ export class AppointmentsListComponent implements OnInit {
         () => { this.snackBar.showMessage('APPOINTMENT.ADD_ERROR', 'ERROR'); }
       ));
     }
+  }
+
+  public findContactValue(fleetManager: FleetManager, code: number): string {
+    let res = '';
+    fleetManager.contacts.find(contact => {
+      if (contact.code === code) {
+        res = contact.value;
+      }
+    });
+    return res;
   }
 
   public reload(): void {

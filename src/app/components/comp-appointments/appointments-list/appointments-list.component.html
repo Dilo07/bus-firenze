@@ -10,10 +10,7 @@
         <mat-slide-toggle *ngIf="hasAppointment" (change)="reload()" [(ngModel)]="onlyActive">{{( onlyActive ?
             'APPOINTMENT.ONLY_ACTIVE': 'APPOINTMENT.ALL') | translate}}</mat-slide-toggle>
         <div class="mat-elevation-z8 example-container">
-
-            <mat-table #table [dataSource]="appointmentList" multiTemplateDataRows
-                [style.background-color]="'lightblue'">
-
+            <mat-table #table [dataSource]="appointmentList" multiTemplateDataRows>
                 <ng-container matColumnDef="id">
                     <mat-header-cell mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
                     <mat-cell *matCellDef="let element">
@@ -64,6 +61,14 @@
                     <mat-cell *matCellDef="let element">
                         <span class="mobile-label">{{'FLEET-MANAGER.ADDRESS' | translate}}</span>
                         {{element.address}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="mobile">
+                    <mat-header-cell *matHeaderCellDef> mobile </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">mobile</span>
+                        {{findContactValue(element, 1)}}
                     </mat-cell>
                 </ng-container>
 
@@ -151,13 +156,13 @@
                 </mat-row>
                 <mat-row [style.display]="expandedElement && expandedElement.id === row.id ? '' : 'none'"
                     *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
-
             </mat-table>
         </div>
-        <div *ngIf="appointmentList.data.length === 0"> {{ (!hasAppointment ? 'APPOINTMENT.NO_TO_ADD' :
-            'APPOINTMENT.NO_TO_MANAGE') | translate }}</div>
-        <!-- <mat-paginator [style.display]="appointmentList.data.length === 0 ? 'none' : '' "
-            [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator> -->
+        <mat-paginator [style.display]="appointmentList.data.length === 0 ? 'none' : '' "
+            [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+        <div *ngIf="appointmentList.data.length === 0">
+            {{ (!hasAppointment ? 'APPOINTMENT.NO_TO_ADD' : 'APPOINTMENT.NO_TO_MANAGE') | translate }}
+        </div>
 
     </mat-card-content>
 </mat-card>
