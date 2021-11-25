@@ -32,6 +32,15 @@ export interface Contact {
     value: string;
 }
 
+export class CompleteFleetManager extends FleetManager {
+    constructor() {
+        super();
+        this.vehicles = [];
+    }
+
+    vehicles: Vehicle[];
+}
+
 export class Vehicle {
     id: number;
     fleetManagerId: number;

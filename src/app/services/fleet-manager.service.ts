@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ColumnSort, FleetManager, Vehicle } from '../components/domain/bus-firenze-domain';
+import { ColumnSort, CompleteFleetManager, FleetManager, Vehicle } from '../components/domain/bus-firenze-domain';
 import { getFleetManager } from './mokup/getFleetmanager';
 
 @Injectable({
@@ -69,6 +69,29 @@ export class FleetManagerService {
 
   validInvalidFleetManager(id: number, valid: boolean): Observable<void> {
     return this.http.put<void>(this.apiUrl + `/${id}/valid/${valid}`, null)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  getAppointmentList(hasAppointment: boolean, onlyActive: boolean): Observable<CompleteFleetManager[]> {
+    let subpath: string = !hasAppointment ? 'request' : 'list';
+    if (hasAppointment) {
+      subpath += '/' + onlyActive;
+    }
+    return this.http.get<CompleteFleetManager[]>(this.apiUrl + '/appointment/' + subpath)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  addAppointment(vehicleId: number, appointmentDate: string): Observable<void> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ date: appointmentDate })
+    };
+    return this.http.post<void>(this.apiUrl + '/appointment/vehicle/' + vehicleId + '/add', null, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  removeAppointment(vehicleId: number): Observable<void> {
+    return this.http.delete<void>(this.apiUrl + '/appointment/vehicle/' + vehicleId + '/delete')
       .pipe(catchError(err => { throw err; }));
   }
 }

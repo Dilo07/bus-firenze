@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path: 'manage-obu',
     loadChildren: () => import('./components/comp-manage-obu/manage-obu.module').then(m => m.ManageObuModule)
+  },
+  {
+    path: 'appointment',
+    loadChildren: () => import('./components/comp-appointments/appointments.module').then(m => m.AppointmentsModule)
   }
 ];
 

@@ -20,7 +20,10 @@
         "Assign-obu": "Assegna obu",
         "Change-obu": "Cambia obu",
         "Remove-obu": "Rimuovi obu",
-        "Change-plate": "Cambia targa"
+        "Change-plate": "Cambia targa",
+        "Appointment": "Appuntamenti",
+        "Add-appointment": "Aggiungi",
+        "Manage-appointment": "Gestisci"
     },
     "ACCOUNT": {
         "PROFILE": "Profilo",
@@ -164,6 +167,25 @@
         "METERS": "Metri",
         "SECONDS": "Secondi",
         "SECOND": "Secondo"
+    },
+    "APPOINTMENT": {
+        "SELECT-VEHICLE": "Seleziona un veicolo",
+        "SELECT-DATE": "Seleziona una data",
+        "ADD_TITLE":"Aggiungi Appuntamento",
+        "MANAGE_TITLE":"Gestisci Appuntamento",
+        "ADD_BUTTON": "Aggiungi",
+        "REVOKE_BUTTON": "Revoca",
+        "ASSIGN_OBU": "Assegna obu",
+        "ONLY_ACTIVE": "Solo attivi",
+        "REVOKE_SUCCESS": "Appuntamento rimosso con successo",
+        "REVOKE_ERROR": "Errore durante la revoca",
+        "ADD_SUCCESS": "Appuntamento prenotato con successo",
+        "ADD_ERROR": "Errore durante la prenotazione",
+        "ALL": "Tutti",
+        "VEHICLES": "Mostra veicoli",
+        "DATE_LABEL":"Data dell'appuntamento",
+        "NO_TO_ADD": "Nessun appuntamento da aggiungere",
+        "NO_TO_MANAGE": "Nessun appuntamento da gestire"
     },
     "COMMON": {
         "DATE": {

@@ -18,7 +18,10 @@
         "Assign-obu": "Assign obu",
         "Change-obu": "Change obu",
         "Remove-obu": "Remove obu",
-        "Change-plate": "Change plate"
+        "Change-plate": "Change plate",
+        "Appointment": "Appointments",
+        "Add-appointment": "Add",
+        "Manage-appointment": "Manage"
     },
     "ACCOUNT": {
         "PROFILE": "Profile",
@@ -162,6 +165,25 @@
         "METERS": "Meters",
         "SECONDS": "Seconds",
         "SECOND": "Second"
+    },
+    "APPOINTMENT": {
+        "SELECT-VEHICLE": "Select a vehicle",
+        "SELECT-DATE": "Select a date",
+        "ADD_TITLE":"Add Appointment",
+        "MANAGE_TITLE":"Manage appointment",
+        "ADD_BUTTON": "Add",
+        "REVOKE_BUTTON": "Revoke",
+        "ASSIGN_OBU": "Assign obu",
+        "ONLY_ACTIVE": "Only Active",
+        "REVOKE_SUCCESS": "Appointment revoked",
+        "REVOKE_ERROR": "Error during revocation",
+        "ADD_SUCCESS": "Appointment booked successfully",
+        "ADD_ERROR": "Error during booking",
+        "ALL": "All",
+        "VEHICLES": "Show vehicles",
+        "DATE_LABEL":"Appointment date",
+        "NO_TO_ADD": "Nobody appointment to add",
+        "NO_TO_MANAGE": "Nobody appointment to manage"
     },
     "COMMON": {
         "DATE": {
