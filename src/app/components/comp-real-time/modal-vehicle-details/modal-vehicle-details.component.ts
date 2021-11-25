@@ -17,11 +17,11 @@ export class ModalVehicleDetailsComponent implements OnInit {
 
   constructor(
     private fleetManagerService: FleetManagerService,
-    @Inject(MAT_DIALOG_DATA) public obuId: string) { }
+    @Inject(MAT_DIALOG_DATA) public data: {obuID: string, fleetId: number | null}) { }
 
   ngOnInit(): void {
     this.complete = false;
-    this.subscription.push(this.fleetManagerService.getVehicleByObu(this.obuId).subscribe((data: Vehicle) => {
+    this.subscription.push(this.fleetManagerService.getVehicleByObu(this.data.obuID, this.data.fleetId).subscribe((data: Vehicle) => {
       this.vehicleInfo = data;
     },
       () => this.complete = true,

@@ -16,6 +16,7 @@
         "User-Fleet": "Fleet Manager",
         "Anagraphic": "Anagrafica",
         "Vehicles": "Veicoli",
+        "Drivers": "Autisti",
         "Manage-obu": "Gestione obu",
         "Assign-obu": "Assegna obu",
         "Change-obu": "Cambia obu",
@@ -100,12 +101,14 @@
     },
     "VEHICLE": {
         "TITLE": "Veicoli",
+        "DETAILS": "Dettagli veicolo",
         "NO_DATA": "Nessun veicolo presente",
         "SEARCH": "Ricerca per targa o Obu Id",
         "LPN": "Targa",
         "LPN NAT": "Nazione",
         "EURO-CLASS": "EuroClass",
         "EUROPEAN-GROUP": "Categoria",
+        "DATE_ASSOCIATION": "Data associazione",
         "AXIS": "Numero di Assi",
         "WEIGHT": "Massa complessiva a pieno carico (kg)",
         "INSERT LPN": "Inserisci una Targa",
@@ -121,6 +124,9 @@
         "ADD_SUCCESS": "Veicolo inserito correttamente",
         "EDIT_ERROR": "Errore nella modifica veicolo",
         "EDIT_SUCCESS": "Veicolo modificato correttamente"
+    },
+    "DRIVERS": {
+        "TITLE": "Autisti"
     },
     "OBU": {
         "ASSIGN": "Assegna Obu",
@@ -171,8 +177,8 @@
     "APPOINTMENT": {
         "SELECT-VEHICLE": "Seleziona un veicolo",
         "SELECT-DATE": "Seleziona una data",
-        "ADD_TITLE":"Aggiungi Appuntamento",
-        "MANAGE_TITLE":"Gestisci Appuntamento",
+        "ADD_TITLE": "Aggiungi Appuntamento",
+        "MANAGE_TITLE": "Gestisci Appuntamento",
         "ADD_BUTTON": "Aggiungi",
         "REVOKE_BUTTON": "Revoca",
         "ASSIGN_OBU": "Assegna obu",
@@ -183,9 +189,18 @@
         "ADD_ERROR": "Errore durante la prenotazione",
         "ALL": "Tutti",
         "VEHICLES": "Mostra veicoli",
-        "DATE_LABEL":"Data dell'appuntamento",
+        "DATE_LABEL": "Data dell'appuntamento",
         "NO_TO_ADD": "Nessun appuntamento da aggiungere",
         "NO_TO_MANAGE": "Nessun appuntamento da gestire"
+    },
+    "EUROPEAN_VEHICLE": {
+        "GROUP1": "Autoveicolo (classe M1)",
+        "GROUP2": "Trasporto merci <= 3,5t (classe N1)",
+        "GROUP3": "Trasporto passeggeri \n(classe M2, M3)",
+        "GROUP4": "Trasporto merci 3,5t - 12t \n(classe N2)",
+        "GROUP5": "Trasporto merci > 12t \n(classe N3)",
+        "GROUP6": "Motocicli (classe L)",
+        "GROUP7": "Altri veicoli"
     },
     "COMMON": {
         "DATE": {
@@ -215,30 +230,30 @@
             "finalizesize": "Non è possibile finalizzare più di una rete"
         },
         "shapefile": {
-          "opening": "Errore nella lettura dello shapefile",
-          "writing": "Errore nella scrittura dello shapefile",
-          "invalid": "Contenuto dello shapefile non valido",
-          "export": "Errore nell'export dello shapefile"
+            "opening": "Errore nella lettura dello shapefile",
+            "writing": "Errore nella scrittura dello shapefile",
+            "invalid": "Contenuto dello shapefile non valido",
+            "export": "Errore nell'export dello shapefile"
         },
         "fleetmanager": {
-          "insert" : "Non è possibile inserire il fleet manager",
-          "email" : "Email obbligatoria",
-          "duplicate-email": "Questa email è già usata. Per favore, inserisci un'altra email",
-          "delete" : "Non è possibile cancellare un fleet manager con veicoli associati"
+            "insert": "Non è possibile inserire il fleet manager",
+            "email": "Email obbligatoria",
+            "duplicate-email": "Questa email è già usata. Per favore, inserisci un'altra email",
+            "delete": "Non è possibile cancellare un fleet manager con veicoli associati"
         },
         "vehicle": {
-          "update": "Aggiornamento dei dati del veicolo fallito",
-          "not_associated" : "Il veicolo non è associato a un Obu",
-          "delete": "Non è possibile cancellare un veicolo con un Obu associato",
-          "duplicate": "La targa inserita è già associata"
+            "update": "Aggiornamento dei dati del veicolo fallito",
+            "not_associated": "Il veicolo non è associato a un Obu",
+            "delete": "Non è possibile cancellare un veicolo con un Obu associato",
+            "duplicate": "La targa inserita è già associata"
         },
         "obu": {
-          "not_found" : "Obu Id non presente",
-          "not_associated": "L'obu non è associato a un veicolo",
-          "already_associated" : "L'obu è già associato a un altro veicolo",
-          "association" : "Errore nell'associazione obu-veicolo",
-          "match" : "Errore nel cambio di targa",
-          "remove": "non è possibile rimuovere l'obu"
+            "not_found": "Obu Id non presente",
+            "not_associated": "L'obu non è associato a un veicolo",
+            "already_associated": "L'obu è già associato a un altro veicolo",
+            "association": "Errore nell'associazione obu-veicolo",
+            "match": "Errore nel cambio di targa",
+            "remove": "non è possibile rimuovere l'obu"
         },
         "ines": {
             "GENERIC": "Errore sul sistema Ines",

@@ -11,18 +11,18 @@ import { ModalVehicleDetailsComponent } from '../modal-vehicle-details/modal-veh
 })
 export class TableRealTimeComponent implements OnInit {
   @Input() public vehicleTable: VehicleTripPersistence[];
+  @Input() public fleetManagerId: number;
   public displayedColumns: string[] = ['OBUID', 'Start', 'End', 'actions'];
 
   constructor(public dialog: MatDialog) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  public viewDetails(obuID: string): void{
+  public viewDetails(obuId: string): void{
     this.dialog.open(ModalVehicleDetailsComponent, {
       width: '90%',
-      height: '50%',
-      data: obuID
+      height: '70%',
+      data: {obuID: obuId, fleetId: this.fleetManagerId}
     });
   }
 

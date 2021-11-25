@@ -41,6 +41,14 @@ export class CompleteFleetManager extends FleetManager {
     vehicles: Vehicle[];
 }
 
+export interface Drivers {
+    id: number;
+    name: string;
+    surname: string;
+    contact: Contact[];
+    fleetManagerId: number;
+}
+
 export class Vehicle {
     id: number;
     fleetManagerId: number;

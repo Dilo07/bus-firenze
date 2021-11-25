@@ -18,6 +18,7 @@ import { StatisticComponent } from './vehicles/page-statistic/statistic.componen
 import { NptMapModule } from '@npt/npt-map';
 import { TableStatisticComponent } from './vehicles/table-statistic/table-statistic.component';
 import { AnagraphicFleetManagerComponent } from './anagraphic-fleet-manager/anagraphic-fleet-manager.component';
+import { DriversComponent } from './drivers/drivers.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { AnagraphicFleetManagerComponent } from './anagraphic-fleet-manager/anag
     TripStatisticComponent,
     StatisticComponent,
     TableStatisticComponent,
-    AnagraphicFleetManagerComponent
+    AnagraphicFleetManagerComponent,
+    DriversComponent
   ],
   imports: [
     CommonModule,

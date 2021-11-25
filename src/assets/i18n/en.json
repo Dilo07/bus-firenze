@@ -14,6 +14,7 @@
         "User-Fleet": "Fleet manager",
         "Anagraphic": "Anagraphic",
         "Vehicles": "Vehicles",
+        "Drivers": "Drivers",
         "Manage-obu": "Manage obu",
         "Assign-obu": "Assign obu",
         "Change-obu": "Change obu",
@@ -96,14 +97,16 @@
         "VEHICLESIZE": "# Vehicles",
         "CONTACT": "Contact"
     },
-    "VEHICLE":{
+    "VEHICLE": {
         "TITLE": "Vehicles",
+        "DETAILS": "Dettagli veicolo",
         "NO_DATA": "No vehicle present",
         "SEARCH": "Search for plate or Obu Id",
         "LPN": "Plate",
         "LPN NAT": "Country Plate",
         "EURO-CLASS": "EuroClass",
         "EUROPEAN-GROUP": "Category",
+        "DATE_ASSOCIATION": "Date association",
         "AXIS": "Axis Number",
         "WEIGHT": "Total mass fully loaded (Kg)",
         "INSERT LPN": "Insert a Plate",
@@ -119,6 +122,9 @@
         "ADD_SUCCESS": "Vehicle inserted correctly",
         "EDIT_ERROR": "vehicle edit error",
         "EDIT_SUCCESS": "Vehicle edited correctly"
+    },
+    "DRIVERS": {
+        "TITLE": "Drivers"
     },
     "OBU": {
         "ASSIGN": "Assign Obu",
@@ -169,8 +175,8 @@
     "APPOINTMENT": {
         "SELECT-VEHICLE": "Select a vehicle",
         "SELECT-DATE": "Select a date",
-        "ADD_TITLE":"Add Appointment",
-        "MANAGE_TITLE":"Manage appointment",
+        "ADD_TITLE": "Add Appointment",
+        "MANAGE_TITLE": "Manage appointment",
         "ADD_BUTTON": "Add",
         "REVOKE_BUTTON": "Revoke",
         "ASSIGN_OBU": "Assign obu",
@@ -181,9 +187,18 @@
         "ADD_ERROR": "Error during booking",
         "ALL": "All",
         "VEHICLES": "Show vehicles",
-        "DATE_LABEL":"Appointment date",
+        "DATE_LABEL": "Appointment date",
         "NO_TO_ADD": "Nobody appointment to add",
         "NO_TO_MANAGE": "Nobody appointment to manage"
+    },
+    "EUROPEAN_VEHICLE": {
+        "GROUP1": "Car (class M1)",
+        "GROUP2": "Goods transport (class N1)",
+        "GROUP3": "Passengers transport \n(class M2, M3)",
+        "GROUP4": "Goods transport 3,5t - 12t \n(class N2)",
+        "GROUP5": "Goods transport > 12t (class N3)",
+        "GROUP6": "Motorcycles (class L)",
+        "GROUP7": "Other vehicles"
     },
     "COMMON": {
         "DATE": {
@@ -213,30 +228,30 @@
             "finalizesize": "Cannot finalize more than one network"
         },
         "shapefile": {
-          "opening": "Error opening the shapefile",
-          "writing": "Error writing the shapefile",
-          "invalid": "Invalid shapefile",
-          "export": "Error in shapefile's export"
+            "opening": "Error opening the shapefile",
+            "writing": "Error writing the shapefile",
+            "invalid": "Invalid shapefile",
+            "export": "Error in shapefile's export"
         },
         "fleetmanager": {
-          "insert" : "Failed to insert a fleet manager",
-          "email" : "Error: Email is mandatory",
-          "duplicate-email": "Email is already used. Please try another one",
-          "delete" : "Cannot delete a fleet manager with assigned vehicles"
+            "insert": "Failed to insert a fleet manager",
+            "email": "Error: Email is mandatory",
+            "duplicate-email": "Email is already used. Please try another one",
+            "delete": "Cannot delete a fleet manager with assigned vehicles"
         },
         "vehicle": {
-          "update": "Failed to update the vehicle",
-          "not_associated" : "vehicle is not associated",
-          "delete": "Cannot delete a vehicle with an associated Obu",
-          "duplicate": "The entered plate is already associated"
+            "update": "Failed to update the vehicle",
+            "not_associated": "vehicle is not associated",
+            "delete": "Cannot delete a vehicle with an associated Obu",
+            "duplicate": "The entered plate is already associated"
         },
         "obu": {
-          "not_found" : "Obu Id doesn't exist",
-          "not_associated": "Failed to retrieve vehicle associated to obu",
-          "already_associated" : "Obu is already associated",
-          "association" : "Error in obu-vehicle association",
-          "match" : "Error on change plate",
-          "remove": "Cannot remove the obu"
+            "not_found": "Obu Id doesn't exist",
+            "not_associated": "Failed to retrieve vehicle associated to obu",
+            "already_associated": "Obu is already associated",
+            "association": "Error in obu-vehicle association",
+            "match": "Error on change plate",
+            "remove": "Cannot remove the obu"
         },
         "ines": {
             "GENERIC": "Error on Ines system",
@@ -259,7 +274,7 @@
             "ERR_NO_TOKEN": "Token not valorized",
             "ERR_NOT_YET_VALID_TOKEN": "Token not yet valid",
             "ERR_TOKEN_EXPIRED": "Token expired",
-            "ERR_NO_OBU_MANAGER_FOUND":  "Management OBU not found",
+            "ERR_NO_OBU_MANAGER_FOUND": "Management OBU not found",
             "ERR_NO_OBU_FOUND_WITH_SERIAL": "Nobody OBU found for serial number inserted",
             "ERR_NO_OBU_FOUND": "OBU not found",
             "ERR_OBU_DATE_BEFORE_LAST_CHANGE_STATE": "The inserted date is lower then already exist change state",
@@ -279,7 +294,7 @@
             "ERR_BUS_STATE_ERROR": "Not it's possible insert State: The Bus has'nt state 'Censito' or 'Validazione Provvisoria'",
             "ERR_BUS_STATE_STEP_ERROR": "The state sent not is compatible with the previus OBU state",
             "ERR_BUS_STATE_ALREADY_EXIST": "The OBU is just on state",
-            "ERR_BUS_STATE_NON_IN_INSTALLAZIONE":  "The new OBU hasn't the correct state 'IN_INSTALLAZIONE'",
+            "ERR_BUS_STATE_NON_IN_INSTALLAZIONE": "The new OBU hasn't the correct state 'IN_INSTALLAZIONE'",
             "ERR_BUS_STATE_RIMOSSO_NON_MODIFICABILE": "The state 'RIMOSSO' not is editable",
             "ERR_BUS_VALIDITA_PROVVISORIA_SCADUTA": "the bus temporary validity is expired",
             "ERR_CONTRASSEGNO_SCADUTO": "The request mark is expired",
