@@ -19,6 +19,7 @@ import { NptMapModule } from '@npt/npt-map';
 import { TableStatisticComponent } from './vehicles/table-statistic/table-statistic.component';
 import { AnagraphicFleetManagerComponent } from './anagraphic-fleet-manager/anagraphic-fleet-manager.component';
 import { DriversComponent } from './drivers/drivers.component';
+import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { DriversComponent } from './drivers/drivers.component';
     StatisticComponent,
     TableStatisticComponent,
     AnagraphicFleetManagerComponent,
-    DriversComponent
+    DriversComponent,
+    FormDriverComponent
   ],
   imports: [
     CommonModule,

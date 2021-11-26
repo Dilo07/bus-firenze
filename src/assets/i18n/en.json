@@ -124,7 +124,8 @@
         "EDIT_SUCCESS": "Vehicle edited correctly"
     },
     "DRIVERS": {
-        "TITLE": "Drivers"
+        "TITLE": "Drivers",
+        "MESSAGE_NEW": "Insert new driver information"
     },
     "OBU": {
         "ASSIGN": "Assign Obu",

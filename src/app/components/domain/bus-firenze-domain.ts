@@ -41,11 +41,11 @@ export class CompleteFleetManager extends FleetManager {
     vehicles: Vehicle[];
 }
 
-export interface Drivers {
+export class Driver {
     id: number;
     name: string;
     surname: string;
-    contact: Contact[];
+    contacts: Contact[];
     fleetManagerId: number;
 }
 

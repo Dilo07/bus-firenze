@@ -126,7 +126,8 @@
         "EDIT_SUCCESS": "Veicolo modificato correttamente"
     },
     "DRIVERS": {
-        "TITLE": "Autisti"
+        "TITLE": "Autisti",
+        "MESSAGE_NEW": "Inserisci le informazioni del nuovo Driver"
     },
     "OBU": {
         "ASSIGN": "Assegna Obu",
