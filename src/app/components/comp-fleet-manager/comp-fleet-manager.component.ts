@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SessionService } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
+import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
@@ -32,6 +33,7 @@ export class FleetManagerComponent implements OnInit {
   public complete = true;
   public validFleet: boolean;
   public manageFleet: boolean;
+  public roleMovyon: boolean;
 
   private offset = 0;
   private limit = 10;
@@ -45,9 +47,11 @@ export class FleetManagerComponent implements OnInit {
     private snackBar: SnackBar,
     private fleetManagerService: FleetManagerService,
     private formBuilder: FormBuilder,
-    private sessionService: SessionService) { }
+    private sessionService: SessionService,
+    @Inject('authService') private authService) { }
 
   ngOnInit(): void {
+    this.roleMovyon = this.authService.getUserRoles().includes(ROLES.MOVYON);
     this.validFleet = this.router.url === '/fleet-manager-valid';
     this.manageFleet = this.router.url === '/fleet-manager-manage';
     this.Search = this.formBuilder.group({

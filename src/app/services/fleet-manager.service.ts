@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ColumnSort, CompleteFleetManager, FleetManager, Vehicle } from '../components/domain/bus-firenze-domain';
+import { ColumnSort, CompleteFleetManager, Drivers, FleetManager, Vehicle } from '../components/domain/bus-firenze-domain';
 import { getFleetManager } from './mokup/getFleetmanager';
 
 @Injectable({
@@ -76,6 +76,8 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  // appointments
+
   getAppointmentList(hasAppointment: boolean, onlyActive: boolean): Observable<CompleteFleetManager[]> {
     let subpath: string = !hasAppointment ? 'request' : 'list';
     if (hasAppointment) {
@@ -96,6 +98,21 @@ export class FleetManagerService {
 
   removeAppointment(vehicleId: number): Observable<void> {
     return this.http.delete<void>(this.apiUrl + '/appointment/vehicle/' + vehicleId + '/delete')
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  // drivers
+
+  getDrivers(keyword: string, fleetManagerId?: number): Observable<Drivers[]> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ keyword })
+    };
+    let url = '';
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
+    return this.http.get<Drivers[]>(this.apiUrl + url + '/drivers')
       .pipe(catchError(err => { throw err; }));
   }
 }

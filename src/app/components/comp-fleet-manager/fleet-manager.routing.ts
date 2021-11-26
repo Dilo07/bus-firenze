@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'drivers',
-    component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.FLEETMNG] }
+    component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.FLEETMNG] }
   },
   {
     path: 'vehicles',

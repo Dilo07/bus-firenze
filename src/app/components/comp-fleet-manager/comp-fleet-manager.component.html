@@ -63,6 +63,10 @@
 							<button mat-icon-button matTooltip="Cancella" (click)="deleteFleetManager(element.id)">
 								<mat-icon style="color: red;">delete</mat-icon>
 							</button>
+							<button mat-icon-button matTooltip="Autisti" [routerLink]="['drivers']"
+								[state]="{fleetManager: element}">
+								<mat-icon style="color: #0066CC;">airline_seat_recline_normal</mat-icon>
+							</button>
 							<button mat-icon-button matTooltip="Veicoli" [routerLink]="['vehicles']"
 								[state]="{fleetManager: element}">
 								<mat-icon style="color: #0066CC;">directions_car</mat-icon>
