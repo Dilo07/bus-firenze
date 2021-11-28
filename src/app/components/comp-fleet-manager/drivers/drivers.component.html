@@ -41,6 +41,7 @@
 					[style.display]="dataSource.data.length === 0 ? 'none' : '' "></tr>
 				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 			</table>
+			<div *ngIf="dataSource.data.length === 0 && complete"> {{'DRIVERS.NO_DATA' | translate}}</div>
 		</div>
 	</mat-card-content>
 </mat-card>

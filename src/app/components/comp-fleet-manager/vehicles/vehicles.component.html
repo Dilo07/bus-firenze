@@ -68,6 +68,7 @@
 					[style.display]="vehicleList.data.length === 0 ? 'none' : '' "></tr>
 				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 			</table>
+			<div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
 		</div>
 	</mat-card-content>
 </mat-card>

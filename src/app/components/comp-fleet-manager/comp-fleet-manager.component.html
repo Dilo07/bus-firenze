@@ -93,7 +93,7 @@
 			</table>
 			<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"
 				(page)="pageChanged($event)"></mat-paginator>
-			<div *ngIf="dataSource.data.length === 0 && complete"> Nessun fleet-manager presente</div>
+			<div *ngIf="dataSource.data.length === 0 && complete">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>
 		</div>
 	</mat-card-content>
 </mat-card>

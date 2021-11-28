@@ -56,6 +56,7 @@
         "SAVE": "Salva",
         "CLEAN": "Ripulisci",
         "SEARCH": "Cerca",
+        "NO_DATA": "Nessun Fleet manager presente",
         "INITIAL MESSAGE": "Inserisci un nuovo Fleet-Manager o cercane uno esistente",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Fleet Manager",
         "MESSAGE_EDIT": "Modifica le informazioni del Fleet Manager",
@@ -127,7 +128,10 @@
     },
     "DRIVERS": {
         "TITLE": "Autisti",
-        "MESSAGE_NEW": "Inserisci le informazioni del nuovo Driver"
+        "NO_DATA": "Nessun autista presente",
+        "MESSAGE_NEW": "Inserisci le informazioni del nuovo Driver",
+        "ADD_ERROR":"Errore nell'inserimento autista",
+        "ADD_SUCCESS": "Autista inserito correttamente"
     },
     "OBU": {
         "ASSIGN": "Assegna Obu",

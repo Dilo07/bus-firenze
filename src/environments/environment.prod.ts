@@ -12,7 +12,7 @@ export const environment = {
     title: 'BUS Firenze'
   },
   footer: {
-    year: '2021',
+    year: 'v. ' + version + '2021',
     title: 'Powered by Movyon',
     link: 'https://www.movyon.com/'
   }
