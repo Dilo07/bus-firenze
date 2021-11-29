@@ -5,7 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DriverService } from 'src/app/services/driver.service';
-import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
@@ -34,7 +33,6 @@ export class VehiclesComponent implements OnInit {
   constructor(
     private router: Router,
     private snackBar: SnackBar,
-    private fleetManagerService: FleetManagerService,
     private vehicleService: VehicleService,
     private driverService: DriverService,
     private formBuilder: FormBuilder,
@@ -52,7 +50,7 @@ export class VehiclesComponent implements OnInit {
   public getVehiclesByManagerId(): void {
     this.complete = false;
     const keyword = this.Search.get('CtrlSearch').value;
-    this.fleetManagerService.getVehiclesById(true, this.fleetManager?.id, keyword).subscribe(data => {
+    this.vehicleService.getVehiclesById(true, this.fleetManager?.id, keyword).subscribe(data => {
       this.vehicleList.data = data;
       this.vehicleList.sort = this.sort;
     },

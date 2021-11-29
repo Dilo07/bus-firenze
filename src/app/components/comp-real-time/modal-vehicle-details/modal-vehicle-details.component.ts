@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Vehicle } from '../../domain/bus-firenze-domain';
+import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-modal-vehicle-details',
@@ -16,7 +16,7 @@ export class ModalVehicleDetailsComponent implements OnInit {
   public complete: boolean;
 
   constructor(
-    private fleetManagerService: FleetManagerService,
+    private fleetManagerService: VehicleService,
     @Inject(MAT_DIALOG_DATA) public data: {obuID: string, fleetId: number | null}) { }
 
   ngOnInit(): void {

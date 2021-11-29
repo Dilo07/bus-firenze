@@ -33,29 +33,6 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getVehiclesById(onlyActive: boolean, fleetManagerId?: number, keyword?: string): Observable<Vehicle[]> {
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ keyword })
-    };
-    let url = '';
-    if (fleetManagerId) {
-      url = '/' + fleetManagerId;
-    }
-    return this.http.get<Vehicle[]>(
-      this.apiUrl + url + '/vehicles/' + onlyActive, options)
-      .pipe(catchError(err => { throw err; }));
-  }
-
-  getVehicleByObu(obuId: string, fleetManagerId?: number): Observable<Vehicle> {
-    let url = '';
-    if (fleetManagerId) {
-      url = '/' + fleetManagerId;
-    }
-    return this.http.get<Vehicle>(this.apiUrl + url + '/vehicle/' + obuId)
-      .pipe(catchError(err => { throw err; }));
-  }
-
   insertFleetManager(fleetManager: FleetManager): Observable<void> {
     return this.http.post<void>(this.apiUrl + '/add', fleetManager)
       .pipe(catchError(err => { throw err; }));
