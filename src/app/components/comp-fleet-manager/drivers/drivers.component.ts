@@ -9,6 +9,7 @@ import { DriverService } from 'src/app/services/driver.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { Driver, FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
+import { AssociationDriversVehiclesComponent } from './modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { FormDriverComponent } from './modal-form-driver/form-driver.component';
 
 @Component({
@@ -116,7 +117,14 @@ export class DriversComponent implements OnInit, OnDestroy {
   public associationVehicle(idDriver: number): void {
     this.subscription.push(
       this.driverService.getVehiclesByDriver(idDriver, this.fleetManager?.id).subscribe(
-        data => console.log(data)));
+        vehicles => {
+          const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
+            width: '80%',
+            height: '80%',
+            data: vehicles,
+            autoFocus: false
+          });
+        }));
   }
 
   public findContactValue(fleetManager: FleetManager, code: number): string {

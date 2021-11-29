@@ -1,0 +1,9 @@
+<mat-selection-list [(ngModel)]="selectedElement">
+    <mat-list-option *ngFor="let element of data" [selected]="element.status" [value]="element">
+        {{element.displayName}}
+    </mat-list-option>
+</mat-selection-list>
+<p>
+    <button mat-button (click)="saveAssociation()"> salva </button>
+</p>
+  
