@@ -85,7 +85,8 @@ export class DriverService {
     if (vehicleId) {
       urlVehicle = '/' + vehicleId;
     }
-    return this.http.get<DriverVehicle[]>(this.apiUrl + urlFleet + '/vehicle' + urlVehicle + '/drivers')
-      .pipe(catchError(err => { throw err; }));
+    /* return this.http.get<DriverVehicle[]>(this.apiUrl + urlFleet + '/vehicle' + urlVehicle + '/drivers')
+      .pipe(catchError(err => { throw err; })); */
+    return of(this.driversByVehicle);
   }
 }

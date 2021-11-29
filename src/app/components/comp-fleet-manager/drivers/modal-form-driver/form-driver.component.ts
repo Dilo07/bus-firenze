@@ -19,7 +19,7 @@ export class FormDriverComponent implements OnInit {
     private formBuilder: FormBuilder,
     private driverService: DriverService,
     private snackBar: SnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: {driver: Driver, fleetManagerId: number} ) {  }
+    @Inject(MAT_DIALOG_DATA) public data: { driver: Driver, fleetManagerId: number, cellularRequired: boolean }) { }
 
   ngOnInit(): void {
     if (this.data.driver) {
@@ -34,6 +34,9 @@ export class FormDriverComponent implements OnInit {
         CtrlSurname: ['', Validators.required],
         CtrlMail: ['', Validators.email]
       });
+    }
+    if (this.data.cellularRequired) {
+      this.FormGroup.addControl('CtrlCell', this.formBuilder.control('', Validators.required));
     }
   }
 
