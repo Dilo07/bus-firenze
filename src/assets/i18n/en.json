@@ -132,7 +132,7 @@
         "ADD_SUCCESS": "Driver inserted correctly",
         "EDIT_ERROR":"Error on edit driver",
         "EDIT_SUCCESS": "Driver changed correctly",
-        "ERROR_SUCCESS": "Driver deleted correctly",
+        "DELETE_SUCCESS": "Driver deleted correctly",
         "DELETE_CONFIRM": "Are you sure of delete this driver?"
     },
     "OBU": {
@@ -242,10 +242,13 @@
             "invalid": "Invalid shapefile",
             "export": "Error in shapefile's export"
         },
+        "user": {
+            "duplicate-email": "Email is already used. Please try another one",
+            "insert": "Error in inserting new user"
+        },
         "fleetmanager": {
             "insert": "Failed to insert a fleet manager",
             "email": "Error: Email is mandatory",
-            "duplicate-email": "Email is already used. Please try another one",
             "delete": "Cannot delete a fleet manager with assigned vehicles"
         },
         "vehicle": {

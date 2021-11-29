@@ -57,4 +57,30 @@ export class DriverService {
     return this.http.delete<void>(this.apiUrl + url + '/driver/delete/' + driverId)
       .pipe(catchError(err => { throw err; }));
   }
+
+  getVehiclesByDriver(driverId?: number, fleetManagerId?: number): Observable<void>{
+    let urlFleet = '';
+    let urlDriver = '';
+    if (fleetManagerId) {
+      urlFleet = '/' + fleetManagerId;
+    }
+    if (driverId) {
+      urlDriver = '/' + driverId;
+    }
+    return this.http.get<void>(this.apiUrl + urlFleet + '/driver' + urlDriver + '/vehicles')
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  getDriversByVehicle(vehicleId?: number, fleetManagerId?: number): Observable<void>{
+    let urlFleet = '';
+    let urlVehicle = '';
+    if (fleetManagerId) {
+      urlFleet = '/' + fleetManagerId;
+    }
+    if (vehicleId) {
+      urlVehicle = '/' + vehicleId;
+    }
+    return this.http.get<void>(this.apiUrl + urlFleet + '/vehicle' + urlVehicle + '/drivers')
+      .pipe(catchError(err => { throw err; }));
+  }
 }

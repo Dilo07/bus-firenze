@@ -134,7 +134,7 @@
         "ADD_SUCCESS": "Autista inserito correttamente",
         "EDIT_ERROR":"Errore nella modifica autista",
         "EDIT_SUCCESS": "Autista modificato correttamente",
-        "ERROR_SUCCESS": "Autista eliminato correttamente",
+        "DELETE_SUCCESS": "Autista eliminato correttamente",
         "DELETE_CONFIRM": "Sei sicuro di voler cancellare questo autista?"
     },
     "OBU": {
@@ -244,10 +244,13 @@
             "invalid": "Contenuto dello shapefile non valido",
             "export": "Errore nell'export dello shapefile"
         },
+        "user": {
+            "duplicate-email": "Questa email è già usata. Per favore, inserisci un'altra email",
+            "insert": "Errore nell'inserimento nuovo utente"
+        },
         "fleetmanager": {
             "insert": "Non è possibile inserire il fleet manager",
             "email": "Email obbligatoria",
-            "duplicate-email": "Questa email è già usata. Per favore, inserisci un'altra email",
             "delete": "Non è possibile cancellare un fleet manager con veicoli associati"
         },
         "vehicle": {

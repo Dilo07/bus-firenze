@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
@@ -17,7 +17,7 @@ import { FormDriverComponent } from './modal-form-driver/form-driver.component';
   styles: [
   ]
 })
-export class DriversComponent implements OnInit {
+export class DriversComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   public Search: FormGroup;
@@ -44,6 +44,12 @@ export class DriversComponent implements OnInit {
     this.getDrivers();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+  }
+
   public getDrivers(): void {
     this.complete = false;
     const keyword = this.Search.get('CtrlSearch').value;
@@ -55,7 +61,7 @@ export class DriversComponent implements OnInit {
         },
         () => this.complete = true,
         () => this.complete = true
-        ));
+      ));
   }
 
   public addDriver(): void {
@@ -63,7 +69,7 @@ export class DriversComponent implements OnInit {
       width: '90%',
       height: '90%',
       /* disableClose: true, */
-      data: {driver: null, fleetManagerId: this.fleetManager?.id}
+      data: { driver: null, fleetManagerId: this.fleetManager?.id }
     });
     dialogRef.afterClosed().subscribe((add) => {
       if (add) {
@@ -77,7 +83,7 @@ export class DriversComponent implements OnInit {
     const dialogRef = this.dialog.open(FormDriverComponent, {
       width: '90%',
       height: '90%',
-      data: {driver: dRiver, fleetManagerId: this.fleetManager?.id}
+      data: { driver: dRiver, fleetManagerId: this.fleetManager?.id }
     });
     dialogRef.afterClosed().subscribe((edit) => {
       if (edit) {
@@ -96,15 +102,21 @@ export class DriversComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-          this.driverService.deleteDriver(idDriver, this.fleetManager?.id).subscribe(
-            () => this.snackBar.showMessage('DRIVERS.DELETE_SUCCESS', 'INFO'),
-            () => null,
-            () => {
-              this.getDrivers();
-              this.resetSearchField();
-            });
+        this.driverService.deleteDriver(idDriver, this.fleetManager?.id).subscribe(
+          () => this.snackBar.showMessage('DRIVERS.DELETE_SUCCESS', 'INFO'),
+          () => null,
+          () => {
+            this.getDrivers();
+            this.resetSearchField();
+          });
       }
     });
+  }
+
+  public associationVehicle(idDriver: number): void {
+    this.subscription.push(
+      this.driverService.getVehiclesByDriver(idDriver, this.fleetManager?.id).subscribe(
+        data => console.log(data)));
   }
 
   public findContactValue(fleetManager: FleetManager, code: number): string {

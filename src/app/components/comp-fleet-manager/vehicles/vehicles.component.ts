@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { DriverService } from 'src/app/services/driver.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
@@ -35,6 +36,7 @@ export class VehiclesComponent implements OnInit {
     private snackBar: SnackBar,
     private fleetManagerService: FleetManagerService,
     private vehicleService: VehicleService,
+    private driverService: DriverService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
@@ -104,6 +106,12 @@ export class VehiclesComponent implements OnInit {
             });
       }
     });
+  }
+
+  public associationDriver(vehicleId: number): void{
+    this.driverService.getDriversByVehicle(vehicleId, this.fleetManager?.id).subscribe(
+      data => console.log(data)
+    );
   }
 
   private resetSearchField(): void {
