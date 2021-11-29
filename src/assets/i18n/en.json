@@ -129,7 +129,11 @@
         "NO_DATA": "Nobody drivers present",
         "MESSAGE_NEW": "Insert new driver information",
         "ADD_ERROR":"Error on insert driver",
-        "ADD_SUCCESS": "Driver correctly insert"
+        "ADD_SUCCESS": "Driver inserted correctly",
+        "EDIT_ERROR":"Error on edit driver",
+        "EDIT_SUCCESS": "Driver changed correctly",
+        "ERROR_SUCCESS": "Driver deleted correctly",
+        "DELETE_CONFIRM": "Are you sure of delete this driver?"
     },
     "OBU": {
         "ASSIGN": "Assign Obu",

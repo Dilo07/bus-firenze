@@ -131,7 +131,11 @@
         "NO_DATA": "Nessun autista presente",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Driver",
         "ADD_ERROR":"Errore nell'inserimento autista",
-        "ADD_SUCCESS": "Autista inserito correttamente"
+        "ADD_SUCCESS": "Autista inserito correttamente",
+        "EDIT_ERROR":"Errore nella modifica autista",
+        "EDIT_SUCCESS": "Autista modificato correttamente",
+        "ERROR_SUCCESS": "Autista eliminato correttamente",
+        "DELETE_CONFIRM": "Sei sicuro di voler cancellare questo autista?"
     },
     "OBU": {
         "ASSIGN": "Assegna Obu",

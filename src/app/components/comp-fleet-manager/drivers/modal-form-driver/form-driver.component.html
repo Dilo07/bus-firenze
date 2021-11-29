@@ -27,10 +27,12 @@
             <button mat-button (click)="dialogRef.close(false);" class="backButton">
                 {{'FLEET-MANAGER.BACK' | translate}}
             </button>
-            <button *ngIf="!data.driver" mat-button [disabled]="FormGroup.invalid" class="greenButtons" (click)="addDriver()">
+            <button *ngIf="!data.driver" mat-button [disabled]="FormGroup.invalid" class="greenButtons"
+                (click)="addDriver()">
                 {{'FLEET-MANAGER.SAVE' | translate}}
             </button>
-            <button *ngIf="data.driver" mat-button [disabled]="FormGroup.invalid || !FormGroup.dirty" class="greenButtons">
+            <button *ngIf="data.driver" mat-button [disabled]="FormGroup.invalid || !FormGroup.dirty"
+                class="greenButtons" (click)="editDriver()">
                 {{'FLEET-MANAGER.EDIT' | translate}}
             </button>
         </div>

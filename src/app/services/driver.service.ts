@@ -35,4 +35,26 @@ export class DriverService {
     return this.http.post<void>(this.apiUrl + url + '/driver/add', driver)
       .pipe(catchError(err => { throw err; }));
   }
+
+  editDriver(driver: Driver, driverId?: number, fleetManagerId?: number): Observable<void> {
+    let urlFleet = '';
+    let urlDriver = '';
+    if (fleetManagerId) {
+      urlFleet = '/' + fleetManagerId;
+    }
+    if (driverId) {
+      urlDriver = '/' + driverId;
+    }
+    return this.http.put<void>(this.apiUrl + urlFleet + '/driver' + urlDriver + '/update', driver)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  deleteDriver(driverId: number, fleetManagerId?: number): Observable<void>{
+    let url = '';
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
+    return this.http.delete<void>(this.apiUrl + url + '/driver/delete/' + driverId)
+      .pipe(catchError(err => { throw err; }));
+  }
 }

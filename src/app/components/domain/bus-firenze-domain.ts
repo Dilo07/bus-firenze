@@ -49,6 +49,13 @@ export class Driver {
     fleetManagerId: number;
 }
 
+export interface DriverVehicle {
+    id: number;
+    displayName: string;
+    status: boolean;
+    dateIns: Date;
+}
+
 export class Vehicle {
     id: number;
     fleetManagerId: number;

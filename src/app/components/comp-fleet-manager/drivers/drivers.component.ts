@@ -6,7 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
+import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { Driver, FleetManager } from '../../domain/bus-firenze-domain';
+import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { FormDriverComponent } from './modal-form-driver/form-driver.component';
 
 @Component({
@@ -21,7 +23,7 @@ export class DriversComponent implements OnInit {
   public Search: FormGroup;
   public fleetManager: FleetManager;
   public dataSource = new MatTableDataSource<Driver>();
-  public displayedColumns = ['name', 'surname', 'e-mail'];
+  public displayedColumns = ['name', 'surname', 'e-mail', 'action'];
   public complete = true;
 
   private subscription: Subscription[] = [];
@@ -29,6 +31,7 @@ export class DriversComponent implements OnInit {
   constructor(
     private router: Router,
     private dialog: MatDialog,
+    private snackBar: SnackBar,
     private driverService: DriverService,
     private formBuilder: FormBuilder) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
@@ -59,12 +62,47 @@ export class DriversComponent implements OnInit {
     const dialogRef = this.dialog.open(FormDriverComponent, {
       width: '90%',
       height: '90%',
-      data: {driver: null, fleetManagerId: this.fleetManager.id}
+      /* disableClose: true, */
+      data: {driver: null, fleetManagerId: this.fleetManager?.id}
     });
     dialogRef.afterClosed().subscribe((add) => {
       if (add) {
         this.getDrivers();
         this.resetSearchField();
+      }
+    });
+  }
+
+  public editDriver(dRiver: Driver): void {
+    const dialogRef = this.dialog.open(FormDriverComponent, {
+      width: '90%',
+      height: '90%',
+      data: {driver: dRiver, fleetManagerId: this.fleetManager?.id}
+    });
+    dialogRef.afterClosed().subscribe((edit) => {
+      if (edit) {
+        this.getDrivers();
+        this.resetSearchField();
+      }
+    });
+  }
+
+  public deleteDriver(idDriver: number): void {
+    const dialogRef = this.dialog.open(ModalConfirmComponent, {
+      width: '50%',
+      height: '30%',
+      data: { text: 'DRIVERS.DELETE_CONFIRM' },
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+          this.driverService.deleteDriver(idDriver, this.fleetManager?.id).subscribe(
+            () => this.snackBar.showMessage('DRIVERS.DELETE_SUCCESS', 'INFO'),
+            () => null,
+            () => {
+              this.getDrivers();
+              this.resetSearchField();
+            });
       }
     });
   }

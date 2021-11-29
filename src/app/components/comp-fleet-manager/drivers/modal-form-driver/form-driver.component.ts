@@ -28,7 +28,6 @@ export class FormDriverComponent implements OnInit {
         CtrlSurname: [this.data.driver.surname, Validators.required],
         CtrlMail: [this.findContactValue(3), Validators.email]
       });
-
     } else {
       this.FormGroup = this.formBuilder.group({
         CtrlName: ['', Validators.required],
@@ -49,6 +48,20 @@ export class FormDriverComponent implements OnInit {
       () => null,
       () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
       () => { this.snackBar.showMessage('DRIVERS.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
+    );
+  }
+
+  public editDriver(): void {
+    const editDriver = this.data.driver;
+    editDriver.name = this.FormGroup.get('CtrlName').value;
+    editDriver.surname = this.FormGroup.get('CtrlSurname').value;
+    editDriver.contacts = [];
+    const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
+    editDriver.contacts.push(mail);
+    this.driverService.editDriver(editDriver, editDriver.id, this.data.fleetManagerId).subscribe(
+      () => null,
+      () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
+      () => { this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }
     );
   }
 
