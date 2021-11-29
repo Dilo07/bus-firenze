@@ -20,6 +20,7 @@ import { TableStatisticComponent } from './vehicles/table-statistic/table-statis
 import { AnagraphicFleetManagerComponent } from './anagraphic-fleet-manager/anagraphic-fleet-manager.component';
 import { DriversComponent } from './drivers/drivers.component';
 import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
+import { AssociationDriversVehiclesComponent } from './drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.com
     TableStatisticComponent,
     AnagraphicFleetManagerComponent,
     DriversComponent,
-    FormDriverComponent
+    FormDriverComponent,
+    AssociationDriversVehiclesComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Driver } from '../components/domain/bus-firenze-domain';
+import { Driver, DriverVehicle } from '../components/domain/bus-firenze-domain';
+import { driversByVehicle, vehiclesByDriver } from './mokup/getDriverVehicle';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,9 @@ export class DriverService {
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
   private apiUrl = this.url + '/api/fleet';
+
+  private driversByVehicle = driversByVehicle;
+  private vehiclesByDriver = vehiclesByDriver;
 
   getDrivers(keyword: string, fleetManagerId?: number): Observable<Driver[]> {
     const options = {
@@ -58,7 +62,7 @@ export class DriverService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getVehiclesByDriver(driverId?: number, fleetManagerId?: number): Observable<void>{
+  getVehiclesByDriver(driverId?: number, fleetManagerId?: number): Observable<DriverVehicle[]>{
     let urlFleet = '';
     let urlDriver = '';
     if (fleetManagerId) {
@@ -67,11 +71,12 @@ export class DriverService {
     if (driverId) {
       urlDriver = '/' + driverId;
     }
-    return this.http.get<void>(this.apiUrl + urlFleet + '/driver' + urlDriver + '/vehicles')
-      .pipe(catchError(err => { throw err; }));
+    /* return this.http.get<DriverVehicle[]>(this.apiUrl + urlFleet + '/driver' + urlDriver + '/vehicles')
+      .pipe(catchError(err => { throw err; })); */
+    return of(this.vehiclesByDriver);
   }
 
-  getDriversByVehicle(vehicleId?: number, fleetManagerId?: number): Observable<void>{
+  getDriversByVehicle(vehicleId?: number, fleetManagerId?: number): Observable<DriverVehicle[]>{
     let urlFleet = '';
     let urlVehicle = '';
     if (fleetManagerId) {
@@ -80,7 +85,7 @@ export class DriverService {
     if (vehicleId) {
       urlVehicle = '/' + vehicleId;
     }
-    return this.http.get<void>(this.apiUrl + urlFleet + '/vehicle' + urlVehicle + '/drivers')
+    return this.http.get<DriverVehicle[]>(this.apiUrl + urlFleet + '/vehicle' + urlVehicle + '/drivers')
       .pipe(catchError(err => { throw err; }));
   }
 }
