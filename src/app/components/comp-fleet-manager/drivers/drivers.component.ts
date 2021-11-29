@@ -69,7 +69,6 @@ export class DriversComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(FormDriverComponent, {
       width: '90%',
       height: '90%',
-      /* disableClose: true, */
       data: { driver: null, fleetManagerId: this.fleetManager?.id }
     });
     dialogRef.afterClosed().subscribe((add) => {

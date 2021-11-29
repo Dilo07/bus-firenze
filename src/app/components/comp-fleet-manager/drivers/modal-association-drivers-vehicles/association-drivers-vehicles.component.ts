@@ -40,6 +40,7 @@ export class AssociationDriversVehiclesComponent implements OnInit {
     console.log(this.arrayForDB);
     if (this.arrayForDB.length > 0){
       // servizio
+      this.dialogRef.close();
     }else{
       this.dialogRef.close();
     }
