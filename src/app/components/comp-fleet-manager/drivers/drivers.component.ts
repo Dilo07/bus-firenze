@@ -113,14 +113,14 @@ export class DriversComponent implements OnInit, OnDestroy {
     });
   }
 
-  public associationVehicle(idDriver: number): void {
+  public associationVehicle(IdDriver: number): void {
     this.subscription.push(
-      this.driverService.getVehiclesByDriver(idDriver, this.fleetManager?.id).subscribe(
+      this.driverService.getVehiclesByDriver(IdDriver, this.fleetManager?.id).subscribe(
         vehicles => {
           const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
             width: '80%',
             height: '80%',
-            data: {driverVehicle: vehicles, isDriver: true},
+            data: {driverVehicle: vehicles, idDriver: IdDriver, fleetManageId: this.fleetManager?.id},
             autoFocus: false
           });
         }));

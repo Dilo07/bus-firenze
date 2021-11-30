@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutGap="20px">
 	<h4 fxLayout="row" fxLayoutAlign="center center">
-        {{(data.isDriver ? 'DRIVERS.ASSOCIATION_VEHICLES' : 'DRIVERS.ASSOCIATION_DRIVERS') | translate}}
+        {{(data.idDriver ? 'DRIVERS.ASSOCIATION_VEHICLES' : 'DRIVERS.ASSOCIATION_DRIVERS') | translate}}
     </h4>
     <mat-selection-list [(ngModel)]="selectedElement" style="background-color: beige;">
         <mat-list-option *ngFor="let element of data.driverVehicle" [selected]="element.status" [value]="element">

@@ -32,6 +32,7 @@ export class ObuComponent implements OnInit, OnDestroy {
   public displayedColumns = ['id', 'plate', 'nat', 'euroClass', 'obuId', 'actions'];
   public Search: FormGroup;
 
+  private vehicleLpnAppointment: string;
   private subscription: Subscription[] = [];
 
   constructor(
@@ -40,11 +41,15 @@ export class ObuComponent implements OnInit, OnDestroy {
     private vehicleService: VehicleService,
     private obuService: ObuService,
     private snackBar: SnackBar,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder) {
+      this.vehicleLpnAppointment = this.router.getCurrentNavigation()?.extras.state?.vehicleLpnAppointment as string;
+    }
 
   ngOnInit(): void {
+    // se arriva una targa dall'appuntamenti valorizza la ricerca altrimenti è vuota
+    const ctrlSearch = this.vehicleLpnAppointment ? this.vehicleLpnAppointment : '';
     this.Search = this.formBuilder.group({
-      CtrlSearch: ['']
+      CtrlSearch: [ctrlSearch]
     });
     this.callTableInstaller();
   }

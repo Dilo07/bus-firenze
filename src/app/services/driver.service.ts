@@ -58,7 +58,7 @@ export class DriverService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  deleteDriver(driverId: number, fleetManagerId?: number): Observable<void>{
+  deleteDriver(driverId: number, fleetManagerId?: number): Observable<void> {
     let url = '';
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
@@ -67,7 +67,7 @@ export class DriverService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getVehiclesByDriver(driverId?: number, fleetManagerId?: number): Observable<DriverVehicle[]>{
+  getVehiclesByDriver(driverId?: number, fleetManagerId?: number): Observable<DriverVehicle[]> {
     let urlFleet = '';
     let urlDriver = '';
     if (fleetManagerId) {
@@ -76,12 +76,12 @@ export class DriverService {
     if (driverId) {
       urlDriver = '/' + driverId;
     }
-    /* return this.http.get<DriverVehicle[]>(this.apiUrl + urlFleet + '/driver' + urlDriver + '/vehicles')
-      .pipe(catchError(err => { throw err; })); */
-    return of(this.vehiclesByDriver);
+    return this.http.get<DriverVehicle[]>(this.apiUrl + urlFleet + '/driver' + urlDriver + '/vehicles')
+      .pipe(catchError(err => { throw err; }));
+    /* return of(this.vehiclesByDriver); */
   }
 
-  getDriversByVehicle(vehicleId?: number, fleetManagerId?: number): Observable<DriverVehicle[]>{
+  getDriversByVehicle(vehicleId?: number, fleetManagerId?: number): Observable<DriverVehicle[]> {
     let urlFleet = '';
     let urlVehicle = '';
     if (fleetManagerId) {
@@ -90,8 +90,27 @@ export class DriverService {
     if (vehicleId) {
       urlVehicle = '/' + vehicleId;
     }
-    /* return this.http.get<DriverVehicle[]>(this.apiUrl + urlFleet + '/vehicle' + urlVehicle + '/drivers')
-      .pipe(catchError(err => { throw err; })); */
-    return of(this.driversByVehicle);
+    return this.http.get<DriverVehicle[]>(this.apiUrl + urlFleet + '/vehicle' + urlVehicle + '/drivers')
+      .pipe(catchError(err => { throw err; }));
+    /* return of(this.driversByVehicle); */
   }
+
+  updateVehiclesByDriver(driverId: number, driverVehicle: DriverVehicle[], fleetManagerId?: number): Observable<void> {
+    let urlFleet = '';
+    if (fleetManagerId) {
+      urlFleet = '/' + fleetManagerId;
+    }
+    return this.http.put<void>(this.apiUrl + urlFleet +  '/driver/' + driverId + '/vehicles/update', driverVehicle)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  updateDriversByVehicle(vehicleId: number, driverVehicle: DriverVehicle[], fleetManagerId?: number): Observable<void> {
+    let urlFleet = '';
+    if (fleetManagerId) {
+      urlFleet = '/' + fleetManagerId;
+    }
+    return this.http.put<void>(this.apiUrl + urlFleet + '/vehicle/' + vehicleId + '/drivers/update', driverVehicle)
+      .pipe(catchError(err => { throw err; }));
+  }
+
 }
