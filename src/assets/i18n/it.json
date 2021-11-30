@@ -133,6 +133,8 @@
         "TITLE": "Autisti",
         "NO_DATA": "Nessun autista presente",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Driver",
+        "ASSOCIATION_VEHICLES": "Seleziona i veicoli da associare al guidatore",
+        "ASSOCIATION_DRIVERS": "Seleziona i guidatori da associare al veicolo",
         "ADD_ERROR":"Errore nell'inserimento autista",
         "ADD_SUCCESS": "Autista inserito correttamente",
         "EDIT_ERROR":"Errore nella modifica autista",

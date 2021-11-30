@@ -118,7 +118,7 @@ export class VehiclesComponent implements OnInit {
         const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
           width: '80%',
           height: '80%',
-          data: drivers,
+          data: {driverVehicle: drivers, isDriver: false},
           autoFocus: false
         });
       });

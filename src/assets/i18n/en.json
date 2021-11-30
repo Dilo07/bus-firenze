@@ -131,6 +131,8 @@
         "TITLE": "Drivers",
         "NO_DATA": "Nobody drivers present",
         "MESSAGE_NEW": "Insert new driver information",
+        "ASSOCIATION_VEHICLES": "Select the vehicles to be associated with the driver",
+        "ASSOCIATION_DRIVERS": "select the drivers to be associated with the vehicle",
         "ADD_ERROR":"Error on insert driver",
         "ADD_SUCCESS": "Driver inserted correctly",
         "EDIT_ERROR":"Error on edit driver",

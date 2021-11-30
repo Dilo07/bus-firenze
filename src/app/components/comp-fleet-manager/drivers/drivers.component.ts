@@ -120,7 +120,7 @@ export class DriversComponent implements OnInit, OnDestroy {
           const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
             width: '80%',
             height: '80%',
-            data: vehicles,
+            data: {driverVehicle: vehicles, isDriver: true},
             autoFocus: false
           });
         }));

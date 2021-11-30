@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { DriverVehicle } from 'src/app/components/domain/bus-firenze-domain';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DriverService } from 'src/app/services/driver.service';
 
 @Component({
   selector: 'app-association-drivers-vehicles',
@@ -8,21 +9,20 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styles: []
 })
 export class AssociationDriversVehiclesComponent implements OnInit {
-  public selectedElement: DriverVehicle[];
+  public selectedElement: DriverVehicle[] = [];
   public arrayForDB: DriverVehicle[];
 
   constructor(
+    private driverService: DriverService,
     public dialogRef: MatDialogRef<AssociationDriversVehiclesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DriverVehicle[]
+    @Inject(MAT_DIALOG_DATA) public data: {driverVehicle: DriverVehicle[], isDriver: boolean}
   ) { }
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+  ngOnInit(): void { }
 
   public saveAssociation(): void{
     this.arrayForDB = [];
-    this.data.forEach(element => {
+    this.data.driverVehicle.forEach(element => {
       if (!element.status){
         // verifica gli status false, se li trova nei selezionati allora imposta a true e aggiunge
         if (this.selectedElement.find(selectedElement => element.id === selectedElement.id)){
