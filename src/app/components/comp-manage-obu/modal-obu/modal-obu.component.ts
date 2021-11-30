@@ -37,7 +37,7 @@ export class ModalObuComponent implements OnInit, OnDestroy {
     private obuService: ObuService,
     private cdr: ChangeDetectorRef,
     private snackBar: SnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: Obu) { }
+    @Inject(MAT_DIALOG_DATA) public data: {vehicleId: number, obuId: string, lpn: string, lpnNat: string}) { }
 
   ngOnInit(): void {
     // se ci sono dati è un edit form altrimenti è un add form
@@ -107,7 +107,7 @@ export class ModalObuComponent implements OnInit, OnDestroy {
         this.isGunScanner = false;
         return;
       } else {
-        this.subscription.push(this.obuService.testObu(obu).subscribe(
+        this.subscription.push(this.obuService.testObu(obu, this.data.lpn, this.data.lpnNat).subscribe(
           () => { // se testobu è passato
             const scanObu = this.FormGroup.get('CtrlObuId').value;
             if (scanObu === '') {

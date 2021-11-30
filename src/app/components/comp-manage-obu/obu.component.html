@@ -42,11 +42,13 @@
 				<ng-container matColumnDef="actions">
 					<th mat-header-cell *matHeaderCellDef> </th>
 					<td mat-cell *matCellDef="let element" style="text-align: end;">
-						<button *ngIf="assignObuEnabled" mat-button (click)="addObu(element.id)"
+						<button *ngIf="assignObuEnabled" mat-button
+							(click)="addObu(element.id, element.lpn, element.lpnNat)"
 							matTooltip="{{'OBU.ASSIGN' | translate}}">
 							<mat-icon style="color: #0066CC;">keyboard_tab</mat-icon>
 						</button>
-						<button *ngIf="changeObuEnabled" mat-button (click)="changeObu(element.id, element.obuId)"
+						<button *ngIf="changeObuEnabled" mat-button
+							(click)="changeObu(element.id, element.obuId, element.lpn, element.lpnNat)"
 							matTooltip="{{'OBU.CHANGE' | translate}}">
 							<mat-icon style="color: #0066CC;">loop</mat-icon>
 						</button>

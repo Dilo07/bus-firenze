@@ -78,11 +78,11 @@ export class ObuComponent implements OnInit, OnDestroy {
       () => this.complete = true));
   }
 
-  public addObu(VehicleId: number): void {
+  public addObu(VehicleId: number, Lpn: string, LpnNat: string): void {
     const dialogRef = this.dialog.open(ModalObuComponent, {
       width: '70%',
       height: '70%',
-      data: { vehicleId: VehicleId }
+      data: { vehicleId: VehicleId, lpn: Lpn, lpnNat: LpnNat }
     });
     // chiama il modal form in caso si edit aggiorna la table chiamando il service
     dialogRef.afterClosed().subscribe((add) => {
@@ -93,11 +93,11 @@ export class ObuComponent implements OnInit, OnDestroy {
     });
   }
 
-  public changeObu(VehicleId: number, ObuId: string): void {
+  public changeObu(VehicleId: number, ObuId: string, Lpn: string, LpnNat: string): void {
     const dialogRef = this.dialog.open(ModalObuComponent, {
       width: '70%',
       height: '70%',
-      data: { vehicleId: VehicleId, obuId: ObuId }
+      data: { vehicleId: VehicleId, obuId: ObuId, lpn: Lpn, lpnNat: LpnNat }
     });
     // chiama il modal form in caso si edit aggiorna la table chiamando il service
     dialogRef.afterClosed().subscribe((edit) => {

@@ -16,8 +16,8 @@ export class ObuService {
 
   private apiUrl = this.url + '/api/fleet/obu';
 
-  testObu(id: string): Observable<void> {
-    return this.http.get<void>(this.apiUrl + '/' + id + '/test')
+  testObu(id: string, plate: string, nat: string): Observable<void> {
+    return this.http.get<void>(this.apiUrl + '/' + id + '/plate/' + plate + '/nat/' + nat + '/test')
       .pipe(catchError(err => { throw err; }));
   }
 
