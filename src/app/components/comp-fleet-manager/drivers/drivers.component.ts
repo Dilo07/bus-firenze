@@ -24,7 +24,7 @@ export class DriversComponent implements OnInit, OnDestroy {
   public Search: FormGroup;
   public fleetManager: FleetManager;
   public dataSource = new MatTableDataSource<Driver>();
-  public displayedColumns = ['name', 'surname', 'e-mail', 'action'];
+  public displayedColumns = ['name', 'surname', 'e-mail', 'mobile', 'action'];
   public complete = true;
 
   private subscription: Subscription[] = [];

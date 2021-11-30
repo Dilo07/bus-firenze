@@ -18,6 +18,11 @@ export class DriverService {
   private driversByVehicle = driversByVehicle;
   private vehiclesByDriver = vehiclesByDriver;
 
+  getDriver(): Observable<Driver> {
+    return this.http.get<Driver>(this.apiUrl + '/driver')
+      .pipe(catchError(err => { throw err; }));
+  }
+
   getDrivers(keyword: string, fleetManagerId?: number): Observable<Driver[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

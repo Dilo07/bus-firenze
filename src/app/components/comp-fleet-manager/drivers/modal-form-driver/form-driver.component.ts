@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
+import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 
@@ -13,13 +14,17 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 })
 export class FormDriverComponent implements OnInit {
   public FormGroup: FormGroup;
+  public roleDriver: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<FormDriverComponent>,
     private formBuilder: FormBuilder,
     private driverService: DriverService,
     private snackBar: SnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: { driver: Driver, fleetManagerId: number, cellularRequired: boolean }) { }
+    @Inject('authService') private authService,
+    @Inject(MAT_DIALOG_DATA) public data: { driver: Driver, fleetManagerId: number, cellularRequired: boolean }) {
+    this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
+  }
 
   ngOnInit(): void {
     if (this.data.driver) {
@@ -61,7 +66,11 @@ export class FormDriverComponent implements OnInit {
     editDriver.contacts = [];
     const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
     editDriver.contacts.push(mail);
-    this.driverService.editDriver(editDriver, editDriver.id, this.data.fleetManagerId).subscribe(
+    if (this.FormGroup.get('CtrlCell')?.value) {
+      const cell = { code: 1, value: this.FormGroup.get('CtrlCell').value };
+      editDriver.contacts.push(cell);
+    }
+    this.driverService.editDriver(editDriver, this.roleDriver ? null : editDriver.id, this.data.fleetManagerId).subscribe(
       () => null,
       () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
       () => { this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }

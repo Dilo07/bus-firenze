@@ -37,6 +37,11 @@
 					<td mat-cell *matCellDef="let element"> {{ findContactValue(element, 3)}} </td>
 				</ng-container>
 
+				<ng-container matColumnDef="mobile">
+					<th mat-header-cell *matHeaderCellDef> mobile </th>
+					<td mat-cell *matCellDef="let element"> {{ findContactValue(element, 1)}} </td>
+				</ng-container>
+
 				<ng-container matColumnDef="action">
 					<th mat-header-cell *matHeaderCellDef> </th>
 					<td mat-cell *matCellDef="let element" style="text-align: end;">

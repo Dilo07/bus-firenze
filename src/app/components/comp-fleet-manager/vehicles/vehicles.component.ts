@@ -20,6 +20,9 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
     width: 100%;
     background-color: beige;
   }
+  .obuDisactive{
+    opacity: 0.8;
+  }
   `]
 })
 export class VehiclesComponent implements OnInit {
@@ -43,7 +46,8 @@ export class VehiclesComponent implements OnInit {
 
   ngOnInit(): void {
     this.Search = this.formBuilder.group({
-      CtrlSearch: ['']
+      CtrlSearch: [''],
+      onlyActive: [true]
     });
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
   }
@@ -51,7 +55,8 @@ export class VehiclesComponent implements OnInit {
   public getVehiclesByManagerId(): void {
     this.complete = false;
     const keyword = this.Search.get('CtrlSearch').value;
-    this.vehicleService.getVehiclesById(true, this.fleetManager?.id, keyword).subscribe(data => {
+    const onlyActive = this.Search.get('onlyActive').value;
+    this.vehicleService.getVehiclesById(onlyActive, this.fleetManager?.id, keyword).subscribe(data => {
       this.vehicleList.data = data;
       this.vehicleList.sort = this.sort;
     },

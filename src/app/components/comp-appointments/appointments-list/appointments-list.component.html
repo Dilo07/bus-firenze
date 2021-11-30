@@ -41,7 +41,7 @@
                     <mat-header-cell mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.COMPANY_NAME' | translate}}
                     </mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <span class="mobile-label">{{'FLEET-MANAGER.COMPANY NAME' | translate}}</span>
+                        <span class="mobile-label">{{'FLEET-MANAGER.COMPANY_NAME' | translate}}</span>
                         {{element.companyName}}
                     </mat-cell>
                 </ng-container>
@@ -106,7 +106,8 @@
                                         <mat-radio-group class="example-radio-group" [(ngModel)]="vehicleSelected">
                                             <mat-radio-button class="example-radio-button"
                                                 *ngFor="let vehicle of element.vehicles" [value]="vehicle">
-                                                {{vehicle.lpn}} <span *ngIf="vehicle.appointmentDate"> -
+                                                {{vehicle.lpn}}
+                                                <span *ngIf="vehicle.appointmentDate"> - 
                                                     {{vehicle.appointmentDate | date: 'dd/MM/yy HH:mm'}}</span>
                                             </mat-radio-button>
                                         </mat-radio-group>

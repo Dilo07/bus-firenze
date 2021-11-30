@@ -21,6 +21,7 @@ import { AnagraphicFleetManagerComponent } from './anagraphic-fleet-manager/anag
 import { DriversComponent } from './drivers/drivers.component';
 import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
 import { AssociationDriversVehiclesComponent } from './drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
+import { AnagraphicDriverComponent } from './drivers/anagraphic-driver/anagraphic-driver.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { AssociationDriversVehiclesComponent } from './drivers/modal-association
     AnagraphicFleetManagerComponent,
     DriversComponent,
     FormDriverComponent,
-    AssociationDriversVehiclesComponent
+    AssociationDriversVehiclesComponent,
+    AnagraphicDriverComponent
   ],
   imports: [
     CommonModule,
