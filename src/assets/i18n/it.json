@@ -108,6 +108,7 @@
         "SEARCH": "Ricerca per targa o Obu Id",
         "ONLY_ACTIVE": "Veicoli attivi",
         "ALL": "Tutti i veicoli",
+        "DISABLED": "Disabilitato il ",
         "LPN": "Targa",
         "LPN NAT": "Nazione",
         "EURO-CLASS": "EuroClass",

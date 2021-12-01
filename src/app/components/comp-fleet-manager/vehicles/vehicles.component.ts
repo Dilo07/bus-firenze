@@ -101,7 +101,7 @@ export class VehiclesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-          this.vehicleService.deleteVehicle(vehicleId).subscribe(
+          this.vehicleService.deleteVehicle(vehicleId, this.fleetManager?.id).subscribe(
             () => this.snackBar.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
             () => null,
             () => {

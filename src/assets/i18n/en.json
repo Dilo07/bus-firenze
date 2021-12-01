@@ -106,6 +106,7 @@
         "SEARCH": "Search for plate or Obu Id",
         "ONLY_ACTIVE": "Active vehicles",
         "ALL": "All vehicles",
+        "DISABLED": "Disabled at ",
         "LPN": "Plate",
         "LPN NAT": "Country Plate",
         "EURO-CLASS": "EuroClass",

@@ -7,7 +7,12 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 @Component({
   selector: 'app-association-drivers-vehicles',
   templateUrl: './association-drivers-vehicles.component.html',
-  styles: []
+  styles: [`
+  mat-selection-list {
+    max-height: 400px;
+    overflow: auto;
+  }
+  `]
 })
 export class AssociationDriversVehiclesComponent implements OnInit {
   public selectedElement: DriverVehicle[] = [];
@@ -39,7 +44,6 @@ export class AssociationDriversVehiclesComponent implements OnInit {
         }
       }
     });
-    console.log(this.arrayForDB);
     if (this.arrayForDB.length > 0) {
       if (this.data.idDriver) {
         this.driverService.updateVehiclesByDriver(this.data.idDriver, this.arrayForDB, this.data.fleetManageId).subscribe(

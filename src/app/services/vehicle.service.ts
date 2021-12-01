@@ -32,8 +32,12 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  deleteVehicle(id: number): Observable<void> {
-    return this.http.delete<void>(this.apiUrl + '/vehicle/delete/' + id)
+  deleteVehicle(id: number, fleetManagerId?: number): Observable<void> {
+    let url = '';
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
+    return this.http.delete<void>(this.apiUrl + url + '/vehicle/delete/' + id)
       .pipe(catchError(err => { throw err; }));
   }
 

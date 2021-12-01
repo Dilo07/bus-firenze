@@ -8,7 +8,7 @@ import {Md5} from 'ts-md5/dist/md5';
   styles: [
   ]
 })
-export class ModalOTPComponent implements OnInit, OnDestroy {
+export class ModalOTPComponent implements OnInit {
   public otp: string;
   public readonly = false;
   public errorOtp = false;
@@ -18,8 +18,6 @@ export class ModalOTPComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: {otp: string, cell: string}) { }
 
   ngOnInit(): void {}
-
-  ngOnDestroy(): void{}
 
   public onChangeEvent(): void{
     if (this.otp.length === 6){

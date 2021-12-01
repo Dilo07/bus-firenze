@@ -60,6 +60,11 @@
 							(click)="editVehicle(element)">
 							<mat-icon style="color: #0066CC;">edit</mat-icon>
 						</button>
+						<button *ngIf="element.deleted" mat-icon-button [disabled]="true">
+							<mat-icon style="color: #8f9a27"
+								matTooltip="{{('VEHICLE.DISABLED' | translate) +  (element.deleted | date : 'dd/MM/yyyy')}}">
+								disabled_by_default</mat-icon>
+						</button>
 						<button mat-icon-button matTooltip="Statistiche" [routerLink]="['statistic']"
 							[state]="{vehicle: element, fleetManager: fleetManager}">
 							<mat-icon style="color: #0066CC;">poll</mat-icon>

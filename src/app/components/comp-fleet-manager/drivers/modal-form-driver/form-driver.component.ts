@@ -1,10 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
+import { RegisterService } from 'src/app/services/register.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
+import { ModalOTPComponent } from '../../register-page/modal-otp/modal-otp.component';
 
 @Component({
   selector: 'app-form-driver',
@@ -12,14 +16,20 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
   styles: [
   ]
 })
-export class FormDriverComponent implements OnInit {
+export class FormDriverComponent implements OnInit, OnDestroy {
   public FormGroup: FormGroup;
   public roleDriver: boolean;
+  public verifyOtp = false;
+
+  private subscription: Subscription[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<FormDriverComponent>,
+    public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private driverService: DriverService,
+    private registerService: RegisterService,
+    private translateService: TranslateService,
     private snackBar: SnackBar,
     @Inject('authService') private authService,
     @Inject(MAT_DIALOG_DATA) public data: { driver: Driver, fleetManagerId: number, cellularRequired: boolean }) {
@@ -45,6 +55,12 @@ export class FormDriverComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void{
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+  }
+
   public addDriver(): void {
     const newDriver = new Driver();
     newDriver.name = this.FormGroup.get('CtrlName').value;
@@ -57,6 +73,30 @@ export class FormDriverComponent implements OnInit {
       () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
       () => { this.snackBar.showMessage('DRIVERS.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
     );
+  }
+
+  public modalOTP(): void {
+    const Cell = this.FormGroup.get('CtrlCell').value;
+    const lang = this.translateService.currentLang;
+    this.subscription.push(this.registerService.getOtpCode(Cell, lang).subscribe(
+      code => {
+        const dialogRef = this.dialog.open(ModalOTPComponent, {
+          width: '80%',
+          height: '50%',
+          data: { otp: code, cell: Cell },
+          autoFocus: false
+        });
+        dialogRef.afterClosed().subscribe(
+          verify => {
+            if (verify) {
+              this.verifyOtp = true;
+            }
+          }
+        );
+      },
+      () => null,
+      () => this.ngOnDestroy()
+    ));
   }
 
   public editDriver(): void {
