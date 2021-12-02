@@ -108,12 +108,10 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     editDriver.contacts = [];
     const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
     editDriver.contacts.push(mail);
-    if (this.FormGroup.get('CtrlCell')?.value) {
-      const formCell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
-      const cell = { code: 1, value: formCell };
-      console.log(cell);
-      editDriver.contacts.push(cell);
-    }
+    const formCell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
+    const cell = { code: 1, value: formCell };
+    console.log(cell);
+    editDriver.contacts.push(cell);
     this.driverService.editDriver(editDriver, this.roleDriver ? null : editDriver.id, this.data.fleetManagerId).subscribe(
       () => null,
       () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
