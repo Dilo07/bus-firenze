@@ -18,8 +18,6 @@ export class RepairShopComponent implements OnInit {
     @Inject('repair_shopData') public repairShops: RepairShops
   ) { }
 
-  ngOnInit(): void {
-    console.log(this.repairShops)
-  }
+  ngOnInit(): void { }
 
 }
