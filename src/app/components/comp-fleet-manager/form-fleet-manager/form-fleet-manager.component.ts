@@ -24,6 +24,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public FormGroup: FormGroup;
   public verifyOtp = false;
   public dialCode: CountryCallingCode = '39';
+  public selectedFile: File;
 
   private subscription: Subscription[] = [];
 
@@ -180,6 +181,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       () => null,
       () => this.ngOnDestroy()
     ));
+  }
+
+  public uploadFile(event: any): void{
+    this.selectedFile = event.target.files[0];
   }
 
   private fiscaleCodeValidator(control: AbstractControl): { [key: string]: boolean } | null {
