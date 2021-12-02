@@ -41,6 +41,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     }),
   ],
   providers: [
+    { provide: 'repair_shop', useValue: 'repair_shop'},
+    {
+      provide: 'repair_shopData',
+      useFactory: getPropertyFromConfig, multi: false, deps: ['repair_shop', ConfigInitService]
+    },
     // npt-net
     { provide: 'viewOuter', useValue: 'viewOuter'},
     {

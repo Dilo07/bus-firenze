@@ -16,10 +16,10 @@ const SUBMENU_ROUTES = [
   { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
   { state: 'drivers', name: 'Drivers', icon: 'airline_seat_recline_normal', roles: [ROLES.FLEETMNG] },
   { state: 'anagraphic-fleet', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.FLEETMNG] },
-  { state: 'assign-obu', name: 'Assign-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'change-obu', name: 'Change-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'remove-obu', name: 'Remove-obu', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'change-plate', name: 'Change-plate', icon: 'build', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'assign-obu', name: 'Assign-obu', icon: 'new_label', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'change-obu', name: 'Change-obu', icon: 'assignment_return', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'remove-obu', name: 'Remove-obu', icon: 'code_off', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'change-plate', name: 'Change-plate', icon: 'assignment_return', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'add-appointment', name: 'Add-appointment', icon: 'contact_phone', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'manage-appointment', name: 'Manage-appointment', icon: 'contact_phone', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'anagraphic-driver', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.DRIVER] },
@@ -35,6 +35,10 @@ const MENUITEMS = [
   {
     state: 'area-monitoring', name: 'Area-monitoring', type: 'link', icon: 'assignment',
     children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+  },
+  {
+    state: 'repair-shop', name: 'Repair-shop', type: 'link', icon: 'build',
+    children: [], roles: [ROLES.MOVYON, ROLES.FLEETMNG]
   },
   {
     state: '', name: 'Fleet-manager', type: 'submenu', icon: 'manage_accounts',

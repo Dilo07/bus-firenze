@@ -41,6 +41,10 @@ const routes: Routes = [
     path: 'user-driver',
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
+  {
+    path: 'repair-shop',
+    loadChildren: () => import('./components/comp-repair-shop/repair-shop.module').then(m => m.RepairShopModule)
+  }
 ];
 
 @NgModule({

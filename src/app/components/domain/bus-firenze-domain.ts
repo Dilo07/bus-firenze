@@ -111,3 +111,11 @@ export interface TripStat {
     innerDuration: number;
     outerDuration: number;
 }
+
+export interface RepairShops {
+    name: string;
+    surname: string;
+    mobile_number: string;
+    name_shop: string;
+    address: string;
+}

@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { CountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
+import { CountryCallingCode } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
@@ -57,7 +57,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     this.subscription.forEach(subscription => {
       subscription.unsubscribe();
     });
@@ -103,15 +103,21 @@ export class FormDriverComponent implements OnInit, OnDestroy {
 
   public editDriver(): void {
     const editDriver = this.data.driver;
+    const mobile = this.findContactValue(1);
     editDriver.name = this.FormGroup.get('CtrlName').value;
     editDriver.surname = this.FormGroup.get('CtrlSurname').value;
     editDriver.contacts = [];
     const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
     editDriver.contacts.push(mail);
-    const formCell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
-    const cell = { code: 1, value: formCell };
-    console.log(cell);
-    editDriver.contacts.push(cell);
+    if (this.FormGroup.get('CtrlCell')?.value) {
+      const formCell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
+      const cell = { code: 1, value: formCell };
+      editDriver.contacts.push(cell);
+    }else if (mobile){
+      const formCell = mobile;
+      const cell = { code: 1, value: formCell };
+      editDriver.contacts.push(cell);
+    }
     this.driverService.editDriver(editDriver, this.roleDriver ? null : editDriver.id, this.data.fleetManagerId).subscribe(
       () => null,
       () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
@@ -119,7 +125,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     );
   }
 
-  public onCountryChange(evt: any): void{
+  public onCountryChange(evt: any): void {
     this.dialCode = evt.dialCode;
   }
 
