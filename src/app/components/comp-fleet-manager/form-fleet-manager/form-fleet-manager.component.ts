@@ -10,6 +10,7 @@ import { RegisterService } from 'src/app/services/register.service';
 import { FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
+import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -22,6 +23,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public data: FleetManager;
   public FormGroup: FormGroup;
   public verifyOtp = false;
+  public dialCode: CountryCallingCode = '39';
 
   private subscription: Subscription[] = [];
 
@@ -52,6 +54,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlDistrict: [this.data.district, Validators.required],
         CtrlCAP: [this.data.cap, Validators.required],
       });
+      const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
+      this.dialCode = phoneNumber.countryCallingCode;
 
     } else {
       this.FormGroup = this.formBuilder.group({
@@ -77,6 +81,9 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     });
   }
 
+  public onCountryChange(evt: any): void{
+    this.dialCode = evt.dialCode;
+  }
 
   private findContactValue(code: number): string {
     let res = '';
@@ -134,10 +141,19 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
     fleetManager.contacts = [];
 
-    const cell = { code: 1, value: this.FormGroup.get('CtrlCell').value };
     const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
     const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
 
+    let formCell = this.FormGroup.get('CtrlCell').value;
+    const phoneNumber = parsePhoneNumber(formCell);
+    if (!phoneNumber){ // caso nuovo fleet o modifica cell
+      formCell = '+' + this.dialCode + formCell;
+    }else if (this.dialCode !== phoneNumber.countryCallingCode){ // caso edit fleet
+      formCell = '+' + this.dialCode + phoneNumber.nationalNumber;
+    }
+    const cell = { code: 1, value: formCell };
+
+    console.log(cell);
     fleetManager.contacts.push(cell, office, mail);
     return fleetManager;
   }
@@ -168,14 +184,14 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
   private fiscaleCodeValidator(control: AbstractControl): { [key: string]: boolean } | null {
     let cf: CodiceFiscale;
-    if (control.value?.length === 16){
+    if (control.value?.length === 16) {
       try {
         cf = new CodiceFiscale(control.value);
         return null;
       } catch (error) {
         return { fiscalCode: true };
       }
-    }else{
+    } else {
       return { fiscalCode: true };
     }
   }

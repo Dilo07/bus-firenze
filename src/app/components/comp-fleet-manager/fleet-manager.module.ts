@@ -22,6 +22,7 @@ import { DriversComponent } from './drivers/drivers.component';
 import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
 import { AssociationDriversVehiclesComponent } from './drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { AnagraphicDriverComponent } from './drivers/anagraphic-driver/anagraphic-driver.component';
+import { Ng2TelInputModule } from 'ng2-tel-input';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { AnagraphicDriverComponent } from './drivers/anagraphic-driver/anagraphi
     ReactiveFormsModule,
     TranslateModule,
     NptMapModule,
-    FleetManagerRoutingModule
+    FleetManagerRoutingModule,
+    Ng2TelInputModule
   ],
   exports: [FormFleetManagerComponent]
 })

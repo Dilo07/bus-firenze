@@ -2,6 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
+import { CountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
@@ -20,6 +21,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   public FormGroup: FormGroup;
   public roleDriver: boolean;
   public verifyOtp = false;
+  public dialCode: CountryCallingCode = '39';
 
   private subscription: Subscription[] = [];
 
@@ -76,7 +78,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   }
 
   public modalOTP(): void {
-    const Cell = this.FormGroup.get('CtrlCell').value;
+    const Cell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
     const lang = this.translateService.currentLang;
     this.subscription.push(this.registerService.getOtpCode(Cell, lang).subscribe(
       code => {
@@ -107,7 +109,9 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
     editDriver.contacts.push(mail);
     if (this.FormGroup.get('CtrlCell')?.value) {
-      const cell = { code: 1, value: this.FormGroup.get('CtrlCell').value };
+      const formCell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
+      const cell = { code: 1, value: formCell };
+      console.log(cell);
       editDriver.contacts.push(cell);
     }
     this.driverService.editDriver(editDriver, this.roleDriver ? null : editDriver.id, this.data.fleetManagerId).subscribe(
@@ -115,6 +119,10 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
       () => { this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }
     );
+  }
+
+  public onCountryChange(evt: any): void{
+    this.dialCode = evt.dialCode;
   }
 
   private findContactValue(code: number): string {
