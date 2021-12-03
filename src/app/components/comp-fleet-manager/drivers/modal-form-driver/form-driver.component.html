@@ -27,10 +27,10 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div *ngIf="cellularRequired" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
+            <div *ngIf="cellularRequired || roleDriver" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.CELL' | translate}}</mat-label>
-                    <input matInput type="text" ng2TelInput
+                    <input matInput type="text" ng2TelInput #countryTel
                         [ng2TelInputOptions]="{initialCountry: 'it', separateDialCode: true}"
                         (countryChange)="onCountryChange($event)" formControlName="CtrlCell" maxlength="25" required
                         [readonly]="verifyOtp">
@@ -54,7 +54,7 @@
                 {{'FLEET-MANAGER.SAVE' | translate}}
             </button>
             <button *ngIf="driver" mat-button
-                [disabled]="FormGroup.invalid || !FormGroup.dirty || (roleDriver && !verifyOtp && cellularRequired)" class="greenButtons"
+                [disabled]="FormGroup.invalid || !FormGroup.dirty || (roleDriver && !verifyOtp)" class="greenButtons"
                 (click)="editDriver()">
                 {{'FLEET-MANAGER.EDIT' | translate}}
             </button>

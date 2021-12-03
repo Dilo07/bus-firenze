@@ -1,9 +1,9 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { CountryCallingCode } from 'libphonenumber-js';
+import { CountryCallingCode, NationalNumber, parsePhoneNumber } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
@@ -30,7 +30,6 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
 
   constructor(
-    /* public dialogRef: MatDialogRef<FormDriverComponent>, */
     private router: Router,
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
@@ -39,7 +38,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private snackBar: SnackBar,
     @Inject('authService') private authService,
-    /* @Inject(MAT_DIALOG_DATA) public data: { driver: Driver, fleetManagerId: number, cellularRequired: boolean } */) {
+  ) {
     this.driver = this.router.getCurrentNavigation()?.extras.state?.driver as Driver;
     this.fleetManagerId = this.router.getCurrentNavigation()?.extras.state?.fleetManagerId as number;
     this.cellularRequired = this.router.getCurrentNavigation()?.extras.state?.cellularRequired as boolean;
@@ -63,6 +62,9 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     if (this.cellularRequired) {
       this.FormGroup.addControl('CtrlCell', this.formBuilder.control('', Validators.required));
     }
+    if (this.roleDriver) {
+      this.FormGroup.addControl('CtrlCell', this.formBuilder.control(this.findContactValue(1), Validators.required));
+    }
   }
 
   ngOnDestroy(): void {
@@ -72,7 +74,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   }
 
   public modalOTP(): void {
-    const Cell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
+    const Cell = '+' + this.dialCode + parsePhoneNumber(this.FormGroup.get('CtrlCell').value).nationalNumber;
     const lang = this.translateService.currentLang;
     this.subscription.push(this.registerService.getOtpCode(Cell, lang).subscribe(
       code => {
@@ -121,7 +123,15 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
     editDriver.contacts.push(mail);
     if (this.FormGroup.get('CtrlCell')?.value) {
-      const formCell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
+      const formMobile = this.FormGroup.get('CtrlCell').value;
+      let formCell: string;
+      let natNumber: NationalNumber;
+      if (formMobile.charAt(0) === '+'){
+        natNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value).nationalNumber;
+        formCell = '+' + this.dialCode + natNumber;
+      }else{
+        formCell = '+' + this.dialCode + formMobile;
+      }
       const cell = { code: 1, value: formCell };
       editDriver.contacts.push(cell);
     } else if (mobile) {
