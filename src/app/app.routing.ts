@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@npt/npt-template';
 import { RegisterComponent } from 'src/app/components/comp-fleet-manager/register-page/register.component';
 import { DashboardComponent } from './components/comp-dashboard/dashboard.component';
+import { DriveGuard } from './core/guards/driverGuard';
 import { ROLES } from './npt-template-menu/menu-item.service';
 
 const routes: Routes = [
@@ -10,7 +11,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'dashboard', component: DashboardComponent,
-    canActivate: [AuthGuard], data: { roles: [ROLES.DRIVER, ROLES.FLEETMNG, ROLES.INSTALLER, ROLES.OPER_MOVYON, ROLES.MOVYON] }
+    canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.DRIVER, ROLES.FLEETMNG, ROLES.INSTALLER, ROLES.OPER_MOVYON, ROLES.MOVYON] }
   },
   { path: 'real-time', loadChildren: () => import('./components/comp-real-time/real-time.module').then(m => m.RealTimeModule) },
   {

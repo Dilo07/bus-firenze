@@ -29,7 +29,7 @@ export class AnagraphicDriverComponent implements OnInit, OnDestroy {
     this.driverService.getDriver().subscribe(
       data => this.driver = data,
       () => this.complete = true,
-      () => { this.viewForm(); this.complete = true; }
+      () => { /* this.viewForm(); */ this.complete = true; }
     );
   }
 
@@ -39,7 +39,7 @@ export class AnagraphicDriverComponent implements OnInit, OnDestroy {
     });
   }
 
-  public editDriver(): void {
+  /* public editDriver(): void {
     const driverEdit = new Driver();
     driverEdit.name = this.FormGroup.get('CtrlName').value;
     driverEdit.surname = this.FormGroup.get('CtrlSurname').value;
@@ -72,5 +72,5 @@ export class AnagraphicDriverComponent implements OnInit, OnDestroy {
       }
     });
     return res;
-  }
+  } */
 }

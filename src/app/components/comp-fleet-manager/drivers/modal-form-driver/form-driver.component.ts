@@ -1,6 +1,7 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CountryCallingCode } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
@@ -18,6 +19,9 @@ import { ModalOTPComponent } from '../../register-page/modal-otp/modal-otp.compo
   ]
 })
 export class FormDriverComponent implements OnInit, OnDestroy {
+  @Input() driver: Driver;
+  @Input() fleetManagerId: number;
+  @Input() cellularRequired: boolean;
   public FormGroup: FormGroup;
   public roleDriver: boolean;
   public verifyOtp = false;
@@ -26,7 +30,8 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
 
   constructor(
-    public dialogRef: MatDialogRef<FormDriverComponent>,
+    /* public dialogRef: MatDialogRef<FormDriverComponent>, */
+    private router: Router,
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private driverService: DriverService,
@@ -34,15 +39,18 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private snackBar: SnackBar,
     @Inject('authService') private authService,
-    @Inject(MAT_DIALOG_DATA) public data: { driver: Driver, fleetManagerId: number, cellularRequired: boolean }) {
+    /* @Inject(MAT_DIALOG_DATA) public data: { driver: Driver, fleetManagerId: number, cellularRequired: boolean } */) {
+    this.driver = this.router.getCurrentNavigation()?.extras.state?.driver as Driver;
+    this.fleetManagerId = this.router.getCurrentNavigation()?.extras.state?.fleetManagerId as number;
+    this.cellularRequired = this.router.getCurrentNavigation()?.extras.state?.cellularRequired as boolean;
     this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
   }
 
   ngOnInit(): void {
-    if (this.data.driver) {
+    if (this.driver) {
       this.FormGroup = this.formBuilder.group({
-        CtrlName: [this.data.driver.name, Validators.required],
-        CtrlSurname: [this.data.driver.surname, Validators.required],
+        CtrlName: [this.driver.name, Validators.required],
+        CtrlSurname: [this.driver.surname, Validators.required],
         CtrlMail: [this.findContactValue(3), Validators.email]
       });
     } else {
@@ -52,7 +60,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
         CtrlMail: ['', Validators.email]
       });
     }
-    if (this.data.cellularRequired) {
+    if (this.cellularRequired) {
       this.FormGroup.addControl('CtrlCell', this.formBuilder.control('', Validators.required));
     }
   }
@@ -61,20 +69,6 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     this.subscription.forEach(subscription => {
       subscription.unsubscribe();
     });
-  }
-
-  public addDriver(): void {
-    const newDriver = new Driver();
-    newDriver.name = this.FormGroup.get('CtrlName').value;
-    newDriver.surname = this.FormGroup.get('CtrlSurname').value;
-    newDriver.contacts = [];
-    const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
-    newDriver.contacts.push(mail);
-    this.driverService.addDriver(newDriver, this.data.fleetManagerId).subscribe(
-      () => null,
-      () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
-      () => { this.snackBar.showMessage('DRIVERS.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
-    );
   }
 
   public modalOTP(): void {
@@ -101,8 +95,25 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     ));
   }
 
+  public addDriver(): void {
+    const newDriver = new Driver();
+    newDriver.name = this.FormGroup.get('CtrlName').value;
+    newDriver.surname = this.FormGroup.get('CtrlSurname').value;
+    newDriver.contacts = [];
+    const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
+    newDriver.contacts.push(mail);
+    this.driverService.addDriver(newDriver, this.fleetManagerId).subscribe(
+      () => null,
+      () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
+      () => {
+        this.snackBar.showMessage('DRIVERS.ADD_SUCCESS', 'INFO');
+        this.router.navigate(['fleet-manager-manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
+      }
+    );
+  }
+
   public editDriver(): void {
-    const editDriver = this.data.driver;
+    const editDriver = this.driver;
     const mobile = this.findContactValue(1);
     editDriver.name = this.FormGroup.get('CtrlName').value;
     editDriver.surname = this.FormGroup.get('CtrlSurname').value;
@@ -113,16 +124,22 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       const formCell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
       const cell = { code: 1, value: formCell };
       editDriver.contacts.push(cell);
-    }else if (mobile){
+    } else if (mobile) {
       const formCell = mobile;
       const cell = { code: 1, value: formCell };
       editDriver.contacts.push(cell);
     }
-    this.driverService.editDriver(editDriver, this.roleDriver ? null : editDriver.id, this.data.fleetManagerId).subscribe(
-      () => null,
-      () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
-      () => { this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }
-    );
+    this.driverService.editDriver(
+      editDriver,
+      this.roleDriver ? null : editDriver.id,
+      this.roleDriver ? null : this.fleetManagerId).subscribe(
+        () => null,
+        () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
+        () => {
+          this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO');
+          this.router.navigate(['fleet-manager-manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
+        }
+      );
   }
 
   public onCountryChange(evt: any): void {
@@ -131,7 +148,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
 
   private findContactValue(code: number): string {
     let res = '';
-    this.data.driver.contacts.find(contact => {
+    this.driver.contacts.find(contact => {
       if (contact.code === code) {
         res = contact.value;
       }

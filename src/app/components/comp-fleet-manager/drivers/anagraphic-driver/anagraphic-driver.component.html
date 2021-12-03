@@ -1,4 +1,4 @@
-<mat-card>
+<!-- <mat-card>
     <mat-card-title fxLayout="row" fxLayoutAlign="center center">
         {{'FLEET-MANAGER.MESSAGE_EDIT_ANAGRAPHIC' | translate}}
     </mat-card-title>
@@ -39,4 +39,7 @@
             </button>
         </div>
     </mat-card-content>
-</mat-card>
+</mat-card> -->
+<div *ngIf="driver">
+    <app-form-driver [driver]="driver" [fleetManagerId]="driver.fleetManagerId" [cellularRequired]="false"></app-form-driver>
+</div>

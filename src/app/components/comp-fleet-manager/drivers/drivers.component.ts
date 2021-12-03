@@ -22,7 +22,7 @@ export class DriversComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   public Search: FormGroup;
-  public fleetManager: FleetManager;
+  public fleetManagerId: number;
   public dataSource = new MatTableDataSource<Driver>();
   public displayedColumns = ['name', 'surname', 'e-mail', 'mobile', 'action'];
   public complete = true;
@@ -35,7 +35,7 @@ export class DriversComponent implements OnInit, OnDestroy {
     private snackBar: SnackBar,
     private driverService: DriverService,
     private formBuilder: FormBuilder) {
-    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    this.fleetManagerId = this.router.getCurrentNavigation()?.extras.state?.fleetManagerId as number;
   }
 
   ngOnInit(): void {
@@ -55,7 +55,7 @@ export class DriversComponent implements OnInit, OnDestroy {
     this.complete = false;
     const keyword = this.Search.get('CtrlSearch').value;
     this.subscription.push(
-      this.driverService.getDrivers(keyword, this.fleetManager?.id).subscribe(
+      this.driverService.getDrivers(keyword, this.fleetManagerId).subscribe(
         data => {
           this.dataSource.data = data;
           this.dataSource.sort = this.sort;
@@ -69,7 +69,7 @@ export class DriversComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(FormDriverComponent, {
       width: '90%',
       height: '90%',
-      data: { driver: null, fleetManagerId: this.fleetManager?.id }
+      data: { driver: null, fleetManagerId: this.fleetManagerId }
     });
     dialogRef.afterClosed().subscribe((add) => {
       if (add) {
@@ -83,7 +83,7 @@ export class DriversComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(FormDriverComponent, {
       width: '90%',
       height: '90%',
-      data: { driver: dRiver, fleetManagerId: this.fleetManager?.id }
+      data: { driver: dRiver, fleetManagerId: this.fleetManagerId }
     });
     dialogRef.afterClosed().subscribe((edit) => {
       if (edit) {
@@ -102,7 +102,7 @@ export class DriversComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-        this.driverService.deleteDriver(idDriver, this.fleetManager?.id).subscribe(
+        this.driverService.deleteDriver(idDriver, this.fleetManagerId).subscribe(
           () => this.snackBar.showMessage('DRIVERS.DELETE_SUCCESS', 'INFO'),
           () => null,
           () => {
@@ -115,12 +115,12 @@ export class DriversComponent implements OnInit, OnDestroy {
 
   public associationVehicle(IdDriver: number): void {
     this.subscription.push(
-      this.driverService.getVehiclesByDriver(IdDriver, this.fleetManager?.id).subscribe(
+      this.driverService.getVehiclesByDriver(IdDriver, this.fleetManagerId).subscribe(
         vehicles => {
           const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
             width: '80%',
             height: '80%',
-            data: {driverVehicle: vehicles, idDriver: IdDriver, fleetManageId: this.fleetManager?.id},
+            data: {driverVehicle: vehicles, idDriver: IdDriver, fleetManageId: this.fleetManagerId},
             autoFocus: false
           });
         }));
