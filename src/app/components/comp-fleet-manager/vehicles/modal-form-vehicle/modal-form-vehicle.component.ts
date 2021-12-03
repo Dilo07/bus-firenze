@@ -30,7 +30,7 @@ export class ModalFormVehicleComponent implements OnInit {
     // se ci sono dati è un edit form altrimenti è un add form
     if (this.data.vehicle) {
       this.FormGroup = this.formBuilder.group({
-        CtrlLpn: [this.data.vehicle.lpn, Validators.required],
+        CtrlLpn: [this.data.vehicle.lpn, Validators.pattern('^[A-Za-z0-9]+$')],
         CtrlLpnNat: [this.data.vehicle.lpnNat, Validators.required],
         CtrlEuroClass: [this.data.vehicle.euroClass, Validators.min(1)],
         CtrlNumAxis: [this.data.vehicle.numAxis, Validators.min(1)],
@@ -38,8 +38,8 @@ export class ModalFormVehicleComponent implements OnInit {
       });
     } else {
       this.FormGroup = this.formBuilder.group({
-        CtrlLpn: ['', Validators.required],
-        CtrlLpnNat: [''],
+        CtrlLpn: ['', Validators.pattern('^[A-Za-z0-9]+$')],
+        CtrlLpnNat: ['', Validators.required],
         CtrlEuroClass: ['', Validators.min(1)],
         CtrlNumAxis: ['', Validators.min(1)],
         CtrlMaxWeight: ['', Validators.min(1)]

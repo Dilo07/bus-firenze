@@ -26,6 +26,7 @@
                         <input matInput type="text" formControlName="CtrlLpnNat" style="opacity: 0.5" readonly>
                         <span [ngClass]="'flag-icon flag-icon-' + data.vehicle.lpnNat.toLowerCase()"></span>
                     </span>
+                    <mat-error> {{'VEHICLE.INSERT LPN NAT' | translate}}</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">

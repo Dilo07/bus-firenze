@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ObuService } from 'src/app/services/obu.service';
@@ -26,24 +27,26 @@ import { Obu } from '../../domain/bus-firenze-domain';
 })
 export class ModalPlateComponent implements OnInit {
   public nations = Nations;
-  public CtrlLpn: string;
-  public CtrlLpnNat: string;
+  public FormGroup: FormGroup;
   private subscription: Subscription[] = [];
 
   constructor(
+    private formBuilder: FormBuilder,
     private obuService: ObuService,
     public dialogRef: MatDialogRef<ModalPlateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { Obu: Obu, lpn: string, lpnNat: string }
   ) { }
 
   ngOnInit(): void {
-    this.CtrlLpn = this.data.lpn;
-    this.CtrlLpnNat = this.data.lpnNat;
+    this.FormGroup = this.formBuilder.group({
+      CtrlLpn: [this.data.lpn, Validators.pattern('^[A-Za-z0-9]+$')],
+      CtrlLpnNat: [this.data.lpnNat, Validators.required]
+    });
   }
 
   public changePlate(): void {
-    const lpn = this.CtrlLpn;
-    const nat = this.CtrlLpnNat;
+    const lpn = this.FormGroup.get('CtrlLpn').value;
+    const nat = this.FormGroup.get('CtrlLpnNat').value;
     this.subscription.push(this.obuService.changePlate(this.data.Obu.obuId, this.data.Obu.vehicleId, lpn, nat).subscribe(
       () => {},
       () => { this.dialogRef.close(false); },

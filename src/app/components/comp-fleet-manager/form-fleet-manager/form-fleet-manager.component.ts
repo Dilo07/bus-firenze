@@ -165,9 +165,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }else if (this.dialCode !== phoneNumber.countryCallingCode){ // caso edit fleet
       formCell = '+' + this.dialCode + phoneNumber.nationalNumber;
     }
-    const cell = { code: 1, value: formCell };
+    const cell = { code: 1, value: formCell.replace(/\s/g, '') }; // toglie gli spazi
 
-    console.log(cell);
     fleetManager.contacts.push(cell, office, mail);
     return fleetManager;
   }

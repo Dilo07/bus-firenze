@@ -10,6 +10,7 @@ import { ModalObuComponent } from './modal-obu/modal-obu.component';
 import { ObuComponent } from './obu.component';
 import { ModalPlateComponent } from './modal-plate/modal-plate.component';
 import { VehicleDocumentComponent } from './vehicle-document/vehicle-document.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { VehicleDocumentComponent } from './vehicle-document/vehicle-document.co
     FormsModule,
     ReactiveFormsModule,
     ManageObuRoutingModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    PdfViewerModule
   ]
 })
 export class ManageObuModule { }

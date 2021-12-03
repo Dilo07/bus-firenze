@@ -35,6 +35,7 @@
     "flag-icon-css": "^4.1.5",
     "intl-tel-input": "17.0.15",
     "libphonenumber-js": "1.9.43",
+    "ng2-pdf-viewer": "7.0.1",
     "ng2-tel-input": "2.3.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
