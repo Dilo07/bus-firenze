@@ -25,6 +25,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public verifyOtp = false;
   public dialCode: CountryCallingCode = '39';
   public selectedFile: File;
+  public nationForm = true;
 
   private subscription: Subscription[] = [];
 
@@ -80,6 +81,18 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     this.subscription.forEach(subscription => {
       subscription.unsubscribe();
     });
+  }
+
+  public changeFormNat(): void{
+    if (!this.nationForm){
+      this.FormGroup.controls.CtrlCF.setValidators(null);
+      this.FormGroup.controls.CtrlpIva.setValidators(null);
+    }else{
+      this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
+      this.FormGroup.controls.CtrlpIva.setValidators(Validators.required);
+    }
+    this.FormGroup.controls.CtrlCF.updateValueAndValidity();
+    this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
   }
 
   public onCountryChange(evt: any): void{
@@ -160,7 +173,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public modalOTP(): void {
-    const Cell = this.FormGroup.get('CtrlCell').value;
+    const Cell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
     const lang = this.translateService.currentLang;
     this.subscription.push(this.registerService.getOtpCode(Cell, lang).subscribe(
       code => {

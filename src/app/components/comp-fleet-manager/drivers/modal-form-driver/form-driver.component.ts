@@ -28,6 +28,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   public dialCode: CountryCallingCode = '39';
 
   private subscription: Subscription[] = [];
+  private cellForm: string;
 
   constructor(
     private router: Router,
@@ -74,14 +75,23 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   }
 
   public modalOTP(): void {
-    const Cell = '+' + this.dialCode + parsePhoneNumber(this.FormGroup.get('CtrlCell').value).nationalNumber;
+    if (this.cellularRequired){
+      this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
+    }else{
+      if (this.FormGroup.get('CtrlCell').value.charAt(0) === '+'){ // se c'è già un dial code prende solo il numero senza dial code
+        const natNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value).nationalNumber;
+        this.cellForm = '+' + this.dialCode + natNumber;
+      }else{
+        this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
+      }
+    }
     const lang = this.translateService.currentLang;
-    this.subscription.push(this.registerService.getOtpCode(Cell, lang).subscribe(
+    this.subscription.push(this.registerService.getOtpCode(this.cellForm, lang).subscribe(
       code => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',
           height: '50%',
-          data: { otp: code, cell: Cell },
+          data: { otp: code, cell: this.cellForm },
           autoFocus: false
         });
         dialogRef.afterClosed().subscribe(
@@ -121,8 +131,9 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     editDriver.surname = this.FormGroup.get('CtrlSurname').value;
     editDriver.contacts = [];
     const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
-    editDriver.contacts.push(mail);
-    if (this.FormGroup.get('CtrlCell')?.value) {
+    const cell = { code: 1, value: this.cellForm ? this.cellForm : mobile };
+    editDriver.contacts.push(mail, cell);
+    /* if (this.FormGroup.get('CtrlCell')?.value) {
       const formMobile = this.FormGroup.get('CtrlCell').value;
       let formCell: string;
       let natNumber: NationalNumber;
@@ -138,7 +149,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       const formCell = mobile;
       const cell = { code: 1, value: formCell };
       editDriver.contacts.push(cell);
-    }
+    } */
     this.driverService.editDriver(
       editDriver,
       this.roleDriver ? null : editDriver.id,

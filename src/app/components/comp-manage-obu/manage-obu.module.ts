@@ -9,13 +9,15 @@ import { ManageObuRoutingModule } from './manage-obu-routing';
 import { ModalObuComponent } from './modal-obu/modal-obu.component';
 import { ObuComponent } from './obu.component';
 import { ModalPlateComponent } from './modal-plate/modal-plate.component';
+import { VehicleDocumentComponent } from './vehicle-document/vehicle-document.component';
 
 
 @NgModule({
   declarations: [
     ObuComponent,
     ModalObuComponent,
-    ModalPlateComponent
+    ModalPlateComponent,
+    VehicleDocumentComponent
   ],
   imports: [
     CommonModule,
