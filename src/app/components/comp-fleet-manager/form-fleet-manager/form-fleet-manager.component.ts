@@ -120,14 +120,14 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed().subscribe((resp) => {
         if (resp) {
           const newFleetManager = this.generateFleetManager();
-          this.subscription.push(this.registerService.registerFleet(newFleetManager).subscribe(
+          this.subscription.push(this.registerService.registerFleet(this.selectedFile, newFleetManager).subscribe(
             () => { this.router.navigate(['../']); }
           ));
         }
       });
     } else {
       const newFleetManager = this.generateFleetManager();
-      this.subscription.push(this.fleetManagerService.insertFleetManager(newFleetManager).subscribe(
+      this.subscription.push(this.fleetManagerService.insertFleetManager(this.selectedFile, newFleetManager).subscribe(
         () => { this.router.navigate(['../fleet-manager-manage']); },
       ));
     }

@@ -33,7 +33,7 @@ export class FleetManagerComponent implements OnInit {
   public complete = true;
   public validFleet: boolean;
   public manageFleet: boolean;
-  public roleMovyon: boolean;
+  public roleOpMovyon: boolean;
 
   private offset = 0;
   private limit = 10;
@@ -51,7 +51,7 @@ export class FleetManagerComponent implements OnInit {
     @Inject('authService') private authService) { }
 
   ngOnInit(): void {
-    this.roleMovyon = this.authService.getUserRoles().includes(ROLES.MOVYON);
+    this.roleOpMovyon = this.authService.getUserRoles().includes(ROLES.OPER_MOVYON);
     this.validFleet = this.router.url === '/fleet-manager-valid';
     this.manageFleet = this.router.url === '/fleet-manager-manage';
     this.Search = this.formBuilder.group({

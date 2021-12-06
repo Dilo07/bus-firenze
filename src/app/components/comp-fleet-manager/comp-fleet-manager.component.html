@@ -63,7 +63,7 @@
 							<button mat-icon-button matTooltip="Cancella" (click)="deleteFleetManager(element.id)">
 								<mat-icon style="color: red;">delete</mat-icon>
 							</button>
-							<button mat-icon-button matTooltip="Autisti" [routerLink]="['drivers']"
+							<button *ngIf="!roleOpMovyon" mat-icon-button matTooltip="Autisti" [routerLink]="['drivers']"
 								[state]="{fleetManagerId: element.id}">
 								<mat-icon style="color: #0066CC;">airline_seat_recline_normal</mat-icon>
 							</button>

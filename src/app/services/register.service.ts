@@ -18,8 +18,11 @@ export class RegisterService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  registerFleet(fleetManager: FleetManager): Observable<void> {
-    return this.http.post<void>(this.apiUrl + '/register', fleetManager)
+  registerFleet(file: File, fleetManager: FleetManager): Observable<void> {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('metadata', JSON.stringify(fleetManager));
+    return this.http.post<void>(this.apiUrl + '/register', formData)
       .pipe(catchError(err => { throw err; }));
   }
 }

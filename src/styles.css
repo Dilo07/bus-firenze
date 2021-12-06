@@ -44,6 +44,14 @@ mat-card-content {
     }
 }
 
+/* paginator on mobile */
+
+@media(max-width: 470px) {
+    .mat-paginator-range-label {
+        margin: 0 10px 0 10px !important;
+    }
+}
+
 /* npt-template style */
 
 .topbar {

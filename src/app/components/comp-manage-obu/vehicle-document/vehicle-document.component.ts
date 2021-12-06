@@ -50,7 +50,7 @@ export class VehicleDocumentComponent implements OnInit {
   public getVehiclesInstaller(associated: boolean): void {
     const keyword = this.Search.get('CtrlSearch').value;
     this.complete = false;
-    this.subscription.push(this.vehicleService.getVehicles(associated, keyword).subscribe(
+    this.subscription.push(this.vehicleService.getVehiclesIstalled(associated, keyword).subscribe(
       (data) => {
         this.vehicleList.data = data;
         this.vehicleList.sort = this.sort;

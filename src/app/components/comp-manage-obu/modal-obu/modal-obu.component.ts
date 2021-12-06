@@ -4,7 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { Subscription } from 'rxjs';
 import { ObuService } from 'src/app/services/obu.service';
-import { Obu } from '../../domain/bus-firenze-domain';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 
 @Component({

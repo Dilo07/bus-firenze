@@ -72,4 +72,14 @@ export class VehicleService {
     return this.http.get<Vehicle>(this.apiUrl + url + '/vehicle/' + obuId)
       .pipe(catchError(err => { throw err; }));
   }
+
+  getVehiclesIstalled(upload: boolean, keyword?: string): Observable<Vehicle[]>{
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ keyword, upload })
+    };
+    return this.http.get<Vehicle[]>(this.apiUrl + '/vehicles/installed', options)
+      .pipe(catchError(err => { throw err; }));
+
+  }
 }

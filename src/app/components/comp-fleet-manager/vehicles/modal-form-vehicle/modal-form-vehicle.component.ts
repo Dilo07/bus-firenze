@@ -34,7 +34,8 @@ export class ModalFormVehicleComponent implements OnInit {
         CtrlLpnNat: [this.data.vehicle.lpnNat, Validators.required],
         CtrlEuroClass: [this.data.vehicle.euroClass, Validators.min(1)],
         CtrlNumAxis: [this.data.vehicle.numAxis, Validators.min(1)],
-        CtrlMaxWeight: [this.data.vehicle.maxWeight, Validators.min(1)]
+        CtrlMaxWeight: [this.data.vehicle.maxWeight, Validators.min(1)],
+        CtrlConsent: ['']
       });
     } else {
       this.FormGroup = this.formBuilder.group({
@@ -42,7 +43,9 @@ export class ModalFormVehicleComponent implements OnInit {
         CtrlLpnNat: ['', Validators.required],
         CtrlEuroClass: ['', Validators.min(1)],
         CtrlNumAxis: ['', Validators.min(1)],
-        CtrlMaxWeight: ['', Validators.min(1)]
+        CtrlMaxWeight: ['', Validators.min(1)],
+        CtrlContract: ['', Validators.required],
+        CtrlConsent: [false]
       });
     }
   }
