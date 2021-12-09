@@ -158,6 +158,7 @@
         "INSERT_OBU": "Insert a Obu",
         "MISSING_UPLOAD": "Missing upload file",
         "ALL": "All vehicles",
+        "UPLOAD_SUCCESS": "File uploaded correctly",
         "ATTENTION_PLATE1": "Attention: Will be remove the vehicle with plate",
         "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number."
     },

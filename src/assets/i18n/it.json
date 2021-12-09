@@ -160,6 +160,7 @@
         "INSERT_OBU": "Inserisci un Obu",
         "MISSING_UPLOAD": "File da caricare",
         "ALL": "Tutti i veicoli",
+        "UPLOAD_SUCCESS": "File caricato correttamente",
         "ATTENTION_PLATE1": "Attenzione: verrà rimosso il veicolo con targa",
         "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita."
     },

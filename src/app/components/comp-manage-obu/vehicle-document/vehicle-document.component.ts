@@ -73,7 +73,7 @@ export class VehicleDocumentComponent implements OnInit {
       this.obuService.uploadObuDocument(obuId, vehicleId, this.selectedFile).subscribe(
         data => console.log(data),
         () => null,
-        () => { this.getVehiclesInstaller(); this.snackBar.showMessage('UPLOAD_CORRECT', 'INFO'); }
+        () => { this.getVehiclesInstaller(); this.snackBar.showMessage('OBU.UPLOAD_SUCCESS', 'INFO'); }
       );
     }
   }
