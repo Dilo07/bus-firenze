@@ -5,12 +5,12 @@
 			[autoresize]="true" [show-borders]="true">
 		</pdf-viewer>
 	</span>
-	<ng-template #image>
-		<img class="img-responsive" src="src.url" alt="imgDoc">
-	</ng-template>
 	<button mat-icon-button (click)="viewDoc = false">
 		<mat-icon>close</mat-icon>
 	</button>
+	<ng-template #image>
+		<img class="img-responsive" [src]="src.url" alt="imgDoc">
+	</ng-template>
 </div>
 <ng-template #body>
 	<mat-card>

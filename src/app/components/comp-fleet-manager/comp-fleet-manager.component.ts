@@ -35,8 +35,7 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
     height: 98% !important;
   }
   .img-responsive {
-    width: 100%;
-    max-width: 400px;
+    max-width: 40%;
     height: auto;
   }
   `]
@@ -54,7 +53,7 @@ export class FleetManagerComponent implements OnInit {
   public manageFleet: boolean;
   public roleOpMovyon: boolean;
   public viewDoc = false;
-  public src: {type: string, url: string} = { type: '', url: ''};
+  public src: {type: string, url: string | ArrayBuffer} = { type: '', url: ''};
 
   private offset = 0;
   private limit = 10;
@@ -168,16 +167,19 @@ export class FleetManagerComponent implements OnInit {
   public getFleetDocument(fleetManagerId: number, fileId: number): void{
     this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(
       data => {
-        console.log(data);
         if (data.type === 'application/pdf'){
           const url = window.URL.createObjectURL(data);
           this.src.url = url;
           this.src.type = data.type;
           this.viewDoc = true;
         }else{
-          this.src.url = data;
-          this.src.type = data.type;
-          this.viewDoc = true;
+          const reader = new FileReader();
+          reader.readAsDataURL(data);
+          reader.onload = () => {
+            this.src.url = reader.result;
+            this.src.type = data.type;
+            this.viewDoc = true;
+          };
         }
       },
       () => this.complete = true,
