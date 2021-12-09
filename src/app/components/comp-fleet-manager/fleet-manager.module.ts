@@ -23,6 +23,7 @@ import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.com
 import { AssociationDriversVehiclesComponent } from './drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { AnagraphicDriverComponent } from './drivers/anagraphic-driver/anagraphic-driver.component';
 import { Ng2TelInputModule } from 'ng2-tel-input';
+import { AssociationVehiclesComponent } from './drivers/association-vehicles/association-vehicles.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
     DriversComponent,
     FormDriverComponent,
     AssociationDriversVehiclesComponent,
-    AnagraphicDriverComponent
+    AnagraphicDriverComponent,
+    AssociationVehiclesComponent
   ],
   imports: [
     CommonModule,

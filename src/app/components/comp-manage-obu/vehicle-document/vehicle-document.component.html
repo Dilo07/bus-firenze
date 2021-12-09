@@ -53,7 +53,7 @@
 							<mat-icon>find_in_page</mat-icon>
 						</button>
 						<input style="display: none" type="file" #fileInput accept="application/pdf"
-							(change)="uploadFile($event)">
+							(change)="uploadFile($event, element.obuId, element.id)">
 						<button mat-icon-button style="color: #0066CC;" (click)="fileInput.click()">
 							<mat-icon>upgrade</mat-icon>
 						</button>

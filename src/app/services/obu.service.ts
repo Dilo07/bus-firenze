@@ -40,4 +40,11 @@ export class ObuService {
     return this.http.put<Vehicle>(this.apiUrl + '/' + id + '/vehicle/' + vehicle + '/plate/' + plate + '/nat/' + nat, '')
       .pipe(catchError(err => { throw err; }));
   }
+
+  uploadObuDocument(obuId: number, vehicleId: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(this.apiUrl + '/obu/' + obuId + '/vehicle/' + vehicleId + '/upload', formData)
+      .pipe(catchError(err => { throw err; }));
+  }
 }

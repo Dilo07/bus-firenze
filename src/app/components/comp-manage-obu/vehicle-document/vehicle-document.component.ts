@@ -4,13 +4,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { ObuService } from 'src/app/services/obu.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { Vehicle } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-vehicle-document',
   templateUrl: './vehicle-document.component.html',
-  styles: [ `
+  styles: [`
   .viewPDF {
     opacity: 1;
     z-index: 2;
@@ -37,7 +38,8 @@ export class VehicleDocumentComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private vehicleService: VehicleService
+    private vehicleService: VehicleService,
+    private obuService: ObuService
   ) { }
 
   ngOnInit(): void {
@@ -60,8 +62,13 @@ export class VehicleDocumentComponent implements OnInit {
       () => this.complete = true));
   }
 
-  public uploadFile(event: any): void{
+  public uploadFile(event: any, obuId: number, vehicleId: number): void {
     this.selectedFile = event.target.files[0];
+    if (this.selectedFile.type === 'application/pdf') {
+      this.obuService.uploadObuDocument(obuId, vehicleId, this.selectedFile).subscribe(
+        data => console.log(data)
+      );
+    }
   }
 
 }

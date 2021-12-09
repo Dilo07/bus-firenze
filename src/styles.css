@@ -11,13 +11,13 @@ mat-card-content {
 .example-container {
     display: flex;
     flex-direction: column;
-    max-height: 500px;
+    max-height: 550px;
     min-width: 200px;
 }
 
 .mat-table {
     overflow: auto;
-    max-height: 500px;
+    max-height: 550px;
     background-color: beige; 
 }
 

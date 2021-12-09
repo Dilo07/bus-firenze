@@ -25,7 +25,8 @@
         "Vehicle-document": "Documents",
         "Appointment": "Appointments",
         "Add-appointment": "Add",
-        "Manage-appointment": "Manage"
+        "Manage-appointment": "Manage",
+        "Association-vehicles": "Associated vehicles"
     },
     "ACCOUNT": {
         "PROFILE": "Profile",

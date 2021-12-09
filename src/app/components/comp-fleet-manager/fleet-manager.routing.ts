@@ -6,6 +6,7 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { AnagraphicFleetManagerComponent } from './anagraphic-fleet-manager/anagraphic-fleet-manager.component';
 import { FleetManagerComponent } from './comp-fleet-manager.component';
 import { AnagraphicDriverComponent } from './drivers/anagraphic-driver/anagraphic-driver.component';
+import { AssociationVehiclesComponent } from './drivers/association-vehicles/association-vehicles.component';
 import { DriversComponent } from './drivers/drivers.component';
 import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
 import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manager.component';
@@ -42,6 +43,10 @@ const routes: Routes = [
     path: 'anagraphic-driver',
     component: AnagraphicDriverComponent, canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.DRIVER] }
   },
+  {
+    path: 'association-driver',
+    component: AssociationVehiclesComponent, canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.DRIVER] }
+  }
 ];
 
 @NgModule({

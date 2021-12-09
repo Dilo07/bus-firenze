@@ -20,6 +20,16 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
   styles: [`
   table { width: 100%; background-color: beige; }
   mat-card { z-index: 2;}
+  @media(min-width: 1180px) {
+    .mat-column-id { max-width: 5%}
+    .mat-column-name { max-width: 8%; margin-right: 1%;}
+    .mat-column-surname { max-width: 8%; margin-right: 1%;}
+    .mat-column-e-mail { max-width: 18%}
+    .mat-column-companyName { max-width: 18%}
+    .mat-column-city { max-width: 10%}
+    .mat-column-district { max-width: 10%}
+    .mat-column-actions { max-width: 20%; display: table-column;}
+  }
   `]
 })
 export class FleetManagerComponent implements OnInit {

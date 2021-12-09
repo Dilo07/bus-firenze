@@ -15,84 +15,107 @@
 				</button>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id"
-				matSortDirection="asc" (matSortChange)="sortData($event)">
-				<ng-container matColumnDef="id">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </th>
-					<td mat-cell *matCellDef="let element"> {{element.id}} </td>
-				</ng-container>
+			<div class="mat-elevation-z8 example-container">
+				<mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
+					(matSortChange)="sortData($event)">
+					<ng-container matColumnDef="id">
+						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">id</span>
+							{{element.id}}
+						</mat-cell>
+					</ng-container>
 
-				<ng-container matColumnDef="name">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> name </th>
-					<td mat-cell *matCellDef="let element"> {{ element.name}} </td>
-				</ng-container>
+					<ng-container matColumnDef="name">
+						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> name </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">name</span>
+							{{ element.name}}
+						</mat-cell>
+					</ng-container>
 
-				<ng-container matColumnDef="surname">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> surname </th>
-					<td mat-cell *matCellDef="let element"> {{ element.surname}} </td>
-				</ng-container>
+					<ng-container matColumnDef="surname">
+						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> surname </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">surname</span>
+							{{ element.surname}}
+						</mat-cell>
+					</ng-container>
 
-				<ng-container matColumnDef="e-mail">
-					<th mat-header-cell *matHeaderCellDef> e-mail </th>
-					<td mat-cell *matCellDef="let element"> {{ findContactValue(element, 3)}} </td>
-				</ng-container>
+					<ng-container matColumnDef="e-mail">
+						<mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">e-mail</span>
+							{{ findContactValue(element, 3)}}
+						</mat-cell>
+					</ng-container>
 
-				<ng-container matColumnDef="companyName">
-					<th mat-header-cell *matHeaderCellDef> companyName </th>
-					<td mat-cell *matCellDef="let element"> {{ element.companyName}} </td>
-				</ng-container>
+					<ng-container matColumnDef="companyName">
+						<mat-header-cell *matHeaderCellDef> companyName </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">companyName</span>
+							{{ element.companyName}}
+						</mat-cell>
+					</ng-container>
 
-				<ng-container matColumnDef="city">
-					<th mat-header-cell *matHeaderCellDef> city </th>
-					<td mat-cell *matCellDef="let element"> {{ element.city}} </td>
-				</ng-container>
+					<ng-container matColumnDef="city">
+						<mat-header-cell *matHeaderCellDef> city </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">city</span>
+							{{ element.city}}
+						</mat-cell>
+					</ng-container>
 
-				<ng-container matColumnDef="district">
-					<th mat-header-cell *matHeaderCellDef> district </th>
-					<td mat-cell *matCellDef="let element"> {{ element.district}} </td>
-				</ng-container>
+					<ng-container matColumnDef="district">
+						<mat-header-cell *matHeaderCellDef> district </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">district</span>
+							{{ element.district}}
+						</mat-cell>
+					</ng-container>
 
-				<ng-container matColumnDef="actions">
-					<th mat-header-cell *matHeaderCellDef> </th>
-					<td mat-cell *matCellDef="let element" style="text-align: end;">
-						<span *ngIf="manageFleet">
-							<button mat-icon-button matTooltip="Edit" [routerLink]="['form-Fleet']"
-								[state]="{fleetManager: element}">
-								<mat-icon style="color: #0066CC;">edit</mat-icon>
-							</button>
-							<button mat-icon-button matTooltip="Cancella" (click)="deleteFleetManager(element.id)">
-								<mat-icon style="color: red;">delete</mat-icon>
-							</button>
-							<button *ngIf="!roleOpMovyon" mat-icon-button matTooltip="Autisti" [routerLink]="['drivers']"
-								[state]="{fleetManagerId: element.id}">
-								<mat-icon style="color: #0066CC;">airline_seat_recline_normal</mat-icon>
-							</button>
-							<button mat-icon-button matTooltip="Veicoli" [routerLink]="['vehicles']"
-								[state]="{fleetManager: element}">
-								<mat-icon style="color: #0066CC;">directions_car</mat-icon>
-							</button>
-							<button mat-icon-button matTooltip="Real time" [routerLink]="['../real-time']"
-								[state]="{fleetManager: element}">
-								<mat-icon style="color: #0066CC;">place</mat-icon>
-							</button>
-						</span>
-						<span *ngIf="validFleet">
-							<button mat-icon-button matTooltip="Valid" (click)="validateFleet(element.id, true)">
-								<mat-icon style="color: green;">done</mat-icon>
-							</button>
-							<button mat-icon-button matTooltip="Rifiuta" (click)="validateFleet(element.id, false)">
-								<mat-icon style="color: red;">clear</mat-icon>
-							</button>
-						</span>
-					</td>
-				</ng-container>
+					<ng-container matColumnDef="actions">
+						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
+						<mat-cell *matCellDef="let element" style="text-align: end;">
+							<span *ngIf="manageFleet">
+								<button mat-icon-button matTooltip="Edit" [routerLink]="['form-Fleet']"
+									[state]="{fleetManager: element}">
+									<mat-icon style="color: #0066CC;">edit</mat-icon>
+								</button>
+								<button mat-icon-button matTooltip="Cancella" (click)="deleteFleetManager(element.id)">
+									<mat-icon style="color: red;">delete</mat-icon>
+								</button>
+								<button *ngIf="!roleOpMovyon" mat-icon-button matTooltip="Autisti"
+									[routerLink]="['drivers']" [state]="{fleetManagerId: element.id}">
+									<mat-icon style="color: #0066CC;">airline_seat_recline_normal</mat-icon>
+								</button>
+								<button mat-icon-button matTooltip="Veicoli" [routerLink]="['vehicles']"
+									[state]="{fleetManager: element}">
+									<mat-icon style="color: #0066CC;">directions_car</mat-icon>
+								</button>
+								<button mat-icon-button matTooltip="Real time" [routerLink]="['../real-time']"
+									[state]="{fleetManager: element}">
+									<mat-icon style="color: #0066CC;">place</mat-icon>
+								</button>
+							</span>
+							<span *ngIf="validFleet">
+								<button mat-icon-button matTooltip="Valid" (click)="validateFleet(element.id, true)">
+									<mat-icon style="color: green;">done</mat-icon>
+								</button>
+								<button mat-icon-button matTooltip="Rifiuta" (click)="validateFleet(element.id, false)">
+									<mat-icon style="color: red;">clear</mat-icon>
+								</button>
+							</span>
+						</mat-cell>
+					</ng-container>
 
-				<tr mat-header-row *matHeaderRowDef="displayedColumns"
-					[style.display]="dataSource.data.length === 0 ? 'none' : '' "></tr>
-				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-			</table>
-			<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"
-				(page)="pageChanged($event)"></mat-paginator>
+					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
+						[style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+					<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+				</mat-table>
+			</div>
+			<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
+				[pageSizeOptions]="[5, 10, 25]" (page)="pageChanged($event)"></mat-paginator>
 			<div *ngIf="dataSource.data.length === 0 && complete">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>
 		</div>
 	</mat-card-content>
