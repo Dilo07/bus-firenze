@@ -102,7 +102,8 @@
         "INSERT_DISTRICT": "Inserisci una Provincia",
         "INSERT_POSTAL_CODE": "Inserisci un CAP",
         "VEHICLESIZE": "N° Veicoli",
-        "CONTACT": "Contatto"
+        "CONTACT": "Contatto",
+        "ERROR_TYPE": "Il tipo del file inserito non è corretto. (file accettati: PDF, jpeg, png)"
     },
     "VEHICLE": {
         "TITLE": "Veicoli",
@@ -160,6 +161,8 @@
         "INSERT_OBU": "Inserisci un Obu",
         "MISSING_UPLOAD": "File da caricare",
         "ALL": "Tutti i veicoli",
+        "VIEW_FILE": "Visualizza file",
+        "UPLOAD_FILE": "Carica file",
         "UPLOAD_SUCCESS": "File caricato correttamente",
         "ATTENTION_PLATE1": "Attenzione: verrà rimosso il veicolo con targa",
         "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita."

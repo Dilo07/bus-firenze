@@ -11,6 +11,7 @@ import { FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
 import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
+import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -31,9 +32,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private registerService: RegisterService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
+    private snackBar: SnackBar,
+    private registerService: RegisterService,
     private translateService: TranslateService,
     private fleetManagerService: FleetManagerService) {
     this.data = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
@@ -196,7 +198,12 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public uploadFile(event: any): void{
-    this.selectedFile = event.target.files[0];
+    const type = event.target.files[0].type;
+    if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png'){
+      this.selectedFile = event.target.files[0];
+    }else{
+      this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR');
+    }
   }
 
   private fiscaleCodeValidator(control: AbstractControl): { [key: string]: boolean } | null {

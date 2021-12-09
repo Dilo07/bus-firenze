@@ -100,7 +100,8 @@
         "INSERT_DISTRICT": "Insert a District",
         "INSERT_POSTAL_CODE": "Insert a Postal Code",
         "VEHICLESIZE": "# Vehicles",
-        "CONTACT": "Contact"
+        "CONTACT": "Contact",
+        "ERROR_TYPE": "The type file is incorrect. (accepted file: PDF, jpeg, png)"
     },
     "VEHICLE": {
         "TITLE": "Vehicles",
@@ -158,6 +159,8 @@
         "INSERT_OBU": "Insert a Obu",
         "MISSING_UPLOAD": "Missing upload file",
         "ALL": "All vehicles",
+        "VIEW_FILE": "View file",
+        "UPLOAD_FILE": "Upload file",
         "UPLOAD_SUCCESS": "File uploaded correctly",
         "ATTENTION_PLATE1": "Attention: Will be remove the vehicle with plate",
         "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number."

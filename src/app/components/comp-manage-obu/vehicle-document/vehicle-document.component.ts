@@ -18,7 +18,10 @@ import { Vehicle } from '../../domain/bus-firenze-domain';
     opacity: 1;
     z-index: 2;
   }
-
+  :host ::ng-deep .ng2-pdf-viewer-container {
+    width: 98% !important;
+    height: 98% !important;
+  }
   .contentOpacity{
     opacity: 0.3;
     z-index: 1;
@@ -34,7 +37,7 @@ export class VehicleDocumentComponent implements OnInit {
   public displayedColumns = ['id', 'plate', 'nat', 'euroClass', 'obuId', 'actions'];
   public selectedFile: File;
   public viewPDF = false;
-  public src = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
+  public src = '';
 
   private subscription: Subscription[] = [];
 
@@ -79,12 +82,15 @@ export class VehicleDocumentComponent implements OnInit {
   }
 
   public getObuDocument(obuId: number, fileId: number): void {
+    this.complete = false;
     this.obuService.getObuDocument(obuId, fileId).subscribe(
       (data: HttpResponse<Blob>) => {
         const url = window.URL.createObjectURL(data.body);
         this.src = url;
         this.viewPDF = true;
-      }
+      },
+      () => this.complete = true,
+      () => this.complete = true
     );
   }
 

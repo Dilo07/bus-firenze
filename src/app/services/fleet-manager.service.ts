@@ -56,6 +56,15 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  getFleetDocument(fleetManagerId: number, fileId: number): Observable<any> {
+    const options = {
+      /* observe: 'response' as 'body', */
+      responseType: 'blob' as 'blob'
+    };
+    return this.http.get(this.apiUrl + '/' + fleetManagerId + '/upload/' + fileId, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   // appointments
 
   getAppointmentList(hasAppointment: boolean, onlyActive: boolean): Observable<CompleteFleetManager[]> {

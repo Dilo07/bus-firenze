@@ -30,6 +30,15 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
     .mat-column-district { max-width: 10%}
     .mat-column-actions { max-width: 20%; display: table-column;}
   }
+  :host ::ng-deep .ng2-pdf-viewer-container {
+    width: 98% !important;
+    height: 98% !important;
+  }
+  .img-responsive {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
   `]
 })
 export class FleetManagerComponent implements OnInit {
@@ -44,6 +53,8 @@ export class FleetManagerComponent implements OnInit {
   public validFleet: boolean;
   public manageFleet: boolean;
   public roleOpMovyon: boolean;
+  public viewDoc = false;
+  public src: {type: string, url: string} = { type: '', url: ''};
 
   private offset = 0;
   private limit = 10;
@@ -137,11 +148,11 @@ export class FleetManagerComponent implements OnInit {
   }
 
   public validateFleet(id: number, valid: boolean): void {
-    this.fleetManagerService.validInvalidFleetManager(id, valid).subscribe(
+    this.subscription.push(this.fleetManagerService.validInvalidFleetManager(id, valid).subscribe(
       () => this.snackBar.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
       () => null,
       () => this.callGetFleetManager()
-    );
+    ));
   }
 
   public findContactValue(fleetManager: FleetManager, code: number): string {
@@ -152,6 +163,26 @@ export class FleetManagerComponent implements OnInit {
       }
     });
     return res;
+  }
+
+  public getFleetDocument(fleetManagerId: number, fileId: number): void{
+    this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(
+      data => {
+        console.log(data);
+        if (data.type === 'application/pdf'){
+          const url = window.URL.createObjectURL(data);
+          this.src.url = url;
+          this.src.type = data.type;
+          this.viewDoc = true;
+        }else{
+          this.src.url = data;
+          this.src.type = data.type;
+          this.viewDoc = true;
+        }
+      },
+      () => this.complete = true,
+      () => this.complete = true
+    ));
   }
 
   public sortData(event: {active: string, direction: string}): void {

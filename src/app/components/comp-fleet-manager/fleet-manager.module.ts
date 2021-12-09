@@ -24,6 +24,7 @@ import { AssociationDriversVehiclesComponent } from './drivers/modal-association
 import { AnagraphicDriverComponent } from './drivers/anagraphic-driver/anagraphic-driver.component';
 import { Ng2TelInputModule } from 'ng2-tel-input';
 import { AssociationVehiclesComponent } from './drivers/association-vehicles/association-vehicles.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { AssociationVehiclesComponent } from './drivers/association-vehicles/ass
     TranslateModule,
     NptMapModule,
     FleetManagerRoutingModule,
-    Ng2TelInputModule
+    Ng2TelInputModule,
+    PdfViewerModule
   ],
   exports: [FormFleetManagerComponent]
 })
