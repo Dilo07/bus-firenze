@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DriverService } from 'src/app/services/driver.service';
 
 @Component({
   selector: 'app-association-vehicles',
@@ -8,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssociationVehiclesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private driverService: DriverService
+  ) { }
 
   ngOnInit(): void {
+    this.driverService.getVehiclesByDriver().subscribe(
+      data => console.log(data)
+    );
   }
 
 }

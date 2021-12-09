@@ -156,6 +156,8 @@
         "REMOVE_SUCCESS": "Obu remove correctly",
         "REMOVE CONFIRM": "Are you sure of remove this Obu?",
         "INSERT_OBU": "Insert a Obu",
+        "MISSING_UPLOAD": "Missing upload file",
+        "ALL": "All vehicles",
         "ATTENTION_PLATE1": "Attention: Will be remove the vehicle with plate",
         "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number."
     },

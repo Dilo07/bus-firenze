@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { ObuService } from 'src/app/services/obu.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { Vehicle } from '../../domain/bus-firenze-domain';
 
 @Component({
@@ -38,21 +40,24 @@ export class VehicleDocumentComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private snackBar: SnackBar,
     private vehicleService: VehicleService,
     private obuService: ObuService
   ) { }
 
   ngOnInit(): void {
     this.Search = this.formBuilder.group({
-      CtrlSearch: ['']
+      CtrlSearch: [''],
+      onlyUpload: [true]
     });
-    this.getVehiclesInstaller(true);
+    this.getVehiclesInstaller();
   }
 
-  public getVehiclesInstaller(associated: boolean): void {
+  public getVehiclesInstaller(): void {
     const keyword = this.Search.get('CtrlSearch').value;
+    const onlyUpload = this.Search.get('onlyUpload').value;
     this.complete = false;
-    this.subscription.push(this.vehicleService.getVehiclesIstalled(associated, keyword).subscribe(
+    this.subscription.push(this.vehicleService.getVehiclesIstalled(onlyUpload, keyword).subscribe(
       (data) => {
         this.vehicleList.data = data;
         this.vehicleList.sort = this.sort;
@@ -66,9 +71,21 @@ export class VehicleDocumentComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     if (this.selectedFile.type === 'application/pdf') {
       this.obuService.uploadObuDocument(obuId, vehicleId, this.selectedFile).subscribe(
-        data => console.log(data)
+        data => console.log(data),
+        () => null,
+        () => { this.getVehiclesInstaller(); this.snackBar.showMessage('UPLOAD_CORRECT', 'INFO'); }
       );
     }
+  }
+
+  public getObuDocument(obuId: number, fileId: number): void {
+    this.obuService.getObuDocument(obuId, fileId).subscribe(
+      (data: HttpResponse<Blob>) => {
+        const url = window.URL.createObjectURL(data.body);
+        this.src = url;
+        this.viewPDF = true;
+      }
+    );
   }
 
 }

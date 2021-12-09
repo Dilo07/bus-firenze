@@ -41,10 +41,20 @@ export class ObuService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  getObuDocument(obuId: number, fileId: number): Observable<any> {
+    const options = {
+      observe: 'response' as 'body',
+      Accept: 'application/pdf',
+      responseType: 'blob' as 'blob'
+    };
+    return this.http.get(this.apiUrl + '/' + obuId + '/upload/' + fileId, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   uploadObuDocument(obuId: number, vehicleId: number, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post(this.apiUrl + '/obu/' + obuId + '/vehicle/' + vehicleId + '/upload', formData)
+    return this.http.put(this.apiUrl + '/' + obuId + '/vehicle/' + vehicleId + '/upload', formData)
       .pipe(catchError(err => { throw err; }));
   }
 }

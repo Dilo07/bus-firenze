@@ -158,6 +158,8 @@
         "REMOVE_SUCCESS": "Obu rimosso correttamente",
         "REMOVE CONFIRM": "Sei sicuro di voler rimuovere questo Obu?",
         "INSERT_OBU": "Inserisci un Obu",
+        "MISSING_UPLOAD": "File da caricare",
+        "ALL": "Tutti i veicoli",
         "ATTENTION_PLATE1": "Attenzione: verrà rimosso il veicolo con targa",
         "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita."
     },

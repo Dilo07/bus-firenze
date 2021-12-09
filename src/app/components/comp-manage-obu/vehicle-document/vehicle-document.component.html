@@ -1,11 +1,15 @@
-<div *ngIf="viewPDF" > <!-- [ngClass]="viewPDF ? 'viewPDF' : ''" -->
-	<button mat-icon-button (click)="viewPDF = false"><mat-icon>close</mat-icon></button>
-	<pdf-viewer [src]="src" [rotation]="0" [original-size]="false" [show-all]="true" [fit-to-page]="false"
-		[zoom]="0.4" [zoom-scale]="'page-width'" [stick-to-page]="false" [render-text]="true"
-		[external-link-target]="'top'" [autoresize]="true" [show-borders]="true">
+<div *ngIf="viewPDF">
+	<!-- [ngClass]="viewPDF ? 'viewPDF' : ''" -->
+	<button mat-icon-button (click)="viewPDF = false">
+		<mat-icon>close</mat-icon>
+	</button>
+	<pdf-viewer [src]="src" [rotation]="0" [original-size]="false" [show-all]="true" [fit-to-page]="false" [zoom]="0.4"
+		[zoom-scale]="'page-width'" [stick-to-page]="false" [render-text]="true" [external-link-target]="'top'"
+		[autoresize]="true" [show-borders]="true">
 	</pdf-viewer>
 </div>
-<mat-card *ngIf="!viewPDF"> <!-- [ngClass]="viewPDF ? 'contentOpacity' : ''" -->
+<mat-card *ngIf="!viewPDF">
+	<!-- [ngClass]="viewPDF ? 'contentOpacity' : ''" -->
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Documenti</mat-card-title>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
@@ -14,9 +18,12 @@
 					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>
 					<input matInput type="search" formControlName="CtrlSearch" placeholder="cerca" autocomplete="off">
 				</mat-form-field>
-				<button mat-icon-button>
+				<button mat-icon-button (click)="getVehiclesInstaller()">
 					<mat-icon matPrefix>search</mat-icon>
 				</button>
+				<mat-slide-toggle formControlName="onlyUpload" (change)="getVehiclesInstaller()">
+					{{(Search.controls['onlyUpload'].value ? 'OBU.MISSING_UPLOAD' : 'OBU.ALL') | translate}}
+				</mat-slide-toggle>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<table mat-table [dataSource]="vehicleList" style="background-color: beige;" class="mat-elevation-z8"
@@ -49,12 +56,14 @@
 				<ng-container matColumnDef="actions">
 					<th mat-header-cell *matHeaderCellDef> </th>
 					<td mat-cell *matCellDef="let element" style="text-align: end;">
-						<button mat-icon-button style="color: #0066CC;" (click)="viewPDF = !viewPDF">
+						<button mat-icon-button *ngIf="element.fileId" style="color: #0066CC;"
+							(click)="getObuDocument(element.obuId, element.fileId)">
 							<mat-icon>find_in_page</mat-icon>
 						</button>
 						<input style="display: none" type="file" #fileInput accept="application/pdf"
 							(change)="uploadFile($event, element.obuId, element.id)">
-						<button mat-icon-button style="color: #0066CC;" (click)="fileInput.click()">
+						<button mat-icon-button *ngIf="!element.fileId" style="color: #0066CC;"
+							(click)="fileInput.click()">
 							<mat-icon>upgrade</mat-icon>
 						</button>
 					</td>
