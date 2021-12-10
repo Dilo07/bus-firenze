@@ -35,7 +35,8 @@ export class ModalFormVehicleComponent implements OnInit {
         CtrlEuroClass: [this.data.vehicle.euroClass, Validators.min(1)],
         CtrlNumAxis: [this.data.vehicle.numAxis, Validators.min(1)],
         CtrlMaxWeight: [this.data.vehicle.maxWeight, Validators.min(1)],
-        CtrlConsent: ['']
+        CtrlContract: [this.data.vehicle.contractType, Validators.required],
+        CtrlConsent: [this.data.vehicle.allowContacted]
       });
     } else {
       this.FormGroup = this.formBuilder.group({
@@ -57,6 +58,8 @@ export class ModalFormVehicleComponent implements OnInit {
     newVehicle.euroClass = this.FormGroup.get('CtrlEuroClass').value;
     newVehicle.numAxis = this.FormGroup.get('CtrlNumAxis').value;
     newVehicle.maxWeight = this.FormGroup.get('CtrlMaxWeight').value;
+    newVehicle.contractType = this.FormGroup.get('CtrlContract').value;
+    newVehicle.allowContacted = this.FormGroup.get('CtrlConsent').value;
     this.subscription.push(this.vehicleService.addVehicle(newVehicle, this.data?.fleetManagerId).subscribe(
       () => null,
       (err) => {
@@ -73,6 +76,7 @@ export class ModalFormVehicleComponent implements OnInit {
     editVehicle.vehicle.euroClass = this.FormGroup.get('CtrlEuroClass').value;
     editVehicle.vehicle.numAxis = this.FormGroup.get('CtrlNumAxis').value;
     editVehicle.vehicle.maxWeight = this.FormGroup.get('CtrlMaxWeight').value;
+    editVehicle.vehicle.allowContacted = this.FormGroup.get('CtrlConsent').value;
     this.subscription.push(this.vehicleService.updateVehicle(editVehicle.vehicle, this.data?.fleetManagerId).subscribe(
       () => null,
       (err) => {

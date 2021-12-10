@@ -24,8 +24,8 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
     .mat-column-id { max-width: 5%}
     .mat-column-name { max-width: 8%; margin-right: 1%;}
     .mat-column-surname { max-width: 8%; margin-right: 1%;}
-    .mat-column-e-mail { max-width: 18%}
-    .mat-column-companyName { max-width: 18%}
+    .mat-column-e-mail { max-width: 20%}
+    .mat-column-companyName { max-width: 15%}
     .mat-column-city { max-width: 10%}
     .mat-column-district { max-width: 10%}
     .mat-column-actions { max-width: 20%; display: table-column;}
@@ -46,7 +46,7 @@ export class FleetManagerComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<FleetManager>();
   public fleetManagerList: FleetManager[] = [];
-  public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'city', 'district', 'actions'];
+  public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'fiscalCode', 'city', 'district', 'actions'];
   public Search: FormGroup;
   public complete = true;
   public validFleet: boolean;

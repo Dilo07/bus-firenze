@@ -12,7 +12,8 @@ export const getFleetManager: FleetManager[] = [
         city: 'Calenzano',
         district: 'Firenze',
         cap: '50041',
-        contacts: [{code: 1, value: '33312443'}]
+        contacts: [{code: 1, value: '33312443'}],
+        foreign: true
     }
 ];
 
@@ -30,6 +31,8 @@ export const getVehicles: Vehicle[] = [
         associationDate: new Date(),
         appointmentDate: new Date(),
         obuId: 'TEST',
-        hardware: 1
+        hardware: 1,
+        contractType: 'BUY',
+        allowContacted: true
     }
 ];

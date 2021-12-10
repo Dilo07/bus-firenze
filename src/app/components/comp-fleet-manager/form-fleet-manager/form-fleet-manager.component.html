@@ -11,14 +11,14 @@
         <div fxLayout="row" fxLayoutAlign="center" *ngIf="register">
             {{'FLEET-MANAGER.REGISTRATION_HEADER' | translate}}
         </div>
-        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
-            <label>Nazionalità</label>
-            <mat-radio-group [(ngModel)]="nationForm" (change)="changeFormNat()">
-                <mat-radio-button style="margin-right: 10px;" [value]="true">Italiana</mat-radio-button>
-                <mat-radio-button [value]="false">Straniera</mat-radio-button>
-            </mat-radio-group>
-        </div>
         <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+                <label>Nazionalità</label>
+                <mat-radio-group formControlName="CtrlForeign" (change)="changeFormNat()">
+                    <mat-radio-button style="margin-right: 10px;" [value]="false">Italiana</mat-radio-button>
+                    <mat-radio-button [value]="true">Straniera</mat-radio-button>
+                </mat-radio-group>
+            </div>
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.NAME' | translate}}</mat-label>
@@ -101,7 +101,8 @@
             </div>
         </form>
         <div fxLayout="row" fxLayoutAlign="center center">{{selectedFile?.name}}</div>
-        <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+            <button mat-raised-button color="primary">Scarica File</button>
             <input style="display: none" type="file" #fileInput accept="application/pdf, image/jpeg, image/png"
                 (change)="uploadFile($event)">
             <button mat-raised-button color="primary" (click)="fileInput.click()">

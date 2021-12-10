@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
   templateUrl: './form-fleet-manager.component.html',
   styleUrls: ['./form-fleet-manager.component.css']
 })
-export class FormFleetManagerComponent implements OnInit, OnDestroy {
+export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() register = false;
 
   public data: FleetManager;
@@ -26,7 +26,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public verifyOtp = false;
   public dialCode: CountryCallingCode = '39';
   public selectedFile: File;
-  public nationForm = true;
 
   private subscription: Subscription[] = [];
 
@@ -57,6 +56,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlCity: [this.data.city, Validators.required],
         CtrlDistrict: [this.data.district, Validators.required],
         CtrlCAP: [this.data.cap, Validators.required],
+        CtrlForeign: [this.data.foreign, Validators.required]
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
@@ -75,7 +75,17 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlCity: ['', Validators.required],
         CtrlDistrict: ['', Validators.required],
         CtrlCAP: ['', Validators.required],
+        CtrlForeign: ['', Validators.required]
       });
+    }
+    if (this.FormGroup.get('CtrlForeign').value) {
+      this.changeFormNat();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.FormGroup.get('CtrlForeign').value) {
+      this.changeFormNat();
     }
   }
 
@@ -85,11 +95,11 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     });
   }
 
-  public changeFormNat(): void{
-    if (!this.nationForm){
+  public changeFormNat(): void {
+    if (this.FormGroup.get('CtrlForeign').value) {
       this.FormGroup.controls.CtrlCF.setValidators(null);
       this.FormGroup.controls.CtrlpIva.setValidators(null);
-    }else{
+    } else {
       this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
       this.FormGroup.controls.CtrlpIva.setValidators(Validators.required);
     }
@@ -97,7 +107,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
   }
 
-  public onCountryChange(evt: any): void{
+  public onCountryChange(evt: any): void {
     this.dialCode = evt.dialCode;
   }
 
@@ -155,6 +165,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     fleetManager.city = this.FormGroup.get('CtrlCity').value;
     fleetManager.district = this.FormGroup.get('CtrlDistrict').value;
     fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
+    fleetManager.foreign = this.FormGroup.get('CtrlForeign').value;
     fleetManager.contacts = [];
 
     const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
@@ -162,9 +173,9 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
     let formCell = this.FormGroup.get('CtrlCell').value;
     const phoneNumber = parsePhoneNumber(formCell);
-    if (!phoneNumber){ // caso nuovo fleet o modifica cell
+    if (!phoneNumber) { // caso nuovo fleet o modifica cell
       formCell = '+' + this.dialCode + formCell;
-    }else if (this.dialCode !== phoneNumber.countryCallingCode){ // caso edit fleet
+    } else if (this.dialCode !== phoneNumber.countryCallingCode) { // caso edit fleet
       formCell = '+' + this.dialCode + phoneNumber.nationalNumber;
     }
     const cell = { code: 1, value: formCell.replace(/\s/g, '') }; // toglie gli spazi
@@ -197,11 +208,11 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     ));
   }
 
-  public uploadFile(event: any): void{
+  public uploadFile(event: any): void {
     const type = event.target.files[0].type;
-    if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png'){
+    if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png') {
       this.selectedFile = event.target.files[0];
-    }else{
+    } else {
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR');
     }
   }

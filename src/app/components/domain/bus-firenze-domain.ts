@@ -25,6 +25,7 @@ export class FleetManager {
     district: string;
     cap: string;
     contacts: Contact[];
+    foreign: boolean;
 }
 
 export interface Contact {
@@ -70,6 +71,8 @@ export class Vehicle {
     appointmentDate: Date;
     obuId: string;
     hardware: number;
+    contractType: 'BUY' | 'RNT';
+    allowContacted: boolean;
 }
 
 export class VehicleTripPersistence {
