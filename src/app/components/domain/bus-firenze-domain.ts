@@ -65,6 +65,7 @@ export class Vehicle {
     euroClass: number;
     europeanGroup: number;
     europeanGroupLabel: string;
+    expiresAt: Date;
     numAxis: number;
     maxWeight: number;
     associationDate: Date;
@@ -73,6 +74,7 @@ export class Vehicle {
     hardware: number;
     contractType: 'BUY' | 'RNT';
     allowContacted: boolean;
+    status: string;
 }
 
 export class VehicleTripPersistence {

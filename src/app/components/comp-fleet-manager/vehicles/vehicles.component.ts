@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { DriverService } from 'src/app/services/driver.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
+import { STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
 import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from '../drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
@@ -33,6 +34,7 @@ export class VehiclesComponent implements OnInit {
   public displayedColumns = ['id', 'plate', 'nat', 'euroClass', 'obuId', 'consent', 'actions'];
   public Search: FormGroup;
   public complete = true;
+  public statusVehicle = STATUS_VEHICLE;
 
   constructor(
     private router: Router,

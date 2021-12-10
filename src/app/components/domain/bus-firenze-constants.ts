@@ -16,3 +16,10 @@ export const Nations = [
     { value: 'PT' },
     { value: 'SI' }
 ];
+
+export const STATUS_VEHICLE = Object.freeze({
+    DELETED: 'DELETED',
+    TEMP: 'TEMP',
+    REGISTERED: 'REGISTERED',
+    UNKNOWN: 'UNKNOWN'
+});
