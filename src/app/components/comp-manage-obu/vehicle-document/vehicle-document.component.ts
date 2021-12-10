@@ -74,7 +74,7 @@ export class VehicleDocumentComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     if (this.selectedFile.type === 'application/pdf') {
       this.obuService.uploadObuDocument(obuId, vehicleId, this.selectedFile).subscribe(
-        data => console.log(data),
+        () => null,
         () => null,
         () => { this.getVehiclesInstaller(); this.snackBar.showMessage('OBU.UPLOAD_SUCCESS', 'INFO'); }
       );

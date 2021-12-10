@@ -123,7 +123,7 @@ export class ObuComponent implements OnInit, OnDestroy {
       if (data) {
         this.subscription.push(
           this.obuService.deleteObu(vehicleId).subscribe(
-            () => this.snackBar.showMessage('OBU.REMOVE_SUCCESS', 'ERROR'),
+            () => this.snackBar.showMessage('OBU.REMOVE_SUCCESS', 'INFO'),
             () => null,
             () => {
               this.resetSearchField();

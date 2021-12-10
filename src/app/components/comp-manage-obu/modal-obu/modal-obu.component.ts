@@ -14,7 +14,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
     /* max-height: 70vh; */
     /* width: 70%; */
     object-fit: contain;
-}
+  }
   `
   ]
 })
@@ -25,6 +25,7 @@ export class ModalObuComponent implements OnInit, OnDestroy {
   public validObu: boolean;
   public complete = true;
   public scannerEnabled = false;
+  public selectedFile: File;
 
   private subscription: Subscription[] = [];
   private isGunScanner = false;
@@ -36,7 +37,7 @@ export class ModalObuComponent implements OnInit, OnDestroy {
     private obuService: ObuService,
     private cdr: ChangeDetectorRef,
     private snackBar: SnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: {vehicleId: number, obuId: string, lpn: string, lpnNat: string}) { }
+    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number, obuId: number, lpn: string, lpnNat: string }) { }
 
   ngOnInit(): void {
     // se ci sono dati è un edit form altrimenti è un add form
@@ -70,7 +71,16 @@ export class ModalObuComponent implements OnInit, OnDestroy {
         this.snackBar.showMessage('OBU.ASSIGN_SUCCESS', 'INFO');
       },
       error => console.log(error),
-      () => this.dialogRef.close(true)));
+      () => {
+        if (this.selectedFile && this.selectedFile.type === 'application/pdf') {
+          this.obuService.uploadObuDocument(newObu, this.data.vehicleId, this.selectedFile).subscribe(
+            () => null,
+            () => null,
+            () => { this.snackBar.showMessage('OBU.UPLOAD_SUCCESS', 'INFO'); }
+          );
+        }
+        this.dialogRef.close(true);
+      }));
   }
 
   public changeObu(): void {
@@ -82,6 +92,15 @@ export class ModalObuComponent implements OnInit, OnDestroy {
       },
       error => console.log(error),
       () => this.dialogRef.close(true)));
+  }
+
+  public uploadFile(event: any): void {
+    const type = event.target.files[0]?.type;
+    if (type === 'application/pdf') {
+      this.selectedFile = event.target.files[0];
+    }else{
+      this.snackBar.showMessage('OBU.ERROR_TYPE', 'ERROR');
+    }
   }
 
   public cleanObu(): void {
@@ -138,7 +157,7 @@ export class ModalObuComponent implements OnInit, OnDestroy {
       const url = new URL(event);
       const value = url.searchParams.get('c');
       this.FormGroup.patchValue({
-        CtrlObuId: value.substr(1, 15)
+        CtrlObuId: value.substring(1, 15)
       });
     } else { // bar code
       this.FormGroup.patchValue({

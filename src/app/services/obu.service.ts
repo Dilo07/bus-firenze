@@ -21,12 +21,12 @@ export class ObuService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  addObu(id: string, vehicle: number): Observable<void> {
+  addObu(id: number, vehicle: number): Observable<void> {
     return this.http.put<void>(this.apiUrl + '/' + id + '/vehicle/' + vehicle, '')
       .pipe(catchError(err => { throw err; }));
   }
 
-  updateObu(id: string, vehicle: number, newId: string): Observable<void> {
+  updateObu(id: number, vehicle: number, newId: string): Observable<void> {
     return this.http.put<void>(this.apiUrl + '/' + id + '/vehicle/' + vehicle + '/change/' + newId, '')
       .pipe(catchError(err => { throw err; }));
   }

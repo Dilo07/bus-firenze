@@ -46,14 +46,14 @@ export class FleetManagerComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<FleetManager>();
   public fleetManagerList: FleetManager[] = [];
-  public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'fiscalCode', 'city', 'district', 'actions'];
+  public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'pIva', 'fiscalCode', 'city', 'district', 'actions'];
   public Search: FormGroup;
   public complete = true;
   public validFleet: boolean;
   public manageFleet: boolean;
   public roleOpMovyon: boolean;
   public viewDoc = false;
-  public src: {type: string, url: string | ArrayBuffer} = { type: '', url: ''};
+  public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
 
   private offset = 0;
   private limit = 10;
@@ -109,7 +109,7 @@ export class FleetManagerComponent implements OnInit {
     this.sessionService.setSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
   }
 
-  public pageChanged(event: {lengrh: number, pageIndex: number, pageSize: number, previousPageIndex: number}): void {
+  public pageChanged(event: { lengrh: number, pageIndex: number, pageSize: number, previousPageIndex: number }): void {
     this.offset = event.pageIndex;
     this.limit = event.pageSize;
     const currentSize = this.offset * this.limit;
@@ -147,11 +147,21 @@ export class FleetManagerComponent implements OnInit {
   }
 
   public validateFleet(id: number, valid: boolean): void {
-    this.subscription.push(this.fleetManagerService.validInvalidFleetManager(id, valid).subscribe(
-      () => this.snackBar.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
-      () => null,
-      () => this.callGetFleetManager()
-    ));
+    const dialogRef = this.dialog.open(ModalConfirmComponent, {
+      width: '50%',
+      height: '30%',
+      data: { text: valid ? 'FLEET-MANAGER.VALID_CONFIRM' : 'FLEET-MANAGER.INVALID_CONFIRM' },
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        this.subscription.push(this.fleetManagerService.validInvalidFleetManager(id, valid).subscribe(
+          () => this.snackBar.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
+          () => null,
+          () => this.callGetFleetManager()
+        ));
+      }
+    });
   }
 
   public findContactValue(fleetManager: FleetManager, code: number): string {
@@ -164,15 +174,15 @@ export class FleetManagerComponent implements OnInit {
     return res;
   }
 
-  public getFleetDocument(fleetManagerId: number, fileId: number): void{
+  public getFleetDocument(fleetManagerId: number, fileId: number): void {
     this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(
       data => {
-        if (data.type === 'application/pdf'){
+        if (data.type === 'application/pdf') {
           const url = window.URL.createObjectURL(data);
           this.src.url = url;
           this.src.type = data.type;
           this.viewDoc = true;
-        }else{
+        } else {
           const reader = new FileReader();
           reader.readAsDataURL(data);
           reader.onload = () => {
@@ -187,7 +197,7 @@ export class FleetManagerComponent implements OnInit {
     ));
   }
 
-  public sortData(event: {active: string, direction: string}): void {
+  public sortData(event: { active: string, direction: string }): void {
     this.columnOrder.active = event.active;
     this.columnOrder.direction = event.direction === 'asc' ? 1 : -1;
     this.refreshTable();

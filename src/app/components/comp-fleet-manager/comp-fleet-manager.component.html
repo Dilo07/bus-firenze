@@ -81,15 +81,25 @@
 							</mat-cell>
 						</ng-container>
 
-						<ng-container matColumnDef="district">
-							<mat-header-cell *matHeaderCellDef> district </mat-header-cell>
-							<mat-cell *matCellDef="let element">
+						<ng-container matColumnDef="district"> <!-- solo manage table -->
+							<mat-header-cell *matHeaderCellDef [style.display]="validFleet ? 'none' : ''"> district
+							</mat-header-cell>
+							<mat-cell *matCellDef="let element" [style.display]="validFleet ? 'none' : ''">
 								<span class="mobile-label">district</span>
 								{{ element.district}}
 							</mat-cell>
 						</ng-container>
 
-						<ng-container matColumnDef="fiscalCode">
+						<ng-container matColumnDef="pIva"> <!-- solo valid table -->
+							<mat-header-cell *matHeaderCellDef [style.display]="validFleet ? '' : 'none'"> pIva
+							</mat-header-cell>
+							<mat-cell *matCellDef="let element" [style.display]="validFleet ? '' : 'none'">
+								<span class="mobile-label">pIva</span>
+								{{ element.pIva}}
+							</mat-cell>
+						</ng-container>
+
+						<ng-container matColumnDef="fiscalCode"> <!-- solo valid table -->
 							<mat-header-cell *matHeaderCellDef [style.display]="validFleet ? '' : 'none'"> fiscalCode
 							</mat-header-cell>
 							<mat-cell *matCellDef="let element" [style.display]="validFleet ? '' : 'none'">
