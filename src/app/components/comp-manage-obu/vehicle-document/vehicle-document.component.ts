@@ -14,17 +14,9 @@ import { Vehicle } from '../../domain/bus-firenze-domain';
   selector: 'app-vehicle-document',
   templateUrl: './vehicle-document.component.html',
   styles: [`
-  .viewPDF {
-    opacity: 1;
-    z-index: 2;
-  }
   :host ::ng-deep .ng2-pdf-viewer-container {
     width: 98% !important;
     height: 98% !important;
-  }
-  .contentOpacity{
-    opacity: 0.3;
-    z-index: 1;
   }
   `]
 })

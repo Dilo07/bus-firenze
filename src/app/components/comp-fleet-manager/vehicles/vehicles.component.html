@@ -59,19 +59,17 @@
 				<ng-container matColumnDef="actions">
 					<th mat-header-cell *matHeaderCellDef> </th>
 					<td mat-cell *matCellDef="let element" style="text-align: end;">
-						<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button
-							matTooltip="scaduto il 
-							{{element.expiresAt.day + '/' + element.expiresAt.month + '/' + element.expiresAt.year }}">
-							<mat-icon style="color: red;">error</mat-icon>
+						<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button [disabled]="true">
+							<mat-icon style="color: red;" matTooltip="Il veicolo è scaduto in data
+							{{element.expiresAt.day + '/' + element.expiresAt.month + '/' + element.expiresAt.year }}">error</mat-icon>
 						</button>
-						<button *ngIf="element.status === statusVehicle.TEMP" mat-icon-button
-							matTooltip="Il veicolo scadrà il 
-							{{element.expiresAt.day + '/' + element.expiresAt.month + '/' + element.expiresAt.year }}">
-							<mat-icon style="color: #eed202">warning</mat-icon>
+						<button *ngIf="element.status === statusVehicle.TEMP" mat-icon-button [disabled]="true">
+							<mat-icon style="color: #eed202" matTooltip="Il veicolo scadrà in data
+							{{element.expiresAt.day + '/' + element.expiresAt.month + '/' + element.expiresAt.year }}">warning</mat-icon>
 						</button>
-						<button *ngIf="element.status === statusVehicle.UNKNOWN" mat-icon-button
-							matTooltip="Veicolo sconosciuto su Ines">
-							<mat-icon style="color: #9c8b0979">warning_amber</mat-icon>
+						<button *ngIf="element.status === statusVehicle.UNKNOWN" mat-icon-button [disabled]="true">
+							<mat-icon style="color: #9c8b0979" matTooltip="Veicolo sconosciuto su Ines">warning_amber
+							</mat-icon>
 						</button>
 						<button *ngIf="!element.deleted" mat-icon-button matTooltip="Edit"
 							(click)="editVehicle(element)">

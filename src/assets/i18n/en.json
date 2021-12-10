@@ -26,7 +26,10 @@
         "Appointment": "Appointments",
         "Add-appointment": "Add",
         "Manage-appointment": "Manage",
-        "Association-vehicles": "Associated vehicles"
+        "Association-vehicles": "Associated vehicles",
+        "Ticket": "Ticket",
+        "Manage-ticket": "Manage",
+        "Active-ticket": "Active now"
     },
     "ACCOUNT": {
         "PROFILE": "Profile",

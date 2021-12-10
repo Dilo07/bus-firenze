@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -38,7 +39,34 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
     max-width: 40%;
     height: auto;
   }
-  `]
+  `],
+  animations: [
+    trigger('slideInOut', [
+      state(
+        'on',
+        style({
+          'background-color': 'darkseagreen',
+          'z-index': '10',
+          padding: '6px',
+          'border-style': 'solid',
+          position: 'fixed',
+          right: '10%',
+          width: '50%',
+          height: '60%'
+        })
+      ),
+      state(
+        'off',
+        style({
+          'border-style': 'solid',
+          position: 'fixed',
+          right: '-60%',
+        })
+      ),
+      transition('on => off', animate('500ms')),
+      transition('off => on', animate('500ms')),
+    ]),
+  ],
 })
 export class FleetManagerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
@@ -52,7 +80,7 @@ export class FleetManagerComponent implements OnInit {
   public validFleet: boolean;
   public manageFleet: boolean;
   public roleOpMovyon: boolean;
-  public viewDoc = false;
+  public viewDoc: 'on' | 'off' = 'off';
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
 
   private offset = 0;
@@ -181,14 +209,14 @@ export class FleetManagerComponent implements OnInit {
           const url = window.URL.createObjectURL(data);
           this.src.url = url;
           this.src.type = data.type;
-          this.viewDoc = true;
+          this.viewDoc = 'on';
         } else {
           const reader = new FileReader();
           reader.readAsDataURL(data);
           reader.onload = () => {
             this.src.url = reader.result;
             this.src.type = data.type;
-            this.viewDoc = true;
+            this.viewDoc = 'on';
           };
         }
       },

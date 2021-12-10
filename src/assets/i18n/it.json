@@ -28,7 +28,10 @@
         "Appointment": "Appuntamenti",
         "Add-appointment": "Aggiungi",
         "Manage-appointment": "Gestisci",
-        "Association-vehicles": "Veicoli associati"
+        "Association-vehicles": "Veicoli associati",
+        "Ticket": "Contrassegni",
+        "Manage-ticket": "Gestisci",
+        "Active-ticket": "Attivi ora"
     },
     "ACCOUNT": {
         "PROFILE": "Profilo",

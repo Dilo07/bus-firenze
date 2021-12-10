@@ -1,5 +1,4 @@
 <div *ngIf="viewPDF">
-	<!-- [ngClass]="viewPDF ? 'viewPDF' : ''" -->
 	<pdf-viewer [src]="src" [rotation]="0" [original-size]="false" [show-all]="true" [fit-to-page]="false" [zoom]="0.5"
 		[zoom-scale]="'page-width'" [stick-to-page]="false" [render-text]="true" [external-link-target]="'top'"
 		[autoresize]="true" [show-borders]="true">
@@ -9,7 +8,6 @@
 	</button>
 </div>
 <mat-card *ngIf="!viewPDF">
-	<!-- [ngClass]="viewPDF ? 'contentOpacity' : ''" -->
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Documenti</mat-card-title>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">

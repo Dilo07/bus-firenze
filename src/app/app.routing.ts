@@ -45,6 +45,10 @@ const routes: Routes = [
   {
     path: 'repair-shop',
     loadChildren: () => import('./components/comp-repair-shop/repair-shop.module').then(m => m.RepairShopModule)
+  },
+  {
+    path: 'ticket',
+    loadChildren: () => import('./components/comp-ticket/ticket.module').then(m => m.TicketModule)
   }
 ];
 
