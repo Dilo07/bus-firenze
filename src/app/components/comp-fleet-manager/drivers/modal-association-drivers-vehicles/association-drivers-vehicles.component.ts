@@ -22,7 +22,7 @@ export class AssociationDriversVehiclesComponent implements OnInit {
     private driverService: DriverService,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<AssociationDriversVehiclesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { driverVehicle: DriverVehicle[], idVehicle: number, idDriver: number, fleetManageId: number }
+    @Inject(MAT_DIALOG_DATA) public data: { driverVehicle: DriverVehicle[], idVehicle: number, idDriver: number, fleetManagerId: number }
   ) { }
 
   ngOnInit(): void { }
@@ -45,21 +45,25 @@ export class AssociationDriversVehiclesComponent implements OnInit {
       }
     });
     if (this.arrayForDB.length > 0) {
-      if (this.data.idDriver) {
-        this.driverService.updateVehiclesByDriver(this.data.idDriver, this.arrayForDB, this.data.fleetManageId).subscribe(
-          () => this.snackBar.showMessage('DRIVERS.ASSOCIATION_SUCCESS', 'INFO'),
-          () => null,
-          () => this.dialogRef.close()
+      if (!this.data.idVehicle) {
+        this.driverService.updateVehiclesByDriver(this.arrayForDB, this.data.idDriver, this.data.fleetManagerId).subscribe(
+          () => {
+            this.snackBar.showMessage('DRIVERS.ASSOCIATION_SUCCESS', 'INFO');
+            this.dialogRef.close(true);
+          },
+          () => null
         );
       } else {
-        this.driverService.updateDriversByVehicle(this.data.idVehicle, this.arrayForDB, this.data.fleetManageId).subscribe(
-          () => this.snackBar.showMessage('DRIVERS.ASSOCIATION_SUCCESS', 'INFO'),
-          () => null,
-          () => this.dialogRef.close()
+        this.driverService.updateDriversByVehicle(this.data.idVehicle, this.arrayForDB, this.data.fleetManagerId).subscribe(
+          () => {
+            this.snackBar.showMessage('DRIVERS.ASSOCIATION_SUCCESS', 'INFO');
+            this.dialogRef.close(true);
+          },
+          () => null
         );
       }
     } else {
-      this.dialogRef.close();
+      this.dialogRef.close(false);
     }
   }
 

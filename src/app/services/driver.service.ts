@@ -95,12 +95,16 @@ export class DriverService {
     /* return of(this.driversByVehicle); */
   }
 
-  updateVehiclesByDriver(driverId: number, driverVehicle: DriverVehicle[], fleetManagerId?: number): Observable<void> {
+  updateVehiclesByDriver(driverVehicle: DriverVehicle[], driverId?: number, fleetManagerId?: number): Observable<void> {
     let urlFleet = '';
+    let urlDriver = '';
+    if (driverId) {
+      urlDriver = '/' + driverId;
+    }
     if (fleetManagerId) {
       urlFleet = '/' + fleetManagerId;
     }
-    return this.http.put<void>(this.apiUrl + urlFleet +  '/driver/' + driverId + '/vehicles/update', driverVehicle)
+    return this.http.put<void>(this.apiUrl + urlFleet +  '/driver' + urlDriver + '/vehicles/update', driverVehicle)
       .pipe(catchError(err => { throw err; }));
   }
 
