@@ -141,9 +141,11 @@ export class FormDriverComponent implements OnInit, OnDestroy {
         () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
         () => {
           this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO');
-          if (this.roleDriver) {
-            this.router.navigate(['dashboard']);
-          } else {
+          if (this.roleDriver && this.cellularRequired) {
+            this.router.navigate(['user-driver/anagraphic-driver']);
+            this.cellularRequired = false;
+          }
+          if (!this.roleDriver) {
             this.router.navigate(['fleet-manager-manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
           }
         }

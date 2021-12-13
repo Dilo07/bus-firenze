@@ -140,7 +140,8 @@
     "DRIVERS": {
         "TITLE": "Drivers",
         "NO_DATA": "Nobody drivers present",
-        "MESSAGE_NEW": "Insert new driver information",
+        "MESSAGE_NEW": "Insert new driver informations",
+        "MESSAGE_EDIT": "Edit the driver informations",
         "ASSOCIATION_VEHICLES": "Select the vehicles to be associated with the driver",
         "ASSOCIATION_DRIVERS": "select the drivers to be associated with the vehicle",
         "ASSOCIATION_SUCCESS": "Association correctly executed",

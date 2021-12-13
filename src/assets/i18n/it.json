@@ -143,6 +143,7 @@
         "TITLE": "Autisti",
         "NO_DATA": "Nessun autista presente",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Driver",
+        "MESSAGE_EDIT": "Modifica le informazioni del Driver",
         "ASSOCIATION_VEHICLES": "Seleziona i veicoli da associare al guidatore",
         "ASSOCIATION_DRIVERS": "Seleziona i guidatori da associare al veicolo",
         "ASSOCIATION_SUCCESS": "Associazione eseguita correttamente",

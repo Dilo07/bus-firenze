@@ -13,7 +13,7 @@ export class DriveGuard implements CanActivate {
     constructor(
         private driverService: DriverService,
         private router: Router,
-        @Inject('authService') private authService
+        @Inject('authService') private authService: any
     ) {
         this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
     }

@@ -1,6 +1,8 @@
 <mat-card>
     <mat-card-title fxLayout="row" fxLayoutAlign="center center">
-        <span *ngIf="!cellularRequired else insertCell">{{'DRIVERS.MESSAGE_NEW' | translate}}</span>
+        <span *ngIf="!cellularRequired else insertCell">
+            {{(driver ? 'DRIVERS.MESSAGE_EDIT' : 'DRIVERS.MESSAGE_NEW') | translate}}
+        </span>
         <ng-template #insertCell>
             <span style="color: red;">
                 Attenzione! E' necessario verificare il numero di cellulare
