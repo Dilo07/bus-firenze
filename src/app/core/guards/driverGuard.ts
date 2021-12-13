@@ -33,7 +33,9 @@ export class DriveGuard implements CanActivate {
                     }
                 }
             );
+            return true;
+        } else {
+            return true;
         }
-        return true;
     }
 }

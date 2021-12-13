@@ -124,3 +124,8 @@ export interface RepairShops {
     name_shop: string;
     address: string;
 }
+
+export interface DisplayName{
+    id: number;
+    displayName: string;
+}
