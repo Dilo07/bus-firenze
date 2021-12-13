@@ -9,6 +9,7 @@ import { DriverService } from 'src/app/services/driver.service';
 })
 export class DriveGuard implements CanActivate {
     private roleDriver: boolean;
+    private guard = true;
     constructor(
         private driverService: DriverService,
         private router: Router,
@@ -21,21 +22,22 @@ export class DriveGuard implements CanActivate {
         if (this.roleDriver) {
             this.driverService.getDriver().subscribe(
                 respDriver => {
-                    let res = null;
+                    let resp = null;
                     respDriver.contacts.find(contact => {
                         if (contact.code === 1) {
-                            res = contact.value;
+                            resp = contact.value;
                         }
                     });
-                    if (!res) { // in caso in cui il cellulare non è presente apre il form
+                    if (!resp) { // in caso in cui il cellulare non è presente apre il form
                         this.router.navigate(['user-driver/form-Driver'],
                             { state: { driver: respDriver, fleetManagerId: respDriver.fleetManagerId, cellularRequired: true } });
+                        this.guard = false;
+                    }else{
+                        this.guard = true;
                     }
                 }
             );
-            return true;
-        } else {
-            return true;
         }
+        return this.guard;
     }
 }

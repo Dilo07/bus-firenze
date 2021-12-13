@@ -75,13 +75,13 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   }
 
   public modalOTP(): void {
-    if (this.cellularRequired){
+    if (this.cellularRequired) {
       this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
-    }else{
-      if (this.FormGroup.get('CtrlCell').value.charAt(0) === '+'){ // se c'è già un dial code prende solo il numero senza dial code
+    } else {
+      if (this.FormGroup.get('CtrlCell').value.charAt(0) === '+') { // se c'è già un dial code prende solo il numero senza dial code
         const natNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value).nationalNumber;
         this.cellForm = '+' + this.dialCode + natNumber;
-      }else{
+      } else {
         this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
       }
     }
@@ -133,23 +133,6 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
     const cell = { code: 1, value: this.cellForm ? this.cellForm : mobile };
     editDriver.contacts.push(mail, cell);
-    /* if (this.FormGroup.get('CtrlCell')?.value) {
-      const formMobile = this.FormGroup.get('CtrlCell').value;
-      let formCell: string;
-      let natNumber: NationalNumber;
-      if (formMobile.charAt(0) === '+'){
-        natNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value).nationalNumber;
-        formCell = '+' + this.dialCode + natNumber;
-      }else{
-        formCell = '+' + this.dialCode + formMobile;
-      }
-      const cell = { code: 1, value: formCell };
-      editDriver.contacts.push(cell);
-    } else if (mobile) {
-      const formCell = mobile;
-      const cell = { code: 1, value: formCell };
-      editDriver.contacts.push(cell);
-    } */
     this.driverService.editDriver(
       editDriver,
       this.roleDriver ? null : editDriver.id,
@@ -158,7 +141,11 @@ export class FormDriverComponent implements OnInit, OnDestroy {
         () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
         () => {
           this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO');
-          this.router.navigate(['fleet-manager-manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
+          if (this.roleDriver) {
+            this.router.navigate(['dashboard']);
+          } else {
+            this.router.navigate(['fleet-manager-manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
+          }
         }
       );
   }
