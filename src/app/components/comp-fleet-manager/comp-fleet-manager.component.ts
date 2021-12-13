@@ -96,7 +96,7 @@ export class FleetManagerComponent implements OnInit {
     private fleetManagerService: FleetManagerService,
     private formBuilder: FormBuilder,
     private sessionService: SessionService,
-    @Inject('authService') private authService) { }
+    @Inject('authService') private authService: any) { }
 
   ngOnInit(): void {
     this.roleOpMovyon = this.authService.getUserRoles().includes(ROLES.OPER_MOVYON);

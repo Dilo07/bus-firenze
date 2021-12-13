@@ -38,7 +38,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     private registerService: RegisterService,
     private translateService: TranslateService,
     private snackBar: SnackBar,
-    @Inject('authService') private authService,
+    @Inject('authService') private authService: any,
   ) {
     this.driver = this.router.getCurrentNavigation()?.extras.state?.driver as Driver;
     this.fleetManagerId = this.router.getCurrentNavigation()?.extras.state?.fleetManagerId as number;

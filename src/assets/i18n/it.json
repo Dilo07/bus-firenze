@@ -225,6 +225,9 @@
         "NO_TO_ADD": "Nessun appuntamento da aggiungere",
         "NO_TO_MANAGE": "Nessun appuntamento da gestire"
     },
+    "TICKET": {
+        "NO_DATA": "Nessun veicolo presente"
+    },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",
         "GROUP2": "Trasporto merci <= 3,5t (classe N1)",

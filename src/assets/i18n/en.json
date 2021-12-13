@@ -223,6 +223,9 @@
         "NO_TO_ADD": "Nobody appointment to add",
         "NO_TO_MANAGE": "Nobody appointment to manage"
     },
+    "TICKET": {
+        "NO_DATA": "No vehicles present"
+    },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",
         "GROUP2": "Goods transport (class N1)",

@@ -3,12 +3,14 @@
 	<mat-card-content>
 		<button mat-button class="greenButtons" (click)="openModal()"> Associa</button>
 		<hr>
-		<h4  fxLayout="row" fxLayoutAlign="center"> Targhe associate - data associazione</h4>
-		<div *ngFor="let element of vehicles">
-			<div *ngIf="element.dateIns" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="30px">
+		<h4 fxLayout="row" fxLayoutAlign="center"> Targhe associate - data associazione</h4>
+		<div *ngFor="let element of vehiclesAssociated">
+			<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="30px">
 				<span>{{element.displayName}}</span>
 				<span>{{element.dateIns | date : 'dd/MM/yyyy'}}</span>
 			</div>
 		</div>
-    </mat-card-content>
+		<div fxLayout="row" fxLayoutAlign="center" *ngIf="vehiclesAssociated.length === 0"> Nessun veicolo associato
+		</div>
+	</mat-card-content>
 </mat-card>

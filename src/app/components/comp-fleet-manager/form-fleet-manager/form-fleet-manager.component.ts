@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
 import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
+import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -20,12 +21,13 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 })
 export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() register = false;
+  @Input() data: FleetManager;
 
-  public data: FleetManager;
   public FormGroup: FormGroup;
   public verifyOtp = false;
   public dialCode: CountryCallingCode = '39';
   public selectedFile: File;
+  public roleFleetManager: boolean;
 
   private subscription: Subscription[] = [];
 
@@ -36,8 +38,10 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
     private snackBar: SnackBar,
     private registerService: RegisterService,
     private translateService: TranslateService,
-    private fleetManagerService: FleetManagerService) {
+    private fleetManagerService: FleetManagerService,
+    @Inject('authService') private authService: any) {
     this.data = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    this.roleFleetManager = this.authService.getUserRoles().includes(ROLES.FLEETMNG);
   }
 
   ngOnInit(): void {
@@ -148,7 +152,10 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
   public updateFleetManager(): void {
     const fleetManagerEdit = this.generateFleetManager();
     this.subscription.push(this.fleetManagerService.updateFleetManager(fleetManagerEdit).subscribe(
-      () => { this.router.navigate(['../fleet-manager-manage']); }
+      () => {
+        this.snackBar.showMessage('FLEET-MANAGER.EDIT_SUCCESS', 'INFO');
+        this.router.navigate(['../fleet-manager-manage']);
+      }
     ));
   }
 

@@ -12,6 +12,7 @@ import { AssociationDriversVehiclesComponent } from '../modal-association-driver
 })
 export class AssociationVehiclesComponent implements OnInit {
   public vehicles: DriverVehicle[];
+  public vehiclesAssociated: DriverVehicle[] = [];
 
   constructor(
     private driverService: DriverService,
@@ -24,11 +25,14 @@ export class AssociationVehiclesComponent implements OnInit {
 
   private getVehiclesDriver(): void {
     this.driverService.getVehiclesByDriver().subscribe(
-      data => this.vehicles = data
+      data => {
+        this.vehicles = data;
+        this.vehiclesAssociated = this.vehicles.filter(vehicle => vehicle.dateIns);
+      }
     );
   }
 
-  openModal(): void {
+  public openModal(): void {
     const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
       width: '80%',
       height: '80%',

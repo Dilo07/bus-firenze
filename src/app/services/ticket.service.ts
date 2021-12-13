@@ -18,7 +18,7 @@ export class TicketService {
     if (isDriver) {
       url = '/' + 'driver';
     }
-    return this.http.get<DisplayName[]>(this.apiUrl + url + '/vehicles/ticket/')
+    return this.http.get<DisplayName[]>(this.apiUrl + url + '/ticket/vehicles/')
       .pipe(catchError(err => { throw err; }));
   }
 }
