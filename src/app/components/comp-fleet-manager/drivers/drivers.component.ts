@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,16 +17,20 @@ import { FormDriverComponent } from './modal-form-driver/form-driver.component';
   selector: 'app-drivers',
   templateUrl: './drivers.component.html',
   styles: [`
-  .mat-column-name { max-width: 20%;}
-  .mat-column-surname { max-width: 20%;}
-  .mat-column-e-mail { max-width: 20%;}
-  .mat-column-mobile { max-width: 20%;}
-  .mat-column-actions { max-width: 20%; display: table-column;}
+  @media(min-width: 1180px) {
+    .mat-column-name { max-width: 20%;}
+    .mat-column-surname { max-width: 20%;}
+    .mat-column-e-mail { max-width: 20%;}
+    .mat-column-mobile { max-width: 20%;}
+    .mat-column-actions { max-width: 20%; display: table-column;}
+  }
   `
   ]
 })
 export class DriversComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   public Search: FormGroup;
   public fleetManagerId: number;
@@ -65,6 +70,7 @@ export class DriversComponent implements OnInit, OnDestroy {
         data => {
           this.dataSource.data = data;
           this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
         },
         () => this.complete = true,
         () => this.complete = true

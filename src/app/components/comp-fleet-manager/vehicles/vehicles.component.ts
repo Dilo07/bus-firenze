@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DriverService } from 'src/app/services/driver.service';
@@ -24,17 +25,20 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   .obuDisactive{
     opacity: 0.8;
   }
-  .mat-column-id { max-width: 10%}
-  .mat-column-plate { max-width: 15%;}
-  .mat-column-nat { max-width: 5%}
-  .mat-column-euroClass { max-width: 10%;}
-  .mat-column-obuId { max-width: 20%;}
-  .mat-column-consent { max-width: 20%;}
-  .mat-column-actions { max-width: 20%; display: table-column;}
+  @media(min-width: 1180px) {
+    .mat-column-id { max-width: 10%}
+    .mat-column-plate { max-width: 15%;}
+    .mat-column-nat { max-width: 5%}
+    .mat-column-euroClass { max-width: 10%;}
+    .mat-column-obuId { max-width: 20%;}
+    .mat-column-consent { max-width: 20%;}
+    .mat-column-actions { max-width: 20%; display: table-column;}
+  }
   `]
 })
 export class VehiclesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public fleetManager: FleetManager;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
@@ -69,6 +73,7 @@ export class VehiclesComponent implements OnInit {
     this.vehicleService.getVehiclesById(onlyActive, this.fleetManager?.id, keyword).subscribe(data => {
       this.vehicleList.data = data;
       this.vehicleList.sort = this.sort;
+      this.vehicleList.paginator = this.paginator;
     },
       () => this.complete = true,
       () => this.complete = true);
