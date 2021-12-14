@@ -26,8 +26,8 @@ export class AssociationVehiclesComponent implements OnInit {
   private getVehiclesDriver(): void {
     this.driverService.getVehiclesByDriver().subscribe(
       data => {
-        this.vehicles = data;
-        this.vehiclesAssociated = this.vehicles.filter(vehicle => vehicle.dateIns);
+        this.vehicles = data; // tutti i veicoli
+        this.vehiclesAssociated = this.vehicles.filter(vehicle => vehicle.dateIns); // solo veicoli associati
       }
     );
   }

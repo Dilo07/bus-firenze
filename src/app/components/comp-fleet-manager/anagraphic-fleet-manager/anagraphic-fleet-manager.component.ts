@@ -18,7 +18,7 @@ export class AnagraphicFleetManagerComponent implements OnInit, OnDestroy {
 
   constructor(
     private fleetManagerService: FleetManagerService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.subscription.push(this.fleetManagerService.getFleetManagerInfo().subscribe(
@@ -27,8 +27,8 @@ export class AnagraphicFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-     this.subscription.forEach(subscription => {
+    this.subscription.forEach(subscription => {
       subscription.unsubscribe();
-     });
+    });
   }
 }

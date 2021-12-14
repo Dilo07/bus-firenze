@@ -15,7 +15,13 @@ import { FormDriverComponent } from './modal-form-driver/form-driver.component';
 @Component({
   selector: 'app-drivers',
   templateUrl: './drivers.component.html',
-  styles: [
+  styles: [`
+  .mat-column-name { max-width: 20%;}
+  .mat-column-surname { max-width: 20%;}
+  .mat-column-e-mail { max-width: 20%;}
+  .mat-column-mobile { max-width: 20%;}
+  .mat-column-actions { max-width: 20%; display: table-column;}
+  `
   ]
 })
 export class DriversComponent implements OnInit, OnDestroy {
@@ -24,7 +30,7 @@ export class DriversComponent implements OnInit, OnDestroy {
   public Search: FormGroup;
   public fleetManagerId: number;
   public dataSource = new MatTableDataSource<Driver>();
-  public displayedColumns = ['name', 'surname', 'e-mail', 'mobile', 'action'];
+  public displayedColumns = ['name', 'surname', 'e-mail', 'mobile', 'actions'];
   public complete = true;
 
   private subscription: Subscription[] = [];

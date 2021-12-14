@@ -31,20 +31,20 @@ export class AssociationDriversVehiclesComponent implements OnInit {
     this.arrayForDB = [];
     this.data.driverVehicle.forEach(element => {
       if (!element.status) {
-        // verifica gli status false, se li trova nei selezionati allora imposta a true e aggiunge
+        // verifica gli status false di ogni elemento, se li trova nei selezionati allora imposta a true e aggiunge
         if (this.selectedElement.find(selectedElement => element.id === selectedElement.id)) {
           element.status = true;
           this.arrayForDB.push(element);
         }
       } else {
-        // verifica gli status true, se non li trova nei selezionati allora imposta a false e aggiunge
+        // verifica gli status true di ogni elemento, se non li trova nei selezionati allora imposta a false e aggiunge
         if (!this.selectedElement.find(selectedElement => element.id === selectedElement.id)) {
           element.status = false;
           this.arrayForDB.push(element);
         }
       }
     });
-    if (this.arrayForDB.length > 0) {
+    if (this.arrayForDB.length > 0) { // se ci sono state modifiche chiama l'api altrimenti no
       if (!this.data.idVehicle) {
         this.driverService.updateVehiclesByDriver(this.arrayForDB, this.data.idDriver, this.data.fleetManagerId).subscribe(
           () => {

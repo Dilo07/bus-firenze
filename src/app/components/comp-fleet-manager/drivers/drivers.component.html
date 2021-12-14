@@ -56,24 +56,21 @@
 						</mat-cell>
 					</ng-container>
 
-					<ng-container matColumnDef="action">
+					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
-							<span>
-								<button mat-icon-button matTooltip="Edit" [routerLink]="['../form-Driver']"
-									[state]="{driver: element, fleetManagerId: fleetManagerId}">
-									<!-- (click)="editDriver(element)" -->
-									<mat-icon style="color: #0066CC;">edit</mat-icon>
-								</button>
-								<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
-									(click)="deleteDriver(element.id)">
-									<mat-icon style="color: red;">delete</mat-icon>
-								</button>
-								<button mat-icon-button matTooltip="associa veicoli"
-									(click)="associationVehicle(element.id)">
-									<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
-								</button>
-							</span>
+							<button mat-icon-button matTooltip="Edit" [routerLink]="['../form-Driver']"
+								[state]="{driver: element, fleetManagerId: fleetManagerId}">
+								<mat-icon style="color: #0066CC;">edit</mat-icon>
+							</button>
+							<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
+								(click)="deleteDriver(element.id)">
+								<mat-icon style="color: red;">delete</mat-icon>
+							</button>
+							<button mat-icon-button matTooltip="associa veicoli"
+								(click)="associationVehicle(element.id)">
+								<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
+							</button>
 						</mat-cell>
 					</ng-container>
 

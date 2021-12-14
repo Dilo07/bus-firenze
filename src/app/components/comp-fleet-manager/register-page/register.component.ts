@@ -6,7 +6,6 @@ import { TranslateService } from '@ngx-translate/core';
   styles: [``]
 })
 export class RegisterComponent implements OnInit {
-  public angular = false;
   public langs: string[];
 
   constructor(private translateService: TranslateService) { }

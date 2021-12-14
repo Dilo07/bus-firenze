@@ -79,7 +79,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
     } else {
       if (this.FormGroup.get('CtrlCell').value.charAt(0) === '+') { // se c'è già un dial code prende solo il numero senza dial code
-        const natNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value).nationalNumber;
+        const natNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value).nationalNumber; // estrae il num cell senza prefisso
         this.cellForm = '+' + this.dialCode + natNumber;
       } else {
         this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
@@ -131,6 +131,8 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     editDriver.surname = this.FormGroup.get('CtrlSurname').value;
     editDriver.contacts = [];
     const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
+    /* se è stata eseguita la verifica otp prende da cellForm,, altrimenti è un fleet role (che non può modificare il numero)
+    e lascia quello che c'è */
     const cell = { code: 1, value: this.cellForm ? this.cellForm : mobile };
     editDriver.contacts.push(mail, cell);
     this.driverService.editDriver(

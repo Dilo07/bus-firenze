@@ -70,6 +70,8 @@ export class VehicleDocumentComponent implements OnInit {
         () => null,
         () => { this.getVehiclesInstaller(); this.snackBar.showMessage('OBU.UPLOAD_SUCCESS', 'INFO'); }
       );
+    }else{
+      this.snackBar.showMessage('OBU.ERROR_TYPE', 'ERROR');
     }
   }
 

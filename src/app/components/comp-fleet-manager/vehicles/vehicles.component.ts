@@ -50,6 +50,7 @@ export class VehiclesComponent implements OnInit {
     private driverService: DriverService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog) {
+    // se è utente movyon op movyon fleetManager sarà valorizzato in caso di ruolo fleetmanger no
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
   }
 
@@ -125,7 +126,7 @@ export class VehiclesComponent implements OnInit {
   public associationDriver(vehicleId: number): void{
     this.driverService.getDriversByVehicle(vehicleId, this.fleetManager?.id).subscribe(
       drivers => {
-        const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
+        this.dialog.open(AssociationDriversVehiclesComponent, {
           width: '80%',
           height: '80%',
           data: {driverVehicle: drivers, idVehicle: vehicleId, fleetManageId: this.fleetManager?.id},

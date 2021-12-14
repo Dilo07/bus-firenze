@@ -206,12 +206,12 @@ export class FleetManagerComponent implements OnInit {
     this.complete = false;
     this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(
       data => {
-        if (data.type === 'application/pdf') {
+        if (data.type === 'application/pdf') { // se è un pdf
           const url = window.URL.createObjectURL(data);
           this.src.url = url;
           this.src.type = data.type;
           this.viewDoc = 'on';
-        } else {
+        } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data);
           reader.onload = () => {

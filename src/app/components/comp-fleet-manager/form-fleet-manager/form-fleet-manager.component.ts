@@ -46,7 +46,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
 
   ngOnInit(): void {
     // se ci sono dati è un edit form altrimenti è un add form
-    if (this.data !== undefined && this.data !== null) {
+    if (this.data) {
       this.FormGroup = this.formBuilder.group({
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
@@ -64,7 +64,6 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
-
     } else {
       this.FormGroup = this.formBuilder.group({
         CtrlName: ['', Validators.required],
