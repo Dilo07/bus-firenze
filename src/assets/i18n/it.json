@@ -226,7 +226,8 @@
         "NO_TO_MANAGE": "Nessun appuntamento da gestire"
     },
     "TICKET": {
-        "NO_DATA": "Nessun veicolo presente"
+        "NO_DATA": "Nessun veicolo presente",
+        "INSERT_TICKET": "Inserisci un ticket corretto"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",

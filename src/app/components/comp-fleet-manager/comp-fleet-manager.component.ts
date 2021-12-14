@@ -203,6 +203,7 @@ export class FleetManagerComponent implements OnInit {
   }
 
   public getFleetDocument(fleetManagerId: number, fileId: number): void {
+    this.complete = false;
     this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(
       data => {
         if (data.type === 'application/pdf') {

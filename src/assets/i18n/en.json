@@ -224,7 +224,8 @@
         "NO_TO_MANAGE": "Nobody appointment to manage"
     },
     "TICKET": {
-        "NO_DATA": "No vehicles present"
+        "NO_DATA": "No vehicles present",
+        "INSERT_TICKET": "Insert a correct ticket"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",
