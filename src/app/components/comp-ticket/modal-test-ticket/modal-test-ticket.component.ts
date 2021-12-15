@@ -28,7 +28,8 @@ export class ModalTestTicketComponent implements OnInit {
 
   ngOnInit(): void {
     this.FormGroup = this.formBuilder.group({
-      CtrlTicket: ['', Validators.pattern('^[A-Za-z0-9]+$')]
+      CtrlTicket: ['', Validators.pattern('^[A-Za-z0-9]+$')],
+      CtrlActive: [false, Validators.required]
     });
   }
 

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { DisplayName } from '../components/domain/bus-firenze-domain';
+import { Ticket } from '../components/domain/bus-firenze-domain';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +13,12 @@ export class TicketService {
 
   private apiUrl = this.url + '/api/fleet';
 
-  getVehicleNoTicket(isDriver: boolean): Observable<DisplayName[]> {
+  getVehicleNoTicket(isDriver: boolean): Observable<Ticket[]> {
     let url = '';
     if (isDriver) {
       url = '/' + 'driver';
     }
-    return this.http.get<DisplayName[]>(this.apiUrl + url + '/ticket/vehicles/')
+    return this.http.get<Ticket[]>(this.apiUrl + url + '/ticket/vehicles/')
       .pipe(catchError(err => { throw err; }));
   }
 

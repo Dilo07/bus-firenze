@@ -2,7 +2,7 @@
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header [collapsedHeight]="'80px'" [expandedHeight]="'80px'">
             <mat-panel-description>
-                Statistiche dell'ultimo mese
+                {{'STATISTIC.LAST-MONTH' | translate}}
             </mat-panel-description>
         </mat-expansion-panel-header>
         <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="fleetManager">

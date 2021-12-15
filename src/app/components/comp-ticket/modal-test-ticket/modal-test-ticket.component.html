@@ -18,6 +18,17 @@
                     <mat-error>{{'TICKET.INSERT_TICKET' | translate}}</mat-error>
                 </mat-form-field>
             </div>
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-radio-group formControlName="CtrlActive">
+                    <mat-radio-button [value]="true">
+                        <span style="white-space: normal; margin-right: 10px;">{{'TICKET.ACTIVE_AFTER' | translate}}</span>
+                    </mat-radio-button>
+                    <br>
+                    <mat-radio-button [value]="false">
+                        <span style="white-space: normal;"> {{'TICKET.ACTIVE_NOW' | translate}}</span>
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="15px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">
                     {{'COMMON.ACTION.CANCEL' | translate}}</button>

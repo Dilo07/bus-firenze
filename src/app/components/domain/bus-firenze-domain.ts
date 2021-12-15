@@ -125,7 +125,24 @@ export interface RepairShops {
     address: string;
 }
 
-export interface DisplayName{
+export interface Ticket {
+    ticketId: string;
+    vehicleId: number;
+    lpn: string;
+    lpnNat: string;
+    userIns: User;
+    userDel: User;
+    dateIns: Date;
+    dateSink: Date;
+    dateDel: Date;
+    ticketStart: Date;
+    ticketEnd: Date;
+    ticketSubscription: boolean;
+}
+
+export interface User {
     id: number;
-    displayName: string;
+    name: string;
+    surname: string;
+    guid: string;
 }

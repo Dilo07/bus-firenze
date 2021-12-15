@@ -7,7 +7,9 @@
 				<button mat-button class="backButton" *ngIf="fleetManager" [routerLink]="['../']">
 					{{'FLEET-MANAGER.BACK' |translate}}
 				</button>
-				<button mat-button class="greenButtons" (click)="addVehicle()">nuovo</button>
+				<button mat-button class="greenButtons" (click)="addVehicle()">
+					{{'FLEET-MANAGER.NEW' | translate}}
+				</button>
 			</div>
 			<form [formGroup]="Search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
@@ -34,25 +36,25 @@
 					</ng-container>
 
 					<ng-container matColumnDef="plate">
-						<mat-header-cell *matHeaderCellDef> plate </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">plate</span>
+							<span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
 							{{ element.lpn}}
 						</mat-cell>
 					</ng-container>
 
 					<ng-container matColumnDef="nat">
-						<mat-header-cell *matHeaderCellDef> nat </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">nat</span>
+							<span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
 							{{ element.lpnNat}}
 						</mat-cell>
 					</ng-container>
 
 					<ng-container matColumnDef="euroClass">
-						<mat-header-cell *matHeaderCellDef> euroClass </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.EURO-CLASS' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">euroClass</span>
+							<span class="mobile-label">{{'VEHICLE.EURO-CLASS' | translate}}</span>
 							{{ element.euroClass}}
 						</mat-cell>
 					</ng-container>
@@ -66,9 +68,9 @@
 					</ng-container>
 
 					<ng-container matColumnDef="consent">
-						<mat-header-cell *matHeaderCellDef> Consenso contatto</mat-header-cell>
+						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.CONSENT' | translate}}</mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">Consenso contratto</span>
+							<span class="mobile-label">{{'VEHICLE.CONSENT' | translate}}</span>
 							{{ element.allowContacted ? 'consentito' : 'non consentito'}}
 						</mat-cell>
 					</ng-container>
@@ -76,27 +78,29 @@
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
-							<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button (click)="updateStatus(element.id)">
-								<mat-icon style="color: #0066CC; opacity: 0.8;" matTooltip="aggiorna scadenza">
+							<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button
+								(click)="updateStatus(element.id)">
+								<mat-icon style="color: #0066CC; opacity: 0.8;"
+									matTooltip="{{'VEHICLE.REFRESH_EXPDATE' | translate}}">
 									rotate_right
 								</mat-icon>
 							</button>
 							<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button [disabled]="true">
-								<mat-icon style="color: red; opacity: 0.8;" matTooltip="Il veicolo è scaduto in data
+								<mat-icon style="color: red; opacity: 0.8;" matTooltip="{{'VEHICLE.EXPIRED' | translate}}
 								{{element.expiresAt.day + '/' + element.expiresAt.month + '/' + element.expiresAt.year }}">error</mat-icon>
 							</button>
 							<button *ngIf="element.status === statusVehicle.TEMP" mat-icon-button [disabled]="true">
-								<mat-icon style="color: #eed202; opacity: 0.8;" matTooltip="Il veicolo scadrà in data
+								<mat-icon style="color: #eed202; opacity: 0.8;" matTooltip="{{'VEHICLE.WILLEXPIRE' | translate}}
 								{{element.expiresAt.day + '/' + element.expiresAt.month + '/' + element.expiresAt.year }}">warning</mat-icon>
 							</button>
 							<button *ngIf="element.status === statusVehicle.UNKNOWN" mat-icon-button [disabled]="true">
 								<mat-icon style="color: #9c8b0979; opacity: 0.8;"
-									matTooltip="Veicolo sconosciuto su Ines">
+									matTooltip="{{'VEHICLE.UNKNOWN' | translate}}">
 									warning_amber
 								</mat-icon>
 							</button>
-							<button *ngIf="!element.deleted" mat-icon-button matTooltip="Edit"
-								(click)="editVehicle(element)">
+							<button *ngIf="!element.deleted" mat-icon-button
+								matTooltip="{{'COMMON.ACTION.EDIT' | translate}}" (click)="editVehicle(element)">
 								<mat-icon style="color: #0066CC;">edit</mat-icon>
 							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
@@ -108,17 +112,17 @@
 									matTooltip="{{('VEHICLE.DISABLED' | translate) +  (element.deleted | date : 'dd/MM/yyyy')}}">
 									disabled_by_default</mat-icon>
 							</button>
-							<button mat-icon-button matTooltip="Statistiche" [routerLink]="['statistic']"
-								[state]="{vehicle: element, fleetManager: fleetManager}">
+							<button mat-icon-button matTooltip="{{'STATISTIC.VEHICLE' | translate}}"
+								[routerLink]="['statistic']" [state]="{vehicle: element, fleetManager: fleetManager}">
 								<mat-icon style="color: #0066CC;">poll</mat-icon>
 							</button>
-							<button *ngIf="!element.deleted" mat-icon-button matTooltip="associa driver"
+							<button *ngIf="!element.deleted" mat-icon-button
+								matTooltip="{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}"
 								(click)="associationDriver(element.id)">
 								<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
 							</button>
 						</mat-cell>
 					</ng-container>
-
 
 					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
 						[style.display]="vehicleList.data.length === 0 ? 'none' : '' "></mat-header-row>

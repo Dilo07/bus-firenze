@@ -13,10 +13,10 @@
         </div>
         <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
-                <label>Nazionalità</label>
+                <label>{{'FLEET-MANAGER.NATIONALITY' | translate}}</label>
                 <mat-radio-group formControlName="CtrlForeign" (change)="changeFormNat()">
-                    <mat-radio-button style="margin-right: 10px;" [value]="false">Italiana</mat-radio-button>
-                    <mat-radio-button [value]="true">Straniera</mat-radio-button>
+                    <mat-radio-button style="margin-right: 10px;" [value]="false">{{'FLEET-MANAGER.ITALIAN' | translate}}</mat-radio-button>
+                    <mat-radio-button [value]="true">{{'FLEET-MANAGER.FOREIGN' | translate}}</mat-radio-button>
                 </mat-radio-group>
             </div>
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">

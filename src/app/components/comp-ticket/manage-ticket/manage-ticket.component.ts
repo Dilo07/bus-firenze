@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { DisplayName } from '../../domain/bus-firenze-domain';
+import { Ticket } from '../../domain/bus-firenze-domain';
 import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket.component';
 
 @Component({
@@ -21,7 +21,7 @@ export class ManageTicketComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public roleDriver: boolean;
-  public dataSource = new MatTableDataSource<DisplayName>();
+  public dataSource = new MatTableDataSource<Ticket>();
   public displayedColumns = ['id', 'displayName', 'actions'];
   public complete = true;
 
@@ -44,7 +44,7 @@ export class ManageTicketComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
-      () => null,
+      () => this.complete = true,
       () => this.complete = true
     );
   }
