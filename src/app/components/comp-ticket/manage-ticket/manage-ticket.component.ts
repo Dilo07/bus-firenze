@@ -21,9 +21,11 @@ export class ManageTicketComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public roleDriver: boolean;
+  public roleMovyon: boolean;
   public dataSource = new MatTableDataSource<Ticket>();
   public displayedColumns = ['id', 'displayName', 'actions'];
   public complete = true;
+  public viewFleetTable = false;
 
   constructor(
     private ticketService: TicketService,
@@ -33,12 +35,20 @@ export class ManageTicketComponent implements OnInit {
 
   ngOnInit(): void {
     this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
-    this.getVehicle();
+    this.roleMovyon = this.authService.getUserRoles().includes(ROLES.MOVYON);
+    if (this.roleMovyon) {
+      this.viewFleetTable = true;
+    } else {
+      this.getVehicle();
+    }
   }
 
-  private getVehicle(): void {
+  private getVehicle(fleetManagerId?: number): void {
+    if (fleetManagerId) {
+      this.viewFleetTable = false;
+    }
     this.complete = false;
-    this.ticketService.getVehicleNoTicket(this.roleDriver).subscribe(
+    this.ticketService.getVehicleNoTicket(this.roleDriver, fleetManagerId).subscribe(
       data => {
         this.dataSource.data = data;
         this.dataSource.sort = this.sort;
@@ -49,11 +59,11 @@ export class ManageTicketComponent implements OnInit {
     );
   }
 
-  public modalTicket(VehicleId: number): void{
+  public modalTicket(VehicleId: number): void {
     this.dialog.open(ModalTestTicketComponent, {
       width: '90%',
       height: '50%',
-      data: {vehicleId: VehicleId}
+      data: { vehicleId: VehicleId }
     });
   }
 

@@ -13,10 +13,13 @@ export class TicketService {
 
   private apiUrl = this.url + '/api/fleet';
 
-  getVehicleNoTicket(isDriver: boolean): Observable<Ticket[]> {
+  getVehicleNoTicket(isDriver: boolean, fleetManagerId?: number): Observable<Ticket[]> {
     let url = '';
     if (isDriver) {
       url = '/' + 'driver';
+    }
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
     }
     return this.http.get<Ticket[]>(this.apiUrl + url + '/ticket/vehicles/')
       .pipe(catchError(err => { throw err; }));

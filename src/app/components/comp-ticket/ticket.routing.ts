@@ -10,11 +10,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'manage-ticket', pathMatch: 'full' },
   {
     path: 'manage-ticket', component: ManageTicketComponent,
-    canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.FLEETMNG, ROLES.DRIVER] }
+    canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] }
   },
   {
     path: 'active-ticket', component: ActiveTicketComponent,
-    canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.FLEETMNG, ROLES.DRIVER] }
+    canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] }
   },
 ];
 
