@@ -76,7 +76,7 @@
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
-							<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button>
+							<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button (click)="updateStatus(element.id)">
 								<mat-icon style="color: #0066CC; opacity: 0.8;" matTooltip="aggiorna scadenza">
 									rotate_right
 								</mat-icon>

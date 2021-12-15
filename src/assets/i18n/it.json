@@ -256,6 +256,10 @@
     },
     "error": {
         "generic": "Errore lato server",
+        "code": {
+            "lang": "Lingua non supportata",
+            "code": "Errore nell'invio del codice"
+        },
         "live": {
             "store": "Errore nella ricezione dei dati"
         },
@@ -271,20 +275,33 @@
             "invalid": "Contenuto dello shapefile non valido",
             "export": "Errore nell'export dello shapefile"
         },
+        "file": {
+            "notfound": "File non trovato",
+            "upload": "Errore nell'upload"
+        },
         "user": {
             "duplicate-email": "Questa email è già usata. Per favore, inserisci un'altra email",
             "insert": "Errore nell'inserimento nuovo utente"
         },
+        "driver": {
+            "notfound": "Driver non trovato",
+            "delete": "Errore nella cancellazione driver",
+            "insert": "Errore nell'inserimento driver"
+        },
         "fleetmanager": {
             "insert": "Non è possibile inserire il fleet manager",
             "email": "Email obbligatoria",
+            "mobile": "Num. cellulare obbligatorio",
             "delete": "Non è possibile cancellare un fleet manager con veicoli associati"
         },
         "vehicle": {
             "update": "Aggiornamento dei dati del veicolo fallito",
             "not_associated": "Il veicolo non è associato a un Obu",
             "delete": "Non è possibile cancellare un veicolo con un Obu associato",
-            "duplicate": "La targa inserita è già associata"
+            "duplicate": "La targa inserita è già associata",
+            "notfound": "Veicolo non trovato",
+            "invalid": "Assegnato un ticket ad un veicolo non valido",
+            "already_present": "Ticket già presente sul veicolo"
         },
         "obu": {
             "not_found": "Obu Id non presente",
@@ -292,9 +309,15 @@
             "already_associated": "L'obu è già associato a un altro veicolo",
             "association": "Errore nell'associazione obu-veicolo",
             "match": "Errore nel cambio di targa",
-            "remove": "non è possibile rimuovere l'obu"
+            "remove": "non è possibile rimuovere l'obu",
+            "installer": "L'installer non ha installato questo obu"
         },
         "ines": {
+            "fleet": {
+                "fiscal": "Codice fiscale non corretto",
+                "undefined": "Controllo bus: Fleet-manager vuoto",
+                "piva": "Errore nella P.IVA"
+            },
             "GENERIC": "Errore sul sistema Ines",
             "ERR_AUTHORIZATION_NOT_DUPPORTED": "Tipo autenticazione non supportato",
             "ERR_USER_NOT_AUTHORIZED": "Utente non autorizzato",

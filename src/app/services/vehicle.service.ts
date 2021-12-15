@@ -81,4 +81,9 @@ export class VehicleService {
     return this.http.get<Vehicle[]>(this.apiUrl + '/vehicles/installed', options)
       .pipe(catchError(err => { throw err; }));
   }
+
+  updateStatusVehicle(vehicleId: number): Observable<void> {
+    return this.http.put<void>(this.apiUrl + '/vehicle/' + vehicleId + '/check', null)
+      .pipe(catchError(err => { throw err; }));
+  }
 }

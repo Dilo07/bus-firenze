@@ -108,7 +108,7 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
-  public deleteVehicle(vehicleId: number): void{
+  public deleteVehicle(vehicleId: number): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',
       height: '30%',
@@ -117,24 +117,32 @@ export class VehiclesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-          this.vehicleService.deleteVehicle(vehicleId, this.fleetManager?.id).subscribe(
-            () => this.snackBar.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
-            () => null,
-            () => {
-              this.getVehiclesByManagerId();
-              this.resetSearchField();
-            });
+        this.vehicleService.deleteVehicle(vehicleId, this.fleetManager?.id).subscribe(
+          () => this.snackBar.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
+          () => null,
+          () => {
+            this.getVehiclesByManagerId();
+            this.resetSearchField();
+          });
       }
     });
   }
 
-  public associationDriver(vehicleId: number): void{
+  public updateStatus(vehicleId: number): void {
+    this.vehicleService.updateStatusVehicle(vehicleId).subscribe(
+      () => null,
+      () => null,
+      () => this.getVehiclesByManagerId()
+    );
+  }
+
+  public associationDriver(vehicleId: number): void {
     this.driverService.getDriversByVehicle(vehicleId, this.fleetManager?.id).subscribe(
       drivers => {
         this.dialog.open(AssociationDriversVehiclesComponent, {
           width: '80%',
           height: '80%',
-          data: {driverVehicle: drivers, idVehicle: vehicleId, fleetManageId: this.fleetManager?.id},
+          data: { driverVehicle: drivers, idVehicle: vehicleId, fleetManageId: this.fleetManager?.id },
           autoFocus: false
         });
       });

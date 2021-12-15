@@ -254,6 +254,10 @@
     },
     "error": {
         "generic": "Error server site",
+        "code": {
+            "lang": "Lang not supported",
+            "code": "Error on sending code"
+        },
         "live": {
             "store": "Error on receive data"
         },
@@ -269,20 +273,33 @@
             "invalid": "Invalid shapefile",
             "export": "Error in shapefile's export"
         },
+        "file": {
+            "notfound": "File not found",
+            "upload": "Error upload"
+        },
         "user": {
             "duplicate-email": "Email is already used. Please try another one",
             "insert": "Error in inserting new user"
         },
+        "driver": {
+            "notfound": "Driver not found",
+            "delete": "Error on deleting driver",
+            "insert": "Error on insert driver"
+        },
         "fleetmanager": {
             "insert": "Failed to insert a fleet manager",
             "email": "Error: Email is mandatory",
+            "mobile": "Mobile number is mandatory",
             "delete": "Cannot delete a fleet manager with assigned vehicles"
         },
         "vehicle": {
             "update": "Failed to update the vehicle",
             "not_associated": "vehicle is not associated",
             "delete": "Cannot delete a vehicle with an associated Obu",
-            "duplicate": "The entered plate is already associated"
+            "duplicate": "The entered plate is already associated",
+            "notfound": "Vehicle not found",
+            "invalid": "Ticket assigned to invalid vehicle",
+            "already_present": "Ticket already present on vehicle"
         },
         "obu": {
             "not_found": "Obu Id doesn't exist",
@@ -290,9 +307,15 @@
             "already_associated": "Obu is already associated",
             "association": "Error in obu-vehicle association",
             "match": "Error on change plate",
-            "remove": "Cannot remove the obu"
+            "remove": "Cannot remove the obu",
+            "installer": "Installer didn't install this obu"
         },
         "ines": {
+            "fleet": {
+                "fiscal": "Fiscal code incorrect",
+                "undefined": "Check bus: Fleet-manager empty",
+                "piva": "Error P.IVA"
+            },
             "GENERIC": "Error on Ines system",
             "ERR_AUTHORIZATION_NOT_DUPPORTED": "Autentication type not support",
             "ERR_USER_NOT_AUTHORIZED": "User not autorized",
