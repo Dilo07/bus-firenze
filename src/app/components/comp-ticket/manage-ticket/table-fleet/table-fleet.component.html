@@ -50,6 +50,6 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
     </mat-table>
 </div>
-<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
+<mat-paginator [style.display]="fleetManagerList.length === 0 ? 'none' : '' " [pageSize]="10"
     [pageSizeOptions]="[5, 10, 25]" (page)="pageChanged($event)"></mat-paginator>
-<div *ngIf="dataSource.data.length === 0 && complete">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>
+<div *ngIf="fleetManagerList.length === 0 && complete">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>

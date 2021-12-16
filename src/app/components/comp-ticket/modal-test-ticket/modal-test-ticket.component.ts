@@ -51,4 +51,10 @@ export class ModalTestTicketComponent implements OnInit {
     );
   }
 
+  public cleanTicket(): void {
+    this.FormGroup.patchValue({
+      CtrlTicket: ''
+    });
+  }
+
 }

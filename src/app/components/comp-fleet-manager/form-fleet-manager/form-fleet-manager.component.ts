@@ -191,7 +191,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   public modalOTP(): void {
-    const Cell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
+    const Cell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value.replace(/\s/g, '');
     const lang = this.translateService.currentLang;
     this.subscription.push(this.registerService.getOtpCode(Cell, lang).subscribe(
       code => {
