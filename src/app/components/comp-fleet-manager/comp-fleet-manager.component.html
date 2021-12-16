@@ -17,7 +17,9 @@
 		</div>
 		<div fxLayout="column" fxLayoutGap="20px">
 			<span fxFlex="20" *ngIf="manageFleet">
-				<button mat-button class="greenButtons" [routerLink]="['form-Fleet']"> {{'FLEET-MANAGER.NEW' | translate}} </button>
+				<button mat-button class="greenButtons" [routerLink]="['form-Fleet']">
+					{{'FLEET-MANAGER.NEW' | translate}}
+				</button>
 			</span>
 			<form [formGroup]="Search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field appearance="fill" fxFlex="30">
@@ -41,7 +43,8 @@
 					</ng-container>
 
 					<ng-container matColumnDef="name">
-						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.NAME' | translate}} </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+							{{'FLEET-MANAGER.NAME' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'FLEET-MANAGER.NAME' | translate}}</span>
 							{{ element.name}}
@@ -49,7 +52,8 @@
 					</ng-container>
 
 					<ng-container matColumnDef="surname">
-						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.SURNAME' | translate}} </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+							{{'FLEET-MANAGER.SURNAME' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'FLEET-MANAGER.SURNAME' | translate}}</span>
 							{{ element.surname}}
@@ -65,7 +69,8 @@
 					</ng-container>
 
 					<ng-container matColumnDef="companyName">
-						<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.COMPANY_NAME' | translate}} </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.COMPANY_NAME' | translate}}
+						</mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'FLEET-MANAGER.COMPANY_NAME' | translate}}</span>
 							{{ element.companyName}}
@@ -73,8 +78,11 @@
 					</ng-container>
 
 					<ng-container matColumnDef="city">
-						<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.CITY' | translate}} </mat-header-cell>
-						<mat-cell *matCellDef="let element">
+						<!-- solo manage table -->
+						<mat-header-cell *matHeaderCellDef [style.display]="validFleet ? 'none' : ''">
+							{{'FLEET-MANAGER.CITY' | translate}}
+						</mat-header-cell>
+						<mat-cell *matCellDef="let element" [style.display]="validFleet ? 'none' : ''">
 							<span class="mobile-label">{{'FLEET-MANAGER.CITY' | translate}}</span>
 							{{ element.city}}
 						</mat-cell>
@@ -115,7 +123,7 @@
 
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
-						<mat-cell *matCellDef="let element" style="text-align: end;">
+						<mat-cell *matCellDef="let element">
 							<span *ngIf="manageFleet">
 								<button mat-icon-button matTooltip="Edit" [routerLink]="['form-Fleet']"
 									[state]="{fleetManager: element}">

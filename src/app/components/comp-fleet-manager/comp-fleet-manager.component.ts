@@ -23,13 +23,15 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
   mat-card { z-index: 2;}
   @media(min-width: 1180px) {
     .mat-column-id { max-width: 5%}
-    .mat-column-name { max-width: 8%; margin-right: 1%;}
-    .mat-column-surname { max-width: 8%; margin-right: 1%;}
-    .mat-column-e-mail { max-width: 20%}
+    .mat-column-name { max-width: 8%;}
+    .mat-column-surname { max-width: 8%;}
+    .mat-column-e-mail { max-width: 22%}
     .mat-column-companyName { max-width: 15%}
-    .mat-column-city { max-width: 10%}
-    .mat-column-district { max-width: 10%}
-    .mat-column-actions { max-width: 20%; display: table-column;}
+    .mat-column-city { max-width: 12%} /* solo manage */
+    .mat-column-district { max-width: 10%} /* solo manage */
+    .mat-column-pIva { max-width: 10%} /* solo valid */
+    .mat-column-fiscalCode { max-width: 12%} /* solo valid */
+    .mat-column-actions { max-width: 20%; display: table-column; text-align: end;}
   }
   :host ::ng-deep .ng2-pdf-viewer-container {
     width: 98% !important;

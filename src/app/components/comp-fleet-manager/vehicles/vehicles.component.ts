@@ -142,7 +142,7 @@ export class VehiclesComponent implements OnInit {
         this.dialog.open(AssociationDriversVehiclesComponent, {
           width: '80%',
           height: '80%',
-          data: { driverVehicle: drivers, idVehicle: vehicleId, fleetManageId: this.fleetManager?.id },
+          data: { driverVehicle: drivers, idVehicle: vehicleId, fleetManagerId: this.fleetManager?.id },
           autoFocus: false
         });
       });

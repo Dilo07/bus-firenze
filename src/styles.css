@@ -1,12 +1,14 @@
 /* app */
 
-html, body { height: 100% !important}
+html, body {
+    height: 100% !important
+}
 
 mat-card-content {
     border-radius: 10px !important;
 }
 
-/* table responsive */ 
+/* table responsive */
 
 .example-container {
     display: flex;
@@ -18,7 +20,7 @@ mat-card-content {
 .mat-table {
     overflow: auto;
     max-height: 550px;
-    background-color: beige; 
+    background-color: beige;
 }
 
 .mobile-label {
@@ -26,22 +28,29 @@ mat-card-content {
 }
 
 @media(max-width: 1180px) {
-    mat-cell:first-of-type{
+    mat-cell:first-of-type {
         padding-left: 0 !important;
     }
+
     .mobile-label {
         width: 80px;
         display: inline-block;
         font-weight: bold;
     }
+
     .mobileHeader {
         display: none;
     }
+
     .mat-row {
         flex-direction: column;
         align-items: start;
         padding: 8px 24px;
     }
+}
+
+.hover-row:hover {
+    background-color: #EDF4F8;
 }
 
 /* paginator on mobile */
