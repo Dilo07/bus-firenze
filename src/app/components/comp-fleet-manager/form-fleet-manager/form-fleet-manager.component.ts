@@ -78,7 +78,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
         CtrlCity: ['', Validators.required],
         CtrlDistrict: ['', Validators.required],
         CtrlCAP: ['', Validators.required],
-        CtrlForeign: ['', Validators.required]
+        CtrlForeign: [false, Validators.required]
       });
     }
     if (this.FormGroup.get('CtrlForeign').value) {

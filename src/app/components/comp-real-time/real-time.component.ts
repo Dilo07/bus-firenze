@@ -6,8 +6,9 @@ import { Subscription } from 'rxjs';
 import { LiveStreamService } from 'src/app/services/live-stream.service';
 import { FirenzeMapUtils } from 'src/app/shared/utils/map/Firenze-map.utils';
 import * as moment from 'moment';
-import { FleetManager, VehicleTripPersistence } from '../domain/bus-firenze-domain';
+import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
 import { TranslateService } from '@ngx-translate/core';
+import { TimesRefresh } from '../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-real-time',
@@ -22,10 +23,14 @@ export class RealTimeComponent implements OnInit {
   public complete = true;
   public vehicleTrip: VehicleTripPersistence[] = [];
   public center = [11.206119915108518, 43.81031349352526];
+  public stop = true;
+  public actualTime = RefreshOption._5_minutes;
+  public times: RefreshInterface[] = TimesRefresh;
 
   private subscription: Subscription[] = [];
   private geometry: Geometry[] = [];
   public layersPopup = [FirenzeMapUtils.LayerEnum.POINT_REAL_TIME];
+  private interval: any;
 
   constructor(
     private router: Router,
@@ -121,6 +126,44 @@ export class RealTimeComponent implements OnInit {
         <tr><td> ${trip.obuId} </td>
         <td> ${moment(trip.start).format('HH:mm:ss')} </td> <td> ${moment(trip.end).format('HH:mm:ss')} </td>
         </tr></table><hr><br>`;
+  }
+
+  public onChangedRefresh(): void {
+    clearInterval(this.interval);
+    this.callInterval();
+  }
+
+  private callInterval(): void {
+    let milliseconds = 1800000;
+    if (!this.stop) {
+      this.stop = true;
+    }
+    switch (this.actualTime) {
+      case 0:
+        milliseconds = 60000; // 1 min
+        break;
+      case 1:
+        milliseconds = 300000; // 5 min
+        break;
+      case 2:
+        milliseconds = 600000; // 10 min
+        break;
+      case 3:
+        milliseconds = 1800000; // 30 min
+        break;
+    }
+    this.interval = setInterval(() => {
+      this.getTrip();
+    }, milliseconds);
+  }
+
+  public stopPlayRefresh(): void {
+    this.stop = !this.stop;
+    if (!this.stop) {
+      clearInterval(this.interval);
+    } else {
+      this.callInterval();
+    }
   }
 
   private createGeoJSON(geom: any): any {

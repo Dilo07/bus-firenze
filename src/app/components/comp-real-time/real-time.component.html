@@ -3,22 +3,44 @@
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
 			<span fxFlex="20" *ngIf="fleetManager">
-				<button mat-button class="backButton" (click)="backFromRealTime()">{{'FLEET-MANAGER.BACK' |
-					translate}}</button>
+				<button mat-button class="backButton" (click)="backFromRealTime()">
+					{{'FLEET-MANAGER.BACK' | translate}}</button>
 			</span>
+			<mat-card>
+				<mat-card-content fxLayout="row wrap" fxLayoutGap="20px">
+					<mat-form-field appearance="fill" fxFlex.gt-lg="25" fxFlex.gt-md="25" fxFlex.gt-xs="100" fxFlex="100">
+						<mat-label>{{'REAL-TIME.SELECT' | translate}}</mat-label>
+						<mat-select [(ngModel)]="actualTime" (selectionChange)="onChangedRefresh()">
+							<mat-option *ngFor="let time of times" [value]="time.code">
+								{{'REAL-TIME.' + time.label | translate}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<button mat-icon-button matTooltip="{{'REAL-TIME.REFRESH' | translate}}" (click)="getTrip()">
+						<mat-icon>refresh</mat-icon>
+					</button>
+					<button mat-icon-button matTooltip="{{'REAL-TIME.STOP' | translate}}" [disabled]="!stop" (click)="stopPlayRefresh()">
+						<mat-icon [style.color]="!stop ? 'grey' : 'red'">stop</mat-icon>
+					</button>
+					<button mat-icon-button matTooltip="{{'REAL-TIME.PLAY' | translate}}" [disabled]="stop" (click)="stopPlayRefresh()">
+						<mat-icon [style.color]="stop ? 'grey' : 'green'">play_arrow</mat-icon>
+					</button>
+				</mat-card-content>
+			</mat-card>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<mat-tab-group mat-align-tabs="center">
 				<mat-tab label="mappa">
 					<mat-card fxFlex.gt-lg="100" fxFlex.gt-md="100" fxFlex.gt-xs="100" fxFlex="100">
-						<lib-npt-map [zoom]=15 [center]="center" [usePopUp]=true
-							[typeEvent]="'click'" [layerToCheck]="layersPopup" (mapReady)="onMapReady($event)">
+						<lib-npt-map [zoom]=15 [center]="center" [usePopUp]=true [typeEvent]="'click'"
+							[layerToCheck]="layersPopup" (mapReady)="onMapReady($event)">
 						</lib-npt-map>
 					</mat-card>
 				</mat-tab>
 				<mat-tab label="tabella">
 					<mat-card>
 						<mat-card-content>
-							<app-table-real-time [vehicleTable]="vehicleTrip" [fleetManagerId]="fleetManager?.id"></app-table-real-time>
+							<app-table-real-time [vehicleTable]="vehicleTrip" [fleetManagerId]="fleetManager?.id">
+							</app-table-real-time>
 						</mat-card-content>
 					</mat-card>
 				</mat-tab>

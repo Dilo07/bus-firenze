@@ -41,7 +41,7 @@ export class ModalFormVehicleComponent implements OnInit {
     } else {
       this.FormGroup = this.formBuilder.group({
         CtrlLpn: ['', Validators.pattern('^[A-Za-z0-9]+$')],
-        CtrlLpnNat: ['', Validators.required],
+        CtrlLpnNat: ['IT', Validators.required],
         CtrlEuroClass: ['', Validators.min(1)],
         CtrlNumAxis: ['', Validators.min(1)],
         CtrlMaxWeight: ['', Validators.min(1)],

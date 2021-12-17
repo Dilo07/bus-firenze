@@ -20,7 +20,7 @@ export class ModalTestTicketComponent implements OnInit {
     private ticketService: TicketService,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number },
+    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number, fleetManagerId: number },
     @Inject('authService') private authService: any
   ) {
     this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
@@ -46,7 +46,7 @@ export class ModalTestTicketComponent implements OnInit {
 
   public addTicket(): void {
     const ticket = this.FormGroup.get('CtrlTicket').value;
-    this.ticketService.addTicket(this.roleDriver, this.data.vehicleId, ticket).subscribe(
+    this.ticketService.addTicket(this.roleDriver, this.data.vehicleId, ticket, this.data.fleetManagerId).subscribe(
       data => console.log(data)
     );
   }

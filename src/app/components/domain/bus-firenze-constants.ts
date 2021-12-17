@@ -1,3 +1,14 @@
+import { RefreshOption } from './bus-firenze-domain';
+
+export const TimesRefresh =
+    [
+        { label: '1 Minute', code: RefreshOption._1_minute },
+        { label: '5 Minutes', code: RefreshOption._5_minutes },
+        { label: '10 Minutes', code: RefreshOption._10_minutes },
+        { label: '30 Minutes', code: RefreshOption._30_minutes }
+    ];
+
+
 export const Nations = [
     { value: 'IT' },
     { value: 'AL' },

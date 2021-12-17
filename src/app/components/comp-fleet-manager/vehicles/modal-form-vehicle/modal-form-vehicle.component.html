@@ -26,18 +26,23 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
                     <mat-label> {{'VEHICLE.LPN_NAT' | translate}}</mat-label>
-                    <mat-select formControlName="CtrlLpnNat" *ngIf="!data.vehicle" required>
-                        <mat-option *ngFor="let nation of nations" [value]="nation.value">
-                            <!-- selezione nazione -->
-                            {{nation.value | translate}}
-                            <span [ngClass]="'flag-icon flag-icon-' + nation.value.toLowerCase()"></span>
-                        </mat-option>
-                    </mat-select>
-                    <span fxLayout="row" *ngIf="data.vehicle">
-                        <!-- readonly nazione -->
-                        <input matInput type="text" formControlName="CtrlLpnNat" style="opacity: 0.5" readonly>
-                        <span [ngClass]="'flag-icon flag-icon-' + data.vehicle.lpnNat.toLowerCase()"></span>
+                    <span *ngIf="!data.vehicle else readOnlyNat" fxLayout="row">
+                        <mat-select formControlName="CtrlLpnNat" required>
+                            <mat-option *ngFor="let nation of nations" [value]="nation.value">
+                                <!-- selezione nazione -->
+                                {{nation.value | translate}}
+                                <span [ngClass]="'flag-icon flag-icon-' + nation.value.toLowerCase()"></span>
+                            </mat-option>
+                        </mat-select>
+                        <span [ngClass]="'flag-icon flag-icon-' + FormGroup.get('CtrlLpnNat').value.toLowerCase()"></span>
                     </span>
+                    <ng-template #readOnlyNat>
+                        <span fxLayout="row">
+                            <!-- readonly nazione -->
+                            <input matInput type="text" formControlName="CtrlLpnNat" style="opacity: 0.5" readonly>
+                            <span [ngClass]="'flag-icon flag-icon-' + data.vehicle.lpnNat.toLowerCase()"></span>
+                        </span>
+                    </ng-template>
                     <mat-error> {{'VEHICLE.INSERT LPN NAT' | translate}}</mat-error>
                 </mat-form-field>
             </div>

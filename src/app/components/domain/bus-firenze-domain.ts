@@ -146,3 +146,15 @@ export interface User {
     surname: string;
     guid: string;
 }
+
+export interface RefreshInterface {
+    label: string;
+    code: RefreshOption._1_minute | RefreshOption._5_minutes | RefreshOption._10_minutes | RefreshOption._30_minutes;
+}
+
+export enum RefreshOption {
+    _1_minute,
+    _5_minutes,
+    _10_minutes,
+    _30_minutes
+}

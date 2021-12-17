@@ -65,10 +65,10 @@ const MENUITEMS = [
     state: 'user-driver', name: 'User-Driver', type: 'submenu', icon: 'manage_accounts',
     children: [SUBMENU_ROUTES[12], SUBMENU_ROUTES[13]], roles: [ROLES.DRIVER]
   },
-  {
+  /* {
     state: 'ticket', name: 'Ticket', type: 'submenu', icon: 'manage_accounts',
     children: [SUBMENU_ROUTES[14], SUBMENU_ROUTES[15]], roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER]
-  },
+  }, */
 ];
 
 @Injectable()

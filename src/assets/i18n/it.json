@@ -161,7 +161,7 @@
         "MESSAGE_EDIT": "Modifica le informazioni del Driver",
         "ASSOCIATION_VEHICLES": "Seleziona i veicoli da associare al guidatore",
         "ASSOCIATION_DRIVERS": "Seleziona i guidatori da associare al veicolo",
-        "ASSOCIATION_SUCCESS": "Associazione eseguita correttamente",
+        "ASSOCIATION_SUCCESS": "Modifica eseguita correttamente",
         "ADD_ERROR": "Errore nell'inserimento autista",
         "ADD_SUCCESS": "Autista inserito correttamente",
         "EDIT_ERROR": "Errore nella modifica autista",
@@ -266,7 +266,8 @@
             "BACK": "Indietro",
             "CANCEL": "Cancella",
             "SAVE": "Salva",
-            "EDIT": "Modifica"
+            "EDIT": "Modifica",
+            "ACTIVE": "Attiva"
         }
     },
     "ERROR": {

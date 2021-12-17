@@ -159,7 +159,7 @@
         "MESSAGE_EDIT": "Edit the driver informations",
         "ASSOCIATION_VEHICLES": "Select the vehicles to be associated with the driver",
         "ASSOCIATION_DRIVERS": "select the drivers to be associated with the vehicle",
-        "ASSOCIATION_SUCCESS": "Association correctly executed",
+        "ASSOCIATION_SUCCESS": "Modification correctly executed",
         "ADD_ERROR":"Error on insert driver",
         "ADD_SUCCESS": "Driver inserted correctly",
         "EDIT_ERROR":"Error on edit driver",
@@ -264,7 +264,8 @@
             "BACK": "Back",
             "CANCEL": "Cancel",
             "SAVE": "Save",
-            "EDIT": "Edit"
+            "EDIT": "Edit",
+            "ACTIVE": "Active"
         }
     },
     "ERROR": {

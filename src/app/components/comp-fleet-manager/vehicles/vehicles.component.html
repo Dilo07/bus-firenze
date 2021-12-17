@@ -87,11 +87,11 @@
 							</button>
 							<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button [disabled]="true">
 								<mat-icon style="color: red; opacity: 0.8;" matTooltip="{{'VEHICLE.EXPIRED' | translate}}
-								{{element.expiresAt.day + '/' + element.expiresAt.month + '/' + element.expiresAt.year }}">error</mat-icon>
+								{{element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year }}">error</mat-icon>
 							</button>
 							<button *ngIf="element.status === statusVehicle.TEMP" mat-icon-button [disabled]="true">
 								<mat-icon style="color: #eed202; opacity: 0.8;" matTooltip="{{'VEHICLE.WILLEXPIRE' | translate}}
-								{{element.expiresAt.day + '/' + element.expiresAt.month + '/' + element.expiresAt.year }}">warning</mat-icon>
+								{{element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year }}">warning</mat-icon>
 							</button>
 							<button *ngIf="element.status === statusVehicle.UNKNOWN" mat-icon-button [disabled]="true">
 								<mat-icon style="color: #9c8b0979; opacity: 0.8;"

@@ -27,6 +27,8 @@ export class ManageTicketComponent implements OnInit {
   public complete = true;
   public viewFleetTable = false;
 
+  private fleetManagerId: number;
+
   constructor(
     private ticketService: TicketService,
     private dialog: MatDialog,
@@ -45,10 +47,11 @@ export class ManageTicketComponent implements OnInit {
 
   private getVehicle(fleetManagerId?: number): void {
     if (fleetManagerId) {
+      this.fleetManagerId = fleetManagerId;
       this.viewFleetTable = false;
     }
     this.complete = false;
-    this.ticketService.getVehicleNoTicket(this.roleDriver, fleetManagerId).subscribe(
+    this.ticketService.getVehicleNoTicket(this.roleDriver, this.fleetManagerId).subscribe(
       data => {
         this.dataSource.data = data;
         this.dataSource.sort = this.sort;
@@ -63,7 +66,7 @@ export class ManageTicketComponent implements OnInit {
     this.dialog.open(ModalTestTicketComponent, {
       width: '90%',
       height: '50%',
-      data: { vehicleId: VehicleId }
+      data: { vehicleId: VehicleId, fleetManagerId: this.fleetManagerId }
     });
   }
 

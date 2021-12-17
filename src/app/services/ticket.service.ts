@@ -30,10 +30,13 @@ export class TicketService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  addTicket(isDriver: boolean, vehicleId: number, ticketNumber: string): Observable<void> {
+  addTicket(isDriver: boolean, vehicleId: number, ticketNumber: string, fleetManagerId?: number): Observable<void> {
     let url = '';
     if (isDriver) {
       url = '/' + 'driver';
+    }
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
     }
     return this.http.put<void>(this.apiUrl + url + '/vehicle/' + vehicleId + '/ticket/' + ticketNumber, null)
       .pipe(catchError(err => { throw err; }));
