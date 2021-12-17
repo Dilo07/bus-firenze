@@ -16,7 +16,7 @@ import { AssociationDriversVehiclesComponent } from './drivers/modal-association
 import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
 import { FleetManagerRoutingModule } from './fleet-manager.routing';
 import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manager.component';
-import { Ng2telinputDirective } from './ng2telinput.directive';
+import { Ng2telinputDirective } from '../directive/ng2telinput.directive';
 import { ModalOTPComponent } from './register-page/modal-otp/modal-otp.component';
 import { RegisterComponent } from './register-page/register.component';
 import { ModalFormVehicleComponent } from './vehicles/modal-form-vehicle/modal-form-vehicle.component';
