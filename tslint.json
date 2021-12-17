@@ -140,7 +140,8 @@
       true,
       "attribute",
       "app",
-      "camelCase"
+      "camelCase",
+      "[ng2TelInput]"
     ],
     "component-selector": [
       true,

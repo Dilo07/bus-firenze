@@ -76,13 +76,13 @@ export class FormDriverComponent implements OnInit, OnDestroy {
 
   public modalOTP(): void {
     if (this.cellularRequired) {
-      this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
+      this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value.replace(/\s/g, '');
     } else {
       if (this.FormGroup.get('CtrlCell').value.charAt(0) === '+') { // se c'è già un dial code prende solo il numero senza dial code
         const natNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value).nationalNumber; // estrae il num cell senza prefisso
         this.cellForm = '+' + this.dialCode + natNumber;
       } else {
-        this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value;
+        this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value.replace(/\s/g, '');
       }
     }
     const lang = this.translateService.currentLang;
