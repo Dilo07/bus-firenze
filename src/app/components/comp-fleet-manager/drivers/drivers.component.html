@@ -1,0 +1,87 @@
+<mat-card>
+	<mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'DRIVERS.TITLE' | translate}}</mat-card-title>
+	<mat-card-content>
+		<div fxLayout="column" fxLayoutGap="20px">
+			<div fxLayout="row" fxLayoutGap="20px">
+				<button mat-button class="backButton" *ngIf="fleetManagerId" [routerLink]="['../']">
+					{{'COMMON.ACTION.BACK' |translate}}
+				</button>
+				<button mat-button class="greenButtons" [routerLink]="['../form-Driver']"
+					[state]="{ driver: null, fleetManagerId: this.fleetManagerId }">
+					nuovo
+				</button>
+			</div>
+			<form [formGroup]="Search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
+				<mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+					<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
+					<input matInput type="search" formControlName="CtrlSearch" autocomplete="off">
+				</mat-form-field>
+				<button mat-icon-button (click)="getDrivers()">
+					<mat-icon matPrefix>search</mat-icon>
+				</button>
+			</form>
+			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+			<div class="mat-elevation-z8 example-container">
+				<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="name"
+					matSortDirection="asc">
+					<ng-container matColumnDef="name">
+						<mat-header-cell *matHeaderCellDef mat-sort-header> name </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">name</span>
+							{{element.name}}
+						</mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="surname">
+						<mat-header-cell *matHeaderCellDef> surname </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">surname</span>
+							{{ element.surname}}
+						</mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="e-mail">
+						<mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">e-mail</span>
+							{{ findContactValue(element, 3)}}
+						</mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="mobile">
+						<mat-header-cell *matHeaderCellDef> mobile </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">mobile</span>
+							{{ findContactValue(element, 1)}}
+						</mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="actions">
+						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
+						<mat-cell *matCellDef="let element" style="text-align: end;">
+							<button mat-icon-button matTooltip="Edit" [routerLink]="['../form-Driver']"
+								[state]="{driver: element, fleetManagerId: fleetManagerId}">
+								<mat-icon style="color: #0066CC;">edit</mat-icon>
+							</button>
+							<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
+								(click)="deleteDriver(element.id)">
+								<mat-icon style="color: red;">delete</mat-icon>
+							</button>
+							<button mat-icon-button matTooltip="associa veicoli"
+								(click)="associationVehicle(element.id)">
+								<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
+							</button>
+						</mat-cell>
+					</ng-container>
+
+					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
+						[style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+					<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+				</mat-table>
+			</div>
+			<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
+				[pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+			<div *ngIf="dataSource.data.length === 0 && complete"> {{'DRIVERS.NO_DATA' | translate}}</div>
+		</div>
+	</mat-card-content>
+</mat-card>

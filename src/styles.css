@@ -1,0 +1,117 @@
+/* app */
+
+html, body {
+    height: 100% !important
+}
+
+mat-card-content {
+    border-radius: 10px !important;
+}
+
+/* table responsive */
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 550px;
+    min-width: 200px;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 550px;
+    background-color: beige;
+}
+
+.mobile-label {
+    display: none;
+}
+
+@media(max-width: 1180px) {
+    mat-cell:first-of-type {
+        padding-left: 0 !important;
+    }
+
+    .mobile-label {
+        width: 80px;
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    .mobileHeader {
+        display: none;
+    }
+
+    .mat-row {
+        flex-direction: column;
+        align-items: start;
+        padding: 8px 24px;
+    }
+}
+
+.hover-row:hover {
+    background-color: #EDF4F8;
+}
+
+/* paginator on mobile */
+
+@media(max-width: 470px) {
+    .mat-paginator-range-label {
+        margin: 0 10px 0 10px !important;
+    }
+}
+
+/* npt-template style */
+
+.topbar {
+    background-color: #C30C26 !important;
+}
+
+/* snackbar */
+
+.ERROR {
+    background-color: #FF0000 !important;
+    color: white !important;
+}
+
+.WARN {
+    background-color: #eed202 !important;
+    color: white !important;
+}
+
+.INFO {
+    background-color: #5cb85c !important;
+    color: white !important;
+}
+
+.mat-simple-snackbar-action {
+    color: white !important;
+}
+
+/* buttons */
+.redButtons {
+    background-color: red;
+    color: white;
+}
+
+.greenButtons {
+    background-color: green;
+    color: white;
+}
+
+.greenButtons[disabled]:hover {
+    background-color: green;
+}
+
+.greenButtons:hover {
+    background-color: rgb(46, 175, 46);
+}
+
+.backButton {
+    background-color: gray;
+    color: white;
+}
+
+.backButton:hover {
+    background-color: #616161;
+}

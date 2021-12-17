@@ -1,0 +1,58 @@
+<mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header [collapsedHeight]="'80px'" [expandedHeight]="'80px'">
+            <mat-panel-description>
+                {{'STATISTIC.LAST-MONTH' | translate}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="fleetManager">
+            <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-card-content class="vehicle">
+                    <mat-card-title>Fleet Manager ID</mat-card-title>
+                    <mat-card-subtitle>{{fleetManager.id}}</mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>
+            <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-card-content class="vehicle">
+                    <mat-card-title>{{'FLEET-MANAGER.NAME' | translate}}</mat-card-title>
+                    <mat-card-subtitle>
+                        {{fleetManager.name}}
+                    </mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>
+            <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-card-content class="vehicle">
+                    <mat-card-title>{{'FLEET-MANAGER.SURNAME' | translate}}</mat-card-title>
+                    <mat-card-subtitle> {{fleetManager.surname}} </mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>
+            <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
+                <mat-card-content class="vehicle">
+                    <mat-card-title>{{'FLEET-MANAGER.COMPANY_NAME' | translate}}</mat-card-title>
+                    <mat-card-subtitle> {{fleetManager.companyName}} </mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="center">
+            <app-trip-statistic [vehicleStatTrip]="tripStat" [viewOuter]="viewOuter"></app-trip-statistic>
+            <form [formGroup]="FormGroup">
+                <mat-form-field appearance="fill">
+                    <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
+                    <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+                        <input matStartDate formControlName="start">
+                        <input matEndDate formControlName="end" (dateChange)="changeDate($event)">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+    
+                    <mat-error *ngIf="FormGroup.controls.start.hasError('required') || FormGroup.controls.start.hasError('matStartDateInvalid')">
+                        {{'STATISTIC.INVALID_START' | translate}}
+                    </mat-error>
+                    <mat-error *ngIf="FormGroup.controls.end.hasError('required') || FormGroup.controls.end.hasError('matEndDateInvalid')">
+                        {{'STATISTIC.INVALID_END' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

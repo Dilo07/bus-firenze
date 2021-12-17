@@ -1,0 +1,38 @@
+<mat-card>
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center"> {{'OBU.CHANGE_PLATE' | translate}}</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="FormGroup">
+            <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="center">
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
+                    <mat-label> {{'VEHICLE.LPN' | translate}}</mat-label>
+                    <input matInput type="text"
+                        (input)="FormGroup.patchValue({CtrlLpn: $event.target.value.toUpperCase()})"
+                        formControlName="CtrlLpn" maxlength="20" autocomplete="off" required>
+                    <mat-error> {{'VEHICLE.INSERT LPN' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
+                    <mat-label> {{'VEHICLE.LPN_NAT' | translate}}</mat-label>
+                    <span fxLayout="row">
+                        <mat-select formControlName="CtrlLpnNat" required>
+                            <mat-option *ngFor="let nation of nations" [value]="nation.value">
+                                <!-- selezione nazione -->
+                                {{nation.value | translate}}
+                                <span [ngClass]="'flag-icon flag-icon-' + nation.value.toLowerCase()"></span>
+                            </mat-option>
+                        </mat-select>
+                        <span [ngClass]="'flag-icon flag-icon-' + FormGroup.get('CtrlLpnNat').value.toLowerCase()"></span>
+                    </span>
+                    <mat-error> {{'VEHICLE.INSERT LPN NAT' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+        <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
+            <button mat-button class="redButtons" (click)="dialogRef.close(false);">
+                {{'COMMON.ACTION.CANCEL' | translate}}</button>
+            <button mat-button class="greenButtons" (click)="changePlate()"
+                [disabled]="FormGroup.invalid || !FormGroup.dirty">
+                {{'COMMON.ACTION.SAVE' | translate}}
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>

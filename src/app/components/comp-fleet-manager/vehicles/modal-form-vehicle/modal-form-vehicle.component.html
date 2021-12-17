@@ -1,0 +1,94 @@
+<mat-card>
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">
+        {{ (data.vehicle ? 'VEHICLE.EDIT' : 'VEHICLE.NEW') | translate }}
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
+            <div *ngIf="!data.vehicle else viewContractType" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+                <label>{{'VEHICLE.CONTRACT' | translate}}</label>
+                <mat-radio-group formControlName="CtrlContract">
+                    <mat-radio-button style="margin-right: 10px;" [value]="'BUY'">{{'VEHICLE.BUYING' | translate}}</mat-radio-button>
+                    <mat-radio-button [value]="'RNT'">{{'VEHICLE.RENT' | translate}}</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <ng-template #viewContractType>
+                <p fxLayout="row" fxLayoutAlign="center">
+                    Contratto: {{data.vehicle.contractType === 'BUY' ? 'Acquisto' : 'Noleggio'}}</p>
+            </ng-template>
+            <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
+                    <mat-label> {{'VEHICLE.LPN' | translate}}</mat-label>
+                    <input *ngIf="!data.vehicle" matInput type="text" #input [value]="input.value.toUpperCase()"
+                        formControlName="CtrlLpn" maxlength="20" autocomplete="off" required>
+                    <input *ngIf="data.vehicle" matInput type="text" formControlName="CtrlLpn" style="opacity: 0.5"
+                        readonly>
+                    <mat-error> {{'VEHICLE.INSERT LPN' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
+                    <mat-label> {{'VEHICLE.LPN_NAT' | translate}}</mat-label>
+                    <span *ngIf="!data.vehicle else readOnlyNat" fxLayout="row">
+                        <mat-select formControlName="CtrlLpnNat" required>
+                            <mat-option *ngFor="let nation of nations" [value]="nation.value">
+                                <!-- selezione nazione -->
+                                {{nation.value | translate}}
+                                <span [ngClass]="'flag-icon flag-icon-' + nation.value.toLowerCase()"></span>
+                            </mat-option>
+                        </mat-select>
+                        <span [ngClass]="'flag-icon flag-icon-' + FormGroup.get('CtrlLpnNat').value.toLowerCase()"></span>
+                    </span>
+                    <ng-template #readOnlyNat>
+                        <span fxLayout="row">
+                            <!-- readonly nazione -->
+                            <input matInput type="text" formControlName="CtrlLpnNat" style="opacity: 0.5" readonly>
+                            <span [ngClass]="'flag-icon flag-icon-' + data.vehicle.lpnNat.toLowerCase()"></span>
+                        </span>
+                    </ng-template>
+                    <mat-error> {{'VEHICLE.INSERT LPN NAT' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label> {{'VEHICLE.EURO-CLASS' | translate}}</mat-label>
+                    <input matInput type="number" formControlName="CtrlEuroClass" max="999" min="1" autocomplete="off"
+                        required>
+                    <mat-error *ngIf="FormGroup.controls.CtrlEuroClass.hasError('required')">
+                        {{'VEHICLE.INSERT EURO-CLASS' | translate}}
+                    </mat-error>
+                    <mat-error *ngIf="FormGroup.controls.CtrlEuroClass.hasError('min')">
+                        {{'VEHICLE.ERROR_NEGATIVE' | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label> {{'VEHICLE.AXIS' | translate}}</mat-label>
+                    <input matInput type="number" formControlName="CtrlNumAxis" max="999999" min="1" autocomplete="off"
+                        required>
+                    <mat-error *ngIf="FormGroup.controls.CtrlNumAxis.hasError('required')">
+                        {{'VEHICLE.INSERT AXIS' | translate}}</mat-error>
+                    <mat-error *ngIf="FormGroup.controls.CtrlNumAxis.hasError('min')">
+                        {{'VEHICLE.ERROR_NEGATIVE' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                    <mat-label> {{'VEHICLE.WEIGHT' | translate}}</mat-label>
+                    <input matInput type="number" formControlName="CtrlMaxWeight" max="999999" min="1"
+                        autocomplete="off" required>
+                    <mat-error *ngIf="FormGroup.controls.CtrlMaxWeight.hasError('required')">
+                        {{'VEHICLE.INSERT WEIGHT' | translate}}</mat-error>
+                    <mat-error *ngIf="FormGroup.controls.CtrlMaxWeight.hasError('min')">
+                        {{'VEHICLE.ERROR_NEGATIVE' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-checkbox formControlName="CtrlConsent"></mat-checkbox>
+                {{'VEHICLE.CONSENT_TEXT' | translate}}
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+                <button mat-button (click)="dialogRef.close(false);" class="backButton">
+                    {{'COMMON.ACTION.BACK' | translate}}</button>
+                <button *ngIf="!data.vehicle" mat-button [disabled]="FormGroup.invalid" class="greenButtons"
+                    (click)="addVehicle()"> {{'COMMON.ACTION.SAVE' | translate}}</button>
+                <button *ngIf="data.vehicle" mat-button [disabled]="FormGroup.invalid || !FormGroup.dirty"
+                    class="greenButtons" (click)="updateVehicle()"> {{'COMMON.ACTION.EDIT' | translate}}</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

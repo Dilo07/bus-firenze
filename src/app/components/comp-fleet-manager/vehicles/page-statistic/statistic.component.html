@@ -1,0 +1,47 @@
+<mat-card>
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center"> {{'STATISTIC.VEHICLE' | translate}}
+    </mat-card-title>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <span>
+            <button mat-button class="backButton" [routerLink]="['../']" [state]="{fleetManager: fleetManager}">
+                {{'FLEET-MANAGER.BACK' |translate}}
+            </button>
+        </span>
+        <form [formGroup]="FormGroup" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+            <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
+                <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
+                <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+                    <input matStartDate formControlName="start">
+                    <input matEndDate formControlName="end" (dateChange)="changeDate($event)">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+
+                <mat-error *ngIf="FormGroup.controls.start.hasError('required') || FormGroup.controls.start.hasError('matStartDateInvalid')">
+                    {{'STATISTIC.INVALID_START' | translate}}
+                </mat-error>
+                <mat-error *ngIf="FormGroup.controls.end.hasError('required') || FormGroup.controls.end.hasError('matEndDateInvalid')">
+                    {{'STATISTIC.INVALID_END' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </form>
+        <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+        <mat-tab-group mat-align-tabs="center" [selectedIndex]="index" (selectedTabChange)="tabChange($event)">
+            <mat-tab label="Mappa">
+                <div style="margin-top: 1%;">
+                    <lib-npt-map [usePopUp]=true [typeEvent]="'pointermove'" [layerToCheck]="layersToCheck"></lib-npt-map>
+                </div>
+            </mat-tab>
+            <mat-tab label="Statistiche">
+                <div fxLayout="row wrap">
+                    <div fxFlex.gt-lg="50" fxFlex.gt-md="50" fxFlex.gt-xs="100" fxFlex="100">
+                        <app-trip-statistic [vehicleStatTrip]="vehicleStatTrip" [viewOuter]="viewOuter"></app-trip-statistic>
+                    </div>
+                    <div fxFlex.gt-lg="50" fxFlex.gt-md="50" fxFlex.gt-xs="100" fxFlex="100">
+                        <app-table-statistic [TripPersistence]="vehicleTripPersistence"></app-table-statistic>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>

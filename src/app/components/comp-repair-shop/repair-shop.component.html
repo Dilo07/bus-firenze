@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">Officine</mat-card-title>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let repairShop of repairShops" style="margin-bottom: 20px;">
+                <mat-icon mat-list-icon>remove</mat-icon>
+                <div mat-line>{{repairShop.name}}</div>
+                <div mat-line> {{repairShop.surname}} </div>
+                <div mat-line> {{repairShop.mobile_number}}</div>
+                <div mat-line> {{repairShop.name_shop}}</div>
+                <div mat-line> {{repairShop.address}}</div>
+                <a href="http://maps.google.com/?q=`{{repairShop.name_shop}} + {{repairShop.address}}`" target="_blank">
+                    <mat-icon>
+                        location_on
+                    </mat-icon>
+                </a>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
