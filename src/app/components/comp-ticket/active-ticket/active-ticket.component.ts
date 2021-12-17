@@ -4,12 +4,20 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
-import { Ticket } from '../../domain/bus-firenze-domain';
+import { CompleteFleetManager, Ticket } from '../../domain/bus-firenze-domain';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-active-ticket',
   templateUrl: './active-ticket.component.html',
-  styles: [``]
+  styles: [``],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class ActiveTicketComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
@@ -18,8 +26,9 @@ export class ActiveTicketComponent implements OnInit {
   public roleMovyon: boolean;
   public viewFleetTable = false;
   public dataSource = new MatTableDataSource<Ticket>();
-  public displayedColumns = ['ticketId', 'lpn', 'ticketStart', 'ticketEnd', 'actions'];
+  public displayedColumns = ['ticketId', 'lpn', 'ticketStart', 'ticketEnd', 'expandButton', 'actions'];
   public complete = true;
+  public expandedElement: CompleteFleetManager | null;
 
   private fleetManagerId: number;
 
@@ -48,7 +57,7 @@ export class ActiveTicketComponent implements OnInit {
       data => {
         console.log(data)
         this.dataSource.data = data,
-        this.dataSource.sort = this.sort;
+          this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
       () => this.complete = true,

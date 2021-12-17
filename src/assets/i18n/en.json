@@ -243,7 +243,8 @@
         "NO_DATA": "No vehicles present",
         "INSERT_TICKET": "Insert a correct ticket",
         "ACTIVE_NOW": "Active now",
-        "ACTIVE_AFTER": "Active when you'll enter on area"
+        "ACTIVE_AFTER": "Active when you'll enter on area",
+        "DETAILS": "Detail ticket"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",

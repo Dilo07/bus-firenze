@@ -245,7 +245,8 @@
         "NO_DATA": "Nessun veicolo presente",
         "INSERT_TICKET": "Inserisci un ticket corretto",
         "ACTIVE_NOW": "Attiva subito",
-        "ACTIVE_AFTER": "Attiva quando entrerai nell'area"
+        "ACTIVE_AFTER": "Attiva quando entrerai nell'area",
+        "DETAILS": "Dettagli ticket"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",
