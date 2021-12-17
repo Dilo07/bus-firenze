@@ -47,7 +47,6 @@
     "@types/node": "^12.20.37",
     "codelyzer": "^6.0.0",
     "codice-fiscale-js": "^2.3.9",
-    "ng2-tel-input": "^2.3.0",
     "ts-md5": "^1.2.10",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
