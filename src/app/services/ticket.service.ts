@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Ticket } from '../components/domain/bus-firenze-domain';
+import { ActiveTicket } from './mokup/getTicket';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class TicketService {
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
   private apiUrl = this.url + '/api/fleet';
+  private activeVehicle = ActiveTicket;
 
   getVehicleNoTicket(isDriver: boolean, fleetManagerId?: number): Observable<Ticket[]> {
     let url = '';
@@ -23,6 +25,11 @@ export class TicketService {
     }
     return this.http.get<Ticket[]>(this.apiUrl + url + '/ticket/vehicles/')
       .pipe(catchError(err => { throw err; }));
+  }
+
+  getActiveTicket(): Observable<Ticket[]> {
+
+    return of(this.activeVehicle);
   }
 
   checkTicket(vehicleId: number, ticketNumber: string): Observable<void> {
