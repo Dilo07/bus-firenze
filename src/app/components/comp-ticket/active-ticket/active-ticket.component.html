@@ -35,6 +35,20 @@
             <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
             <div class="mat-elevation-z8 example-container">
                 <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+                    <ng-container matColumnDef="expandButton">
+                        <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label"></span>
+                            <button mat-icon-button
+                                (click)="expandedElement = expandedElement === element ? null : element"
+                                matTooltip="{{'TICKET.DETAILS' | translate}}">
+                                <mat-icon style="color: grey">{{expandedElement &&
+                                    expandedElement.ticketId === element.ticketId ? 'expand_more' : 'chevron_right' }}
+                                </mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+
                     <ng-container matColumnDef="ticketId">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> ticketId </mat-header-cell>
                         <mat-cell *matCellDef="let element">
@@ -67,20 +81,6 @@
                         </mat-cell>
                     </ng-container>
 
-                    <ng-container matColumnDef="expandButton">
-                        <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                            <span class="mobile-label"></span>
-                            <button mat-icon-button
-                                (click)="expandedElement = expandedElement === element ? null : element"
-                                matTooltip="{{'TICKET.DETAILS' | translate}}">
-                                <mat-icon style="color: grey">{{expandedElement &&
-                                    expandedElement.ticketId === element.ticketId ? 'expand_more' : 'expand_less' }}
-                                </mat-icon>
-                            </button>
-                        </mat-cell>
-                    </ng-container>
-
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                         <mat-cell *matCellDef="let element" style="text-align: end;">
@@ -106,11 +106,11 @@
                                             <p>{{element.dateIns | date: 'dd/MM/yyyy'}}</p>
                                         </div>
                                         <div>
-                                            <h3>Cancellato da:</h3>
+                                            <h3>Terminato da:</h3>
                                             <p>{{element.userIns.surname}}</p>
                                         </div>
                                         <div>
-                                            <h3>Cancellato il:</h3>
+                                            <h3>Terminato il:</h3>
                                             <p>{{element.dateIns | date: 'dd/MM/yyyy'}}</p>
                                         </div>
                                     </div>

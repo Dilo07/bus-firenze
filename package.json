@@ -47,6 +47,8 @@
     "@types/node": "^12.20.37",
     "codelyzer": "^6.0.0",
     "codice-fiscale-js": "^2.3.9",
+    "@types/file-saver": "2.0.4",
+    "file-saver": "2.0.5",
     "ts-md5": "^1.2.10",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",

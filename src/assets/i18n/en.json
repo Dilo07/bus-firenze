@@ -150,7 +150,9 @@
         "ADD_ERROR": "vehicle entry error",
         "ADD_SUCCESS": "Vehicle inserted correctly",
         "EDIT_ERROR": "vehicle edit error",
-        "EDIT_SUCCESS": "Vehicle edited correctly"
+        "EDIT_SUCCESS": "Vehicle edited correctly",
+        "DOWNLOAD": "Download manual",
+        "DOWNLOAD CONTRACT": "Download contract"
     },
     "DRIVERS": {
         "TITLE": "Drivers",
@@ -266,7 +268,8 @@
             "CANCEL": "Cancel",
             "SAVE": "Save",
             "EDIT": "Edit",
-            "ACTIVE": "Active"
+            "ACTIVE": "Active",
+            "VERIFY": "Verify"
         }
     },
     "ERROR": {

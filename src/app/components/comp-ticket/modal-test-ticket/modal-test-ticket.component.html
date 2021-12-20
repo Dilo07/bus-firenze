@@ -8,20 +8,24 @@
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="50" fxFlex.gt-md="50">
                     <mat-label>Ticket</mat-label>
                     <div fxLayout="row">
-                        <input matInput type="text" formControlName="CtrlTicket" required minlength="7" maxlength="7"
-                            (ngModelChange)="testTicket()" autocomplete="off">
-                        <mat-icon *ngIf="validTicket === true" style="color: green;">check</mat-icon>
-                        <button mat-icon-button *ngIf="validTicket === false" (click)="cleanTicket()">
-                            <mat-icon>close</mat-icon>
-                        </button>
+                        <input matInput type="text" formControlName="CtrlTicket" required minlength="1" maxlength="10"
+                            autocomplete="off" [readOnly]="validTicket">
+                        <mat-icon *ngIf="validTicket === true else clean" style="color: green;">check</mat-icon>
+                        <ng-template #clean>
+                            <button mat-icon-button (click)="cleanTicket()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </ng-template>
                     </div>
                     <mat-error>{{'TICKET.INSERT_TICKET' | translate}}</mat-error>
                 </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutAlign="center">
+            <div fxLayout="row" fxLayoutAlign="center" *ngIf="!hideActiveTicket">
                 <mat-radio-group formControlName="CtrlActive">
                     <mat-radio-button [value]="true">
-                        <span style="white-space: normal; margin-right: 10px;">{{'TICKET.ACTIVE_AFTER' | translate}}</span>
+                        <span style="white-space: normal; margin-right: 10px;">
+                            {{'TICKET.ACTIVE_AFTER' | translate}}
+                        </span>
                     </mat-radio-button>
                     <br>
                     <mat-radio-button [value]="false">
@@ -32,8 +36,13 @@
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="15px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">
                     {{'COMMON.ACTION.CANCEL' | translate}}</button>
-                <button mat-button [disabled]="!validTicket" class="greenButtons"
-                    (click)="addTicket()">{{'COMMON.ACTION.ACTIVE' | translate}}</button>
+                <button mat-button *ngIf="!validTicket else save" [disabled]="FormGroup.invalid" class="greenButtons"
+                    (click)="testTicket()">{{'COMMON.ACTION.VERIFY' | translate}}</button>
+                <ng-template #save>
+                    <button mat-button class="greenButtons" (click)="addTicket()">
+                        {{'COMMON.ACTION.SAVE' | translate}}
+                    </button>
+                </ng-template>
             </div>
         </form>
     </mat-card-content>

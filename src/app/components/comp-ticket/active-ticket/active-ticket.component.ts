@@ -29,7 +29,7 @@ export class ActiveTicketComponent implements OnInit {
   public viewFleetTable = false;
   public viewHistoric = false;
   public dataSource = new MatTableDataSource<Ticket>();
-  public displayedColumns = ['ticketId', 'lpn', 'ticketStart', 'ticketEnd', 'expandButton', 'actions'];
+  public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'ticketStart', 'ticketEnd', 'actions'];
   public complete = true;
   public expandedElement: CompleteFleetManager | null;
   public FormGroup: FormGroup;
@@ -64,6 +64,7 @@ export class ActiveTicketComponent implements OnInit {
     this.complete = false;
     this.ticketService.getActiveTicket().subscribe(
       data => {
+        console.log(data)
         this.dataSource.data = data,
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;

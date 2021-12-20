@@ -21,7 +21,8 @@ export class ModalTestTicketComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number, fleetManagerId: number },
-    @Inject('authService') private authService: any
+    @Inject('authService') private authService: any,
+    @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {
     this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
   }
@@ -35,13 +36,10 @@ export class ModalTestTicketComponent implements OnInit {
 
   public testTicket(): void {
     const ticket = this.FormGroup.get('CtrlTicket').value;
-    if (ticket.length !== 7) {
-      this.validTicket = false;
-    } else {
-      this.ticketService.checkTicket(this.data.vehicleId, ticket).subscribe(
-        () => this.validTicket = true
-      );
-    }
+    this.ticketService.checkTicket(this.data.vehicleId, ticket).subscribe(
+      () => this.validTicket = true,
+      () => this.validTicket = false
+    );
   }
 
   public addTicket(): void {

@@ -46,6 +46,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
       provide: 'repair_shopData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['repair_shop', ConfigInitService]
     },
+    { provide: 'hideActiveTicket', useValue: 'hideActiveTicket'},
+    {
+      provide: 'hideActiveTicketData',
+      useFactory: getPropertyFromConfig, multi: false, deps: ['hideActiveTicket', ConfigInitService]
+    },
     // npt-net
     { provide: 'viewOuter', useValue: 'viewOuter'},
     {

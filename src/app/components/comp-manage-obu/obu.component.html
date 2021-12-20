@@ -2,6 +2,15 @@
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Veicoli</mat-card-title>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
+			<div>
+				<button mat-button class="greenButtons" [matMenuTriggerFor]="menuDownload">
+					{{'VEHICLE.DOWNLOAD' | translate}}</button>
+			</div>
+			<mat-menu #menuDownload="matMenu">
+				<button mat-menu-item (click)="downloadManualPdf(2)">Tracker X</button>
+				<button mat-menu-item (click)="downloadManualPdf(3)">Arianna II</button>
+				<button mat-menu-item (click)="downloadManualPdf(4)">Arianna I</button>
+			</mat-menu>
 			<form [formGroup]="Search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field appearance="fill" fxFlex="30">
 					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>

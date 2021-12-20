@@ -152,7 +152,9 @@
         "ADD_ERROR": "Errore nell'inserimento veicolo",
         "ADD_SUCCESS": "Veicolo inserito correttamente",
         "EDIT_ERROR": "Errore nella modifica veicolo",
-        "EDIT_SUCCESS": "Veicolo modificato correttamente"
+        "EDIT_SUCCESS": "Veicolo modificato correttamente",
+        "DOWNLOAD": "Scarica manuale",
+        "DOWNLOAD CONTRACT": "Scarica contratto"
     },
     "DRIVERS": {
         "TITLE": "Autisti",
@@ -268,7 +270,8 @@
             "CANCEL": "Cancella",
             "SAVE": "Salva",
             "EDIT": "Modifica",
-            "ACTIVE": "Attiva"
+            "ACTIVE": "Attiva",
+            "VERIFY": "Verifica"
         }
     },
     "ERROR": {
