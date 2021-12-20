@@ -104,10 +104,10 @@
         </form>
         <div fxLayout="row" fxLayoutAlign="center center">{{selectedFile?.name}}</div>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" *ngIf="!data">
-            <button mat-raised-button color="primary">Scarica File</button>
+            <button mat-button class="bluButton">Scarica File</button>
             <input style="display: none" type="file" #fileInput accept="application/pdf, image/jpeg, image/png"
                 (change)="uploadFile($event)">
-            <button mat-raised-button color="primary" (click)="fileInput.click()">
+            <button mat-button class="bluButton" (click)="fileInput.click()">
                 {{selectedFile?.name ? 'Change File' : 'Upload File'}}
             </button>
         </div>

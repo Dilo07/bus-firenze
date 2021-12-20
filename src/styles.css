@@ -115,3 +115,12 @@ mat-card-content {
 .backButton:hover {
     background-color: #616161;
 }
+
+.bluButton{
+    background-color: #1E88E5;
+    color: white;
+}
+
+.bluButton:hover{
+    background-color: #1878cc;
+}

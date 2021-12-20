@@ -6,11 +6,32 @@
             <app-table-fleet (callManageTicket)="getActiveTicket($event)"></app-table-fleet>
         </div>
         <ng-template #vehicleTicket>
-            <div style="margin-bottom: 20px;">
+            <div fxLayout="row" fxLayoutGap="20px" style="margin-bottom: 20px;">
                 <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
                     {{'FLEET-MANAGER.BACK' | translate}}
                 </button>
+                <button mat-raised-button class="bluButton" (click)="viewHistoric = !viewHistoric">
+                    {{ viewHistoric ? 'ticket attivi' : 'vedi storico' }}
+                </button>
             </div>
+            <form *ngIf="viewHistoric" [formGroup]="FormGroup" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+                <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
+                    <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
+                    <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+                        <input matStartDate formControlName="start">
+                        <input matEndDate formControlName="end" (dateChange)="changeDate($event)">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+    
+                    <mat-error *ngIf="FormGroup.controls.start.hasError('required') || FormGroup.controls.start.hasError('matStartDateInvalid')">
+                        {{'STATISTIC.INVALID_START' | translate}}
+                    </mat-error>
+                    <mat-error *ngIf="FormGroup.controls.end.hasError('required') || FormGroup.controls.end.hasError('matEndDateInvalid')">
+                        {{'STATISTIC.INVALID_END' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </form>
             <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
             <div class="mat-elevation-z8 example-container">
                 <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>

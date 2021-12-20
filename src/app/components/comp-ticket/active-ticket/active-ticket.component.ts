@@ -6,6 +6,8 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { CompleteFleetManager, Ticket } from '../../domain/bus-firenze-domain';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-active-ticket',
@@ -25,10 +27,13 @@ export class ActiveTicketComponent implements OnInit {
   public roleDriver: boolean;
   public roleMovyon: boolean;
   public viewFleetTable = false;
+  public viewHistoric = false;
   public dataSource = new MatTableDataSource<Ticket>();
   public displayedColumns = ['ticketId', 'lpn', 'ticketStart', 'ticketEnd', 'expandButton', 'actions'];
   public complete = true;
   public expandedElement: CompleteFleetManager | null;
+  public FormGroup: FormGroup;
+  public maxDate = moment(moment.now()).toDate();
 
   private fleetManagerId: number;
 
@@ -43,8 +48,12 @@ export class ActiveTicketComponent implements OnInit {
     if (this.roleMovyon) {
       this.viewFleetTable = true;
     } else {
-      // get ticket active
+      this.getActiveTicket();
     }
+    this.FormGroup = new FormGroup({
+      start: new FormControl('', Validators.required),
+      end: new FormControl('', Validators.required),
+    });
   }
 
   public getActiveTicket(fleetManagerId?: number): void {
@@ -55,9 +64,8 @@ export class ActiveTicketComponent implements OnInit {
     this.complete = false;
     this.ticketService.getActiveTicket().subscribe(
       data => {
-        console.log(data)
         this.dataSource.data = data,
-          this.dataSource.sort = this.sort;
+        this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
       () => this.complete = true,

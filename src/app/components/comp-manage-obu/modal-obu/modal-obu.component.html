@@ -31,7 +31,7 @@
             <div *ngIf="validObu && !data.obuId">
                 <input style="display: none" type="file" #fileInput accept="application/pdf"
                 (change)="uploadFile($event)">
-                <button mat-raised-button color="primary" matTooltip="{{'OBU.UPLOAD_FILE' | translate}}"
+                <button mat-button class="bluButton" matTooltip="{{'OBU.UPLOAD_FILE' | translate}}"
                     (click)="fileInput.click()">
                     {{selectedFile?.name ? 'Change File' : 'Upload File'}}
                 </button>
