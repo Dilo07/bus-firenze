@@ -62,4 +62,16 @@ export class TicketService {
     return this.http.put<void>(this.apiUrl + url + '/vehicle/' + vehicleId + '/ticket/' + ticketNumber, null)
       .pipe(catchError(err => { throw err; }));
   }
+
+  removeTicket(ticketId: number, vehicleId: number, isDriver: boolean, fleetManagerId: number): Observable<void> {
+    let url = '';
+    if (isDriver) {
+      url = '/' + 'driver';
+    }
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
+    return this.http.delete<void>(this.apiUrl + url + '/vehicle/' + vehicleId + '/ticket/' + ticketId)
+      .pipe(catchError(err => { throw err; }));
+  }
 }

@@ -76,7 +76,7 @@ export class ActiveTicketComponent implements OnInit {
     this.ticketService.getActiveTicket(this.roleDriver, this.fleetManagerId, this.start, this.end).subscribe(
       data => {
         this.dataSource.data = data,
-        this.dataSource.sort = this.sort;
+          this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
       () => this.complete = true,
@@ -84,7 +84,13 @@ export class ActiveTicketComponent implements OnInit {
     );
   }
 
-  public changeDate(): void{
+  public removeTicket(ticketId: number, vehicleId: number): void {
+    this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManagerId).subscribe(
+      data => console.log(data)
+    );
+  }
+
+  public changeDate(): void {
     this.start = '';
     this.end = '';
     if (this.FormGroup.get('end').value) {
