@@ -240,6 +240,14 @@ export class FleetManagerComponent implements OnInit {
     this.callGetFleetManager();
   }
 
+  public changeZoom(zoomIn: boolean): void {
+    if (zoomIn && this.zoom <= 1) {
+      this.zoom += 0.1;
+    }else if (!zoomIn && this.zoom >= 0.2){
+      this.zoom -= 0.1;
+    }
+  }
+
   private reset(): void {
     this.paginator.pageIndex = 0;
     this.paginator.length = 0;

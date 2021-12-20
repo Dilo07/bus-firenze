@@ -7,10 +7,10 @@
         </div>
         <ng-template #vehicleTicket>
             <div fxLayout="row" fxLayoutGap="20px" style="margin-bottom: 20px;">
-                <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
+                <button mat-button class="backButton" *ngIf="roleMovyon" (click)="backFleetTable()">
                     {{'FLEET-MANAGER.BACK' | translate}}
                 </button>
-                <button mat-raised-button class="bluButton" (click)="viewHistoric = !viewHistoric">
+                <button mat-raised-button class="bluButton" (click)="switchHistoric()">
                     {{ viewHistoric ? 'ticket attivi' : 'vedi storico' }}
                 </button>
             </div>
@@ -20,19 +20,10 @@
                     <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
                     <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
                         <input matStartDate formControlName="start">
-                        <input matEndDate formControlName="end" (dateChange)="getActiveTicket()">
+                        <input matEndDate formControlName="end" (dateChange)="changeDate()">
                     </mat-date-range-input>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>
-
-                    <mat-error
-                        *ngIf="FormGroup.controls.start.hasError('required') || FormGroup.controls.start.hasError('matStartDateInvalid')">
-                        {{'STATISTIC.INVALID_START' | translate}}
-                    </mat-error>
-                    <mat-error
-                        *ngIf="FormGroup.controls.end.hasError('required') || FormGroup.controls.end.hasError('matEndDateInvalid')">
-                        {{'STATISTIC.INVALID_END' | translate}}
-                    </mat-error>
                 </mat-form-field>
             </form>
             <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
@@ -85,10 +76,18 @@
                         </mat-cell>
                     </ng-container>
 
+                    <ng-container matColumnDef="type">
+                        <mat-header-cell *matHeaderCellDef> type </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">type</span>
+                            {{element.ticketSubscription ? 'abbonamento' : 'voucher'}}
+                        </mat-cell>
+                    </ng-container>
+
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                         <mat-cell *matCellDef="let element" style="text-align: end;">
-                            <button mat-icon-button matTooltip="fine visita">
+                            <button mat-icon-button matTooltip="fine visita" *ngIf="element.ticketSubscription && !element.dateDel">
                                 <mat-icon style="color: #0066CC;">pan_tool</mat-icon>
                             </button>
                         </mat-cell>
@@ -102,19 +101,19 @@
                                 <div class="example-element-description">
                                     <div fxLayout="row" fxLayoutGap="20px">
                                         <div>
-                                            <h3>Inserito da:</h3>
+                                            <h5>Inserito da:</h5>
                                             <p>{{element.userIns.surname}}</p>
                                         </div>
                                         <div>
-                                            <h3>Inserito il:</h3>
+                                            <h5>Inserito il:</h5>
                                             <p>{{element.dateIns | date: 'dd/MM/yyyy'}}</p>
                                         </div>
                                         <div>
-                                            <h3>Terminato da:</h3>
+                                            <h5>Terminato da:</h5>
                                             <p>{{element.userIns.surname}}</p>
                                         </div>
                                         <div>
-                                            <h3>Terminato il:</h3>
+                                            <h5>Terminato il:</h5>
                                             <p>{{element.dateIns | date: 'dd/MM/yyyy'}}</p>
                                         </div>
                                     </div>

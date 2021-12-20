@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { HttpUtils } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Ticket } from '../components/domain/bus-firenze-domain';
@@ -27,9 +28,22 @@ export class TicketService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getActiveTicket(): Observable<Ticket[]> {
+  getActiveTicket(isDriver: boolean, fleetManagerId: number, start?: string, end?: string): Observable<Ticket[]> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ start, end })
+    };
+    let url = '';
+    if (isDriver) {
+      url = '/' + 'driver';
+    }
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
+    return this.http.get<Ticket[]>(this.apiUrl + url + '/tickets', options)
+      .pipe(catchError(err => { throw err; }));
 
-    return of(this.activeVehicle);
+    /* return of(this.activeVehicle); */
   }
 
   checkTicket(vehicleId: number, ticketNumber: string): Observable<void> {

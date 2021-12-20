@@ -38,11 +38,13 @@ export class ActiveTicketComponent implements OnInit {
   public viewFleetTable = false;
   public viewHistoric = false;
   public dataSource = new MatTableDataSource<Ticket>();
-  public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'ticketStart', 'ticketEnd', 'actions'];
+  public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'ticketStart', 'ticketEnd', 'type', 'actions'];
   public complete = true;
   public expandedElement: CompleteFleetManager | null;
   public FormGroup: FormGroup;
   public maxDate = moment(moment.now()).toDate();
+  public start: string;
+  public end: string;
 
   private fleetManagerId: number;
 
@@ -54,15 +56,15 @@ export class ActiveTicketComponent implements OnInit {
   ngOnInit(): void {
     this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
     this.roleMovyon = this.authService.getUserRoles().includes(ROLES.MOVYON);
+    this.FormGroup = new FormGroup({
+      start: new FormControl(''),
+      end: new FormControl(''),
+    });
     if (this.roleMovyon) {
       this.viewFleetTable = true;
     } else {
       this.getActiveTicket();
     }
-    this.FormGroup = new FormGroup({
-      start: new FormControl('', Validators.required),
-      end: new FormControl('', Validators.required),
-    });
   }
 
   public getActiveTicket(fleetManagerId?: number): void {
@@ -71,9 +73,8 @@ export class ActiveTicketComponent implements OnInit {
       this.viewFleetTable = false;
     }
     this.complete = false;
-    this.ticketService.getActiveTicket().subscribe(
+    this.ticketService.getActiveTicket(this.roleDriver, this.fleetManagerId, this.start, this.end).subscribe(
       data => {
-        console.log(data)
         this.dataSource.data = data,
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -81,6 +82,39 @@ export class ActiveTicketComponent implements OnInit {
       () => this.complete = true,
       () => this.complete = true
     );
+  }
+
+  public changeDate(): void{
+    this.start = '';
+    this.end = '';
+    if (this.FormGroup.get('end').value) {
+      this.start = moment(this.FormGroup.get('start').value).format('yyyy-MM-DD');
+      this.end = moment(this.FormGroup.get('end').value).format('yyyy-MM-DD');
+      this.getActiveTicket();
+    }
+  }
+
+  public backFleetTable(): void {
+    this.viewFleetTable = true;
+  }
+
+  public switchHistoric(): void {
+    if (this.viewHistoric) {
+      this.resetDate();
+      this.viewHistoric = false;
+      this.getActiveTicket();
+    } else {
+      this.viewHistoric = true;
+    }
+  }
+
+  private resetDate(): void {
+    this.FormGroup.patchValue({
+      start: '',
+      end: ''
+    });
+    this.start = '';
+    this.end = '';
   }
 
 }
