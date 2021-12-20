@@ -224,12 +224,10 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   private fiscaleCodeValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    let cf: CodiceFiscale;
     if (control.value?.length === 16) {
-      try {
-        cf = new CodiceFiscale(control.value);
+      if (CodiceFiscale.check(control.value)) {
         return null;
-      } catch (error) {
+      } else {
         return { fiscalCode: true };
       }
     } else {

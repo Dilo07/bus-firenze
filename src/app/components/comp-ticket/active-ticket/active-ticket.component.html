@@ -14,20 +14,23 @@
                     {{ viewHistoric ? 'ticket attivi' : 'vedi storico' }}
                 </button>
             </div>
-            <form *ngIf="viewHistoric" [formGroup]="FormGroup" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+            <form *ngIf="viewHistoric" [formGroup]="FormGroup" fxLayout="row" fxLayoutAlign="left center"
+                fxLayoutGap="20px">
                 <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
                     <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
                     <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
                         <input matStartDate formControlName="start">
-                        <input matEndDate formControlName="end" (dateChange)="changeDate($event)">
+                        <input matEndDate formControlName="end" (dateChange)="getActiveTicket()">
                     </mat-date-range-input>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>
-    
-                    <mat-error *ngIf="FormGroup.controls.start.hasError('required') || FormGroup.controls.start.hasError('matStartDateInvalid')">
+
+                    <mat-error
+                        *ngIf="FormGroup.controls.start.hasError('required') || FormGroup.controls.start.hasError('matStartDateInvalid')">
                         {{'STATISTIC.INVALID_START' | translate}}
                     </mat-error>
-                    <mat-error *ngIf="FormGroup.controls.end.hasError('required') || FormGroup.controls.end.hasError('matEndDateInvalid')">
+                    <mat-error
+                        *ngIf="FormGroup.controls.end.hasError('required') || FormGroup.controls.end.hasError('matEndDateInvalid')">
                         {{'STATISTIC.INVALID_END' | translate}}
                     </mat-error>
                 </mat-form-field>
@@ -42,7 +45,8 @@
                             <button mat-icon-button
                                 (click)="expandedElement = expandedElement === element ? null : element"
                                 matTooltip="{{'TICKET.DETAILS' | translate}}">
-                                <mat-icon style="color: grey">{{expandedElement &&
+                                <mat-icon style="color: grey">
+                                    {{expandedElement &&
                                     expandedElement.ticketId === element.ticketId ? 'expand_more' : 'chevron_right' }}
                                 </mat-icon>
                             </button>

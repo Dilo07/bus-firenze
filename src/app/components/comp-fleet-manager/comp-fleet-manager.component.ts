@@ -84,6 +84,7 @@ export class FleetManagerComponent implements OnInit {
   public roleOpMovyon: boolean;
   public viewDoc: 'on' | 'off' = 'off';
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
+  public zoom = 0.5;
 
   private offset = 0;
   private limit = 10;

@@ -10,8 +10,9 @@
 				<button mat-button class="greenButtons" (click)="addVehicle()">
 					{{'FLEET-MANAGER.NEW' | translate}}
 				</button>
-				<button mat-button class="greenButtons" [matMenuTriggerFor]="menuDownload">{{'VEHICLE.DOWNLOAD' |
-					translate}}</button>
+				<button mat-button class="greenButtons" [matMenuTriggerFor]="menuDownload">
+					{{'VEHICLE.DOWNLOAD' | translate}}
+				</button>
 				<mat-menu #menuDownload="matMenu">
 					<button mat-menu-item (click)="downloadManualPdf(2)">Tracker X</button>
 					<button mat-menu-item (click)="downloadManualPdf(3)">Arianna II</button>
@@ -132,7 +133,7 @@
 							<button *ngIf="!element.deleted" mat-icon-button
 								matTooltip="{{'VEHICLE.DOWNLOAD CONTRACT' | translate}}"
 								(click)="downloadDocumentVehicle(element.id)">
-								<mat-icon style="color: green;">assignment_returned</mat-icon>
+								<mat-icon style="color: #0066CC;">assignment_returned</mat-icon>
 							</button>
 						</mat-cell>
 					</ng-container>

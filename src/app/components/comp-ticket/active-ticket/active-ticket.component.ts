@@ -12,7 +12,16 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-active-ticket',
   templateUrl: './active-ticket.component.html',
-  styles: [``],
+  styles: [`
+  @media(min-width: 1180px) {
+    .mat-column-expandButton { max-width: 5%}
+    .mat-column-ticketId { max-width: 15%;}
+    .mat-column-lpn { max-width: 20%}
+    .mat-column-ticketStart { max-width: 20%;}
+    .mat-column-ticketEnd { max-width: 20%;}
+    .mat-column-actions { max-width: 20%; display: table-column;}
+  }
+  `],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),

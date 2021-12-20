@@ -4,12 +4,20 @@
 		<div [@slideInOut]="viewDoc">
 			<span *ngIf="src.type === 'application/pdf' else image">
 				<pdf-viewer [src]="src.url" [rotation]="0" [original-size]="false" [show-all]="true"
-					[fit-to-page]="false" [zoom]="0.5" [zoom-scale]="'page-width'" [stick-to-page]="false"
+					[fit-to-page]="false" [zoom]="zoom" [zoom-scale]="'page-width'" [stick-to-page]="false"
 					[render-text]="true" [external-link-target]="'top'" [autoresize]="true" [show-borders]="true">
 				</pdf-viewer>
 			</span>
-			<button mat-icon-button (click)="viewDoc = 'off'">
+			<button mat-icon-button (click)="viewDoc = 'off'; zoom = 0.5">
 				<mat-icon>close</mat-icon>
+			</button>
+			<br>
+			<button mat-icon-button (click)="zoom = zoom + 0.1">
+				<mat-icon>add</mat-icon>
+			</button>
+			<br>
+			<button mat-icon-button (click)="zoom = zoom - 0.1">
+				<mat-icon>remove</mat-icon>
 			</button>
 			<ng-template #image>
 				<img class="img-responsive" [src]="src.url" alt="imgDoc">
