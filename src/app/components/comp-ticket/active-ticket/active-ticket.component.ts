@@ -75,8 +75,8 @@ export class ActiveTicketComponent implements OnInit {
     this.complete = false;
     this.ticketService.getActiveTicket(this.roleDriver, this.fleetManagerId, this.start, this.end).subscribe(
       data => {
-        this.dataSource.data = data,
-          this.dataSource.sort = this.sort;
+        this.dataSource.data = data;
+        this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
       () => this.complete = true,
@@ -86,7 +86,9 @@ export class ActiveTicketComponent implements OnInit {
 
   public removeTicket(ticketId: number, vehicleId: number): void {
     this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManagerId).subscribe(
-      data => console.log(data)
+      () => this.complete = true,
+      () => this.complete = true,
+      () => { this.getActiveTicket(); this.complete = true; }
     );
   }
 
