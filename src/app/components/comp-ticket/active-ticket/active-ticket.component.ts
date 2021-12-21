@@ -86,7 +86,7 @@ export class ActiveTicketComponent implements OnInit {
 
   public removeTicket(ticketId: number, vehicleId: number): void {
     this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManagerId).subscribe(
-      () => this.complete = true,
+      () => null,
       () => this.complete = true,
       () => { this.getActiveTicket(); this.complete = true; }
     );

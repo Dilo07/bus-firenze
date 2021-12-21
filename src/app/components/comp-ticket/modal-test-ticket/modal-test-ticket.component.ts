@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
+import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 
 @Component({
   selector: 'app-modal-test-ticket',
@@ -19,6 +20,7 @@ export class ModalTestTicketComponent implements OnInit {
   constructor(
     private ticketService: TicketService,
     private formBuilder: FormBuilder,
+    private snackBar: SnackBar,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number, fleetManagerId: number },
     @Inject('authService') private authService: any,
@@ -29,7 +31,7 @@ export class ModalTestTicketComponent implements OnInit {
 
   ngOnInit(): void {
     this.FormGroup = this.formBuilder.group({
-      CtrlTicket: ['', Validators.pattern('^[A-Za-z0-9]+$')],
+      CtrlTicket: ['', Validators.required],
       CtrlActive: [false, Validators.required]
     });
   }
@@ -38,14 +40,15 @@ export class ModalTestTicketComponent implements OnInit {
     const ticket = this.FormGroup.get('CtrlTicket').value;
     this.ticketService.checkTicket(this.data.vehicleId, ticket).subscribe(
       () => this.validTicket = true,
-      () => this.validTicket = false
+      () => this.validTicket = false,
+      () => this.snackBar.showMessage('TICKET.TEST_SUCCESS', 'INFO')
     );
   }
 
   public addTicket(): void {
     const ticket = this.FormGroup.get('CtrlTicket').value;
     this.ticketService.addTicket(this.roleDriver, this.data.vehicleId, ticket, this.data.fleetManagerId).subscribe(
-      data => console.log(data)
+      () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO')
     );
   }
 

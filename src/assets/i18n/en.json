@@ -246,7 +246,9 @@
         "INSERT_TICKET": "Insert a correct ticket",
         "ACTIVE_NOW": "Active now",
         "ACTIVE_AFTER": "Active when you'll enter on area",
-        "DETAILS": "Detail ticket"
+        "DETAILS": "Detail ticket",
+        "TEST_SUCCESS": "Ticket verified",
+        "ADD_SUCCESS": "Ticket correctly added"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",

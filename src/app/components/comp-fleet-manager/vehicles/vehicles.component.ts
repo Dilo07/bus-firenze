@@ -29,12 +29,12 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   }
   @media(min-width: 1180px) {
     .mat-column-id { max-width: 10%}
-    .mat-column-plate { max-width: 15%;}
+    .mat-column-plate { max-width: 10%;}
     .mat-column-nat { max-width: 5%}
     .mat-column-euroClass { max-width: 10%;}
     .mat-column-obuId { max-width: 20%;}
     .mat-column-consent { max-width: 20%;}
-    .mat-column-actions { max-width: 20%; display: table-column;}
+    .mat-column-actions { max-width: 25%; display: table-column;}
   }
   `]
 })
