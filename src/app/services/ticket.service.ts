@@ -42,8 +42,6 @@ export class TicketService {
     }
     return this.http.get<Ticket[]>(this.apiUrl + url + '/tickets', options)
       .pipe(catchError(err => { throw err; }));
-
-    /* return of(this.activeVehicle); */
   }
 
   checkTicket(vehicleId: number, ticketNumber: string): Observable<void> {
