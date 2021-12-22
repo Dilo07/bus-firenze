@@ -12,6 +12,7 @@ import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.componen
 import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -211,6 +212,17 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
       () => null,
       () => this.ngOnDestroy()
     ));
+  }
+
+  public downloadTemplate(): void{
+    const FileSaver = require('file-saver');
+    this.subscription.push(this.registerService.getTemplateDocument()
+      .subscribe((data: HttpResponse<Blob>) => {
+        const contentDispositionHeader = data.headers.get('Content-Disposition');
+        const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+        FileSaver.saveAs(data.body, filename);
+      },
+        () => null));
   }
 
   public uploadFile(event: any): void {
