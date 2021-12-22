@@ -44,12 +44,20 @@ export class TicketService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  checkTicket(vehicleId: number, ticketNumber: string): Observable<void> {
-    return this.http.get<void>(this.apiUrl + '/vehicle/' + vehicleId + '/ticket/' + ticketNumber)
+  checkTicket(vehicleId: number, ticketId: string): Observable<void> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ ticketId })
+    };
+    return this.http.get<void>(this.apiUrl + '/vehicle/' + vehicleId + '/ticket', options)
       .pipe(catchError(err => { throw err; }));
   }
 
-  addTicket(isDriver: boolean, vehicleId: number, ticketNumber: string, fleetManagerId?: number): Observable<void> {
+  addTicket(isDriver: boolean, vehicleId: number, ticketId: string, fleetManagerId?: number): Observable<void> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ ticketId })
+    };
     let url = '';
     if (isDriver) {
       url = '/' + 'driver';
@@ -57,11 +65,15 @@ export class TicketService {
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
-    return this.http.put<void>(this.apiUrl + url + '/vehicle/' + vehicleId + '/ticket/' + ticketNumber, null)
+    return this.http.put<void>(this.apiUrl + url + '/vehicle/' + vehicleId + '/ticket', null , options)
       .pipe(catchError(err => { throw err; }));
   }
 
   removeTicket(ticketId: number, vehicleId: number, isDriver: boolean, fleetManagerId: number): Observable<void> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ ticketId })
+    };
     let url = '';
     if (isDriver) {
       url = '/' + 'driver';
@@ -69,7 +81,7 @@ export class TicketService {
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
-    return this.http.delete<void>(this.apiUrl + url + '/vehicle/' + vehicleId + '/ticket/' + ticketId)
+    return this.http.delete<void>(this.apiUrl + url + '/vehicle/' + vehicleId + '/ticket', options)
       .pipe(catchError(err => { throw err; }));
   }
 }
