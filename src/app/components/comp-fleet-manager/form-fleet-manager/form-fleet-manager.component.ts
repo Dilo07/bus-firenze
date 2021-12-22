@@ -3,7 +3,6 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import CodiceFiscale from 'codice-fiscale-js';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { RegisterService } from 'src/app/services/register.service';
@@ -224,8 +223,9 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   private fiscaleCodeValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const codiceFiscale = require('codice-fiscale-js');
     if (control.value?.length === 16) {
-      if (CodiceFiscale.check(control.value)) {
+      if (codiceFiscale.check(control.value)) {
         return null;
       } else {
         return { fiscalCode: true };

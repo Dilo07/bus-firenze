@@ -1,13 +1,15 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import * as moment from 'moment';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { CompleteFleetManager, Ticket } from '../../domain/bus-firenze-domain';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import * as moment from 'moment';
+import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-active-ticket',
@@ -50,6 +52,7 @@ export class ActiveTicketComponent implements OnInit {
 
   constructor(
     private ticketService: TicketService,
+    private dialog: MatDialog,
     @Inject('authService') private authService: any
   ) { }
 
@@ -85,10 +88,23 @@ export class ActiveTicketComponent implements OnInit {
   }
 
   public removeTicket(ticketId: number, vehicleId: number): void {
-    this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManagerId).subscribe(
-      () => null,
-      () => this.complete = true,
-      () => { this.getActiveTicket(); this.complete = true; }
+    const dialogRef = this.dialog.open(ModalConfirmComponent, {
+      width: '50%',
+      height: '30%',
+      data: { text: 'TICKET.REMOVE_CONFIRM' },
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe(
+      confirm => {
+        if (confirm) {
+          this.complete = false;
+          this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManagerId).subscribe(
+            () => null,
+            () => this.complete = true,
+            () => { this.getActiveTicket(); this.complete = true; }
+          );
+        }
+      }
     );
   }
 

@@ -48,7 +48,9 @@ export class ModalTestTicketComponent implements OnInit {
   public addTicket(): void {
     const ticket = this.FormGroup.get('CtrlTicket').value;
     this.ticketService.addTicket(this.roleDriver, this.data.vehicleId, ticket, this.data.fleetManagerId).subscribe(
-      () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO')
+      () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
+      () => null,
+      () => this.dialogRef.close(true)
     );
   }
 

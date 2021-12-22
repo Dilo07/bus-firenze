@@ -250,7 +250,8 @@
         "ACTIVE_AFTER": "Attiva quando entrerai nell'area",
         "DETAILS": "Dettagli ticket",
         "TEST_SUCCESS": "Ticket verificato",
-        "ADD_SUCCESS": "Ticket inserito correttamente"
+        "ADD_SUCCESS": "Ticket inserito correttamente",
+        "REMOVE_CONFIRM": "Sei sicuro di voler terminare questo ticket?"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",

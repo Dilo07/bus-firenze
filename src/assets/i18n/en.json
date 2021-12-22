@@ -248,7 +248,8 @@
         "ACTIVE_AFTER": "Active when you'll enter on area",
         "DETAILS": "Detail ticket",
         "TEST_SUCCESS": "Ticket verified",
-        "ADD_SUCCESS": "Ticket correctly added"
+        "ADD_SUCCESS": "Ticket correctly added",
+        "REMOVE_CONFIRM": "Are you sure to terminate this ticket?"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",
