@@ -80,7 +80,8 @@
                         <mat-header-cell *matHeaderCellDef> {{'TICKET.TYPE' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
                             <span class="mobile-label">{{'TICKET.TYPE' | translate}}</span>
-                            {{element.ticketSubscription === null ? '-' : element.ticketSubscription  ? 'abbonamento' : 'voucher'}}
+                            {{element.ticketSubscription === null ? '-' :
+                            element.ticketSubscription ? ('TICKET.RENT' | translate) : 'Voucher' }}
                         </mat-cell>
                     </ng-container>
 
@@ -88,15 +89,18 @@
                         <mat-header-cell *matHeaderCellDef> {{'TICKET.ACTIVATION' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
                             <span class="mobile-label">{{'TICKET.ACTIVATION' | translate}}</span>
-                            {{element.dateSink ? (element.dateSink | date: 'dd/MM/yyyy HH:mm') : 'in fase di attivazione'}}
+                            {{element.dateSink ? (element.dateSink | date: 'dd/MM/yyyy HH:mm') :
+                            ('TICKET.ACTIVATION_PHASE' | translate)}}
                         </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                         <mat-cell *matCellDef="let element" style="text-align: end;">
-                            <button mat-icon-button matTooltip="fine visita" *ngIf="element.ticketSubscription && !element.dateDel">
-                                <mat-icon style="color: #0066CC;" (click)="removeTicket(element.ticketId, element.vehicleId)">pan_tool</mat-icon>
+                            <button mat-icon-button matTooltip="{{'TICKET.END' | translate}}"
+                                *ngIf="element.ticketSubscription && !element.dateDel">
+                                <mat-icon style="color: #0066CC;"
+                                    (click)="removeTicket(element.ticketId, element.vehicleId)">pan_tool</mat-icon>
                             </button>
                         </mat-cell>
                     </ng-container>
@@ -114,15 +118,15 @@
                                         </div>
                                         <div>
                                             <h5>Inserito il:</h5>
-                                            <p>{{element.dateIns | date: 'dd/MM/yyyy'}}</p>
+                                            <p>{{element.dateIns | date: 'dd/MM/yyyy HH:mm'}}</p>
                                         </div>
-                                        <div>
+                                        <div *ngIf="element.ticketSubscription">
                                             <h5>Terminato da:</h5>
                                             <p>{{element.userDel.displayName}}</p>
                                         </div>
-                                        <div>
+                                        <div *ngIf="element.ticketSubscription">
                                             <h5>Terminato il:</h5>
-                                            <p>{{element.dateDel | date: 'dd/MM/yyyy'}}</p>
+                                            <p>{{element.dateDel | date: 'dd/MM/yyyy HH:mm'}}</p>
                                         </div>
                                     </div>
                                 </div>

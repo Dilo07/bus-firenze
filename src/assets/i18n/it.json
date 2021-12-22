@@ -76,6 +76,8 @@
         "CONFIRM_REGISTRATION": "Una volta confermata la registrazione movyon verificherà i dati. Riceverai una mail per eseguire l'accesso. Vuoi proseguire?",
         "EDIT": "Modifica",
         "DELETE": "Cancella",
+        "VALID": "Valida",
+        "REFUSE": "Rifiuta",
         "DELETE CONFIRM": "Sei sicuro di voler cancellare questo Fleet-Manager?",
         "DELETE_SUCCESS": "Fleet manager rimosso correttamente",
         "VALID_SUCCESS": "Fleet manager validato correttamente",
@@ -260,7 +262,10 @@
         "DATE_START": "Inizio",
         "DATE_END": "Fine",
         "TYPE": "Tipo",
-        "ACTIVATION": "Attivazione"
+        "RENT": "Abbonamento",
+        "ACTIVATION": "Attivazione",
+        "ACTIVATION_PHASE": "In fase di attivazione",
+        "END": "Fine visita"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",
@@ -283,7 +288,8 @@
             "SAVE": "Salva",
             "EDIT": "Modifica",
             "ACTIVE": "Attiva",
-            "VERIFY": "Verifica"
+            "VERIFY": "Verifica",
+            "CLOSE": "Chiudi"
         }
     },
     "ERROR": {

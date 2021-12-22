@@ -4,20 +4,21 @@
 		<div [@slideInOut]="viewDoc">
 			<span *ngIf="src.type === 'application/pdf' else image">
 				<pdf-viewer [src]="src.url" [rotation]="0" [original-size]="true" [show-all]="true"
-					[fit-to-page]="false" [zoom]="zoom"  [stick-to-page]="false"
-					[render-text]="true" [external-link-target]="'top'" [autoresize]="true" [show-borders]="true">
+					[fit-to-page]="false" [zoom]="zoom" [stick-to-page]="false" [render-text]="true"
+					[external-link-target]="'top'" [autoresize]="true" [show-borders]="true">
 				</pdf-viewer>
 			</span>
-			<button mat-icon-button (click)="viewDoc = 'off'; zoom = 0.5">
+			<button mat-icon-button matTooltip="{{'COMMON.ACTION.CLOSE' | translate}}"
+				(click)="viewDoc = 'off'; zoom = 0.6">
 				<mat-icon>close</mat-icon>
 			</button>
 			<br>
 			<span *ngIf="src.type === 'application/pdf'">
-				<button mat-icon-button (click)="changeZoom(true)">
+				<button mat-icon-button matTooltip="zoom +" (click)="changeZoom(true)">
 					<mat-icon>add</mat-icon>
 				</button>
 				<br>
-				<button mat-icon-button (click)="changeZoom(false)">
+				<button mat-icon-button matTooltip="zoom -" (click)="changeZoom(false)">
 					<mat-icon>remove</mat-icon>
 				</button>
 			</span>
@@ -135,19 +136,21 @@
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span *ngIf="manageFleet">
-								<button mat-icon-button matTooltip="Edit" [routerLink]="['form-Fleet']"
-									[state]="{fleetManager: element}">
+								<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}"
+									[routerLink]="['form-Fleet']" [state]="{fleetManager: element}">
 									<mat-icon style="color: #0066CC;">edit</mat-icon>
 								</button>
-								<button mat-icon-button matTooltip="Cancella" (click)="deleteFleetManager(element.id)">
+								<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
+									(click)="deleteFleetManager(element.id)">
 									<mat-icon style="color: red;">delete</mat-icon>
 								</button>
-								<button *ngIf="!roleOpMovyon" mat-icon-button matTooltip="Autisti"
-									[routerLink]="['drivers']" [state]="{fleetManagerId: element.id}">
+								<button *ngIf="!roleOpMovyon" mat-icon-button
+									matTooltip="{{'DRIVERS.TITLE' | translate}}" [routerLink]="['drivers']"
+									[state]="{fleetManagerId: element.id}">
 									<mat-icon style="color: #0066CC;">airline_seat_recline_normal</mat-icon>
 								</button>
-								<button mat-icon-button matTooltip="Veicoli" [routerLink]="['vehicles']"
-									[state]="{fleetManager: element}">
+								<button mat-icon-button matTooltip="{{'VEHICLE.TITLE' | translate}}"
+									[routerLink]="['vehicles']" [state]="{fleetManager: element}">
 									<mat-icon style="color: #0066CC;">directions_car</mat-icon>
 								</button>
 								<button mat-icon-button matTooltip="Real time" [routerLink]="['../real-time']"
@@ -161,10 +164,12 @@
 									(click)="getFleetDocument(element.id, element.fileId)">
 									<mat-icon>find_in_page</mat-icon>
 								</button>
-								<button mat-icon-button matTooltip="Valid" (click)="validateFleet(element.id, true)">
+								<button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
+									(click)="validateFleet(element.id, true)">
 									<mat-icon style="color: green;">done</mat-icon>
 								</button>
-								<button mat-icon-button matTooltip="Rifiuta" (click)="validateFleet(element.id, false)">
+								<button mat-icon-button matTooltip="{{'FLEET-MANAGER.REFUSE' | translate}}"
+									(click)="validateFleet(element.id, false)">
 									<mat-icon style="color: red;">clear</mat-icon>
 								</button>
 							</span>
