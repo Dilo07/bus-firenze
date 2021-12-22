@@ -8,6 +8,7 @@
   "viewOuter" : false,
   "flow_implicit": false,
   "rangeDateStatisticVehicle": null,
+  "hideActiveTicket": false,
   "no_auth": {
     "roles": ["driver", "opmovyon", "installer", "movyon", "fleet"],
     "user": {

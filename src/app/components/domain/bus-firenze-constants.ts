@@ -34,3 +34,8 @@ export const STATUS_VEHICLE = Object.freeze({
     REGISTERED: 'REGISTERED',
     UNKNOWN: 'UNKNOWN'
 });
+
+export const CONTRACT_TYPE = {
+    RENT: 'RENT',
+    BUY: 'BUY'
+};

@@ -76,6 +76,8 @@
         "CONFIRM_REGISTRATION": "Una volta confermata la registrazione movyon verificherà i dati. Riceverai una mail per eseguire l'accesso. Vuoi proseguire?",
         "EDIT": "Modifica",
         "DELETE": "Cancella",
+        "VALID": "Valida",
+        "REFUSE": "Rifiuta",
         "DELETE CONFIRM": "Sei sicuro di voler cancellare questo Fleet-Manager?",
         "DELETE_SUCCESS": "Fleet manager rimosso correttamente",
         "VALID_SUCCESS": "Fleet manager validato correttamente",
@@ -152,7 +154,9 @@
         "ADD_ERROR": "Errore nell'inserimento veicolo",
         "ADD_SUCCESS": "Veicolo inserito correttamente",
         "EDIT_ERROR": "Errore nella modifica veicolo",
-        "EDIT_SUCCESS": "Veicolo modificato correttamente"
+        "EDIT_SUCCESS": "Veicolo modificato correttamente",
+        "DOWNLOAD": "Scarica manuale",
+        "DOWNLOAD CONTRACT": "Scarica contratto"
     },
     "DRIVERS": {
         "TITLE": "Autisti",
@@ -245,7 +249,27 @@
         "NO_DATA": "Nessun veicolo presente",
         "INSERT_TICKET": "Inserisci un ticket corretto",
         "ACTIVE_NOW": "Attiva subito",
-        "ACTIVE_AFTER": "Attiva quando entrerai nell'area"
+        "ACTIVE_AFTER": "Attiva quando entrerai nell'area",
+        "DETAILS": "Dettagli ticket",
+        "TEST_SUCCESS": "Ticket verificato",
+        "ADD_SUCCESS": "Ticket inserito correttamente",
+        "REMOVE_CONFIRM": "Sei sicuro di voler terminare questo ticket?",
+        "REMOVE_SUCCESS": "Ticket terminato correttamente",
+        "HISTORY": "Vedi storico",
+        "ACTIVE": "Ticket attivi",
+        "MANAGE": "Gestisci ticket",
+        "LPN": "Targa",
+        "DATE_START": "Inizio",
+        "DATE_END": "Fine",
+        "TYPE": "Tipo",
+        "RENT": "Abbonamento",
+        "ACTIVATION": "Attivazione",
+        "ACTIVATION_PHASE": "In fase di attivazione",
+        "END": "Fine visita",
+        "INSERT_BY": "Inserito da:",
+        "INSERT_AT": "Inserito il:",
+        "END_BY": "Terminato da:",
+        "END_AT": "Terminato il:"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",
@@ -267,7 +291,9 @@
             "CANCEL": "Cancella",
             "SAVE": "Salva",
             "EDIT": "Modifica",
-            "ACTIVE": "Attiva"
+            "ACTIVE": "Attiva",
+            "VERIFY": "Verifica",
+            "CLOSE": "Chiudi"
         }
     },
     "ERROR": {

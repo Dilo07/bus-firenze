@@ -84,6 +84,7 @@ export class FleetManagerComponent implements OnInit {
   public roleOpMovyon: boolean;
   public viewDoc: 'on' | 'off' = 'off';
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
+  public zoom = 0.6;
 
   private offset = 0;
   private limit = 10;
@@ -237,6 +238,14 @@ export class FleetManagerComponent implements OnInit {
   public refreshTable(): void {
     this.reset();
     this.callGetFleetManager();
+  }
+
+  public changeZoom(zoomIn: boolean): void {
+    if (zoomIn && this.zoom <= 1) {
+      this.zoom += 0.1;
+    }else if (!zoomIn && this.zoom >= 0.2){
+      this.zoom -= 0.1;
+    }
   }
 
   private reset(): void {

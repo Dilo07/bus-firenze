@@ -3,7 +3,6 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import CodiceFiscale from 'codice-fiscale-js';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { RegisterService } from 'src/app/services/register.service';
@@ -13,6 +12,7 @@ import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.componen
 import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -214,6 +214,17 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
     ));
   }
 
+  public downloadTemplate(): void{
+    const FileSaver = require('file-saver');
+    this.subscription.push(this.registerService.getTemplateDocument()
+      .subscribe((data: HttpResponse<Blob>) => {
+        const contentDispositionHeader = data.headers.get('Content-Disposition');
+        const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+        FileSaver.saveAs(data.body, filename);
+      },
+        () => null));
+  }
+
   public uploadFile(event: any): void {
     const type = event.target.files[0].type;
     if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png') {
@@ -224,12 +235,11 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   private fiscaleCodeValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    let cf: CodiceFiscale;
+    const codiceFiscale = require('codice-fiscale-js');
     if (control.value?.length === 16) {
-      try {
-        cf = new CodiceFiscale(control.value);
+      if (codiceFiscale.check(control.value)) {
         return null;
-      } catch (error) {
+      } else {
         return { fiscalCode: true };
       }
     } else {

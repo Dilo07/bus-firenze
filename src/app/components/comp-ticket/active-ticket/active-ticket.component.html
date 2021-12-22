@@ -1,6 +1,151 @@
 <mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center">Ticket attivi
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'TICKET.ACTIVE' | translate}}
     </mat-card-title>
     <mat-card-content>
+        <div *ngIf="viewFleetTable else vehicleTicket">
+            <app-table-fleet (callManageTicket)="getActiveTicket($event)"></app-table-fleet>
+        </div>
+        <ng-template #vehicleTicket>
+            <div fxLayout="row" fxLayoutGap="20px" style="margin-bottom: 20px;">
+                <button mat-button class="backButton" *ngIf="roleMovyon" (click)="backFleetTable()">
+                    {{'FLEET-MANAGER.BACK' | translate}}
+                </button>
+                <button mat-raised-button class="bluButton" *ngIf="!roleDriver" (click)="switchHistoric()">
+                    {{ (viewHistoric ? 'TICKET.ACTIVE' : 'TICKET.HISTORY') | translate }}
+                </button>
+            </div>
+            <form *ngIf="viewHistoric" [formGroup]="FormGroup" fxLayout="row" fxLayoutAlign="left center"
+                fxLayoutGap="20px">
+                <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
+                    <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
+                    <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+                        <input matStartDate formControlName="start">
+                        <input matEndDate formControlName="end" (dateChange)="changeDate()">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </form>
+            <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+            <div class="mat-elevation-z8 example-container">
+                <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+                    <ng-container matColumnDef="expandButton">
+                        <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label"></span>
+                            <button mat-icon-button
+                                (click)="expandedElement = expandedElement === element ? null : element"
+                                matTooltip="{{'TICKET.DETAILS' | translate}}">
+                                <mat-icon style="color: grey">
+                                    {{expandedElement &&
+                                    expandedElement.ticketId === element.ticketId ? 'expand_more' : 'chevron_right' }}
+                                </mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ticketId">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> ticketId </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">ticketId</span>
+                            {{element.ticketId}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lpn">
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.LPN' | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">{{'TICKET.LPN' | translate}}</span>
+                            {{element.lpn}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ticketStart">
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.DATE_START' | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">{{'TICKET.DATE_START' | translate}}</span>
+                            {{element.ticketStart ? (element.ticketStart | date: 'dd/MM/yyyy HH:mm') : '-'}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ticketEnd">
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.DATE_END' | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">{{'TICKET.DATE_END' | translate}}</span>
+                            {{element.ticketEnd ? (element.ticketEnd | date: 'dd/MM/yyyy HH:mm') : '-'}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="type">
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.TYPE' | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">{{'TICKET.TYPE' | translate}}</span>
+                            {{element.ticketSubscription === null ? '-' :
+                            element.ticketSubscription ? ('TICKET.RENT' | translate) : 'Voucher' }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dateSink">
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.ACTIVATION' | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">{{'TICKET.ACTIVATION' | translate}}</span>
+                            {{element.dateSink ? (element.dateSink | date: 'dd/MM/yyyy HH:mm') :
+                            ('TICKET.ACTIVATION_PHASE' | translate)}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                        <mat-cell *matCellDef="let element" style="text-align: end;">
+                            <button mat-icon-button matTooltip="{{'TICKET.END' | translate}}"
+                                *ngIf="element.ticketSubscription && !element.dateDel">
+                                <mat-icon style="color: #0066CC;"
+                                    (click)="removeTicket(element.ticketId, element.vehicleId)">pan_tool</mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!--Collapse div-->
+                    <ng-container matColumnDef="expandedDetail">
+                        <mat-cell *matCellDef="let element">
+                            <div class="example-element-detail"
+                                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                                <div class="example-element-description">
+                                    <div fxLayout="row" fxLayoutGap="20px">
+                                        <div>
+                                            <h5>{{'TICKET.INSERT_BY' | translate}}</h5>
+                                            <p>{{element.userIns.displayName}}</p>
+                                        </div>
+                                        <div>
+                                            <h5>{{'TICKET.INSERT_AT' | translate}}</h5>
+                                            <p>{{element.dateIns | date: 'dd/MM/yyyy HH:mm'}}</p>
+                                        </div>
+                                        <div *ngIf="element.ticketSubscription">
+                                            <h5>{{'TICKET.END_BY' | translate}}</h5>
+                                            <p>{{element.userDel.displayName}}</p>
+                                        </div>
+                                        <div *ngIf="element.ticketSubscription">
+                                            <h5>{{'TICKET.END_AT' | translate}}</h5>
+                                            <p>{{element.dateDel | date: 'dd/MM/yyyy HH:mm'}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
+                        [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+                        [class.example-expanded-row]="expandedElement === element"></mat-row>
+                    <mat-row
+                        [style.display]="expandedElement && expandedElement.ticketId === row.ticketId ? '' : 'none'"
+                        *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
+                </mat-table>
+            </div>
+            <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+            <div *ngIf="dataSource.data.length === 0 && complete">{{ 'TICKET.NO_DATA' | translate}}</div>
+        </ng-template>
     </mat-card-content>
 </mat-card>

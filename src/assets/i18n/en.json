@@ -11,6 +11,8 @@
         "Real-time": "Real Time",
         "Area-monitoring": "Area monitoring",
         "Fleet-manager": "Fleet manager",
+        "Manage-Fleet-manager": "Manage",
+        "Valid-Fleet-manager": "Valid",
         "User-Fleet": "Fleet manager",
         "User-Driver": "Driver",
         "Anagraphic": "Anagraphic",
@@ -74,6 +76,8 @@
         "CONFIRM_REGISTRATION": "Once the form is confirmed, movyon will verify the inserted data. You will receive an mail to log in. Do you want continue?",
         "EDIT": "Edit",
         "DELETE": "Delete",
+        "VALID": "Valid",
+        "REFUSE": "Refuse",
         "DELETE CONFIRM": "Are you sure of delete this Fleet Manager?",
         "DELETE_SUCCESS": "Fleet manager remove correctly",
         "VALID_SUCCESS": "Fleet manager validate correctly",
@@ -150,7 +154,9 @@
         "ADD_ERROR": "vehicle entry error",
         "ADD_SUCCESS": "Vehicle inserted correctly",
         "EDIT_ERROR": "vehicle edit error",
-        "EDIT_SUCCESS": "Vehicle edited correctly"
+        "EDIT_SUCCESS": "Vehicle edited correctly",
+        "DOWNLOAD": "Download manual",
+        "DOWNLOAD CONTRACT": "Download contract"
     },
     "DRIVERS": {
         "TITLE": "Drivers",
@@ -243,7 +249,27 @@
         "NO_DATA": "No vehicles present",
         "INSERT_TICKET": "Insert a correct ticket",
         "ACTIVE_NOW": "Active now",
-        "ACTIVE_AFTER": "Active when you'll enter on area"
+        "ACTIVE_AFTER": "Active when you'll enter on area",
+        "DETAILS": "Detail ticket",
+        "TEST_SUCCESS": "Ticket verified",
+        "ADD_SUCCESS": "Ticket correctly added",
+        "REMOVE_CONFIRM": "Are you sure to terminate this ticket?",
+        "REMOVE_SUCCESS": "Ticket correctly terminated",
+        "HISTORY": "View history",
+        "ACTIVE": "Active ticket",
+        "MANAGE": "Manage ticket",
+        "LPN": "Plate",
+        "DATE_START": "Start",
+        "DATE_END": "End",
+        "TYPE": "Type",
+        "RENT": "Subscription",
+        "ACTIVATION": "Activation",
+        "ACTIVATION_PHASE": "Activation phase",
+        "END": "Trip end",
+        "INSERT_BY": "Inserted by:",
+        "INSERT_AT": "Inserted at:",
+        "END_BY": "Terminated by:",
+        "END_AT": "Terminated at:"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",
@@ -265,7 +291,9 @@
             "CANCEL": "Cancel",
             "SAVE": "Save",
             "EDIT": "Edit",
-            "ACTIVE": "Active"
+            "ACTIVE": "Active",
+            "VERIFY": "Verify",
+            "CLOSE": "Close"
         }
     },
     "ERROR": {

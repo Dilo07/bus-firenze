@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
@@ -27,16 +29,16 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   }
   @media(min-width: 1180px) {
     .mat-column-id { max-width: 10%}
-    .mat-column-plate { max-width: 15%;}
+    .mat-column-plate { max-width: 10%;}
     .mat-column-nat { max-width: 5%}
     .mat-column-euroClass { max-width: 10%;}
     .mat-column-obuId { max-width: 20%;}
     .mat-column-consent { max-width: 20%;}
-    .mat-column-actions { max-width: 20%; display: table-column;}
+    .mat-column-actions { max-width: 25%; display: table-column;}
   }
   `]
 })
-export class VehiclesComponent implements OnInit {
+export class VehiclesComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -46,6 +48,8 @@ export class VehiclesComponent implements OnInit {
   public Search: FormGroup;
   public complete = true;
   public statusVehicle = STATUS_VEHICLE;
+
+  private subscription: Subscription[] = [];
 
   constructor(
     private router: Router,
@@ -64,6 +68,12 @@ export class VehiclesComponent implements OnInit {
       onlyActive: [true]
     });
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
 
   public getVehiclesByManagerId(): void {
@@ -146,6 +156,28 @@ export class VehiclesComponent implements OnInit {
           autoFocus: false
         });
       });
+  }
+
+  public downloadManualPdf(device: number): void {
+    const FileSaver = require('file-saver');
+    this.subscription.push(this.vehicleService.getManual(device, 'operating')
+      .subscribe((data: HttpResponse<Blob>) => {
+        const contentDispositionHeader = data.headers.get('Content-Disposition');
+        const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+        FileSaver.saveAs(data.body, filename);
+      },
+        () => null));
+  }
+
+  public downloadDocumentVehicle(device: number): void {
+    const FileSaver = require('file-saver');
+    this.subscription.push(this.vehicleService.getManual(device, 'operating')
+      .subscribe((data: HttpResponse<Blob>) => {
+        const contentDispositionHeader = data.headers.get('Content-Disposition');
+        const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+        FileSaver.saveAs(data.body, filename);
+      },
+        () => null));
   }
 
   private resetSearchField(): void {

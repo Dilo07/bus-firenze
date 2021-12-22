@@ -1,7 +1,16 @@
 <mat-card>
-	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Veicoli</mat-card-title>
+	<mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
+			<div>
+				<button mat-button class="greenButtons" [matMenuTriggerFor]="menuDownload">
+					{{'VEHICLE.DOWNLOAD' | translate}}</button>
+			</div>
+			<mat-menu #menuDownload="matMenu">
+				<button mat-menu-item (click)="downloadManualPdf(2)">Tracker X</button>
+				<button mat-menu-item (click)="downloadManualPdf(3)">Arianna II</button>
+				<button mat-menu-item (click)="downloadManualPdf(4)">Arianna I</button>
+			</mat-menu>
 			<form [formGroup]="Search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field appearance="fill" fxFlex="30">
 					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>
@@ -24,17 +33,17 @@
 					</ng-container>
 
 					<ng-container matColumnDef="plate">
-						<mat-header-cell *matHeaderCellDef> plate </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">plate</span>
+							<span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
 							{{ element.lpn}}
 						</mat-cell>
 					</ng-container>
 
 					<ng-container matColumnDef="nat">
-						<mat-header-cell *matHeaderCellDef> nat </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">nat</span>
+							<span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
 							{{ element.lpnNat}}
 						</mat-cell>
 					</ng-container>

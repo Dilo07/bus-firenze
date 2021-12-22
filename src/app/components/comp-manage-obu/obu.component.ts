@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -42,8 +43,8 @@ export class ObuComponent implements OnInit, OnDestroy {
     private obuService: ObuService,
     private snackBar: SnackBar,
     private formBuilder: FormBuilder) {
-      this.vehicleLpnAppointment = this.router.getCurrentNavigation()?.extras.state?.vehicleLpnAppointment as string;
-    }
+    this.vehicleLpnAppointment = this.router.getCurrentNavigation()?.extras.state?.vehicleLpnAppointment as string;
+  }
 
   ngOnInit(): void {
     // se arriva una targa dall'appuntamenti valorizza la ricerca altrimenti è vuota
@@ -150,6 +151,17 @@ export class ObuComponent implements OnInit, OnDestroy {
         this.getVehiclesInstaller(true);
       }
     });
+  }
+
+  public downloadManualPdf(device: number): void {
+    const FileSaver = require('file-saver');
+    this.subscription.push(this.vehicleService.getManual(device, 'installation')
+      .subscribe((data: HttpResponse<Blob>) => {
+        const contentDispositionHeader = data.headers.get('Content-Disposition');
+        const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+        FileSaver.saveAs(data.body, filename);
+      },
+        (error) => console.log(error)));
   }
 
   private resetSearchField(): void {

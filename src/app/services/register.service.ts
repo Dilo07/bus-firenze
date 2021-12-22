@@ -25,4 +25,13 @@ export class RegisterService {
     return this.http.post<void>(this.apiUrl + '/register', formData)
       .pipe(catchError(err => { throw err; }));
   }
+
+  getTemplateDocument(): Observable<any> {
+    const options = {
+      observe: 'response' as 'body',
+      responseType: 'blob' as 'blob'
+    };
+    return this.http.get(this.apiUrl + '/register/template', options)
+      .pipe(catchError(err => { throw err; }));
+  }
 }

@@ -86,4 +86,14 @@ export class VehicleService {
     return this.http.put<void>(this.apiUrl + '/vehicle/' + vehicleId + '/check', null)
       .pipe(catchError(err => { throw err; }));
   }
+
+  getManual(device: number, type: string): Observable<any> {
+    const options = {
+      observe: 'response' as 'body',
+      responseType: 'blob' as 'blob'
+    };
+    return this.http.get(this.apiUrl + '/manual/' + device + '/' + type, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
 }

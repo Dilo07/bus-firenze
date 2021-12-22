@@ -5,6 +5,7 @@ import { RepairShopRoutingModule } from './repair-shop.routing';
 import { RepairShopComponent } from './repair-shop.component';
 import { MaterialModule } from '@npt/npt-template';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
+    TranslateModule,
     RepairShopRoutingModule
   ]
 })

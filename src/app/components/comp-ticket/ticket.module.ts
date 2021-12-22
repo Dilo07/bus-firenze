@@ -8,7 +8,7 @@ import { ActiveTicketComponent } from './active-ticket/active-ticket.component';
 import { ManageTicketComponent } from './manage-ticket/manage-ticket.component';
 import { TicketRoutingModule } from './ticket.routing';
 import { ModalTestTicketComponent } from './modal-test-ticket/modal-test-ticket.component';
-import { TableFleetComponent } from './manage-ticket/table-fleet/table-fleet.component';
+import { TableFleetComponent } from './table-fleet/table-fleet.component';
 
 @NgModule({
   declarations: [
