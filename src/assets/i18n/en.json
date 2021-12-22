@@ -265,7 +265,11 @@
         "RENT": "Subscription",
         "ACTIVATION": "Activation",
         "ACTIVATION_PHASE": "Activation phase",
-        "END": "Trip end"
+        "END": "Trip end",
+        "INSERT_BY": "Inserted by:",
+        "INSERT_AT": "Inserted at:",
+        "END_BY": "Terminated by:",
+        "END_AT": "Terminated at:"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",

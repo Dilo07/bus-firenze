@@ -265,7 +265,11 @@
         "RENT": "Abbonamento",
         "ACTIVATION": "Attivazione",
         "ACTIVATION_PHASE": "In fase di attivazione",
-        "END": "Fine visita"
+        "END": "Fine visita",
+        "INSERT_BY": "Inserito da:",
+        "INSERT_AT": "Inserito il:",
+        "END_BY": "Terminato da:",
+        "END_AT": "Terminato il:"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",

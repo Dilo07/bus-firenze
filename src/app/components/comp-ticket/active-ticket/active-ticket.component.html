@@ -113,19 +113,19 @@
                                 <div class="example-element-description">
                                     <div fxLayout="row" fxLayoutGap="20px">
                                         <div>
-                                            <h5>Inserito da:</h5>
+                                            <h5>{{'TICKET.INSERT_BY' | translate}}</h5>
                                             <p>{{element.userIns.displayName}}</p>
                                         </div>
                                         <div>
-                                            <h5>Inserito il:</h5>
+                                            <h5>{{'TICKET.INSERT_AT' | translate}}</h5>
                                             <p>{{element.dateIns | date: 'dd/MM/yyyy HH:mm'}}</p>
                                         </div>
                                         <div *ngIf="element.ticketSubscription">
-                                            <h5>Terminato da:</h5>
+                                            <h5>{{'TICKET.END_BY' | translate}}</h5>
                                             <p>{{element.userDel.displayName}}</p>
                                         </div>
                                         <div *ngIf="element.ticketSubscription">
-                                            <h5>Terminato il:</h5>
+                                            <h5>{{'TICKET.END_AT' | translate}}</h5>
                                             <p>{{element.dateDel | date: 'dd/MM/yyyy HH:mm'}}</p>
                                         </div>
                                     </div>
