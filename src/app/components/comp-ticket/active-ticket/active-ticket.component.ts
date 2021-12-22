@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
+import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { CompleteFleetManager, Ticket } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
@@ -54,6 +55,7 @@ export class ActiveTicketComponent implements OnInit {
   constructor(
     private ticketService: TicketService,
     private dialog: MatDialog,
+    private snackBar: SnackBar,
     @Inject('authService') private authService: any
   ) { }
 
@@ -102,7 +104,11 @@ export class ActiveTicketComponent implements OnInit {
           this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManagerId).subscribe(
             () => null,
             () => this.complete = true,
-            () => { this.getActiveTicket(); this.complete = true; }
+            () => {
+              this.getActiveTicket();
+              this.snackBar.showMessage('TICKET.REMOVE_SUCCESS', 'INFO');
+              this.complete = true;
+            }
           );
         }
       }

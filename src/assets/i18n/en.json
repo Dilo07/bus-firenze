@@ -249,7 +249,16 @@
         "DETAILS": "Detail ticket",
         "TEST_SUCCESS": "Ticket verified",
         "ADD_SUCCESS": "Ticket correctly added",
-        "REMOVE_CONFIRM": "Are you sure to terminate this ticket?"
+        "REMOVE_CONFIRM": "Are you sure to terminate this ticket?",
+        "REMOVE_SUCCESS": "Ticket correctly terminated",
+        "HISTORY": "View history",
+        "ACTIVE": "Active ticket",
+        "MANAGE": "Manage ticket",
+        "LPN": "Plate",
+        "DATE_START": "Start",
+        "DATE_END": "End",
+        "TYPE": "Type",
+        "ACTIVATION": "Activation"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",

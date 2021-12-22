@@ -72,7 +72,7 @@ export class Vehicle {
     appointmentDate: Date;
     obuId: string;
     hardware: number;
-    contractType: 'BUY' | 'RENT';
+    contractType: string;
     allowContacted: boolean;
     status: string;
 }

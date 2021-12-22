@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center">Ticket attivi
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'TICKET.ACTIVE' | translate}}
     </mat-card-title>
     <mat-card-content>
         <div *ngIf="viewFleetTable else vehicleTicket">
@@ -11,7 +11,7 @@
                     {{'FLEET-MANAGER.BACK' | translate}}
                 </button>
                 <button mat-raised-button class="bluButton" *ngIf="!roleDriver" (click)="switchHistoric()">
-                    {{ viewHistoric ? 'ticket attivi' : 'vedi storico' }}
+                    {{ (viewHistoric ? 'TICKET.ACTIVE' : 'TICKET.HISTORY') | translate }}
                 </button>
             </div>
             <form *ngIf="viewHistoric" [formGroup]="FormGroup" fxLayout="row" fxLayoutAlign="left center"
@@ -53,41 +53,41 @@
                     </ng-container>
 
                     <ng-container matColumnDef="lpn">
-                        <mat-header-cell *matHeaderCellDef> Targa </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.LPN' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">Targa</span>
+                            <span class="mobile-label">{{'TICKET.LPN' | translate}}</span>
                             {{element.lpn}}
                         </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="ticketStart">
-                        <mat-header-cell *matHeaderCellDef> Start </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.DATE_START' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">Start</span>
+                            <span class="mobile-label">{{'TICKET.DATE_START' | translate}}</span>
                             {{element.ticketStart ? (element.ticketStart | date: 'dd/MM/yyyy HH:mm') : '-'}}
                         </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="ticketEnd">
-                        <mat-header-cell *matHeaderCellDef> End </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.DATE_END' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">End</span>
+                            <span class="mobile-label">{{'TICKET.DATE_END' | translate}}</span>
                             {{element.ticketEnd ? (element.ticketEnd | date: 'dd/MM/yyyy HH:mm') : '-'}}
                         </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="type">
-                        <mat-header-cell *matHeaderCellDef> type </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.TYPE' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">type</span>
+                            <span class="mobile-label">{{'TICKET.TYPE' | translate}}</span>
                             {{element.ticketSubscription === null ? '-' : element.ticketSubscription  ? 'abbonamento' : 'voucher'}}
                         </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="dateSink">
-                        <mat-header-cell *matHeaderCellDef> attivazione </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.ACTIVATION' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">attivazione</span>
+                            <span class="mobile-label">{{'TICKET.ACTIVATION' | translate}}</span>
                             {{element.dateSink ? (element.dateSink | date: 'dd/MM/yyyy HH:mm') : 'in fase di attivazione'}}
                         </mat-cell>
                     </ng-container>

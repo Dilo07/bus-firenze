@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center">Gestisci ticket
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'TICKET.MANAGE' | translate}}
     </mat-card-title>
     <mat-card-content>
         <div *ngIf="viewFleetTable else vehicleTicket">
@@ -23,9 +23,9 @@
                     </ng-container>
 
                     <ng-container matColumnDef="displayName">
-                        <mat-header-cell *matHeaderCellDef> Targa </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.LPN' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">Targa</span>
+                            <span class="mobile-label">{{'TICKET.LPN' | translate}}</span>
                             {{element.displayName}}
                         </mat-cell>
                     </ng-container>

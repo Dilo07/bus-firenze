@@ -251,7 +251,16 @@
         "DETAILS": "Dettagli ticket",
         "TEST_SUCCESS": "Ticket verificato",
         "ADD_SUCCESS": "Ticket inserito correttamente",
-        "REMOVE_CONFIRM": "Sei sicuro di voler terminare questo ticket?"
+        "REMOVE_CONFIRM": "Sei sicuro di voler terminare questo ticket?",
+        "REMOVE_SUCCESS": "Ticket terminato correttamente",
+        "HISTORY": "Vedi storico",
+        "ACTIVE": "Ticket attivi",
+        "MANAGE": "Gestisci ticket",
+        "LPN": "Targa",
+        "DATE_START": "Inizio",
+        "DATE_END": "Fine",
+        "TYPE": "Tipo",
+        "ACTIVATION": "Attivazione"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",

@@ -7,13 +7,13 @@
             <div *ngIf="!data.vehicle else viewContractType" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
                 <label>{{'VEHICLE.CONTRACT' | translate}}</label>
                 <mat-radio-group formControlName="CtrlContract">
-                    <mat-radio-button style="margin-right: 10px;" [value]="'BUY'">{{'VEHICLE.BUYING' | translate}}</mat-radio-button>
-                    <mat-radio-button [value]="'RENT'">{{'VEHICLE.RENT' | translate}}</mat-radio-button>
+                    <mat-radio-button style="margin-right: 10px;" [value]="contractType.BUY">{{'VEHICLE.BUYING' | translate}}</mat-radio-button>
+                    <mat-radio-button [value]="contractType.RENT">{{'VEHICLE.RENT' | translate}}</mat-radio-button>
                 </mat-radio-group>
             </div>
             <ng-template #viewContractType>
                 <p fxLayout="row" fxLayoutAlign="center">
-                    Contratto: {{data.vehicle.contractType === 'BUY' ? 'Acquisto' : 'Noleggio'}}</p>
+                    Contratto: {{data.vehicle.contractType === contractType.BUY ? 'Acquisto' : 'Noleggio'}}</p>
             </ng-template>
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
