@@ -108,6 +108,11 @@
 									warning_amber
 								</mat-icon>
 							</button>
+							<button *ngIf="element.hardware" mat-icon-button
+								matTooltip="{{'VEHICLE.DOWNLOAD CONTRACT' | translate}}"
+								(click)="downloadDocumentVehicle(element.hardware)">
+								<mat-icon style="color: #0066CC;">assignment_returned</mat-icon>
+							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
 								matTooltip="{{'COMMON.ACTION.EDIT' | translate}}" (click)="editVehicle(element)">
 								<mat-icon style="color: #0066CC;">edit</mat-icon>
@@ -129,11 +134,6 @@
 								matTooltip="{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}"
 								(click)="associationDriver(element.id)">
 								<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
-							</button>
-							<button *ngIf="!element.deleted" mat-icon-button
-								matTooltip="{{'VEHICLE.DOWNLOAD CONTRACT' | translate}}"
-								(click)="downloadDocumentVehicle(element.id)">
-								<mat-icon style="color: #0066CC;">assignment_returned</mat-icon>
 							</button>
 						</mat-cell>
 					</ng-container>

@@ -169,12 +169,15 @@ export class VehiclesComponent implements OnInit, OnDestroy {
         () => null));
   }
 
-  public downloadDocumentVehicle(vehicleId: number): void {
+  public downloadDocumentVehicle(device: number): void {
     const FileSaver = require('file-saver');
-    this.subscription.push(this.vehicleService.getVehicleDocument(vehicleId).subscribe((data: HttpResponse<Blob>) => {
-      FileSaver.saveAs(data.body, 'veicolo_' + vehicleId + '.pdf');
-    },
-      () => null));
+    this.subscription.push(this.vehicleService.getManual(device, 'operating')
+      .subscribe((data: HttpResponse<Blob>) => {
+        const contentDispositionHeader = data.headers.get('Content-Disposition');
+        const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+        FileSaver.saveAs(data.body, filename);
+      },
+        () => null));
   }
 
   private resetSearchField(): void {
