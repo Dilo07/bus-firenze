@@ -8,7 +8,6 @@ import { VehicleTripPersistence } from 'src/app/components/domain/bus-firenze-do
   selector: 'app-table-statistic',
   templateUrl: './table-statistic.component.html',
   styles: [`
-  table { width: 100%; background-color: beige; }
   `
   ]
 })
