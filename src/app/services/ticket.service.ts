@@ -53,10 +53,10 @@ export class TicketService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  addTicket(isDriver: boolean, vehicleId: number, ticketId: string, fleetManagerId?: number): Observable<void> {
+  addTicket(isDriver: boolean, vehicleId: number, ticketId: string, delayed: boolean, fleetManagerId?: number): Observable<void> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ ticketId })
+      params: HttpUtils.createHttpParams({ ticketId, delayed })
     };
     let url = '';
     if (isDriver) {

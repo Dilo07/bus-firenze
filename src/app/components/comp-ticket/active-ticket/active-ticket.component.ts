@@ -18,10 +18,11 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
   @media(min-width: 1180px) {
     .mat-column-expandButton { max-width: 5%}
     .mat-column-ticketId { max-width: 15%;}
-    .mat-column-lpn { max-width: 20%}
+    .mat-column-lpn { max-width: 10%}
     .mat-column-ticketStart { max-width: 20%;}
     .mat-column-ticketEnd { max-width: 20%;}
-    .mat-column-actions { max-width: 20%; display: table-column;}
+    .mat-column-dateSink { max-width: 20%;}
+    .mat-column-actions { max-width: 10%; display: table-column;}
   }
   `],
   animations: [
@@ -40,7 +41,7 @@ export class ActiveTicketComponent implements OnInit {
   public viewFleetTable = false;
   public viewHistoric = false;
   public dataSource = new MatTableDataSource<Ticket>();
-  public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'ticketStart', 'ticketEnd', 'type', 'actions'];
+  public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'ticketStart', 'ticketEnd', 'type', 'dateSink', 'actions'];
   public complete = true;
   public expandedElement: CompleteFleetManager | null;
   public FormGroup: FormGroup;
