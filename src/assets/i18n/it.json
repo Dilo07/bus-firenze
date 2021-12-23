@@ -30,8 +30,8 @@
         "Manage-appointment": "Gestisci",
         "Association-vehicles": "Veicoli associati",
         "Ticket": "Contrassegni",
-        "Manage-ticket": "Gestisci",
-        "Active-ticket": "Attivi ora"
+        "Add-ticket": "Aggiungi",
+        "Manage-ticket": "Gestisci"
     },
     "ACCOUNT": {
         "PROFILE": "Profilo",
@@ -246,6 +246,7 @@
         "NO_TO_MANAGE": "Nessun appuntamento da gestire"
     },
     "TICKET": {
+        "INSERT": "Inserisci un ticket",
         "NO_DATA": "Nessun veicolo presente",
         "INSERT_TICKET": "Inserisci un ticket corretto",
         "ACTIVE_NOW": "Attiva subito",
@@ -263,6 +264,9 @@
         "DATE_END": "Fine",
         "TYPE": "Tipo",
         "RENT": "Abbonamento",
+        "abbonamento": "Abbonamento",
+        "voucher": "Voucher",
+        "VERIFIED": "verificato",
         "ACTIVATION": "Attivazione",
         "ACTIVATION_PHASE": "In fase di attivazione",
         "END": "Fine visita",

@@ -1,21 +1,21 @@
 <mat-card>
     <mat-card-title fxLayout="row" fxLayoutAlign="center center">
-        Inserisci ticket
+        {{'TICKET.INSERT' | translate}}
     </mat-card-title>
     <mat-card-content>
         <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
-            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
+            <div [style.display]="!validTicket.valid ? 'none' : ''" style="color: green; text-align: center;"> 
+                {{'TICKET.' + validTicket.type | translate}} {{FormGroup.get('CtrlTicket').value}} {{'TICKET.VERIFIED' | translate}}
+            </div>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center" [style.display]="validTicket.valid ? 'none' : ''">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="50" fxFlex.gt-md="50">
                     <mat-label>Ticket</mat-label>
                     <div fxLayout="row">
                         <input matInput type="text" formControlName="CtrlTicket" required minlength="1"
-                            autocomplete="off" [readOnly]="validTicket">
-                        <mat-icon *ngIf="validTicket === true else clean" style="color: green;">check</mat-icon>
-                        <ng-template #clean>
-                            <button mat-icon-button (click)="cleanTicket()">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                        </ng-template>
+                            autocomplete="off">
+                        <button mat-icon-button (click)="cleanTicket()">
+                            <mat-icon>close</mat-icon>
+                        </button>
                     </div>
                     <mat-error>{{'TICKET.INSERT_TICKET' | translate}}</mat-error>
                 </mat-form-field>
@@ -36,7 +36,7 @@
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="15px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">
                     {{'COMMON.ACTION.CANCEL' | translate}}</button>
-                <button mat-button *ngIf="!validTicket else save" [disabled]="FormGroup.invalid" class="greenButtons"
+                <button mat-button *ngIf="!validTicket.valid else save" [disabled]="FormGroup.invalid" class="greenButtons"
                     (click)="testTicket()">{{'COMMON.ACTION.VERIFY' | translate}}</button>
                 <ng-template #save>
                     <button mat-button class="greenButtons" (click)="addTicket()">

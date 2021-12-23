@@ -13,7 +13,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 })
 export class ModalTestTicketComponent implements OnInit {
   public FormGroup: FormGroup;
-  public validTicket: boolean;
+  public validTicket: {valid: boolean, type: string} = {valid: false, type : ''};
 
   private roleDriver: boolean;
 
@@ -39,9 +39,11 @@ export class ModalTestTicketComponent implements OnInit {
   public testTicket(): void {
     const ticket = this.FormGroup.get('CtrlTicket').value;
     this.ticketService.checkTicket(this.data.vehicleId, ticket).subscribe(
-      () => this.validTicket = true,
-      () => this.validTicket = false,
-      () => this.snackBar.showMessage('TICKET.TEST_SUCCESS', 'INFO')
+      (type) => {
+        this.validTicket.valid = true;
+        this.validTicket.type = type;
+      },
+      () => this.validTicket.valid = false
     );
   }
 
