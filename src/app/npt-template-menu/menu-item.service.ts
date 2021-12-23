@@ -25,8 +25,8 @@ const SUBMENU_ROUTES = [
   { state: 'manage-appointment', name: 'Manage-appointment', icon: 'contact_phone', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'anagraphic-driver', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.DRIVER] },
   { state: 'association-driver', name: 'Association-vehicles', icon: 'directions_car', roles: [ROLES.DRIVER] },
+  { state: 'add-ticket', name: 'Add-ticket', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] },
   { state: 'manage-ticket', name: 'Manage-ticket', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] },
-  { state: 'active-ticket', name: 'Active-ticket', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] },
 ];
 
 const MENUITEMS = [

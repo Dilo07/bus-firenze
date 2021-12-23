@@ -30,8 +30,8 @@
         "Manage-appointment": "Manage",
         "Association-vehicles": "Associated vehicles",
         "Ticket": "Ticket",
-        "Manage-ticket": "Manage",
-        "Active-ticket": "Active now"
+        "Add-ticket": "Add new",
+        "Manage-ticket": "Manage"
     },
     "ACCOUNT": {
         "PROFILE": "Profile",
@@ -246,6 +246,7 @@
         "NO_TO_MANAGE": "Nobody appointment to manage"
     },
     "TICKET": {
+        "INSERT": "Insert a ticket",
         "NO_DATA": "No vehicles present",
         "INSERT_TICKET": "Insert a correct ticket",
         "ACTIVE_NOW": "Active now",
@@ -263,6 +264,9 @@
         "DATE_END": "End",
         "TYPE": "Type",
         "RENT": "Subscription",
+        "abbonamento": "Subscription",
+        "voucher": "Voucher",
+        "VERIFIED": "verified",
         "ACTIVATION": "Activation",
         "ACTIVATION_PHASE": "Activation phase",
         "END": "Trip end",

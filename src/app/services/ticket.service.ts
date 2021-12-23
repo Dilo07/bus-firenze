@@ -44,12 +44,12 @@ export class TicketService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  checkTicket(vehicleId: number, ticketId: string): Observable<void> {
+  checkTicket(vehicleId: number, ticketId: string): Observable<string> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ ticketId })
     };
-    return this.http.get<void>(this.apiUrl + '/vehicle/' + vehicleId + '/ticket', options)
+    return this.http.get<string>(this.apiUrl + '/vehicle/' + vehicleId + '/ticket', options)
       .pipe(catchError(err => { throw err; }));
   }
 
