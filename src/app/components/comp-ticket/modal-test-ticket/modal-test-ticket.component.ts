@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
+import { Ticket } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-modal-test-ticket',
@@ -13,7 +14,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 })
 export class ModalTestTicketComponent implements OnInit {
   public FormGroup: FormGroup;
-  public validTicket: {valid: boolean, type: string} = {valid: false, type : ''};
+  public validTicket: {valid: boolean, ticket: Ticket} = {valid: false, ticket : null};
 
   private roleDriver: boolean;
 
@@ -39,9 +40,9 @@ export class ModalTestTicketComponent implements OnInit {
   public testTicket(): void {
     const ticket = this.FormGroup.get('CtrlTicket').value;
     this.ticketService.checkTicket(this.data.vehicleId, ticket).subscribe(
-      (type) => {
+      (ticket) => {
         this.validTicket.valid = true;
-        this.validTicket.type = type;
+        this.validTicket.ticket = ticket;
       },
       () => this.validTicket.valid = false
     );

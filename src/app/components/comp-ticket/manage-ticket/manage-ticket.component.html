@@ -102,6 +102,11 @@
                                 <mat-icon style="color: #0066CC;"
                                     (click)="removeTicket(element.ticketId, element.vehicleId)">pan_tool</mat-icon>
                             </button>
+                            <button mat-icon-button matTooltip="{{'TICKET.CANCEL' | translate}}"
+                                *ngIf="!element.dateSink && !element.dateDel">
+                                <mat-icon style="color: #0066CC;"
+                                    (click)="removeTicket(element.ticketId, element.vehicleId)">event_busy</mat-icon>
+                            </button>
                         </mat-cell>
                     </ng-container>
 

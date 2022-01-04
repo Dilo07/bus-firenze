@@ -138,6 +138,8 @@ export interface Ticket {
     ticketStart: Date;
     ticketEnd: Date;
     ticketSubscription: boolean;
+    type: string;
+    code: string;
 }
 
 export interface User {

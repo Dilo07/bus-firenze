@@ -267,6 +267,7 @@
         "abbonamento": "Abbonamento",
         "voucher": "Voucher",
         "VERIFIED": "verificato",
+        "CODE" : "codice",
         "ACTIVATION": "Attivazione",
         "ACTIVATION_PHASE": "In fase di attivazione",
         "END": "Fine visita",
@@ -351,6 +352,9 @@
             "notfound": "Veicolo non trovato",
             "invalid": "Assegnato un ticket ad un veicolo non valido",
             "already_present": "Ticket già presente sul veicolo"
+        },
+        "ticket":{
+          "already_assigned": "Ticket già assegnato a un veicolo"
         },
         "obu": {
             "not_found": "Obu Id non presente",
