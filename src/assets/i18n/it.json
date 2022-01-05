@@ -260,6 +260,7 @@
         "ACTIVE": "Ticket attivi",
         "MANAGE": "Gestisci ticket",
         "LPN": "Targa",
+        "LPN_NAT":"Nazione",
         "DATE_START": "Inizio",
         "DATE_END": "Fine",
         "TYPE": "Tipo",

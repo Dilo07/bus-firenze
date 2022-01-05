@@ -42,7 +42,7 @@ export class ManageTicketComponent implements OnInit {
   public viewFleetTable = false;
   public viewHistoric = false;
   public dataSource = new MatTableDataSource<Ticket>();
-  public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'ticketStart', 'ticketEnd', 'type', 'dateSink', 'actions'];
+  public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'lpnNat', 'ticketStart', 'ticketEnd', 'type', 'dateSink', 'actions'];
   public complete = true;
   public expandedElement: CompleteFleetManager | null;
   public FormGroup: FormGroup;

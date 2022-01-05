@@ -260,6 +260,7 @@
         "ACTIVE": "Active ticket",
         "MANAGE": "Manage ticket",
         "LPN": "Plate",
+        "LPN_NAT":"Country",
         "DATE_START": "Start",
         "DATE_END": "End",
         "TYPE": "Type",

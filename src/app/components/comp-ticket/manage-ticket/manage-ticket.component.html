@@ -60,6 +60,14 @@
                         </mat-cell>
                     </ng-container>
 
+                    <ng-container matColumnDef="lpnNat">
+                      <mat-header-cell *matHeaderCellDef> {{'TICKET.LPN_NAT' | translate}} </mat-header-cell>
+                      <mat-cell *matCellDef="let element">
+                          <span class="mobile-label">{{'TICKET.LPN_NAT' | translate}}</span>
+                          {{element.lpnNat}}
+                      </mat-cell>
+                  </ng-container>
+
                     <ng-container matColumnDef="ticketStart">
                         <mat-header-cell *matHeaderCellDef> {{'TICKET.DATE_START' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
