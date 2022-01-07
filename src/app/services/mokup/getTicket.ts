@@ -13,7 +13,9 @@ export const ActiveTicket: Ticket[] = [
         dateDel: new Date(),
         ticketStart: new Date(),
         ticketEnd: new Date(),
-        ticketSubscription: true
+        ticketSubscription: true,
+        type: 'abbonamento',
+        code: 'G'
     },
     {
         ticketId: '2',
@@ -27,6 +29,8 @@ export const ActiveTicket: Ticket[] = [
         dateDel: new Date(),
         ticketStart: new Date(),
         ticketEnd: new Date(),
-        ticketSubscription: true
+        ticketSubscription: true,
+        type: 'abbonamento',
+        code: 'G'
     }
 ];

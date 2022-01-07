@@ -260,6 +260,7 @@
         "ACTIVE": "Ticket attivi",
         "MANAGE": "Gestisci ticket",
         "LPN": "Targa",
+        "LPN_NAT":"Nazione",
         "DATE_START": "Inizio",
         "DATE_END": "Fine",
         "TYPE": "Tipo",
@@ -267,9 +268,11 @@
         "abbonamento": "Abbonamento",
         "voucher": "Voucher",
         "VERIFIED": "verificato",
+        "CODE" : "codice",
         "ACTIVATION": "Attivazione",
         "ACTIVATION_PHASE": "In fase di attivazione",
         "END": "Fine visita",
+        "CANCEL": "Annulla",
         "INSERT_BY": "Inserito da:",
         "INSERT_AT": "Inserito il:",
         "END_BY": "Terminato da:",
@@ -351,6 +354,9 @@
             "notfound": "Veicolo non trovato",
             "invalid": "Assegnato un ticket ad un veicolo non valido",
             "already_present": "Ticket già presente sul veicolo"
+        },
+        "ticket":{
+          "already_assigned": "Ticket già assegnato a un veicolo"
         },
         "obu": {
             "not_found": "Obu Id non presente",
