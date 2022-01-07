@@ -14,7 +14,7 @@ import { Ticket } from '../../domain/bus-firenze-domain';
 })
 export class ModalTestTicketComponent implements OnInit {
   public FormGroup: FormGroup;
-  public validTicket: {valid: boolean, ticket: Ticket} = {valid: false, ticket : null};
+  public validTicket: { valid: boolean, ticket: Ticket } = { valid: false, ticket: null };
 
   private roleDriver: boolean;
 
@@ -40,9 +40,9 @@ export class ModalTestTicketComponent implements OnInit {
   public testTicket(): void {
     const ticket = this.FormGroup.get('CtrlTicket').value;
     this.ticketService.checkTicket(this.data.vehicleId, ticket).subscribe(
-      (ticket) => {
+      (infoTicket) => {
         this.validTicket.valid = true;
-        this.validTicket.ticket = ticket;
+        this.validTicket.ticket = infoTicket;
       },
       () => this.validTicket.valid = false
     );
@@ -51,11 +51,17 @@ export class ModalTestTicketComponent implements OnInit {
   public addTicket(): void {
     const ticket = this.FormGroup.get('CtrlTicket').value;
     const delayed = this.FormGroup.get('CtrlActive').value;
-    this.ticketService.addTicket(this.roleDriver, this.data.vehicleId, ticket, delayed, this.data.extend, this.data.fleetManagerId).subscribe(
-      () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
-      () => null,
-      () => this.dialogRef.close(true)
-    );
+    this.ticketService.addTicket(
+      this.roleDriver,
+      this.data.vehicleId,
+      ticket,
+      delayed,
+      this.data.extend,
+      this.data.fleetManagerId).subscribe(
+        () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
+        () => null,
+        () => this.dialogRef.close(true)
+      );
   }
 
   public cleanTicket(): void {
