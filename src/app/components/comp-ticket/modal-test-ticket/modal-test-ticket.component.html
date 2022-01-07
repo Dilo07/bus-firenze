@@ -29,7 +29,7 @@
                     <mat-error>{{'TICKET.INSERT_TICKET' | translate}}</mat-error>
                 </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutAlign="center" *ngIf="!hideActiveTicket">
+            <div fxLayout="row" fxLayoutAlign="center" *ngIf="!hideActiveTicket && !data.extend">
                 <mat-radio-group formControlName="CtrlActive">
                     <mat-radio-button [value]="true">
                         <span style="white-space: normal; margin-right: 10px;">
@@ -41,6 +41,9 @@
                         <span style="white-space: normal;"> {{'TICKET.ACTIVE_NOW' | translate}}</span>
                     </mat-radio-button>
                 </mat-radio-group>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" *ngIf="data.extend">
+              {{'TICKET.EXTEND_TEXT' | translate}}
             </div>
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="15px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">

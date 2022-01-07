@@ -66,7 +66,7 @@ export class AddTicketComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalTestTicketComponent, {
       width: '90%',
       height: '60%',
-      data: { vehicleId: VehicleId, fleetManagerId: this.fleetManagerId }
+      data: { vehicleId: VehicleId, fleetManagerId: this.fleetManagerId, extend: false }
     });
     dialogRef.afterClosed().subscribe(save => {
       if (save) {

@@ -23,7 +23,7 @@ export class ModalTestTicketComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number, fleetManagerId: number },
+    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number, fleetManagerId: number, extend: boolean },
     @Inject('authService') private authService: any,
     @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {
@@ -51,7 +51,7 @@ export class ModalTestTicketComponent implements OnInit {
   public addTicket(): void {
     const ticket = this.FormGroup.get('CtrlTicket').value;
     const delayed = this.FormGroup.get('CtrlActive').value;
-    this.ticketService.addTicket(this.roleDriver, this.data.vehicleId, ticket, delayed, this.data.fleetManagerId).subscribe(
+    this.ticketService.addTicket(this.roleDriver, this.data.vehicleId, ticket, delayed, this.data.extend, this.data.fleetManagerId).subscribe(
       () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
       () => null,
       () => this.dialogRef.close(true)

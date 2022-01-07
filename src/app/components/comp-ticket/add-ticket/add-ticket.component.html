@@ -33,7 +33,7 @@
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                         <mat-cell *matCellDef="let element" style="text-align: end;">
-                            <button mat-icon-button matTooltip="Attiva contrassegno" (click)="modalTicket(element.id)">
+                            <button mat-icon-button matTooltip="{{'TICKET.ADD' | translate}}" (click)="modalTicket(element.id)">
                                 <mat-icon style="color: #0066CC;">receipt_long</mat-icon>
                             </button>
                         </mat-cell>

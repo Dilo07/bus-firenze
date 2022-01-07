@@ -249,6 +249,7 @@
         "INSERT": "Insert a ticket",
         "NO_DATA": "No vehicles present",
         "INSERT_TICKET": "Insert a correct ticket",
+        "ADD": "Add a ticket",
         "ACTIVE_NOW": "Active now",
         "ACTIVE_AFTER": "Active when you'll enter on area",
         "DETAILS": "Detail ticket",
@@ -276,7 +277,8 @@
         "INSERT_BY": "Inserted by:",
         "INSERT_AT": "Inserted at:",
         "END_BY": "Terminated by:",
-        "END_AT": "Terminated at:"
+        "END_AT": "Terminated at:",
+        "EXTEND_TEXT": "The ticket will be activated a few minutes before the currently active ticket expires"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",

@@ -249,6 +249,7 @@
         "INSERT": "Inserisci un ticket",
         "NO_DATA": "Nessun veicolo presente",
         "INSERT_TICKET": "Inserisci un ticket corretto",
+        "ADD": "Aggiungi un contrassegno",
         "ACTIVE_NOW": "Attiva subito",
         "ACTIVE_AFTER": "Attiva quando entrerai nell'area",
         "DETAILS": "Dettagli ticket",
@@ -276,7 +277,8 @@
         "INSERT_BY": "Inserito da:",
         "INSERT_AT": "Inserito il:",
         "END_BY": "Terminato da:",
-        "END_AT": "Terminato il:"
+        "END_AT": "Terminato il:",
+        "EXTEND_TEXT": "Il contrassegno sarà attivato alcuni minuti prima della scadenza del contrassegno attualmente attivo"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",
