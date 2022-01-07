@@ -5,14 +5,18 @@
     <mat-card-content>
         <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
             <div *ngIf="validTicket.valid" style="color: green; text-align: center;">
-                 Ticket {{FormGroup.get('CtrlTicket').value}} {{'TICKET.VERIFIED' | translate}} <br>
-                 {{'TICKET.TYPE' | translate}}: {{'TICKET.' + validTicket.ticket.type | translate}} ({{'TICKET.CODE' | translate}} {{validTicket.ticket.code}})
+                Ticket {{FormGroup.get('CtrlTicket').value}} {{'TICKET.VERIFIED' | translate}} <br>
+                {{'TICKET.TYPE' | translate}}: {{'TICKET.' + validTicket.ticket.type | translate}}
+                ({{'TICKET.CODE' | translate}} {{validTicket.ticket.code}})
                 <div *ngIf="validTicket.ticket.ticketStart">
-                  {{'TICKET.DATE_START' | translate}}: {{validTicket.ticket.ticketStart ? (validTicket.ticket.ticketStart | date: 'dd/MM/yyyy HH:mm') : '-'}}<br>
-                  {{'TICKET.DATE_END' | translate}}: {{validTicket.ticket.ticketEnd ? (validTicket.ticket.ticketEnd | date: 'dd/MM/yyyy HH:mm') : '-'}}
+                    {{'TICKET.DATE_START' | translate}}: {{validTicket.ticket.ticketStart ?
+                    (validTicket.ticket.ticketStart | date: 'dd/MM/yyyy HH:mm') : '-'}}<br>
+                    {{'TICKET.DATE_END' | translate}}: {{validTicket.ticket.ticketEnd ? (validTicket.ticket.ticketEnd |
+                    date: 'dd/MM/yyyy HH:mm') : '-'}}
                 </div>
-              </div>
-            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center" [style.display]="validTicket.valid ? 'none' : ''">
+            </div>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center"
+                [style.display]="validTicket.valid ? 'none' : ''">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="50" fxFlex.gt-md="50">
                     <mat-label>Ticket</mat-label>
                     <div fxLayout="row">
@@ -41,8 +45,8 @@
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="15px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">
                     {{'COMMON.ACTION.CANCEL' | translate}}</button>
-                <button mat-button *ngIf="!validTicket.valid else save" [disabled]="FormGroup.invalid" class="greenButtons"
-                    (click)="testTicket()">{{'COMMON.ACTION.VERIFY' | translate}}</button>
+                <button mat-button *ngIf="!validTicket.valid else save" [disabled]="FormGroup.invalid"
+                    class="greenButtons" (click)="testTicket()">{{'COMMON.ACTION.VERIFY' | translate}}</button>
                 <ng-template #save>
                     <button mat-button class="greenButtons" (click)="addTicket()">
                         {{'COMMON.ACTION.SAVE' | translate}}

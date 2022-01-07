@@ -272,6 +272,7 @@
         "ACTIVATION": "Activation",
         "ACTIVATION_PHASE": "Activation phase",
         "END": "Trip end",
+        "CANCEL": "Cancel",
         "INSERT_BY": "Inserted by:",
         "INSERT_AT": "Inserted at:",
         "END_BY": "Terminated by:",
