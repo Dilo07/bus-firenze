@@ -260,6 +260,7 @@
         "ACTIVE": "Active ticket",
         "MANAGE": "Manage ticket",
         "LPN": "Plate",
+        "LPN_NAT":"Country",
         "DATE_START": "Start",
         "DATE_END": "End",
         "TYPE": "Type",
@@ -267,9 +268,11 @@
         "abbonamento": "Subscription",
         "voucher": "Voucher",
         "VERIFIED": "verified",
+        "CODE" : "code",
         "ACTIVATION": "Activation",
         "ACTIVATION_PHASE": "Activation phase",
         "END": "Trip end",
+        "CANCEL": "Cancel",
         "INSERT_BY": "Inserted by:",
         "INSERT_AT": "Inserted at:",
         "END_BY": "Terminated by:",
@@ -351,6 +354,9 @@
             "notfound": "Vehicle not found",
             "invalid": "Ticket assigned to invalid vehicle",
             "already_present": "Ticket already present on vehicle"
+        },
+        "ticket":{
+          "already_assigned": "Ticket already assigned to another vehicle"
         },
         "obu": {
             "not_found": "Obu Id doesn't exist",
