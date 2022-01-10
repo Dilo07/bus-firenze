@@ -7,6 +7,8 @@ import { MapUtils } from '@npt/npt-map';
 export const COLOR = {
     LIGHT_GREEN: 'rgba(0, 255, 0, 0.7)',
     LIGHT_BLUE: 'rgb(102, 204, 255, 0.8)',
+    RED: 'rgb(255, 0, 0, 0.7)',
+    YELLOW: 'rgb(255, 255, 0, 0.7)',
     BLUE: 'rgb(0, 0, 255, 0.8)',
     BLACK: 'rgba(0, 0, 0, 1)',
 };
@@ -61,6 +63,8 @@ const StylePoint = (Color: string): Style => {
 export const Expstyle: any = {
 
     SECTION_LINKS: MapUtils.Style.StyleLineString(COLOR.LIGHT_GREEN, 14),
+    SECTION_LINKS_ERROR: MapUtils.Style.StyleLineString(COLOR.RED, 14),
+    SECTION_LINKS_WARNING: MapUtils.Style.StyleLineString(COLOR.YELLOW, 14),
     SECTION_LINKS_LIGHT: MapUtils.Style.StyleLineString(COLOR.LIGHT_BLUE, 14),
     SECTION_COUNTER: MapUtils.Style.StyleLineString,
     ARROW_BLUE: StyleArrowBlue,

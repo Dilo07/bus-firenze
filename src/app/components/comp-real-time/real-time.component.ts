@@ -52,7 +52,7 @@ export class RealTimeComponent implements OnInit {
     this.getGeom();
   }
 
-  private getGeom(): void{
+  private getGeom(): void {
     this.complete = false;
     this.subscription.push(this.liveStreamService.getGeometryLive().subscribe(
       data => {
@@ -60,18 +60,18 @@ export class RealTimeComponent implements OnInit {
         this.drawGeom();
       },
       () => this.complete = true,
-      () =>  { this.getTrip(); this.complete = true; }
+      () => { this.getTrip(); this.complete = true; }
     ));
   }
 
   private drawGeom(): void {
     this.geometry.forEach(geom => {
-      if ( geom.type === 'MultiPolygon'){
+      if (geom.type === 'MultiPolygon') {
         geom.coordinates.forEach(cord => {
-          const geoJson = this.createGeoJSON({coordinates: [cord]});
+          const geoJson = this.createGeoJSON({ coordinates: [cord] });
           this.mapChild.viewGeometry(geoJson, FirenzeMapUtils.LayerEnum.CHARGE_POLYGON, FirenzeMapUtils.Style.POLYGON_SELECTOR);
         });
-      }else{
+      } else {
         const geoJson = this.createGeoJSON(geom);
         this.mapChild.viewGeometry(geoJson, FirenzeMapUtils.LayerEnum.CHARGE_POLYGON, FirenzeMapUtils.Style.POLYGON_SELECTOR);
       }
@@ -95,8 +95,17 @@ export class RealTimeComponent implements OnInit {
 
   private drawLine(): void {
     this.vehicleTrip.forEach(trip => {
-      this.mapChild.drawLine([trip.shape.points], FirenzeMapUtils.LayerEnum.LINE_REAL_TIME, FirenzeMapUtils.Style.SECTION_LINKS);
+      const style = this.getStyle(trip);
+      this.mapChild.drawLine([trip.shape.points], FirenzeMapUtils.LayerEnum.LINE_REAL_TIME, style);
     });
+  }
+
+  private getStyle(trip: VehicleTripPersistence): string {
+    if (!trip.ticketNumber) {
+      return FirenzeMapUtils.Style.SECTION_LINKS_ERROR;
+    }else{
+      return FirenzeMapUtils.Style.SECTION_LINKS;
+    }
   }
 
   private drawPoint(): void {

@@ -78,6 +78,8 @@ export class Vehicle {
 }
 
 export class VehicleTripPersistence {
+    ticketNumber: string;
+    ticketExpiresAt: number;
     id: number;
     start: number;
     end: number;
