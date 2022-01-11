@@ -119,7 +119,7 @@ export class ManageTicketComponent implements OnInit {
   public modalTicket(VehicleId: number): void {
     const dialogRef = this.dialog.open(ModalTestTicketComponent, {
       width: '90%',
-      height: '60%',
+      height: '80%',
       data: { vehicleId: VehicleId, fleetManagerId: this.fleetManagerId, extend: true }
     });
     dialogRef.afterClosed().subscribe(save => {

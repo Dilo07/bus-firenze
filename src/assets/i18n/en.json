@@ -272,6 +272,7 @@
         "RENT": "Subscription",
         "abbonamento": "Subscription",
         "voucher": "Voucher",
+        "contrassegno": "Ticket",
         "VERIFIED": "verified",
         "CODE" : "code",
         "ACTIVATION": "Activation",

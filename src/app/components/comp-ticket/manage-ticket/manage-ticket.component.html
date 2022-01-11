@@ -88,8 +88,7 @@
                         <mat-header-cell *matHeaderCellDef> {{'TICKET.TYPE' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
                             <span class="mobile-label">{{'TICKET.TYPE' | translate}}</span>
-                            {{element.ticketSubscription === null ? '-' :
-                            element.ticketSubscription ? ('TICKET.RENT' | translate) : 'Voucher' }}
+                            {{element.type ? ('TICKET.' + element.type | translate) : '-'}}
                         </mat-cell>
                     </ng-container>
 

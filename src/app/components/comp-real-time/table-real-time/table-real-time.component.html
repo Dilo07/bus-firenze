@@ -5,6 +5,16 @@
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">Obu Id</span>
                 {{element.obuId}}
+                <button *ngIf="element.ticketExpiresAt < now" mat-icon-button [disabled]="true">
+                    <mat-icon style="color: red; opacity: 0.8;" matTooltip="{{'VEHICLE.EXPIRED' | translate}}
+                    {{element.ticketExpiresAt | date : 'dd/MM/yyyy HH:mm:ss'}}">error</mat-icon>
+                </button>
+                <button *ngIf="element.ticketExpiresAt > now && element.ticketExpiresAt < nowPlus15" mat-icon-button
+                    [disabled]="true">
+                    <mat-icon style="color: #eed202; opacity: 0.8;" matTooltip="{{'VEHICLE.WILLEXPIRE' | translate}}
+                    {{element.ticketExpiresAt | date : 'dd/MM/yyyy HH:mm:ss'}}">warning
+                    </mat-icon>
+                </button>
             </mat-cell>
         </ng-container>
 
@@ -21,6 +31,22 @@
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">{{'COMMON.DATE.END' | translate}}</span>
                 {{element.end | date: 'dd/MM/yyyy HH:mm:ss'}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ticketNumber">
+            <mat-header-cell *matHeaderCellDef> ticketNumber </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">ticketNumber</span>
+                {{element.ticketNumber}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ticketExpiresAt">
+            <mat-header-cell *matHeaderCellDef> scadenza ticket </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">scadenza ticket</span>
+                {{element.ticketExpiresAt | date: 'dd/MM/yyyy HH:mm:ss'}}
             </mat-cell>
         </ng-container>
 
