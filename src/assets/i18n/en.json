@@ -44,7 +44,7 @@
         "INCORRECT-PASSWORD": "The password not is correct",
         "CHANGE-PASSWORD": "Change password",
         "CANCEL": "Cancel",
-        "RULE-PASSWORD": "The password must have 8 carapter with almost one uppercase, on lowercase and one number",
+        "RULE-PASSWORD": "The password must have 8 carapter with almost one uppercase, on lowercase, a special character and one number",
         "PASSWORD-DIFFERENT": "The two password inserted are different",
         "ERROR": "password change not performed correctly",
         "SUCCESS": "Password changed successfully"
@@ -194,6 +194,7 @@
         "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number."
     },
     "REAL-TIME": {
+        "TICKET": "Ticket",
         "VEHICLES": "Vehicles number",
         "ACTIVEVEHICLE": "Active vehicles",
         "WARNINGVEHICLE": "Expiring vehicles",

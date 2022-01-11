@@ -140,9 +140,11 @@ export class RealTimeComponent implements OnInit {
   }
 
   private generateText(trip: VehicleTripPersistence): string {
-    return `<table><tr><th> OBU </th><th> ${this.translate.instant('COMMON.DATE.START')} </th><th> ${this.translate.instant('COMMON.DATE.END')} </th></tr>
+    return `<table><tr><th> OBU </th><th> ${this.translate.instant('COMMON.DATE.START')} </th><th> ${this.translate.instant('COMMON.DATE.END')} </th>
+        <th> ${this.translate.instant('REAL-TIME.TICKET')} </th></tr>
         <tr><td> ${trip.obuId} </td>
         <td> ${moment(trip.start).format('HH:mm:ss')} </td> <td> ${moment(trip.end).format('HH:mm:ss')} </td>
+        <td> ${trip.ticketNumber} </td>
         </tr></table><hr><br>`;
   }
 

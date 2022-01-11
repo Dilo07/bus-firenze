@@ -44,7 +44,7 @@
         "INCORRECT-PASSWORD": "La password non è corretta",
         "CHANGE-PASSWORD": "Cambia password",
         "CANCEL": "Annulla",
-        "RULE-PASSWORD": "E' richiesta una password di almeno 8 caratteri con almeno una lettera maiuscola, una minuscola ed un numero",
+        "RULE-PASSWORD": "E' richiesta una password di almeno 8 caratteri con almeno una lettera maiuscola, una minuscola, un carattere speciale ed un numero",
         "PASSWORD-DIFFERENT": "Le password inserite sono diverse",
         "ERROR": "Cambio password non eseguito correttamente",
         "SUCCESS": "Password modificata correttamente"
@@ -194,6 +194,7 @@
         "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita."
     },
     "REAL-TIME": {
+        "TICKET": "Contrassegno",
         "VEHICLES": "Numero veicoli",
         "ACTIVEVEHICLE": "Veicoli attivi",
         "WARNINGVEHICLE": "Veicoli in scadenza",
