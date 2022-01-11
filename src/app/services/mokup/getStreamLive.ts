@@ -2,7 +2,7 @@ import { VehicleTripPersistence } from 'src/app/components/domain/bus-firenze-do
 
 export const vehicleTrip: VehicleTripPersistence[] = [
     {
-        ticketNumber: '', ticketExpiresAt: 1673123668000, id: 0,
+        ticketNumber: '12345', ticketExpiresAt: 1673123668000, id: 0,
         obuId: '000010000000003', start: 0, end: 0, type: 'multipolygon',
         shape:
         {

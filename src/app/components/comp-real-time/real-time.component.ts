@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
 import { TranslateService } from '@ngx-translate/core';
 import { TimesRefresh } from '../domain/bus-firenze-constants';
+import Map from 'ol/Map';
 
 @Component({
   selector: 'app-real-time',
@@ -31,6 +32,7 @@ export class RealTimeComponent implements OnInit {
   private geometry: Geometry[] = [];
   public layersPopup = [FirenzeMapUtils.LayerEnum.POINT_REAL_TIME];
   private interval: any;
+  private map: Map;
 
   constructor(
     private router: Router,
@@ -49,7 +51,10 @@ export class RealTimeComponent implements OnInit {
   }
 
   public onMapReady(event: any): void {
+    this.map = event;
     this.getGeom();
+    this.getTrip();
+    this.setMapControls();
   }
 
   private getGeom(): void {
@@ -101,9 +106,13 @@ export class RealTimeComponent implements OnInit {
   }
 
   private getStyle(trip: VehicleTripPersistence): string {
-    if (!trip.ticketNumber) {
+    const now = moment.now();
+    const nowPlus15 = moment(now).add(15, 'minutes').valueOf();
+    if (!trip.ticketNumber || trip.ticketExpiresAt < now) {
       return FirenzeMapUtils.Style.SECTION_LINKS_ERROR;
-    }else{
+    } else if (trip.ticketExpiresAt > now && trip.ticketExpiresAt < nowPlus15) {
+      return FirenzeMapUtils.Style.SECTION_LINKS_WARNING;
+    } else {
       return FirenzeMapUtils.Style.SECTION_LINKS;
     }
   }
@@ -173,6 +182,37 @@ export class RealTimeComponent implements OnInit {
     } else {
       this.callInterval();
     }
+  }
+
+  private setMapControls(): void {
+    const activeVehicle = new MapUtils.Control.Enum.BUTTON(
+      'activeVehicle',
+      this.translate.instant('REAL-TIME.ACTIVEVEHICLE'),
+      '40px',
+      null,
+      null,
+      true
+    );
+
+    const warningVehicle = new MapUtils.Control.Enum.BUTTON(
+      'warningVehicle',
+      this.translate.instant('REAL-TIME.WARNINGVEHICLE'),
+      '80px',
+      null,
+      null,
+      true
+    );
+
+    const errorVehicle = new MapUtils.Control.Enum.BUTTON(
+      'errorVehicle',
+      this.translate.instant('REAL-TIME.ERRORVEHICLE'),
+      '120px',
+      null,
+      null,
+      true
+    );
+
+    MapUtils.Control.SetControls(this.map, [activeVehicle, warningVehicle, errorVehicle]);
   }
 
   private createGeoJSON(geom: any): any {

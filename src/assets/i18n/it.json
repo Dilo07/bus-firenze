@@ -194,6 +194,10 @@
         "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita."
     },
     "REAL-TIME": {
+        "VEHICLES": "Numero veicoli",
+        "ACTIVEVEHICLE": "Veicoli attivi",
+        "WARNINGVEHICLE": "Veicoli in scadenza",
+        "ERRORVEHICLE": "Veicoli scaduti o senza ticket",
         "NO_DATA": "Nessun veicolo nell'area",
         "REFRESH": "Aggiorna",
         "STOP": "Ferma aggiornamento",

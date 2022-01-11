@@ -194,6 +194,10 @@
         "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number."
     },
     "REAL-TIME": {
+        "VEHICLES": "Vehicles number",
+        "ACTIVEVEHICLE": "Active vehicles",
+        "WARNINGVEHICLE": "Expiring vehicles",
+        "ERRORVEHICLE": "Expired vehicles or without ticket",
         "NO_DATA": "No vehicle in area",
         "REFRESH": "Refresh",
         "STOP": "Stop refresh",

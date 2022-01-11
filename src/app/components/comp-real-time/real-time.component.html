@@ -25,6 +25,7 @@
 					<button mat-icon-button matTooltip="{{'REAL-TIME.PLAY' | translate}}" [disabled]="stop" (click)="stopPlayRefresh()">
 						<mat-icon [style.color]="stop ? 'grey' : 'green'">play_arrow</mat-icon>
 					</button>
+					<mat-card-title> {{'REAL-TIME.VEHICLES' | translate}} {{vehicleTrip.length}}</mat-card-title>
 				</mat-card-content>
 			</mat-card>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>

@@ -116,11 +116,46 @@ mat-card-content {
     background-color: #616161;
 }
 
-.bluButton{
+.bluButton {
     background-color: #1E88E5;
     color: white;
 }
 
-.bluButton:hover{
+.bluButton:hover {
     background-color: #1878cc;
+}
+
+/* control map */
+
+.ol-control button {
+    display: block;
+    margin: 1px;
+    padding: 0;
+    color: black;
+    font-size: 1.14em;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    height: 40px;
+    width: 100px;
+    line-height: .4em;
+    background-color: rgba(0, 60, 136, 0.5);
+    border: none;
+    border-radius: 2px;
+}
+
+.material-icons{
+    display: none;
+}
+
+#activeVehicle{
+    background-color: rgba(0, 255, 0, 0.7);
+}
+
+#warningVehicle{
+    background-color: rgb(255, 255, 0, 0.7);
+}
+
+#errorVehicle{
+    background-color: rgb(255, 0, 0, 0.7);
 }
