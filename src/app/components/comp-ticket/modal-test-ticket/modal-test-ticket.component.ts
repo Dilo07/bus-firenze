@@ -44,7 +44,7 @@ export class ModalTestTicketComponent implements OnInit {
       CtrlProgressive: [''],
       CtrlCode: [''],
       CtrlYear: [moment().year()],
-      CtrlActive: [false, Validators.required]
+      CtrlActive: [false]
     });
   }
 

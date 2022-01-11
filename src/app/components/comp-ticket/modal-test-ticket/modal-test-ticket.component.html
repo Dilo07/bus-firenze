@@ -88,13 +88,6 @@
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="15px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">
                     {{'COMMON.ACTION.CANCEL' | translate}}</button>
-                <!-- <button mat-button *ngIf="!validTicket.valid else save" [disabled]="FormGroup.invalid"
-                    class="greenButtons" (click)="testTicket()">{{'COMMON.ACTION.VERIFY' | translate}}</button>
-                <ng-template #save>
-                    <button mat-button class="greenButtons" (click)="addTicket()">
-                        {{'COMMON.ACTION.SAVE' | translate}}
-                    </button>
-                </ng-template> -->
                 <button mat-button class="greenButtons" [disabled]="!validTicket.valid" (click)="addTicket()">
                     {{'COMMON.ACTION.SAVE' | translate}}
                 </button>
