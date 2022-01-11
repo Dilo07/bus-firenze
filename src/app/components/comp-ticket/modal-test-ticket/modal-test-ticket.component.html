@@ -5,9 +5,15 @@
     <mat-card-content>
         <div fxLayout="row" fxLayoutAlign="center">
             <mat-button-toggle-group [(ngModel)]="ticketType" (change)="changeValidator()">
-                <mat-button-toggle value="{{ticketsType.TICKET}}">{{ticketsType.TICKET}}</mat-button-toggle>
-                <mat-button-toggle value="{{ticketsType.ABBONAMENTO}}">{{ticketsType.ABBONAMENTO}}</mat-button-toggle>
-                <mat-button-toggle value="{{ticketsType.VOUCHER}}">{{ticketsType.VOUCHER}}</mat-button-toggle>
+                <mat-button-toggle value="{{ticketsType.TICKET}}">
+                    {{'TICKET.' + ticketsType.TICKET | translate}}
+                </mat-button-toggle>
+                <mat-button-toggle value="{{ticketsType.ABBONAMENTO}}">
+                    {{'TICKET.' + ticketsType.ABBONAMENTO | translate}}
+                </mat-button-toggle>
+                <mat-button-toggle value="{{ticketsType.VOUCHER}}">
+                    {{'TICKET.' + ticketsType.VOUCHER | translate}}
+                </mat-button-toggle>
             </mat-button-toggle-group>
         </div>
         <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px" *ngIf="ticketType">
@@ -27,23 +33,22 @@
                     [style.display]="validTicket.valid ? 'none' : ''">
                     <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                         fxFlex.gt-md="30">
-                        <mat-label>Progressive</mat-label>
+                        <mat-label>{{'TICKET.PROGRESSIVE' | translate}}</mat-label>
                         <input matInput type="text" formControlName="CtrlProgressive" required
                             (ngModelChange)="testTicket()">
-                        <mat-error>error {{ticketType}}</mat-error>
+                        <mat-error>{{('TICKET.INSERT_' + ticketType) | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                         fxFlex.gt-md="30">
-                        <mat-label>Code</mat-label>
-                        <input matInput type="text" formControlName="CtrlCode" required
-                            (ngModelChange)="testTicket()">
-                        <mat-error>error {{ticketType}}</mat-error>
+                        <mat-label>{{'TICKET.CODE' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="CtrlCode" required (ngModelChange)="testTicket()">
+                        <mat-error>{{('TICKET.INSERT_' + ticketType) | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                         fxFlex.gt-md="30">
-                        <mat-label>Year</mat-label>
+                        <mat-label>{{'TICKET.YEAR' | translate}}</mat-label>
                         <input matInput type="text" formControlName="CtrlYear" required (ngModelChange)="testTicket()">
-                        <mat-error>error {{ticketType}}</mat-error>
+                        <mat-error>{{('TICKET.INSERT_' + ticketType) | translate}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -54,13 +59,13 @@
                         fxFlex.gt-md="50">
                         <mat-label>{{ticketType}}</mat-label>
                         <div fxLayout="row">
-                            <input matInput type="text" formControlName="CtrlVoucher"
-                                required autocomplete="off" (ngModelChange)="testTicket()">
+                            <input matInput type="text" formControlName="CtrlVoucher" required autocomplete="off"
+                                (ngModelChange)="testTicket()">
                             <button mat-icon-button (click)="cleanTicket()">
                                 <mat-icon>close</mat-icon>
                             </button>
                         </div>
-                        <mat-error>{{'TICKET.INSERT_TICKET' | translate}}</mat-error>
+                        <mat-error>{{('TICKET.INSERT_' + ticketType) | translate}}</mat-error>
                     </mat-form-field>
                 </div>
             </ng-template>

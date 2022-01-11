@@ -68,18 +68,10 @@ export class ModalTestTicketComponent implements OnInit {
       this.FormGroup.controls.CtrlCode.setValidators([Validators.minLength(3), Validators.maxLength(3), Validators.required]);
       this.FormGroup.controls.CtrlYear.setValidators([Validators.required]);
     }
-    this.FormGroup.controls.CtrlVoucher.updateValueAndValidity();
-    this.FormGroup.controls.CtrlProgressive.updateValueAndValidity();
-    this.FormGroup.controls.CtrlCode.updateValueAndValidity();
-    this.FormGroup.controls.CtrlYear.updateValueAndValidity();
   }
 
   public testTicket(): void {
-    this.FormGroup.controls.CtrlVoucher.updateValueAndValidity();
-    this.FormGroup.controls.CtrlProgressive.updateValueAndValidity();
-    this.FormGroup.controls.CtrlCode.updateValueAndValidity();
-    this.FormGroup.controls.CtrlYear.updateValueAndValidity();
-    console.log(this.FormGroup.invalid);
+    this.updateControls();
     let ticketTest = '';
     if (!this.FormGroup.invalid) {
       if (this.ticketType !== this.ticketsType.VOUCHER) {
@@ -119,6 +111,13 @@ export class ModalTestTicketComponent implements OnInit {
     this.FormGroup.patchValue({
       CtrlVoucher: ''
     });
+  }
+
+  private updateControls(): void {
+    this.FormGroup.controls.CtrlVoucher.updateValueAndValidity();
+    this.FormGroup.controls.CtrlProgressive.updateValueAndValidity();
+    this.FormGroup.controls.CtrlCode.updateValueAndValidity();
+    this.FormGroup.controls.CtrlYear.updateValueAndValidity();
   }
 
 }

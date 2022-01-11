@@ -252,7 +252,11 @@
     "TICKET": {
         "INSERT": "Insert a ticket",
         "NO_DATA": "No vehicles present",
-        "INSERT_TICKET": "Insert a correct ticket",
+        "INSERT_contrassegno": "Insert a correct ticket",
+        "INSERT_abbonamento": "Insert a correct subscription",
+        "INSERT_voucher": "Insert a correct voucher",
+        "PROGRESSIVE": "# Progressive",
+        "YEAR": "Year",
         "ADD": "Add a ticket",
         "ACTIVE_NOW": "Active now",
         "ACTIVE_AFTER": "Active when you'll enter on area",

@@ -41,7 +41,7 @@ export const CONTRACT_TYPE = {
 };
 
 export const TICKETS_TYPE = {
-    TICKET: 'Ticket',
-    ABBONAMENTO: 'Abbonamento',
-    VOUCHER: 'Voucher'
+    TICKET: 'contrassegno',
+    ABBONAMENTO: 'abbonamento',
+    VOUCHER: 'voucher'
 };

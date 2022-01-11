@@ -252,7 +252,11 @@
     "TICKET": {
         "INSERT": "Inserisci un ticket",
         "NO_DATA": "Nessun veicolo presente",
-        "INSERT_TICKET": "Inserisci un ticket corretto",
+        "INSERT_contrassegno": "Inserisci un contrassegno corretto",
+        "INSERT_abbonamento": "Inserisci un abbonamento corretto",
+        "INSERT_voucher": "Inserisci un voucher corretto",
+        "PROGRESSIVE": "N. progressivo",
+        "YEAR": "Anno",
         "ADD": "Aggiungi un contrassegno",
         "ACTIVE_NOW": "Attiva subito",
         "ACTIVE_AFTER": "Attiva quando entrerai nell'area",
