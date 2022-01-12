@@ -28,7 +28,6 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
 
   private roleDriver: boolean;
   private subscription: Subscription[] = [];
-  private subscriptionProgressive: Subscription[] = [];
 
   constructor(
     private ticketService: TicketService,
@@ -74,19 +73,10 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
       this.FormGroup.controls.CtrlYear.setValidators(null);
     } else {
       this.FormGroup.controls.CtrlVoucher.setValidators(null);
-      this.FormGroup.controls.CtrlProgressive.setValidators([Validators.required]);
+      this.FormGroup.controls.CtrlProgressive.setValidators([Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.required]);
       this.FormGroup.controls.CtrlCode.setValidators([Validators.minLength(3), Validators.maxLength(3), Validators.required]);
       this.FormGroup.controls.CtrlYear.setValidators([Validators.required]);
     }
-    this.subscriptionProgressive.push(this.FormGroup.controls.CtrlProgressive.valueChanges.pipe(
-      debounceTime(1000), take(3)
-    ).subscribe(
-      (data) => {
-        if (data) {
-          this.testTicket();
-        }
-      }
-    ));
   }
 
   public testTicket(): void {
@@ -107,9 +97,6 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
         },
         () => this.validTicket.valid = false
       ));
-      this.subscriptionProgressive.forEach(subscription => {
-        subscription.unsubscribe();
-      });
     }
   }
 
