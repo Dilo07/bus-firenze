@@ -39,3 +39,9 @@ export const CONTRACT_TYPE = {
     RENT: 'RENT',
     BUY: 'BUY'
 };
+
+export const TICKETS_TYPE = {
+    TICKET: 'contrassegno',
+    ABBONAMENTO: 'abbonamento',
+    VOUCHER: 'voucher'
+};

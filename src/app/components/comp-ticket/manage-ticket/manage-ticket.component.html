@@ -61,12 +61,12 @@
                     </ng-container>
 
                     <ng-container matColumnDef="lpnNat">
-                      <mat-header-cell *matHeaderCellDef> {{'TICKET.LPN_NAT' | translate}} </mat-header-cell>
-                      <mat-cell *matCellDef="let element">
-                          <span class="mobile-label">{{'TICKET.LPN_NAT' | translate}}</span>
-                          {{element.lpnNat}}
-                      </mat-cell>
-                  </ng-container>
+                        <mat-header-cell *matHeaderCellDef> {{'TICKET.LPN_NAT' | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">{{'TICKET.LPN_NAT' | translate}}</span>
+                            {{element.lpnNat}}
+                        </mat-cell>
+                    </ng-container>
 
                     <ng-container matColumnDef="ticketStart">
                         <mat-header-cell *matHeaderCellDef> {{'TICKET.DATE_START' | translate}} </mat-header-cell>
@@ -88,8 +88,7 @@
                         <mat-header-cell *matHeaderCellDef> {{'TICKET.TYPE' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
                             <span class="mobile-label">{{'TICKET.TYPE' | translate}}</span>
-                            {{element.ticketSubscription === null ? '-' :
-                            element.ticketSubscription ? ('TICKET.RENT' | translate) : 'Voucher' }}
+                            {{element.type ? ('TICKET.' + element.type | translate) : '-'}}
                         </mat-cell>
                     </ng-container>
 
@@ -114,6 +113,10 @@
                                 *ngIf="!element.dateSink && !element.dateDel">
                                 <mat-icon style="color: #0066CC;"
                                     (click)="removeTicket(element.ticketId, element.vehicleId)">event_busy</mat-icon>
+                            </button>
+                            <button mat-icon-button matTooltip="{{'TICKET.ADD' | translate}}" *ngIf="!element.dateDel">
+                                <mat-icon style="color: #0066CC;" (click)="modalTicket(element.vehicleId)">receipt_long
+                                </mat-icon>
                             </button>
                         </mat-cell>
                     </ng-container>

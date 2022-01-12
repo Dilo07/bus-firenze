@@ -11,6 +11,7 @@ import { TicketService } from 'src/app/services/ticket.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { CompleteFleetManager, Ticket } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
+import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket.component';
 
 @Component({
   selector: 'app-active-ticket',
@@ -113,6 +114,19 @@ export class ManageTicketComponent implements OnInit {
         }
       }
     );
+  }
+
+  public modalTicket(VehicleId: number): void {
+    const dialogRef = this.dialog.open(ModalTestTicketComponent, {
+      width: '90%',
+      height: '80%',
+      data: { vehicleId: VehicleId, fleetManagerId: this.fleetManagerId, extend: true }
+    });
+    dialogRef.afterClosed().subscribe(save => {
+      if (save) {
+        this.getActiveTicket();
+      }
+    });
   }
 
   public changeDate(): void {

@@ -44,7 +44,7 @@
         "INCORRECT-PASSWORD": "The password not is correct",
         "CHANGE-PASSWORD": "Change password",
         "CANCEL": "Cancel",
-        "RULE-PASSWORD": "The password must have 8 carapter with almost one uppercase, on lowercase and one number",
+        "RULE-PASSWORD": "The password must have 8 carapter with almost one uppercase, on lowercase, a special character and one number",
         "PASSWORD-DIFFERENT": "The two password inserted are different",
         "ERROR": "password change not performed correctly",
         "SUCCESS": "Password changed successfully"
@@ -194,6 +194,11 @@
         "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number."
     },
     "REAL-TIME": {
+        "TICKET": "Ticket",
+        "VEHICLES": "Vehicles number",
+        "ACTIVEVEHICLE": "Active vehicles",
+        "WARNINGVEHICLE": "Expiring vehicles",
+        "ERRORVEHICLE": "Expired vehicles or without ticket",
         "NO_DATA": "No vehicle in area",
         "REFRESH": "Refresh",
         "STOP": "Stop refresh",
@@ -248,7 +253,12 @@
     "TICKET": {
         "INSERT": "Insert a ticket",
         "NO_DATA": "No vehicles present",
-        "INSERT_TICKET": "Insert a correct ticket",
+        "INSERT_contrassegno": "Insert a correct ticket",
+        "INSERT_abbonamento": "Insert a correct subscription",
+        "INSERT_voucher": "Insert a correct voucher",
+        "PROGRESSIVE": "# Progressive",
+        "YEAR": "Year",
+        "ADD": "Add a ticket",
         "ACTIVE_NOW": "Active now",
         "ACTIVE_AFTER": "Active when you'll enter on area",
         "DETAILS": "Detail ticket",
@@ -267,6 +277,7 @@
         "RENT": "Subscription",
         "abbonamento": "Subscription",
         "voucher": "Voucher",
+        "contrassegno": "Ticket",
         "VERIFIED": "verified",
         "CODE" : "code",
         "ACTIVATION": "Activation",
@@ -276,7 +287,8 @@
         "INSERT_BY": "Inserted by:",
         "INSERT_AT": "Inserted at:",
         "END_BY": "Terminated by:",
-        "END_AT": "Terminated at:"
+        "END_AT": "Terminated at:",
+        "EXTEND_TEXT": "The ticket will be activated a few minutes before the currently active ticket expires"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",
@@ -439,7 +451,15 @@
             "ERR_NO_VOUCHER_VALIDO": "The request voucher not is usable for inserted plate",
             "ERR_NO_OBU_FOR_MANAGER": "Manage OBU not associated at serial OBU",
             "ERR_NO_OBU_MANAGER_FOR_BUS": "Manage OBU not associated for inserted plate",
-            "ERR_NO_OBU_FOUND_WITH_PLATE": "Nobody OBU found for supplied plate"
+            "ERR_NO_OBU_FOUND_WITH_PLATE": "Nobody OBU found for supplied plate",
+            "ERR_TARIFFA_NOT_VALID": "Invalid ammount for this plate",
+            "ERR_BUS_NOT_PREAUTORIZZATO ": "The bus hasn't the request preautorization",
+            "ERR_NO_PLATE_FOUND": "Nobody plate found for this data",
+            "MSG_OBU_INSERT_SUCCESSFUL": "Insert OBU operation completed successfully",
+            "MSG_OBU_UPDATE_SUCCESSFUL": "Update OBU operation completed successfully",
+            "MSG_COORDINATES_INSERT_SUCCESSFUL": "Insert coordinate operation completed successfully",
+            "MSG_CONTRASSEGNO_ACTIVATE_SUCCESSFULL": "Activation trip operation completed successfully, ticket #:",
+            "MSG_CORSA_TERMINATA_SUCCESS": "End trip operation completed successfully"
         }
     }
 }

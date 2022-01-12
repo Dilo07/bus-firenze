@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
 import { TranslateService } from '@ngx-translate/core';
 import { TimesRefresh } from '../domain/bus-firenze-constants';
+import Map from 'ol/Map';
 
 @Component({
   selector: 'app-real-time',
@@ -31,6 +32,7 @@ export class RealTimeComponent implements OnInit {
   private geometry: Geometry[] = [];
   public layersPopup = [FirenzeMapUtils.LayerEnum.POINT_REAL_TIME];
   private interval: any;
+  private map: Map;
 
   constructor(
     private router: Router,
@@ -49,10 +51,13 @@ export class RealTimeComponent implements OnInit {
   }
 
   public onMapReady(event: any): void {
+    this.map = event;
     this.getGeom();
+    this.getTrip();
+    this.setMapControls();
   }
 
-  private getGeom(): void{
+  private getGeom(): void {
     this.complete = false;
     this.subscription.push(this.liveStreamService.getGeometryLive().subscribe(
       data => {
@@ -60,18 +65,18 @@ export class RealTimeComponent implements OnInit {
         this.drawGeom();
       },
       () => this.complete = true,
-      () =>  { this.getTrip(); this.complete = true; }
+      () => { this.getTrip(); this.complete = true; }
     ));
   }
 
   private drawGeom(): void {
     this.geometry.forEach(geom => {
-      if ( geom.type === 'MultiPolygon'){
+      if (geom.type === 'MultiPolygon') {
         geom.coordinates.forEach(cord => {
-          const geoJson = this.createGeoJSON({coordinates: [cord]});
+          const geoJson = this.createGeoJSON({ coordinates: [cord] });
           this.mapChild.viewGeometry(geoJson, FirenzeMapUtils.LayerEnum.CHARGE_POLYGON, FirenzeMapUtils.Style.POLYGON_SELECTOR);
         });
-      }else{
+      } else {
         const geoJson = this.createGeoJSON(geom);
         this.mapChild.viewGeometry(geoJson, FirenzeMapUtils.LayerEnum.CHARGE_POLYGON, FirenzeMapUtils.Style.POLYGON_SELECTOR);
       }
@@ -95,8 +100,21 @@ export class RealTimeComponent implements OnInit {
 
   private drawLine(): void {
     this.vehicleTrip.forEach(trip => {
-      this.mapChild.drawLine([trip.shape.points], FirenzeMapUtils.LayerEnum.LINE_REAL_TIME, FirenzeMapUtils.Style.SECTION_LINKS);
+      const style = this.getStyle(trip);
+      this.mapChild.drawLine([trip.shape.points], FirenzeMapUtils.LayerEnum.LINE_REAL_TIME, style);
     });
+  }
+
+  private getStyle(trip: VehicleTripPersistence): string {
+    const now = moment.now();
+    const nowPlus15 = moment(now).add(15, 'minutes').valueOf();
+    if (!trip.ticketNumber || trip.ticketExpiresAt < now) {
+      return FirenzeMapUtils.Style.SECTION_LINKS_ERROR;
+    } else if (trip.ticketExpiresAt > now && trip.ticketExpiresAt < nowPlus15) {
+      return FirenzeMapUtils.Style.SECTION_LINKS_WARNING;
+    } else {
+      return FirenzeMapUtils.Style.SECTION_LINKS;
+    }
   }
 
   private drawPoint(): void {
@@ -122,9 +140,11 @@ export class RealTimeComponent implements OnInit {
   }
 
   private generateText(trip: VehicleTripPersistence): string {
-    return `<table><tr><th> OBU </th><th> ${this.translate.instant('COMMON.DATE.START')} </th><th> ${this.translate.instant('COMMON.DATE.END')} </th></tr>
+    return `<table><tr><th> OBU </th><th> ${this.translate.instant('COMMON.DATE.START')} </th><th> ${this.translate.instant('COMMON.DATE.END')} </th>
+        <th> ${this.translate.instant('REAL-TIME.TICKET')} </th></tr>
         <tr><td> ${trip.obuId} </td>
         <td> ${moment(trip.start).format('HH:mm:ss')} </td> <td> ${moment(trip.end).format('HH:mm:ss')} </td>
+        <td> ${trip.ticketNumber} </td>
         </tr></table><hr><br>`;
   }
 
@@ -164,6 +184,37 @@ export class RealTimeComponent implements OnInit {
     } else {
       this.callInterval();
     }
+  }
+
+  private setMapControls(): void {
+    const activeVehicle = new MapUtils.Control.Enum.BUTTON(
+      'activeVehicle',
+      this.translate.instant('REAL-TIME.ACTIVEVEHICLE'),
+      '40px',
+      null,
+      null,
+      true
+    );
+
+    const warningVehicle = new MapUtils.Control.Enum.BUTTON(
+      'warningVehicle',
+      this.translate.instant('REAL-TIME.WARNINGVEHICLE'),
+      '80px',
+      null,
+      null,
+      true
+    );
+
+    const errorVehicle = new MapUtils.Control.Enum.BUTTON(
+      'errorVehicle',
+      this.translate.instant('REAL-TIME.ERRORVEHICLE'),
+      '120px',
+      null,
+      null,
+      true
+    );
+
+    MapUtils.Control.SetControls(this.map, [activeVehicle, warningVehicle, errorVehicle]);
   }
 
   private createGeoJSON(geom: any): any {

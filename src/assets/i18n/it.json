@@ -44,7 +44,7 @@
         "INCORRECT-PASSWORD": "La password non è corretta",
         "CHANGE-PASSWORD": "Cambia password",
         "CANCEL": "Annulla",
-        "RULE-PASSWORD": "E' richiesta una password di almeno 8 caratteri con almeno una lettera maiuscola, una minuscola ed un numero",
+        "RULE-PASSWORD": "E' richiesta una password di almeno 8 caratteri con almeno una lettera maiuscola, una minuscola, un carattere speciale ed un numero",
         "PASSWORD-DIFFERENT": "Le password inserite sono diverse",
         "ERROR": "Cambio password non eseguito correttamente",
         "SUCCESS": "Password modificata correttamente"
@@ -194,6 +194,11 @@
         "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita."
     },
     "REAL-TIME": {
+        "TICKET": "Contrassegno",
+        "VEHICLES": "Numero veicoli",
+        "ACTIVEVEHICLE": "Veicoli attivi",
+        "WARNINGVEHICLE": "Veicoli in scadenza",
+        "ERRORVEHICLE": "Veicoli scaduti o senza ticket",
         "NO_DATA": "Nessun veicolo nell'area",
         "REFRESH": "Aggiorna",
         "STOP": "Ferma aggiornamento",
@@ -248,7 +253,12 @@
     "TICKET": {
         "INSERT": "Inserisci un ticket",
         "NO_DATA": "Nessun veicolo presente",
-        "INSERT_TICKET": "Inserisci un ticket corretto",
+        "INSERT_contrassegno": "Inserisci un contrassegno corretto",
+        "INSERT_abbonamento": "Inserisci un abbonamento corretto",
+        "INSERT_voucher": "Inserisci un voucher corretto",
+        "PROGRESSIVE": "N. progressivo",
+        "YEAR": "Anno",
+        "ADD": "Aggiungi un contrassegno",
         "ACTIVE_NOW": "Attiva subito",
         "ACTIVE_AFTER": "Attiva quando entrerai nell'area",
         "DETAILS": "Dettagli ticket",
@@ -267,6 +277,7 @@
         "RENT": "Abbonamento",
         "abbonamento": "Abbonamento",
         "voucher": "Voucher",
+        "contrassegno": "Contrassegno",
         "VERIFIED": "verificato",
         "CODE" : "codice",
         "ACTIVATION": "Attivazione",
@@ -276,7 +287,8 @@
         "INSERT_BY": "Inserito da:",
         "INSERT_AT": "Inserito il:",
         "END_BY": "Terminato da:",
-        "END_AT": "Terminato il:"
+        "END_AT": "Terminato il:",
+        "EXTEND_TEXT": "Il contrassegno sarà attivato alcuni minuti prima della scadenza del contrassegno attualmente attivo"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",
@@ -439,7 +451,15 @@
             "ERR_NO_VOUCHER_VALIDO": "Il voucher richiesto non è utilizzabile per la targa inserita",
             "ERR_NO_OBU_FOR_MANAGER": "Gestore OBU non associato al seriale OBU dato",
             "ERR_NO_OBU_MANAGER_FOR_BUS": "Gestore OBU non associato alla targa inserita",
-            "ERR_NO_OBU_FOUND_WITH_PLATE": "Nessun OBU trovato per la targa fornita"
+            "ERR_NO_OBU_FOUND_WITH_PLATE": "Nessun OBU trovato per la targa fornita",
+            "ERR_TARIFFA_NOT_VALID": "Tariffa non valida per la targa data",
+            "ERR_BUS_NOT_PREAUTORIZZATO ": "Il bus non possiede la preautorizzazione richiesta",
+            "ERR_NO_PLATE_FOUND": "Nessuna targa trovata per i dati forniti",
+            "MSG_OBU_INSERT_SUCCESSFUL": "Operazione di inserimento OBU effettuata con successo",
+            "MSG_OBU_UPDATE_SUCCESSFUL": "Operazione di aggiornamento OBU effettuata con successo",
+            "MSG_COORDINATES_INSERT_SUCCESSFUL": "Operazione di inserimento Coordinate effettuata con successo",
+            "MSG_CONTRASSEGNO_ACTIVATE_SUCCESSFULL": "Operazione di attivazione corsa effettuata con successo, contrassegno n:",
+            "MSG_CORSA_TERMINATA_SUCCESS": "Operazione di terminazione corsa effettuata con successo"
         }
     }
 }

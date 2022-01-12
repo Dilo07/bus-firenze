@@ -53,10 +53,16 @@ export class TicketService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  addTicket(isDriver: boolean, vehicleId: number, ticketId: string, delayed: boolean, fleetManagerId?: number): Observable<void> {
+  addTicket(
+    isDriver: boolean,
+    vehicleId: number,
+    ticketId: string,
+    delayed: boolean,
+    extend: boolean,
+    fleetManagerId?: number): Observable<void> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ ticketId, delayed })
+      params: HttpUtils.createHttpParams({ ticketId, delayed, extend })
     };
     let url = '';
     if (isDriver) {
@@ -65,7 +71,7 @@ export class TicketService {
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
-    return this.http.put<void>(this.apiUrl + url + '/vehicle/' + vehicleId + '/ticket', null , options)
+    return this.http.put<void>(this.apiUrl + url + '/vehicle/' + vehicleId + '/ticket', null, options)
       .pipe(catchError(err => { throw err; }));
   }
 
