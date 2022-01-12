@@ -1,7 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
+import { debounceTime, take } from 'rxjs/operators';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
@@ -18,13 +20,14 @@ import { Ticket } from '../../domain/bus-firenze-domain';
   `
   ]
 })
-export class ModalTestTicketComponent implements OnInit {
+export class ModalTestTicketComponent implements OnInit, OnDestroy {
   public FormGroup: FormGroup;
   public validTicket: { valid: boolean, ticket: Ticket } = { valid: false, ticket: null };
   public ticketType: string;
   public ticketsType = TICKETS_TYPE;
 
   private roleDriver: boolean;
+  private subscription: Subscription[] = [];
 
   constructor(
     private ticketService: TicketService,
@@ -48,6 +51,12 @@ export class ModalTestTicketComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+  }
+
   public changeValidator(): void {
     this.FormGroup.patchValue({
       CtrlVoucher: '',
@@ -68,6 +77,15 @@ export class ModalTestTicketComponent implements OnInit {
       this.FormGroup.controls.CtrlCode.setValidators([Validators.minLength(3), Validators.maxLength(3), Validators.required]);
       this.FormGroup.controls.CtrlYear.setValidators([Validators.required]);
     }
+    this.subscription.push(this.FormGroup.controls.CtrlProgressive.valueChanges.pipe(
+      debounceTime(1000), take(3)
+    ).subscribe(
+      (data) => {
+        if (data) {
+          this.testTicket();
+        }
+      }
+    ));
   }
 
   public testTicket(): void {
@@ -88,6 +106,7 @@ export class ModalTestTicketComponent implements OnInit {
         },
         () => this.validTicket.valid = false
       );
+      this.ngOnDestroy();
     }
   }
 
