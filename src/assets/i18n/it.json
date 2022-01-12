@@ -451,7 +451,15 @@
             "ERR_NO_VOUCHER_VALIDO": "Il voucher richiesto non è utilizzabile per la targa inserita",
             "ERR_NO_OBU_FOR_MANAGER": "Gestore OBU non associato al seriale OBU dato",
             "ERR_NO_OBU_MANAGER_FOR_BUS": "Gestore OBU non associato alla targa inserita",
-            "ERR_NO_OBU_FOUND_WITH_PLATE": "Nessun OBU trovato per la targa fornita"
+            "ERR_NO_OBU_FOUND_WITH_PLATE": "Nessun OBU trovato per la targa fornita",
+            "ERR_TARIFFA_NOT_VALID": "Tariffa non valida per la targa data",
+            "ERR_BUS_NOT_PREAUTORIZZATO ": "Il bus non possiede la preautorizzazione richiesta",
+            "ERR_NO_PLATE_FOUND": "Nessuna targa trovata per i dati forniti",
+            "MSG_OBU_INSERT_SUCCESSFUL": "Operazione di inserimento OBU effettuata con successo",
+            "MSG_OBU_UPDATE_SUCCESSFUL": "Operazione di aggiornamento OBU effettuata con successo",
+            "MSG_COORDINATES_INSERT_SUCCESSFUL": "Operazione di inserimento Coordinate effettuata con successo",
+            "MSG_CONTRASSEGNO_ACTIVATE_SUCCESSFULL": "Operazione di attivazione corsa effettuata con successo, contrassegno n:",
+            "MSG_CORSA_TERMINATA_SUCCESS": "Operazione di terminazione corsa effettuata con successo"
         }
     }
 }

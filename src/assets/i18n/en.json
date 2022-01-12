@@ -451,7 +451,15 @@
             "ERR_NO_VOUCHER_VALIDO": "The request voucher not is usable for inserted plate",
             "ERR_NO_OBU_FOR_MANAGER": "Manage OBU not associated at serial OBU",
             "ERR_NO_OBU_MANAGER_FOR_BUS": "Manage OBU not associated for inserted plate",
-            "ERR_NO_OBU_FOUND_WITH_PLATE": "Nobody OBU found for supplied plate"
+            "ERR_NO_OBU_FOUND_WITH_PLATE": "Nobody OBU found for supplied plate",
+            "ERR_TARIFFA_NOT_VALID": "Invalid ammount for this plate",
+            "ERR_BUS_NOT_PREAUTORIZZATO ": "The bus hasn't the request preautorization",
+            "ERR_NO_PLATE_FOUND": "Nobody plate found for this data",
+            "MSG_OBU_INSERT_SUCCESSFUL": "Insert OBU operation completed successfully",
+            "MSG_OBU_UPDATE_SUCCESSFUL": "Update OBU operation completed successfully",
+            "MSG_COORDINATES_INSERT_SUCCESSFUL": "Insert coordinate operation completed successfully",
+            "MSG_CONTRASSEGNO_ACTIVATE_SUCCESSFULL": "Activation trip operation completed successfully, ticket #:",
+            "MSG_CORSA_TERMINATA_SUCCESS": "End trip operation completed successfully"
         }
     }
 }
