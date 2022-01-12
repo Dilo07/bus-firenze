@@ -28,6 +28,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
 
   private roleDriver: boolean;
   private subscription: Subscription[] = [];
+  private subscriptionProgressive: Subscription[] = [];
 
   constructor(
     private ticketService: TicketService,
@@ -77,7 +78,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
       this.FormGroup.controls.CtrlCode.setValidators([Validators.minLength(3), Validators.maxLength(3), Validators.required]);
       this.FormGroup.controls.CtrlYear.setValidators([Validators.required]);
     }
-    this.subscription.push(this.FormGroup.controls.CtrlProgressive.valueChanges.pipe(
+    this.subscriptionProgressive.push(this.FormGroup.controls.CtrlProgressive.valueChanges.pipe(
       debounceTime(1000), take(3)
     ).subscribe(
       (data) => {
@@ -99,21 +100,23 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
         ticketTest = this.FormGroup.get('CtrlVoucher').value;
       }
       console.log(ticketTest);
-      this.ticketService.checkTicket(this.data.vehicleId, ticketTest).subscribe(
+      this.subscription.push(this.ticketService.checkTicket(this.data.vehicleId, ticketTest).subscribe(
         (infoTicket) => {
           this.validTicket.valid = true;
           this.validTicket.ticket = infoTicket;
         },
         () => this.validTicket.valid = false
-      );
-      this.ngOnDestroy();
+      ));
+      this.subscriptionProgressive.forEach(subscription => {
+        subscription.unsubscribe();
+      });
     }
   }
 
   public addTicket(): void {
     const ticketSave = this.validTicket.ticket.ticketId;
     const delayed = this.FormGroup.get('CtrlActive').value;
-    this.ticketService.addTicket(
+    this.subscription.push(this.ticketService.addTicket(
       this.roleDriver,
       this.data.vehicleId,
       ticketSave,
@@ -123,7 +126,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
         () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
         () => null,
         () => this.dialogRef.close(true)
-      );
+      ));
   }
 
   public cleanTicket(): void {
