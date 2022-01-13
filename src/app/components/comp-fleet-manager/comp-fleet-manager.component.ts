@@ -102,7 +102,7 @@ export class FleetManagerComponent implements OnInit {
     @Inject('authService') private authService: any) { }
 
   ngOnInit(): void {
-    this.roleOpMovyon = this.authService.getUserRoles().includes(ROLES.OPER_MOVYON);
+    this.authService.getUserRoles().then((res: string) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
     this.validFleet = this.router.url === '/fleet-manager-valid';
     this.manageFleet = this.router.url === '/fleet-manager-manage';
     this.Search = this.formBuilder.group({

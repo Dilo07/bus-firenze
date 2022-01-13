@@ -61,8 +61,8 @@ export class ManageTicketComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
-    this.roleMovyon = this.authService.getUserRoles().includes(ROLES.MOVYON);
+    this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
+    this.authService.getUserRoles().then((res: string) => this.roleMovyon = res.includes(ROLES.MOVYON));
     this.FormGroup = new FormGroup({
       start: new FormControl(''),
       end: new FormControl(''),

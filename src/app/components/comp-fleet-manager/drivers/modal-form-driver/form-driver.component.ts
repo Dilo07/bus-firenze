@@ -43,7 +43,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     this.driver = this.router.getCurrentNavigation()?.extras.state?.driver as Driver;
     this.fleetManagerId = this.router.getCurrentNavigation()?.extras.state?.fleetManagerId as number;
     this.cellularRequired = this.router.getCurrentNavigation()?.extras.state?.cellularRequired as boolean;
-    this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
+    this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
   }
 
   ngOnInit(): void {
