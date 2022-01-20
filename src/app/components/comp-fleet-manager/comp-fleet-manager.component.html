@@ -3,7 +3,7 @@
 	<mat-card-content>
 		<div [@slideInOut]="viewDoc">
 			<span *ngIf="src.type === 'application/pdf' else image">
-				<pdf-viewer [src]="src.url" [rotation]="0" [original-size]="true" [show-all]="true"
+				<pdf-viewer [src]="$any(src.url)" [rotation]="0" [original-size]="true" [show-all]="true"
 					[fit-to-page]="false" [zoom]="zoom" [stick-to-page]="false" [render-text]="true"
 					[external-link-target]="'top'" [autoresize]="true" [show-borders]="true">
 				</pdf-viewer>

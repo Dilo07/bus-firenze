@@ -15,6 +15,7 @@ export class TableStatisticComponent implements OnInit, OnChanges {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() TripPersistence: VehicleTripPersistence[];
+  @Input() viewOuter: boolean;
   public displayedColumns: string[] = ['start', 'end', 'trip length', 'duration', 'type', 'obuId'];
   public dataSource = new MatTableDataSource<VehicleTripPersistence>([]);
 

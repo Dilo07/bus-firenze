@@ -2,7 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -140,7 +140,7 @@ export class FleetManagerComponent implements OnInit {
     this.sessionService.setSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
   }
 
-  public pageChanged(event: { lengrh: number, pageIndex: number, pageSize: number, previousPageIndex: number }): void {
+  public pageChanged(event: PageEvent): void {
     this.offset = event.pageIndex;
     this.limit = event.pageSize;
     const currentSize = this.offset * this.limit;

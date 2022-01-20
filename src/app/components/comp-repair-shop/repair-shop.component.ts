@@ -15,7 +15,7 @@ import { RepairShops } from '../domain/bus-firenze-domain';
 export class RepairShopComponent implements OnInit {
 
   constructor(
-    @Inject('repair_shopData') public repairShops: RepairShops
+    @Inject('repair_shopData') public repairShops: RepairShops[]
   ) { }
 
   ngOnInit(): void { }

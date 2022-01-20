@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -81,7 +81,7 @@ export class TableFleetComponent implements OnInit {
     );
   }
 
-  public pageChanged(event: { lengrh: number, pageIndex: number, pageSize: number, previousPageIndex: number }): void {
+  public pageChanged(event: PageEvent): void {
     this.offset = event.pageIndex;
     this.limit = event.pageSize;
     const currentSize = this.offset * this.limit;

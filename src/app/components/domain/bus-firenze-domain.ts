@@ -40,6 +40,7 @@ export class CompleteFleetManager extends FleetManager {
     }
 
     vehicles: Vehicle[];
+    ticketId?: string;
 }
 
 export class Driver {

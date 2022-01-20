@@ -35,9 +35,9 @@ export class AddTicketComponent implements OnInit {
     @Inject('authService') private authService: any
   ) { }
 
-  ngOnInit(): void {
-    this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
-    this.authService.getUserRoles().then((res: string) => this.roleMovyon = res.includes(ROLES.MOVYON));
+  async ngOnInit(): Promise<void> {
+    await this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
+    await this.authService.getUserRoles().then((res: string) => this.roleMovyon = res.includes(ROLES.MOVYON));
     if (this.roleMovyon) {
       this.viewFleetTable = true;
     } else {
@@ -45,7 +45,7 @@ export class AddTicketComponent implements OnInit {
     }
   }
 
-  private getVehicle(fleetManagerId?: number): void {
+  public getVehicle(fleetManagerId?: number): void {
     if (fleetManagerId) {
       this.fleetManagerId = fleetManagerId;
       this.viewFleetTable = false;

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BarcodeFormat } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { Subscription } from 'rxjs';
 import { ObuService } from 'src/app/services/obu.service';
@@ -26,6 +27,7 @@ export class ModalObuComponent implements OnInit, OnDestroy {
   public complete = true;
   public scannerEnabled = false;
   public selectedFile: File;
+  public allowedFormats = [ BarcodeFormat.QR_CODE, BarcodeFormat.EAN_13, BarcodeFormat.CODE_128, BarcodeFormat.DATA_MATRIX];
 
   private subscription: Subscription[] = [];
   private isGunScanner = false;
@@ -153,11 +155,11 @@ export class ModalObuComponent implements OnInit, OnDestroy {
   // funziona chiamata quando la telecamera ha acquisito il qar code o il bar code
   public scanSuccessHandler(event: any): void {
     console.log(event);
-    if (event.substr(0, 4) === 'http') { // qar code
+    if (event.substring(0, 4) === 'http') { // qar code
       const url = new URL(event);
       const value = url.searchParams.get('c');
       this.FormGroup.patchValue({
-        CtrlObuId: value.substring(1, 15)
+        CtrlObuId: value.substring(1, 16)
       });
     } else { // bar code
       this.FormGroup.patchValue({
