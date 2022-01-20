@@ -118,7 +118,7 @@
                                                 <input matInput [ngxMatDatetimePicker]="picker" [min]="minDate"
                                                     (focus)="picker.open()" autocomplete="off"
                                                     [(ngModel)]="CtrlDateSelection" readonly>
-                                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                                <mat-datepicker-toggle matSuffix [for]="$any(picker)">
                                                 </mat-datepicker-toggle>
                                                 <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
                                             </mat-form-field>
