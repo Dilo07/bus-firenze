@@ -9,7 +9,7 @@
             </span>
         </ng-template>
     </mat-card-title>
-    <mat-card-content fxLayout="column" fxLayoutGap="20px">
+    <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="FormGroup">
         <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">

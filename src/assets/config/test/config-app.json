@@ -1,6 +1,6 @@
 {
   "keycloak_url": "https://n4800038.gruppo.autostrade.it",
-  "keycloak_realm": "movyon-reaml-dev",
+  "keycloak_realm": "bus-firenze-dev-realm",
   "keycloak_clientId": "bus-firenze-locale-id",
   "be_url": "http://localhost:9094",
   "context_app": "",
