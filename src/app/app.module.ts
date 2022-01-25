@@ -16,7 +16,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.component';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+  const packageObj = require('../../package.json');
+  const version = packageObj.version;
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json?version=' + version);
 }
 
 @NgModule({
