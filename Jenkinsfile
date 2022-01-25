@@ -21,6 +21,7 @@ pipeline {
         MASTER_BRANCH_NAME = 'main'
         NEXUS_DEPLOY = true
         UPDATE_GIT = true
+        CLEAR_CACHE = false
         MOVE_JIRA_ISSUE = true
         COPY_ARTIFACT = true
         FOLDER_ARTIFACT_COPY = "dev-tech/ATECH-NPT/Dev/${ARTIFACT}"
@@ -40,6 +41,19 @@ pipeline {
                 }
             }
         }
+
+        stage('Clear Cache') {
+            steps {
+                script {
+                    if (env.CLEAR_CACHE.toBoolean()) {
+                        nodejs(nodeJSInstallationName: 'Node-14.17.0', configId: 'd1fbb428-bc33-489b-bb11-e2e807e439d9') { 
+                            echo "clear cache: npm cache clear --force"
+                            sh 'npm cache clear --force'
+                        }
+                    }
+                }
+			}
+		}
 
         stage('Build Project') {
             steps {
