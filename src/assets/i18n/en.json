@@ -194,6 +194,7 @@
         "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number."
     },
     "REAL-TIME": {
+        "NOT-FOUND": "Not found",
         "TICKET": "Ticket",
         "VEHICLES": "Vehicles number",
         "ACTIVEVEHICLE": "Active vehicles",

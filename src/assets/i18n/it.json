@@ -194,6 +194,7 @@
         "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita."
     },
     "REAL-TIME": {
+        "NOT-FOUND": "Non trovato",
         "TICKET": "Contrassegno",
         "VEHICLES": "Numero veicoli",
         "ACTIVEVEHICLE": "Veicoli attivi",
