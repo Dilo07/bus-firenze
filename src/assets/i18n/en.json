@@ -155,8 +155,7 @@
         "ADD_SUCCESS": "Vehicle inserted correctly",
         "EDIT_ERROR": "vehicle edit error",
         "EDIT_SUCCESS": "Vehicle edited correctly",
-        "DOWNLOAD": "Download manual",
-        "DOWNLOAD CONTRACT": "Download contract"
+        "DOWNLOAD": "Download manual"
     },
     "DRIVERS": {
         "TITLE": "Drivers",

@@ -155,8 +155,7 @@
         "ADD_SUCCESS": "Veicolo inserito correttamente",
         "EDIT_ERROR": "Errore nella modifica veicolo",
         "EDIT_SUCCESS": "Veicolo modificato correttamente",
-        "DOWNLOAD": "Scarica manuale",
-        "DOWNLOAD CONTRACT": "Scarica contratto"
+        "DOWNLOAD": "Scarica manuale"
     },
     "DRIVERS": {
         "TITLE": "Autisti",
