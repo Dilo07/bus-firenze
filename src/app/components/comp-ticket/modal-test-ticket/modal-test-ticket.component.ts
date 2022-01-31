@@ -38,7 +38,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     @Inject('authService') private authService: any,
     @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {
-    this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
+    this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
   }
 
   ngOnInit(): void {

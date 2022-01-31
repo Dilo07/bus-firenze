@@ -6,7 +6,7 @@
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
                     <mat-label> {{'VEHICLE.LPN' | translate}}</mat-label>
                     <input matInput type="text"
-                        (input)="FormGroup.patchValue({CtrlLpn: $event.target.value.toUpperCase()})"
+                        (input)="FormGroup.patchValue({CtrlLpn: FormGroup.get('CtrlLpn').value.toUpperCase()})"
                         formControlName="CtrlLpn" maxlength="20" autocomplete="off" required>
                     <mat-error> {{'VEHICLE.INSERT LPN' | translate}}</mat-error>
                 </mat-form-field>

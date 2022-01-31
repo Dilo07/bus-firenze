@@ -31,8 +31,8 @@ export class AppointmentsListComponent implements OnInit {
   public expandedElement: CompleteFleetManager | null;
   public complete = true;
   public minDate = moment(moment.now()).toDate();
+  public onlyActive = true;
   private subscription: Subscription[] = [];
-  private onlyActive = true;
 
   constructor(private route: ActivatedRoute, private fleetService: FleetManagerService, private snackBar: SnackBar) {
     this.route.data.subscribe(data => {

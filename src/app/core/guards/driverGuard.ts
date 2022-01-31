@@ -15,7 +15,7 @@ export class DriveGuard implements CanActivate {
         private router: Router,
         @Inject('authService') private authService: any
     ) {
-        this.roleDriver = this.authService.getUserRoles().includes(ROLES.DRIVER);
+        this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
     }
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
@@ -32,7 +32,7 @@ export class DriveGuard implements CanActivate {
                         this.router.navigate(['user-driver/form-Driver'],
                             { state: { driver: respDriver, fleetManagerId: respDriver.fleetManagerId, cellularRequired: true } });
                         this.guard = false;
-                    }else{
+                    } else {
                         this.guard = true;
                     }
                 }

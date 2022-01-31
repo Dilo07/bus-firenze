@@ -26,7 +26,7 @@
             </div>
             <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
             <zxing-scanner *ngIf="scannerEnabled" #scanner (scanSuccess)="scanSuccessHandler($event)"
-                [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']"></zxing-scanner>
+                [formats]="allowedFormats"></zxing-scanner>
             <p>{{selectedFile?.name}}</p>
             <div *ngIf="validObu && !data.obuId">
                 <input style="display: none" type="file" #fileInput accept="application/pdf"

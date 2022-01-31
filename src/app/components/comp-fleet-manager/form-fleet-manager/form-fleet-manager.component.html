@@ -33,8 +33,8 @@
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}</mat-label>
                     <input matInput type="text" formControlName="CtrlCF"
-                        (input)="FormGroup.patchValue({CtrlCF: $event.target.value.toUpperCase()})"
-                        [required]="FormGroup.controls.CtrlCF.validator">
+                        (input)="FormGroup.patchValue({CtrlCF: FormGroup.get('CtrlCF').value.toUpperCase()})"
+                        [required]="FormGroup.controls.CtrlCF.invalid">
                     <mat-error>{{'FLEET-MANAGER.INSERT_FISCALCODE' | translate}}</mat-error>
                 </mat-form-field>
             </div>
@@ -42,7 +42,7 @@
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>E-Mail</mat-label>
                     <input matInput type="text" formControlName="CtrlMail" maxlength="100" required
-                        [readonly]="!register && data" [style.opacity]="!register && data ? '0.5' : ''">
+                        [readonly]="!register && data?.name" [style.opacity]="!register && data?.name ? '0.5' : ''">
                     <mat-error *ngIf="FormGroup.get('CtrlMail').invalid">{{'FLEET-MANAGER.INSERT_MAIL' | translate}}
                     </mat-error>
                 </mat-form-field>
@@ -51,7 +51,7 @@
                     <input matInput type="text" ng2TelInput
                         [ng2TelInputOptions]="{initialCountry: 'it', separateDialCode: true}"
                         (countryChange)="onCountryChange($event)" formControlName="CtrlCell" autocomplete="off"
-                        maxlength="25" required [readonly]="(verifyOtp && register) || (!register && data)"
+                        maxlength="25" required [readonly]="(verifyOtp && register) || (!register && data?.name)"
                         [style.opacity]="!register && data ? '0.5' : ''">
                     <button matSuffix mat-icon-button matTooltip="verifica numero"
                         *ngIf="register && FormGroup.get('CtrlCell').value && !verifyOtp" (click)="modalOTP()">
@@ -80,7 +80,7 @@
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</mat-label>
                     <input matInput type="text" formControlName="CtrlpIva" maxlength="11"
-                        [required]="FormGroup.controls.CtrlpIva.validator">
+                        [required]="FormGroup.controls.CtrlpIva.invalid">
                     <mat-error>{{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
                 </mat-form-field>
             </div>

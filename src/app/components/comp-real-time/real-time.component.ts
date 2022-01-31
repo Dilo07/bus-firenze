@@ -144,7 +144,7 @@ export class RealTimeComponent implements OnInit {
         <th> ${this.translate.instant('REAL-TIME.TICKET')} </th></tr>
         <tr><td> ${trip.obuId} </td>
         <td> ${moment(trip.start).format('HH:mm:ss')} </td> <td> ${moment(trip.end).format('HH:mm:ss')} </td>
-        <td> ${trip.ticketNumber} </td>
+        <td> ${trip.ticketNumber ? trip.ticketNumber : this.translate.instant('REAL-TIME.NOT-FOUND')} </td>
         </tr></table><hr><br>`;
   }
 

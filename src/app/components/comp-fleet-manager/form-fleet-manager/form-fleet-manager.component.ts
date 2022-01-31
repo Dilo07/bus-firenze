@@ -41,7 +41,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
     private fleetManagerService: FleetManagerService,
     @Inject('authService') private authService: any) {
     this.data = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
-    this.roleFleetManager = this.authService.getUserRoles().includes(ROLES.FLEETMNG);
+    this.authService.getUserRoles().then((res: string) => this.roleFleetManager = res.includes(ROLES.FLEETMNG));
   }
 
   ngOnInit(): void {
