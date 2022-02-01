@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { IAuthenticationService } from '@npt/npt-template';
 import * as moment from 'moment';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
@@ -57,12 +58,12 @@ export class ManageTicketComponent implements OnInit {
     private ticketService: TicketService,
     private dialog: MatDialog,
     private snackBar: SnackBar,
-    @Inject('authService') private authService: any
+    @Inject('authService') private authService: IAuthenticationService
   ) { }
 
   async ngOnInit(): Promise<void> {
-    await this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
-    await this.authService.getUserRoles().then((res: string) => this.roleMovyon = res.includes(ROLES.MOVYON));
+    await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
+    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON));
     this.FormGroup = new FormGroup({
       start: new FormControl(''),
       end: new FormControl(''),

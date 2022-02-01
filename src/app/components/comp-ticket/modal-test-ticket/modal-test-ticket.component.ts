@@ -1,6 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IAuthenticationService } from '@npt/npt-template';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { debounceTime, take } from 'rxjs/operators';
@@ -35,10 +36,10 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number, fleetManagerId: number, extend: boolean },
-    @Inject('authService') private authService: any,
+    @Inject('authService') private authService: IAuthenticationService,
     @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {
-    this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
+    this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
   }
 
   ngOnInit(): void {

@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Ticket } from '../../domain/bus-firenze-domain';
 import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket.component';
+import { IAuthenticationService } from '@npt/npt-template';
 
 @Component({
   selector: 'app-ticket',
@@ -32,12 +33,12 @@ export class AddTicketComponent implements OnInit {
   constructor(
     private ticketService: TicketService,
     private dialog: MatDialog,
-    @Inject('authService') private authService: any
+    @Inject('authService') private authService: IAuthenticationService
   ) { }
 
   async ngOnInit(): Promise<void> {
-    await this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
-    await this.authService.getUserRoles().then((res: string) => this.roleMovyon = res.includes(ROLES.MOVYON));
+    await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
+    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON));
     if (this.roleMovyon) {
       this.viewFleetTable = true;
     } else {

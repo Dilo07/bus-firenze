@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { IAuthenticationService } from '@npt/npt-template';
 import { CountryCallingCode, NationalNumber, parsePhoneNumber } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
@@ -38,7 +39,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     private registerService: RegisterService,
     private translateService: TranslateService,
     private snackBar: SnackBar,
-    @Inject('authService') private authService: any,
+    @Inject('authService') private authService: IAuthenticationService,
   ) {
     this.driver = this.router.getCurrentNavigation()?.extras.state?.driver as Driver;
     this.fleetManagerId = this.router.getCurrentNavigation()?.extras.state?.fleetManagerId as number;
@@ -46,7 +47,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
+    await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
     if (this.driver) {
       this.FormGroup = this.formBuilder.group({
         CtrlName: [this.driver.name, Validators.required],

@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { IAuthenticationService } from '@npt/npt-template';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
 
@@ -13,9 +14,9 @@ export class DriveGuard implements CanActivate {
     constructor(
         private driverService: DriverService,
         private router: Router,
-        @Inject('authService') private authService: any
+        @Inject('authService') private authService: IAuthenticationService
     ) {
-        this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
+        this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
     }
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
