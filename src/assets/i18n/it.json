@@ -365,7 +365,8 @@
             "duplicate": "La targa inserita è già associata",
             "notfound": "Veicolo non trovato",
             "invalid": "Assegnato un ticket ad un veicolo non valido",
-            "already_present": "Ticket già presente sul veicolo"
+            "already_present": "Ticket già presente sul veicolo",
+            "already_associated": "Il veicolo è già associato ad un altro obu"
         },
         "ticket":{
           "already_assigned": "Ticket già assegnato a un veicolo"

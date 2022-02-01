@@ -365,7 +365,8 @@
             "duplicate": "The entered plate is already associated",
             "notfound": "Vehicle not found",
             "invalid": "Ticket assigned to invalid vehicle",
-            "already_present": "Ticket already present on vehicle"
+            "already_present": "Ticket already present on vehicle",
+            "already_associated": "The vehicle is already associated to another obu"
         },
         "ticket":{
           "already_assigned": "Ticket already assigned to another vehicle"
