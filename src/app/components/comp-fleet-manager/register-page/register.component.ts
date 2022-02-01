@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -8,7 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class RegisterComponent implements OnInit {
   public langs: string[];
 
-  constructor(private translateService: TranslateService) { }
+  constructor(
+    private translateService: TranslateService,
+    @Inject('static_pageData') public staticPage: boolean) { }
 
   ngOnInit(): void {
     this.langs = this.translateService.getLangs();
