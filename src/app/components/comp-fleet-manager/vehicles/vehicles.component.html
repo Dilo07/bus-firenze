@@ -110,7 +110,7 @@
 						<mat-cell *matCellDef="let element" style="text-align: end;">
 							<button *ngIf="element.hardware" mat-icon-button
 								matTooltip="{{'VEHICLE.DOWNLOAD' | translate}}"
-								(click)="downloadDocumentVehicle(element.hardware)">
+								(click)="downloadManualPdf(element.hardware)">
 								<mat-icon style="color: #0066CC;">assignment_returned</mat-icon>
 							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
