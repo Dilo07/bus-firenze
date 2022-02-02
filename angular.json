@@ -36,8 +36,8 @@
             ],
             "styles": [
               "node_modules/@npt/npt-template/assets/styles/style.scss",
-              "node_modules/flag-icon-css/css/flag-icons.min.css",
               "node_modules/@npt/npt-map/assets/styles/ol.css",
+              "node_modules/@npt/npt-obu/assets/styles/css/flag-icons.min.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/styles.css"
             ],
@@ -104,8 +104,8 @@
             ],
             "styles": [
               "node_modules/@npt/npt-template/assets/styles/style.scss",
-              "node_modules/flag-icon-css/css/flag-icons.min.css",
               "node_modules/@npt/npt-map/assets/styles/ol.css",
+              "node_modules/@npt/npt-obu/assets/styles/css/flag-icons.min.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/styles.css"
             ],
