@@ -159,12 +159,19 @@
     },
     "DRIVERS": {
         "TITLE": "Autisti",
+        "NEW": "Nuovo",
         "NO_DATA": "Nessun autista presente",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Driver",
         "MESSAGE_EDIT": "Modifica le informazioni del Driver",
+        "MESSAGE_MOBILE": "Attenzione! è necessario verificare il numero di cellulare",
+        "ASSOCIATION": "Associazioni",
         "ASSOCIATION_VEHICLES": "Seleziona i veicoli da associare al guidatore",
         "ASSOCIATION_DRIVERS": "Seleziona i guidatori da associare al veicolo",
         "ASSOCIATION_SUCCESS": "Modifica eseguita correttamente",
+        "NO_ASSOCIATION": "Nessun veicolo associato",
+        "VEHICLES_ASSOCIATION": "Associa veicoli",
+        "ASSOCIATION_PLATE": "Targhe associate",
+        "ASSOCIATION_DATE": "Data associazione",
         "ADD_ERROR": "Errore nell'inserimento autista",
         "ADD_SUCCESS": "Autista inserito correttamente",
         "EDIT_ERROR": "Errore nella modifica autista",
@@ -312,7 +319,8 @@
             "EDIT": "Modifica",
             "ACTIVE": "Attiva",
             "VERIFY": "Verifica",
-            "CLOSE": "Chiudi"
+            "CLOSE": "Chiudi",
+            "SEARCH": "Cerca"
         }
     },
     "ERROR": {
