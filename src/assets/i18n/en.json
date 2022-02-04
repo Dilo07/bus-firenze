@@ -113,7 +113,9 @@
         "INSERT_POSTAL_CODE": "Insert a Postal Code",
         "VEHICLESIZE": "# Vehicles",
         "CONTACT": "Contact",
-        "ERROR_TYPE": "The type file is incorrect. (accepted file: PDF, jpeg, png)"
+        "ERROR_TYPE": "The type file is incorrect. (accepted file: PDF, jpeg, png)",
+        "VERIFY_MOBILE": "verify mobile",
+        "MOBILE_VERIFIED": "mobile verified"
     },
     "VEHICLE": {
         "TITLE": "Vehicles",

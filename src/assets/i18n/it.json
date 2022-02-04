@@ -113,7 +113,9 @@
         "INSERT_POSTAL_CODE": "Inserisci un CAP",
         "VEHICLESIZE": "N° Veicoli",
         "CONTACT": "Contatto",
-        "ERROR_TYPE": "Il tipo del file inserito non è corretto. (file accettati: PDF, jpeg, png)"
+        "ERROR_TYPE": "Il tipo del file inserito non è corretto. (file accettati: PDF, jpeg, png)",
+        "VERIFY_MOBILE": "verifica numero",
+        "MOBILE_VERIFIED": "numero verificato"
     },
     "VEHICLE": {
         "TITLE": "Veicoli",
