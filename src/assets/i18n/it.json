@@ -379,7 +379,9 @@
             "already_associated": "Il veicolo è già associato ad un altro obu"
         },
         "ticket":{
-          "already_assigned": "Ticket già assegnato a un veicolo"
+          "already_assigned": "Ticket già assegnato a un veicolo",
+          "not_found": "Ticket non trovato",
+          "extend": "Impossibile esterndere il ticket"
         },
         "obu": {
             "not_found": "Obu Id non presente",
