@@ -1,5 +1,7 @@
-import { Inject, Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { IAuthenticationService } from '@npt/npt-template';
+import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
 
@@ -7,20 +9,20 @@ import { DriverService } from 'src/app/services/driver.service';
 @Injectable({
     providedIn: 'root'
 })
-export class DriveGuard implements CanActivate {
+export class DriveGuard implements CanActivate, OnDestroy {
     private roleDriver: boolean;
     private guard = true;
+    private subscription: Subscription[] = [];
     constructor(
         private driverService: DriverService,
         private router: Router,
-        @Inject('authService') private authService: any
-    ) {
-        this.authService.getUserRoles().then((res: string) => this.roleDriver = res.includes(ROLES.DRIVER));
-    }
+        @Inject('authService') private authService: IAuthenticationService
+    ) { }
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+        await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
         if (this.roleDriver) {
-            this.driverService.getDriver().subscribe(
+            this.subscription.push(this.driverService.getDriver().subscribe(
                 respDriver => {
                     let resp = null;
                     respDriver.contacts.find(contact => {
@@ -35,9 +37,17 @@ export class DriveGuard implements CanActivate {
                     } else {
                         this.guard = true;
                     }
-                }
-            );
+                },
+                () => null,
+                () => this.ngOnDestroy()
+            ));
         }
         return this.guard;
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.forEach(subscription => {
+            subscription.unsubscribe();
+        });
     }
 }

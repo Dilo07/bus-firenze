@@ -5,7 +5,7 @@
         </span>
         <ng-template #insertCell>
             <span style="color: red;">
-                Attenzione! E' necessario verificare il numero di cellulare
+                {{'DRIVERS.MESSAGE_MOBILE' | translate}}
             </span>
         </ng-template>
     </mat-card-title>
@@ -36,11 +36,12 @@
                         [ng2TelInputOptions]="{initialCountry: 'it', separateDialCode: true}"
                         (countryChange)="onCountryChange($event)" formControlName="CtrlCell" maxlength="25" required
                         [readonly]="verifyOtp">
-                    <button matSuffix mat-icon-button matTooltip="verifica numero"
+                    <button matSuffix mat-icon-button matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}"
                         *ngIf="FormGroup.get('CtrlCell').value && !verifyOtp" (click)="modalOTP()">
                         <mat-icon>mobile_screen_share</mat-icon>
                     </button>
-                    <mat-icon matSuffix *ngIf="verifyOtp" matTooltip="numero verificato" style="color: green;">done
+                    <mat-icon matSuffix *ngIf="verifyOtp" matTooltip="{{'FLEET-MANAGER.MOBILE_VERIFIED' | translate}}"
+                        style="color: green;">done
                     </mat-icon>
                     <mat-error>{{'FLEET-MANAGER.INSERT_CELL' | translate}}</mat-error>
                 </mat-form-field>

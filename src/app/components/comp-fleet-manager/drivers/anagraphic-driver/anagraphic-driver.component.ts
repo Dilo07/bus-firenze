@@ -23,11 +23,11 @@ export class AnagraphicDriverComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.complete = false;
-    this.driverService.getDriver().subscribe(
+    this.subscription.push(this.driverService.getDriver().subscribe(
       data => this.driver = data,
       () => this.complete = true,
       () => { this.complete = true; }
-    );
+    ));
   }
 
   ngOnDestroy(): void {

@@ -53,11 +53,11 @@
                         (countryChange)="onCountryChange($event)" formControlName="CtrlCell" autocomplete="off"
                         maxlength="25" required [readonly]="(verifyOtp && register) || (!register && data?.name)"
                         [style.opacity]="!register && data ? '0.5' : ''">
-                    <button matSuffix mat-icon-button matTooltip="verifica numero"
+                    <button matSuffix mat-icon-button matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}"
                         *ngIf="register && FormGroup.get('CtrlCell').value && !verifyOtp" (click)="modalOTP()">
                         <mat-icon>mobile_screen_share</mat-icon>
                     </button>
-                    <mat-icon matSuffix *ngIf="register && verifyOtp" matTooltip="numero verificato"
+                    <mat-icon matSuffix *ngIf="register && verifyOtp" matTooltip="{{'FLEET-MANAGER.MOBILE_VERIFIED' | translate}}"
                         style="color: green;">done</mat-icon>
                     <mat-error>{{'FLEET-MANAGER.INSERT_CELL' | translate}}</mat-error>
                 </mat-form-field>

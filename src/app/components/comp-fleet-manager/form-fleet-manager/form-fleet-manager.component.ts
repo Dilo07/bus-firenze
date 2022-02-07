@@ -13,6 +13,7 @@ import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { HttpResponse } from '@angular/common/http';
+import { IAuthenticationService } from '@npt/npt-template';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -39,9 +40,9 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
     private registerService: RegisterService,
     private translateService: TranslateService,
     private fleetManagerService: FleetManagerService,
-    @Inject('authService') private authService: any) {
+    @Inject('authService') private authService: IAuthenticationService) {
     this.data = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
-    this.authService.getUserRoles().then((res: string) => this.roleFleetManager = res.includes(ROLES.FLEETMNG));
+    this.authService.getUserRoles().then((res: string[]) => this.roleFleetManager = res.includes(ROLES.FLEETMNG));
   }
 
   ngOnInit(): void {

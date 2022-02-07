@@ -94,8 +94,8 @@
         "FISCALCODE": "Fiscale code",
         "VAT_NUMBER": "VAT Number",
         "COMPANY_NAME": "Company Name",
-        "CELL": "N. Cellulare",
-        "OFFICE": "N. Office",
+        "CELL": "Mobile num.",
+        "OFFICE": "Office num.",
         "ADDRESS": "Address",
         "CITY": "City",
         "DISTRICT": "District",
@@ -113,7 +113,9 @@
         "INSERT_POSTAL_CODE": "Insert a Postal Code",
         "VEHICLESIZE": "# Vehicles",
         "CONTACT": "Contact",
-        "ERROR_TYPE": "The type file is incorrect. (accepted file: PDF, jpeg, png)"
+        "ERROR_TYPE": "The type file is incorrect. (accepted file: PDF, jpeg, png)",
+        "VERIFY_MOBILE": "verify mobile",
+        "MOBILE_VERIFIED": "mobile verified"
     },
     "VEHICLE": {
         "TITLE": "Vehicles",
@@ -159,12 +161,19 @@
     },
     "DRIVERS": {
         "TITLE": "Drivers",
+        "NEW": "New",
         "NO_DATA": "Nobody drivers present",
         "MESSAGE_NEW": "Insert new driver informations",
         "MESSAGE_EDIT": "Edit the driver informations",
+        "MESSAGE_MOBILE": "Attenction! You must verify mobile number",
+        "ASSOCIATION": "Association",
         "ASSOCIATION_VEHICLES": "Select the vehicles to be associated with the driver",
         "ASSOCIATION_DRIVERS": "select the drivers to be associated with the vehicle",
         "ASSOCIATION_SUCCESS": "Modification correctly executed",
+        "NO_ASSOCIATION": "Nobody associated vehicle",
+        "VEHICLES_ASSOCIATION": "Association vehicles",
+        "ASSOCIATION_PLATE": "Associated plate",
+        "ASSOCIATION_DATE": "Association date",
         "ADD_ERROR":"Error on insert driver",
         "ADD_SUCCESS": "Driver inserted correctly",
         "EDIT_ERROR":"Error on edit driver",
@@ -312,7 +321,8 @@
             "EDIT": "Edit",
             "ACTIVE": "Active",
             "VERIFY": "Verify",
-            "CLOSE": "Close"
+            "CLOSE": "Close",
+            "SEARCH": "Search"
         }
     },
     "ERROR": {
@@ -365,10 +375,13 @@
             "duplicate": "The entered plate is already associated",
             "notfound": "Vehicle not found",
             "invalid": "Ticket assigned to invalid vehicle",
-            "already_present": "Ticket already present on vehicle"
+            "already_present": "Ticket already present on vehicle",
+            "already_associated": "The vehicle is already associated to another obu"
         },
         "ticket":{
-          "already_assigned": "Ticket already assigned to another vehicle"
+          "already_assigned": "Ticket already assigned to another vehicle",
+          "not_found": "Ticket not found",
+          "extend": "Cannot extend ticket"
         },
         "obu": {
             "not_found": "Obu Id doesn't exist",

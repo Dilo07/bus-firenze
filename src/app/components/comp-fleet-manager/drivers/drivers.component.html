@@ -8,7 +8,7 @@
 				</button>
 				<button mat-button class="greenButtons" [routerLink]="['../form-Driver']"
 					[state]="{ driver: null, fleetManagerId: this.fleetManagerId }">
-					nuovo
+					{{'DRIVERS.NEW' | translate}}
 				</button>
 			</div>
 			<form [formGroup]="Search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
@@ -25,17 +25,18 @@
 				<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="name"
 					matSortDirection="asc">
 					<ng-container matColumnDef="name">
-						<mat-header-cell *matHeaderCellDef mat-sort-header> name </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef mat-sort-header> {{'FLEET-MANAGER.NAME' | translate}}
+						</mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">name</span>
+							<span class="mobile-label">{{'FLEET-MANAGER.NAME' | translate}}</span>
 							{{element.name}}
 						</mat-cell>
 					</ng-container>
 
 					<ng-container matColumnDef="surname">
-						<mat-header-cell *matHeaderCellDef> surname </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.SURNAME' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">surname</span>
+							<span class="mobile-label">{{'FLEET-MANAGER.SURNAME' | translate}}</span>
 							{{ element.surname}}
 						</mat-cell>
 					</ng-container>
@@ -49,9 +50,9 @@
 					</ng-container>
 
 					<ng-container matColumnDef="mobile">
-						<mat-header-cell *matHeaderCellDef> mobile </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.CELL' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">mobile</span>
+							<span class="mobile-label">{{'FLEET-MANAGER.CELL' | translate}}</span>
 							{{ findContactValue(element, 1)}}
 						</mat-cell>
 					</ng-container>
@@ -59,7 +60,7 @@
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
-							<button mat-icon-button matTooltip="Edit" [routerLink]="['../form-Driver']"
+							<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}" [routerLink]="['../form-Driver']"
 								[state]="{driver: element, fleetManagerId: fleetManagerId}">
 								<mat-icon style="color: #0066CC;">edit</mat-icon>
 							</button>
@@ -67,7 +68,7 @@
 								(click)="deleteDriver(element.id)">
 								<mat-icon style="color: red;">delete</mat-icon>
 							</button>
-							<button mat-icon-button matTooltip="associa veicoli"
+							<button mat-icon-button matTooltip="{{'DRIVERS.VEHICLES_ASSOCIATION' | translate}}"
 								(click)="associationVehicle(element.id)">
 								<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
 							</button>

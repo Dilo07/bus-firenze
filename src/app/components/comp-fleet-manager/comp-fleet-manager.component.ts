@@ -6,7 +6,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SessionService } from '@npt/npt-template';
+import { IAuthenticationService, SessionService } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
@@ -99,10 +99,10 @@ export class FleetManagerComponent implements OnInit {
     private fleetManagerService: FleetManagerService,
     private formBuilder: FormBuilder,
     private sessionService: SessionService,
-    @Inject('authService') private authService: any) { }
+    @Inject('authService') private authService: IAuthenticationService) { }
 
   ngOnInit(): void {
-    this.authService.getUserRoles().then((res: string) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
+    this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
     this.validFleet = this.router.url === '/fleet-manager-valid';
     this.manageFleet = this.router.url === '/fleet-manager-manage';
     this.Search = this.formBuilder.group({

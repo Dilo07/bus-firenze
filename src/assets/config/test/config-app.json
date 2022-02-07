@@ -5,6 +5,7 @@
   "be_url": "http://localhost:9094",
   "context_app": "",
   "register_url": "#/register",
+  "static_page": false,
   "viewOuter" : false,
   "flow_implicit": false,
   "rangeDateStatisticVehicle": null,

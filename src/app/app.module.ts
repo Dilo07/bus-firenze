@@ -43,6 +43,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     }),
   ],
   providers: [
+    { provide: 'static_page', useValue: 'static_page'},
+    {
+      provide: 'static_pageData',
+      useFactory: getPropertyFromConfig, multi: false, deps: ['static_page', ConfigInitService]
+    },
     { provide: 'repair_shop', useValue: 'repair_shop'},
     {
       provide: 'repair_shopData',

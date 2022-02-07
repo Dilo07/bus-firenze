@@ -65,28 +65,4 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  // appointments
-
-  getAppointmentList(hasAppointment: boolean, onlyActive: boolean): Observable<CompleteFleetManager[]> {
-    let subpath: string = !hasAppointment ? 'request' : 'list';
-    if (hasAppointment) {
-      subpath += '/' + onlyActive;
-    }
-    return this.http.get<CompleteFleetManager[]>(this.apiUrl + '/appointment/' + subpath)
-      .pipe(catchError(err => { throw err; }));
-  }
-
-  addAppointment(vehicleId: number, appointmentDate: string): Observable<void> {
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ date: appointmentDate })
-    };
-    return this.http.post<void>(this.apiUrl + '/appointment/vehicle/' + vehicleId + '/add', null, options)
-      .pipe(catchError(err => { throw err; }));
-  }
-
-  removeAppointment(vehicleId: number): Observable<void> {
-    return this.http.delete<void>(this.apiUrl + '/appointment/vehicle/' + vehicleId + '/delete')
-      .pipe(catchError(err => { throw err; }));
-  }
 }

@@ -113,7 +113,9 @@
         "INSERT_POSTAL_CODE": "Inserisci un CAP",
         "VEHICLESIZE": "N° Veicoli",
         "CONTACT": "Contatto",
-        "ERROR_TYPE": "Il tipo del file inserito non è corretto. (file accettati: PDF, jpeg, png)"
+        "ERROR_TYPE": "Il tipo del file inserito non è corretto. (file accettati: PDF, jpeg, png)",
+        "VERIFY_MOBILE": "verifica numero",
+        "MOBILE_VERIFIED": "numero verificato"
     },
     "VEHICLE": {
         "TITLE": "Veicoli",
@@ -159,12 +161,19 @@
     },
     "DRIVERS": {
         "TITLE": "Autisti",
+        "NEW": "Nuovo",
         "NO_DATA": "Nessun autista presente",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Driver",
         "MESSAGE_EDIT": "Modifica le informazioni del Driver",
+        "MESSAGE_MOBILE": "Attenzione! è necessario verificare il numero di cellulare",
+        "ASSOCIATION": "Associazioni",
         "ASSOCIATION_VEHICLES": "Seleziona i veicoli da associare al guidatore",
         "ASSOCIATION_DRIVERS": "Seleziona i guidatori da associare al veicolo",
         "ASSOCIATION_SUCCESS": "Modifica eseguita correttamente",
+        "NO_ASSOCIATION": "Nessun veicolo associato",
+        "VEHICLES_ASSOCIATION": "Associa veicoli",
+        "ASSOCIATION_PLATE": "Targhe associate",
+        "ASSOCIATION_DATE": "Data associazione",
         "ADD_ERROR": "Errore nell'inserimento autista",
         "ADD_SUCCESS": "Autista inserito correttamente",
         "EDIT_ERROR": "Errore nella modifica autista",
@@ -312,7 +321,8 @@
             "EDIT": "Modifica",
             "ACTIVE": "Attiva",
             "VERIFY": "Verifica",
-            "CLOSE": "Chiudi"
+            "CLOSE": "Chiudi",
+            "SEARCH": "Cerca"
         }
     },
     "ERROR": {
@@ -365,10 +375,13 @@
             "duplicate": "La targa inserita è già associata",
             "notfound": "Veicolo non trovato",
             "invalid": "Assegnato un ticket ad un veicolo non valido",
-            "already_present": "Ticket già presente sul veicolo"
+            "already_present": "Ticket già presente sul veicolo",
+            "already_associated": "Il veicolo è già associato ad un altro obu"
         },
         "ticket":{
-          "already_assigned": "Ticket già assegnato a un veicolo"
+          "already_assigned": "Ticket già assegnato a un veicolo",
+          "not_found": "Ticket non trovato",
+          "extend": "Impossibile esterndere il ticket"
         },
         "obu": {
             "not_found": "Obu Id non presente",
