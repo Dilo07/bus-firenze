@@ -262,6 +262,8 @@
     "TICKET": {
         "INSERT": "Insert a ticket",
         "NO_DATA": "No vehicles present",
+        "EXPIRED": "Ticket expired at",
+        "WILLEXPIRE": "The ticket will expire at",
         "INSERT_contrassegno": "Insert a correct ticket",
         "INSERT_abbonamento": "Insert a correct subscription",
         "INSERT_voucher": "Insert a correct voucher",

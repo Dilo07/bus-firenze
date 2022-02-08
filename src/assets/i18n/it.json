@@ -262,6 +262,8 @@
     "TICKET": {
         "INSERT": "Inserisci un ticket",
         "NO_DATA": "Nessun veicolo presente",
+        "EXPIRED": "Ticket scaduto in data",
+        "WILLEXPIRE": "Il ticket scadrà in data",
         "INSERT_contrassegno": "Inserisci un contrassegno corretto",
         "INSERT_abbonamento": "Inserisci un abbonamento corretto",
         "INSERT_voucher": "Inserisci un voucher corretto",
