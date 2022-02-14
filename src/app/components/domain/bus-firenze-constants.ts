@@ -47,7 +47,7 @@ export const NationsFM = [
     { value: 'SI' }
 ];
 
-export const FleetManType = ['Privato', 'Pubblica amm.', 'Ente']
+export const FleetManType = ['Privato', 'Pubblica amm.', 'Ente'];
 
 export const STATUS_VEHICLE = Object.freeze({
     DELETED: 'DELETED',
