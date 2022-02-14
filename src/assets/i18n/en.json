@@ -114,6 +114,7 @@
         "VEHICLESIZE": "# Vehicles",
         "CONTACT": "Contact",
         "ERROR_TYPE": "The type file is incorrect. (accepted file: PDF, jpeg, png)",
+        "ERROR_SIZE": "the file exceeds the maximum size. (2mb)",
         "VERIFY_MOBILE": "verify mobile",
         "MOBILE_VERIFIED": "mobile verified"
     },
@@ -157,7 +158,10 @@
         "ADD_SUCCESS": "Vehicle inserted correctly",
         "EDIT_ERROR": "vehicle edit error",
         "EDIT_SUCCESS": "Vehicle edited correctly",
-        "DOWNLOAD": "Download manual"
+        "DOWNLOAD": "Download manual",
+        "CHANGE_LIB": "Change circolation document",
+        "UPLOAD_LIB": "Upload circolation document",
+        "UPLOAD_SUCC": "Upload document correctly"
     },
     "DRIVERS": {
         "TITLE": "Drivers",

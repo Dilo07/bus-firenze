@@ -114,6 +114,7 @@
         "VEHICLESIZE": "N° Veicoli",
         "CONTACT": "Contatto",
         "ERROR_TYPE": "Il tipo del file inserito non è corretto. (file accettati: PDF, jpeg, png)",
+        "ERROR_SIZE": "Il file supera la dimensione massima. (2mb)",
         "VERIFY_MOBILE": "verifica numero",
         "MOBILE_VERIFIED": "numero verificato"
     },
@@ -157,7 +158,10 @@
         "ADD_SUCCESS": "Veicolo inserito correttamente",
         "EDIT_ERROR": "Errore nella modifica veicolo",
         "EDIT_SUCCESS": "Veicolo modificato correttamente",
-        "DOWNLOAD": "Scarica manuale"
+        "DOWNLOAD": "Scarica manuale",
+        "CHANGE_LIB": "Cambia libretto circolazione",
+        "UPLOAD_LIB": "Carica libretto circolazione",
+        "UPLOAD_SUCC": "Libretto caricato correttamente"
     },
     "DRIVERS": {
         "TITLE": "Autisti",

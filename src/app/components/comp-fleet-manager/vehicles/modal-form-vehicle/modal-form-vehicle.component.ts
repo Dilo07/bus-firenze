@@ -17,6 +17,7 @@ export class ModalFormVehicleComponent implements OnInit {
   public nations = Nations;
   public FormGroup: FormGroup;
   public contractType = CONTRACT_TYPE;
+  public libDocument: File;
 
   private subscription: Subscription[] = [];
 
@@ -47,7 +48,8 @@ export class ModalFormVehicleComponent implements OnInit {
         CtrlNumAxis: ['', Validators.min(1)],
         CtrlMaxWeight: ['', Validators.min(1)],
         CtrlContract: ['', Validators.required],
-        CtrlConsent: [false]
+        CtrlConsent: [false],
+        CtrlLibretto: ['', Validators.required]
       });
     }
   }
@@ -86,6 +88,23 @@ export class ModalFormVehicleComponent implements OnInit {
         }
       },
       () => { this.snackBar.showMessage('VEHICLE.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }));
+  }
+
+  public uploadFile(event: any): void {
+    const type = event.target.files[0].type;
+    const size = event.target.files[0].size;
+    if (size > 2097152) { // dimensione massima
+      this.libDocument = null;
+      this.FormGroup.patchValue({ CtrlLibretto: '' });
+      this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
+    } else if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png') {
+      this.libDocument = event.target.files[0];
+      this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO');
+    } else { // formato errato
+      this.libDocument = null;
+      this.FormGroup.patchValue({ CtrlLibretto: '' });
+      this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR');
+    }
   }
 
 }
