@@ -176,7 +176,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
     const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
     const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
-
     let formCell = this.FormGroup.get('CtrlCell').value;
     const phoneNumber = parsePhoneNumber(formCell);
     if (!phoneNumber) { // caso nuovo fleet o modifica cell
