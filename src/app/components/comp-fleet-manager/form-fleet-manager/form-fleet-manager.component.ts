@@ -14,13 +14,14 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { HttpResponse } from '@angular/common/http';
 import { IAuthenticationService } from '@npt/npt-template';
+import { FleetManType, NationsFM } from '../../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-form-fleet-manager',
   templateUrl: './form-fleet-manager.component.html',
   styleUrls: ['./form-fleet-manager.component.css']
 })
-export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FormFleetManagerComponent implements OnInit, OnDestroy {
   @Input() register = false;
   @Input() data: FleetManager;
 
@@ -29,6 +30,8 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
   public dialCode: CountryCallingCode = '39';
   public selectedFile: File;
   public roleFleetManager: boolean;
+  public nations = NationsFM;
+  public userTypes = FleetManType;
 
   private subscription: Subscription[] = [];
 
@@ -49,6 +52,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
     // se ci sono dati è un edit form altrimenti è un add form
     if (this.data) {
       this.FormGroup = this.formBuilder.group({
+        CtrlUser: [FleetManType[0], Validators.required],
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
         CtrlCF: [this.data.fiscalCode, [this.fiscaleCodeValidator]],
@@ -61,12 +65,14 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
         CtrlCity: [this.data.city, Validators.required],
         CtrlDistrict: [this.data.district, Validators.required],
         CtrlCAP: [this.data.cap, Validators.required],
-        CtrlForeign: [this.data.foreign, Validators.required]
+        CtrlForeign: [this.data.foreign, Validators.required],
+        CtrlNat: ['']
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
     } else {
       this.FormGroup = this.formBuilder.group({
+        CtrlUser: [FleetManType[0], Validators.required],
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
         CtrlCF: ['', [this.fiscaleCodeValidator]],
@@ -79,18 +85,11 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
         CtrlCity: ['', Validators.required],
         CtrlDistrict: ['', Validators.required],
         CtrlCAP: ['', Validators.required],
-        CtrlForeign: [false, Validators.required]
+        CtrlForeign: [false, Validators.required],
+        CtrlNat: ['']
       });
     }
-    if (this.FormGroup.get('CtrlForeign').value) {
-      this.changeFormNat();
-    }
-  }
-
-  ngAfterViewInit(): void {
-    if (this.FormGroup.get('CtrlForeign').value) {
-      this.changeFormNat();
-    }
+    this.changeFormNat();
   }
 
   ngOnDestroy(): void {
