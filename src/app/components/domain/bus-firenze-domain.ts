@@ -25,7 +25,7 @@ export class FleetManager {
     district: string;
     cap: string;
     contacts: Contact[];
-    foreign: boolean;
+    country: string;
 }
 
 export interface Contact {

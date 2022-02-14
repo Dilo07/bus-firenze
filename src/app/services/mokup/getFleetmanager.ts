@@ -14,7 +14,7 @@ export const getFleetManager: FleetManager[] = [
         district: 'Firenze',
         cap: '50041',
         contacts: [{code: 1, value: '33312443'}],
-        foreign: true
+        country: 'IT'
     }
 ];
 

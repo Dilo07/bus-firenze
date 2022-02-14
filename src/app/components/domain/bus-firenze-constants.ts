@@ -28,25 +28,6 @@ export const Nations = [
     { value: 'SI' }
 ];
 
-export const NationsFM = [
-    { value: '' },
-    { value: 'AL' },
-    { value: 'AT' },
-    { value: 'BE' },
-    { value: 'BG' },
-    { value: 'CH' },
-    { value: 'CZ' },
-    { value: 'DE' },
-    { value: 'ES' },
-    { value: 'FR' },
-    { value: 'GB' },
-    { value: 'HR' },
-    { value: 'HU' },
-    { value: 'NL' },
-    { value: 'PT' },
-    { value: 'SI' }
-];
-
 export const FleetManType = ['Privato', 'Pubblica amm.', 'Ente'];
 
 export const STATUS_VEHICLE = Object.freeze({

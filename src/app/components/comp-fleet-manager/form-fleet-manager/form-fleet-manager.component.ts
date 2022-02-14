@@ -14,7 +14,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { HttpResponse } from '@angular/common/http';
 import { IAuthenticationService } from '@npt/npt-template';
-import { FleetManType, NationsFM } from '../../domain/bus-firenze-constants';
+import { FleetManType, Nations } from '../../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -30,7 +30,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public dialCode: CountryCallingCode = '39';
   public selectedFile: File;
   public roleFleetManager: boolean;
-  public nations = NationsFM;
+  public nations = Nations;
   public userTypes = FleetManType;
 
   private subscription: Subscription[] = [];
@@ -65,8 +65,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlCity: [this.data.city, Validators.required],
         CtrlDistrict: [this.data.district, Validators.required],
         CtrlCAP: [this.data.cap, Validators.required],
-        CtrlForeign: [this.data.foreign, Validators.required],
-        CtrlNat: ['']
+        CtrlNat: [this.data.country, Validators.required]
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
@@ -85,8 +84,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlCity: ['', Validators.required],
         CtrlDistrict: ['', Validators.required],
         CtrlCAP: ['', Validators.required],
-        CtrlForeign: [false, Validators.required],
-        CtrlNat: ['']
+        CtrlNat: ['IT', Validators.required]
       });
     }
     this.changeFormNat();
@@ -99,7 +97,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public changeFormNat(): void {
-    if (this.FormGroup.get('CtrlForeign').value) {
+    if (this.FormGroup.get('CtrlNat').value !== 'IT') {
       this.FormGroup.controls.CtrlCF.setValidators(null);
       this.FormGroup.controls.CtrlpIva.setValidators(null);
     } else {
@@ -171,7 +169,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     fleetManager.city = this.FormGroup.get('CtrlCity').value;
     fleetManager.district = this.FormGroup.get('CtrlDistrict').value;
     fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
-    fleetManager.foreign = this.FormGroup.get('CtrlForeign').value;
+    fleetManager.country = this.FormGroup.get('CtrlNat').value;
     fleetManager.contacts = [];
 
     const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
