@@ -70,6 +70,12 @@
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
 							{{ element.lpn}}
+							<button mat-icon-button>
+								<mat-icon style="color: #0066CC;" matTooltip="libretto">description</mat-icon>
+							</button>
+							<button mat-icon-button *ngIf="fleetManager">
+								<mat-icon style="color: #0066CC;" matTooltip="modifica libretto">edit_note</mat-icon>
+							</button>
 						</mat-cell>
 					</ng-container>
 

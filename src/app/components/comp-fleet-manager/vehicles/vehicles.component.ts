@@ -80,6 +80,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     this.complete = false;
     const keyword = this.Search.get('CtrlSearch').value;
     const onlyActive = this.Search.get('onlyActive').value;
+    // in caso di op_movyon movyon passa l'id altrimento no
     this.vehicleService.getVehiclesById(onlyActive, this.fleetManager?.id, keyword).subscribe(data => {
       this.vehicleList.data = data;
       this.vehicleList.sort = this.sort;

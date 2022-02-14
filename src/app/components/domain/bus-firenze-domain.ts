@@ -26,6 +26,7 @@ export class FleetManager {
     cap: string;
     contacts: Contact[];
     foreign: boolean;
+    fileId: number;
 }
 
 export interface Contact {
