@@ -104,8 +104,8 @@
         "INSERT_SURNAME": "Inserisci un Cognome",
         "INSERT_FISCALCODE": "Inserisci un codice fiscale valido",
         "INSERT_MAIL": "Inserisci una mail corretta",
-        "INSERT_CELL": "Inserisci un numero di cellulare",
-        "INSERT_VAT_NUMBER": "Inserisci una Partita Iva",
+        "INSERT_CELL": "Inserisci un numero di cellulare corretto",
+        "INSERT_VAT_NUMBER": "Inserisci una Partita Iva corretta",
         "INSERT_COMPANY_NAME": "Inserisci una Ragione Sociale",
         "INSERT_ADDRESS": "Inserisci un Indirizzo",
         "INSERT_CITY": "Inserisci una Città",
@@ -115,7 +115,8 @@
         "CONTACT": "Contatto",
         "ERROR_TYPE": "Il tipo del file inserito non è corretto. (file accettati: PDF, jpeg, png)",
         "VERIFY_MOBILE": "verifica numero",
-        "MOBILE_VERIFIED": "numero verificato"
+        "MOBILE_VERIFIED": "numero verificato",
+        "DOWNLOAD_TEMPLATE": "Scarica file"
     },
     "VEHICLE": {
         "TITLE": "Veicoli",

@@ -104,8 +104,8 @@
         "INSERT_SURNAME": "Insert a Surname",
         "INSERT_FISCALCODE": "Insert a valid fiscal code",
         "INSERT_MAIL": "Insert a correct mail",
-        "INSERT_CELL": "Inserisci a cellular number",
-        "INSERT_VAT_NUMBER": "Insert a VAT Number",
+        "INSERT_CELL": "Inserisci a correct cellular number",
+        "INSERT_VAT_NUMBER": "Insert a correct VAT Number",
         "INSERT_COMPANY_NAME": "Insert a Company Name",
         "INSERT_ADDRESS": "Insert an Address",
         "INSERT_CITY": "Insert a City",
@@ -115,7 +115,8 @@
         "CONTACT": "Contact",
         "ERROR_TYPE": "The type file is incorrect. (accepted file: PDF, jpeg, png)",
         "VERIFY_MOBILE": "verify mobile",
-        "MOBILE_VERIFIED": "mobile verified"
+        "MOBILE_VERIFIED": "mobile verified",
+        "DOWNLOAD_TEMPLATE": "Download file"
     },
     "VEHICLE": {
         "TITLE": "Vehicles",

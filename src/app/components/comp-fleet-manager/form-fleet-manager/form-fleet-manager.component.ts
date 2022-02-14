@@ -56,15 +56,15 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
         CtrlCF: [this.data.fiscalCode, [this.fiscaleCodeValidator]],
-        CtrlpIva: [this.data.pIva, Validators.required],
+        CtrlpIva: [this.data.pIva, [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlCompanyName: [this.data.companyName, Validators.required],
-        CtrlCell: [this.findContactValue(1), Validators.required],
+        CtrlCell: [this.findContactValue(1), [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [this.findContactValue(2)],
         CtrlMail: [this.findContactValue(3), Validators.email],
         CtrlAddress: [this.data.address, Validators.required],
         CtrlCity: [this.data.city, Validators.required],
         CtrlDistrict: [this.data.district, Validators.required],
-        CtrlCAP: [this.data.cap, Validators.required],
+        CtrlCAP: [this.data.cap, [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlNat: [this.data.country, Validators.required]
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
@@ -75,15 +75,15 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
         CtrlCF: ['', [this.fiscaleCodeValidator]],
-        CtrlpIva: ['', Validators.required],
+        CtrlpIva: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlCompanyName: ['', Validators.required],
-        CtrlCell: ['', Validators.required],
+        CtrlCell: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [''],
         CtrlMail: ['', Validators.email],
         CtrlAddress: ['', Validators.required],
         CtrlCity: ['', Validators.required],
         CtrlDistrict: ['', Validators.required],
-        CtrlCAP: ['', Validators.required],
+        CtrlCAP: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlNat: ['IT', Validators.required]
       });
     }
@@ -99,10 +99,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public changeFormNat(): void {
     if (this.FormGroup.get('CtrlNat').value !== 'IT') {
       this.FormGroup.controls.CtrlCF.setValidators(null);
-      this.FormGroup.controls.CtrlpIva.setValidators(null);
+      this.FormGroup.controls.CtrlpIva.setValidators(Validators.pattern(/^\d+$/));
     } else {
       this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
-      this.FormGroup.controls.CtrlpIva.setValidators(Validators.required);
+      this.FormGroup.controls.CtrlpIva.setValidators([Validators.pattern(/^\d+$/), Validators.required]);
     }
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
