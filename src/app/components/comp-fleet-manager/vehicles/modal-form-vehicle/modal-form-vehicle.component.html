@@ -34,8 +34,11 @@
                                 {{nation.value | translate}}
                                 <span [ngClass]="'fi fi-' + nation.value.toLowerCase()"></span>
                             </mat-option>
+                            <mat-select-trigger>
+                                {{FormGroup.get('CtrlLpnNat').value}}
+                                <span [ngClass]="'fi fi-' + FormGroup.get('CtrlLpnNat').value.toLowerCase()"></span>
+                            </mat-select-trigger>
                         </mat-select>
-                        <span [ngClass]="'fi fi-' + FormGroup.get('CtrlLpnNat').value.toLowerCase()"></span>
                     </span>
                     <ng-template #readOnlyNat>
                         <span fxLayout="row">
