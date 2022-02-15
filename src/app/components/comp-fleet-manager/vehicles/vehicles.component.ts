@@ -230,9 +230,12 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   }
 
   public uploadCertificate(vehicleId: number, event: any): void {
+    this.complete = false;
     const file = event.target.files[0];
-    this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file).subscribe(
-      () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO')
+    this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file, this.fleetManager?.id).subscribe(
+      () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
+      () => this.complete = true,
+      () => { this.getVehiclesByManagerId(); this.complete = true; }
     ));
   }
 
