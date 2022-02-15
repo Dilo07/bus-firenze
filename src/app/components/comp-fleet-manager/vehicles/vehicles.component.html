@@ -100,7 +100,7 @@
 									(click)="viewCertificate(element.id, element.certificateId)">description</mat-icon>
 							</button>
 							<input style="display: none" type="file" #fileInput
-								accept="application/pdf, image/jpeg, image/png">
+								accept="application/pdf, image/jpeg, image/png" (change)="uploadCertificate(element.id, $event)">
 							<button mat-icon-button *ngIf="fleetManager" (click)="fileInput.click()">
 								<mat-icon style="color: #0066CC;" matTooltip="modifica libretto">edit_note</mat-icon>
 							</button>

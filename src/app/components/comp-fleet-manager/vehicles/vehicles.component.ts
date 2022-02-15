@@ -229,10 +229,17 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       }));
   }
 
+  public uploadCertificate(vehicleId: number, event: any): void {
+    const file = event.target.files[0];
+    this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file).subscribe(
+      () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO')
+    ));
+  }
+
   public changeZoom(zoomIn: boolean): void {
     if (zoomIn && this.zoom <= 1) {
       this.zoom += 0.1;
-    }else if (!zoomIn && this.zoom >= 0.2){
+    } else if (!zoomIn && this.zoom >= 0.2) {
       this.zoom -= 0.1;
     }
   }

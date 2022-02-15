@@ -107,4 +107,16 @@ export class VehicleService {
     return this.http.get(this.apiUrl + '/vehicle/' + vehicleId + '/certificate/' + certificateId, options)
       .pipe(catchError(err => { throw err; }));
   }
+
+  uploadCertificate(vehicleId: number, file: File, fleetManagerId?: number): Observable<void> {
+    let url = '';
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.put<void>(this.apiUrl + `${url}/vehicle/${vehicleId}/certificate/update`, formData)
+      .pipe(catchError(err => { throw err; }));
+  }
 }
