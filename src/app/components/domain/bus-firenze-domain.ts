@@ -62,6 +62,7 @@ export interface DriverVehicle {
 export class Vehicle {
     id: number;
     fleetManagerId: number;
+    certificateId: number;
     lpn: string;
     lpnNat: string;
     euroClass: number;

@@ -99,4 +99,12 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  getCertificateFile(vehicleId: number, certificateId: number): Observable<any> {
+    const options = {
+      observe: 'response' as 'body',
+      responseType: 'blob' as 'blob'
+    };
+    return this.http.get(this.apiUrl + '/vehicle/' + vehicleId + '/certificate/' + certificateId, options)
+      .pipe(catchError(err => { throw err; }));
+  }
 }
