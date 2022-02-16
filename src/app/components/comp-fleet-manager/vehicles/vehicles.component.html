@@ -115,9 +115,11 @@
 									(click)="viewCertificate(element.id, element.certificateId)">description</mat-icon>
 							</button>
 							<input style="display: none" type="file" #fileInput
-								accept="application/pdf, image/jpeg, image/png" (change)="uploadCertificate(element.id, $event)">
+								accept="application/pdf, image/jpeg, image/png"
+								(change)="uploadCertificate(element.id, $event)">
 							<button mat-icon-button *ngIf="fleetManager" (click)="fileInput.click()">
-								<mat-icon style="color: #0066CC;" matTooltip=" {{'VEHICLE.CERTIFICATE_MODIFY' | translate}}">edit_note</mat-icon>
+								<mat-icon style="color: #0066CC;"
+									matTooltip=" {{'VEHICLE.CERTIFICATE_MODIFY' | translate}}">edit_note</mat-icon>
 							</button>
 						</mat-cell>
 					</ng-container>
@@ -142,7 +144,7 @@
 						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.CONSENT' | translate}}</mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.CONSENT' | translate}}</span>
-							{{ element.allowContacted ? 'consentito' : 'non consentito'}}
+							{{ (element.allowContacted ? 'VEHICLE.CONSENTYES' : 'VEHICLE.CONSENTNO') | translate}}
 						</mat-cell>
 					</ng-container>
 

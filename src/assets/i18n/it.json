@@ -127,6 +127,8 @@
         "RENT": "Noleggio",
         "CERTIFICATE": "Libretto",
         "CERTIFICATE_MODIFY": "Modifica Libretto",
+        "CONSENTYES": "Consentito",
+        "CONSENTNO": "Non consentito",
         "CONSENT_TEXT": "Acconsenti ad essere contattato, per questo veicolo, dal supporto istallazione Obu?",
         "DETAILS": "Dettagli veicolo",
         "NO_DATA": "Nessun veicolo presente",
