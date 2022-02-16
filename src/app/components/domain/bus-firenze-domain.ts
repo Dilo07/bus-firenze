@@ -26,6 +26,8 @@ export class FleetManager {
     cap: string;
     contacts: Contact[];
     foreign: boolean;
+    fileId: number;
+    country: string;
 }
 
 export interface Contact {
@@ -61,6 +63,7 @@ export interface DriverVehicle {
 export class Vehicle {
     id: number;
     fleetManagerId: number;
+    certificateId: number;
     lpn: string;
     lpnNat: string;
     euroClass: number;
