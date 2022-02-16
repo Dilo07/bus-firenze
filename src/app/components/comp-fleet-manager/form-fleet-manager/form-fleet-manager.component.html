@@ -22,7 +22,7 @@
                         </mat-option>
                         <mat-select-trigger>
                             {{FormGroup.get('CtrlNat').value}}
-                            <span [ngClass]="'fi fi-' + FormGroup.get('CtrlNat').value.toLowerCase()"></span>
+                            <span [ngClass]="'fi fi-' + FormGroup.get('CtrlNat').value?.toLowerCase()"></span>
                         </mat-select-trigger>
                     </mat-select>
                 </mat-form-field>
