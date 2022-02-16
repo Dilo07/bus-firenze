@@ -95,15 +95,6 @@
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
 							{{ element.lpn}}
-							<button mat-icon-button>
-								<mat-icon style="color: #0066CC;" matTooltip="libretto"
-									(click)="viewCertificate(element.id, element.certificateId)">description</mat-icon>
-							</button>
-							<input style="display: none" type="file" #fileInput
-								accept="application/pdf, image/jpeg, image/png" (change)="uploadCertificate(element.id, $event)">
-							<button mat-icon-button *ngIf="fleetManager" (click)="fileInput.click()">
-								<mat-icon style="color: #0066CC;" matTooltip="modifica libretto">edit_note</mat-icon>
-							</button>
 						</mat-cell>
 					</ng-container>
 
@@ -112,6 +103,22 @@
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
 							{{ element.lpnNat}}
+						</mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="certificateId">
+						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.CERTIFICATE' | translate}} </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">{{'VEHICLE.CERTIFICATE' | translate}}</span>
+							<button mat-icon-button>
+								<mat-icon style="color: #0066CC;" matTooltip="{{'VEHICLE.CERTIFICATE' | translate}}"
+									(click)="viewCertificate(element.id, element.certificateId)">description</mat-icon>
+							</button>
+							<input style="display: none" type="file" #fileInput
+								accept="application/pdf, image/jpeg, image/png" (change)="uploadCertificate(element.id, $event)">
+							<button mat-icon-button *ngIf="fleetManager" (click)="fileInput.click()">
+								<mat-icon style="color: #0066CC;" matTooltip=" {{'VEHICLE.CERTIFICATE_MODIFY' | translate}}">edit_note</mat-icon>
+							</button>
 						</mat-cell>
 					</ng-container>
 

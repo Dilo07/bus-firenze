@@ -80,7 +80,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
 
   public fleetManager: FleetManager;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
-  public displayedColumns = ['id', 'plate', 'nat', 'euroClass', 'obuId', 'consent', 'actions'];
+  public displayedColumns = ['id', 'plate', 'nat','certificateId', 'euroClass', 'obuId', 'consent', 'actions'];
   public Search: FormGroup;
   public complete = true;
   public statusVehicle = STATUS_VEHICLE;
