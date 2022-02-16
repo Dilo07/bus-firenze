@@ -14,13 +14,14 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { HttpResponse } from '@angular/common/http';
 import { IAuthenticationService } from '@npt/npt-template';
+import { Nations } from '../../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-form-fleet-manager',
   templateUrl: './form-fleet-manager.component.html',
   styleUrls: ['./form-fleet-manager.component.css']
 })
-export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FormFleetManagerComponent implements OnInit, OnDestroy {
   @Input() register = false;
   @Input() data: FleetManager;
 
@@ -29,6 +30,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
   public dialCode: CountryCallingCode = '39';
   public selectedFile: File;
   public roleFleetManager: boolean;
+  public nations = Nations;
 
   private subscription: Subscription[] = [];
 
@@ -61,7 +63,8 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
         CtrlCity: [this.data.city, Validators.required],
         CtrlDistrict: [this.data.district, Validators.required],
         CtrlCAP: [this.data.cap, Validators.required],
-        CtrlForeign: [this.data.foreign, Validators.required]
+        CtrlForeign: [this.data.foreign, Validators.required],
+        CtrlNat: [this.data.country, Validators.required]
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
@@ -79,18 +82,10 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
         CtrlCity: ['', Validators.required],
         CtrlDistrict: ['', Validators.required],
         CtrlCAP: ['', Validators.required],
-        CtrlForeign: [false, Validators.required]
+        CtrlNat: ['IT', Validators.required]
       });
     }
-    if (this.FormGroup.get('CtrlForeign').value) {
-      this.changeFormNat();
-    }
-  }
-
-  ngAfterViewInit(): void {
-    if (this.FormGroup.get('CtrlForeign').value) {
-      this.changeFormNat();
-    }
+    this.changeFormNat();
   }
 
   ngOnDestroy(): void {
@@ -100,7 +95,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   public changeFormNat(): void {
-    if (this.FormGroup.get('CtrlForeign').value) {
+    if (this.FormGroup.get('CtrlNat').value !== 'IT') {
       this.FormGroup.controls.CtrlCF.setValidators(null);
       this.FormGroup.controls.CtrlpIva.setValidators(null);
     } else {
@@ -172,7 +167,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
     fleetManager.city = this.FormGroup.get('CtrlCity').value;
     fleetManager.district = this.FormGroup.get('CtrlDistrict').value;
     fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
-    fleetManager.foreign = this.FormGroup.get('CtrlForeign').value;
+    fleetManager.country = this.FormGroup.get('CtrlNat').value;
     fleetManager.contacts = [];
 
     const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
