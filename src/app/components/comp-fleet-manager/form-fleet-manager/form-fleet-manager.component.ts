@@ -239,7 +239,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       } else {
         return { fiscalCode: true };
       }
-    } else if (control.value?.length === 8) {
+    } else if (control.value?.length === 11) {
       const isnum = /^\d+$/.test(control.value);
       if (isnum) { return null; } else { return { fiscalCode: true }; }
     }
