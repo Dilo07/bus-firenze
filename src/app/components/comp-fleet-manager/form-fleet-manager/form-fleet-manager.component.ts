@@ -53,8 +53,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.FormGroup = this.formBuilder.group({
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
-        CtrlCF: [this.data.fiscalCode, [this.fiscaleCodeValidator]],
-        CtrlpIva: ['', [Validators.pattern(/^\d+$/), Validators.required]],
+        CtrlCF: [this.data.fiscalCode], // cf e p.iva validator sono valorizzati in base alla nation
+        CtrlpIva: [''],
         CtrlCompanyName: [this.data.companyName, Validators.required],
         CtrlCell: [this.findContactValue(1), [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [this.findContactValue(2)],
@@ -72,8 +72,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.FormGroup = this.formBuilder.group({
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
-        CtrlCF: ['', [this.fiscaleCodeValidator]],
-        CtrlpIva: ['', [Validators.pattern(/^\d+$/), Validators.required]],
+        CtrlCF: [''],
+        CtrlpIva: [''],
         CtrlCompanyName: ['', Validators.required],
         CtrlCell: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [''],
@@ -100,7 +100,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.FormGroup.controls.CtrlpIva.setValidators(null);
     } else {
       this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
-      this.FormGroup.controls.CtrlpIva.setValidators(Validators.required);
+      this.FormGroup.controls.CtrlpIva.setValidators(
+        [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]);
     }
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
@@ -238,7 +239,11 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       } else {
         return { fiscalCode: true };
       }
-    } else {
+    } else if (control.value?.length === 8) {
+      const isnum = /^\d+$/.test(control.value);
+      if (isnum) { return null; } else { return { fiscalCode: true }; }
+    }
+    else {
       return { fiscalCode: true };
     }
   }
