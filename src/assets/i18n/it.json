@@ -109,7 +109,7 @@
         "INSERT_COMPANY_NAME": "Inserisci una Ragione Sociale",
         "INSERT_ADDRESS": "Inserisci un Indirizzo",
         "INSERT_CITY": "Inserisci una Città",
-        "INSERT_DISTRICT": "Inserisci una Provincia",
+        "INSERT_DISTRICT": "Inserisci una provincia corretta",
         "INSERT_POSTAL_CODE": "Inserisci un CAP",
         "VEHICLESIZE": "N° Veicoli",
         "CONTACT": "Contatto",

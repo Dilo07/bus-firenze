@@ -61,7 +61,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlMail: [this.findContactValue(3), Validators.email],
         CtrlAddress: [this.data.address, Validators.required],
         CtrlCity: [this.data.city, Validators.required],
-        CtrlDistrict: [this.data.district, Validators.required],
+        CtrlDistrict: [this.data.district, [Validators.minLength(2), Validators.maxLength(2), Validators.required]],
         CtrlCAP: [this.data.cap, Validators.required],
         CtrlForeign: [this.data.foreign, Validators.required],
         CtrlNat: [this.data.country, Validators.required]
@@ -80,7 +80,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlMail: ['', Validators.email],
         CtrlAddress: ['', Validators.required],
         CtrlCity: ['', Validators.required],
-        CtrlDistrict: ['', Validators.required],
+        CtrlDistrict: ['', [Validators.minLength(2), Validators.maxLength(2), Validators.required]],
         CtrlCAP: ['', Validators.required],
         CtrlNat: ['IT', Validators.required]
       });

@@ -109,7 +109,7 @@
         "INSERT_COMPANY_NAME": "Insert a Company Name",
         "INSERT_ADDRESS": "Insert an Address",
         "INSERT_CITY": "Insert a City",
-        "INSERT_DISTRICT": "Insert a District",
+        "INSERT_DISTRICT": "Insert a correct district",
         "INSERT_POSTAL_CODE": "Insert a Postal Code",
         "VEHICLESIZE": "# Vehicles",
         "CONTACT": "Contact",
