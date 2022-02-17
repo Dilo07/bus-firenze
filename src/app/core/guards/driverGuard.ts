@@ -9,8 +9,7 @@ import { DriverService } from 'src/app/services/driver.service';
 @Injectable({
     providedIn: 'root'
 })
-export class DriveGuard implements CanActivate, OnDestroy {
-    private subscription: Subscription[] = [];
+export class DriveGuard implements CanActivate {
     constructor(
         private driverService: DriverService,
         private sessionService: SessionService,
@@ -50,11 +49,5 @@ export class DriveGuard implements CanActivate, OnDestroy {
             guard = true;
         }
         return guard;
-    }
-
-    ngOnDestroy(): void {
-        this.subscription.forEach(subscription => {
-            subscription.unsubscribe();
-        });
     }
 }
