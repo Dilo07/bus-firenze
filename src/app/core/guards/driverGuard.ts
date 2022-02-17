@@ -20,7 +20,8 @@ export class DriveGuard implements CanActivate, OnDestroy {
     ) { }
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-        await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
+        const id = this.authService.getUserId();
+        if (id) { await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER)); }
         if (this.roleDriver) {
             this.subscription.push(this.driverService.getDriver().subscribe(
                 respDriver => {
