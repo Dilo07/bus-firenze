@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ColumnSort, CompleteFleetManager, FleetManager, Vehicle } from '../components/domain/bus-firenze-domain';
+import { ColumnSort, FleetManager } from '../components/domain/bus-firenze-domain';
 import { getFleetManager } from './mokup/getFleetmanager';
 
 @Injectable({

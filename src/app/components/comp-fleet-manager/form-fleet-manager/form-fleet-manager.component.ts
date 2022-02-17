@@ -14,13 +14,14 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { HttpResponse } from '@angular/common/http';
 import { IAuthenticationService } from '@npt/npt-template';
+import { Nations } from '../../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-form-fleet-manager',
   templateUrl: './form-fleet-manager.component.html',
   styleUrls: ['./form-fleet-manager.component.css']
 })
-export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FormFleetManagerComponent implements OnInit, OnDestroy {
   @Input() register = false;
   @Input() data: FleetManager;
 
@@ -29,6 +30,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
   public dialCode: CountryCallingCode = '39';
   public selectedFile: File;
   public roleFleetManager: boolean;
+  public nations = Nations;
 
   private subscription: Subscription[] = [];
 
@@ -51,17 +53,18 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
       this.FormGroup = this.formBuilder.group({
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
-        CtrlCF: [this.data.fiscalCode, [this.fiscaleCodeValidator]],
-        CtrlpIva: [this.data.pIva, Validators.required],
+        CtrlCF: [this.data.fiscalCode], // cf e p.iva validator sono valorizzati in base alla nation
+        CtrlpIva: [''],
         CtrlCompanyName: [this.data.companyName, Validators.required],
-        CtrlCell: [this.findContactValue(1), Validators.required],
+        CtrlCell: [this.findContactValue(1), [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [this.findContactValue(2)],
         CtrlMail: [this.findContactValue(3), Validators.email],
         CtrlAddress: [this.data.address, Validators.required],
         CtrlCity: [this.data.city, Validators.required],
-        CtrlDistrict: [this.data.district, Validators.required],
+        CtrlDistrict: [this.data.district, [Validators.minLength(2), Validators.maxLength(2), Validators.required]],
         CtrlCAP: [this.data.cap, Validators.required],
-        CtrlForeign: [this.data.foreign, Validators.required]
+        CtrlForeign: [this.data.foreign, Validators.required],
+        CtrlNat: [this.data.country, Validators.required]
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
@@ -69,28 +72,20 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
       this.FormGroup = this.formBuilder.group({
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
-        CtrlCF: ['', [this.fiscaleCodeValidator]],
-        CtrlpIva: ['', Validators.required],
+        CtrlCF: [''],
+        CtrlpIva: [''],
         CtrlCompanyName: ['', Validators.required],
-        CtrlCell: ['', Validators.required],
+        CtrlCell: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [''],
         CtrlMail: ['', Validators.email],
         CtrlAddress: ['', Validators.required],
         CtrlCity: ['', Validators.required],
-        CtrlDistrict: ['', Validators.required],
+        CtrlDistrict: ['', [Validators.minLength(2), Validators.maxLength(2), Validators.required]],
         CtrlCAP: ['', Validators.required],
-        CtrlForeign: [false, Validators.required]
+        CtrlNat: ['IT', Validators.required]
       });
     }
-    if (this.FormGroup.get('CtrlForeign').value) {
-      this.changeFormNat();
-    }
-  }
-
-  ngAfterViewInit(): void {
-    if (this.FormGroup.get('CtrlForeign').value) {
-      this.changeFormNat();
-    }
+    this.changeFormNat();
   }
 
   ngOnDestroy(): void {
@@ -100,12 +95,13 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   public changeFormNat(): void {
-    if (this.FormGroup.get('CtrlForeign').value) {
+    if (this.FormGroup.get('CtrlNat').value !== 'IT') {
       this.FormGroup.controls.CtrlCF.setValidators(null);
       this.FormGroup.controls.CtrlpIva.setValidators(null);
     } else {
       this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
-      this.FormGroup.controls.CtrlpIva.setValidators(Validators.required);
+      this.FormGroup.controls.CtrlpIva.setValidators(
+        [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]);
     }
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
@@ -172,7 +168,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
     fleetManager.city = this.FormGroup.get('CtrlCity').value;
     fleetManager.district = this.FormGroup.get('CtrlDistrict').value;
     fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
-    fleetManager.foreign = this.FormGroup.get('CtrlForeign').value;
+    fleetManager.country = this.FormGroup.get('CtrlNat').value;
     fleetManager.contacts = [];
 
     const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
@@ -215,7 +211,7 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
     ));
   }
 
-  public downloadTemplate(): void{
+  public downloadTemplate(): void {
     const FileSaver = require('file-saver');
     this.subscription.push(this.registerService.getTemplateDocument()
       .subscribe((data: HttpResponse<Blob>) => {
@@ -243,7 +239,11 @@ export class FormFleetManagerComponent implements OnInit, AfterViewInit, OnDestr
       } else {
         return { fiscalCode: true };
       }
-    } else {
+    } else if (control.value?.length === 11) {
+      const isnum = /^\d+$/.test(control.value);
+      if (isnum) { return null; } else { return { fiscalCode: true }; }
+    }
+    else {
       return { fiscalCode: true };
     }
   }

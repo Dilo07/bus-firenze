@@ -1,6 +1,31 @@
 <mat-card>
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 	<mat-card-content>
+		<div [@slideInOut]="viewDoc">
+			<span *ngIf="src.type === 'application/pdf' else image">
+				<pdf-viewer [src]="$any(src.url)" [rotation]="0" [original-size]="true" [show-all]="true"
+					[fit-to-page]="false" [zoom]="zoom" [stick-to-page]="false" [render-text]="true"
+					[external-link-target]="'top'" [autoresize]="true" [show-borders]="true">
+				</pdf-viewer>
+			</span>
+			<button mat-icon-button matTooltip="{{'COMMON.ACTION.CLOSE' | translate}}"
+				(click)="viewDoc = 'off'; zoom = 0.6">
+				<mat-icon>close</mat-icon>
+			</button>
+			<br>
+			<span *ngIf="src.type === 'application/pdf'">
+				<button mat-icon-button matTooltip="zoom +" (click)="changeZoom(true)">
+					<mat-icon>add</mat-icon>
+				</button>
+				<br>
+				<button mat-icon-button matTooltip="zoom -" (click)="changeZoom(false)">
+					<mat-icon>remove</mat-icon>
+				</button>
+			</span>
+			<ng-template #image>
+				<img class="img-responsive" [src]="src.url" alt="imgDoc">
+			</ng-template>
+		</div>
 		<div fxLayout="column" fxLayoutGap="20px">
 			<app-panel-statistic [fleetManager]="fleetManager"></app-panel-statistic>
 			<div fxLayout="row wrap" fxLayoutGap="20px">
@@ -81,6 +106,24 @@
 						</mat-cell>
 					</ng-container>
 
+					<ng-container matColumnDef="certificateId">
+						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.CERTIFICATE' | translate}} </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">{{'VEHICLE.CERTIFICATE' | translate}}</span>
+							<button mat-icon-button>
+								<mat-icon style="color: #0066CC;" matTooltip="{{'VEHICLE.CERTIFICATE' | translate}}"
+									(click)="viewCertificate(element.id, element.certificateId)">description</mat-icon>
+							</button>
+							<input style="display: none" type="file" #fileInput
+								accept="application/pdf, image/jpeg, image/png"
+								(change)="uploadCertificate(element.id, $event)">
+							<button mat-icon-button *ngIf="fleetManager" (click)="fileInput.click()">
+								<mat-icon style="color: #0066CC;"
+									matTooltip=" {{'VEHICLE.CERTIFICATE_MODIFY' | translate}}">edit_note</mat-icon>
+							</button>
+						</mat-cell>
+					</ng-container>
+
 					<ng-container matColumnDef="euroClass">
 						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.EURO-CLASS' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
@@ -101,7 +144,7 @@
 						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.CONSENT' | translate}}</mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.CONSENT' | translate}}</span>
-							{{ element.allowContacted ? 'consentito' : 'non consentito'}}
+							{{ (element.allowContacted ? 'VEHICLE.CONSENTYES' : 'VEHICLE.CONSENTNO') | translate}}
 						</mat-cell>
 					</ng-container>
 
