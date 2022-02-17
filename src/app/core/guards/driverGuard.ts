@@ -19,7 +19,9 @@ export class DriveGuard implements CanActivate, OnDestroy {
     ) { }
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-        let guard = false;
+        let guard :boolean = false;
+        //check session
+
         const id = this.authService.getUserId();
         if (id) {
             const roles = await this.authService.getUserRoles();
@@ -37,27 +39,11 @@ export class DriveGuard implements CanActivate, OnDestroy {
                     guard = false;
                 } else {
                     guard = true;
+                    //
                 }
-
-                /*this.subscription.push(this.driverService.getDriver().subscribe(
-                    respDriver => {
-                        let resp = null;
-                        respDriver.contacts.find(contact => {
-                            if (contact.code === 1) {
-                                resp = contact.value;
-                            }
-                        });
-                        if (!resp) { // in caso in cui il cellulare non è presente apre il form
-                            this.router.navigate(['user-driver/form-Driver'],
-                                { state: { driver: respDriver, fleetManagerId: respDriver.fleetManagerId, cellularRequired: true } });
-                            guard = false;
-                        } else {
-                            guard = true;
-                        }
-                    },
-                    () => null,
-                    () => this.ngOnDestroy()
-                ));*/
+            } else {
+                guard = true;
+                //
             }
         }
         return guard;
