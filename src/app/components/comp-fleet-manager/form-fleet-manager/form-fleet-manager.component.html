@@ -51,8 +51,7 @@
                     <mat-label>E-Mail</mat-label>
                     <input matInput type="text" formControlName="CtrlMail" maxlength="100" required
                         [readonly]="!register && data?.name" [style.opacity]="!register && data?.name ? '0.5' : ''">
-                    <mat-error *ngIf="FormGroup.get('CtrlMail').invalid">{{'FLEET-MANAGER.INSERT_MAIL' | translate}}
-                    </mat-error>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_MAIL' | translate}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.CELL' | translate}}</mat-label>
@@ -62,7 +61,7 @@
                         maxlength="25" required [readonly]="(verifyOtp && register) || (!register && data?.name)"
                         [style.opacity]="!register && data ? '0.5' : ''">
                     <button matSuffix mat-icon-button matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}"
-                        *ngIf="register && FormGroup.get('CtrlCell').value && !verifyOtp" (click)="modalOTP()">
+                        *ngIf="register && !FormGroup.get('CtrlCell').invalid && !verifyOtp" (click)="modalOTP()">
                         <mat-icon>mobile_screen_share</mat-icon>
                     </button>
                     <mat-icon matSuffix *ngIf="register && verifyOtp"
@@ -83,7 +82,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.ADDRESS' | translate}}</mat-label>
-                    <input matInput type="text" formControlName="CtrlAddress" maxlength="100" required>
+                    <input matInput type="text" formControlName="CtrlAddress" maxlength="60" required>
                     <mat-error>{{'FLEET-MANAGER.INSERT_ADDRESS' | translate}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
@@ -96,12 +95,12 @@
             <div fxLayout="row wrap" fxLayoutGap="20px">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.CITY' | translate}}</mat-label>
-                    <input matInput type="text" formControlName="CtrlCity" maxlength="100" required>
+                    <input matInput type="text" formControlName="CtrlCity" maxlength="35" required>
                     <mat-error>{{'FLEET-MANAGER.INSERT_CITY' | translate}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.DISTRICT' | translate}}</mat-label>
-                    <input matInput type="text" formControlName="CtrlDistrict" maxlength="100" required>
+                    <input matInput type="text" formControlName="CtrlDistrict" maxlength="3" required>
                     <mat-error>{{'FLEET-MANAGER.INSERT_DISTRICT' | translate}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">

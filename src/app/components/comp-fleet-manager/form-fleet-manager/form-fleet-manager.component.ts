@@ -54,9 +54,9 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
         CtrlCF: [this.data.fiscalCode, [this.fiscaleCodeValidator]],
-        CtrlpIva: [this.data.pIva, Validators.required],
+        CtrlpIva: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlCompanyName: [this.data.companyName, Validators.required],
-        CtrlCell: [this.findContactValue(1), Validators.required],
+        CtrlCell: [this.findContactValue(1), [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [this.findContactValue(2)],
         CtrlMail: [this.findContactValue(3), Validators.email],
         CtrlAddress: [this.data.address, Validators.required],
@@ -73,9 +73,9 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
         CtrlCF: ['', [this.fiscaleCodeValidator]],
-        CtrlpIva: ['', Validators.required],
+        CtrlpIva: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlCompanyName: ['', Validators.required],
-        CtrlCell: ['', Validators.required],
+        CtrlCell: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [''],
         CtrlMail: ['', Validators.email],
         CtrlAddress: ['', Validators.required],
@@ -210,7 +210,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     ));
   }
 
-  public downloadTemplate(): void{
+  public downloadTemplate(): void {
     const FileSaver = require('file-saver');
     this.subscription.push(this.registerService.getTemplateDocument()
       .subscribe((data: HttpResponse<Blob>) => {
