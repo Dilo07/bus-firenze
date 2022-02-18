@@ -56,7 +56,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlCF: [this.data.fiscalCode], // cf e p.iva validator sono valorizzati in base alla nation
         CtrlpIva: [''],
         CtrlCompanyName: [this.data.companyName, Validators.required],
-        CtrlCell: [this.findContactValue(1), [Validators.pattern(/^\d+$/), Validators.required]],
+        CtrlCell: [this.findContactValue(1), [Validators.required]],
         CtrlOffice: [this.findContactValue(2)],
         CtrlMail: [this.findContactValue(3), Validators.email],
         CtrlAddress: [this.data.address, Validators.required],
