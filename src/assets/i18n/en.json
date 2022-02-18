@@ -126,6 +126,7 @@
         "BUYING": "Buying",
         "RENT": "Rent",
         "CERTIFICATE": "Certificate",
+        "NOCERTIFICATE": "Certificate not uploaded",
         "CERTIFICATE_MODIFY": "Edit certificate",
         "CONSENTYES": "Allowed",
         "CONSENTNO": "Not allowed",

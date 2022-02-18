@@ -50,18 +50,19 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // se ci sono dati è un edit form altrimenti è un add form
     if (this.data) {
+      // cf, p.iva e district validator sono valorizzati in base alla nation
       this.FormGroup = this.formBuilder.group({
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
-        CtrlCF: [this.data.fiscalCode], // cf e p.iva validator sono valorizzati in base alla nation
-        CtrlpIva: [''],
+        CtrlCF: [this.data.fiscalCode],
+        CtrlpIva: [this.data.pIva],
         CtrlCompanyName: [this.data.companyName, Validators.required],
         CtrlCell: [this.findContactValue(1), [Validators.required]],
         CtrlOffice: [this.findContactValue(2)],
         CtrlMail: [this.findContactValue(3), Validators.email],
         CtrlAddress: [this.data.address, Validators.required],
         CtrlCity: [this.data.city, Validators.required],
-        CtrlDistrict: [this.data.district, [Validators.minLength(2), Validators.maxLength(2), Validators.required]],
+        CtrlDistrict: [this.data.district],
         CtrlCAP: [this.data.cap, Validators.required],
         CtrlForeign: [this.data.foreign, Validators.required],
         CtrlNat: [this.data.country, Validators.required]
@@ -80,7 +81,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlMail: ['', Validators.email],
         CtrlAddress: ['', Validators.required],
         CtrlCity: ['', Validators.required],
-        CtrlDistrict: ['', [Validators.minLength(2), Validators.maxLength(2), Validators.required]],
+        CtrlDistrict: [''],
         CtrlCAP: ['', Validators.required],
         CtrlNat: ['IT', Validators.required]
       });
@@ -98,10 +99,14 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     if (this.FormGroup.get('CtrlNat').value !== 'IT') {
       this.FormGroup.controls.CtrlCF.setValidators(null);
       this.FormGroup.controls.CtrlpIva.setValidators(null);
+      this.FormGroup.controls.CtrlDistrict.setValidators(
+        [Validators.minLength(3), Validators.maxLength(3), Validators.required]);
     } else {
       this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
       this.FormGroup.controls.CtrlpIva.setValidators(
         [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]);
+      this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia IT)
+        [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
     }
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();

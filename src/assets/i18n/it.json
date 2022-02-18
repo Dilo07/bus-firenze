@@ -126,6 +126,7 @@
         "BUYING": "Acquisto",
         "RENT": "Noleggio",
         "CERTIFICATE": "Libretto",
+        "NOCERTIFICATE": "Libretto non caricato",
         "CERTIFICATE_MODIFY": "Modifica Libretto",
         "CONSENTYES": "Consentito",
         "CONSENTNO": "Non consentito",
