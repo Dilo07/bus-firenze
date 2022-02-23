@@ -51,20 +51,22 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // se ci sono dati è un edit form altrimenti è un add form
     if (this.data) {
+      // cf, p.iva e district validator sono valorizzati in base alla nation
       this.FormGroup = this.formBuilder.group({
         CtrlUser: [FleetManType[0], Validators.required],
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
-        CtrlCF: [this.data.fiscalCode, [this.fiscaleCodeValidator]],
-        CtrlpIva: [this.data.pIva, [Validators.pattern(/^\d+$/), Validators.required]],
+        CtrlCF: [this.data.fiscalCode],
+        CtrlpIva: [this.data.pIva],
         CtrlCompanyName: [this.data.companyName, Validators.required],
-        CtrlCell: [this.findContactValue(1), [Validators.pattern(/^\d+$/), Validators.required]],
+        CtrlCell: [this.findContactValue(1), [Validators.required]],
         CtrlOffice: [this.findContactValue(2)],
         CtrlMail: [this.findContactValue(3), Validators.email],
         CtrlAddress: [this.data.address, Validators.required],
         CtrlCity: [this.data.city, Validators.required],
-        CtrlDistrict: [this.data.district, Validators.required],
-        CtrlCAP: [this.data.cap, [Validators.pattern(/^\d+$/), Validators.required]],
+        CtrlDistrict: [this.data.district],
+        CtrlCAP: [this.data.cap, Validators.required],
+        CtrlForeign: [this.data.foreign, Validators.required],
         CtrlNat: [this.data.country, Validators.required]
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
@@ -74,16 +76,16 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlUser: [FleetManType[0], Validators.required],
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
-        CtrlCF: ['', [this.fiscaleCodeValidator]],
-        CtrlpIva: ['', [Validators.pattern(/^\d+$/), Validators.required]],
+        CtrlCF: [''],
+        CtrlpIva: [''],
         CtrlCompanyName: ['', Validators.required],
         CtrlCell: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [''],
         CtrlMail: ['', Validators.email],
         CtrlAddress: ['', Validators.required],
         CtrlCity: ['', Validators.required],
-        CtrlDistrict: ['', Validators.required],
-        CtrlCAP: ['', [Validators.pattern(/^\d+$/), Validators.required]],
+        CtrlDistrict: [''],
+        CtrlCAP: ['', Validators.required],
         CtrlNat: ['IT', Validators.required]
       });
     }
@@ -99,10 +101,15 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public changeFormNat(): void {
     if (this.FormGroup.get('CtrlNat').value !== 'IT') {
       this.FormGroup.controls.CtrlCF.setValidators(null);
-      this.FormGroup.controls.CtrlpIva.setValidators(Validators.pattern(/^\d+$/));
+      this.FormGroup.controls.CtrlpIva.setValidators(null);
+      this.FormGroup.controls.CtrlDistrict.setValidators(
+        [Validators.minLength(3), Validators.maxLength(3), Validators.required]);
     } else {
       this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
-      this.FormGroup.controls.CtrlpIva.setValidators([Validators.pattern(/^\d+$/), Validators.required]);
+      this.FormGroup.controls.CtrlpIva.setValidators(
+        [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]);
+      this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia IT)
+        [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
     }
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
@@ -211,7 +218,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     ));
   }
 
-  public downloadTemplate(): void{
+  public downloadTemplate(): void {
     const FileSaver = require('file-saver');
     this.subscription.push(this.registerService.getTemplateDocument()
       .subscribe((data: HttpResponse<Blob>) => {
@@ -239,7 +246,11 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       } else {
         return { fiscalCode: true };
       }
-    } else {
+    } else if (control.value?.length === 11) {
+      const isnum = /^\d+$/.test(control.value);
+      if (isnum) { return null; } else { return { fiscalCode: true }; }
+    }
+    else {
       return { fiscalCode: true };
     }
   }

@@ -109,11 +109,12 @@
         "INSERT_COMPANY_NAME": "Inserisci una Ragione Sociale",
         "INSERT_ADDRESS": "Inserisci un Indirizzo",
         "INSERT_CITY": "Inserisci una Città",
-        "INSERT_DISTRICT": "Inserisci una Provincia",
+        "INSERT_DISTRICT": "Inserisci una provincia corretta",
         "INSERT_POSTAL_CODE": "Inserisci un CAP",
         "VEHICLESIZE": "N° Veicoli",
         "CONTACT": "Contatto",
         "ERROR_TYPE": "Il tipo del file inserito non è corretto. (file accettati: PDF, jpeg, png)",
+        "ERROR_SIZE": "Il file supera la dimensione massima. (2mb)",
         "VERIFY_MOBILE": "verifica numero",
         "MOBILE_VERIFIED": "numero verificato",
         "DOWNLOAD_TEMPLATE": "Scarica file"
@@ -125,6 +126,11 @@
         "CONTRACT": "Contratto",
         "BUYING": "Acquisto",
         "RENT": "Noleggio",
+        "CERTIFICATE": "Libretto",
+        "NOCERTIFICATE": "Libretto non caricato",
+        "CERTIFICATE_MODIFY": "Modifica Libretto",
+        "CONSENTYES": "Consentito",
+        "CONSENTNO": "Non consentito",
         "CONSENT_TEXT": "Acconsenti ad essere contattato, per questo veicolo, dal supporto istallazione Obu?",
         "DETAILS": "Dettagli veicolo",
         "NO_DATA": "Nessun veicolo presente",
@@ -158,7 +164,10 @@
         "ADD_SUCCESS": "Veicolo inserito correttamente",
         "EDIT_ERROR": "Errore nella modifica veicolo",
         "EDIT_SUCCESS": "Veicolo modificato correttamente",
-        "DOWNLOAD": "Scarica manuale"
+        "DOWNLOAD": "Scarica manuale",
+        "CHANGE_LIB": "Cambia libretto circolazione",
+        "UPLOAD_LIB": "Carica libretto circolazione",
+        "UPLOAD_SUCC": "Libretto caricato correttamente"
     },
     "DRIVERS": {
         "TITLE": "Autisti",

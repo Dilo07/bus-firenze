@@ -14,12 +14,15 @@ export class VehicleService {
 
   private apiUrl = this.url + '/api/fleet';
 
-  addVehicle(vehicle: Vehicle, fleetManagerId?: number): Observable<void> {
+  addVehicle(file: File, vehicle: Vehicle, fleetManagerId?: number): Observable<void> {
     let url = '';
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
-    return this.http.post<void>(this.apiUrl + url + '/vehicle/add', vehicle)
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('metadata', JSON.stringify(vehicle));
+    return this.http.post<void>(this.apiUrl + url + '/vehicle/add', formData)
       .pipe(catchError(err => { throw err; }));
   }
 
@@ -96,4 +99,24 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  getCertificateFile(vehicleId: number, certificateId: number): Observable<any> {
+    const options = {
+      observe: 'response' as 'body',
+      responseType: 'blob' as 'blob'
+    };
+    return this.http.get(this.apiUrl + '/vehicle/' + vehicleId + '/certificate/' + certificateId, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  uploadCertificate(vehicleId: number, file: File, fleetManagerId?: number): Observable<void> {
+    let url = '';
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.put<void>(this.apiUrl + `${url}/vehicle/${vehicleId}/certificate/update`, formData)
+      .pipe(catchError(err => { throw err; }));
+  }
 }

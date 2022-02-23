@@ -7,7 +7,8 @@
             <div *ngIf="!data.vehicle else viewContractType" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
                 <label>{{'VEHICLE.CONTRACT' | translate}}</label>
                 <mat-radio-group formControlName="CtrlContract">
-                    <mat-radio-button style="margin-right: 10px;" [value]="contractType.BUY">{{'VEHICLE.BUYING' | translate}}</mat-radio-button>
+                    <mat-radio-button style="margin-right: 10px;" [value]="contractType.BUY">
+                        {{'VEHICLE.BUYING' | translate}}</mat-radio-button>
                     <mat-radio-button [value]="contractType.RENT">{{'VEHICLE.RENT' | translate}}</mat-radio-button>
                 </mat-radio-group>
             </div>
@@ -83,6 +84,16 @@
             <div>
                 <mat-checkbox formControlName="CtrlConsent"></mat-checkbox>
                 {{'VEHICLE.CONSENT_TEXT' | translate}}
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!data.vehicle">
+                <mat-label> {{libDocument?.name}}</mat-label>
+                <input style="display: none" type="file" formControlName="CtrlLibretto" #fileInput
+                    accept="application/pdf, image/jpeg, image/png" (change)="uploadFile($event)">
+                <span>
+                    <button mat-button class="bluButton" (click)="fileInput.click()">
+                        {{(libDocument ? 'VEHICLE.CHANGE_LIB' : 'VEHICLE.UPLOAD_LIB') | translate}}
+                    </button>
+                </span>
             </div>
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">

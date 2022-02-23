@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -36,7 +37,42 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
     .mat-column-consent { max-width: 20%;}
     .mat-column-actions { max-width: 25%; display: table-column;}
   }
-  `]
+  :host ::ng-deep .ng2-pdf-viewer-container {
+    width: 98% !important;
+    height: 98% !important;
+  }
+  .img-responsive {
+    max-width: 40%;
+    height: auto;
+  }
+  `],
+  animations: [
+    trigger('slideInOut', [
+      state(
+        'on',
+        style({
+          'background-color': 'darkseagreen',
+          'z-index': '10',
+          padding: '6px',
+          'border-style': 'solid',
+          position: 'fixed',
+          right: '10%',
+          width: '50%',
+          height: '60%'
+        })
+      ),
+      state(
+        'off',
+        style({
+          'border-style': 'solid',
+          position: 'fixed',
+          right: '-60%',
+        })
+      ),
+      transition('on => off', animate('500ms')),
+      transition('off => on', animate('500ms')),
+    ]),
+  ],
 })
 export class VehiclesComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
@@ -44,10 +80,13 @@ export class VehiclesComponent implements OnInit, OnDestroy {
 
   public fleetManager: FleetManager;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
-  public displayedColumns = ['id', 'plate', 'nat', 'euroClass', 'obuId', 'consent', 'actions'];
+  public displayedColumns = ['id', 'plate', 'nat', 'certificateId', 'euroClass', 'obuId', 'consent', 'actions'];
   public Search: FormGroup;
   public complete = true;
   public statusVehicle = STATUS_VEHICLE;
+  public viewDoc: 'on' | 'off' = 'off';
+  public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
+  public zoom = 0.6;
 
   private subscription: Subscription[] = [];
 
@@ -80,6 +119,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     this.complete = false;
     const keyword = this.Search.get('CtrlSearch').value;
     const onlyActive = this.Search.get('onlyActive').value;
+    // in caso di op_movyon movyon passa l'id altrimento no
     this.vehicleService.getVehiclesById(onlyActive, this.fleetManager?.id, keyword).subscribe(data => {
       this.vehicleList.data = data;
       this.vehicleList.sort = this.sort;
@@ -167,6 +207,44 @@ export class VehiclesComponent implements OnInit, OnDestroy {
         FileSaver.saveAs(data.body, filename);
       },
         () => null));
+  }
+
+  public viewCertificate(vehicleId: number, certificateId: number): void {
+    this.subscription.push(this.vehicleService.getCertificateFile(vehicleId, certificateId)
+      .subscribe((data) => {
+        if (data.body.type === 'application/pdf') { // se è un pdf
+          const url = window.URL.createObjectURL(data.body);
+          this.src.url = url;
+          this.src.type = data.body.type;
+          this.viewDoc = 'on';
+        } else { // altrimenti se è un'immagine
+          const reader = new FileReader();
+          reader.readAsDataURL(data.body);
+          reader.onload = () => {
+            this.src.url = reader.result;
+            this.src.type = data.body.type;
+            this.viewDoc = 'on';
+          };
+        }
+      }));
+  }
+
+  public uploadCertificate(vehicleId: number, event: any): void {
+    this.complete = false;
+    const file = event.target.files[0];
+    this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file, this.fleetManager?.id).subscribe(
+      () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
+      () => this.complete = true,
+      () => { this.getVehiclesByManagerId(); this.complete = true; }
+    ));
+  }
+
+  public changeZoom(zoomIn: boolean): void {
+    if (zoomIn && this.zoom <= 1) {
+      this.zoom += 0.1;
+    } else if (!zoomIn && this.zoom >= 0.2) {
+      this.zoom -= 0.1;
+    }
   }
 
   private resetSearchField(): void {

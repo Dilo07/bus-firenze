@@ -98,7 +98,7 @@ pipeline {
                     if (env.NEXUS_DEPLOY.toBoolean()) {
                         nodejs(nodeJSInstallationName: 'Node-14.17.0', configId: 'd1fbb428-bc33-489b-bb11-e2e807e439d9') {
                             echo "Zip ${ARTIFACT} - ${VERSION}"
-                            zip zipFile: "${ARTIFACT}-AWS.zip", archive: false, dir: "${FOLDER}"                               
+                            zip zipFile: "${ARTIFACT}-AWS.zip", archive: false, dir: "${FOLDER}/${ARTIFACT}"                               
                         }
                     }
                 }
