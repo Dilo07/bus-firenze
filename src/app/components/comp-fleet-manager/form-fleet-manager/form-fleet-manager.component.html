@@ -95,8 +95,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</mat-label>
-                    <input matInput type="text" formControlName="CtrlpIva" maxlength="11"
-                        [required]="FormGroup.get('CtrlNat').value === 'IT'">
+                    <input matInput type="text" formControlName="CtrlpIva" maxlength="11" required (input)="!FormGroup.controls.CtrlpIva.invalid ? pivaValidator() : null">
                     <mat-error>{{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
                 </mat-form-field>
             </div>

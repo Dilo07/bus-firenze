@@ -57,7 +57,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
         CtrlCF: [this.data.fiscalCode],
-        CtrlpIva: [this.data.pIva],
+        CtrlpIva: [this.data.pIva, [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]],
         CtrlCompanyName: [this.data.companyName, Validators.required],
         CtrlCell: [this.findContactValue(1), [Validators.required]],
         CtrlOffice: [this.findContactValue(2)],
@@ -77,7 +77,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
         CtrlCF: [''],
-        CtrlpIva: [''],
+        CtrlpIva: ['', [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]],
         CtrlCompanyName: ['', Validators.required],
         CtrlCell: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [''],
@@ -89,7 +89,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlNat: ['IT', Validators.required]
       });
     }
-    this.changeFormNat();
+    this.changeFormNat(true);
   }
 
   ngOnDestroy(): void {
@@ -98,21 +98,22 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     });
   }
 
-  public changeFormNat(): void {
+  public changeFormNat(isFirst?: boolean): void {
     if (this.FormGroup.get('CtrlNat').value !== 'IT') {
       this.FormGroup.controls.CtrlCF.setValidators(null);
-      this.FormGroup.controls.CtrlpIva.setValidators(null);
+      /* this.FormGroup.controls.CtrlpIva.setValidators(null); */
       this.FormGroup.controls.CtrlDistrict.setValidators(
         [Validators.minLength(3), Validators.maxLength(3), Validators.required]);
     } else {
       this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
-      this.FormGroup.controls.CtrlpIva.setValidators(
-        [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]);
+      /* this.FormGroup.controls.CtrlpIva.setValidators(
+        [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]); */
       this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia IT)
         [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
     }
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
+    if (!this.FormGroup.controls.CtrlpIva.invalid && !isFirst) { this.pivaValidator(); }
   }
 
   public onCountryChange(evt: any): void {
@@ -254,5 +255,23 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       return { fiscalCode: true };
     }
   }
+
+  public pivaValidator(): void {
+    const pIva = this.FormGroup.get('CtrlpIva').value;
+    const nat = this.FormGroup.get('CtrlNat').value;
+    this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
+    this.fleetManagerService.checkVatNumber(nat, pIva).subscribe(
+      vatVerify => {
+        console.log(vatVerify);
+        if (!vatVerify.valid) {
+          this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
+        } else {
+          this.FormGroup.controls.CtrlpIva.setErrors(null);
+        }
+      }
+    );
+  }
+  /* this.FormGroup.controls.CtrlpIva.setErrors({invalid: true}); */
+  /* console.log(this.FormGroup.controls.CtrlpIva.errors) */
 
 }

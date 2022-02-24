@@ -65,4 +65,8 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  checkVatNumber(nation: string, vat: string): Observable<any> {
+    return this.http.get(this.apiUrl + `/checkVat/${nation}/${vat}`)
+      .pipe(catchError(err => { throw err; }));
+  }
 }
