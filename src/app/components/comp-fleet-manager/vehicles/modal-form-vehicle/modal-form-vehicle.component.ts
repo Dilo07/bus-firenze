@@ -47,7 +47,7 @@ export class ModalFormVehicleComponent implements OnInit {
         CtrlEuroClass: ['', Validators.min(1)],
         CtrlNumAxis: ['', Validators.min(1)],
         CtrlMaxWeight: ['', Validators.min(1)],
-        CtrlContract: ['', Validators.required],
+        CtrlContract: [this.contractType.RENT, Validators.required],
         CtrlConsent: [false],
         CtrlLibretto: ['', Validators.required]
       });

@@ -49,7 +49,7 @@
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}</mat-label>
                     <input matInput type="text" formControlName="CtrlCF"
-                        (input)="FormGroup.patchValue({CtrlCF: FormGroup.get('CtrlCF').value.toUpperCase()})"
+                        (input)="pivaOfFcValidator()"
                         [required]="FormGroup.get('CtrlNat').value === 'IT'">
                     <mat-error>{{'FLEET-MANAGER.INSERT_FISCALCODE' | translate}}</mat-error>
                 </mat-form-field>
