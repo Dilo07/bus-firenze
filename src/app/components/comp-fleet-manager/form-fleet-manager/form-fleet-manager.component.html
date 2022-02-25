@@ -48,8 +48,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}</mat-label>
-                    <input matInput type="text" formControlName="CtrlCF"
-                        (input)="pivaOfFcValidator()"
+                    <input matInput type="text" formControlName="CtrlCF" (input)="pivaOfFcValidator()"
                         [required]="FormGroup.get('CtrlNat').value === 'IT'">
                     <mat-error>{{'FLEET-MANAGER.INSERT_FISCALCODE' | translate}}</mat-error>
                 </mat-form-field>
@@ -95,7 +94,8 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</mat-label>
-                    <input matInput type="text" formControlName="CtrlpIva" maxlength="11" required (input)="!FormGroup.controls.CtrlpIva.invalid ? pivaValidator() : null">
+                    <input matInput type="text" formControlName="CtrlpIva" maxlength="11" required
+                        (input)="pivaValidator()">
                     <mat-error>{{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
                 </mat-form-field>
             </div>
@@ -120,7 +120,8 @@
         </form>
         <div fxLayout="row" fxLayoutAlign="center center">{{selectedFile?.name}}</div>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" *ngIf="!data">
-            <button mat-button class="bluButton" (click)="downloadTemplate()">{{'FLEET-MANAGER.DOWNLOAD_TEMPLATE' | translate}}</button>
+            <button mat-button class="bluButton" (click)="downloadTemplate()">{{'FLEET-MANAGER.DOWNLOAD_TEMPLATE' |
+                translate}}</button>
             <input style="display: none" type="file" #fileInput accept="application/pdf, image/jpeg, image/png"
                 (change)="uploadFile($event)">
             <button mat-button class="bluButton" (click)="fileInput.click()">

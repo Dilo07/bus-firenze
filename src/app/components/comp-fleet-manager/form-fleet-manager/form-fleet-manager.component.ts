@@ -257,30 +257,30 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public pivaValidator(): void {
-    const pIva = this.FormGroup.get('CtrlpIva').value;
-    const nat = this.FormGroup.get('CtrlNat').value;
-    this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
-    this.fleetManagerService.checkVatNumber(nat, pIva).subscribe(
-      vatVerify => {
-        console.log(vatVerify);
-        if (!vatVerify.valid) {
-          this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
-        } else {
-          this.FormGroup.controls.CtrlpIva.setErrors(null);
+    if (!this.FormGroup.controls.CtrlpIva.invalid) {
+      const pIva = this.FormGroup.get('CtrlpIva').value;
+      const nat = this.FormGroup.get('CtrlNat').value;
+      this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
+      this.subscription.push(this.fleetManagerService.checkVatNumber(nat, pIva).subscribe(
+        vatVerify => {
+          console.log(vatVerify);
+          if (!vatVerify.valid) {
+            this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
+          } else {
+            this.FormGroup.controls.CtrlpIva.setErrors(null);
+          }
         }
-      }
-    );
+      ));
+    }
   }
-  /* this.FormGroup.controls.CtrlpIva.setErrors({invalid: true}); */
-  /* console.log(this.FormGroup.controls.CtrlpIva.errors) */
 
   public pivaOfFcValidator(): void {
     const fiscalCode = this.FormGroup.get('CtrlCF').value;
-    const nat = this.FormGroup.get('CtrlNat').value;
     this.FormGroup.patchValue({ CtrlCF: fiscalCode.toUpperCase() });
     if (!this.FormGroup.controls.CtrlCF.invalid && fiscalCode.length === 11) {
-      this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
-      this.fleetManagerService.checkVatNumber(nat, fiscalCode).subscribe(
+      const nat = this.FormGroup.get('CtrlNat').value;
+      this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
+      this.subscription.push(this.fleetManagerService.checkVatNumber(nat, fiscalCode).subscribe(
         vatVerify => {
           console.log(vatVerify);
           if (!vatVerify.valid) {
@@ -289,7 +289,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
             this.FormGroup.controls.CtrlCF.setErrors(null);
           }
         }
-      );
+      ));
     }
   }
 
