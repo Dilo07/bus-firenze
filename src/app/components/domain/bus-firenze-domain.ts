@@ -25,7 +25,6 @@ export class FleetManager {
     district: string;
     cap: string;
     contacts: Contact[];
-    foreign: boolean;
     fileId: number;
     country: string;
 }

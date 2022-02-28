@@ -117,7 +117,14 @@
         "ERROR_SIZE": "the file exceeds the maximum size. (2mb)",
         "VERIFY_MOBILE": "verify mobile",
         "MOBILE_VERIFIED": "mobile verified",
-        "DOWNLOAD_TEMPLATE": "Download file"
+        "DOWNLOAD_TEMPLATE": "Download file",
+        "UPLOAD_FILE": "Upload file",
+        "CHANGE_FILE": "Change file"
+    },
+    "USERTYPE": {
+        "0": "Private",
+        "1": "Public amministration",
+        "2": "Company"
     },
     "VEHICLE": {
         "TITLE": "Vehicles",

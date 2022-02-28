@@ -14,7 +14,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { HttpResponse } from '@angular/common/http';
 import { IAuthenticationService } from '@npt/npt-template';
-import { FleetManType, Nations } from '../../domain/bus-firenze-constants';
+import { FleetManType, worldNations } from '../../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -30,8 +30,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public dialCode: CountryCallingCode = '39';
   public selectedFile: File;
   public roleFleetManager: boolean;
-  public nations = Nations;
-  public userTypes = FleetManType;
+  public nations = worldNations;
+  public fleetType = FleetManType;
+  public userTypes: FleetManType[] = [this.fleetType.PRIVATO, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
+  public filteredList1 = this.nations.slice();
 
   private subscription: Subscription[] = [];
 
@@ -53,7 +55,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     if (this.data) {
       // cf, p.iva e district validator sono valorizzati in base alla nation
       this.FormGroup = this.formBuilder.group({
-        CtrlUser: [FleetManType[0], Validators.required],
+        CtrlUser: [this.fleetType.PRIVATO, Validators.required],
+        CtrlIpa: [''],
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
         CtrlCF: [this.data.fiscalCode],
@@ -66,14 +69,14 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlCity: [this.data.city, Validators.required],
         CtrlDistrict: [this.data.district],
         CtrlCAP: [this.data.cap, Validators.required],
-        CtrlForeign: [this.data.foreign, Validators.required],
         CtrlNat: [this.data.country, Validators.required]
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
     } else {
       this.FormGroup = this.formBuilder.group({
-        CtrlUser: [FleetManType[0], Validators.required],
+        CtrlUser: [this.fleetType.PRIVATO, Validators.required],
+        CtrlIpa: [''],
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
         CtrlCF: [''],
@@ -113,6 +116,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
+    // avvia il controllo della piva quando viene cambiata la nazione
     if (!this.FormGroup.controls.CtrlpIva.invalid && !isFirst) { this.pivaValidator(); }
   }
 

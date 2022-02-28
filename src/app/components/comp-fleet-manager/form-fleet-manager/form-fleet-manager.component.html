@@ -17,15 +17,22 @@
                     <mat-label>Tipo Fleet-manager</mat-label>
                     <mat-select formControlName="CtrlUser" required>
                         <mat-option *ngFor="let user of userTypes" [value]="user">
-                            {{user | translate}}
+                            {{'USERTYPE.' + user | translate}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="20" fxFlex.gt-md="20"
+                    *ngIf="FormGroup.get('CtrlUser').value === fleetType.PUBBLICA_AMM">
+                    <mat-label>Codice IPA</mat-label>
+                    <input matInput type="text" formControlName="CtrlIpa" maxlength="40" required>
+                    <mat-error>{{'FLEET-MANAGER.INSERT_NAME' | translate}}</mat-error>
+                </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="20" fxFlex.gt-md="20">
                     <mat-label>{{'FLEET-MANAGER.NATIONALITY' | translate}}</mat-label>
-                    <mat-select formControlName="CtrlNat" required (selectionChange)="changeFormNat()">
-                        <mat-option *ngFor="let nation of nations" [value]="nation.value">
-                            {{nation.value | translate}}
+                    <mat-select class="nationSelect" formControlName="CtrlNat" required (selectionChange)="changeFormNat()">
+                        <mat-select-filter [displayMember]="'text'" [array]="nations" (filteredReturn)="filteredList1 = $event"></mat-select-filter>
+                        <mat-option *ngFor="let nation of filteredList1" [value]="nation.value">
+                            {{nation.text | translate}}
                             <span [ngClass]="'fi fi-' + nation.value.toLowerCase()"></span>
                         </mat-option>
                         <mat-select-trigger>
@@ -96,7 +103,8 @@
                     <mat-label>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</mat-label>
                     <input matInput type="text" formControlName="CtrlpIva" maxlength="11" required
                         (input)="pivaValidator()">
-                    <mat-error>{{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
+                    <mat-error *ngIf="!FormGroup.controls.CtrlpIva.errors?.invalid">{{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
+                    <mat-hint *ngIf="FormGroup.controls.CtrlpIva.errors?.invalid" style="color: red;">Partita Iva non valida</mat-hint>
                 </mat-form-field>
             </div>
             <div fxLayout="row wrap" fxLayoutGap="20px">
@@ -125,7 +133,7 @@
             <input style="display: none" type="file" #fileInput accept="application/pdf, image/jpeg, image/png"
                 (change)="uploadFile($event)">
             <button mat-button class="bluButton" (click)="fileInput.click()">
-                {{selectedFile?.name ? 'Change File' : 'Upload File'}}
+                {{(selectedFile?.name ? 'FLEET-MANAGER.CHANGE_FILE' : 'FLEET-MANAGER.UPLOAD_FILE') | translate}}
             </button>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">

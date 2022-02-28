@@ -25,6 +25,7 @@ import { PanelStatisticComponent } from './vehicles/panel-statistic/panel-statis
 import { TableStatisticComponent } from './vehicles/table-statistic/table-statistic.component';
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
+import { MatSelectFilterModule } from 'mat-select-filter';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
     CommonModule,
     HttpClientModule,
     MaterialModule,
+    MatSelectFilterModule,
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,

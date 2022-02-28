@@ -117,7 +117,14 @@
         "ERROR_SIZE": "Il file supera la dimensione massima. (2mb)",
         "VERIFY_MOBILE": "verifica numero",
         "MOBILE_VERIFIED": "numero verificato",
-        "DOWNLOAD_TEMPLATE": "Scarica file"
+        "DOWNLOAD_TEMPLATE": "Scarica file",
+        "UPLOAD_FILE": "Carica file",
+        "CHANGE_FILE": "Cambia file"
+    },
+    "USERTYPE": {
+        "0": "Privato",
+        "1": "Pubblica amministrazione",
+        "2": "Ente"
     },
     "VEHICLE": {
         "TITLE": "Veicoli",

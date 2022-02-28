@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Vehicle } from 'src/app/components/domain/bus-firenze-domain';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CONTRACT_TYPE, Nations } from 'src/app/components/domain/bus-firenze-constants';
+import { CONTRACT_TYPE, euroNations } from 'src/app/components/domain/bus-firenze-constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { Subscription } from 'rxjs';
@@ -14,7 +14,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
   ]
 })
 export class ModalFormVehicleComponent implements OnInit {
-  public nations = Nations;
+  public nations = euroNations;
   public FormGroup: FormGroup;
   public contractType = CONTRACT_TYPE;
   public libDocument: File;
