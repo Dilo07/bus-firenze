@@ -14,7 +14,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { HttpResponse } from '@angular/common/http';
 import { IAuthenticationService } from '@npt/npt-template';
-import { FleetManType, worldNations } from '../../domain/bus-firenze-constants';
+import { euroNations, FleetManType, worldNations } from '../../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -30,11 +30,13 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public dialCode: CountryCallingCode = '39';
   public selectedFile: File;
   public roleFleetManager: boolean;
+  public isEuropeNat: boolean;
   public nations = worldNations;
+  public filteredList = this.nations.slice();
   public fleetType = FleetManType;
   public userTypes: FleetManType[] = [this.fleetType.PRIVATO, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
-  public filteredList1 = this.nations.slice();
 
+  private euroNations = euroNations;
   private subscription: Subscription[] = [];
 
   constructor(
@@ -60,7 +62,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
         CtrlCF: [this.data.fiscalCode],
-        CtrlpIva: [this.data.pIva, [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]],
+        CtrlpIva: [this.data.pIva],
         CtrlCompanyName: [this.data.companyName, Validators.required],
         CtrlCell: [this.findContactValue(1), [Validators.required]],
         CtrlOffice: [this.findContactValue(2)],
@@ -80,7 +82,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
         CtrlCF: [''],
-        CtrlpIva: ['', [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]],
+        CtrlpIva: [''],
         CtrlCompanyName: ['', Validators.required],
         CtrlCell: ['', [Validators.pattern(/^\d+$/), Validators.required]],
         CtrlOffice: [''],
@@ -102,22 +104,26 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public changeFormNat(isFirst?: boolean): void {
-    if (this.FormGroup.get('CtrlNat').value !== 'IT') {
-      this.FormGroup.controls.CtrlCF.setValidators(null);
-      /* this.FormGroup.controls.CtrlpIva.setValidators(null); */
-      this.FormGroup.controls.CtrlDistrict.setValidators(
-        [Validators.minLength(3), Validators.maxLength(3), Validators.required]);
-    } else {
+    this.isEuropeNat = this.euroNations.includes(this.FormGroup.get('CtrlNat').value);
+    if (this.isEuropeNat){
+      this.FormGroup.controls.CtrlpIva.setValidators(
+        [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]);
       this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
-      /* this.FormGroup.controls.CtrlpIva.setValidators(
-        [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]); */
-      this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia IT)
-        [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
+      if (this.FormGroup.get('CtrlNat').value !== 'IT') {
+        this.FormGroup.controls.CtrlDistrict.setValidators(
+          [Validators.minLength(3), Validators.maxLength(3), Validators.required]);
+      } else {
+        this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia italiana)
+          [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
+      }
+    }else{
+      this.FormGroup.controls.CtrlCF.setValidators(null);
+      this.FormGroup.controls.CtrlpIva.setValidators(null);
     }
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
     // avvia il controllo della piva quando viene cambiata la nazione
-    if (!this.FormGroup.controls.CtrlpIva.invalid && !isFirst) { this.pivaValidator(); }
+    if (!this.FormGroup.controls.CtrlpIva.invalid && !isFirst && this.isEuropeNat) { this.pivaValidator(); }
   }
 
   public onCountryChange(evt: any): void {

@@ -10,10 +10,10 @@ export const TimesRefresh =
 
 
 export const euroNations = [
-    { value: 'IT' }, { value: 'AT' }, { value: 'BE' }, { value: 'BG' }, { value: 'CZ' }, { value: 'CY' }, { value: 'HR' },
-    { value: 'DK' }, { value: 'EE' }, { value: 'FI' }, { value: 'FR' }, { value: 'DE' }, { value: 'GR' }, { value: 'IE' },
-    { value: 'LV' }, { value: 'LT' }, { value: 'LU' }, { value: 'MT' }, { value: 'NL' }, { value: 'PL'}, { value: 'PT' },
-    { value: 'RO'}, { value: 'SK'}, { value: 'SI' }, { value: 'ES' }, { value: 'SE'}, { value: 'HU' }
+    'IT', 'AT', 'BE', 'BG', 'CZ', 'CY', 'HR',
+    'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'IE',
+    'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT',
+    'RO', 'SK', 'SI', 'ES', 'SE', 'HU'
 ];
 
 export const worldNations = [
