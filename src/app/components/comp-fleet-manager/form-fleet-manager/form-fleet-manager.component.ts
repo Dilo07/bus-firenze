@@ -50,10 +50,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     private fleetManagerService: FleetManagerService,
     @Inject('authService') private authService: IAuthenticationService) {
     this.data = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
-    this.authService.getUserRoles().then((res: string[]) => this.roleFleetManager = res.includes(ROLES.FLEETMNG));
   }
 
   ngOnInit(): void {
+    if (!this.register) { this.authService.getUserRoles().then((res: string[]) => this.roleFleetManager = res.includes(ROLES.FLEETMNG)); }
     // se ci sono dati è un edit form altrimenti è un add form
     if (this.data) {
       // cf, p.iva e district validator sono valorizzati in base alla nation
@@ -107,9 +107,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public changeFormNat(isFirst?: boolean): void {
     this.isEuropeNat = this.euroNations.includes(this.FormGroup.get('CtrlNat').value);
     if (this.isEuropeNat) { // se è europeo
-      this.FormGroup.controls.CtrlpIva.setValidators(
-        [Validators.required]);
-      this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
+      this.FormGroup.controls.CtrlpIva.setValidators([Validators.required]);
+      this.FormGroup.controls.CtrlCF.setValidators([Validators.required]);
       if (this.FormGroup.get('CtrlNat').value !== 'IT') {
         this.FormGroup.controls.CtrlDistrict.setValidators(
           [Validators.minLength(3), Validators.maxLength(3), Validators.required]);
@@ -121,6 +120,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.FormGroup.controls.CtrlCF.setValidators(null);
       this.FormGroup.controls.CtrlpIva.setValidators(null);
     }
+    this.FormGroup.controls.CtrlDistrict.updateValueAndValidity();
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
     // avvia il controllo della piva quando viene cambiata la nazione
@@ -250,29 +250,12 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  private fiscaleCodeValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    const codiceFiscale = require('codice-fiscale-js');
-    if (control.value?.length === 16) {
-      if (codiceFiscale.check(control.value)) {
-        return null;
-      } else {
-        return { fiscalCode: true };
-      }
-    } else if (control.value?.length === 11) {
-      const isnum = /^\d+$/.test(control.value);
-      if (isnum) { return null; } else { return { fiscalCode: true }; }
-    }
-    else {
-      return { fiscalCode: true };
-    }
-  }
-
   public pivaValidator(): void {
-    if (!this.FormGroup.controls.CtrlpIva.invalid) {
+    if (!this.FormGroup.controls.CtrlpIva.invalid && this.isEuropeNat) {
       const pIva = this.FormGroup.get('CtrlpIva').value;
       const nat = this.FormGroup.get('CtrlNat').value;
       this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
-      this.subscription.push(this.fleetManagerService.checkVatNumber(nat, pIva).subscribe(
+      this.subscription.push(this.registerService.checkVatNumber(nat, pIva).subscribe(
         vatVerify => {
           console.log(vatVerify);
           if (!vatVerify.valid) {
@@ -285,22 +268,32 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public pivaOfFcValidator(): void {
+  public pivaOrFcValidator(): void {
     const fiscalCode = this.FormGroup.get('CtrlCF').value;
+    const userType = this.FormGroup.get('CtrlUser').value;
     this.FormGroup.patchValue({ CtrlCF: fiscalCode.toUpperCase() });
-    if (!this.FormGroup.controls.CtrlCF.invalid && fiscalCode.length === 11) {
-      const nat = this.FormGroup.get('CtrlNat').value;
-      this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
-      this.subscription.push(this.fleetManagerService.checkVatNumber(nat, fiscalCode).subscribe(
-        vatVerify => {
-          console.log(vatVerify);
-          if (!vatVerify.valid) {
-            this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
-          } else {
-            this.FormGroup.controls.CtrlCF.setErrors(null);
-          }
+    if (!this.FormGroup.controls.CtrlCF.invalid) {
+      if (userType === this.fleetType.PERSONA_FISICA) {
+        const codiceFiscale = require('codice-fiscale-js');
+        if (codiceFiscale.check(fiscalCode)) {
+          this.FormGroup.controls.CtrlCF.setErrors(null);
+        } else {
+          this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
         }
-      ));
+      } else {
+        const nat = this.FormGroup.get('CtrlNat').value;
+        this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
+        this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode).subscribe(
+          vatVerify => {
+            console.log(vatVerify);
+            if (!vatVerify.valid) {
+              this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
+            } else {
+              this.FormGroup.controls.CtrlCF.setErrors(null);
+            }
+          }
+        ));
+      }
     }
   }
 
