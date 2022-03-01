@@ -53,14 +53,17 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     this.data = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
   }
 
-  ngOnInit(): void {
-    if (!this.register) { this.authService.getUserRoles().then((res: string[]) => this.roleFleetManager = res.includes(ROLES.FLEETMNG)); }
+  async ngOnInit(): Promise<void> {
+    if (!this.register) {
+      await this.authService.getUserRoles().then((res: string[]) => this.roleFleetManager = res.includes(ROLES.FLEETMNG));
+    }
     // se ci sono dati è un edit form altrimenti è un add form
     if (this.data) {
       // cf, p.iva e district validator sono valorizzati in base alla nation
       this.FormGroup = this.formBuilder.group({
-        CtrlUser: [this.fleetType.AZIENDA_PRIVATA, Validators.required],
-        CtrlIpa: [''],
+        CtrlContractCode: [this.data.contractCode],
+        CtrlUser: [{ value: this.data.companyType, disabled: this.roleFleetManager ? true : false }, Validators.required],
+        CtrlIpa: [this.data.codeIpa],
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
         CtrlCF: [this.data.fiscalCode],
@@ -73,12 +76,13 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlCity: [this.data.city, Validators.required],
         CtrlDistrict: [this.data.district],
         CtrlCAP: [this.data.cap, Validators.required],
-        CtrlNat: [this.data.country, Validators.required]
+        CtrlNat: [{ value: this.data.country, disabled: this.roleFleetManager ? true : false }, Validators.required]
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
     } else {
       this.FormGroup = this.formBuilder.group({
+        CtrlContractCode: [''],
         CtrlUser: [this.fleetType.AZIENDA_PRIVATA, Validators.required],
         CtrlIpa: [''],
         CtrlName: ['', Validators.required],
@@ -133,6 +137,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public insertFleetManager(): void {
+    const newFleetManager = this.generateFleetManager();
     if (this.register) {
       const dialogRef = this.dialog.open(ModalConfirmComponent, {
         width: '50%',
@@ -142,14 +147,12 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe((resp) => {
         if (resp) {
-          const newFleetManager = this.generateFleetManager();
           this.subscription.push(this.registerService.registerFleet(this.selectedFile, newFleetManager).subscribe(
             () => { this.router.navigate(['../']); }
           ));
         }
       });
     } else {
-      const newFleetManager = this.generateFleetManager();
       this.subscription.push(this.fleetManagerService.insertFleetManager(this.selectedFile, newFleetManager).subscribe(
         () => { this.router.navigate(['../fleet-manager-manage']); },
       ));
@@ -211,7 +214,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public pivaValidator(): void {
-    if (!this.FormGroup.controls.CtrlpIva.invalid && this.isEuropeNat) {
+    if (!this.FormGroup.controls.CtrlpIva.invalid && this.isEuropeNat && !this.roleFleetManager) {
       const pIva = this.FormGroup.get('CtrlpIva').value;
       const nat = this.FormGroup.get('CtrlNat').value;
       this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
@@ -239,7 +242,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public pivaOrFcValidator(): void {
     const fiscalCode = this.FormGroup.get('CtrlCF').value;
     const userType = this.FormGroup.get('CtrlUser').value;
-    if (!this.FormGroup.controls.CtrlCF.invalid) {
+    if (!this.FormGroup.controls.CtrlCF.invalid && !this.roleFleetManager) {
       if (userType === this.fleetType.PERSONA_FISICA) {
         const codiceFiscale = require('codice-fiscale-js');
         if (codiceFiscale.check(fiscalCode)) {
@@ -283,6 +286,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     const fleetManager = new FleetManager();
 
     fleetManager.id = this.data?.id;
+    fleetManager.contractCode = this.FormGroup.get('CtrlContractCode').value ? this.FormGroup.get('CtrlContractCode').value : null;
+    fleetManager.codeIpa = this.FormGroup.get('CtrlIpa').value ? this.FormGroup.get('CtrlIpa').value : null;
     fleetManager.name = this.FormGroup.get('CtrlName').value;
     fleetManager.surname = this.FormGroup.get('CtrlSurname').value;
     fleetManager.companyType = this.FormGroup.get('CtrlUser').value;

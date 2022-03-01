@@ -16,6 +16,7 @@ export class FleetManager {
     contacts: Contact[];
     fileId: number;
     country: string;
+    codeIpa: string;
 }
 
 export interface Contact {
