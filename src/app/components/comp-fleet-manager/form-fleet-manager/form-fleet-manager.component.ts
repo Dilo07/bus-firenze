@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { RegisterService } from 'src/app/services/register.service';
-import { FleetManager, FleetManType } from '../../domain/bus-firenze-domain';
+import { FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
 import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
@@ -14,7 +14,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { HttpResponse } from '@angular/common/http';
 import { IAuthenticationService } from '@npt/npt-template';
-import { euroNations, worldNations } from '../../domain/bus-firenze-constants';
+import { euroNations, FLEETMNG_TYPE, worldNations } from '../../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -33,9 +33,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public isEuropeNat: boolean;
   public nations = worldNations;
   public filteredList = this.nations.slice();
-  public fleetType = FleetManType;
-  public userTypes: FleetManType[] =
-    [this.fleetType.PERSONA_FISICA, this.fleetType.AZIENDA_PRIVATA, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
+  public fleetType = FLEETMNG_TYPE;
+  public userTypes = [this.fleetType.PERSONA_FISICA, this.fleetType.AZIENDA_PRIVATA, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
 
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
@@ -131,16 +130,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     this.dialCode = evt.dialCode;
   }
 
-  private findContactValue(code: number): string {
-    let res = '';
-    this.data.contacts.find(contact => {
-      if (contact.code === code) {
-        res = contact.value;
-      }
-    });
-    return res;
-  }
-
   public insertFleetManager(): void {
     if (this.register) {
       const dialogRef = this.dialog.open(ModalConfirmComponent, {
@@ -175,37 +164,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     ));
   }
 
-  private generateFleetManager(): FleetManager {
-    const fleetManager = new FleetManager();
-
-    fleetManager.id = this.data?.id;
-    fleetManager.name = this.FormGroup.get('CtrlName').value;
-    fleetManager.surname = this.FormGroup.get('CtrlSurname').value;
-    fleetManager.fiscalCode = this.FormGroup.get('CtrlCF').value.toUpperCase();
-    fleetManager.pIva = this.FormGroup.get('CtrlpIva').value;
-    fleetManager.companyName = this.FormGroup.get('CtrlCompanyName').value;
-    fleetManager.address = this.FormGroup.get('CtrlAddress').value;
-    fleetManager.city = this.FormGroup.get('CtrlCity').value;
-    fleetManager.district = this.FormGroup.get('CtrlDistrict').value;
-    fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
-    fleetManager.country = this.FormGroup.get('CtrlNat').value;
-    fleetManager.contacts = [];
-
-    const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
-    const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
-    let formCell = this.FormGroup.get('CtrlCell').value;
-    const phoneNumber = parsePhoneNumber(formCell);
-    if (!phoneNumber) { // caso nuovo fleet o modifica cell
-      formCell = '+' + this.dialCode + formCell;
-    } else if (this.dialCode !== phoneNumber.countryCallingCode) { // caso edit fleet
-      formCell = '+' + this.dialCode + phoneNumber.nationalNumber;
-    }
-    const cell = { code: 1, value: formCell.replace(/\s/g, '') }; // toglie gli spazi
-
-    fleetManager.contacts.push(cell, office, mail);
-    return fleetManager;
-  }
-
   public modalOTP(): void {
     const Cell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value.replace(/\s/g, '');
     const lang = this.translateService.currentLang;
@@ -233,12 +191,12 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public downloadTemplate(): void {
     const FileSaver = require('file-saver');
     this.subscription.push(this.registerService.getTemplateDocument()
-      .subscribe((data: HttpResponse<Blob>) => {
-        const contentDispositionHeader = data.headers.get('Content-Disposition');
-        const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
-        FileSaver.saveAs(data.body, filename);
-      },
-        () => null));
+      .subscribe(
+        (data: HttpResponse<Blob>) => {
+          const contentDispositionHeader = data.headers.get('Content-Disposition');
+          const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+          FileSaver.saveAs(data.body, filename);
+        }));
   }
 
   public uploadFile(event: any): void {
@@ -271,7 +229,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public pivaOrFcValidator(): void {
     const fiscalCode = this.FormGroup.get('CtrlCF').value;
     const userType = this.FormGroup.get('CtrlUser').value;
-    this.FormGroup.patchValue({ CtrlCF: fiscalCode.toUpperCase() });
     if (!this.FormGroup.controls.CtrlCF.invalid) {
       if (userType === this.fleetType.PERSONA_FISICA) {
         const codiceFiscale = require('codice-fiscale-js');
@@ -295,6 +252,60 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ));
       }
     }
+  }
+
+  public resetCompanyInfo(): void {
+    this.FormGroup.patchValue({
+      CtrlCF: '',
+      CtrlpIva: '',
+      CtrlCompanyName: '',
+      CtrlAddress: '',
+      CtrlCity: '',
+      CtrlDistrict: '',
+      CtrlCAP: ''
+    });
+  }
+
+  private generateFleetManager(): FleetManager {
+    const fleetManager = new FleetManager();
+
+    fleetManager.id = this.data?.id;
+    fleetManager.name = this.FormGroup.get('CtrlName').value;
+    fleetManager.surname = this.FormGroup.get('CtrlSurname').value;
+    fleetManager.companyType = this.FormGroup.get('CtrlUser').value;
+    fleetManager.fiscalCode = this.FormGroup.get('CtrlCF').value.toUpperCase();
+    fleetManager.pIva = this.FormGroup.get('CtrlpIva').value;
+    fleetManager.companyName = this.FormGroup.get('CtrlCompanyName').value;
+    fleetManager.address = this.FormGroup.get('CtrlAddress').value;
+    fleetManager.city = this.FormGroup.get('CtrlCity').value;
+    fleetManager.district = this.FormGroup.get('CtrlDistrict').value;
+    fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
+    fleetManager.country = this.FormGroup.get('CtrlNat').value;
+    fleetManager.contacts = [];
+
+    const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
+    const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
+    let formCell = this.FormGroup.get('CtrlCell').value;
+    const phoneNumber = parsePhoneNumber(formCell);
+    if (!phoneNumber) { // caso nuovo fleet o modifica cell
+      formCell = '+' + this.dialCode + formCell;
+    } else if (this.dialCode !== phoneNumber.countryCallingCode) { // caso edit fleet
+      formCell = '+' + this.dialCode + phoneNumber.nationalNumber;
+    }
+    const cell = { code: 1, value: formCell.replace(/\s/g, '') }; // toglie gli spazi
+
+    fleetManager.contacts.push(cell, office, mail);
+    return fleetManager;
+  }
+
+  private findContactValue(code: number): string {
+    let res = '';
+    this.data.contacts.find(contact => {
+      if (contact.code === code) {
+        res = contact.value;
+      }
+    });
+    return res;
   }
 
 }

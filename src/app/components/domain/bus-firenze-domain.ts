@@ -1,23 +1,12 @@
 import { Coordinate } from '@npt/npt-map';
 
 export class FleetManager {
-
-    constructor() {
-        this.name = '';
-        this.surname = '';
-        this.pIva = '';
-        this.companyName = '';
-        this.address = '';
-        this.city = '';
-        this.district = '';
-        this.cap = '';
-        this.contacts = [];
-    }
-
     id: number;
     name: string;
     surname: string;
+    contractCode: string;
     fiscalCode: string;
+    companyType: string;
     pIva: string;
     companyName: string;
     address: string;
@@ -164,11 +153,4 @@ export enum RefreshOption {
     _5_minutes,
     _10_minutes,
     _30_minutes
-}
-
-export enum FleetManType {
-    PERSONA_FISICA,
-    AZIENDA_PRIVATA,
-    PUBBLICA_AMM,
-    ENTE
 }

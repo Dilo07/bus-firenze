@@ -67,7 +67,7 @@
             <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>Tipo Fleet-manager</mat-label>
-                    <mat-select formControlName="CtrlUser" required>
+                    <mat-select formControlName="CtrlUser" required (selectionChange)="resetCompanyInfo()">
                         <mat-option *ngFor="let user of userTypes" [value]="user">
                             {{'USERTYPE.' + user | translate}}
                         </mat-option>
@@ -76,7 +76,7 @@
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.NATIONALITY' | translate}}</mat-label>
                     <mat-select formControlName="CtrlNat" required (selectionChange)="changeFormNat()">
-                        <mat-select-filter [displayMember]="'value'" [array]="nations"
+                        <mat-select-filter [displayMember]="'text'" [array]="nations"
                             (filteredReturn)="filteredList = $event.length > 0 ? $event : filteredList">
                         </mat-select-filter>
                         <mat-option *ngFor="let nation of filteredList" [value]="nation.value">
@@ -105,7 +105,9 @@
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                             fxFlex.gt-md="30" *ngIf="isEuropeNat">
                             <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="CtrlCF" (focusout)="pivaOrFcValidator()" required>
+                            <input matInput type="text" formControlName="CtrlCF"
+                                (input)="FormGroup.patchValue({CtrlCF: FormGroup.get('CtrlCF').value.toUpperCase()})"
+                                (focusout)="pivaOrFcValidator()" required>
                             <mat-error>{{'FLEET-MANAGER.INSERT_FISCALCODE' | translate}}</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
