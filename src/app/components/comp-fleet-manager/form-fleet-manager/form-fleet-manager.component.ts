@@ -227,8 +227,9 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           } else {
             this.FormGroup.controls.CtrlpIva.setErrors(null);
             if (!this.FormGroup.get('CtrlCompanyName').value) {
+              const companyName = vatVerify.name.substring(0, 40);
               this.FormGroup.patchValue({
-                CtrlCompanyName: vatVerify.name
+                CtrlCompanyName: companyName
               });
             }
           }
