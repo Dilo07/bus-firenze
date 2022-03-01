@@ -1,20 +1,20 @@
-import { AfterViewInit, Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpResponse } from '@angular/common/http';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { IAuthenticationService } from '@npt/npt-template';
+import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
+import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { RegisterService } from 'src/app/services/register.service';
+import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
+import { euroNations, FLEETMNG_TYPE, worldNations } from '../../domain/bus-firenze-constants';
 import { FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
-import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
-import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
-import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
-import { HttpResponse } from '@angular/common/http';
-import { IAuthenticationService } from '@npt/npt-template';
-import { euroNations, FLEETMNG_TYPE, worldNations } from '../../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -35,6 +35,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public filteredList = this.nations.slice();
   public fleetType = FLEETMNG_TYPE;
   public userTypes = [this.fleetType.PERSONA_FISICA, this.fleetType.AZIENDA_PRIVATA, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
+  public completePiva = true;
+  public completePiva2 = true;
 
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
@@ -213,6 +215,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       const pIva = this.FormGroup.get('CtrlpIva').value;
       const nat = this.FormGroup.get('CtrlNat').value;
       this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
+      this.completePiva = false;
       this.subscription.push(this.registerService.checkVatNumber(nat, pIva).subscribe(
         vatVerify => {
           console.log(vatVerify);
@@ -220,8 +223,15 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
             this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
           } else {
             this.FormGroup.controls.CtrlpIva.setErrors(null);
+            if (!this.FormGroup.get('CtrlCompanyName').value) {
+              this.FormGroup.patchValue({
+                CtrlCompanyName: vatVerify.name
+              });
+            }
           }
-        }
+        },
+        () => this.completePiva = true,
+        () => this.completePiva = true
       ));
     }
   }
@@ -240,6 +250,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       } else {
         const nat = this.FormGroup.get('CtrlNat').value;
         this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
+        this.completePiva2 = false;
         this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode).subscribe(
           vatVerify => {
             console.log(vatVerify);
@@ -248,7 +259,9 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
             } else {
               this.FormGroup.controls.CtrlCF.setErrors(null);
             }
-          }
+          },
+          () => this.completePiva2 = true,
+          () => this.completePiva2 = true
         ));
       }
     }

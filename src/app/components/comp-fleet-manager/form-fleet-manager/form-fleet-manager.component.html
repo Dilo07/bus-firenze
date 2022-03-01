@@ -101,6 +101,7 @@
                             <input matInput type="text" formControlName="CtrlpIva" maxlength="11"
                                 [required]="isEuropeNat" (focusout)="pivaValidator()">
                             <mat-error> {{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
+                            <mat-progress-bar mode="indeterminate" *ngIf="!completePiva"></mat-progress-bar>
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                             fxFlex.gt-md="30" *ngIf="isEuropeNat">
@@ -109,6 +110,7 @@
                                 (input)="FormGroup.patchValue({CtrlCF: FormGroup.get('CtrlCF').value.toUpperCase()})"
                                 (focusout)="pivaOrFcValidator()" required>
                             <mat-error>{{'FLEET-MANAGER.INSERT_FISCALCODE' | translate}}</mat-error>
+                            <mat-progress-bar mode="indeterminate" *ngIf="!completePiva2"></mat-progress-bar>
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                             fxFlex.gt-md="30" *ngIf="FormGroup.get('CtrlUser').value === fleetType.PUBBLICA_AMM">
