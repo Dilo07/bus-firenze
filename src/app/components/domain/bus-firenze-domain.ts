@@ -165,3 +165,10 @@ export enum RefreshOption {
     _10_minutes,
     _30_minutes
 }
+
+export enum FleetManType {
+    PERSONA_FISICA,
+    AZIENDA_PRIVATA,
+    PUBBLICA_AMM,
+    ENTE
+}

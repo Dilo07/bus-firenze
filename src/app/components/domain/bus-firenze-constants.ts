@@ -62,12 +62,6 @@ export const worldNations = [
     { value: 'WS', text: 'Samoa' }, { value: 'SM', text: 'San Marino' }, { value: 'ST', text: 'Sao Tome And Principe' },
     { value: 'SA', text: 'Saudi Arabia' }, { value: 'SN', text: 'Senegal' }, { value: 'RS', text: 'Serbia' }, { value: 'SC', text: 'Seychelles' }, { value: 'SL', text: 'Sierra Leone' }, { value: 'SG', text: 'Singapore' }, { value: 'SK', text: 'Slovakia' }, { value: 'SI', text: 'Slovenia' }, { value: 'SB', text: 'Solomon Islands' }, { value: 'SO', text: 'Somalia' }, { value: 'ZA', text: 'South Africa' }, { value: 'ES', text: 'Spain' }, { value: 'LK', text: 'Sri Lanka' }, { value: 'SD', text: 'Sudan' }, { value: 'SR', text: 'Suriname' }, { value: 'SZ', text: 'Swaziland' }, { value: 'SE', text: 'Sweden' }, { value: 'CH', text: 'Switzerland' }, { value: 'SY', text: 'Syrian Arab Republic' }, { value: 'TW', text: 'Taiwan' }, { value: 'TJ', text: 'Tajikistan' }, { value: 'TZ', text: 'Tanzania' }, { value: 'TH', text: 'Thailand' }, { value: 'TL', text: 'Timor-Leste' }, { value: 'TG', text: 'Togo' }, { value: 'TK', text: 'Tokelau' }, { value: 'TO', text: 'Tonga' }, { value: 'TN', text: 'Tunisia' }, { value: 'TR', text: 'Turkey' }, { value: 'TM', text: 'Turkmenistan' }, { value: 'TV', text: 'Tuvalu' }, { value: 'UG', text: 'Uganda' }, { value: 'UA', text: 'Ukraine' }, { value: 'AE', text: 'United Arab Emirates' }, { value: 'GB', text: 'United Kingdom' }, { value: 'US', text: 'United States' }, { value: 'UY', text: 'Uruguay' }, { value: 'VU', text: 'Vanuatu' }, { value: 'VE', text: 'Venezuela' }, { value: 'VN', text: 'Viet Nam' }, { value: 'WF', text: 'Wallis And Futuna' }, { value: 'YE', text: 'Yemen' }, { value: 'ZM', text: 'Zambia' }, { value: 'ZW', text: 'Zimbabwe' }];
 
-/* export const FleetManType = ['Privato', 'Pubblica amm.', 'Ente']; */
-export enum FleetManType {
-    PRIVATO,
-    PUBBLICA_AMM,
-    ENTE
-}
 export const STATUS_VEHICLE = Object.freeze({
     DELETED: 'DELETED',
     TEMP: 'TEMP',

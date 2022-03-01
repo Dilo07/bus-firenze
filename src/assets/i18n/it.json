@@ -122,9 +122,10 @@
         "CHANGE_FILE": "Cambia file"
     },
     "USERTYPE": {
-        "0": "Privato",
-        "1": "Pubblica amministrazione",
-        "2": "Ente"
+        "0": "Persona fisica",
+        "1": "Azienda privata",
+        "2": "Pubblica amministrazione",
+        "3": "Ente"
     },
     "VEHICLE": {
         "TITLE": "Veicoli",

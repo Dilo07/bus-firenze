@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { RegisterService } from 'src/app/services/register.service';
-import { FleetManager } from '../../domain/bus-firenze-domain';
+import { FleetManager, FleetManType } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
 import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
@@ -14,7 +14,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { HttpResponse } from '@angular/common/http';
 import { IAuthenticationService } from '@npt/npt-template';
-import { euroNations, FleetManType, worldNations } from '../../domain/bus-firenze-constants';
+import { euroNations, worldNations } from '../../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -34,7 +34,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public nations = worldNations;
   public filteredList = this.nations.slice();
   public fleetType = FleetManType;
-  public userTypes: FleetManType[] = [this.fleetType.PRIVATO, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
+  public userTypes: FleetManType[] =
+    [this.fleetType.PERSONA_FISICA, this.fleetType.AZIENDA_PRIVATA, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
 
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
@@ -57,7 +58,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     if (this.data) {
       // cf, p.iva e district validator sono valorizzati in base alla nation
       this.FormGroup = this.formBuilder.group({
-        CtrlUser: [this.fleetType.PRIVATO, Validators.required],
+        CtrlUser: [this.fleetType.AZIENDA_PRIVATA, Validators.required],
         CtrlIpa: [''],
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
@@ -77,7 +78,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.dialCode = phoneNumber.countryCallingCode;
     } else {
       this.FormGroup = this.formBuilder.group({
-        CtrlUser: [this.fleetType.PRIVATO, Validators.required],
+        CtrlUser: [this.fleetType.AZIENDA_PRIVATA, Validators.required],
         CtrlIpa: [''],
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
@@ -105,9 +106,9 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
   public changeFormNat(isFirst?: boolean): void {
     this.isEuropeNat = this.euroNations.includes(this.FormGroup.get('CtrlNat').value);
-    if (this.isEuropeNat){
+    if (this.isEuropeNat) { // se è europeo
       this.FormGroup.controls.CtrlpIva.setValidators(
-        [Validators.pattern(/^\d+$/), Validators.minLength(11), Validators.maxLength(11), Validators.required]);
+        [Validators.required]);
       this.FormGroup.controls.CtrlCF.setValidators([this.fiscaleCodeValidator]);
       if (this.FormGroup.get('CtrlNat').value !== 'IT') {
         this.FormGroup.controls.CtrlDistrict.setValidators(
@@ -116,7 +117,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia italiana)
           [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
       }
-    }else{
+    } else { // extra ue
       this.FormGroup.controls.CtrlCF.setValidators(null);
       this.FormGroup.controls.CtrlpIva.setValidators(null);
     }
