@@ -125,7 +125,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.FormGroup.controls.CtrlCF.setValidators(null);
       this.FormGroup.controls.CtrlpIva.setValidators(null);
     }
-    this.resetCompanyInfo();
+    if (!isFirst) { this.resetCompanyInfo(); }
     this.FormGroup.controls.CtrlDistrict.updateValueAndValidity();
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
