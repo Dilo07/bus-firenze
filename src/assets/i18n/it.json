@@ -86,6 +86,8 @@
         "VALID_CONFIRM": "Sei sicuro di voler validare questo fleet manager?",
         "INVALID_CONFIRM": "Sei sicuro di non voler validare questo fleet manager?",
         "SHOW VEHICLES": "Mostra Veicoli",
+        "DATA": "Dati",
+        "PERSONREF": "Dati persona di riferimento",
         "NATIONALITY": "Nazionalità",
         "ITALIAN": "Italiana",
         "FOREIGN": "Straniera",
@@ -96,6 +98,7 @@
         "FISCALCODE": "Codice fiscale",
         "VAT_NUMBER": "Partita Iva",
         "COMPANY_NAME": "Ragione Sociale",
+        "IPACODE": "Codice Ipa",
         "CELL": "N. Cellulare",
         "OFFICE": "N. Ufficio",
         "ADDRESS": "Indirizzo",
@@ -114,6 +117,7 @@
         "INSERT_CITY": "Inserisci una Città",
         "INSERT_DISTRICT": "Inserisci una provincia corretta",
         "INSERT_POSTAL_CODE": "Inserisci un CAP",
+        "INSERT_IPA": "Inserisci un codice ipa",
         "VEHICLESIZE": "N° Veicoli",
         "CONTACT": "Contatto",
         "ERROR_TYPE": "Il tipo del file inserito non è corretto. (file accettati: PDF, jpeg, png)",
@@ -123,7 +127,8 @@
         "DOWNLOAD_TEMPLATE": "Scarica file",
         "UPLOAD_FILE": "Carica file",
         "CHANGE_FILE": "Cambia file",
-        "VERIFYCF": "Verifica codice fiscale"
+        "VERIFYCF": "Verifica codice fiscale",
+        "USERTYPE": "Tipo di azienda"
     },
     "USERTYPE": {
         "PERS": "Persona fisica",
