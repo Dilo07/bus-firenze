@@ -309,7 +309,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     fleetManager.district = this.FormGroup.get('CtrlDistrict').value;
     fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
     fleetManager.country = this.FormGroup.get('CtrlNat').value;
-    fleetManager.extraUE = this.isEuropeNat;
+    fleetManager.extraUE = !this.isEuropeNat;
     fleetManager.contacts = [];
 
     const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
