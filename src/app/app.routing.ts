@@ -49,7 +49,11 @@ const routes: Routes = [
   {
     path: 'ticket',
     loadChildren: () => import('./components/comp-ticket/ticket.module').then(m => m.TicketModule)
-  }
+  },
+  {
+    path: 'documents',
+    loadChildren: () => import('./components/comp-documents/documents.module').then(m => m.DocumentsModule)
+  },
 ];
 
 @NgModule({

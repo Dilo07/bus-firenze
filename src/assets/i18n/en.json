@@ -31,7 +31,8 @@
         "Association-vehicles": "Associated vehicles",
         "Ticket": "Ticket",
         "Add-ticket": "Add new",
-        "Manage-ticket": "Manage"
+        "Manage-ticket": "Manage",
+        "Documents": "Documents"
     },
     "ACCOUNT": {
         "PROFILE": "Profile",
