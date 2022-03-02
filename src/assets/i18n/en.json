@@ -93,6 +93,7 @@
         "FOREIGN": "Foreign",
         "ID": "ID FleetM.",
         "CONTRACT_CODE": "Contract code",
+        "SAP_CODE": "Sap code",
         "NAME": "Name",
         "SURNAME": "Surname",
         "FISCALCODE": "Fiscale code",

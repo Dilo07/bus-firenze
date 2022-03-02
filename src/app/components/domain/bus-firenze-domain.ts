@@ -5,6 +5,7 @@ export class FleetManager {
     name: string;
     surname: string;
     contractCode: string;
+    idSap: number;
     fiscalCode: string;
     companyType: string;
     pIva: string;

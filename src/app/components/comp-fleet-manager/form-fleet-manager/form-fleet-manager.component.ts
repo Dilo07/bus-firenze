@@ -62,6 +62,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       // cf, p.iva e district validator sono valorizzati in base alla nation
       this.FormGroup = this.formBuilder.group({
         CtrlContractCode: [this.data.contractCode],
+        CtrlSapCode: [this.data.idSap],
         CtrlUser: [{ value: this.data.companyType, disabled: this.roleFleetManager ? true : false }, Validators.required],
         CtrlIpa: [this.data.codeIpa],
         CtrlName: [this.data.name, Validators.required],

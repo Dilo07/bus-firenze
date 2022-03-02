@@ -12,13 +12,18 @@
         <div fxLayout="row" fxLayoutAlign="center" *ngIf="register">
             {{'FLEET-MANAGER.REGISTRATION_HEADER' | translate}}
         </div>
-        <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
-            <div fxLayout="row wrap" fxLayoutAlign="start">
+        <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="10px">
+            <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
                     *ngIf="!roleFleetManager && !register">
                     <mat-label>{{'FLEET-MANAGER.CONTRACT_CODE' | translate}}</mat-label>
                     <input matInput type="text" formControlName="CtrlContractCode" required minlength="7" maxlength="7" [readonly]="data?.name">
                     <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
+                    *ngIf="!roleFleetManager && !register && data">
+                    <mat-label>{{'FLEET-MANAGER.SAP_CODE' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="CtrlSapCode" readonly>
                 </mat-form-field>
             </div>
             <mat-card style="border-style: groove;">
@@ -77,7 +82,7 @@
                     </div>
                 </mat-card-content>
             </mat-card>
-            <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px">
+            <div fxLayout="row wrap" fxLayoutAlign="center">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.USERTYPE' | translate}}</mat-label>
                     <mat-select formControlName="CtrlUser" required (selectionChange)="resetCompanyInfo(true)">
@@ -202,7 +207,7 @@
                 (click)="insertFleetManager()">
                 {{'FLEET-MANAGER.SAVE' | translate}}
             </button>
-            <button *ngIf="data" mat-button [disabled]="FormGroup.invalid || !FormGroup.dirty" class="greenButtons"
+            <button *ngIf="data && !roleFleetManager" mat-button [disabled]="FormGroup.invalid || !FormGroup.dirty" class="greenButtons"
                 (click)="updateFleetManager()">{{'FLEET-MANAGER.EDIT' | translate}}</button>
         </div>
     </mat-card-content>

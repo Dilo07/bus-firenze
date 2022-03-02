@@ -93,6 +93,7 @@
         "FOREIGN": "Straniera",
         "ID": "ID FleetM.",
         "CONTRACT_CODE": "Codice contratto",
+        "SAP_CODE": "Codice sap",
         "NAME": "Nome",
         "SURNAME": "Cognome",
         "FISCALCODE": "Codice fiscale",
