@@ -177,16 +177,16 @@ export class FleetManagerComponent implements OnInit {
     });
   }
 
-  public validateFleet(id: number, valid: boolean): void {
+  public validInvalidFleet(id: number, valid: boolean): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',
       height: '30%',
-      data: { text: valid ? 'FLEET-MANAGER.VALID_CONFIRM' : 'FLEET-MANAGER.INVALID_CONFIRM' },
+      data: { text: valid ? 'FLEET-MANAGER.VALID_CONFIRM' : 'FLEET-MANAGER.INVALID_CONFIRM', validForm: valid },
       autoFocus: false
     });
-    dialogRef.afterClosed().subscribe((data) => {
-      if (data) {
-        this.subscription.push(this.fleetManagerService.validInvalidFleetManager(id, valid).subscribe(
+    dialogRef.afterClosed().subscribe((contractCode) => {
+      if (contractCode) {
+        this.subscription.push(this.fleetManagerService.validInvalidFleetManager(id, valid, valid ? contractCode : null).subscribe(
           () => this.snackBar.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
           () => null,
           () => this.callGetFleetManager()
