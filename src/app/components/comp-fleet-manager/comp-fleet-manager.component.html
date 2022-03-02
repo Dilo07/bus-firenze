@@ -129,6 +129,11 @@
 						<mat-cell *matCellDef="let element" [style.display]="validFleet ? '' : 'none'">
 							<span class="mobile-label">{{'FLEET-MANAGER.FISCALCODE' | translate}}</span>
 							{{ element.fiscalCode}}
+							<a matSuffix mat-icon-button
+								href="https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCf"
+								target="_blank">
+								<mat-icon style="color: #0066CC;" matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">verified_user</mat-icon>
+							</a>
 						</mat-cell>
 					</ng-container>
 

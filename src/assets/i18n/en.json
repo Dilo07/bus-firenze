@@ -122,7 +122,8 @@
         "MOBILE_VERIFIED": "mobile verified",
         "DOWNLOAD_TEMPLATE": "Download file",
         "UPLOAD_FILE": "Upload file",
-        "CHANGE_FILE": "Change file"
+        "CHANGE_FILE": "Change file",
+        "VERIFYCF": "Verify fiscal code"
     },
     "USERTYPE": {
         "PERS": "Phisical person",
