@@ -14,6 +14,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   const packageObj = require('../../package.json');
@@ -32,6 +33,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     MaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     FlexLayoutModule,
     TranslateModule.forRoot({

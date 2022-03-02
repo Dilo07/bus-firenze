@@ -165,11 +165,11 @@
 									<mat-icon>find_in_page</mat-icon>
 								</button>
 								<button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
-									(click)="validateFleet(element.id, true)">
+									(click)="validInvalidFleet(element.id, true)">
 									<mat-icon style="color: green;">done</mat-icon>
 								</button>
 								<button mat-icon-button matTooltip="{{'FLEET-MANAGER.REFUSE' | translate}}"
-									(click)="validateFleet(element.id, false)">
+									(click)="validInvalidFleet(element.id, false)">
 									<mat-icon style="color: red;">clear</mat-icon>
 								</button>
 							</span>

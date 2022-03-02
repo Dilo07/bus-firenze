@@ -7,10 +7,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styles: [``]
 })
 export class ModalConfirmComponent implements OnInit {
+  public contractCode = '';
 
   constructor(
     public dialogRef: MatDialogRef<ModalConfirmComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {text: string}) { }
+    @Inject(MAT_DIALOG_DATA) public data: {text: string, validForm: boolean}) { }
 
   ngOnInit(): void {
   }
