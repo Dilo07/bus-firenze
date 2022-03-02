@@ -10,12 +10,12 @@
 <ng-template #valid>
     <div fxLayout="column" fxLayoutAlign="center">
         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxLayoutAlign="center">
-            <mat-label>Codice contratto</mat-label>
-            <input matInput type="text" [(ngModel)]="contractCode" maxlength="40" required>
+            <mat-label>{{'FLEET-MANAGER.CONTRACT_CODE' | translate}}</mat-label>
+            <input matInput type="text" [formControl]="contractCode" maxlength="7" required autocomplete="off">
             <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>
         </mat-form-field>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
-            <button mat-button (click)="dialogRef.close(contractCode)" class="greenButtons" [disabled]="!contractCode">
+            <button mat-button (click)="dialogRef.close(contractCode)" class="greenButtons" [disabled]="contractCode.status === 'INVALID'">
                 {{'COMMON.ACTION.SAVE' | translate}}
             </button>
             <button mat-button (click)="dialogRef.close(false)" class="redButtons"> {{'COMMON.ACTION.BACK' | translate}} </button>

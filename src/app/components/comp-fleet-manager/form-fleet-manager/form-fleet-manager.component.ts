@@ -133,7 +133,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     if (!this.FormGroup.controls.CtrlpIva.invalid && !isFirst && this.isEuropeNat) { this.pivaValidator(); }
   }
 
-  public onCountryChange(evt: any): void {
+  public countryMobileChange(evt: any): void {
     this.dialCode = evt.dialCode;
   }
 
@@ -227,8 +227,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
             this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
           } else {
             this.FormGroup.controls.CtrlpIva.setErrors(null);
+            const companyName = vatVerify.name.substring(0, 40);
             if (!this.FormGroup.get('CtrlCompanyName').value) {
-              const companyName = vatVerify.name.substring(0, 40);
               this.FormGroup.patchValue({
                 CtrlCompanyName: companyName
               });
@@ -248,15 +248,9 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       if (userType === this.fleetType.ENTE) {
         if ((fiscalCode.charAt(0) === '8' || fiscalCode.charAt(0) === '9') && fiscalCode.length === 11) {
           this.FormGroup.controls.CtrlCF.setErrors(null);
-        }else{
-          this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
-        }
-        /* const codiceFiscale = require('codice-fiscale-js');
-        if (codiceFiscale.check(fiscalCode)) {
-          this.FormGroup.controls.CtrlCF.setErrors(null);
         } else {
           this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
-        } */
+        }
       } else {
         const nat = this.FormGroup.get('CtrlNat').value;
         this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
@@ -277,16 +271,24 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public resetCompanyInfo(): void {
-    this.FormGroup.patchValue({
-      CtrlCF: '',
-      CtrlpIva: '',
-      CtrlCompanyName: '',
-      CtrlAddress: '',
-      CtrlCity: '',
-      CtrlDistrict: '',
-      CtrlCAP: ''
-    });
+  public resetCompanyInfo(resetNat?: boolean): void {
+    // se viene cambiato il tipo azienda setta la nazione a IT e richiama changeFormNat per rivalidare e svuotare
+    // se viene cambiata la nazione svuota le info societa e basta
+    if (resetNat) {
+      this.FormGroup.patchValue({ CtrlNat: 'IT' });
+      this.changeFormNat();
+    }
+    else {
+      this.FormGroup.patchValue({
+        CtrlCF: '',
+        CtrlpIva: '',
+        CtrlCompanyName: '',
+        CtrlAddress: '',
+        CtrlCity: '',
+        CtrlDistrict: '',
+        CtrlCAP: ''
+      });
+    }
   }
 
   private generateFleetManager(): FleetManager {
@@ -306,6 +308,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     fleetManager.district = this.FormGroup.get('CtrlDistrict').value;
     fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
     fleetManager.country = this.FormGroup.get('CtrlNat').value;
+    fleetManager.extraUE = this.isEuropeNat;
     fleetManager.contacts = [];
 
     const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };

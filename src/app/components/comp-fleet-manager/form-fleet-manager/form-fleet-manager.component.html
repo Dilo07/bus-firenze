@@ -17,7 +17,7 @@
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
                     *ngIf="!roleFleetManager && !register">
                     <mat-label>{{'FLEET-MANAGER.CONTRACT_CODE' | translate}}</mat-label>
-                    <input matInput type="text" formControlName="CtrlContractCode" required>
+                    <input matInput type="text" formControlName="CtrlContractCode" required [readonly]="data?.name">
                     <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>
                 </mat-form-field>
             </div>
@@ -54,7 +54,7 @@
                             <mat-label>{{'FLEET-MANAGER.CELL' | translate}}</mat-label>
                             <input matInput type="text" ng2TelInput
                                 [ng2TelInputOptions]="{initialCountry: 'it', separateDialCode: true}"
-                                (countryChange)="onCountryChange($event)" formControlName="CtrlCell" autocomplete="off"
+                                (countryChange)="countryMobileChange($event)" formControlName="CtrlCell" autocomplete="off"
                                 maxlength="25" required
                                 [readonly]="(verifyOtp && register) || (!register && data?.name)"
                                 [style.opacity]="!register && data ? '0.5' : ''">
@@ -80,35 +80,37 @@
             <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.USERTYPE' | translate}}</mat-label>
-                    <mat-select formControlName="CtrlUser" required (selectionChange)="resetCompanyInfo()">
+                    <mat-select formControlName="CtrlUser" required (selectionChange)="resetCompanyInfo(true)">
                         <mat-option *ngFor="let user of userTypes" [value]="user">
                             {{'USERTYPE.' + user | translate}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
-                    <mat-label>{{'FLEET-MANAGER.NATIONALITY' | translate}}</mat-label>
-                    <mat-select formControlName="CtrlNat" required (selectionChange)="changeFormNat()">
-                        <mat-select-filter [displayMember]="'text'" [array]="nations"
-                            (filteredReturn)="filteredList = $event.length > 0 ? $event : filteredList">
-                        </mat-select-filter>
-                        <mat-option *ngFor="let nation of filteredList" [value]="nation.value">
-                            {{nation.text | translate}}
-                            <span [ngClass]="'fi fi-' + nation.value.toLowerCase()"></span>
-                        </mat-option>
-                        <mat-select-trigger>
-                            {{FormGroup.get('CtrlNat').value}}
-                            <span [ngClass]="'fi fi-' + FormGroup.get('CtrlNat').value?.toLowerCase()"></span>
-                        </mat-select-trigger>
-                    </mat-select>
-                </mat-form-field>
             </div>
             <mat-card style="border-style: groove;">
                 <mat-card-content>
-                    <mat-card-title> 
-                        {{'FLEET-MANAGER.DATA' | translate}} {{('USERTYPE.' + FormGroup.get('CtrlUser').value) | translate}}
+                    <mat-card-title>
+                        {{'FLEET-MANAGER.DATA' | translate}} {{('USERTYPE.' + FormGroup.get('CtrlUser').value) |
+                        translate}}
                     </mat-card-title>
                     <div fxLayout="row wrap" fxLayoutGap="20px">
+                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                            fxFlex.gt-md="30" *ngIf="FormGroup.get('CtrlUser').value === fleetType.AZIENDA_PRIVATA">
+                            <mat-label>{{'FLEET-MANAGER.NATIONALITY' | translate}}</mat-label>
+                            <mat-select formControlName="CtrlNat" required (selectionChange)="changeFormNat()">
+                                <mat-select-filter [displayMember]="'text'" [array]="nations"
+                                    (filteredReturn)="filteredList = $event.length > 0 ? $event : filteredList">
+                                </mat-select-filter>
+                                <mat-option *ngFor="let nation of filteredList" [value]="nation.value">
+                                    {{nation.text | translate}}
+                                    <span [ngClass]="'fi fi-' + nation.value.toLowerCase()"></span>
+                                </mat-option>
+                                <mat-select-trigger>
+                                    {{FormGroup.get('CtrlNat').value}}
+                                    <span [ngClass]="'fi fi-' + FormGroup.get('CtrlNat').value?.toLowerCase()"></span>
+                                </mat-select-trigger>
+                            </mat-select>
+                        </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                             fxFlex.gt-md="30">
                             <mat-label>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</mat-label>

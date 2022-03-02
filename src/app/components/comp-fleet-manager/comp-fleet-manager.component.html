@@ -131,7 +131,7 @@
 							{{ element.fiscalCode}}
 							<a matSuffix mat-icon-button
 								href="https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCf"
-								target="_blank">
+								target="_blank" *ngIf="element.companyType === 'ENTE'">
 								<mat-icon style="color: #0066CC;" matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">verified_user</mat-icon>
 							</a>
 						</mat-cell>

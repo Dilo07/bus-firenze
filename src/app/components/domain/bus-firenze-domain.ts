@@ -16,6 +16,7 @@ export class FleetManager {
     contacts: Contact[];
     fileId: number;
     country: string;
+    extraUE: boolean;
     codeIpa: string;
 }
 
