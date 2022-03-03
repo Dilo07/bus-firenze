@@ -122,6 +122,11 @@ export interface RepairShops {
     address: string;
 }
 
+export interface Modules {
+    name: string;
+    path: string;
+}
+
 export interface Ticket {
     ticketId: string;
     vehicleId: number;

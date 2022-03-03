@@ -1,5 +1,9 @@
 <mat-card>
     <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'MENU.Documents' | translate}}</mat-card-title>
     <mat-card-content>
+        <div *ngFor="let document of modules" fxLayout="row" fxLayoutAlign="start">
+            <div>{{document.name}}</div>
+            <button mat-icon-button (click)="download(document.path)"><mat-icon matTooltip="download">download</mat-icon></button>
+        </div>
     </mat-card-content>
 </mat-card>
