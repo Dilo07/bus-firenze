@@ -59,12 +59,12 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
     // se ci sono dati è un edit form altrimenti è un add form
     if (this.data) {
-      // cf, p.iva e district validator sono valorizzati in base alla nation
+      // cf, p.iva validator sono valorizzati in base alla nation
       this.FormGroup = this.formBuilder.group({
         CtrlContractCode: [this.data.contractCode],
         CtrlSapCode: [this.data.idSap],
         CtrlUser: [{ value: this.data.companyType, disabled: this.roleFleetManager ? true : false }, Validators.required],
-        CtrlIpa: [this.data.codeIpa],
+        CtrlDest: [this.data.codeDest],
         CtrlName: [this.data.name, Validators.required],
         CtrlSurname: [this.data.surname, Validators.required],
         CtrlCF: [this.data.fiscalCode],
@@ -76,7 +76,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlAddress: [this.data.address, Validators.required],
         CtrlCity: [this.data.city, Validators.required],
         CtrlDistrict: [this.data.district],
-        CtrlCAP: [this.data.cap, Validators.required],
+        CtrlCAP: [this.data.cap],
         CtrlNat: [{ value: this.data.country, disabled: this.roleFleetManager ? true : false }, Validators.required]
       });
       const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
@@ -85,7 +85,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.FormGroup = this.formBuilder.group({
         CtrlContractCode: [''],
         CtrlUser: [this.fleetType.AZIENDA_PRIVATA, Validators.required],
-        CtrlIpa: [''],
+        CtrlDest: [''],
         CtrlName: ['', Validators.required],
         CtrlSurname: ['', Validators.required],
         CtrlCF: [''],
@@ -97,7 +97,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         CtrlAddress: ['', Validators.required],
         CtrlCity: ['', Validators.required],
         CtrlDistrict: [''],
-        CtrlCAP: ['', Validators.required],
+        CtrlCAP: [''],
         CtrlNat: ['IT', Validators.required]
       });
     }
@@ -115,19 +115,11 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     if (this.isEuropeNat) { // se è europeo
       this.FormGroup.controls.CtrlpIva.setValidators([Validators.required]);
       this.FormGroup.controls.CtrlCF.setValidators([Validators.required]);
-      if (this.FormGroup.get('CtrlNat').value !== 'IT') {
-        this.FormGroup.controls.CtrlDistrict.setValidators(
-          [Validators.minLength(3), Validators.maxLength(3), Validators.required]);
-      } else {
-        this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia italiana)
-          [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
-      }
     } else { // extra ue
       this.FormGroup.controls.CtrlCF.setValidators(null);
       this.FormGroup.controls.CtrlpIva.setValidators(null);
     }
     if (!isFirst) { this.resetCompanyInfo(); }
-    this.FormGroup.controls.CtrlDistrict.updateValueAndValidity();
     this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
     // avvia il controllo della piva quando viene cambiata la nazione
@@ -283,6 +275,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.FormGroup.patchValue({
         CtrlCF: '',
         CtrlpIva: '',
+        CtrlDest: '',
         CtrlCompanyName: '',
         CtrlAddress: '',
         CtrlCity: '',
@@ -297,7 +290,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
     fleetManager.id = this.data?.id;
     fleetManager.contractCode = this.FormGroup.get('CtrlContractCode').value ? this.FormGroup.get('CtrlContractCode').value : null;
-    fleetManager.codeIpa = this.FormGroup.get('CtrlIpa').value ? this.FormGroup.get('CtrlIpa').value : null;
+    fleetManager.codeDest = this.FormGroup.get('CtrlDest').value ? this.FormGroup.get('CtrlDest').value : null;
     fleetManager.name = this.FormGroup.get('CtrlName').value;
     fleetManager.surname = this.FormGroup.get('CtrlSurname').value;
     fleetManager.companyType = this.FormGroup.get('CtrlUser').value;

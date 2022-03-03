@@ -18,7 +18,7 @@ export class FleetManager {
     fileId: number;
     country: string;
     extraUE: boolean;
-    codeIpa: string;
+    codeDest: string;
 }
 
 export interface Contact {
