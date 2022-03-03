@@ -205,8 +205,8 @@ export class VehiclesComponent implements OnInit, OnDestroy {
         const contentDispositionHeader = data.headers.get('Content-Disposition');
         const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
         FileSaver.saveAs(data.body, filename);
-      },
-        () => null));
+      })
+    );
   }
 
   public viewCertificate(vehicleId: number, certificateId: number): void {

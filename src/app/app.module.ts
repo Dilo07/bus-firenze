@@ -51,6 +51,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
       provide: 'static_pageData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['static_page', ConfigInitService]
     },
+    { provide: 'modules', useValue: 'modules'},
+    {
+      provide: 'modulesData',
+      useFactory: getPropertyFromConfig, multi: false, deps: ['modules', ConfigInitService]
+    },
     { provide: 'repair_shop', useValue: 'repair_shop'},
     {
       provide: 'repair_shopData',
