@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
+    path: 'vehicle-valid',
+    loadChildren: () => import('./components/comp-valid-vehicles/valid-vehicles.module').then(m => m.ValidVehiclesModule)
+  },
+  {
     path: 'user-fleet-manager',
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
