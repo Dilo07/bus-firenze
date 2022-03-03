@@ -179,8 +179,7 @@
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
                             fxFlex.gt-md="18" *ngIf="FormGroup.get('CtrlNat').value === 'IT'">
                             <mat-label>{{'FLEET-MANAGER.DISTRICT' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="CtrlDistrict" pattern="[A-Za-z]+" minlength="2"
-                                maxlength="2" required [readonly]="data && roleFleetManager">
+                            <input matInput type="text" formControlName="CtrlDistrict" required [readonly]="data && roleFleetManager">
                             <mat-error>{{'FLEET-MANAGER.INSERT_DISTRICT' | translate}}</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"

@@ -115,15 +115,28 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     if (this.isEuropeNat) { // se è europeo
       this.FormGroup.controls.CtrlpIva.setValidators([Validators.required]);
       this.FormGroup.controls.CtrlCF.setValidators([Validators.required]);
+      this.FormGroup.controls.CtrlCAP.setValidators([Validators.required]);
+      if (this.FormGroup.get('CtrlNat').value === 'IT') {
+        this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia italiana)
+          [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
+        this.FormGroup.controls.CtrlDest.setValidators([Validators.required]);
+      } else {
+        this.FormGroup.controls.CtrlDistrict.setValidators(null);
+      }
     } else { // extra ue
       this.FormGroup.controls.CtrlCF.setValidators(null);
       this.FormGroup.controls.CtrlpIva.setValidators(null);
+      this.FormGroup.controls.CtrlCAP.setValidators(null);
+      this.FormGroup.controls.CtrlDistrict.setValidators(null);
+      this.FormGroup.controls.CtrlDest.setValidators(null);
     }
+    // resetta i dati al cambio della nazione
     if (!isFirst) { this.resetCompanyInfo(); }
-    this.FormGroup.controls.CtrlCF.updateValueAndValidity();
     this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
-    // avvia il controllo della piva quando viene cambiata la nazione
-    if (!this.FormGroup.controls.CtrlpIva.invalid && !isFirst && this.isEuropeNat) { this.pivaValidator(); }
+    this.FormGroup.controls.CtrlCF.updateValueAndValidity();
+    this.FormGroup.controls.CtrlCAP.updateValueAndValidity();
+    this.FormGroup.controls.CtrlDistrict.updateValueAndValidity();
+    this.FormGroup.controls.CtrlDest.updateValueAndValidity();
   }
 
   public countryMobileChange(evt: any): void {
