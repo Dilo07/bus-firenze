@@ -86,7 +86,8 @@
             <div fxLayout="row wrap" fxLayoutAlign="center">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.USERTYPE' | translate}}</mat-label>
-                    <mat-select formControlName="CtrlUser" required (selectionChange)="resetCompanyInfo(true)">
+                    <mat-select formControlName="CtrlUser" required
+                        (selectionChange)="FormGroup.patchValue({ CtrlNat: 'IT' }); changeFormNat()">
                         <mat-option *ngFor="let user of userTypes" [value]="user">
                             {{'USERTYPE.' + user | translate}}
                         </mat-option>
@@ -127,11 +128,12 @@
                             <mat-progress-bar mode="indeterminate" *ngIf="!completePiva"></mat-progress-bar>
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
-                            fxFlex.gt-md="25" *ngIf="isEuropeNat">
+                            fxFlex.gt-md="25" [style.display]="isEuropeNat ? '' : 'none'">
                             <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}
                                 {{('USERTYPE.' + FormGroup.get('CtrlUser').value) | translate}}</mat-label>
                             <input matInput type="text" formControlName="CtrlCF" maxlength="11"
-                                (focusout)="pivaOrFcValidator()" required [readonly]="data && roleFleetManager">
+                                (focusout)="pivaOrFcValidator()" [required]="isEuropeNat"
+                                [readonly]="data && roleFleetManager">
                             <a matSuffix mat-icon-button *ngIf="FormGroup.get('CtrlUser').value === fleetType.ENTE"
                                 href="https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCf"
                                 target="_blank">
@@ -179,14 +181,15 @@
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
                             fxFlex.gt-md="18" *ngIf="FormGroup.get('CtrlNat').value === 'IT'">
                             <mat-label>{{'FLEET-MANAGER.DISTRICT' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="CtrlDistrict" required [readonly]="data && roleFleetManager">
+                            <input matInput type="text" formControlName="CtrlDistrict" required
+                                [readonly]="data && roleFleetManager">
                             <mat-error>{{'FLEET-MANAGER.INSERT_DISTRICT' | translate}}</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
-                            fxFlex.gt-md="18" *ngIf="isEuropeNat">
+                            fxFlex.gt-md="18" [style.display]="isEuropeNat ? '' : 'none'">
                             <mat-label>{{'FLEET-MANAGER.POSTAL_CODE' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="CtrlCAP" maxlength="10" required
-                                [readonly]="data && roleFleetManager">
+                            <input matInput type="text" formControlName="CtrlCAP" maxlength="10"
+                                [required]="isEuropeNat" [readonly]="data && roleFleetManager">
                             <mat-error>{{'FLEET-MANAGER.INSERT_POSTAL_CODE' | translate}}</mat-error>
                         </mat-form-field>
                     </div>

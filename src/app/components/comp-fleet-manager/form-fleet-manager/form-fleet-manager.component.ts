@@ -113,28 +113,18 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public changeFormNat(isFirst?: boolean): void {
     this.isEuropeNat = this.euroNations.includes(this.FormGroup.get('CtrlNat').value);
     if (this.isEuropeNat) { // se è europeo
-      this.FormGroup.controls.CtrlpIva.setValidators([Validators.required]);
-      this.FormGroup.controls.CtrlCF.setValidators([Validators.required]);
-      this.FormGroup.controls.CtrlCAP.setValidators([Validators.required]);
       if (this.FormGroup.get('CtrlNat').value === 'IT') {
         this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia italiana)
           [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
-        this.FormGroup.controls.CtrlDest.setValidators([Validators.required]);
       } else {
         this.FormGroup.controls.CtrlDistrict.setValidators(null);
       }
     } else { // extra ue
-      this.FormGroup.controls.CtrlCF.setValidators(null);
-      this.FormGroup.controls.CtrlpIva.setValidators(null);
-      this.FormGroup.controls.CtrlCAP.setValidators(null);
       this.FormGroup.controls.CtrlDistrict.setValidators(null);
       this.FormGroup.controls.CtrlDest.setValidators(null);
     }
     // resetta i dati al cambio della nazione
     if (!isFirst) { this.resetCompanyInfo(); }
-    this.FormGroup.controls.CtrlpIva.updateValueAndValidity();
-    this.FormGroup.controls.CtrlCF.updateValueAndValidity();
-    this.FormGroup.controls.CtrlCAP.updateValueAndValidity();
     this.FormGroup.controls.CtrlDistrict.updateValueAndValidity();
     this.FormGroup.controls.CtrlDest.updateValueAndValidity();
   }
@@ -277,25 +267,20 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public resetCompanyInfo(resetNat?: boolean): void {
+  private resetCompanyInfo(): void {
     // se viene cambiato il tipo azienda setta la nazione a IT e richiama changeFormNat per rivalidare e svuotare
     // se viene cambiata la nazione svuota le info societa e basta
-    if (resetNat) {
-      this.FormGroup.patchValue({ CtrlNat: 'IT' });
-      this.changeFormNat();
-    }
-    else {
-      this.FormGroup.patchValue({
-        CtrlCF: '',
-        CtrlpIva: '',
-        CtrlDest: '',
-        CtrlCompanyName: '',
-        CtrlAddress: '',
-        CtrlCity: '',
-        CtrlDistrict: '',
-        CtrlCAP: ''
-      });
-    }
+    this.FormGroup.patchValue({
+      CtrlCF: '',
+      CtrlpIva: '',
+      CtrlDest: '',
+      CtrlCompanyName: '',
+      CtrlAddress: '',
+      CtrlCity: '',
+      CtrlDistrict: '',
+      CtrlCAP: ''
+    });
+
   }
 
   private generateFleetManager(): FleetManager {
