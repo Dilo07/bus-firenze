@@ -37,42 +37,7 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
     .mat-column-consent { max-width: 20%;}
     .mat-column-actions { max-width: 25%; display: table-column;}
   }
-  :host ::ng-deep .ng2-pdf-viewer-container {
-    width: 98% !important;
-    height: 98% !important;
-  }
-  .img-responsive {
-    max-width: 40%;
-    height: auto;
-  }
   `],
-  animations: [
-    trigger('slideInOut', [
-      state(
-        'on',
-        style({
-          'background-color': 'darkseagreen',
-          'z-index': '10',
-          padding: '6px',
-          'border-style': 'solid',
-          position: 'fixed',
-          right: '10%',
-          width: '50%',
-          height: '60%'
-        })
-      ),
-      state(
-        'off',
-        style({
-          'border-style': 'solid',
-          position: 'fixed',
-          right: '-60%',
-        })
-      ),
-      transition('on => off', animate('500ms')),
-      transition('off => on', animate('500ms')),
-    ]),
-  ],
 })
 export class VehiclesComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
@@ -84,9 +49,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public Search: FormGroup;
   public complete = true;
   public statusVehicle = STATUS_VEHICLE;
-  public viewDoc: 'on' | 'off' = 'off';
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
-  public zoom = 0.6;
 
   private subscription: Subscription[] = [];
 
@@ -213,17 +176,13 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     this.subscription.push(this.vehicleService.getCertificateFile(vehicleId, certificateId)
       .subscribe((data) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
-          const url = window.URL.createObjectURL(data.body);
-          this.src.url = url;
-          this.src.type = data.body.type;
-          this.viewDoc = 'on';
+          const Url = window.URL.createObjectURL(data.body);
+          this.src = {url: Url, type: data.body.type};
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data.body);
           reader.onload = () => {
-            this.src.url = reader.result;
-            this.src.type = data.body.type;
-            this.viewDoc = 'on';
+            this.src = {url: reader.result, type: data.body.type};
           };
         }
       }));
@@ -237,14 +196,6 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       () => this.complete = true,
       () => { this.getVehiclesByManagerId(); this.complete = true; }
     ));
-  }
-
-  public changeZoom(zoomIn: boolean): void {
-    if (zoomIn && this.zoom <= 1) {
-      this.zoom += 0.1;
-    } else if (!zoomIn && this.zoom >= 0.2) {
-      this.zoom -= 0.1;
-    }
   }
 
   private resetSearchField(): void {

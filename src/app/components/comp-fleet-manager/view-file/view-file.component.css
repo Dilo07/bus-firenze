@@ -1,0 +1,9 @@
+:host ::ng-deep .ng2-pdf-viewer-container {
+    width: 98% !important;
+    height: 98% !important;
+}
+
+.img-responsive {
+    max-width: 40%;
+    height: auto;
+}

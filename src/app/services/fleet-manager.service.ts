@@ -62,7 +62,7 @@ export class FleetManagerService {
 
   getFleetDocument(fleetManagerId: number, fileId: number): Observable<any> {
     const options = {
-      /* observe: 'response' as 'body', */
+      observe: 'response' as 'body',
       responseType: 'blob' as 'blob'
     };
     return this.http.get(this.apiUrl + '/' + fleetManagerId + '/upload/' + fileId, options)

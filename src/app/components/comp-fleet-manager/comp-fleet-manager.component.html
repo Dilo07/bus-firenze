@@ -1,31 +1,7 @@
 <mat-card>
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
 	<mat-card-content>
-		<div [@slideInOut]="viewDoc">
-			<span *ngIf="src.type === 'application/pdf' else image">
-				<pdf-viewer [src]="$any(src.url)" [rotation]="0" [original-size]="true" [show-all]="true"
-					[fit-to-page]="false" [zoom]="zoom" [stick-to-page]="false" [render-text]="true"
-					[external-link-target]="'top'" [autoresize]="true" [show-borders]="true">
-				</pdf-viewer>
-			</span>
-			<button mat-icon-button matTooltip="{{'COMMON.ACTION.CLOSE' | translate}}"
-				(click)="viewDoc = 'off'; zoom = 0.6">
-				<mat-icon>close</mat-icon>
-			</button>
-			<br>
-			<span *ngIf="src.type === 'application/pdf'">
-				<button mat-icon-button matTooltip="zoom +" (click)="changeZoom(true)">
-					<mat-icon>add</mat-icon>
-				</button>
-				<br>
-				<button mat-icon-button matTooltip="zoom -" (click)="changeZoom(false)">
-					<mat-icon>remove</mat-icon>
-				</button>
-			</span>
-			<ng-template #image>
-				<img class="img-responsive" [src]="src.url" alt="imgDoc">
-			</ng-template>
-		</div>
+		<app-view-file [file]="src"></app-view-file>
 		<div fxLayout="column" fxLayoutGap="20px">
 			<span fxFlex="20" *ngIf="manageFleet">
 				<button mat-button class="greenButtons" [routerLink]="['form-Fleet']">

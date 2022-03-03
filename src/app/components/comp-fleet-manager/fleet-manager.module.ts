@@ -26,6 +26,7 @@ import { TableStatisticComponent } from './vehicles/table-statistic/table-statis
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { MatSelectFilterModule } from 'mat-select-filter';
+import { ViewFileComponent } from './view-file/view-file.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { MatSelectFilterModule } from 'mat-select-filter';
     AssociationDriversVehiclesComponent,
     AnagraphicDriverComponent,
     AssociationVehiclesComponent,
-    Ng2telinputDirective
+    Ng2telinputDirective,
+    ViewFileComponent
   ],
   imports: [
     CommonModule,
