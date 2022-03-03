@@ -128,7 +128,7 @@
                             <mat-progress-bar mode="indeterminate" *ngIf="!completePiva"></mat-progress-bar>
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
-                            fxFlex.gt-md="25" [style.display]="isEuropeNat ? '' : 'none'">
+                            fxFlex.gt-md="25" [style.visibility]="isEuropeNat ? '' : 'hidden'">
                             <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}
                                 {{('USERTYPE.' + FormGroup.get('CtrlUser').value) | translate}}</mat-label>
                             <input matInput type="text" formControlName="CtrlCF" maxlength="11"
@@ -186,7 +186,7 @@
                             <mat-error>{{'FLEET-MANAGER.INSERT_DISTRICT' | translate}}</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
-                            fxFlex.gt-md="18" [style.display]="isEuropeNat ? '' : 'none'">
+                            fxFlex.gt-md="18" [style.visibility]="isEuropeNat ? '' : 'hidden'">
                             <mat-label>{{'FLEET-MANAGER.POSTAL_CODE' | translate}}</mat-label>
                             <input matInput type="text" formControlName="CtrlCAP" maxlength="10"
                                 [required]="isEuropeNat" [readonly]="data && roleFleetManager">
