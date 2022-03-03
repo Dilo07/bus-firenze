@@ -7,7 +7,7 @@
             <div *ngIf="!data.vehicle else viewContractType" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
                 <label>{{'VEHICLE.CONTRACT' | translate}}</label>
                 <mat-radio-group formControlName="CtrlContract">
-                    <mat-radio-button style="margin-right: 10px;" [value]="contractType.BUY">
+                    <mat-radio-button style="margin-right: 10px; display: none;" [value]="contractType.BUY">
                         {{'VEHICLE.BUYING' | translate}}</mat-radio-button>
                     <mat-radio-button [value]="contractType.RENT">{{'VEHICLE.RENT' | translate}}</mat-radio-button>
                 </mat-radio-group>
@@ -29,9 +29,10 @@
                     <mat-label> {{'VEHICLE.LPN_NAT' | translate}}</mat-label>
                     <span *ngIf="!data.vehicle else readOnlyNat" fxLayout="row">
                         <mat-select formControlName="CtrlLpnNat" required>
-                            <mat-option *ngFor="let nation of nations" [value]="nation.value">
+                            <mat-select-filter [displayMember]="'text'" [array]="nations" (filteredReturn)="filteredList = $event"></mat-select-filter>
+                            <mat-option *ngFor="let nation of filteredList" [value]="nation.value">
                                 <!-- selezione nazione -->
-                                {{nation.value | translate}}
+                                {{nation.text | translate}}
                                 <span [ngClass]="'fi fi-' + nation.value.toLowerCase()"></span>
                             </mat-option>
                             <mat-select-trigger>

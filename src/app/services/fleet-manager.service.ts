@@ -51,8 +51,12 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  validInvalidFleetManager(id: number, valid: boolean): Observable<void> {
-    return this.http.put<void>(this.apiUrl + `/${id}/valid/${valid}`, null)
+  validInvalidFleetManager(id: number, valid: boolean, contractCode: number): Observable<void> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ contractCode })
+    };
+    return this.http.put<void>(this.apiUrl + `/${id}/valid/${valid}`, null, options)
       .pipe(catchError(err => { throw err; }));
   }
 
@@ -64,5 +68,4 @@ export class FleetManagerService {
     return this.http.get(this.apiUrl + '/' + fleetManagerId + '/upload/' + fileId, options)
       .pipe(catchError(err => { throw err; }));
   }
-
 }

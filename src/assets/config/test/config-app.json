@@ -25,5 +25,10 @@
   "repair_shop": [
     {"name": "Mirko", "surname": "Battelli", "mobile_number": "+393336486768", "name_shop": "Auto3", "address": "Via del Gelsomino, 11, 50125 Firenze FI" },
     {"name": "Salvatore", "surname": "Feri", "mobile_number": "+393336498668", "name_shop": "Firenze Nova", "address": "Via Umberto Maddalena, 6, 50127 Firenze FI" }
+  ],
+  "modules": [
+    { "name": "modulo restituzione cauzione", "path": "pdf-test" },
+    { "name": "modulo norme contrattuali", "path": "norme_contrattuali" },
+    { "name": "modulo privacy", "path": "privacy" }
   ]
 }

@@ -110,9 +110,11 @@
 						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.CERTIFICATE' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.CERTIFICATE' | translate}}</span>
-							<button mat-icon-button>
-								<mat-icon style="color: #0066CC;" matTooltip="{{'VEHICLE.CERTIFICATE' | translate}}"
-									(click)="viewCertificate(element.id, element.certificateId)">description</mat-icon>
+							<button mat-icon-button [disabled]="!element.certificateId"
+								(click)="viewCertificate(element.id, element.certificateId)">
+								<mat-icon [style.color]="element.certificateId ? '#0066CC' : 'grey'"
+									matTooltip="{{(element.certificateId ? 'VEHICLE.CERTIFICATE' : 'VEHICLE.NOCERTIFICATE') | translate}}">
+									description</mat-icon>
 							</button>
 							<input style="display: none" type="file" #fileInput
 								accept="application/pdf, image/jpeg, image/png"
