@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { DocumentsRoutingModule } from './documents-routing.module';
 import { DocumentsComponent } from './documents/documents.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from '@npt/npt-template';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -11,6 +14,9 @@ import { DocumentsComponent } from './documents/documents.component';
   ],
   imports: [
     CommonModule,
+    MaterialModule,
+    FlexLayoutModule,
+    TranslateModule,
     DocumentsRoutingModule
   ]
 })
