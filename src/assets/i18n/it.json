@@ -193,7 +193,9 @@
         "CHANGE_DEP": "Cambia ricevuta deposito",
         "UPLOAD_DEP": "Carica ricevuta deposito",
         "UPLOAD_SUCC": "Documento caricato correttamente",
-        "TEXTLIB": "* Il libretto di circolazione è obbligatorio per la creazione del veicolo"
+        "TEXTLIB": "* Il libretto di circolazione è obbligatorio per la creazione del veicolo",
+        "DEPOSIT": "Deposito",
+        "DEPOSIT_REQ": "Allega richiesta deposito"
     },
     "DRIVERS": {
         "TITLE": "Autisti",

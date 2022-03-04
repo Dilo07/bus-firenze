@@ -32,10 +32,12 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
     .mat-column-id { max-width: 10%}
     .mat-column-plate { max-width: 10%;}
     .mat-column-nat { max-width: 5%}
+    .mat-column-certificateId { max-width: 10%}
+    .mat-column-depositDocument { max-width: 10%}
     .mat-column-euroClass { max-width: 10%;}
-    .mat-column-obuId { max-width: 20%;}
-    .mat-column-consent { max-width: 20%;}
-    .mat-column-actions { max-width: 25%; display: table-column;}
+    .mat-column-obuId { max-width: 15%;}
+    .mat-column-consent { max-width: 10%;}
+    .mat-column-actions { max-width: 20%; display: table-column;}
   }
   `],
 })
@@ -45,7 +47,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
 
   public fleetManager: FleetManager;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
-  public displayedColumns = ['id', 'plate', 'nat', 'certificateId', 'euroClass', 'obuId', 'consent', 'actions'];
+  public displayedColumns = ['id', 'plate', 'nat', 'certificateId', 'depositDocument', 'euroClass', 'obuId', 'consent', 'actions'];
   public Search: FormGroup;
   public complete = true;
   public statusVehicle = STATUS_VEHICLE;

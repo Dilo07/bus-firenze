@@ -95,9 +95,20 @@
 							<input style="display: none" type="file" #fileInput
 								accept="application/pdf, image/jpeg, image/png"
 								(change)="uploadCertificate(element.id, $event)">
-							<button mat-icon-button *ngIf="fleetManager" (click)="fileInput.click()">
+							<button mat-icon-button *ngIf="fleetManager && !element.deleted"
+								(click)="fileInput.click()">
 								<mat-icon style="color: #0066CC;"
 									matTooltip=" {{'VEHICLE.CERTIFICATE_MODIFY' | translate}}">edit_note</mat-icon>
+							</button>
+						</mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="depositDocument">
+						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.DEPOSIT' | translate}} </mat-header-cell>
+						<mat-cell *matCellDef="let element">
+							<span class="mobile-label">{{'VEHICLE.DEPOSIT' | translate}}</span>
+							<button mat-icon-button>
+								<mat-icon [style.color]="'#0066CC'">description</mat-icon>
 							</button>
 						</mat-cell>
 					</ng-container>
@@ -146,6 +157,10 @@
 								<mat-icon style="color: #8f9a27"
 									matTooltip="{{('VEHICLE.DISABLED' | translate) +  (element.deleted | date : 'dd/MM/yyyy')}}">
 									disabled_by_default</mat-icon>
+							</button>
+							<button *ngIf="element.deleted" mat-icon-button>
+								<mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
+									edit_note</mat-icon>
 							</button>
 							<button mat-icon-button matTooltip="{{'STATISTIC.VEHICLE' | translate}}"
 								[routerLink]="['statistic']" [state]="{vehicle: element, fleetManager: fleetManager}">

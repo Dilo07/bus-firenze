@@ -193,7 +193,9 @@
         "CHANGE_DEP": "Change deposit file",
         "UPLOAD_DEP": "Upload deposit file",
         "UPLOAD_SUCC": "Upload document correctly",
-        "TEXTLIB": "* The certificate document is mandatory for new vehicle"
+        "TEXTLIB": "* The certificate document is mandatory for new vehicle",
+        "DEPOSIT": "Deposit",
+        "DEPOSIT_REQ": "Attach deposit request"
     },
     "DRIVERS": {
         "TITLE": "Drivers",
