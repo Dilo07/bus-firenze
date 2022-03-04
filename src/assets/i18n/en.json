@@ -187,9 +187,12 @@
         "EDIT_ERROR": "vehicle edit error",
         "EDIT_SUCCESS": "Vehicle edited correctly",
         "DOWNLOAD": "Download manual",
-        "CHANGE_LIB": "Change circolation document",
-        "UPLOAD_LIB": "Upload circolation document",
-        "UPLOAD_SUCC": "Upload document correctly"
+        "CHANGE_LIB": "Change certificate document",
+        "UPLOAD_LIB": "Upload certificate document",
+        "CHANGE_DEP": "Change deposit file",
+        "UPLOAD_DEP": "Upload deposit file",
+        "UPLOAD_SUCC": "Upload document correctly",
+        "TEXTLIB": "* The certificate document is mandatory for new vehicle"
     },
     "DRIVERS": {
         "TITLE": "Drivers",

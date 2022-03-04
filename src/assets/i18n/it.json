@@ -189,7 +189,10 @@
         "DOWNLOAD": "Scarica manuale",
         "CHANGE_LIB": "Cambia libretto circolazione",
         "UPLOAD_LIB": "Carica libretto circolazione",
-        "UPLOAD_SUCC": "Libretto caricato correttamente"
+        "CHANGE_DEP": "Cambia ricevuta deposito",
+        "UPLOAD_DEP": "Carica ricevuta deposito",
+        "UPLOAD_SUCC": "Documento caricato correttamente",
+        "TEXTLIB": "* Il libretto di circolazione è obbligatorio per la creazione del veicolo"
     },
     "DRIVERS": {
         "TITLE": "Autisti",

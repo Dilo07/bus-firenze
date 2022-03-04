@@ -3,6 +3,7 @@
         {{ (data.vehicle ? 'VEHICLE.EDIT' : 'VEHICLE.NEW') | translate }}
     </mat-card-title>
     <mat-card-content>
+        <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
         <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
             <!-- <div *ngIf="!data.vehicle else viewContractType" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
                 <label>{{'VEHICLE.CONTRACT' | translate}}</label>
@@ -29,7 +30,8 @@
                     <mat-label> {{'VEHICLE.LPN_NAT' | translate}}</mat-label>
                     <span *ngIf="!data.vehicle else readOnlyNat" fxLayout="row">
                         <mat-select formControlName="CtrlLpnNat" required>
-                            <mat-select-filter [displayMember]="'text'" [array]="nations" (filteredReturn)="filteredList = $event"></mat-select-filter>
+                            <mat-select-filter [displayMember]="'text'" [array]="nations"
+                                (filteredReturn)="filteredList = $event"></mat-select-filter>
                             <mat-option *ngFor="let nation of filteredList" [value]="nation.value">
                                 <!-- selezione nazione -->
                                 {{nation.text | translate}}
@@ -86,15 +88,20 @@
                 <mat-checkbox formControlName="CtrlConsent"></mat-checkbox>
                 {{'VEHICLE.CONSENT_TEXT' | translate}}
             </div>
-            <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!data.vehicle">
-                <mat-label> {{libDocument?.name}}</mat-label>
+            <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!data.vehicle" fxLayoutGap="10px">
+                <input style="display: none" type="file" #fileDeposit accept="application/pdf, image/jpeg, image/png"
+                    (change)="uploadFile($event, false);">
                 <input style="display: none" type="file" formControlName="CtrlLibretto" #fileInput
-                    accept="application/pdf, image/jpeg, image/png" (change)="uploadFile($event)">
-                <span>
-                    <button mat-button class="bluButton" (click)="fileInput.click()">
-                        {{(libDocument ? 'VEHICLE.CHANGE_LIB' : 'VEHICLE.UPLOAD_LIB') | translate}}
-                    </button>
-                </span>
+                    accept="application/pdf, image/jpeg, image/png" (change)="uploadFile($event, true);">
+                <mat-label> {{depositDocument?.name}}</mat-label>
+                <button mat-button class="bluButton" (click)="fileDeposit.click()">
+                    {{(depositDocument ? 'VEHICLE.CHANGE_DEP' : 'VEHICLE.UPLOAD_DEP') | translate}}
+                </button>
+                <mat-label> {{libDocument?.name}}</mat-label>
+                <button mat-button class="bluButton" (click)="fileInput.click();">
+                    {{(libDocument ? 'VEHICLE.CHANGE_LIB' : 'VEHICLE.UPLOAD_LIB') | translate}}
+                </button>
+                <p style="font-size: 12px;">{{'VEHICLE.TEXTLIB' | translate}}</p>
             </div>
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">
