@@ -1,5 +1,63 @@
 <mat-card>
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
 	<mat-card-content>
-    </mat-card-content>
+		<div class="mat-elevation-z8 example-container">
+			<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows>
+				<ng-container matColumnDef="expandButton">
+					<mat-header-cell *matHeaderCellDef></mat-header-cell>
+					<mat-cell *matCellDef="let element">
+						<button mat-icon-button
+							(click)="expandedElement = expandedElement === element ? null : element;">
+							<mat-icon style="color: grey">
+								{{expandedElement && expandedElement.id === element.id ? 'expand_more' :
+								'chevron_right'}}
+							</mat-icon>
+						</button>
+					</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="id">
+					<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
+					<mat-cell *matCellDef="let element">
+						<span class="mobile-label">id</span>
+						{{element.id}}
+					</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="name">
+					<mat-header-cell *matHeaderCellDef> name </mat-header-cell>
+					<mat-cell *matCellDef="let element">
+						<span class="mobile-label">name</span>
+						{{element.name}}
+					</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="surname">
+					<mat-header-cell *matHeaderCellDef> surname </mat-header-cell>
+					<mat-cell *matCellDef="let element">
+						<span class="mobile-label">surname</span>
+						{{element.surname}}
+					</mat-cell>
+				</ng-container>
+
+				<!--Collapse div-->
+				<ng-container matColumnDef="expandedDetail">
+					<mat-cell *matCellDef="let element">
+						<div class="example-element-detail"
+							[@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
+							<div class="example-element-description">
+								<span class="example-element-description-attribution">
+									test
+								</span>
+							</div>
+						</div>
+					</mat-cell>
+				</ng-container>
+				<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
+					[style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+				<mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+					[class.example-expanded-row]="expandedElement === element">
+				</mat-row>
+				<mat-row [style.display]="expandedElement && expandedElement.id === row.id ? '' : 'none'"
+					*matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
+			</mat-table>
+		</div>
+	</mat-card-content>
 </mat-card>

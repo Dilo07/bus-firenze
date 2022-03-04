@@ -14,13 +14,14 @@ export class VehicleService {
 
   private apiUrl = this.url + '/api/fleet';
 
-  addVehicle(file: File, vehicle: Vehicle, fleetManagerId?: number): Observable<void> {
+  addVehicle(deposit: File, certificate: File, vehicle: Vehicle, fleetManagerId?: number): Observable<void> {
     let url = '';
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('deposit', deposit);
+    formData.append('file', certificate);
     formData.append('metadata', JSON.stringify(vehicle));
     return this.http.post<void>(this.apiUrl + url + '/vehicle/add', formData)
       .pipe(catchError(err => { throw err; }));

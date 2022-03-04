@@ -66,15 +66,16 @@ export class ModalFormVehicleComponent implements OnInit {
     newVehicle.maxWeight = this.FormGroup.get('CtrlMaxWeight').value;
     newVehicle.contractType = this.FormGroup.get('CtrlContract').value;
     newVehicle.allowContacted = this.FormGroup.get('CtrlConsent').value;
-    this.subscription.push(this.vehicleService.addVehicle(this.libDocument, newVehicle, this.data?.fleetManagerId).subscribe(
-      () => null,
-      (err) => {
-        if (err.error) {
-          this.snackBar.showMessage(err.error.i18nKey, 'ERROR');
-        }
-      },
-      () => { this.snackBar.showMessage('VEHICLE.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
-    ));
+    this.subscription.push(
+      this.vehicleService.addVehicle(this.depositDocument, this.libDocument, newVehicle, this.data?.fleetManagerId).subscribe(
+        () => null,
+        (err) => {
+          if (err.error) {
+            this.snackBar.showMessage(err.error.i18nKey, 'ERROR');
+          }
+        },
+        () => { this.snackBar.showMessage('VEHICLE.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
+      ));
   }
 
   public updateVehicle(): void {
