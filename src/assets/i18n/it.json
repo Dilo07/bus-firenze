@@ -133,7 +133,8 @@
         "UPLOAD_FILE": "Carica file",
         "CHANGE_FILE": "Cambia file",
         "VERIFYCF": "Verifica codice fiscale",
-        "USERTYPE": "Tipo di azienda"
+        "USERTYPE": "Tipo di azienda",
+        "TEXTFILE": "* Per creare il fleet manager è necessario scaricare, firmare ed allegare il file"
     },
     "USERTYPE": {
         "PERS": "Persona fisica",

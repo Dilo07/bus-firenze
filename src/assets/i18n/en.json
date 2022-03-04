@@ -133,7 +133,8 @@
         "UPLOAD_FILE": "Upload file",
         "CHANGE_FILE": "Change file",
         "VERIFYCF": "Verify fiscal code",
-        "USERTYPE": "Company type"
+        "USERTYPE": "Company type",
+        "TEXTFILE": "* To creare the fleet manager you need to download, sign and attach the file"
     },
     "USERTYPE": {
         "PERS": "Phisical person",

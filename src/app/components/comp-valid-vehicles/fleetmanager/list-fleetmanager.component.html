@@ -52,8 +52,7 @@
 				</ng-container>
 				<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
 					[style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
-				<mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
-					[class.example-expanded-row]="expandedElement === element">
+				<mat-row *matRowDef="let element; columns: displayedColumns;">
 				</mat-row>
 				<mat-row [style.display]="expandedElement && expandedElement.id === row.id ? '' : 'none'"
 					*matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>

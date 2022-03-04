@@ -9,15 +9,6 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './list-fleetmanager.component.html',
   styles: [`
   table { width: 100%; background-color: beige; }
-  .example-radio-group {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
-  }
-
-  .example-radio-button {
-    margin: 5px;
-  }
   `],
   animations: [
     trigger('detailExpand', [

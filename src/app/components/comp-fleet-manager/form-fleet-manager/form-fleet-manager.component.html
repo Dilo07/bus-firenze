@@ -12,7 +12,7 @@
         <div fxLayout="row" fxLayoutAlign="center" *ngIf="register">
             {{'FLEET-MANAGER.REGISTRATION_HEADER' | translate}}
         </div>
-        <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="10px">
+        <form [formGroup]="FormGroup" fxLayout="column">
             <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
                     *ngIf="!roleFleetManager && !register">
@@ -206,6 +206,7 @@
                 {{(selectedFile?.name ? 'FLEET-MANAGER.CHANGE_FILE' : 'FLEET-MANAGER.UPLOAD_FILE') | translate}}
             </button>
         </div>
+        <p style="font-size: 12px;" fxLayout="row" fxLayoutAlign="center">{{'FLEET-MANAGER.TEXTFILE' | translate}}</p>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
             <button mat-button *ngIf="!roleFleetManager" [routerLink]="['../']"
                 class="backButton">{{'FLEET-MANAGER.BACK' | translate}}</button>
