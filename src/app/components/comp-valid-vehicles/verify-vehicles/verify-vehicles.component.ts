@@ -91,7 +91,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   }
 
   private getVehicles(): void{
-    this.subscription.push(this.vehicleService.getVehiclesById(false, this.idFleet, '', true).subscribe(
+    this.subscription.push(this.vehicleService.getVehiclesById(true, this.idFleet, '', true).subscribe(
       vehicles => this.dataSource.data = vehicles
     ));
   }
