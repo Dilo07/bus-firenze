@@ -17,8 +17,8 @@ export class ValidVehicleService {
   private fleetMokup = getFleetManager;
 
   getFleetDeposit(): Observable<FleetManager[]> {
-    return of(this.fleetMokup);
-    /* return this.http.get<FleetManager>(this.apiUrl + '/deposit')
-      .pipe(catchError(err => { throw err; })); */
+    /* return of(this.fleetMokup); */
+    return this.http.get<FleetManager[]>(this.apiUrl + '/deposit')
+      .pipe(catchError(err => { throw err; }));
   }
 }
