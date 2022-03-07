@@ -198,7 +198,9 @@
         "VIEWDEPOSIT": "View deposit",
         "NODEPOSIT": "Deposit not uploaded",
         "ADDDEPOSIT": "Add deposito",
-        "DEPOSIT_REQ": "Attach deposit request"
+        "DEPOSIT_REQ": "Attach deposit request",
+        "VALID_CONFIRM": "Are you sure to validate this vehicle?",
+        "VALID_SUCCESS": "Vehicle validate correctly"
     },
     "DRIVERS": {
         "TITLE": "Drivers",
@@ -215,9 +217,9 @@
         "VEHICLES_ASSOCIATION": "Association vehicles",
         "ASSOCIATION_PLATE": "Associated plate",
         "ASSOCIATION_DATE": "Association date",
-        "ADD_ERROR":"Error on insert driver",
+        "ADD_ERROR": "Error on insert driver",
         "ADD_SUCCESS": "Driver inserted correctly",
-        "EDIT_ERROR":"Error on edit driver",
+        "EDIT_ERROR": "Error on edit driver",
         "EDIT_SUCCESS": "Driver changed correctly",
         "DELETE_SUCCESS": "Driver deleted correctly",
         "DELETE_CONFIRM": "Are you sure of delete this driver?"
@@ -322,7 +324,7 @@
         "ACTIVE": "Active ticket",
         "MANAGE": "Manage ticket",
         "LPN": "Plate",
-        "LPN_NAT":"Country",
+        "LPN_NAT": "Country",
         "DATE_START": "Start",
         "DATE_END": "End",
         "TYPE": "Type",
@@ -331,7 +333,7 @@
         "voucher": "Voucher",
         "contrassegno": "Ticket",
         "VERIFIED": "verified",
-        "CODE" : "code",
+        "CODE": "code",
         "ACTIVATION": "Activation",
         "ACTIVATION_PHASE": "Activation phase",
         "END": "Trip end",
@@ -421,10 +423,10 @@
             "already_present": "Ticket already present on vehicle",
             "already_associated": "The vehicle is already associated to another obu"
         },
-        "ticket":{
-          "already_assigned": "Ticket already assigned to another vehicle",
-          "not_found": "Ticket not found",
-          "extend": "Cannot extend ticket"
+        "ticket": {
+            "already_assigned": "Ticket already assigned to another vehicle",
+            "not_found": "Ticket not found",
+            "extend": "Cannot extend ticket"
         },
         "obu": {
             "not_found": "Obu Id doesn't exist",
@@ -494,8 +496,8 @@
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_FOUND": "Ticket tipology not found",
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_VALIDA": "Ticket tipology invalid",
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_FOR_OBU": "Ticket tipology not expose with OBU",
-            "ERR_NO_TARIFFA_FOR_TIPOLOGIA_CONTRASSEGNO" : "Nobody ammount found for this code",
-            "ERR_NO_CORSA_FOUND" : "Not is possibile identificate the trip",
+            "ERR_NO_TARIFFA_FOR_TIPOLOGIA_CONTRASSEGNO": "Nobody ammount found for this code",
+            "ERR_NO_CORSA_FOUND": "Not is possibile identificate the trip",
             "ERR_NUM_PASSAGGI_RAGGIUNTO": "Allowed limit day fleet reached",
             "ERR_BUS_NOT_IN_FLOTTA": "The bus isn't on association voucher/subscription fleet",
             "ERR_NO_FLOTTA_ASSOCIATA_OBU": "The association fleet not is enable on OBU service",

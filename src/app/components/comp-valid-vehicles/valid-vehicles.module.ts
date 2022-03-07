@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@npt/npt-template';
 import { TranslateModule } from '@ngx-translate/core';
 import { VerifyVehiclesComponent } from './verify-vehicles/verify-vehicles.component';
+import { FleetManagerModule } from '../comp-fleet-manager/fleet-manager.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { VerifyVehiclesComponent } from './verify-vehicles/verify-vehicles.compo
     MaterialModule,
     FlexLayoutModule,
     TranslateModule,
-    ValidVehiclesRoutingModule
+    ValidVehiclesRoutingModule,
+    FleetManagerModule
   ]
 })
 export class ValidVehiclesModule { }

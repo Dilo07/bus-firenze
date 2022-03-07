@@ -1,3 +1,4 @@
+<app-view-file [file]="src"></app-view-file>
 <div class="example-container">
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc">
         <ng-container matColumnDef="id">
@@ -29,10 +30,10 @@
             <mat-cell *matCellDef="let element">
                 <span>
                     <button mat-icon-button style="color: #0066CC;"
-                        matTooltip="{{'OBU.VIEW_FILE' | translate}}">
+                        matTooltip="{{'OBU.VIEW_FILE' | translate}}" (click)="viewDeposit(element.id, element.documents)">
                         <mat-icon>find_in_page</mat-icon>
                     </button>
-                    <button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}">
+                    <button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}" (click)="validVehicle(element.id)">
                         <mat-icon style="color: green;">done</mat-icon>
                     </button>
                 </span>

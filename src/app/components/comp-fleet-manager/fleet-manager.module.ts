@@ -65,6 +65,6 @@ import { HasDepositPipe } from 'src/app/shared/utils/pipes/has-deposit.pipe';
     FleetManagerRoutingModule,
     PdfViewerModule
   ],
-  exports: [FormFleetManagerComponent]
+  exports: [ViewFileComponent]
 })
 export class FleetManagerModule { }

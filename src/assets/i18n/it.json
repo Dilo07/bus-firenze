@@ -198,7 +198,9 @@
         "VIEWDEPOSIT": "Visualizza deposito",
         "NODEPOSIT": "Deposito non caricato",
         "ADDDEPOSIT": "Aggiungi deposito",
-        "DEPOSIT_REQ": "Allega richiesta deposito"
+        "DEPOSIT_REQ": "Allega richiesta deposito",
+        "VALID_CONFIRM": "Sei sicuro di voler validare questo veicolo?",
+        "VALID_SUCCESS": "Veicolo validato correttamente"
     },
     "DRIVERS": {
         "TITLE": "Autisti",
@@ -322,7 +324,7 @@
         "ACTIVE": "Ticket attivi",
         "MANAGE": "Gestisci ticket",
         "LPN": "Targa",
-        "LPN_NAT":"Nazione",
+        "LPN_NAT": "Nazione",
         "DATE_START": "Inizio",
         "DATE_END": "Fine",
         "TYPE": "Tipo",
@@ -331,7 +333,7 @@
         "voucher": "Voucher",
         "contrassegno": "Contrassegno",
         "VERIFIED": "verificato",
-        "CODE" : "codice",
+        "CODE": "codice",
         "ACTIVATION": "Attivazione",
         "ACTIVATION_PHASE": "In fase di attivazione",
         "END": "Fine visita",
@@ -421,10 +423,10 @@
             "already_present": "Ticket già presente sul veicolo",
             "already_associated": "Il veicolo è già associato ad un altro obu"
         },
-        "ticket":{
-          "already_assigned": "Ticket già assegnato a un veicolo",
-          "not_found": "Ticket non trovato",
-          "extend": "Impossibile esterndere il ticket"
+        "ticket": {
+            "already_assigned": "Ticket già assegnato a un veicolo",
+            "not_found": "Ticket non trovato",
+            "extend": "Impossibile esterndere il ticket"
         },
         "obu": {
             "not_found": "Obu Id non presente",
@@ -494,8 +496,8 @@
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_FOUND": "Tipologia contrassegno non trovata",
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_VALIDA": "Tipologia contrassegno non valida",
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_FOR_OBU": "Tipologia contrassegno non esposta verso OBU",
-            "ERR_NO_TARIFFA_FOR_TIPOLOGIA_CONTRASSEGNO" : "Nessuna tariffa trovata per il codice",
-            "ERR_NO_CORSA_FOUND" : "Impossibile identificare la corsa",
+            "ERR_NO_TARIFFA_FOR_TIPOLOGIA_CONTRASSEGNO": "Nessuna tariffa trovata per il codice",
+            "ERR_NO_CORSA_FOUND": "Impossibile identificare la corsa",
             "ERR_NUM_PASSAGGI_RAGGIUNTO": "Limite Flotta per passaggi giornalieri consentiti raggiunto",
             "ERR_BUS_NOT_IN_FLOTTA": "Il bus non appartiene alla flotta associata al voucher/abbonamento",
             "ERR_NO_FLOTTA_ASSOCIATA_OBU": "La flotta associata al voucher non è abilitata ai servizi OBU",
