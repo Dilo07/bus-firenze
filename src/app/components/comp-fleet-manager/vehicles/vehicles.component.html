@@ -107,10 +107,10 @@
 						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.DEPOSIT' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.DEPOSIT' | translate}}</span>
-							<button mat-icon-button [disabled]="!(element.documents | hasDeposit)"
+							<button mat-icon-button [disabled]="!(element.documents | hasDeposit: false)"
 								(click)="viewDeposit(element.id, element.documents)">
-								<mat-icon [style.color]="(element.documents | hasDeposit) ? '#0066CC' : 'grey'"
-									matTooltip="{{((element.documents | hasDeposit)  ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
+								<mat-icon [style.color]="(element.documents | hasDeposit: false) ? '#0066CC' : 'grey'"
+									matTooltip="{{((element.documents | hasDeposit: false)  ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
 									description
 								</mat-icon>
 							</button>
@@ -173,7 +173,7 @@
 							<input style="display: none" type="file" #depositReqInput
 								accept="application/pdf, image/jpeg, image/png"
 								(change)="uploadDeposit(element.id, $event, false)">
-							<button *ngIf="element.deleted && (element.documents | hasDeposit)" mat-icon-button (click)="depositReqInput.click()">
+							<button *ngIf="element.deleted && (element.documents | hasDeposit: true)" mat-icon-button (click)="depositReqInput.click()">
 								<mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
 									edit_note</mat-icon>
 							</button>

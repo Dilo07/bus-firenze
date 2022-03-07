@@ -6,10 +6,11 @@ import { DocumentVehicle } from 'src/app/components/domain/bus-firenze-domain';
 })
 export class HasDepositPipe implements PipeTransform {
 
-  transform(documents: DocumentVehicle[]): boolean {
+  transform(documents: DocumentVehicle[], isValidDeposit: boolean): boolean {
     let hasDeposit = false;
     documents.map(document => {
-      if (document.type === 'deposit') { hasDeposit = true; }
+      if (document.type === 'deposit' && !isValidDeposit) { hasDeposit = true; }
+      if (document.type === 'deposit' && document.valid && isValidDeposit) { hasDeposit = true; }
     });
     return hasDeposit;
   }
