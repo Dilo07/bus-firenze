@@ -27,6 +27,7 @@ import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { MatSelectFilterModule } from 'mat-select-filter';
 import { ViewFileComponent } from './view-file/view-file.component';
+import { HasDepositPipe } from 'src/app/shared/utils/pipes/has-deposit.pipe';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { ViewFileComponent } from './view-file/view-file.component';
     AnagraphicDriverComponent,
     AssociationVehiclesComponent,
     Ng2telinputDirective,
-    ViewFileComponent
+    ViewFileComponent,
+    HasDepositPipe
   ],
   imports: [
     CommonModule,

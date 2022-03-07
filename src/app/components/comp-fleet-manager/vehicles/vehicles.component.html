@@ -107,21 +107,20 @@
 						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.DEPOSIT' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.DEPOSIT' | translate}}</span>
-							<button mat-icon-button
-								[disabled]="!(element.documents[0]?.type === depositType.DEPOSIT || element.documents[1]?.type === depositType.DEPOSIT)"
+							<button mat-icon-button [disabled]="!(element.documents | hasDeposit)"
 								(click)="viewDeposit(element.id, element.documents)">
-								<mat-icon
-									[style.color]="element.documents[0]?.type === depositType.DEPOSIT || element.documents[1]?.type === depositType.DEPOSIT ? '#0066CC' : 'grey'"
-									matTooltip="{{(element.documents[0]?.type === depositType.DEPOSIT || element.documents[1]?.type === depositType.DEPOSIT ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
+								<mat-icon [style.color]="(element.documents | hasDeposit) ? '#0066CC' : 'grey'"
+									matTooltip="{{((element.documents | hasDeposit)  ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
 									description
 								</mat-icon>
 							</button>
 							<input style="display: none" type="file" #depositInput
 								accept="application/pdf, image/jpeg, image/png"
-								(change)="uploadDeposit(element.id, $event)">
+								(change)="uploadDeposit(element.id, $event, true)">
 							<button mat-icon-button *ngIf="!element.deleted && !element.documents.valid"
 								(click)="depositInput.click()">
-								<mat-icon style="color: #0066CC;" matTooltip="{{'VEHICLE.ADDDEPOSIT' | translate}}">edit_note</mat-icon>
+								<mat-icon style="color: #0066CC;" matTooltip="{{'VEHICLE.ADDDEPOSIT' | translate}}">
+									edit_note</mat-icon>
 							</button>
 						</mat-cell>
 					</ng-container>
@@ -171,7 +170,10 @@
 									matTooltip="{{('VEHICLE.DISABLED' | translate) +  (element.deleted | date : 'dd/MM/yyyy')}}">
 									disabled_by_default</mat-icon>
 							</button>
-							<button *ngIf="element.deleted" mat-icon-button>
+							<input style="display: none" type="file" #depositReqInput
+								accept="application/pdf, image/jpeg, image/png"
+								(change)="uploadDeposit(element.id, $event, false)">
+							<button *ngIf="element.deleted && (element.documents | hasDeposit)" mat-icon-button (click)="depositReqInput.click()">
 								<mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
 									edit_note</mat-icon>
 							</button>

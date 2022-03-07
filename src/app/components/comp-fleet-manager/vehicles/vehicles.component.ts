@@ -221,10 +221,10 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       }));
   }
 
-  public uploadDeposit(vehicleId: number, event: any): void {
+  public uploadDeposit(vehicleId: number, event: any, isDeposit: boolean): void {
     this.complete = false;
     const file = event.target.files[0];
-    const deposit = this.depositType.DEPOSIT;
+    const deposit = isDeposit ? this.depositType.DEPOSIT : this.depositType.REQUEST;
     this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, deposit, file, this.fleetManager?.id).subscribe(
       () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
       () => this.complete = true,
