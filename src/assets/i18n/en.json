@@ -195,6 +195,9 @@
         "UPLOAD_SUCC": "Upload document correctly",
         "TEXTLIB": "* The certificate document is mandatory for new vehicle",
         "DEPOSIT": "Deposit",
+        "VIEWDEPOSIT": "View deposit",
+        "NODEPOSIT": "Deposit not uploaded",
+        "ADDDEPOSIT": "Add deposito",
         "DEPOSIT_REQ": "Attach deposit request"
     },
     "DRIVERS": {

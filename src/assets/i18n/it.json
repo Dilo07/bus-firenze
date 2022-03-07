@@ -195,6 +195,9 @@
         "UPLOAD_SUCC": "Documento caricato correttamente",
         "TEXTLIB": "* Il libretto di circolazione è obbligatorio per la creazione del veicolo",
         "DEPOSIT": "Deposito",
+        "VIEWDEPOSIT": "Visualizza deposito",
+        "NODEPOSIT": "Deposito non caricato",
+        "ADDDEPOSIT": "Aggiungi deposito",
         "DEPOSIT_REQ": "Allega richiesta deposito"
     },
     "DRIVERS": {

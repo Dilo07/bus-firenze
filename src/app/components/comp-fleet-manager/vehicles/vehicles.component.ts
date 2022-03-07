@@ -12,7 +12,7 @@ import { DriverService } from 'src/app/services/driver.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { DEPOSIT_TYPE, STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
-import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from '../drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehicle.component';
@@ -199,6 +199,26 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       () => this.complete = true,
       () => { this.getVehiclesByManagerId(); this.complete = true; }
     ));
+  }
+
+  public viewDeposit(vehicleId: number, documents: DocumentVehicle[]): void {
+    let depositId: number;
+    documents.map(document => {
+      if (document.type === 'deposit') { depositId = document.fileId; }
+    });
+    this.subscription.push(this.vehicleService.getDeposit(vehicleId, this.depositType.DEPOSIT, depositId)
+      .subscribe((data) => {
+        if (data.body.type === 'application/pdf') { // se è un pdf
+          const Url = window.URL.createObjectURL(data.body);
+          this.src = { url: Url, type: data.body.type };
+        } else { // altrimenti se è un'immagine
+          const reader = new FileReader();
+          reader.readAsDataURL(data.body);
+          reader.onload = () => {
+            this.src = { url: reader.result, type: data.body.type };
+          };
+        }
+      }));
   }
 
   public uploadDeposit(vehicleId: number, event: any): void {

@@ -109,6 +109,15 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  getDeposit(vehicleId: number, type: string, documentId: number): Observable<any> {
+    const options = {
+      observe: 'response' as 'body',
+      responseType: 'blob' as 'blob'
+    };
+    return this.http.get(this.apiUrl + `/vehicle/${vehicleId}/${type}/${documentId}`, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   uploadCertificate(vehicleId: number, file: File, fleetManagerId?: number): Observable<void> {
     let url = '';
     if (fleetManagerId) {
