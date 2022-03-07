@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -170,7 +171,7 @@ export class FleetManagerComponent implements OnInit {
   public getFleetDocument(fleetManagerId: number, fileId: number): void {
     this.complete = false;
     this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(
-      data => {
+      (data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const Url = window.URL.createObjectURL(data.body);
           this.src = {url: Url, type: data.body.type};

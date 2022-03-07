@@ -100,7 +100,7 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getCertificateFile(vehicleId: number, certificateId: number): Observable<any> {
+  getCertificateFile(vehicleId: number, certificateId: number): Observable<HttpResponse<Blob> | Blob> {
     const options = {
       observe: 'response' as 'body',
       responseType: 'blob' as 'blob'
@@ -109,7 +109,7 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getDeposit(vehicleId: number, type: string, documentId: number): Observable<any> {
+  getDeposit(vehicleId: number, type: string, documentId: number): Observable<HttpResponse<Blob> | Blob> {
     const options = {
       observe: 'response' as 'body',
       responseType: 'blob' as 'blob'

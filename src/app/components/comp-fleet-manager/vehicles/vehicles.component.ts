@@ -176,7 +176,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
 
   public viewCertificate(vehicleId: number, certificateId: number): void {
     this.subscription.push(this.vehicleService.getCertificateFile(vehicleId, certificateId)
-      .subscribe((data) => {
+      .subscribe((data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const Url = window.URL.createObjectURL(data.body);
           this.src = { url: Url, type: data.body.type };
@@ -206,7 +206,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       if (document.type === 'deposit') { depositId = document.fileId; }
     });
     this.subscription.push(this.vehicleService.getDeposit(vehicleId, this.depositType.DEPOSIT, depositId)
-      .subscribe((data) => {
+      .subscribe((data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const Url = window.URL.createObjectURL(data.body);
           this.src = { url: Url, type: data.body.type };

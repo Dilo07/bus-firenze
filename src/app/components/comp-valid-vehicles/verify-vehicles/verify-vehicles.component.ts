@@ -13,13 +13,14 @@ import { MatTableDataSource } from '@angular/material/table';
     background-color: white;
     margin: 2px;
   }
+  .mat-column-actions { display: table-column; text-align: end;}
   `
   ]
 })
 export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Input() idFleet: number;
   public dataSource = new MatTableDataSource<Vehicle>();
-  public displayedColumns: string[] = ['id', 'lpn', 'lpnNat'];
+  public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'actions'];
 
   private subscription: Subscription[] = [];
 

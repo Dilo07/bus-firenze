@@ -24,6 +24,21 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span>
+                    <button mat-icon-button style="color: #0066CC;"
+                        matTooltip="{{'OBU.VIEW_FILE' | translate}}">
+                        <mat-icon>find_in_page</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}">
+                        <mat-icon style="color: green;">done</mat-icon>
+                    </button>
+                </span>
+            </mat-cell>
+        </ng-container>
+
         <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
             [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

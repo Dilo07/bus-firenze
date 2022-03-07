@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
 import { Observable } from 'rxjs';
@@ -60,7 +60,7 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getFleetDocument(fleetManagerId: number, fileId: number): Observable<any> {
+  getFleetDocument(fleetManagerId: number, fileId: number): Observable<HttpResponse<Blob> | Blob> {
     const options = {
       observe: 'response' as 'body',
       responseType: 'blob' as 'blob'
