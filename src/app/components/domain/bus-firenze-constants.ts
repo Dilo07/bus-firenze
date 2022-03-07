@@ -85,3 +85,8 @@ export const FLEETMNG_TYPE = Object.freeze({
     PUBBLICA_AMM: 'PA',
     ENTE: 'ENTE'
 });
+
+export const DEPOSIT_TYPE = {
+    DEPOSIT: 'deposit',
+    REQUEST: 'request'
+};

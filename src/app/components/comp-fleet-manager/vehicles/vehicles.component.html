@@ -107,8 +107,19 @@
 						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.DEPOSIT' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.DEPOSIT' | translate}}</span>
-							<button mat-icon-button>
-								<mat-icon [style.color]="'#0066CC'">description</mat-icon>
+							<button mat-icon-button
+								[disabled]="!(element.documents[0]?.type === depositType.DEPOSIT || element.documents[1]?.type === depositType.DEPOSIT)">
+								<mat-icon
+									[style.color]="element.documents[0]?.type === depositType.DEPOSIT || element.documents[1]?.type === depositType.DEPOSIT ? '#0066CC' : 'grey'"
+									matTooltip="visualizza deposito">description
+								</mat-icon>
+							</button>
+							<input style="display: none" type="file" #depositInput
+								accept="application/pdf, image/jpeg, image/png"
+								(change)="uploadDeposit(element.id, $event)">
+							<button mat-icon-button *ngIf="!element.deleted && !element.documents.valid"
+								(click)="depositInput.click()">
+								<mat-icon style="color: #0066CC;" matTooltip="allega deposito">edit_note</mat-icon>
 							</button>
 						</mat-cell>
 					</ng-container>

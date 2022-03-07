@@ -120,4 +120,15 @@ export class VehicleService {
     return this.http.put<void>(this.apiUrl + `${url}/vehicle/${vehicleId}/certificate/update`, formData)
       .pipe(catchError(err => { throw err; }));
   }
+
+  uploadDeposit(vehicleId: number, type: string, file: File, fleetManagerId?: number): Observable<void> {
+    let url = '';
+    if (fleetManagerId) {
+      url = '/' + fleetManagerId;
+    }
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.put<void>(this.apiUrl + `${url}/vehicle/${vehicleId}/${type}/add`, formData)
+      .pipe(catchError(err => { throw err; }));
+  }
 }

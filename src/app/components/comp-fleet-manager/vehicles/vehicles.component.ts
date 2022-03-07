@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
-import { STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
+import { DEPOSIT_TYPE, STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
 import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from '../drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
@@ -52,6 +52,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public complete = true;
   public statusVehicle = STATUS_VEHICLE;
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
+  public depositType = DEPOSIT_TYPE;
 
   private subscription: Subscription[] = [];
 
@@ -179,12 +180,12 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const Url = window.URL.createObjectURL(data.body);
-          this.src = {url: Url, type: data.body.type};
+          this.src = { url: Url, type: data.body.type };
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data.body);
           reader.onload = () => {
-            this.src = {url: reader.result, type: data.body.type};
+            this.src = { url: reader.result, type: data.body.type };
           };
         }
       }));
@@ -194,6 +195,17 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     this.complete = false;
     const file = event.target.files[0];
     this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file, this.fleetManager?.id).subscribe(
+      () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
+      () => this.complete = true,
+      () => { this.getVehiclesByManagerId(); this.complete = true; }
+    ));
+  }
+
+  public uploadDeposit(vehicleId: number, event: any): void {
+    this.complete = false;
+    const file = event.target.files[0];
+    const deposit = this.depositType.DEPOSIT;
+    this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, deposit, file, this.fleetManager?.id).subscribe(
       () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
       () => this.complete = true,
       () => { this.getVehiclesByManagerId(); this.complete = true; }

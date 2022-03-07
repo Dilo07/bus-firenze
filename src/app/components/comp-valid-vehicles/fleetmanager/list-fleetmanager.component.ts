@@ -35,7 +35,6 @@ export class ListFleetmanagerComponent implements OnInit {
 
   private callFleetDeposit(): void {
     this.validVehiclerService.getFleetDeposit().subscribe(
-      data => this.dataSource.data = data
-      );
+      data => this.dataSource.data = data);
   }
 }

@@ -70,14 +70,14 @@ export class Vehicle {
     contractType: string;
     allowContacted: boolean;
     status: string;
-    documentVehicle: DocumentVehicle[];
+    documents: DocumentVehicle[];
 }
 
 export interface DocumentVehicle {
     fileId: number;
     valid: Date;
     sink: Date;
-    DocumentVehicle: 'deposit' | 'request';
+    type: 'deposit' | 'request';
 }
 
 export class VehicleTripPersistence {

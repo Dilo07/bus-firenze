@@ -58,5 +58,6 @@
 					*matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
 			</mat-table>
 		</div>
+		<div *ngIf="dataSource.data.length === 0">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>
 	</mat-card-content>
 </mat-card>

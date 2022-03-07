@@ -4,6 +4,7 @@ import { ListFleetmanagerComponent } from './fleetmanager/list-fleetmanager.comp
 import { ValidVehiclesRoutingModule } from './valid-vehicles.routing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@npt/npt-template';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { MaterialModule } from '@npt/npt-template';
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
+    TranslateModule,
     ValidVehiclesRoutingModule
   ]
 })
