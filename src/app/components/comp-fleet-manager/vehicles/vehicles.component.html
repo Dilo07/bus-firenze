@@ -157,6 +157,15 @@
 								(click)="downloadManualPdf(element.hardware)">
 								<mat-icon style="color: #0066CC;">assignment_returned</mat-icon>
 							</button>
+							<button *ngIf="!element.deleted && (element.documents | hasDeposit: true)" mat-icon-button
+								matTooltip="{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}"
+								(click)="associationDriver(element.id)">
+								<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
+							</button>
+							<button *ngIf="element.documents | hasDeposit: true" mat-icon-button matTooltip="{{'STATISTIC.VEHICLE' | translate}}"
+								[routerLink]="['statistic']" [state]="{vehicle: element, fleetManager: fleetManager}">
+								<mat-icon style="color: #0066CC;">poll</mat-icon>
+							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
 								matTooltip="{{'COMMON.ACTION.EDIT' | translate}}" (click)="editVehicle(element)">
 								<mat-icon style="color: #0066CC;">edit</mat-icon>
@@ -176,15 +185,6 @@
 							<button *ngIf="element.deleted && (element.documents | hasDeposit: true)" mat-icon-button (click)="depositReqInput.click()">
 								<mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
 									edit_note</mat-icon>
-							</button>
-							<button mat-icon-button matTooltip="{{'STATISTIC.VEHICLE' | translate}}"
-								[routerLink]="['statistic']" [state]="{vehicle: element, fleetManager: fleetManager}">
-								<mat-icon style="color: #0066CC;">poll</mat-icon>
-							</button>
-							<button *ngIf="!element.deleted" mat-icon-button
-								matTooltip="{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}"
-								(click)="associationDriver(element.id)">
-								<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
 							</button>
 						</mat-cell>
 					</ng-container>
