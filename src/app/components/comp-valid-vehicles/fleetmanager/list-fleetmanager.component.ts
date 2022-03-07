@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ValidVehicleService } from 'src/app/services/valid-vehicle.service';
-import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { FleetManager } from '../../domain/bus-firenze-domain';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -22,8 +22,7 @@ export class ListFleetmanagerComponent implements OnInit {
   public dataSource = new MatTableDataSource<FleetManager>();
   public displayedColumns = ['expandButton', 'id', 'name', 'surname'];
   public expandedElement: FleetManager | null;
-
-  private vehicle = new Vehicle();
+  public complete = true;
 
   constructor(
     private validVehiclerService: ValidVehicleService
@@ -34,7 +33,10 @@ export class ListFleetmanagerComponent implements OnInit {
   }
 
   private callFleetDeposit(): void {
+    this.complete = false;
     this.validVehiclerService.getFleetDeposit().subscribe(
-      data => this.dataSource.data = data);
+      fleetM => this.dataSource.data = fleetM,
+      () => this.complete = true,
+      () => this.complete = true);
   }
 }

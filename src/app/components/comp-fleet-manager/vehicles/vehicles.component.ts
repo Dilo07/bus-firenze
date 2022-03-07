@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -52,8 +51,8 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public complete = true;
   public statusVehicle = STATUS_VEHICLE;
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
-  public depositType = DEPOSIT_TYPE;
 
+  private depositType = DEPOSIT_TYPE;
   private subscription: Subscription[] = [];
 
   constructor(

@@ -5,11 +5,13 @@ import { ValidVehiclesRoutingModule } from './valid-vehicles.routing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@npt/npt-template';
 import { TranslateModule } from '@ngx-translate/core';
+import { VerifyVehiclesComponent } from './verify-vehicles/verify-vehicles.component';
 
 
 @NgModule({
   declarations: [
-    ListFleetmanagerComponent
+    ListFleetmanagerComponent,
+    VerifyVehiclesComponent
   ],
   imports: [
     CommonModule,

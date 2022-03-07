@@ -54,10 +54,10 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getVehiclesById(onlyActive: boolean, fleetManagerId?: number, keyword?: string): Observable<Vehicle[]> {
+  getVehiclesById(onlyActive: boolean, fleetManagerId?: number, keyword?: string, toVerify?: boolean): Observable<Vehicle[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ keyword })
+      params: HttpUtils.createHttpParams({ keyword, toVerify })
     };
     let url = '';
     if (fleetManagerId) {
