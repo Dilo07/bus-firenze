@@ -35,6 +35,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public filteredList = this.nations.slice();
   public fleetType = FLEETMNG_TYPE;
   public userTypes = [this.fleetType.DITTA_INDIVIDUALE, this.fleetType.AZIENDA_PRIVATA, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
+  public userSel: string = this.fleetType.AZIENDA_PRIVATA;
   public completePiva = true;
   public completePiva2 = true;
 

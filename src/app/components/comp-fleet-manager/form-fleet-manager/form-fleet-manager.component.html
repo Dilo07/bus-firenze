@@ -87,7 +87,7 @@
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.USERTYPE' | translate}}</mat-label>
                     <mat-select formControlName="CtrlUser" required
-                        (selectionChange)="FormGroup.patchValue({ CtrlNat: 'IT' }); changeFormNat()">
+                        (selectionChange)="userSel=$event.value; FormGroup.patchValue({ CtrlNat: 'IT' }); changeFormNat();">
                         <mat-option *ngFor="let user of userTypes" [value]="user">
                             {{'USERTYPE.' + user | translate}}
                         </mat-option>
@@ -97,12 +97,12 @@
             <mat-card style="border-style: groove;">
                 <mat-card-content>
                     <mat-card-title>
-                        {{'FLEET-MANAGER.DATA' | translate}} {{('USERTYPE.' + FormGroup.get('CtrlUser').value) |
+                        {{'FLEET-MANAGER.DATA' | translate}} {{('USERTYPE.' + userSel) |
                         translate}}
                     </mat-card-title>
                     <div fxLayout="row wrap" fxLayoutGap="20px">
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="10"
-                            fxFlex.gt-md="10" *ngIf="FormGroup.get('CtrlUser').value === fleetType.AZIENDA_PRIVATA">
+                            fxFlex.gt-md="10" *ngIf="userSel === fleetType.AZIENDA_PRIVATA">
                             <mat-label>{{'FLEET-MANAGER.NATIONALITY' | translate}}</mat-label>
                             <mat-select formControlName="CtrlNat" required (selectionChange)="changeFormNat()">
                                 <mat-select-filter [displayMember]="'text'" [array]="nations"
@@ -130,11 +130,11 @@
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
                             fxFlex.gt-md="25" [style.visibility]="isEuropeNat ? '' : 'hidden'">
                             <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}
-                                {{('USERTYPE.' + FormGroup.get('CtrlUser').value) | translate}}</mat-label>
-                            <input matInput type="text" formControlName="CtrlCF" maxlength="16"
-                                (focusout)="pivaOrFcValidator()" [required]="isEuropeNat"
-                                [readonly]="data && roleFleetManager">
-                            <a matSuffix mat-icon-button *ngIf="FormGroup.get('CtrlUser').value === fleetType.ENTE"
+                                {{('USERTYPE.' + userSel) | translate}}</mat-label>
+                            <input matInput type="text" formControlName="CtrlCF" (focusout)="pivaOrFcValidator()"
+                                [required]="isEuropeNat" [readonly]="data && roleFleetManager"
+                                [maxlength]="userSel === fleetType.DITTA_INDIVIDUALE ? 16 : 11">
+                            <a matSuffix mat-icon-button *ngIf="userSel === fleetType.ENTE"
                                 href="https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCf"
                                 target="_blank">
                                 <mat-icon matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">verified_user
@@ -145,14 +145,15 @@
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
                             fxFlex.gt-md="25"
-                            *ngIf="FormGroup.get('CtrlUser').value !== fleetType.ENTE  && FormGroup.get('CtrlUser').value!== fleetType.DITTA_INDIVIDUALE && FormGroup.get('CtrlNat').value === 'IT'">
-                            <mat-label>{{(FormGroup.get('CtrlUser').value === fleetType.AZIENDA_PRIVATA ?
+                            [style.visibility]="userSel !== fleetType.ENTE && userSel!== fleetType.DITTA_INDIVIDUALE && FormGroup.get('CtrlNat').value === 'IT' ? '' : 'hidden'">
+                            <mat-label>{{(userSel === fleetType.AZIENDA_PRIVATA ?
                                 'FLEET-MANAGER.DESTCODE' : 'FLEET-MANAGER.IPACODE') | translate}}</mat-label>
-                            <input matInput type="text" formControlName="CtrlDest" required
-                                [minlength]="FormGroup.get('CtrlUser').value === fleetType.AZIENDA_PRIVATA ? 7 : 6"
-                                [maxlength]="FormGroup.get('CtrlUser').value === fleetType.AZIENDA_PRIVATA ? 7 : 6"
+                            <input matInput type="text" formControlName="CtrlDest"
+                                [required]="userSel !== fleetType.ENTE && userSel!== fleetType.DITTA_INDIVIDUALE && FormGroup.get('CtrlNat').value"
+                                [minlength]="userSel === fleetType.AZIENDA_PRIVATA ? 7 : userSel === fleetType.PUBBLICA_AMM ? 6 : null"
+                                [maxlength]="userSel === fleetType.AZIENDA_PRIVATA ? 7 : userSel === fleetType.PUBBLICA_AMM ? 6 : null"
                                 [readonly]="data && roleFleetManager">
-                            <mat-error>{{(FormGroup.get('CtrlUser').value === fleetType.AZIENDA_PRIVATA ?
+                            <mat-error>{{(userSel === fleetType.AZIENDA_PRIVATA ?
                                 'FLEET-MANAGER.INSERT_DEST' : 'FLEET-MANAGER.INSERT_IPA') | translate}}</mat-error>
                         </mat-form-field>
                     </div>
