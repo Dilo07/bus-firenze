@@ -435,7 +435,8 @@
             "association": "Errore nell'associazione obu-veicolo",
             "match": "Errore nel cambio di targa",
             "remove": "non è possibile rimuovere l'obu",
-            "installer": "L'installer non ha installato questo obu"
+            "installer": "L'installer non ha installato questo obu",
+            "associate_to_other_domains": "L'obu da sostituire è associato ad un altro dominio, rimuovilo da tutti i domini"
         },
         "ines": {
             "fleet": {

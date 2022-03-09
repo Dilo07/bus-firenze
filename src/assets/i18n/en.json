@@ -435,7 +435,8 @@
             "association": "Error in obu-vehicle association",
             "match": "Error on change plate",
             "remove": "Cannot remove the obu",
-            "installer": "Installer didn't install this obu"
+            "installer": "Installer didn't install this obu",
+            "associate_to_other_domains": "The obu to be replaced is associated to another domain, remove it from all domains"
         },
         "ines": {
             "fleet": {
