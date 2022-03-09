@@ -131,7 +131,7 @@
                             fxFlex.gt-md="25" [style.visibility]="isEuropeNat ? '' : 'hidden'">
                             <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}
                                 {{('USERTYPE.' + FormGroup.get('CtrlUser').value) | translate}}</mat-label>
-                            <input matInput type="text" formControlName="CtrlCF" maxlength="11"
+                            <input matInput type="text" formControlName="CtrlCF" maxlength="16"
                                 (focusout)="pivaOrFcValidator()" [required]="isEuropeNat"
                                 [readonly]="data && roleFleetManager">
                             <a matSuffix mat-icon-button *ngIf="FormGroup.get('CtrlUser').value === fleetType.ENTE"
@@ -145,7 +145,7 @@
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
                             fxFlex.gt-md="25"
-                            *ngIf="FormGroup.get('CtrlUser').value !== fleetType.ENTE && FormGroup.get('CtrlNat').value === 'IT'">
+                            *ngIf="FormGroup.get('CtrlUser').value !== fleetType.ENTE  && FormGroup.get('CtrlUser').value!== fleetType.DITTA_INDIVIDUALE && FormGroup.get('CtrlNat').value === 'IT'">
                             <mat-label>{{(FormGroup.get('CtrlUser').value === fleetType.AZIENDA_PRIVATA ?
                                 'FLEET-MANAGER.DESTCODE' : 'FLEET-MANAGER.IPACODE') | translate}}</mat-label>
                             <input matInput type="text" formControlName="CtrlDest" required

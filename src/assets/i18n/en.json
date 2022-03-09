@@ -137,7 +137,7 @@
         "TEXTFILE": "* To creare the fleet manager you need to download, sign and attach the file"
     },
     "USERTYPE": {
-        "PERS": "Phisical person",
+        "PERS": "Individual company",
         "PRVT": "Private company",
         "PA": "Public amministration",
         "ENTE": "Company"

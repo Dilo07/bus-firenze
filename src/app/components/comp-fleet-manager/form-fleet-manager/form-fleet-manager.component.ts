@@ -34,7 +34,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public nations = worldNations;
   public filteredList = this.nations.slice();
   public fleetType = FLEETMNG_TYPE;
-  public userTypes = [this.fleetType.AZIENDA_PRIVATA, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
+  public userTypes = [this.fleetType.DITTA_INDIVIDUALE, this.fleetType.AZIENDA_PRIVATA, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
   public completePiva = true;
   public completePiva2 = true;
 
@@ -241,7 +241,15 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     const fiscalCode = this.FormGroup.get('CtrlCF').value;
     const userType = this.FormGroup.get('CtrlUser').value;
     if (!this.FormGroup.controls.CtrlCF.invalid && !this.roleFleetManager) {
-      if (userType === this.fleetType.ENTE) {
+      if (userType === this.fleetType.DITTA_INDIVIDUALE) {
+        const codiceFiscale = require('codice-fiscale-js');
+        this.FormGroup.patchValue({ CtrlCF: fiscalCode.toUpperCase() });
+        if (codiceFiscale.check(fiscalCode)) {
+          this.FormGroup.controls.CtrlCF.setErrors(null);
+        } else {
+          this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
+        }
+      } else if (userType === this.fleetType.ENTE) {
         if ((fiscalCode.charAt(0) === '8' || fiscalCode.charAt(0) === '9') && fiscalCode.length === 11) {
           this.FormGroup.controls.CtrlCF.setErrors(null);
         } else {

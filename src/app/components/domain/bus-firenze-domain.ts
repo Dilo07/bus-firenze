@@ -170,3 +170,9 @@ export enum RefreshOption {
     _10_minutes,
     _30_minutes
 }
+
+export interface VatValidation {
+    address: string;
+    name: string;
+    valid: boolean;
+}

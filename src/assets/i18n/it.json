@@ -137,7 +137,7 @@
         "TEXTFILE": "* Per creare il fleet manager è necessario scaricare, firmare ed allegare il file"
     },
     "USERTYPE": {
-        "PERS": "Persona fisica",
+        "PERS": "Ditta individuale",
         "PRVT": "Azienda privata",
         "PA": "Pubblica amministrazione",
         "ENTE": "Ente"
