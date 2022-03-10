@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { TranslateModule } from '@ngx-translate/core';
+import { MaterialModule } from '@npt/npt-template';
+import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components/shared-components.module';
+import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 import { ListFleetmanagerComponent } from './fleetmanager/list-fleetmanager.component';
 import { ValidVehiclesRoutingModule } from './valid-vehicles.routing';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule } from '@npt/npt-template';
-import { TranslateModule } from '@ngx-translate/core';
 import { VerifyVehiclesComponent } from './verify-vehicles/verify-vehicles.component';
-import { FleetManagerModule } from '../comp-fleet-manager/fleet-manager.module';
-import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 
 
 @NgModule({
@@ -17,11 +17,11 @@ import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
   ],
   imports: [
     CommonModule,
+    SharedComponentsModule,
     MaterialModule,
     FlexLayoutModule,
     TranslateModule,
     ValidVehiclesRoutingModule,
-    FleetManagerModule,
     PipesModule
   ]
 })
