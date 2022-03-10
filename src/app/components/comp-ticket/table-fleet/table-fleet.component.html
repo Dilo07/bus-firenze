@@ -32,7 +32,7 @@
             <mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">e-mail</span>
-                {{ findContactValue(element, 3)}}
+                {{ element | findContactValue: 3}}
             </mat-cell>
         </ng-container>
 

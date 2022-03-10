@@ -9,6 +9,7 @@ import { AddTicketComponent } from './add-ticket/add-ticket.component';
 import { TicketRoutingModule } from './ticket.routing';
 import { ModalTestTicketComponent } from './modal-test-ticket/modal-test-ticket.component';
 import { TableFleetComponent } from './table-fleet/table-fleet.component';
+import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TableFleetComponent } from './table-fleet/table-fleet.component';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    PipesModule
   ]
 })
 export class TicketModule { }

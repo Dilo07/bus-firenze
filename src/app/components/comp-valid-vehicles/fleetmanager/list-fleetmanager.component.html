@@ -39,6 +39,14 @@
 					</mat-cell>
 				</ng-container>
 
+				<ng-container matColumnDef="mobile">
+					<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.CELL' | translate}} </mat-header-cell>
+					<mat-cell *matCellDef="let element">
+						<span class="mobile-label">{{'FLEET-MANAGER.CELL' | translate}}</span>
+						{{element | findContactValue: 1}}
+					</mat-cell>
+				</ng-container>
+
 				<!--Collapse div-->
 				<ng-container matColumnDef="expandedDetail">
 					<mat-cell *matCellDef="let element">

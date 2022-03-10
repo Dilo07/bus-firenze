@@ -46,8 +46,12 @@ const MENUITEMS = [
     children: [], roles: [ROLES.MOVYON, ROLES.FLEETMNG]
   },
   {
-    state: '', name: 'Fleet-manager', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1], SUBMENU_ROUTES[2]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    state: 'fleet-manager-manage', name: 'Manage-Fleet-manager', type: 'link', icon: 'manage_accounts',
+    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+  },
+  {
+    state: '', name: 'Validation', type: 'submenu', icon: 'manage_accounts',
+    children: [SUBMENU_ROUTES[1], SUBMENU_ROUTES[2]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
     state: 'user-fleet-manager', name: 'User-Fleet', type: 'submenu', icon: 'manage_accounts',

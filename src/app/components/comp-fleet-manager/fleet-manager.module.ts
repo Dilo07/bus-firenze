@@ -28,6 +28,7 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { MatSelectFilterModule } from 'mat-select-filter';
 import { ViewFileComponent } from './view-file/view-file.component';
 import { HasDepositPipe } from 'src/app/shared/utils/pipes/has-deposit.pipe';
+import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { HasDepositPipe } from 'src/app/shared/utils/pipes/has-deposit.pipe';
     TranslateModule,
     NptMapModule,
     FleetManagerRoutingModule,
-    PdfViewerModule
+    PdfViewerModule,
+    PipesModule
   ],
   exports: [ViewFileComponent]
 })

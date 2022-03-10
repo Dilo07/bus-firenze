@@ -158,16 +158,6 @@ export class FleetManagerComponent implements OnInit {
     });
   }
 
-  public findContactValue(fleetManager: FleetManager, code: number): string {
-    let res = '';
-    fleetManager.contacts.find(contact => {
-      if (contact.code === code) {
-        res = contact.value;
-      }
-    });
-    return res;
-  }
-
   public getFleetDocument(fleetManagerId: number, fileId: number): void {
     this.complete = false;
     this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(

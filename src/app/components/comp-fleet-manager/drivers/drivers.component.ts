@@ -138,16 +138,6 @@ export class DriversComponent implements OnInit, OnDestroy {
         }));
   }
 
-  public findContactValue(fleetManager: FleetManager, code: number): string {
-    let res = '';
-    fleetManager.contacts.find(contact => {
-      if (contact.code === code) {
-        res = contact.value;
-      }
-    });
-    return res;
-  }
-
   private resetSearchField(): void {
     this.Search.patchValue({
       CtrlSearch: ''

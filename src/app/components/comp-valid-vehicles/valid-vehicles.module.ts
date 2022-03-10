@@ -7,6 +7,7 @@ import { MaterialModule } from '@npt/npt-template';
 import { TranslateModule } from '@ngx-translate/core';
 import { VerifyVehiclesComponent } from './verify-vehicles/verify-vehicles.component';
 import { FleetManagerModule } from '../comp-fleet-manager/fleet-manager.module';
+import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FleetManagerModule } from '../comp-fleet-manager/fleet-manager.module';
     FlexLayoutModule,
     TranslateModule,
     ValidVehiclesRoutingModule,
-    FleetManagerModule
+    FleetManagerModule,
+    PipesModule
   ]
 })
 export class ValidVehiclesModule { }
