@@ -47,6 +47,14 @@
 					</mat-cell>
 				</ng-container>
 
+				<ng-container matColumnDef="mail">
+					<mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
+					<mat-cell *matCellDef="let element">
+						<span class="mobile-label">e-mail</span>
+						{{element | findContactValue: 3}}
+					</mat-cell>
+				</ng-container>
+
 				<!--Collapse div-->
 				<ng-container matColumnDef="expandedDetail">
 					<mat-cell *matCellDef="let element">

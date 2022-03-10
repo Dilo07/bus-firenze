@@ -20,7 +20,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ListFleetmanagerComponent implements OnInit {
   public dataSource = new MatTableDataSource<FleetManager>();
-  public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile'];
+  public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile', 'mail'];
   public expandedElement: FleetManager | null;
   public complete = true;
 

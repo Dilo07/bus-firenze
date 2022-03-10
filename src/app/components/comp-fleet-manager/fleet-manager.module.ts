@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NptMapModule } from '@npt/npt-map';
 import { MaterialModule } from '@npt/npt-template';
 import { MatSelectFilterModule } from 'mat-select-filter';
-import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components/shared-components.module';
+import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
 import { HasDepositPipe } from 'src/app/shared/utils/pipes/has-deposit.pipe';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 import { Ng2telinputDirective } from '../directive/ng2telinput.directive';
