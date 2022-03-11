@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent,
     canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.DRIVER, ROLES.FLEETMNG, ROLES.INSTALLER, ROLES.OPER_MOVYON, ROLES.MOVYON] }
   },
-  { path: 'real-time', loadChildren: () => import('./components/comp-real-time/real-time.module').then(m => m.RealTimeModule) },
+  { path: 'real-time', loadChildren: () => import('./components/comp-real-time/real-time.module').then(m => m.RealTimeModule) }, // fm
   {
     path: 'area-monitoring', loadChildren: () => import('@npt/npt-net').then(m => m.NptNetModule),
     canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }

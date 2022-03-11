@@ -45,15 +45,6 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getVehicles(isAssociated: boolean, keyword?: string): Observable<Vehicle[]> {
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ isAssociated, keyword })
-    };
-    return this.http.get<Vehicle[]>(this.apiUrl + '/vehicles/search', options)
-      .pipe(catchError(err => { throw err; }));
-  }
-
   getVehiclesById(onlyActive: boolean, fleetManagerId?: number, keyword?: string, toVerify?: boolean): Observable<Vehicle[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -74,15 +65,6 @@ export class VehicleService {
       url = '/' + fleetManagerId;
     }
     return this.http.get<Vehicle>(this.apiUrl + url + '/vehicle/' + obuId)
-      .pipe(catchError(err => { throw err; }));
-  }
-
-  getVehiclesIstalled(upload: boolean, keyword?: string): Observable<Vehicle[]> {
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ keyword, upload })
-    };
-    return this.http.get<Vehicle[]>(this.apiUrl + '/vehicles/installed', options)
       .pipe(catchError(err => { throw err; }));
   }
 
