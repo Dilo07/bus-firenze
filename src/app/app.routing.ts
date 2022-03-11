@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
+    path: 'deposit',
+    loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule)
+  },
+  {
     path: 'fleet-manager-valid',
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
@@ -31,19 +35,19 @@ const routes: Routes = [
     loadChildren: () => import('./components/comp-valid-vehicles/valid-vehicles.module').then(m => m.ValidVehiclesModule)
   },
   {
-    path: 'user-fleet-manager',
+    path: 'user-fleet-manager', // fm
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
-    path: 'manage-obu',
+    path: 'manage-obu', // installer
     loadChildren: () => import('./components/comp-manage-obu/manage-obu.module').then(m => m.ManageObuModule)
   },
   {
-    path: 'appointment',
+    path: 'appointment', // installer
     loadChildren: () => import('./components/comp-appointments/appointments.module').then(m => m.AppointmentsModule)
   },
   {
-    path: 'user-driver',
+    path: 'user-driver', // driver
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {

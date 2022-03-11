@@ -4,6 +4,7 @@ import { ViewFileComponent } from './view-file/view-file.component';
 import { MaterialModule } from '@npt/npt-template';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { TranslateModule } from '@ngx-translate/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -12,6 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     MaterialModule,
+    FlexLayoutModule,
     TranslateModule,
     PdfViewerModule
   ],

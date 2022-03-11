@@ -11,7 +11,8 @@ export const ROLES = Object.freeze({
 });
 
 const SUBMENU_ROUTES = [
-  { state: 'fleet-manager-manage', name: 'Manage-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
+  { state: 'fleet-manager-manage', name: 'Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
+  { state: 'deposit', name: 'Deposit', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'fleet-manager-valid', name: 'Valid-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicle-valid', name: 'Vehicle-valid', icon: 'directions_car', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
@@ -38,7 +39,7 @@ const MENUITEMS = [
     state: 'real-time', name: 'Real-time', type: 'link', icon: 'location_on', children: [], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'area-monitoring', name: 'Area-monitoring', type: 'link', icon: 'assignment',
+    state: 'area-monitoring', name: 'Area-monitoring', type: 'link', icon: 'public',
     children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
@@ -46,33 +47,33 @@ const MENUITEMS = [
     children: [], roles: [ROLES.MOVYON, ROLES.FLEETMNG]
   },
   {
-    state: 'fleet-manager-manage', name: 'Manage-Fleet-manager', type: 'link', icon: 'manage_accounts',
-    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    state: '', name: 'Manage', type: 'submenu', icon: 'manage_accounts',
+    children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
     state: '', name: 'Validation', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[1], SUBMENU_ROUTES[2]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    children: [SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
     state: 'user-fleet-manager', name: 'User-Fleet', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[3], SUBMENU_ROUTES[4], SUBMENU_ROUTES[5]], roles: [ROLES.FLEETMNG]
+    children: [SUBMENU_ROUTES[4], SUBMENU_ROUTES[5], SUBMENU_ROUTES[6]], roles: [ROLES.FLEETMNG]
   },
   {
     state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'assignment',
-    children: [SUBMENU_ROUTES[6], SUBMENU_ROUTES[7], SUBMENU_ROUTES[8], SUBMENU_ROUTES[9], SUBMENU_ROUTES[10]],
+    children: [SUBMENU_ROUTES[7], SUBMENU_ROUTES[8], SUBMENU_ROUTES[9], SUBMENU_ROUTES[10], SUBMENU_ROUTES[11]],
     roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
   {
     state: 'appointment', name: 'Appointment', type: 'submenu', icon: 'assignment',
-    children: [SUBMENU_ROUTES[11], SUBMENU_ROUTES[12]], roles: [ROLES.MOVYON, ROLES.INSTALLER]
+    children: [SUBMENU_ROUTES[12], SUBMENU_ROUTES[13]], roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
   {
     state: 'user-driver', name: 'User-Driver', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[13], SUBMENU_ROUTES[14]], roles: [ROLES.DRIVER]
+    children: [SUBMENU_ROUTES[14], SUBMENU_ROUTES[15]], roles: [ROLES.DRIVER]
   },
   {
     state: 'ticket', name: 'Ticket', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[15], SUBMENU_ROUTES[16]], roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER]
+    children: [SUBMENU_ROUTES[16], SUBMENU_ROUTES[17]], roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER]
   },
   {
     state: 'documents', name: 'Documents', type: 'link', icon: 'assignment',
