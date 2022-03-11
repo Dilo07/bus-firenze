@@ -152,13 +152,6 @@
 								matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}" (click)="deleteVehicle(element.id)">
 								<mat-icon style="color: red;">delete</mat-icon>
 							</button>
-							<!-- <input style="display: none" type="file" #depositReqInput
-								accept="application/pdf, image/jpeg, image/png"
-								(change)="uploadDeposit(element.id, $event, false)">
-							<button *ngIf="element.deleted && (element.documents | hasDeposit: true)" mat-icon-button (click)="depositReqInput.click()">
-								<mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
-									edit_note</mat-icon>
-							</button> -->
 							<button *ngIf="element.deleted" mat-icon-button [disabled]="true">
 								<mat-icon style="color: #8f9a27"
 									matTooltip="{{('VEHICLE.DISABLED' | translate) +  (element.deleted | date : 'dd/MM/yyyy')}}">

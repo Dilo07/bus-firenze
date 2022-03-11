@@ -16,9 +16,10 @@ import { DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
   styles: [`
   .mat-column-id { max-width: 10%};
   .mat-column-plate { max-width: 20%};
-  .mat-column-nate { max-width: 10%};
-  .mat-column-depositDocument { max-width: 30%};
-  .mat-column-actions { max-width: 30%};
+  .mat-column-nat { max-width: 10%};
+  .mat-column-depositDocument { max-width: 20%};
+  .mat-column-obuId { max-width: 20%};
+  .mat-column-actions { max-width: 20%};
   `
   ]
 })
@@ -28,7 +29,7 @@ export class DepositComponent implements OnInit {
   public viewFleetTable = false;
   public roleMovyon: boolean;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
-  public displayedColumns = ['id', 'plate', 'nat', 'depositDocument', 'actions'];
+  public displayedColumns = ['id', 'plate', 'nat', 'depositDocument', 'obuId', 'actions'];
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
   public complete = true;
 
