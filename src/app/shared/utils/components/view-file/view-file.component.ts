@@ -26,7 +26,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
           'z-index': '10',
           'border-style': 'solid',
           position: 'fixed',
-          right: '-60%',
+          right: '-90%',
         })
       ),
       transition('on => off', animate('500ms')),

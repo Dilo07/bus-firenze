@@ -13,7 +13,13 @@ import { DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
 @Component({
   selector: 'app-deposit',
   templateUrl: './deposit.component.html',
-  styles: [
+  styles: [`
+  .mat-column-id { max-width: 10%};
+  .mat-column-plate { max-width: 20%};
+  .mat-column-nate { max-width: 10%};
+  .mat-column-depositDocument { max-width: 30%};
+  .mat-column-actions { max-width: 30%};
+  `
   ]
 })
 export class DepositComponent implements OnInit {
@@ -22,7 +28,7 @@ export class DepositComponent implements OnInit {
   public viewFleetTable = false;
   public roleMovyon: boolean;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
-  public displayedColumns = ['id', 'plate', 'nat', 'depositDocument'];
+  public displayedColumns = ['id', 'plate', 'nat', 'depositDocument', 'actions'];
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
   public complete = true;
 
@@ -51,7 +57,7 @@ export class DepositComponent implements OnInit {
       this.viewFleetTable = false;
     }
     this.complete = false;
-    this.vehicleService.getVehiclesById(true, fleetManagerId).subscribe(
+    this.vehicleService.getVehiclesById(true, this.fleetManagerId).subscribe(
       vehicles => (this.vehicleList.data = vehicles, this.vehicleList.sort = this.sort, this.vehicleList.paginator = this.paginator),
       () => this.complete = true,
       () => this.complete = true
@@ -81,12 +87,17 @@ export class DepositComponent implements OnInit {
   public uploadDeposit(vehicleId: number, event: any, isDeposit: boolean): void {
     this.complete = false;
     const file = event.target.files[0];
-    const deposit = isDeposit ? this.depositType.DEPOSIT : this.depositType.REQUEST;
-    this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, deposit, file, this.fleetManagerId).subscribe(
-      () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
-      () => this.complete = true,
-      () => { this.getVehicle(); this.complete = true; }
-    ));
+    const size = event.target.files[0].size;
+    if (size > 2097152) { // dimensione massima
+      this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
+    }else{
+      const deposit = isDeposit ? this.depositType.DEPOSIT : this.depositType.REQUEST;
+      this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, deposit, file, this.fleetManagerId).subscribe(
+        () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
+        () => this.complete = true,
+        () => { this.getVehicle(); this.complete = true; }
+      ));
+    }
   }
 
 }

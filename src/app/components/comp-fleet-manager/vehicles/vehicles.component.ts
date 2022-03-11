@@ -32,11 +32,10 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
     .mat-column-plate { max-width: 10%;}
     .mat-column-nat { max-width: 5%}
     .mat-column-certificateId { max-width: 10%}
-    .mat-column-depositDocument { max-width: 10%}
     .mat-column-euroClass { max-width: 10%;}
     .mat-column-obuId { max-width: 15%;}
     .mat-column-consent { max-width: 10%;}
-    .mat-column-actions { max-width: 20%; display: table-column;}
+    .mat-column-actions { max-width: 30%; display: table-column;}
   }
   `],
 })
@@ -46,7 +45,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
 
   public fleetManager: FleetManager;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
-  public displayedColumns = ['id', 'plate', 'nat', 'certificateId', 'depositDocument', 'euroClass', 'obuId', 'consent', 'actions'];
+  public displayedColumns = ['id', 'plate', 'nat', 'certificateId', 'euroClass', 'obuId', 'consent', 'actions'];
   public Search: FormGroup;
   public complete = true;
   public statusVehicle = STATUS_VEHICLE;
@@ -194,37 +193,6 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     this.complete = false;
     const file = event.target.files[0];
     this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file, this.fleetManager?.id).subscribe(
-      () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
-      () => this.complete = true,
-      () => { this.getVehiclesByManagerId(); this.complete = true; }
-    ));
-  }
-
-  public viewDeposit(vehicleId: number, documents: DocumentVehicle[]): void {
-    let depositId: number;
-    documents.map(document => {
-      if (document.type === 'deposit') { depositId = document.fileId; }
-    });
-    this.subscription.push(this.vehicleService.getDeposit(vehicleId, this.depositType.DEPOSIT, depositId)
-      .subscribe((data: HttpResponse<Blob>) => {
-        if (data.body.type === 'application/pdf') { // se è un pdf
-          const Url = window.URL.createObjectURL(data.body);
-          this.src = { url: Url, type: data.body.type };
-        } else { // altrimenti se è un'immagine
-          const reader = new FileReader();
-          reader.readAsDataURL(data.body);
-          reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type };
-          };
-        }
-      }));
-  }
-
-  public uploadDeposit(vehicleId: number, event: any, isDeposit: boolean): void {
-    this.complete = false;
-    const file = event.target.files[0];
-    const deposit = isDeposit ? this.depositType.DEPOSIT : this.depositType.REQUEST;
-    this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, deposit, file, this.fleetManager?.id).subscribe(
       () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
       () => this.complete = true,
       () => { this.getVehiclesByManagerId(); this.complete = true; }
