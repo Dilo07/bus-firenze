@@ -162,7 +162,7 @@
 								(click)="associationDriver(element.id)">
 								<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
 							</button>
-							<button *ngIf="element.documents | hasDeposit: true" mat-icon-button matTooltip="{{'STATISTIC.VEHICLE' | translate}}"
+							<button mat-icon-button matTooltip="{{'STATISTIC.VEHICLE' | translate}}"
 								[routerLink]="['statistic']" [state]="{vehicle: element, fleetManager: fleetManager}">
 								<mat-icon style="color: #0066CC;">poll</mat-icon>
 							</button>

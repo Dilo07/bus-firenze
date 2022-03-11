@@ -8,15 +8,14 @@ import { ManageTicketComponent } from './manage-ticket/manage-ticket.component';
 import { AddTicketComponent } from './add-ticket/add-ticket.component';
 import { TicketRoutingModule } from './ticket.routing';
 import { ModalTestTicketComponent } from './modal-test-ticket/modal-test-ticket.component';
-import { TableFleetComponent } from './table-fleet/table-fleet.component';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
+import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
 
 @NgModule({
   declarations: [
     AddTicketComponent,
     ManageTicketComponent,
-    ModalTestTicketComponent,
-    TableFleetComponent
+    ModalTestTicketComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +25,8 @@ import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    PipesModule
+    PipesModule,
+    SharedComponentsModule
   ]
 })
 export class TicketModule { }

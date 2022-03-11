@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from '@npt/npt-template';
+import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
 import { DepositRoutingModule } from './deposit.routing';
 import { DepositComponent } from './deposit/deposit.component';
 
@@ -17,7 +18,8 @@ import { DepositComponent } from './deposit/deposit.component';
     DepositRoutingModule,
     MaterialModule,
     FlexLayoutModule,
-    TranslateModule
+    TranslateModule,
+    SharedComponentsModule
   ]
 })
 export class DepositModule { }

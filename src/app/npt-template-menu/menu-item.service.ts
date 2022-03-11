@@ -12,7 +12,7 @@ export const ROLES = Object.freeze({
 
 const SUBMENU_ROUTES = [
   { state: 'fleet-manager-manage', name: 'Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
-  { state: 'deposit', name: 'Deposit', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
+  { state: 'deposit', name: 'Deposit', icon: 'euro_symbol', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'fleet-manager-valid', name: 'Valid-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicle-valid', name: 'Vehicle-valid', icon: 'directions_car', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
@@ -74,6 +74,10 @@ const MENUITEMS = [
   {
     state: 'ticket', name: 'Ticket', type: 'submenu', icon: 'manage_accounts',
     children: [SUBMENU_ROUTES[16], SUBMENU_ROUTES[17]], roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER]
+  },
+  {
+    state: 'deposit', name: 'Deposit', type: 'link', icon: 'euro_symbol',
+    children: [], roles: [ROLES.FLEETMNG]
   },
   {
     state: 'documents', name: 'Documents', type: 'link', icon: 'assignment',

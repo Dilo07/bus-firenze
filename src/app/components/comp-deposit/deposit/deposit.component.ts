@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { IAuthenticationService } from '@npt/npt-template';
+import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 
 @Component({
   selector: 'app-deposit',
@@ -7,10 +9,24 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class DepositComponent implements OnInit {
+  public viewFleetTable = false;
+  public roleMovyon: boolean;
 
-  constructor() { }
+  constructor(
+    @Inject('authService') private authService: IAuthenticationService
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON));
+    if (this.roleMovyon) {
+      this.viewFleetTable = true;
+    } else {
+      this.getVehicle();
+    }
+  }
+
+  getVehicle(event?: any): void{
+    console.log(event);
   }
 
 }

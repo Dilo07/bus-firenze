@@ -5,18 +5,25 @@ import { MaterialModule } from '@npt/npt-template';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-
+import { TableFleetComponent } from './table-fleet/table-fleet.component';
+import { PipesModule } from '../pipes/pipes-module.module';
 
 @NgModule({
-  declarations: [ViewFileComponent],
+  declarations: [
+    ViewFileComponent,
+    TableFleetComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
     TranslateModule,
-    PdfViewerModule
+    PdfViewerModule,
+    PipesModule
   ],
-  exports: [ViewFileComponent]
+  exports: [
+    ViewFileComponent,
+    TableFleetComponent
+  ]
 })
 export class SharedComponentsModule { }

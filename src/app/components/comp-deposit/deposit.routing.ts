@@ -5,7 +5,7 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DepositComponent } from './deposit/deposit.component';
 
 const routes: Routes = [
-  { path: '', component: DepositComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } }
+  { path: '', component: DepositComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } }
 ];
 
 @NgModule({
