@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule)
   },
   {
+    path: 'user-fleet-manager/deposit', // fm
+    loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule)
+  },
+  {
     path: 'fleet-manager-valid',
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },

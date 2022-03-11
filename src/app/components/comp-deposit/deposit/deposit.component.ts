@@ -12,6 +12,8 @@ export class DepositComponent implements OnInit {
   public viewFleetTable = false;
   public roleMovyon: boolean;
 
+  private fleetManagerId: number;
+
   constructor(
     @Inject('authService') private authService: IAuthenticationService
   ) { }
@@ -25,8 +27,11 @@ export class DepositComponent implements OnInit {
     }
   }
 
-  getVehicle(event?: any): void{
-    console.log(event);
+  getVehicle(fleetManagerId?: any): void{
+    if (fleetManagerId) {
+      this.fleetManagerId = fleetManagerId;
+      this.viewFleetTable = false;
+    }
   }
 
 }
