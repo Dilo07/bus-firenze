@@ -145,9 +145,8 @@
                         </mat-form-field>
                         <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
                             fxFlex.gt-md="25"
-                            [style.visibility]="(userSel === fleetType.AZIENDA_PRIVATA || userSel === fleetType.PUBBLICA_AMM) && FormGroup.get('CtrlNat').value === 'IT' ? '' : 'hidden'">
-                            <mat-label>{{(userSel === fleetType.AZIENDA_PRIVATA ?
-                                'FLEET-MANAGER.DESTCODE' : 'FLEET-MANAGER.IPACODE') | translate}}</mat-label>
+                            *ngIf="(userSel === fleetType.AZIENDA_PRIVATA || userSel === fleetType.PUBBLICA_AMM) && FormGroup.get('CtrlNat').value === 'IT'">
+                            <mat-label>{{(userSel === fleetType.AZIENDA_PRIVATA ? 'FLEET-MANAGER.DESTCODE' : 'FLEET-MANAGER.IPACODE') | translate}}</mat-label>
                             <input matInput type="text" formControlName="CtrlDest"
                                 [required]="(userSel === fleetType.AZIENDA_PRIVATA || userSel === fleetType.PUBBLICA_AMM) && FormGroup.get('CtrlNat').value === 'IT'"
                                 [minlength]="userSel === fleetType.AZIENDA_PRIVATA ? 7 : userSel === fleetType.PUBBLICA_AMM ? 6 : null"
