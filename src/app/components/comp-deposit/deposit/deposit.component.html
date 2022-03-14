@@ -6,14 +6,14 @@
             <app-table-fleet (callManageTicket)="getVehicle($event)"></app-table-fleet>
         </div>
         <ng-template #vehicleTicket>
-            <div style="margin-bottom: 20px;">
+            <div style="margin-bottom: 20px;" fxLayout="row" fxLayoutGap="20px">
                 <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
                     {{'FLEET-MANAGER.BACK' | translate}}
                 </button>
+                <mat-slide-toggle [(ngModel)]="viewAll" (change)="getVehicle()">
+                    {{ (viewAll ? 'VEHICLE.ALL' : 'VEHICLE.NEEDDOC') | translate}}
+                </mat-slide-toggle>
             </div>
-            <mat-slide-toggle [(ngModel)]="viewAll" (change)="getVehicle()">
-                {{ (viewAll ? 'VEHICLE.ALL' : 'VEHICLE.NEEDDOC') | translate}}
-            </mat-slide-toggle>
             <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
             <div class="mat-elevation-z8 example-container">
                 <mat-table [dataSource]="vehicleList" matSort matSortActive="id" matSortDirection="asc">

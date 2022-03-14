@@ -117,8 +117,13 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       if (this.FormGroup.get('CtrlNat').value === 'IT') {
         this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia italiana)
           [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
+        this.FormGroup.controls.CtrlDest.setValidators( // se azienda Priv 7 caratteri se pubbl aministrazione 6
+          this.userSel === this.fleetType.AZIENDA_PRIVATA ? [Validators.required, Validators.minLength(7), Validators.maxLength(7)]
+            : this.userSel === this.fleetType.PUBBLICA_AMM ? [Validators.required, Validators.minLength(6), Validators.maxLength(6)]
+              : null);
       } else {
         this.FormGroup.controls.CtrlDistrict.setValidators(null);
+        this.FormGroup.controls.CtrlDest.setValidators(null);
       }
     } else { // extra ue
       this.FormGroup.controls.CtrlDistrict.setValidators(null);
