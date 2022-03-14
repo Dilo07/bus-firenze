@@ -33,3 +33,18 @@ export class HasRequestDepositPipe implements PipeTransform {
     return hasReqDeposit;
   }
 }
+
+@Pipe({
+  name: 'dateValid'
+})
+export class DateValidPipe implements PipeTransform {
+
+  transform(documents: DocumentVehicle[]): number {
+    let dateValid = null;
+    const deposit = DEPOSIT_TYPE;
+    documents.map(document => { // controlla se ha deposito in caso di checkValid true controlla anche se è valido
+      if (document.type === deposit.DEPOSIT && document.valid) { dateValid = document.valid; }
+    });
+    return dateValid;
+  }
+}

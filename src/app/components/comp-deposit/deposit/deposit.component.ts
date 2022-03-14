@@ -63,11 +63,11 @@ export class DepositComponent implements OnInit {
       this.viewFleetTable = false;
     }
     this.complete = false;
-    this.vehicleService.getVehicleDeposit(this.viewAll, this.fleetManagerId).subscribe(
+    this.subscription.push(this.vehicleService.getVehicleDeposit(this.viewAll, this.fleetManagerId).subscribe(
       vehicles => (this.vehicleList.data = vehicles, this.vehicleList.sort = this.sort, this.vehicleList.paginator = this.paginator),
       () => this.complete = true,
       () => this.complete = true
-    );
+    ));
   }
 
   public viewDeposit(vehicleId: number, documents: DocumentVehicle[], isDeposit: boolean): void {

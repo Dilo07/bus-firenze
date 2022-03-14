@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TableFleetComponent } from './table-fleet/table-fleet.component';
 import { PipesModule } from '../pipes/pipes-module.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { PipesModule } from '../pipes/pipes-module.module';
     MaterialModule,
     FlexLayoutModule,
     TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
     PdfViewerModule,
     PipesModule
   ],
