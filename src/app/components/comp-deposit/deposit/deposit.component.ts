@@ -35,7 +35,7 @@ export class DepositComponent implements OnInit {
   public viewAll = false;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
   public displayedColumns = ['id', 'vehicleState', 'plate', 'nat', 'depositDocument', 'obuId', 'actions'];
-  public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
+  public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
   public complete = true;
 
   private fleetManagerId: number;
@@ -49,7 +49,7 @@ export class DepositComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON));
+    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON) || res.includes(ROLES.OPER_MOVYON));
     if (this.roleMovyon) {
       this.viewFleetTable = true;
     } else {
@@ -80,8 +80,8 @@ export class DepositComponent implements OnInit {
     this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)
       .subscribe((data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
-          const Url = window.URL.createObjectURL(data.body);
-          this.src = { url: Url, type: data.body.type };
+          const objectUrl = window.URL.createObjectURL(data.body);
+          this.src = { url: objectUrl, type: data.body.type };
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data.body);
