@@ -378,7 +378,8 @@
         }
     },
     "ERROR": {
-        "BE_ERROR": "Servizi non raggiungibili"
+        "BE_ERROR": "Servizi non raggiungibili",
+        "INTERNAL_SERVER_ERROR": "Errore interno al server"
     },
     "error": {
         "generic": "Errore lato server",

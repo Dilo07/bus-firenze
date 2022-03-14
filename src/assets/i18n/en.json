@@ -378,7 +378,8 @@
         }
     },
     "ERROR": {
-        "BE_ERROR": "Unreachable services"
+        "BE_ERROR": "Unreachable services",
+        "INTERNAL_SERVER_ERROR": "Internal server error"
     },
     "error": {
         "generic": "Error server site",

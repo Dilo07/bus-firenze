@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { RepairShops } from '../domain/bus-firenze-domain';
 
 @Component({
@@ -12,12 +12,10 @@ import { RepairShops } from '../domain/bus-firenze-domain';
   `
   ]
 })
-export class RepairShopComponent implements OnInit {
+export class RepairShopComponent {
 
   constructor(
     @Inject('repair_shopData') public repairShops: RepairShops[]
   ) { }
-
-  ngOnInit(): void { }
 
 }

@@ -25,7 +25,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   @Input() register = false;
   @Input() data: FleetManager;
 
-  public FormGroup: FormGroup;
+  public formGroup: FormGroup;
   public verifyOtp = false;
   public dialCode: CountryCallingCode = '39';
   public selectedFile: File;
@@ -61,45 +61,45 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     // se ci sono dati è un edit form altrimenti è un add form
     if (this.data) {
       // cf, p.iva validator sono valorizzati in base alla nation
-      this.FormGroup = this.formBuilder.group({
-        CtrlContractCode: [this.data.contractCode],
-        CtrlSapCode: [this.data.idSap],
-        CtrlUser: [{ value: this.data.companyType, disabled: this.roleFleetManager ? true : false }, Validators.required],
-        CtrlDest: [this.data.codeDest],
-        CtrlName: [this.data.name, Validators.required],
-        CtrlSurname: [this.data.surname, Validators.required],
-        CtrlCF: [this.data.fiscalCode],
-        CtrlpIva: [this.data.pIva],
-        CtrlCompanyName: [this.data.companyName, Validators.required],
-        CtrlCell: [this.findContactValue(1), [Validators.required]],
-        CtrlOffice: [this.findContactValue(2)],
-        CtrlMail: [this.findContactValue(3), Validators.email],
-        CtrlAddress: [this.data.address, Validators.required],
-        CtrlCity: [this.data.city, Validators.required],
-        CtrlDistrict: [this.data.district],
-        CtrlCAP: [this.data.cap],
-        CtrlNat: [{ value: this.data.country, disabled: this.roleFleetManager ? true : false }, Validators.required]
+      this.formGroup = this.formBuilder.group({
+        ctrlContractCode: [this.data.contractCode],
+        ctrlSapCode: [this.data.idSap],
+        ctrlUser: [{ value: this.data.companyType, disabled: this.roleFleetManager ? true : false }, Validators.required],
+        ctrlDest: [this.data.codeDest],
+        ctrlName: [this.data.name, Validators.required],
+        ctrlSurname: [this.data.surname, Validators.required],
+        ctrlCF: [this.data.fiscalCode],
+        ctrlpIva: [this.data.pIva],
+        ctrlCompanyName: [this.data.companyName, Validators.required],
+        ctrlCell: [this.findContactValue(1), [Validators.required]],
+        ctrlOffice: [this.findContactValue(2)],
+        ctrlMail: [this.findContactValue(3), Validators.email],
+        ctrlAddress: [this.data.address, Validators.required],
+        ctrlCity: [this.data.city, Validators.required],
+        ctrlDistrict: [this.data.district],
+        ctrlCAP: [this.data.cap],
+        ctrlNat: [{ value: this.data.country, disabled: this.roleFleetManager ? true : false }, Validators.required]
       });
-      const phoneNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value);
+      const phoneNumber = parsePhoneNumber(this.formGroup.get('ctrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
     } else {
-      this.FormGroup = this.formBuilder.group({
-        CtrlContractCode: [''],
-        CtrlUser: [this.fleetType.AZIENDA_PRIVATA, Validators.required],
-        CtrlDest: [''],
-        CtrlName: ['', Validators.required],
-        CtrlSurname: ['', Validators.required],
-        CtrlCF: [''],
-        CtrlpIva: [''],
-        CtrlCompanyName: ['', Validators.required],
-        CtrlCell: ['', [Validators.pattern(/^\d+$/), Validators.required]],
-        CtrlOffice: [''],
-        CtrlMail: ['', Validators.email],
-        CtrlAddress: ['', Validators.required],
-        CtrlCity: ['', Validators.required],
-        CtrlDistrict: [''],
-        CtrlCAP: [''],
-        CtrlNat: ['IT', Validators.required]
+      this.formGroup = this.formBuilder.group({
+        ctrlContractCode: [''],
+        ctrlUser: [this.fleetType.AZIENDA_PRIVATA, Validators.required],
+        ctrlDest: [''],
+        ctrlName: ['', Validators.required],
+        ctrlSurname: ['', Validators.required],
+        ctrlCF: [''],
+        ctrlpIva: [''],
+        ctrlCompanyName: ['', Validators.required],
+        ctrlCell: ['', [Validators.pattern(/^\d+$/), Validators.required]],
+        ctrlOffice: [''],
+        ctrlMail: ['', Validators.email],
+        ctrlAddress: ['', Validators.required],
+        ctrlCity: ['', Validators.required],
+        ctrlDistrict: [''],
+        ctrlCAP: [''],
+        ctrlNat: ['IT', Validators.required]
       });
     }
     this.changeFormNat(true);
@@ -112,27 +112,27 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public changeFormNat(isFirst?: boolean): void {
-    this.isEuropeNat = this.euroNations.includes(this.FormGroup.get('CtrlNat').value);
+    this.isEuropeNat = this.euroNations.includes(this.formGroup.get('ctrlNat').value);
     if (this.isEuropeNat) { // se è europeo
-      if (this.FormGroup.get('CtrlNat').value === 'IT') {
-        this.FormGroup.controls.CtrlDistrict.setValidators( // solo lettere (provincia italiana)
+      if (this.formGroup.get('ctrlNat').value === 'IT') {
+        this.formGroup.controls.ctrlDistrict.setValidators( // solo lettere (provincia italiana)
           [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
-        this.FormGroup.controls.CtrlDest.setValidators( // se azienda Priv 7 caratteri se pubbl aministrazione 6
+        this.formGroup.controls.ctrlDest.setValidators( // se azienda Priv 7 caratteri se pubbl aministrazione 6
           this.userSel === this.fleetType.AZIENDA_PRIVATA ? [Validators.required, Validators.minLength(7), Validators.maxLength(7)]
             : this.userSel === this.fleetType.PUBBLICA_AMM ? [Validators.required, Validators.minLength(6), Validators.maxLength(6)]
               : null);
       } else {
-        this.FormGroup.controls.CtrlDistrict.setValidators(null);
-        this.FormGroup.controls.CtrlDest.setValidators(null);
+        this.formGroup.controls.ctrlDistrict.setValidators(null);
+        this.formGroup.controls.ctrlDest.setValidators(null);
       }
     } else { // extra ue
-      this.FormGroup.controls.CtrlDistrict.setValidators(null);
-      this.FormGroup.controls.CtrlDest.setValidators(null);
+      this.formGroup.controls.ctrlDistrict.setValidators(null);
+      this.formGroup.controls.ctrlDest.setValidators(null);
     }
     // resetta i dati al cambio della nazione
     if (!isFirst) { this.resetCompanyInfo(); }
-    this.FormGroup.controls.CtrlDistrict.updateValueAndValidity();
-    this.FormGroup.controls.CtrlDest.updateValueAndValidity();
+    this.formGroup.controls.ctrlDistrict.updateValueAndValidity();
+    this.formGroup.controls.ctrlDest.updateValueAndValidity();
   }
 
   public countryMobileChange(evt: any): void {
@@ -173,14 +173,14 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public modalOTP(): void {
-    const Cell = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value.replace(/\s/g, '');
+    const valCell = '+' + this.dialCode + this.formGroup.get('ctrlCell').value.replace(/\s/g, '');
     const lang = this.translateService.currentLang;
-    this.subscription.push(this.registerService.getOtpCode(Cell, lang).subscribe(
+    this.subscription.push(this.registerService.getOtpCode(valCell, lang).subscribe(
       code => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',
           height: '50%',
-          data: { otp: code, cell: Cell },
+          data: { otp: code, cell: valCell },
           autoFocus: false
         });
         dialogRef.afterClosed().subscribe(
@@ -197,13 +197,13 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public downloadTemplate(): void {
-    const FileSaver = require('file-saver');
+    const fileSaver = require('file-saver');
     this.subscription.push(this.registerService.getTemplateDocument()
       .subscribe(
         (data: HttpResponse<Blob>) => {
           const contentDispositionHeader = data.headers.get('Content-Disposition');
           const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
-          FileSaver.saveAs(data.body, filename);
+          fileSaver.saveAs(data.body, filename);
         }));
   }
 
@@ -217,24 +217,22 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public pivaValidator(): void {
-    if (!this.FormGroup.controls.CtrlpIva.invalid && this.isEuropeNat && !this.roleFleetManager) {
-      const pIva = this.FormGroup.get('CtrlpIva').value;
-      const nat = this.FormGroup.get('CtrlNat').value;
-      this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
+    if (!this.formGroup.controls.ctrlpIva.invalid && this.isEuropeNat && !this.roleFleetManager) {
+      const pIva = this.formGroup.get('ctrlpIva').value;
+      const nat = this.formGroup.get('ctrlNat').value;
+      this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
       this.completePiva = false;
       this.subscription.push(this.registerService.checkVatNumber(nat, pIva).subscribe(
         vatVerify => {
           console.log(vatVerify);
           if (!vatVerify.valid) {
-            this.FormGroup.controls.CtrlpIva.setErrors({ invalid: true });
+            this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
           } else {
-            this.FormGroup.controls.CtrlpIva.setErrors(null);
+            this.formGroup.controls.ctrlpIva.setErrors(null);
             const companyName = vatVerify.name.substring(0, 40);
-            if (!this.FormGroup.get('CtrlCompanyName').value) {
-              this.FormGroup.patchValue({
-                CtrlCompanyName: companyName
-              });
-            }
+            this.formGroup.patchValue({
+              ctrlCompanyName: companyName
+            });
           }
         },
         () => this.completePiva = true,
@@ -244,34 +242,34 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public pivaOrFcValidator(): void {
-    const fiscalCode = this.FormGroup.get('CtrlCF').value;
-    const userType = this.FormGroup.get('CtrlUser').value;
-    if (!this.FormGroup.controls.CtrlCF.invalid && !this.roleFleetManager) {
+    const fiscalCode = this.formGroup.get('ctrlCF').value;
+    const userType = this.formGroup.get('ctrlUser').value;
+    if (!this.formGroup.controls.ctrlCF.invalid && !this.roleFleetManager) {
       if (userType === this.fleetType.DITTA_INDIVIDUALE) {
         const codiceFiscale = require('codice-fiscale-js');
-        this.FormGroup.patchValue({ CtrlCF: fiscalCode.toUpperCase() });
+        this.formGroup.patchValue({ ctrlCF: fiscalCode.toUpperCase() });
         if (codiceFiscale.check(fiscalCode)) {
-          this.FormGroup.controls.CtrlCF.setErrors(null);
+          this.formGroup.controls.ctrlCF.setErrors(null);
         } else {
-          this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
+          this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         }
       } else if (userType === this.fleetType.ENTE) {
         if ((fiscalCode.charAt(0) === '8' || fiscalCode.charAt(0) === '9') && fiscalCode.length === 11) {
-          this.FormGroup.controls.CtrlCF.setErrors(null);
+          this.formGroup.controls.ctrlCF.setErrors(null);
         } else {
-          this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
+          this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         }
       } else {
-        const nat = this.FormGroup.get('CtrlNat').value;
-        this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
+        const nat = this.formGroup.get('ctrlNat').value;
+        this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         this.completePiva2 = false;
         this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode).subscribe(
           vatVerify => {
             console.log(vatVerify);
             if (!vatVerify.valid) {
-              this.FormGroup.controls.CtrlCF.setErrors({ invalid: true });
+              this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
             } else {
-              this.FormGroup.controls.CtrlCF.setErrors(null);
+              this.formGroup.controls.ctrlCF.setErrors(null);
             }
           },
           () => this.completePiva2 = true,
@@ -284,15 +282,15 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   private resetCompanyInfo(): void {
     // se viene cambiato il tipo azienda setta la nazione a IT e richiama changeFormNat per rivalidare e svuotare
     // se viene cambiata la nazione svuota le info societa e basta
-    this.FormGroup.patchValue({
-      CtrlCF: '',
-      CtrlpIva: '',
-      CtrlDest: '',
-      CtrlCompanyName: '',
-      CtrlAddress: '',
-      CtrlCity: '',
-      CtrlDistrict: '',
-      CtrlCAP: ''
+    this.formGroup.patchValue({
+      ctrlCF: '',
+      ctrlpIva: '',
+      ctrlDest: '',
+      ctrlCompanyName: '',
+      ctrlAddress: '',
+      ctrlCity: '',
+      ctrlDistrict: '',
+      ctrlCAP: ''
     });
 
   }
@@ -301,25 +299,25 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     const fleetManager = new FleetManager();
 
     fleetManager.id = this.data?.id;
-    fleetManager.contractCode = this.FormGroup.get('CtrlContractCode').value ? this.FormGroup.get('CtrlContractCode').value : null;
-    fleetManager.codeDest = this.FormGroup.get('CtrlDest').value ? this.FormGroup.get('CtrlDest').value : null;
-    fleetManager.name = this.FormGroup.get('CtrlName').value;
-    fleetManager.surname = this.FormGroup.get('CtrlSurname').value;
-    fleetManager.companyType = this.FormGroup.get('CtrlUser').value;
-    fleetManager.fiscalCode = this.FormGroup.get('CtrlCF').value.toUpperCase();
-    fleetManager.pIva = this.FormGroup.get('CtrlpIva').value;
-    fleetManager.companyName = this.FormGroup.get('CtrlCompanyName').value;
-    fleetManager.address = this.FormGroup.get('CtrlAddress').value;
-    fleetManager.city = this.FormGroup.get('CtrlCity').value;
-    fleetManager.district = this.FormGroup.get('CtrlDistrict').value;
-    fleetManager.cap = this.FormGroup.get('CtrlCAP').value;
-    fleetManager.country = this.FormGroup.get('CtrlNat').value;
+    fleetManager.contractCode = this.formGroup.get('ctrlContractCode').value ? this.formGroup.get('ctrlContractCode').value : null;
+    fleetManager.codeDest = this.formGroup.get('ctrlDest').value ? this.formGroup.get('ctrlDest').value : null;
+    fleetManager.name = this.formGroup.get('ctrlName').value;
+    fleetManager.surname = this.formGroup.get('ctrlSurname').value;
+    fleetManager.companyType = this.formGroup.get('ctrlUser').value;
+    fleetManager.fiscalCode = this.formGroup.get('ctrlCF').value.toUpperCase();
+    fleetManager.pIva = this.formGroup.get('ctrlpIva').value;
+    fleetManager.companyName = this.formGroup.get('ctrlCompanyName').value;
+    fleetManager.address = this.formGroup.get('ctrlAddress').value;
+    fleetManager.city = this.formGroup.get('ctrlCity').value;
+    fleetManager.district = this.formGroup.get('ctrlDistrict').value;
+    fleetManager.cap = this.formGroup.get('ctrlCAP').value;
+    fleetManager.country = this.formGroup.get('ctrlNat').value;
     fleetManager.extraUE = !this.isEuropeNat;
     fleetManager.contacts = [];
 
-    const office = { code: 2, value: this.FormGroup.get('CtrlOffice').value };
-    const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
-    let formCell = this.FormGroup.get('CtrlCell').value;
+    const office = { code: 2, value: this.formGroup.get('ctrlOffice').value };
+    const mail = { code: 3, value: this.formGroup.get('ctrlMail').value };
+    let formCell = this.formGroup.get('ctrlCell').value;
     const phoneNumber = parsePhoneNumber(formCell);
     if (!phoneNumber) { // caso nuovo fleet o modifica cell
       formCell = '+' + this.dialCode + formCell;
