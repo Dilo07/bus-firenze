@@ -18,3 +18,18 @@ export class HasDepositPipe implements PipeTransform {
   }
 
 }
+
+@Pipe({
+  name: 'hasRequest'
+})
+export class HasRequestDepositPipe implements PipeTransform {
+
+  transform(documents: DocumentVehicle[]): boolean {
+    let hasReqDeposit = false;
+    const deposit = DEPOSIT_TYPE;
+    documents.map(document => { // controlla se ha deposito in caso di checkValid true controlla anche se è valido
+      if (document.type === deposit.REQUEST) { hasReqDeposit = true; }
+    });
+    return hasReqDeposit;
+  }
+}

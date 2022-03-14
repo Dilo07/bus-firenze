@@ -25,6 +25,14 @@
                         </mat-cell>
                     </ng-container>
 
+                    <ng-container matColumnDef="vehicleState">
+                        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.STATE' | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">{{'VEHICLE.STATE' | translate}}</span>
+                            {{ (element.deleted ? 'VEHICLE.DELETED' : 'VEHICLE.ACTIVE') | translate}}
+                        </mat-cell>
+                    </ng-container>
+
                     <ng-container matColumnDef="plate">
                         <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
@@ -46,7 +54,7 @@
                         <mat-cell *matCellDef="let element">
                             <span class="mobile-label">{{'VEHICLE.DEPOSIT' | translate}}</span>
                             <button mat-icon-button [disabled]="!(element.documents | hasDeposit: false)"
-                                (click)="viewDeposit(element.id, element.documents)">
+                                (click)="viewDeposit(element.id, element.documents, true)">
                                 <mat-icon [style.color]="(element.documents | hasDeposit: false) ? '#0066CC' : 'grey'"
                                     matTooltip="{{((element.documents | hasDeposit: false)  ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
                                     description
@@ -74,6 +82,11 @@
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                         <mat-cell *matCellDef="let element">
+                            <button mat-icon-button *ngIf="element.documents | hasRequest" (click)="viewDeposit(element.id, element.documents, false)">
+                                <mat-icon style="color: #0066CC" matTooltip="visualizza richiesta deposito">
+                                    description
+                                </mat-icon>
+                            </button>
                             <input style="display: none" type="file" #depositReqInput
                                 accept="application/pdf, image/jpeg, image/png"
                                 (change)="uploadDeposit(element.id, $event, false)">
@@ -87,8 +100,7 @@
 
                     <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
                         [style.display]="vehicleList.data.length === 0 ? 'none' : '' "></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;"
-                        [ngClass]="row.deleted ? 'obuDisactive' : ''"></mat-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
                 </mat-table>
             </div>
             <mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"

@@ -14,12 +14,16 @@ import { DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
   selector: 'app-deposit',
   templateUrl: './deposit.component.html',
   styles: [`
-  .mat-column-id { max-width: 10%};
-  .mat-column-plate { max-width: 20%};
-  .mat-column-nat { max-width: 10%};
-  .mat-column-depositDocument { max-width: 20%};
-  .mat-column-obuId { max-width: 20%};
-  .mat-column-actions { max-width: 20%; display: table-column; text-align: end;};
+  table { width: 100%; }
+  @media(min-width: 1180px) {
+  .mat-column-id { max-width: 10%}
+  .mat-column-vehicleState { max-width: 10%}
+  .mat-column-plate { max-width: 20%}
+  .mat-column-nat { max-width: 10%}
+  .mat-column-depositDocument { max-width: 10%}
+  .mat-column-obuId { max-width: 20%}
+  .mat-column-actions { max-width: 20%; text-align: end; display: table-column;}
+  }
   `
   ]
 })
@@ -30,7 +34,7 @@ export class DepositComponent implements OnInit {
   public roleMovyon: boolean;
   public viewAll = false;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
-  public displayedColumns = ['id', 'plate', 'nat', 'depositDocument', 'obuId', 'actions'];
+  public displayedColumns = ['id', 'vehicleState', 'plate', 'nat', 'depositDocument', 'obuId', 'actions'];
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
   public complete = true;
 
@@ -66,12 +70,14 @@ export class DepositComponent implements OnInit {
     );
   }
 
-  public viewDeposit(vehicleId: number, documents: DocumentVehicle[]): void {
+  public viewDeposit(vehicleId: number, documents: DocumentVehicle[], isDeposit: boolean): void {
     let depositId: number;
+    const depositType = isDeposit ? this.depositType.DEPOSIT : this.depositType.REQUEST;
     documents.map(document => {
-      if (document.type === 'deposit') { depositId = document.fileId; }
+      if (document.type === this.depositType.DEPOSIT && isDeposit) { depositId = document.fileId; }
+      if (document.type === this.depositType.REQUEST && !isDeposit) { depositId = document.fileId; }
     });
-    this.subscription.push(this.vehicleService.getDeposit(vehicleId, this.depositType.DEPOSIT, depositId)
+    this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)
       .subscribe((data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const Url = window.URL.createObjectURL(data.body);
