@@ -202,7 +202,8 @@
         "ADDDEPOSIT": "Aggiungi deposito",
         "DEPOSIT_REQ": "Allega richiesta deposito",
         "VALID_CONFIRM": "Sei sicuro di voler validare questo veicolo?",
-        "VALID_SUCCESS": "Veicolo validato correttamente"
+        "VALID_SUCCESS": "Veicolo validato correttamente",
+        "NEEDDOC": "Veicoli con documenti da caricare"
     },
     "DRIVERS": {
         "TITLE": "Autisti",

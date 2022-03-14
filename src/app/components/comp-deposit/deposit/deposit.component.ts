@@ -19,7 +19,7 @@ import { DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
   .mat-column-nat { max-width: 10%};
   .mat-column-depositDocument { max-width: 20%};
   .mat-column-obuId { max-width: 20%};
-  .mat-column-actions { max-width: 20%};
+  .mat-column-actions { max-width: 20%; display: table-column; text-align: end;};
   `
   ]
 })
@@ -28,6 +28,7 @@ export class DepositComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public viewFleetTable = false;
   public roleMovyon: boolean;
+  public viewAll = false;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
   public displayedColumns = ['id', 'plate', 'nat', 'depositDocument', 'obuId', 'actions'];
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
@@ -58,7 +59,7 @@ export class DepositComponent implements OnInit {
       this.viewFleetTable = false;
     }
     this.complete = false;
-    this.vehicleService.getVehiclesById(true, this.fleetManagerId).subscribe(
+    this.vehicleService.getVehicleDeposit(this.viewAll, this.fleetManagerId).subscribe(
       vehicles => (this.vehicleList.data = vehicles, this.vehicleList.sort = this.sort, this.vehicleList.paginator = this.paginator),
       () => this.complete = true,
       () => this.complete = true
@@ -91,6 +92,7 @@ export class DepositComponent implements OnInit {
     const size = event.target.files[0].size;
     if (size > 2097152) { // dimensione massima
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
+      this.complete = true;
     }else{
       const deposit = isDeposit ? this.depositType.DEPOSIT : this.depositType.REQUEST;
       this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, deposit, file, this.fleetManagerId).subscribe(
