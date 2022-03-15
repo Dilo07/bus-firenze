@@ -20,16 +20,16 @@
 					<button mat-menu-item (click)="downloadManualPdf(4)">Arianna I</button>
 				</mat-menu>
 			</div>
-			<form [formGroup]="Search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
+			<form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
 					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>
-					<input matInput type="search" formControlName="CtrlSearch" placeholder="cerca" autocomplete="off">
+					<input matInput type="search" formControlName="ctrlSearch" placeholder="cerca" autocomplete="off">
 				</mat-form-field>
 				<button mat-icon-button (click)="getVehiclesByManagerId()">
 					<mat-icon matPrefix>search</mat-icon>
 				</button>
 				<mat-slide-toggle formControlName="onlyActive" (change)="getVehiclesByManagerId()">
-					{{(Search.controls['onlyActive'].value ? 'VEHICLE.ONLY_ACTIVE' : 'VEHICLE.ALL') | translate}}
+					{{(search.controls['onlyActive'].value ? 'VEHICLE.ONLY_ACTIVE' : 'VEHICLE.ALL') | translate}}
 				</mat-slide-toggle>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
