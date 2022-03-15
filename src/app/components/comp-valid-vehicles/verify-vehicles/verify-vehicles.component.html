@@ -25,6 +25,14 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="type">
+            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.TYPE_DOC' | translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'VEHICLE.TYPE_DOC' | translate}}</span>
+                {{ 'VEHICLE.' + (element.documents | documentToValid) | translate}}
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">
@@ -33,7 +41,7 @@
                         matTooltip="{{'OBU.VIEW_FILE' | translate}}" (click)="viewDeposit(element.id, element.documents)">
                         <mat-icon>find_in_page</mat-icon>
                     </button>
-                    <button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}" (click)="validVehicle(element.id)">
+                    <button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}" (click)="validVehicle(element.id, element.documents)">
                         <mat-icon style="color: green;">done</mat-icon>
                     </button>
                 </span>

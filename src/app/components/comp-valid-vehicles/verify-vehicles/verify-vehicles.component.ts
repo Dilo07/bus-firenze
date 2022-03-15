@@ -7,7 +7,6 @@ import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ValidVehicleService } from 'src/app/services/valid-vehicle.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DEPOSIT_TYPE } from '../../domain/bus-firenze-constants';
 import { DocumentVehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
@@ -27,10 +26,9 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Input() idFleet: number;
   public dataSource = new MatTableDataSource<Vehicle>();
-  public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'actions'];
-  public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
+  public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'type', 'actions'];
+  public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
 
-  private depositType = DEPOSIT_TYPE;
   private subscription: Subscription[] = [];
 
   constructor(
@@ -50,7 +48,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
     });
   }
 
-  public validVehicle(vehicleId: number): void {
+  public validVehicle(vehicleId: number,  documents: DocumentVehicle[]): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',
       height: '30%',
@@ -60,7 +58,11 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
     dialogRef.afterClosed().subscribe(
       confirm => {
         if (confirm) {
-          this.subscription.push(this.vehicleValidService.validVehicle(this.idFleet, vehicleId, this.depositType.DEPOSIT, true).subscribe(
+          let depositType: string;
+          documents.map(document => {
+            if (!document.valid) { depositType = document.type; }
+          });
+          this.subscription.push(this.vehicleValidService.validVehicle(this.idFleet, vehicleId, depositType, true).subscribe(
             () => this.snackBar.showMessage('VEHICLE.VALID_SUCCESS', 'INFO'),
             () => null,
             () => this.getVehicles()
@@ -72,14 +74,15 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
 
   public viewDeposit(vehicleId: number, documents: DocumentVehicle[]): void {
     let depositId: number;
+    let depositType: string;
     documents.map(document => {
-      if (document.type === 'deposit') { depositId = document.fileId; }
+      if (!document.valid) { depositId = document.fileId; depositType = document.type; }
     });
-    this.subscription.push(this.vehicleService.getDeposit(vehicleId, this.depositType.DEPOSIT, depositId)
+    this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)
       .subscribe((data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
-          const Url = window.URL.createObjectURL(data.body);
-          this.src = { url: Url, type: data.body.type };
+          const objectUrl = window.URL.createObjectURL(data.body);
+          this.src = { url: objectUrl, type: data.body.type };
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data.body);

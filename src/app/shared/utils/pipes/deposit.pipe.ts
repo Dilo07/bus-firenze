@@ -27,7 +27,7 @@ export class HasRequestDepositPipe implements PipeTransform {
   transform(documents: DocumentVehicle[]): boolean {
     let hasReqDeposit = false;
     const deposit = DEPOSIT_TYPE;
-    documents.map(document => { // controlla se ha deposito in caso di checkValid true controlla anche se è valido
+    documents.map(document => { // controlla se ha una richiesta restituzione deposito
       if (document.type === deposit.REQUEST) { hasReqDeposit = true; }
     });
     return hasReqDeposit;
@@ -42,9 +42,23 @@ export class DateValidPipe implements PipeTransform {
   transform(documents: DocumentVehicle[]): number {
     let dateValid = null;
     const deposit = DEPOSIT_TYPE;
-    documents.map(document => { // controlla se ha deposito in caso di checkValid true controlla anche se è valido
+    documents.map(document => { // ritorna la data di validità del deposito
       if (document.type === deposit.DEPOSIT && document.valid) { dateValid = document.valid; }
     });
     return dateValid;
+  }
+}
+
+@Pipe({
+  name: 'documentToValid'
+})
+export class DocumentToValidPipe implements PipeTransform {
+
+  transform(documents: DocumentVehicle[]): string {
+    let documentType = null;
+    documents.map(document => { // ritorna il tipo di documento con validità a null
+      if (!document.valid) { documentType = document.type; }
+    });
+    return documentType;
   }
 }

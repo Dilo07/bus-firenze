@@ -10,8 +10,9 @@ import { Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
-import { DEPOSIT_TYPE, STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
-import { DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { ViewFileComponent } from 'src/app/shared/utils/components/view-file/view-file.component';
+import { STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
+import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from '../drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehicle.component';
@@ -42,6 +43,7 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
 export class VehiclesComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(ViewFileComponent) viewFile: ViewFileComponent;
 
   public fleetManager: FleetManager;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
@@ -51,7 +53,6 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public statusVehicle = STATUS_VEHICLE;
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
 
-  private depositType = DEPOSIT_TYPE;
   private subscription: Subscription[] = [];
 
   constructor(

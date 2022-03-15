@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card (click)="viewFile.close()">
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 	<mat-card-content>
 		<app-view-file [file]="src"></app-view-file>

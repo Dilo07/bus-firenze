@@ -9,10 +9,9 @@ import { Vehicle } from '../components/domain/bus-firenze-domain';
   providedIn: 'root'
 })
 export class VehicleService {
+  private apiUrl = this.url + '/api/fleet';
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
-
-  private apiUrl = this.url + '/api/fleet';
 
   addVehicle(deposit: File, certificate: File, vehicle: Vehicle, fleetManagerId?: number): Observable<void> {
     let url = '';

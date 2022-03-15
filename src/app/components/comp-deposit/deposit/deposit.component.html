@@ -50,9 +50,9 @@
                     </ng-container>
 
                     <ng-container matColumnDef="depositDocument">
-                        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.DEPOSIT' | translate}} </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.deposit' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">{{'VEHICLE.DEPOSIT' | translate}}</span>
+                            <span class="mobile-label">{{'VEHICLE.deposit' | translate}}</span>
                             <button mat-icon-button [disabled]="!(element.documents | hasDeposit: false)"
                                 (click)="viewDeposit(element.id, element.documents, true)">
                                 <mat-icon [style.color]="(element.documents | hasDeposit: false) ? '#0066CC' : 'grey'"

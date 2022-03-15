@@ -10,11 +10,10 @@ import { getFleetManager } from './mokup/getFleetmanager';
   providedIn: 'root'
 })
 export class ValidVehicleService {
-
-  constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
-
   private apiUrl = this.url + '/api/fleet';
   private fleetMokup = getFleetManager;
+
+  constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
   getFleetDeposit(): Observable<FleetManager[]> {
     /* return of(this.fleetMokup); */

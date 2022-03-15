@@ -35,7 +35,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   ]
 })
 export class ViewFileComponent implements OnChanges {
-  @Input() file: { type: string, url: string | ArrayBuffer };
+  @Input() file: { type: string; url: string | ArrayBuffer; close?: boolean };
   public viewDoc: 'on' | 'off' = 'off';
   public zoom = 0.6;
 
@@ -50,6 +50,13 @@ export class ViewFileComponent implements OnChanges {
       this.zoom += 0.1;
     } else if (!zoomIn && this.zoom >= 0.2) {
       this.zoom -= 0.1;
+    }
+  }
+
+  public close(): void {
+    if (this.viewDoc === 'on') {
+      this.viewDoc = 'off';
+      this.zoom = 0.6;
     }
   }
 
