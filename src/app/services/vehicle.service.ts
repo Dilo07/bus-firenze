@@ -35,12 +35,14 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  deleteVehicle(id: number, fleetManagerId?: number): Observable<void> {
+  deleteVehicle(id: number, reqDeposit: File, fleetManagerId?: number): Observable<void> {
     let url = '';
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
-    return this.http.delete<void>(this.apiUrl + url + '/vehicle/delete/' + id)
+    const formData = new FormData();
+    formData.append('reqDeposit', reqDeposit);
+    return this.http.post<void>(this.apiUrl + url + '/vehicle/delete/' + id, formData)
       .pipe(catchError(err => { throw err; }));
   }
 

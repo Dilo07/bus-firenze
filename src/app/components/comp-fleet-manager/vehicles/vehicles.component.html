@@ -149,7 +149,7 @@
 								<mat-icon style="color: #0066CC;">edit</mat-icon>
 							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
-								matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}" (click)="deleteVehicle(element.id)">
+								matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}" (click)="deleteVehicle(element.id, element.documents)">
 								<mat-icon style="color: red;">delete</mat-icon>
 							</button>
 							<button *ngIf="element.deleted" mat-icon-button [disabled]="true">

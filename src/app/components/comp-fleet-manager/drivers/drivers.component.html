@@ -11,10 +11,10 @@
 					{{'DRIVERS.NEW' | translate}}
 				</button>
 			</div>
-			<form [formGroup]="Search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
+			<form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
 					<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
-					<input matInput type="search" formControlName="CtrlSearch" autocomplete="off">
+					<input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
 				</mat-form-field>
 				<button mat-icon-button (click)="getDrivers()">
 					<mat-icon matPrefix>search</mat-icon>

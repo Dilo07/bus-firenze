@@ -11,8 +11,8 @@ import { DriverService } from 'src/app/services/driver.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ViewFileComponent } from 'src/app/shared/utils/components/view-file/view-file.component';
-import { STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
-import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { DEPOSIT_TYPE, STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
+import { DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from '../drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehicle.component';
@@ -53,6 +53,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public statusVehicle = STATUS_VEHICLE;
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
 
+  private depositType = DEPOSIT_TYPE;
   private subscription: Subscription[] = [];
 
   constructor(
@@ -124,16 +125,21 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     });
   }
 
-  public deleteVehicle(vehicleId: number): void {
+  public deleteVehicle(vehicleId: number, documents: DocumentVehicle[]): void {
+    let hasDepositValid = false;
+    documents.map(document => {
+      if (document.type === this.depositType.DEPOSIT && document.valid) { hasDepositValid = true; }
+    });
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',
       height: '30%',
-      data: { text: 'VEHICLE.DELETE_CONFIRM' },
+      data: { text: 'VEHICLE.DELETE_CONFIRM', uploadDoc: hasDepositValid ? 'VEHICLE.DEPOSIT_REQ' : null },
       autoFocus: false
     });
-    dialogRef.afterClosed().subscribe((data) => {
-      if (data) {
-        this.vehicleService.deleteVehicle(vehicleId, this.fleetManager?.id).subscribe(
+    dialogRef.afterClosed().subscribe((respConfirm) => {
+      if (respConfirm) {
+        const file = respConfirm.file ? respConfirm.file : null;
+        this.vehicleService.deleteVehicle(vehicleId, file, this.fleetManager?.id).subscribe(
           () => this.snackBar.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
           () => null,
           () => {
