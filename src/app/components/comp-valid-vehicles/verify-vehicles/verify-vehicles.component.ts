@@ -68,7 +68,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
           documents.map(document => {
             if (!document.valid) { depositType = document.type; }
           });
-          this.subscription.push(this.vehicleValidService.validVehicle(this.idFleet, vehicleId, depositType, true).subscribe(
+          this.subscription.push(this.vehicleService.getVehicleDeposit(true, this.idFleet, true).subscribe(
             () => this.snackBar.showMessage('VEHICLE.VALID_SUCCESS', 'INFO'),
             () => null,
             () => this.getVehicles()
