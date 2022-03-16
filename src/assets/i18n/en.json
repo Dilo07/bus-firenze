@@ -210,7 +210,8 @@
         "VALID_SUCCESS": "Vehicle validate correctly",
         "NEEDDOC": "Vehicle with need documents",
         "WITHDOC": "Vehicle with upload documents",
-        "DEPVALID": "Deposit validate at "
+        "DEPVALID": "Deposit validate at ",
+        "REQVALID": "Deposit request validate at "
     },
     "DRIVERS": {
         "TITLE": "Drivers",

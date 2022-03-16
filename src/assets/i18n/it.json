@@ -210,7 +210,8 @@
         "VALID_SUCCESS": "Veicolo validato correttamente",
         "NEEDDOC": "Veicoli con documenti da caricare",
         "WITHDOC": "Veicoli con documenti caricati",
-        "DEPVALID": "Deposito validato il "
+        "DEPVALID": "Deposito validato il ",
+        "REQVALID": "Richiesta deposito validata il "
     },
     "DRIVERS": {
         "TITLE": "Autisti",
