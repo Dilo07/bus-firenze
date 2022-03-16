@@ -58,7 +58,7 @@ export class DepositComponent implements OnInit {
   }
 
   public getVehicle(fleetManagerId?: any): void {
-    if (fleetManagerId) {
+    if (fleetManagerId) { // se è op o movyon verrà valorizzato flmId altrimenti se ruolo fm non verrà valorizzato
       this.fleetManagerId = fleetManagerId;
       this.viewFleetTable = false;
     }
