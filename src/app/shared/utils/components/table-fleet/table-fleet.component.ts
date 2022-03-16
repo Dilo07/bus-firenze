@@ -121,16 +121,6 @@ export class TableFleetComponent implements OnInit {
     this.limit = this.paginator.pageSize;
   }
 
-  public findContactValue(fleetManager: FleetManager, code: number): string {
-    let res = '';
-    fleetManager.contacts.find(contact => {
-      if (contact.code === code) {
-        res = contact.value;
-      }
-    });
-    return res;
-  }
-
   private unSubscribe(): void {
     this.subscription.forEach(subscription => {
       subscription.unsubscribe();

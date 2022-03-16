@@ -4,7 +4,6 @@ import { AppointmentsRoutingModule } from './appointments.routing';
 
 
 @NgModule({
-
   imports: [
     CommonModule,
     AppointmentsRoutingModule

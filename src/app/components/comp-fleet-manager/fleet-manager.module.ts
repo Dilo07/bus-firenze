@@ -6,7 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NptMapModule } from '@npt/npt-map';
 import { MaterialModule } from '@npt/npt-template';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { MatSelectFilterModule } from 'mat-select-filter';
+import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
+import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
+import { Ng2telinputDirective } from '../directive/ng2telinput.directive';
 import { AnagraphicFleetManagerComponent } from './anagraphic-fleet-manager/anagraphic-fleet-manager.component';
 import { FleetManagerComponent } from './comp-fleet-manager.component';
 import { AnagraphicDriverComponent } from './drivers/anagraphic-driver/anagraphic-driver.component';
@@ -16,7 +19,6 @@ import { AssociationDriversVehiclesComponent } from './drivers/modal-association
 import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
 import { FleetManagerRoutingModule } from './fleet-manager.routing';
 import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manager.component';
-import { Ng2telinputDirective } from '../directive/ng2telinput.directive';
 import { ModalOTPComponent } from './register-page/modal-otp/modal-otp.component';
 import { RegisterComponent } from './register-page/register.component';
 import { ModalFormVehicleComponent } from './vehicles/modal-form-vehicle/modal-form-vehicle.component';
@@ -25,7 +27,6 @@ import { PanelStatisticComponent } from './vehicles/panel-statistic/panel-statis
 import { TableStatisticComponent } from './vehicles/table-statistic/table-statistic.component';
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
-import { MatSelectFilterModule } from 'mat-select-filter';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { MatSelectFilterModule } from 'mat-select-filter';
   ],
   imports: [
     CommonModule,
+    SharedComponentsModule,
     HttpClientModule,
     MaterialModule,
     MatSelectFilterModule,
@@ -59,8 +61,8 @@ import { MatSelectFilterModule } from 'mat-select-filter';
     TranslateModule,
     NptMapModule,
     FleetManagerRoutingModule,
-    PdfViewerModule
+    PipesModule
   ],
-  exports: [FormFleetManagerComponent]
+  exports: []
 })
 export class FleetManagerModule { }

@@ -1,0 +1,63 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "warn",
+          {
+            "prefix": "app",
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "warn",
+          {
+            "prefix": "app",
+            "style": "camelCase",
+            "type": "attribute"
+          }
+        ],
+        "@typescript-eslint/explicit-function-return-type": ["warn",{"allowExpressions": true}],
+        "@typescript-eslint/member-ordering": "warn",
+        "@typescript-eslint/semi": "warn",
+        "@typescript-eslint/indent": ["warn", 2],
+        "@typescript-eslint/naming-convention": "warn",
+        "@typescript-eslint/no-inferrable-types": "warn",
+        "@angular-eslint/no-empty-lifecycle-method": "warn",
+        "@typescript-eslint/member-delimiter-style": "warn",
+        "eol-last": "warn",
+        "prefer-const": "warn",
+        "max-len": ["warn", 150],
+        "no-trailing-spaces": "warn"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}

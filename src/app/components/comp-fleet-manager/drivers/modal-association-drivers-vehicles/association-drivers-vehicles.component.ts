@@ -14,7 +14,7 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
   }
   `]
 })
-export class AssociationDriversVehiclesComponent implements OnInit {
+export class AssociationDriversVehiclesComponent {
   public selectedElement: DriverVehicle[] = [];
   public arrayForDB: DriverVehicle[];
 
@@ -22,10 +22,8 @@ export class AssociationDriversVehiclesComponent implements OnInit {
     private driverService: DriverService,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<AssociationDriversVehiclesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { driverVehicle: DriverVehicle[], idVehicle: number, idDriver: number, fleetManagerId: number }
+    @Inject(MAT_DIALOG_DATA) public data: { driverVehicle: DriverVehicle[]; idVehicle: number; idDriver: number; fleetManagerId: number }
   ) { }
-
-  ngOnInit(): void { }
 
   public saveAssociation(): void {
     this.arrayForDB = [];

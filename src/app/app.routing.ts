@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent,
     canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.DRIVER, ROLES.FLEETMNG, ROLES.INSTALLER, ROLES.OPER_MOVYON, ROLES.MOVYON] }
   },
-  { path: 'real-time', loadChildren: () => import('./components/comp-real-time/real-time.module').then(m => m.RealTimeModule) },
+  { path: 'real-time', loadChildren: () => import('./components/comp-real-time/real-time.module').then(m => m.RealTimeModule) }, // fm
   {
     path: 'area-monitoring', loadChildren: () => import('@npt/npt-net').then(m => m.NptNetModule),
     canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
@@ -23,23 +23,35 @@ const routes: Routes = [
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
+    path: 'deposit',
+    loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule)
+  },
+  {
+    path: 'user-fleet-manager/deposit', // fm
+    loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule)
+  },
+  {
     path: 'fleet-manager-valid',
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
-    path: 'user-fleet-manager',
+    path: 'vehicle-valid',
+    loadChildren: () => import('./components/comp-valid-vehicles/valid-vehicles.module').then(m => m.ValidVehiclesModule)
+  },
+  {
+    path: 'user-fleet-manager', // fm
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
-    path: 'manage-obu',
+    path: 'manage-obu', // installer
     loadChildren: () => import('./components/comp-manage-obu/manage-obu.module').then(m => m.ManageObuModule)
   },
   {
-    path: 'appointment',
+    path: 'appointment', // installer
     loadChildren: () => import('./components/comp-appointments/appointments.module').then(m => m.AppointmentsModule)
   },
   {
-    path: 'user-driver',
+    path: 'user-driver', // driver
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {

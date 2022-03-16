@@ -11,8 +11,11 @@
         "Real-time": "Real Time",
         "Area-monitoring": "Area monitoring",
         "Fleet-manager": "Fleet manager",
-        "Manage-Fleet-manager": "Manage",
-        "Valid-Fleet-manager": "Valid",
+        "Manage": "Management",
+        "Deposit": "Deposit",
+        "Validation": "Validation",
+        "Valid-Fleet-manager": "Fleet manager",
+        "Vehicle-valid": "Vehicles",
         "User-Fleet": "Fleet manager",
         "User-Driver": "Driver",
         "Anagraphic": "Anagraphic",
@@ -120,8 +123,8 @@
         "INSERT_CITY": "Insert a City",
         "INSERT_DISTRICT": "Insert a correct district",
         "INSERT_POSTAL_CODE": "Insert a Postal Code",
-        "INSERT_IPA": "Insert ipa code",
-        "INSERT_DEST": "Insert receiver code",
+        "INSERT_IPA": "Insert a correct ipa code",
+        "INSERT_DEST": "Insert a correct receiver code",
         "VEHICLESIZE": "# Vehicles",
         "CONTACT": "Contact",
         "ERROR_TYPE": "The type file is incorrect. (accepted file: PDF, jpeg, png)",
@@ -132,10 +135,11 @@
         "UPLOAD_FILE": "Upload file",
         "CHANGE_FILE": "Change file",
         "VERIFYCF": "Verify fiscal code",
-        "USERTYPE": "Company type"
+        "USERTYPE": "Company type",
+        "TEXTFILE": "* To creare the fleet manager you need to download, sign and attach the file"
     },
     "USERTYPE": {
-        "PERS": "Phisical person",
+        "PERS": "Individual company",
         "PRVT": "Private company",
         "PA": "Public amministration",
         "ENTE": "Company"
@@ -170,6 +174,9 @@
         "DATE_ASSOCIATION": "Date association",
         "AXIS": "Axis Number",
         "WEIGHT": "Total mass fully loaded (Kg)",
+        "STATE": "Vehicle state",
+        "DELETED": "Deleted",
+        "ACTIVE": "Active",
         "REFRESH_EXPDATE": "Refresh expiry date",
         "DRIVER_ASSOCIATION": "Driver association",
         "INSERT LPN": "Insert a correct plate",
@@ -186,9 +193,25 @@
         "EDIT_ERROR": "vehicle edit error",
         "EDIT_SUCCESS": "Vehicle edited correctly",
         "DOWNLOAD": "Download manual",
-        "CHANGE_LIB": "Change circolation document",
-        "UPLOAD_LIB": "Upload circolation document",
-        "UPLOAD_SUCC": "Upload document correctly"
+        "CHANGE_LIB": "Change certificate document",
+        "UPLOAD_LIB": "Upload certificate document",
+        "CHANGE_DEP": "Change deposit file",
+        "UPLOAD_DEP": "Upload deposit file",
+        "UPLOAD_SUCC": "Upload document correctly",
+        "TEXTLIB": "* The certificate document is mandatory for new vehicle",
+        "TYPE_DOC": "Document type",
+        "deposit": "Deposit",
+        "request": "Request",
+        "VIEWDEPOSIT": "View deposit",
+        "NODEPOSIT": "Deposit not uploaded",
+        "ADDDEPOSIT": "Add deposito",
+        "DEPOSIT_REQ": "Attach deposit request",
+        "VALID_CONFIRM": "Are you sure to validate this vehicle?",
+        "VALID_SUCCESS": "Vehicle validate correctly",
+        "NEEDDOC": "Vehicle with need documents",
+        "WITHDOC": "Vehicle with upload documents",
+        "DEPVALID": "Deposit validate at ",
+        "REQVALID": "Deposit request validate at "
     },
     "DRIVERS": {
         "TITLE": "Drivers",
@@ -205,9 +228,9 @@
         "VEHICLES_ASSOCIATION": "Association vehicles",
         "ASSOCIATION_PLATE": "Associated plate",
         "ASSOCIATION_DATE": "Association date",
-        "ADD_ERROR":"Error on insert driver",
+        "ADD_ERROR": "Error on insert driver",
         "ADD_SUCCESS": "Driver inserted correctly",
-        "EDIT_ERROR":"Error on edit driver",
+        "EDIT_ERROR": "Error on edit driver",
         "EDIT_SUCCESS": "Driver changed correctly",
         "DELETE_SUCCESS": "Driver deleted correctly",
         "DELETE_CONFIRM": "Are you sure of delete this driver?"
@@ -312,7 +335,7 @@
         "ACTIVE": "Active ticket",
         "MANAGE": "Manage ticket",
         "LPN": "Plate",
-        "LPN_NAT":"Country",
+        "LPN_NAT": "Country",
         "DATE_START": "Start",
         "DATE_END": "End",
         "TYPE": "Type",
@@ -321,7 +344,7 @@
         "voucher": "Voucher",
         "contrassegno": "Ticket",
         "VERIFIED": "verified",
-        "CODE" : "code",
+        "CODE": "code",
         "ACTIVATION": "Activation",
         "ACTIVATION_PHASE": "Activation phase",
         "END": "Trip end",
@@ -359,7 +382,8 @@
         }
     },
     "ERROR": {
-        "BE_ERROR": "Unreachable services"
+        "BE_ERROR": "Unreachable services",
+        "INTERNAL_SERVER_ERROR": "Internal server error"
     },
     "error": {
         "generic": "Error server site",
@@ -411,10 +435,10 @@
             "already_present": "Ticket already present on vehicle",
             "already_associated": "The vehicle is already associated to another obu"
         },
-        "ticket":{
-          "already_assigned": "Ticket already assigned to another vehicle",
-          "not_found": "Ticket not found",
-          "extend": "Cannot extend ticket"
+        "ticket": {
+            "already_assigned": "Ticket already assigned to another vehicle",
+            "not_found": "Ticket not found",
+            "extend": "Cannot extend ticket"
         },
         "obu": {
             "not_found": "Obu Id doesn't exist",
@@ -423,7 +447,8 @@
             "association": "Error in obu-vehicle association",
             "match": "Error on change plate",
             "remove": "Cannot remove the obu",
-            "installer": "Installer didn't install this obu"
+            "installer": "Installer didn't install this obu",
+            "associate_to_other_domains": "The obu to be replaced is associated to another domain, remove it from all domains"
         },
         "ines": {
             "fleet": {
@@ -484,8 +509,8 @@
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_FOUND": "Ticket tipology not found",
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_VALIDA": "Ticket tipology invalid",
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_FOR_OBU": "Ticket tipology not expose with OBU",
-            "ERR_NO_TARIFFA_FOR_TIPOLOGIA_CONTRASSEGNO" : "Nobody ammount found for this code",
-            "ERR_NO_CORSA_FOUND" : "Not is possibile identificate the trip",
+            "ERR_NO_TARIFFA_FOR_TIPOLOGIA_CONTRASSEGNO": "Nobody ammount found for this code",
+            "ERR_NO_CORSA_FOUND": "Not is possibile identificate the trip",
             "ERR_NUM_PASSAGGI_RAGGIUNTO": "Allowed limit day fleet reached",
             "ERR_BUS_NOT_IN_FLOTTA": "The bus isn't on association voucher/subscription fleet",
             "ERR_NO_FLOTTA_ASSOCIATA_OBU": "The association fleet not is enable on OBU service",
