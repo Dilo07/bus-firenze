@@ -9,6 +9,14 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './list-fleetmanager.component.html',
   styles: [`
   table { width: 100%; background-color: beige; }
+  @media(min-width: 1180px) {
+    .mat-column-expandButton { max-width: 5% }
+    .mat-column-id { max-width: 10%}
+    .mat-column-name { max-width: 10%}
+    .mat-column-surname { max-width: 10%}
+    .mat-column-mobile { max-width: 20%}
+    .mat-column-mail { max-width: 20%}
+  }
   `],
   animations: [
     trigger('detailExpand', [

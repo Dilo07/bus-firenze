@@ -209,6 +209,7 @@
         "VALID_CONFIRM": "Are you sure to validate this vehicle?",
         "VALID_SUCCESS": "Vehicle validate correctly",
         "NEEDDOC": "Vehicle with need documents",
+        "WITHDOC": "Vehicle with upload documents",
         "DEPVALID": "Deposit validate at "
     },
     "DRIVERS": {

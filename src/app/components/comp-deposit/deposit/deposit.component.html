@@ -11,7 +11,7 @@
                     {{'FLEET-MANAGER.BACK' | translate}}
                 </button>
                 <mat-slide-toggle [(ngModel)]="viewAll" (change)="getVehicle()">
-                    {{ (viewAll ? 'VEHICLE.ALL' : 'VEHICLE.NEEDDOC') | translate}}
+                    {{ (viewAll ? 'VEHICLE.WITHDOC' : 'VEHICLE.NEEDDOC') | translate}}
                 </mat-slide-toggle>
             </div>
             <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>

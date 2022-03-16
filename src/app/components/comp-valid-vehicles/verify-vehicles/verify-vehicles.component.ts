@@ -15,11 +15,17 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
   templateUrl: './verify-vehicles.component.html',
   styles: [`
   .mat-elevation-z8 {
-    width: 1200px;
+    width: 1000px;
     background-color: white;
     margin: 2px;
   }
-  .mat-column-actions { display: table-column; text-align: end;}
+  @media(min-width: 1180px) {
+    .mat-column-id { max-width: 10%}
+    .mat-column-lpn { max-width: 20%}
+    .mat-column-lpnNat { max-width: 20%}
+    .mat-column-type { max-width: 20%}
+    .mat-column-actions { max-width: 20%; display: table-column; text-align: end;}
+  }
   `
   ]
 })
