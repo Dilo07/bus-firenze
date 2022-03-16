@@ -68,8 +68,30 @@
                                 <mat-icon style="color: #0066CC;" matTooltip="{{'VEHICLE.ADDDEPOSIT' | translate}}">
                                     edit_note</mat-icon>
                             </button>
-                            <mat-icon *ngIf="element.documents | dateValid" style="margin: 10px; color: green;"
-                                matTooltip="{{('VEHICLE.DEPVALID' | translate) + (element.documents | dateValid | date: 'dd/MM/YYYY')}}">task_alt</mat-icon>
+                            <mat-icon *ngIf="element.documents | depositDateValid" style="margin: 10px; color: green;"
+                                matTooltip="{{('VEHICLE.DEPVALID' | translate) + (element.documents | depositDateValid | date: 'dd/MM/YYYY')}}">task_alt</mat-icon>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="requestDocument">
+                        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.request' | translate}} </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <button mat-icon-button *ngIf="element.documents | hasRequest: false"
+                                (click)="viewDeposit(element.id, element.documents, false)">
+                                <mat-icon style="color: #0066CC" matTooltip="visualizza richiesta deposito">
+                                    description
+                                </mat-icon>
+                            </button>
+                            <input style="display: none" type="file" #depositReqInput
+                                accept="application/pdf, image/jpeg, image/png"
+                                (change)="uploadDeposit(element.id, $event, false)">
+                            <button *ngIf="element.deleted && !(element.documents | hasRequest: true)" mat-icon-button
+                                (click)="depositReqInput.click()">
+                                <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
+                                    edit_note</mat-icon>
+                            </button>
+                            <mat-icon *ngIf="element.documents | requestDateValid" style="margin: 10px; color: green;"
+                                matTooltip="{{('VEHICLE.DEPVALID' | translate) + (element.documents | requestDateValid | date: 'dd/MM/YYYY')}}">task_alt</mat-icon>
                         </mat-cell>
                     </ng-container>
 
@@ -78,26 +100,6 @@
                         <mat-cell *matCellDef="let element">
                             <span class="mobile-label">obuId</span>
                             {{ element.obuId}}
-                        </mat-cell>
-                    </ng-container>
-
-                    <ng-container matColumnDef="actions">
-                        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                            <input style="display: none" type="file" #depositReqInput
-                                accept="application/pdf, image/jpeg, image/png"
-                                (change)="uploadDeposit(element.id, $event, false)">
-                            <button *ngIf="element.deleted && (element.documents | hasDeposit: true)" mat-icon-button
-                                (click)="depositReqInput.click()">
-                                <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
-                                    edit_note</mat-icon>
-                            </button>
-                            <button mat-icon-button *ngIf="element.documents | hasRequest"
-                                (click)="viewDeposit(element.id, element.documents, false)">
-                                <mat-icon style="color: #0066CC" matTooltip="visualizza richiesta deposito">
-                                    description
-                                </mat-icon>
-                            </button>
                         </mat-cell>
                     </ng-container>
 
