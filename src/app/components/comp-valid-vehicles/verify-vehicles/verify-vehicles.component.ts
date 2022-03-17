@@ -32,7 +32,7 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Input() idFleet: number;
   public dataSource = new MatTableDataSource<Vehicle>();
-  public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'type', 'actions'];
+  public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'type', 'certificateId', 'actions'];
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
 
   private subscription: Subscription[] = [];
@@ -85,6 +85,22 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
       if (!document.valid) { depositId = document.fileId; depositType = document.type; }
     });
     this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)
+      .subscribe((data: HttpResponse<Blob>) => {
+        if (data.body.type === 'application/pdf') { // se è un pdf
+          const objectUrl = window.URL.createObjectURL(data.body);
+          this.src = { url: objectUrl, type: data.body.type };
+        } else { // altrimenti se è un'immagine
+          const reader = new FileReader();
+          reader.readAsDataURL(data.body);
+          reader.onload = () => {
+            this.src = { url: reader.result, type: data.body.type };
+          };
+        }
+      }));
+  }
+
+  public viewCertificate(vehicleId: number, certificateId: number): void {
+    this.subscription.push(this.vehicleService.getCertificateFile(vehicleId, certificateId)
       .subscribe((data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const objectUrl = window.URL.createObjectURL(data.body);

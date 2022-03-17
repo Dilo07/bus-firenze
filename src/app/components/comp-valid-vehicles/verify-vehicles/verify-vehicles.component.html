@@ -33,6 +33,19 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="certificateId">
+            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.CERTIFICATE' | translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'VEHICLE.CERTIFICATE' | translate}}</span>
+                <button mat-icon-button [disabled]="!element.certificateId"
+                    (click)="viewCertificate(element.id, element.certificateId)">
+                    <mat-icon [style.color]="element.certificateId ? '#0066CC' : 'grey'"
+                        matTooltip="{{(element.certificateId ? 'VEHICLE.CERTIFICATE' : 'VEHICLE.NOCERTIFICATE') | translate}}">
+                        description</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">

@@ -163,7 +163,7 @@
 					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
 						[style.display]="vehicleList.data.length === 0 ? 'none' : '' "></mat-header-row>
 					<mat-row *matRowDef="let row; columns: displayedColumns;"
-						[ngClass]="row.deleted ? 'obuDisactive' : ''"></mat-row>
+						[ngClass]="row.deleted ? 'obuDisactive' : ''"  class="hover-row"></mat-row>
 				</mat-table>
 			</div>
 			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"
