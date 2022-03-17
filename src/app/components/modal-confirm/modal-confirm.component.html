@@ -1,7 +1,13 @@
-<div fxLayout="column" fxLayoutAlign="center center" *ngIf="!data.validForm else valid">
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" *ngIf="!data.validForm else valid">
     <p> {{data.text | translate}}</p>
+    <span *ngIf="data.uploadDoc">
+        <p>{{fileDeposit?.name}}</p>
+        <input style="display: none" type="file" #depositInput accept="application/pdf, image/jpeg, image/png"
+            (change)="uploadDeposit($event)">
+        <button mat-button class="bluButton" (click)="depositInput.click()">{{data.uploadDoc | translate}}</button>
+    </span>
     <div fxLayout="row" fxLayoutGap="20px">
-        <button mat-button (click)="dialogRef.close(true)" class="greenButtons">
+        <button mat-button (click)="dialogRef.close(fileDeposit ? {file: fileDeposit} : true)" class="greenButtons">
             {{'COMMON.ACTION.YES' | translate}}
         </button>
         <button mat-button (click)="dialogRef.close(false)" class="redButtons"> no </button>
@@ -15,10 +21,12 @@
             <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>
         </mat-form-field>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
-            <button mat-button (click)="dialogRef.close(contractCode)" class="greenButtons" [disabled]="contractCode.status === 'INVALID'">
+            <button mat-button (click)="dialogRef.close(contractCode)" class="greenButtons"
+                [disabled]="contractCode.status === 'INVALID'">
                 {{'COMMON.ACTION.SAVE' | translate}}
             </button>
-            <button mat-button (click)="dialogRef.close(false)" class="redButtons"> {{'COMMON.ACTION.BACK' | translate}} </button>
+            <button mat-button (click)="dialogRef.close(false)" class="redButtons"> {{'COMMON.ACTION.BACK' | translate}}
+            </button>
         </div>
     </div>
 </ng-template>

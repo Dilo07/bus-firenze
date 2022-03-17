@@ -36,7 +36,7 @@ const routes: Routes = [
     component: VehiclesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] }
   },
   {
-    path: 'vehicles/statistic',
+    path: 'vehicles/statistic', // per raggiungere le statistiche da fm
     component: StatisticComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] }
   },
   {

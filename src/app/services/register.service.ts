@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { FleetManager } from '../components/domain/bus-firenze-domain';
+import { FleetManager, VatValidation } from '../components/domain/bus-firenze-domain';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class RegisterService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getTemplateDocument(): Observable<any> {
+  getTemplateDocument(): Observable<HttpResponse<Blob> | Blob> {
     const options = {
       observe: 'response' as 'body',
       responseType: 'blob' as 'blob'
@@ -35,8 +35,8 @@ export class RegisterService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  checkVatNumber(nation: string, vat: string): Observable<any> {
-    return this.http.get(this.apiUrl + `/checkVat/${nation}/${vat}`)
+  checkVatNumber(nation: string, vat: string): Observable<VatValidation> {
+    return this.http.get<VatValidation>(this.apiUrl + `/checkVat/${nation}/${vat}`)
       .pipe(catchError(err => { throw err; }));
   }
 }

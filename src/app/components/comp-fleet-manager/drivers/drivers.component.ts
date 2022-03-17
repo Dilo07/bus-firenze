@@ -32,7 +32,7 @@ export class DriversComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-  public Search: FormGroup;
+  public search: FormGroup;
   public fleetManagerId: number;
   public dataSource = new MatTableDataSource<Driver>();
   public displayedColumns = ['name', 'surname', 'e-mail', 'mobile', 'actions'];
@@ -50,8 +50,8 @@ export class DriversComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.Search = this.formBuilder.group({
-      CtrlSearch: [''],
+    this.search = this.formBuilder.group({
+      ctrlSearch: [''],
     });
     this.getDrivers();
   }
@@ -64,7 +64,7 @@ export class DriversComponent implements OnInit, OnDestroy {
 
   public getDrivers(): void {
     this.complete = false;
-    const keyword = this.Search.get('CtrlSearch').value;
+    const keyword = this.search.get('ctrlSearch').value;
     this.subscription.push(
       this.driverService.getDrivers(keyword, this.fleetManagerId).subscribe(
         data => {
@@ -125,32 +125,22 @@ export class DriversComponent implements OnInit, OnDestroy {
     });
   }
 
-  public associationVehicle(IdDriver: number): void {
+  public associationVehicle(iddriver: number): void {
     this.subscription.push(
-      this.driverService.getVehiclesByDriver(IdDriver, this.fleetManagerId).subscribe(
+      this.driverService.getVehiclesByDriver(iddriver, this.fleetManagerId).subscribe(
         vehicles => {
           const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
             width: '80%',
             height: '80%',
-            data: {driverVehicle: vehicles, idDriver: IdDriver, fleetManagerId: this.fleetManagerId},
+            data: {driverVehicle: vehicles, idDriver: iddriver, fleetManagerId: this.fleetManagerId},
             autoFocus: false
           });
         }));
   }
 
-  public findContactValue(fleetManager: FleetManager, code: number): string {
-    let res = '';
-    fleetManager.contacts.find(contact => {
-      if (contact.code === code) {
-        res = contact.value;
-      }
-    });
-    return res;
-  }
-
   private resetSearchField(): void {
-    this.Search.patchValue({
-      CtrlSearch: ''
+    this.search.patchValue({
+      ctrlSearch: ''
     });
   }
 }

@@ -1,31 +1,7 @@
-<mat-card>
+<mat-card (click)="viewFile.close()">
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 	<mat-card-content>
-		<div [@slideInOut]="viewDoc">
-			<span *ngIf="src.type === 'application/pdf' else image">
-				<pdf-viewer [src]="$any(src.url)" [rotation]="0" [original-size]="true" [show-all]="true"
-					[fit-to-page]="false" [zoom]="zoom" [stick-to-page]="false" [render-text]="true"
-					[external-link-target]="'top'" [autoresize]="true" [show-borders]="true">
-				</pdf-viewer>
-			</span>
-			<button mat-icon-button matTooltip="{{'COMMON.ACTION.CLOSE' | translate}}"
-				(click)="viewDoc = 'off'; zoom = 0.6">
-				<mat-icon>close</mat-icon>
-			</button>
-			<br>
-			<span *ngIf="src.type === 'application/pdf'">
-				<button mat-icon-button matTooltip="zoom +" (click)="changeZoom(true)">
-					<mat-icon>add</mat-icon>
-				</button>
-				<br>
-				<button mat-icon-button matTooltip="zoom -" (click)="changeZoom(false)">
-					<mat-icon>remove</mat-icon>
-				</button>
-			</span>
-			<ng-template #image>
-				<img class="img-responsive" [src]="src.url" alt="imgDoc">
-			</ng-template>
-		</div>
+		<app-view-file [file]="src"></app-view-file>
 		<div fxLayout="column" fxLayoutGap="20px">
 			<app-panel-statistic [fleetManager]="fleetManager"></app-panel-statistic>
 			<div fxLayout="row wrap" fxLayoutGap="20px">
@@ -44,16 +20,16 @@
 					<button mat-menu-item (click)="downloadManualPdf(4)">Arianna I</button>
 				</mat-menu>
 			</div>
-			<form [formGroup]="Search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
+			<form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
 					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>
-					<input matInput type="search" formControlName="CtrlSearch" placeholder="cerca" autocomplete="off">
+					<input matInput type="search" formControlName="ctrlSearch" placeholder="cerca" autocomplete="off">
 				</mat-form-field>
 				<button mat-icon-button (click)="getVehiclesByManagerId()">
 					<mat-icon matPrefix>search</mat-icon>
 				</button>
 				<mat-slide-toggle formControlName="onlyActive" (change)="getVehiclesByManagerId()">
-					{{(Search.controls['onlyActive'].value ? 'VEHICLE.ONLY_ACTIVE' : 'VEHICLE.ALL') | translate}}
+					{{(search.controls['onlyActive'].value ? 'VEHICLE.ONLY_ACTIVE' : 'VEHICLE.ALL') | translate}}
 				</mat-slide-toggle>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
@@ -119,7 +95,8 @@
 							<input style="display: none" type="file" #fileInput
 								accept="application/pdf, image/jpeg, image/png"
 								(change)="uploadCertificate(element.id, $event)">
-							<button mat-icon-button *ngIf="fleetManager" (click)="fileInput.click()">
+							<button mat-icon-button *ngIf="fleetManager && !element.deleted"
+								(click)="fileInput.click()">
 								<mat-icon style="color: #0066CC;"
 									matTooltip=" {{'VEHICLE.CERTIFICATE_MODIFY' | translate}}">edit_note</mat-icon>
 							</button>
@@ -158,12 +135,21 @@
 								(click)="downloadManualPdf(element.hardware)">
 								<mat-icon style="color: #0066CC;">assignment_returned</mat-icon>
 							</button>
+							<button *ngIf="!element.deleted && (element.documents | hasDeposit: true)" mat-icon-button
+								matTooltip="{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}"
+								(click)="associationDriver(element.id)">
+								<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
+							</button>
+							<button mat-icon-button matTooltip="{{'STATISTIC.VEHICLE' | translate}}"
+								[routerLink]="['statistic']" [state]="{vehicle: element, fleetManager: fleetManager}">
+								<mat-icon style="color: #0066CC;">poll</mat-icon>
+							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
 								matTooltip="{{'COMMON.ACTION.EDIT' | translate}}" (click)="editVehicle(element)">
 								<mat-icon style="color: #0066CC;">edit</mat-icon>
 							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
-								matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}" (click)="deleteVehicle(element.id)">
+								matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}" (click)="deleteVehicle(element.id, element.documents)">
 								<mat-icon style="color: red;">delete</mat-icon>
 							</button>
 							<button *ngIf="element.deleted" mat-icon-button [disabled]="true">
@@ -171,22 +157,13 @@
 									matTooltip="{{('VEHICLE.DISABLED' | translate) +  (element.deleted | date : 'dd/MM/yyyy')}}">
 									disabled_by_default</mat-icon>
 							</button>
-							<button mat-icon-button matTooltip="{{'STATISTIC.VEHICLE' | translate}}"
-								[routerLink]="['statistic']" [state]="{vehicle: element, fleetManager: fleetManager}">
-								<mat-icon style="color: #0066CC;">poll</mat-icon>
-							</button>
-							<button *ngIf="!element.deleted" mat-icon-button
-								matTooltip="{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}"
-								(click)="associationDriver(element.id)">
-								<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
-							</button>
 						</mat-cell>
 					</ng-container>
 
 					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
 						[style.display]="vehicleList.data.length === 0 ? 'none' : '' "></mat-header-row>
 					<mat-row *matRowDef="let row; columns: displayedColumns;"
-						[ngClass]="row.deleted ? 'obuDisactive' : ''"></mat-row>
+						[ngClass]="row.deleted ? 'obuDisactive' : ''"  class="hover-row"></mat-row>
 				</mat-table>
 			</div>
 			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"

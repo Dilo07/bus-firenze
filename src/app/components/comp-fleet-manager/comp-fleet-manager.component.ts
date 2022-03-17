@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { HttpResponse } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,8 +19,8 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
   selector: 'app-comp-fleet-manager',
   templateUrl: './comp-fleet-manager.component.html',
   styles: [`
-  table { width: 100%; background-color: beige; }
-  mat-card { z-index: 2;}
+  table { width: 100%; }
+  /* mat-card { z-index: 2;} */
   @media(min-width: 1180px) {
     .mat-column-id { max-width: 5%}
     .mat-column-name { max-width: 8%;}
@@ -33,42 +33,7 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
     .mat-column-fiscalCode { max-width: 12%} /* solo valid */
     .mat-column-actions { max-width: 20%; display: table-column; text-align: end;}
   }
-  :host ::ng-deep .ng2-pdf-viewer-container {
-    width: 98% !important;
-    height: 98% !important;
-  }
-  .img-responsive {
-    max-width: 40%;
-    height: auto;
-  }
   `],
-  animations: [
-    trigger('slideInOut', [
-      state(
-        'on',
-        style({
-          'background-color': 'darkseagreen',
-          'z-index': '10',
-          padding: '6px',
-          'border-style': 'solid',
-          position: 'fixed',
-          right: '10%',
-          width: '50%',
-          height: '60%'
-        })
-      ),
-      state(
-        'off',
-        style({
-          'border-style': 'solid',
-          position: 'fixed',
-          right: '-60%',
-        })
-      ),
-      transition('on => off', animate('500ms')),
-      transition('off => on', animate('500ms')),
-    ]),
-  ],
 })
 export class FleetManagerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
@@ -82,9 +47,7 @@ export class FleetManagerComponent implements OnInit {
   public validFleet: boolean;
   public manageFleet: boolean;
   public roleOpMovyon: boolean;
-  public viewDoc: 'on' | 'off' = 'off';
   public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
-  public zoom = 0.6;
 
   private offset = 0;
   private limit = 10;
@@ -195,32 +158,18 @@ export class FleetManagerComponent implements OnInit {
     });
   }
 
-  public findContactValue(fleetManager: FleetManager, code: number): string {
-    let res = '';
-    fleetManager.contacts.find(contact => {
-      if (contact.code === code) {
-        res = contact.value;
-      }
-    });
-    return res;
-  }
-
   public getFleetDocument(fleetManagerId: number, fileId: number): void {
     this.complete = false;
     this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(
-      data => {
-        if (data.type === 'application/pdf') { // se è un pdf
-          const url = window.URL.createObjectURL(data);
-          this.src.url = url;
-          this.src.type = data.type;
-          this.viewDoc = 'on';
+      (data: HttpResponse<Blob>) => {
+        if (data.body.type === 'application/pdf') { // se è un pdf
+          const Url = window.URL.createObjectURL(data.body);
+          this.src = {url: Url, type: data.body.type};
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
-          reader.readAsDataURL(data);
+          reader.readAsDataURL(data.body);
           reader.onload = () => {
-            this.src.url = reader.result;
-            this.src.type = data.type;
-            this.viewDoc = 'on';
+            this.src = {url: reader.result, type: data.body.type};
           };
         }
       },
@@ -238,14 +187,6 @@ export class FleetManagerComponent implements OnInit {
   public refreshTable(): void {
     this.reset();
     this.callGetFleetManager();
-  }
-
-  public changeZoom(zoomIn: boolean): void {
-    if (zoomIn && this.zoom <= 1) {
-      this.zoom += 0.1;
-    }else if (!zoomIn && this.zoom >= 0.2){
-      this.zoom -= 0.1;
-    }
   }
 
   private reset(): void {

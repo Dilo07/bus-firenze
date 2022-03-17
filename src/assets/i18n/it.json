@@ -11,8 +11,11 @@
         "Real-time": "Real Time",
         "Area-monitoring": "Monitoriggio aree",
         "Fleet-manager": "Fleet manager",
-        "Manage-Fleet-manager": "Gestisci",
-        "Valid-Fleet-manager": "Valida",
+        "Manage": "Gestione",
+        "Deposit": "Depositi",
+        "Validation": "Validazione",
+        "Valid-Fleet-manager": "Fleet manager",
+        "Vehicle-valid": "Veicoli",
         "User-Fleet": "Fleet Manager",
         "User-Driver": "Autista",
         "Anagraphic": "Anagrafica",
@@ -120,8 +123,8 @@
         "INSERT_CITY": "Inserisci una Città",
         "INSERT_DISTRICT": "Inserisci una provincia corretta",
         "INSERT_POSTAL_CODE": "Inserisci un CAP",
-        "INSERT_IPA": "Inserisci un codice ipa",
-        "INSERT_DEST": "Inserisci un codice destinatario",
+        "INSERT_IPA": "Inserisci un codice ipa corretto",
+        "INSERT_DEST": "Inserisci un codice destinatario corretto",
         "VEHICLESIZE": "N° Veicoli",
         "CONTACT": "Contatto",
         "ERROR_TYPE": "Il tipo del file inserito non è corretto. (file accettati: PDF, jpeg, png)",
@@ -132,10 +135,11 @@
         "UPLOAD_FILE": "Carica file",
         "CHANGE_FILE": "Cambia file",
         "VERIFYCF": "Verifica codice fiscale",
-        "USERTYPE": "Tipo di azienda"
+        "USERTYPE": "Tipo di azienda",
+        "TEXTFILE": "* Per creare il fleet manager è necessario scaricare, firmare ed allegare il file"
     },
     "USERTYPE": {
-        "PERS": "Persona fisica",
+        "PERS": "Ditta individuale",
         "PRVT": "Azienda privata",
         "PA": "Pubblica amministrazione",
         "ENTE": "Ente"
@@ -170,6 +174,9 @@
         "DATE_ASSOCIATION": "Data associazione",
         "AXIS": "Numero di Assi",
         "WEIGHT": "Massa complessiva a pieno carico (kg)",
+        "STATE": "Stato veicolo",
+        "DELETED": "Cancellato",
+        "ACTIVE": "Attivo",
         "REFRESH_EXPDATE": "Aggiorna scadenza",
         "DRIVER_ASSOCIATION": "Associa driver",
         "INSERT LPN": "Inserisci una Targa corretta",
@@ -188,7 +195,23 @@
         "DOWNLOAD": "Scarica manuale",
         "CHANGE_LIB": "Cambia libretto circolazione",
         "UPLOAD_LIB": "Carica libretto circolazione",
-        "UPLOAD_SUCC": "Libretto caricato correttamente"
+        "CHANGE_DEP": "Cambia ricevuta deposito",
+        "UPLOAD_DEP": "Carica ricevuta deposito",
+        "UPLOAD_SUCC": "Documento caricato correttamente",
+        "TEXTLIB": "* Il libretto di circolazione è obbligatorio per la creazione del veicolo",
+        "TYPE_DOC": "Tipo documento",
+        "deposit": "Deposito",
+        "request": "Richiesta",
+        "VIEWDEPOSIT": "Visualizza deposito",
+        "NODEPOSIT": "Deposito non caricato",
+        "ADDDEPOSIT": "Aggiungi deposito",
+        "DEPOSIT_REQ": "Allega richiesta deposito",
+        "VALID_CONFIRM": "Sei sicuro di voler validare questo veicolo?",
+        "VALID_SUCCESS": "Veicolo validato correttamente",
+        "NEEDDOC": "Veicoli con documenti da caricare",
+        "WITHDOC": "Veicoli con documenti caricati",
+        "DEPVALID": "Deposito validato il ",
+        "REQVALID": "Richiesta deposito validata il "
     },
     "DRIVERS": {
         "TITLE": "Autisti",
@@ -312,7 +335,7 @@
         "ACTIVE": "Ticket attivi",
         "MANAGE": "Gestisci ticket",
         "LPN": "Targa",
-        "LPN_NAT":"Nazione",
+        "LPN_NAT": "Nazione",
         "DATE_START": "Inizio",
         "DATE_END": "Fine",
         "TYPE": "Tipo",
@@ -321,7 +344,7 @@
         "voucher": "Voucher",
         "contrassegno": "Contrassegno",
         "VERIFIED": "verificato",
-        "CODE" : "codice",
+        "CODE": "codice",
         "ACTIVATION": "Attivazione",
         "ACTIVATION_PHASE": "In fase di attivazione",
         "END": "Fine visita",
@@ -359,7 +382,8 @@
         }
     },
     "ERROR": {
-        "BE_ERROR": "Servizi non raggiungibili"
+        "BE_ERROR": "Servizi non raggiungibili",
+        "INTERNAL_SERVER_ERROR": "Errore interno al server"
     },
     "error": {
         "generic": "Errore lato server",
@@ -411,10 +435,10 @@
             "already_present": "Ticket già presente sul veicolo",
             "already_associated": "Il veicolo è già associato ad un altro obu"
         },
-        "ticket":{
-          "already_assigned": "Ticket già assegnato a un veicolo",
-          "not_found": "Ticket non trovato",
-          "extend": "Impossibile esterndere il ticket"
+        "ticket": {
+            "already_assigned": "Ticket già assegnato a un veicolo",
+            "not_found": "Ticket non trovato",
+            "extend": "Impossibile esterndere il ticket"
         },
         "obu": {
             "not_found": "Obu Id non presente",
@@ -423,7 +447,8 @@
             "association": "Errore nell'associazione obu-veicolo",
             "match": "Errore nel cambio di targa",
             "remove": "non è possibile rimuovere l'obu",
-            "installer": "L'installer non ha installato questo obu"
+            "installer": "L'installer non ha installato questo obu",
+            "associate_to_other_domains": "L'obu da sostituire è associato ad un altro dominio, rimuovilo da tutti i domini"
         },
         "ines": {
             "fleet": {
@@ -484,8 +509,8 @@
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_FOUND": "Tipologia contrassegno non trovata",
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_VALIDA": "Tipologia contrassegno non valida",
             "ERR_NO_TIPOLOGIA_CONTRASSEGNO_FOR_OBU": "Tipologia contrassegno non esposta verso OBU",
-            "ERR_NO_TARIFFA_FOR_TIPOLOGIA_CONTRASSEGNO" : "Nessuna tariffa trovata per il codice",
-            "ERR_NO_CORSA_FOUND" : "Impossibile identificare la corsa",
+            "ERR_NO_TARIFFA_FOR_TIPOLOGIA_CONTRASSEGNO": "Nessuna tariffa trovata per il codice",
+            "ERR_NO_CORSA_FOUND": "Impossibile identificare la corsa",
             "ERR_NUM_PASSAGGI_RAGGIUNTO": "Limite Flotta per passaggi giornalieri consentiti raggiunto",
             "ERR_BUS_NOT_IN_FLOTTA": "Il bus non appartiene alla flotta associata al voucher/abbonamento",
             "ERR_NO_FLOTTA_ASSOCIATA_OBU": "La flotta associata al voucher non è abilitata ai servizi OBU",
