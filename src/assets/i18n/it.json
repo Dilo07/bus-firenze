@@ -386,7 +386,13 @@
         "INTERNAL_SERVER_ERROR": "Errore interno al server"
     },
     "error": {
-        "generic": "Errore lato server",
+        "generic": "Error server site",
+        "alert": {
+            "send": "Error send alert"
+        },
+        "notification": {
+            "send": "Error send notification"
+        },
         "code": {
             "lang": "Lingua non supportata",
             "code": "Errore nell'invio del codice"

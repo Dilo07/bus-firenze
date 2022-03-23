@@ -387,6 +387,12 @@
     },
     "error": {
         "generic": "Error server site",
+        "alert": {
+            "send": "Errore nell'invio messaggio"
+        },
+        "notification": {
+            "send": "Errore nell'invio notifica"
+        },
         "code": {
             "lang": "Lang not supported",
             "code": "Error on sending code"
