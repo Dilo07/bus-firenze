@@ -72,7 +72,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
       provide: 'viewOuterData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['viewOuter', ConfigInitService]
     },
-    { provide: 'net-geometry', useValue: 'Polygon' },  // Polygon, LineString, Point, MultiSelection
+    { provide: 'net-geometry', useValue: ['Polygon'] },  // accetta un array con questi valori Polygon, LineString, Point
     // npt template
     { provide: 'menuService', useClass: MenuItemService },
     { provide: 'header', useValue: environment.header },

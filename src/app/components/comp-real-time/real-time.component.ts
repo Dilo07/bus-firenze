@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Coordinate, MapUtils, NptMapComponent } from '@npt/npt-map';
 import { Geometry } from '@npt/npt-net';
+import * as moment from 'moment';
+import Map from 'ol/Map';
 import { Subscription } from 'rxjs';
 import { LiveStreamService } from 'src/app/services/live-stream.service';
 import { FirenzeMapUtils } from 'src/app/shared/utils/map/Firenze-map.utils';
-import * as moment from 'moment';
-import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
-import { TranslateService } from '@ngx-translate/core';
 import { TimesRefresh } from '../domain/bus-firenze-constants';
-import Map from 'ol/Map';
+import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-real-time',
@@ -17,7 +17,7 @@ import Map from 'ol/Map';
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RealTimeComponent implements OnInit {
+export class RealTimeComponent {
   @ViewChild(NptMapComponent) mapChild: NptMapComponent;
 
   public fleetManager: FleetManager;
@@ -27,10 +27,10 @@ export class RealTimeComponent implements OnInit {
   public stop = true;
   public actualTime = RefreshOption._5_minutes;
   public times: RefreshInterface[] = TimesRefresh;
+  public layersPopup = [FirenzeMapUtils.LayerEnum.POINT_REAL_TIME];
 
   private subscription: Subscription[] = [];
   private geometry: Geometry[] = [];
-  public layersPopup = [FirenzeMapUtils.LayerEnum.POINT_REAL_TIME];
   private interval: any;
   private map: Map;
 
@@ -42,19 +42,43 @@ export class RealTimeComponent implements OnInit {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
   }
 
-  ngOnInit(): void { }
-
-  public backFromRealTime(): void {
-    if (this.fleetManager) {
-      this.router.navigate(['../fleet-manager-manage'], { state: { fleetManager: this.fleetManager } });
-    }
-  }
-
   public onMapReady(event: any): void {
     this.map = event;
     this.getGeom();
     this.getTrip();
     this.setMapControls();
+  }
+
+  public getTrip(): void {
+    this.mapChild.removeLayers([FirenzeMapUtils.LayerEnum.LINE_REAL_TIME, FirenzeMapUtils.LayerEnum.POINT_REAL_TIME]);
+
+    this.subscription.push(this.liveStreamService.getStreamLive(this.fleetManager?.id).subscribe(data => {
+      this.vehicleTrip = data;
+      this.drawLine();
+      this.drawPoint();
+    }));
+
+    this.cdr.markForCheck();
+  }
+
+  public stopPlayRefresh(): void {
+    this.stop = !this.stop;
+    if (!this.stop) {
+      clearInterval(this.interval);
+    } else {
+      this.callInterval();
+    }
+  }
+
+  public onChangedRefresh(): void {
+    clearInterval(this.interval);
+    this.callInterval();
+  }
+
+  public backFromRealTime(): void {
+    if (this.fleetManager) {
+      this.router.navigate(['../fleet-manager-manage'], { state: { fleetManager: this.fleetManager } });
+    }
   }
 
   private getGeom(): void {
@@ -71,32 +95,14 @@ export class RealTimeComponent implements OnInit {
 
   private drawGeom(): void {
     this.geometry.forEach(geom => {
-      if (geom.type === 'MultiPolygon') {
-        geom.coordinates.forEach(cord => {
-          const geoJson = this.createGeoJSON({ coordinates: [cord] });
-          this.mapChild.viewGeometry(geoJson, FirenzeMapUtils.LayerEnum.CHARGE_POLYGON, FirenzeMapUtils.Style.POLYGON_SELECTOR);
-        });
-      } else {
-        const geoJson = this.createGeoJSON(geom);
+      geom.coordinates.forEach(cord => {
+        const geoJson = this.createGeoJSON({ coordinates: [cord] });
         this.mapChild.viewGeometry(geoJson, FirenzeMapUtils.LayerEnum.CHARGE_POLYGON, FirenzeMapUtils.Style.POLYGON_SELECTOR);
-      }
+      });
     });
     this.mapChild.zoomToLayer(FirenzeMapUtils.LayerEnum.CHARGE_POLYGON, 12);
   }
 
-  public getTrip(): void {
-    this.mapChild.removeLayers([FirenzeMapUtils.LayerEnum.LINE_REAL_TIME, FirenzeMapUtils.LayerEnum.POINT_REAL_TIME]);
-
-    this.subscription.push(this.liveStreamService.getStreamLive(this.fleetManager?.id).subscribe(data => {
-      this.vehicleTrip = data;
-      this.drawLine();
-      this.drawPoint();
-    },
-      error => console.log(error)
-    ));
-
-    this.cdr.markForCheck();
-  }
 
   private drawLine(): void {
     this.vehicleTrip.forEach(trip => {
@@ -148,11 +154,6 @@ export class RealTimeComponent implements OnInit {
         </tr></table><hr><br>`;
   }
 
-  public onChangedRefresh(): void {
-    clearInterval(this.interval);
-    this.callInterval();
-  }
-
   private callInterval(): void {
     let milliseconds = 1800000;
     if (!this.stop) {
@@ -175,15 +176,6 @@ export class RealTimeComponent implements OnInit {
     this.interval = setInterval(() => {
       this.getTrip();
     }, milliseconds);
-  }
-
-  public stopPlayRefresh(): void {
-    this.stop = !this.stop;
-    if (!this.stop) {
-      clearInterval(this.interval);
-    } else {
-      this.callInterval();
-    }
   }
 
   private setMapControls(): void {
