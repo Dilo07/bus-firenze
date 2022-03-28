@@ -35,6 +35,9 @@
   "modules": [
     { "name": "modulo restituzione cauzione", "path": "pdf-test.pdf" },
     { "name": "modulo norme contrattuali", "path": "norme_contrattuali.pdf" },
-    { "name": "modulo privacy", "path": "privacy.pdf" }
+    { "name": "modulo privacy", "path": "privacy.pdf" },
+    { "name": "Condizioni Economiche.v0.8", "path": "IBUS Firenze - Condizioni Economiche.v0.8.pdf"},
+    { "name": "Nomina a Responsabile del trattamento.v0.4", "path": "IBUS Firenze - Nomina a Responsabile del trattamento.v0.4.pdf"},
+    { "name": "Norme e Condizioni di Adesione.v0.7", "path": "IBUS Firenze - Norme e Condizioni di Adesione.v0.7.pdf"}
   ]
 }
