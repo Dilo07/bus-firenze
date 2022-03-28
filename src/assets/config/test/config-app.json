@@ -23,8 +23,14 @@
     }
   },
   "repair_shop": [
-    {"name": "Mirko", "surname": "Battelli", "mobile_number": "+393336486768", "name_shop": "Auto3", "address": "Via del Gelsomino, 11, 50125 Firenze FI" },
-    {"name": "Salvatore", "surname": "Feri", "mobile_number": "+393336498668", "name_shop": "Firenze Nova", "address": "Via Umberto Maddalena, 6, 50127 Firenze FI" }
+    {
+      "nameShop": "Web Korner",
+      "mail": "helpdesk@webkorner.it",
+      "mobileNumber": "055 0981016",
+      "contactRangeStart": "08:30",
+      "contactRangeEnd": "18:00",
+      "address": "via Fratelli Alinari, 80, 52025 Montevarchi AR" 
+    }
   ],
   "modules": [
     { "name": "modulo restituzione cauzione", "path": "pdf-test.pdf" },

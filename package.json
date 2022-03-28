@@ -1,6 +1,6 @@
 {
   "name": "bus-firenze-gui",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4202",
@@ -25,10 +25,10 @@
     "@angular/router": "~11.2.14",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
-    "@npt/npt-map": "0.0.57",
-    "@npt/npt-net": "0.0.57",
-    "@npt/npt-obu": "0.0.57",
-    "@npt/npt-template": "0.0.57",
+    "@npt/npt-map": "0.0.61",
+    "@npt/npt-net": "0.0.61",
+    "@npt/npt-obu": "0.0.61",
+    "@npt/npt-template": "0.0.61",
     "codice-fiscale-js": "^2.3.15",
     "intl-tel-input": "17.0.15",
     "libphonenumber-js": "1.9.43",

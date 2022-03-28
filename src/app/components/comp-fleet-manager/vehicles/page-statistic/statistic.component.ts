@@ -19,7 +19,7 @@ import { FirenzeMapUtils } from 'src/app/shared/utils/map/Firenze-map.utils';
 })
 export class StatisticComponent implements OnInit {
   @ViewChild(NptMapComponent) mapChild: NptMapComponent;
-  public FormGroup: FormGroup;
+  public formGroup: FormGroup;
   public start = moment(moment.now()).subtract(1, 'day');
   public end = moment(moment.now());
   public maxDate = moment(moment.now()).toDate();
@@ -44,11 +44,27 @@ export class StatisticComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.FormGroup = new FormGroup({
+    this.formGroup = new FormGroup({
       start: new FormControl(moment(this.start).toDate(), Validators.required),
       end: new FormControl(moment(this.end).toDate(), Validators.required),
     });
     this.getGraph();
+  }
+
+  public changeDate(e: MatDatepickerInputEvent<any>): void {
+    if (e.value && !this.formGroup.invalid) {
+      this.start = this.formGroup.get('start').value;
+      this.end = this.formGroup.get('end').value;
+      /* if (this.index === 1) {
+        this.index = 0;
+      } */ // in caso di utilizzo chartist
+      this.mapChild.removeLayers(['layerPoint']);
+      this.getGraph();
+    }
+  }
+
+  public tabChange(event: MatTabChangeEvent): void {
+    this.index = event.index;
   }
 
   private getGraph(): void {
@@ -60,11 +76,12 @@ export class StatisticComponent implements OnInit {
       req1: this.statisticService.getVehicleTrip(this.vehicle.id, start, end, this.fleetManager?.id),
       req2: this.statisticService.getVehicleTripList(this.vehicle.id, inner, start, end, this.fleetManager?.id)
     })
-      .subscribe(({ req1, req2 }) => {
-        this.vehicleStatTrip = req1;
-        this.vehicleTripPersistence = req2;
-        this.drawLineTrip();
-      },
+      .subscribe(
+        ({ req1, req2 }) => {
+          this.vehicleStatTrip = req1;
+          this.vehicleTripPersistence = req2;
+          this.drawLineTrip();
+        },
         () => this.complete = true,
         () => this.complete = true
       ));
@@ -97,19 +114,4 @@ export class StatisticComponent implements OnInit {
     </tr></table><hr><br>`;
   }
 
-  public changeDate(e: MatDatepickerInputEvent<any>): void {
-    if (e.value && !this.FormGroup.invalid) {
-      this.start = this.FormGroup.get('start').value;
-      this.end = this.FormGroup.get('end').value;
-      /* if (this.index === 1) {
-        this.index = 0;
-      } */ // in caso di utilizzo chartist
-      this.mapChild.removeLayers(['layerPoint']);
-      this.getGraph();
-    }
-  }
-
-  public tabChange(event: MatTabChangeEvent): void {
-    this.index = event.index;
-  }
 }
