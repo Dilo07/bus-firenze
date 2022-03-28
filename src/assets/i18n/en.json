@@ -357,6 +357,7 @@
     },
     "REPAIR-SHOP": {
         "TITLE": "For On Board Unit installation it is possible to contact the following Movyon partners. \nThe installation will take place at a place and date to be agreed between the parties and in the most convenient way possible for the Fleet Manager.",
+        "TELEPHON": "Telephone",
         "RANGE": "(Monday to Friday from ",
         "AT": "to "
     },
