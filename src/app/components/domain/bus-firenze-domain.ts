@@ -27,11 +27,6 @@ export interface Contact {
 }
 
 export class CompleteFleetManager extends FleetManager {
-  constructor() {
-    super();
-    this.vehicles = [];
-  }
-
   vehicles: Vehicle[];
   ticketId?: string;
 }
@@ -125,8 +120,11 @@ export interface TripStat {
 export interface RepairShops {
   name: string;
   surname: string;
-  mobile_number: string;
-  name_shop: string;
+  mail: string;
+  mobileNumber: string;
+  contactRangeStart: number;
+  contactRangeEnd: number;
+  nameShop: string;
   address: string;
 }
 

@@ -355,6 +355,11 @@
         "END_AT": "Terminato il:",
         "EXTEND_TEXT": "Il contrassegno sarà attivato alcuni minuti prima della scadenza del contrassegno attualmente attivo"
     },
+    "REPAIR-SHOP": {
+        "TITLE": "Per l'installazione delle On Board Unit è possibile rivolgersi ai seguenti partner di Movyon. \nL'installazione avverrà in luogo e data da concordare tra le parti e nella maniera più conveniente possibile per il Fleet Manager",
+        "RANGE": "(dal lunedì al venerdì dalle ore ",
+        "AT": "alle ore "
+    },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",
         "GROUP2": "Trasporto merci <= 3,5t (classe N1)",

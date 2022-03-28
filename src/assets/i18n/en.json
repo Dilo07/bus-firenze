@@ -355,6 +355,11 @@
         "END_AT": "Terminated at:",
         "EXTEND_TEXT": "The ticket will be activated a few minutes before the currently active ticket expires"
     },
+    "REPAIR-SHOP": {
+        "TITLE": "For On Board Unit installation it is possible to contact the following Movyon partners. \nThe installation will take place at a place and date to be agreed between the parties and in the most convenient way possible for the Fleet Manager.",
+        "RANGE": "(Monday to Friday from ",
+        "AT": "to "
+    },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",
         "GROUP2": "Goods transport (class N1)",

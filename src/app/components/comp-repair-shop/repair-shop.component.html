@@ -1,20 +1,30 @@
 <mat-card>
     <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'MENU.Repair-shop' | translate}}</mat-card-title>
-    <mat-card-content>
-        <mat-list>
+    <mat-card-content fxLayout="row" fxLayoutAlign="center">
+        <div style="white-space: pre-wrap;">{{'REPAIR-SHOP.TITLE' | translate}}</div>
+        <!-- <mat-list>
             <mat-list-item *ngFor="let repairShop of repairShops" style="margin-bottom: 20px;">
                 <mat-icon mat-list-icon>remove</mat-icon>
-                <div mat-line>{{repairShop.name}}</div>
-                <div mat-line> {{repairShop.surname}} </div>
-                <div mat-line> {{repairShop.mobile_number}}</div>
-                <div mat-line> {{repairShop.name_shop}}</div>
-                <div mat-line> {{repairShop.address}}</div>
-                <a href="http://maps.google.com/?q=`{{repairShop.name_shop}} + {{repairShop.address}}`" target="_blank">
+                <div mat-line><b>{{repairShop.nameShop}}</b></div>
+                <a href="http://maps.google.com/?q=`{{repairShop.nameShop}} + {{repairShop.address}}`" target="_blank">
                     <mat-icon>
                         location_on
                     </mat-icon>
                 </a>
             </mat-list-item>
-        </mat-list>
+        </mat-list> -->
+    </mat-card-content>
+</mat-card>
+<mat-card *ngFor="let repairShop of repairShops">
+    <mat-card-content>
+        <div>
+            <b>{{repairShop.nameShop}}</b><br>
+            E-mail: {{repairShop.mail}}<br>
+            {{'FLEET-MANAGER.CONTACT' | translate}}: {{repairShop.mobileNumber}}
+            <span *ngIf="repairShop.contactRangeStart">
+                {{'REPAIR-SHOP.RANGE' | translate}}{{repairShop.contactRangeStart}}
+                {{'REPAIR-SHOP.AT' | translate}}{{repairShop.contactRangeEnd}})
+            </span>
+        </div>
     </mat-card-content>
 </mat-card>
