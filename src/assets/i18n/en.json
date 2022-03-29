@@ -435,7 +435,10 @@
             "insert": "Failed to insert a fleet manager",
             "email": "Error: Email is mandatory",
             "mobile": "Mobile number is mandatory",
-            "delete": "Cannot delete a fleet manager with assigned vehicles"
+            "delete": "Cannot delete a fleet manager with assigned vehicles",
+            "company": "duplicate company identity",
+            "piva": "missing p.iva",
+            "fc": "missing fiscal code"
         },
         "vehicle": {
             "update": "Failed to update the vehicle",

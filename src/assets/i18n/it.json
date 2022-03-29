@@ -435,7 +435,10 @@
             "insert": "Non è possibile inserire il fleet manager",
             "email": "Email obbligatoria",
             "mobile": "Num. cellulare obbligatorio",
-            "delete": "Non è possibile cancellare un fleet manager con veicoli associati"
+            "delete": "Non è possibile cancellare un fleet manager con veicoli associati",
+            "company": "Ragione sociale duplicata",
+            "piva": "P.IVA mancante",
+            "fc": "Codice fiscale mancante"
         },
         "vehicle": {
             "update": "Aggiornamento dei dati del veicolo fallito",
