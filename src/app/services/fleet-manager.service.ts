@@ -11,10 +11,10 @@ import { getFleetManager } from './mokup/getFleetmanager';
 })
 export class FleetManagerService {
 
-  constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
-
   private apiUrl = this.url + '/api/fleet';
   private fleetManager = getFleetManager;
+
+  constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
   getFleetManagerInfo(): Observable<FleetManager> {
     return this.http.get<FleetManager>(this.apiUrl)
