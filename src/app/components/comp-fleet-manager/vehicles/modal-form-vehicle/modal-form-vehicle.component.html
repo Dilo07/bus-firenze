@@ -97,6 +97,12 @@
                 <button mat-button class="bluButton" (click)="fileDeposit.click()">
                     {{(depositDocument ? 'VEHICLE.CHANGE_DEP' : 'VEHICLE.UPLOAD_DEP') | translate}}
                 </button>
+                <p style="font-size: 12px;" *ngIf="iban">
+                    {{'VEHICLE.TEXTIBAN' | translate}}{{iban}}
+                    <button mat-icon-button [cdkCopyToClipboard]="iban">
+                        <mat-icon matTooltip="{{'COMMON.ACTION.COPY' | translate}}">content_copy</mat-icon>
+                    </button>
+                </p>
                 <mat-label> {{libDocument?.name}}</mat-label>
                 <button mat-button class="bluButton" (click)="fileInput.click();">
                     {{(libDocument ? 'VEHICLE.CHANGE_LIB' : 'VEHICLE.UPLOAD_LIB') | translate}}

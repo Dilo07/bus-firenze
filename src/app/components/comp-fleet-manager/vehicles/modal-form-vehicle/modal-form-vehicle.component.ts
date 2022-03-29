@@ -29,6 +29,7 @@ export class ModalFormVehicleComponent implements OnInit {
     private formBuilder: FormBuilder,
     private vehicleService: VehicleService,
     private snackBar: SnackBar,
+    @Inject('ibanData') public iban: string,
     @Inject(MAT_DIALOG_DATA) public data: { vehicle: Vehicle; fleetManagerId: number }) { }
 
   ngOnInit(): void {

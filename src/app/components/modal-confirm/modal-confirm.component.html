@@ -21,7 +21,7 @@
             <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>
         </mat-form-field>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
-            <button mat-button (click)="dialogRef.close(contractCode)" class="greenButtons"
+            <button mat-button (click)="dialogRef.close(contractCode.value)" class="greenButtons"
                 [disabled]="contractCode.status === 'INVALID'">
                 {{'COMMON.ACTION.SAVE' | translate}}
             </button>

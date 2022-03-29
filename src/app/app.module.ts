@@ -46,6 +46,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     }),
   ],
   providers: [
+    { provide: 'iban', useValue: 'iban'},
+    {
+      provide: 'ibanData',
+      useFactory: getPropertyFromConfig, multi: false, deps: ['iban', ConfigInitService]
+    },
     { provide: 'static_page', useValue: 'static_page'},
     {
       provide: 'static_pageData',
