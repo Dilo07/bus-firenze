@@ -42,12 +42,12 @@ export class FleetManagerComponent implements OnInit {
   public dataSource = new MatTableDataSource<FleetManager>();
   public fleetManagerList: FleetManager[] = [];
   public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'pIva', 'fiscalCode', 'city', 'district', 'actions'];
-  public Search: FormGroup;
+  public search: FormGroup;
   public complete = true;
   public validFleet: boolean;
   public manageFleet: boolean;
   public roleOpMovyon: boolean;
-  public src: { type: string, url: string | ArrayBuffer } = { type: '', url: '' };
+  public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
 
   private offset = 0;
   private limit = 10;
@@ -68,8 +68,8 @@ export class FleetManagerComponent implements OnInit {
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
     this.validFleet = this.router.url === '/fleet-manager-valid';
     this.manageFleet = this.router.url === '/fleet-manager-manage';
-    this.Search = this.formBuilder.group({
-      CtrlSearch: [
+    this.search = this.formBuilder.group({
+      ctrlSearch: [
         this.sessionService.getSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID)
       ],
     });
@@ -77,29 +77,28 @@ export class FleetManagerComponent implements OnInit {
   }
 
   public callGetFleetManager(): void {
-    const search = this.Search.get('CtrlSearch').value;
+    const search = this.search.get('ctrlSearch').value;
     this.complete = false;
     const currentSize = this.offset * this.limit;
-    this.subscription.push(
-      this.fleetManagerService.searchFleetManager(
-        search,
-        this.manageFleet,
-        this.offset,
-        this.limit,
-        this.columnOrder).subscribe((data) => {
-          this.fleetManagerList.length = currentSize;
-          this.fleetManagerList = this.fleetManagerList.concat(data);
-          if (data.length < this.limit) {
-            this.paginator.length = this.fleetManagerList.length;
-            this.endTable = true;
-          } else {
-            this.paginator.length = ((this.offset + 1) * this.limit) + 1;
-          }
-          this.dataSource.data = data;
-        },
-          () => this.complete = true,
-          () => { this.complete = true; this.unSubscribe(); })
-    );
+    this.subscription.push(this.fleetManagerService.searchFleetManager(
+      search,
+      this.manageFleet,
+      this.offset,
+      this.limit,
+      this.columnOrder).subscribe(
+      (data) => {
+        this.fleetManagerList.length = currentSize;
+        this.fleetManagerList = this.fleetManagerList.concat(data);
+        if (data.length < this.limit) {
+          this.paginator.length = this.fleetManagerList.length;
+          this.endTable = true;
+        } else {
+          this.paginator.length = ((this.offset + 1) * this.limit) + 1;
+        }
+        this.dataSource.data = data;
+      },
+      () => this.complete = true,
+      () => { this.complete = true; this.unSubscribe(); }));
     this.sessionService.setSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
   }
 
@@ -163,13 +162,13 @@ export class FleetManagerComponent implements OnInit {
     this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(
       (data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
-          const Url = window.URL.createObjectURL(data.body);
-          this.src = {url: Url, type: data.body.type};
+          const URL = window.URL.createObjectURL(data.body);
+          this.src = { url: URL, type: data.body.type };
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data.body);
           reader.onload = () => {
-            this.src = {url: reader.result, type: data.body.type};
+            this.src = { url: reader.result, type: data.body.type };
           };
         }
       },
@@ -178,7 +177,7 @@ export class FleetManagerComponent implements OnInit {
     ));
   }
 
-  public sortData(event: { active: string, direction: string }): void {
+  public sortData(event: { active: string; direction: string }): void {
     this.columnOrder.active = event.active;
     this.columnOrder.direction = event.direction === 'asc' ? 1 : -1;
     this.refreshTable();
