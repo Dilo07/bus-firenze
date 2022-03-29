@@ -199,6 +199,7 @@
         "UPLOAD_DEP": "Carica ricevuta deposito",
         "UPLOAD_SUCC": "Documento caricato correttamente",
         "TEXTLIB": "* Il libretto di circolazione è obbligatorio per la creazione del veicolo",
+        "TEXTIBAN": "* Per effettuare il deposito cauzionale eseguire un versamento sull'IBAN: ",
         "TYPE_DOC": "Tipo documento",
         "deposit": "Deposito",
         "request": "Richiesta",
@@ -384,7 +385,8 @@
             "ACTIVE": "Attiva",
             "VERIFY": "Verifica",
             "CLOSE": "Chiudi",
-            "SEARCH": "Cerca"
+            "SEARCH": "Cerca",
+            "COPY": "Copia"
         }
     },
     "ERROR": {
@@ -466,6 +468,7 @@
             "associate_to_other_domains": "L'obu da sostituire è associato ad un altro dominio, rimuovilo da tutti i domini"
         },
         "ines": {
+            "request": "Servizi ines non raggiungibili",
             "fleet": {
                 "fiscal": "Codice fiscale non corretto",
                 "undefined": "Controllo bus: Fleet-manager vuoto",

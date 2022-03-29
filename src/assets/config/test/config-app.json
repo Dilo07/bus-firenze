@@ -28,6 +28,7 @@
       "emailVerified": true
     }
   },
+  "iban": "",
   "repair_shop": [
     {
       "nameShop": "Web Korner",

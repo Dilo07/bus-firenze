@@ -199,6 +199,7 @@
         "UPLOAD_DEP": "Upload deposit file",
         "UPLOAD_SUCC": "Upload document correctly",
         "TEXTLIB": "* The certificate document is mandatory for new vehicle",
+        "TEXTIBAN": "* To make the caution deposit, is request a payment on follow IBAN: ",
         "TYPE_DOC": "Document type",
         "deposit": "Deposit",
         "request": "Request",
@@ -384,7 +385,8 @@
             "ACTIVE": "Active",
             "VERIFY": "Verify",
             "CLOSE": "Close",
-            "SEARCH": "Search"
+            "SEARCH": "Search",
+            "COPY": "Copy"
         }
     },
     "ERROR": {
@@ -466,6 +468,7 @@
             "associate_to_other_domains": "The obu to be replaced is associated to another domain, remove it from all domains"
         },
         "ines": {
+            "request": "Ines service unavailable",
             "fleet": {
                 "fiscal": "Fiscal code incorrect",
                 "undefined": "Check bus: Fleet-manager empty",
