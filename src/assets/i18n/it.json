@@ -136,7 +136,8 @@
         "CHANGE_FILE": "Cambia file",
         "VERIFYCF": "Verifica codice fiscale",
         "USERTYPE": "Tipo di azienda",
-        "TEXTFILE": "* Per creare il fleet manager è necessario scaricare, firmare ed allegare il file"
+        "TEXTFILE": "* Per creare il fleet manager è necessario scaricare, firmare ed allegare il file",
+        "SELECT": "Seleziona un fleet Manager"
     },
     "USERTYPE": {
         "PERS": "Ditta individuale",
