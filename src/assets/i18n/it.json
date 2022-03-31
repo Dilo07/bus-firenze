@@ -68,6 +68,13 @@
         "CLEAN": "Ripulisci",
         "SEARCH": "Cerca",
         "NO_DATA": "Nessun Fleet manager presente",
+        "FORM-INFO": "Istruzioni per la registrazione fleet manager",
+        "STEP-1": "scarica la ",
+        "NEED_DOC": "documentazione necessaria",
+        "STEP-2": "compila e firma il modulo di registrazione (si trova nella documentazione scaricata).",
+        "STEP-3": "una volta compilato il modulo inserisci i dati nel form di registrazione presente in questa pagina.",
+        "STEP-4": "carica la scansione del modulo di registrazione compilato e firmato mediante il pulsante ",
+        "STEP-5": "Per completare la registrazione, in questo form è richiesta la verifica del numero di cellulare mediante l'invio di un codice OTP.",
         "INITIAL MESSAGE": "Inserisci un nuovo Fleet-Manager o cercane uno esistente",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Fleet Manager",
         "MESSAGE_VIEW": "Informazioni Fleet manager",
@@ -395,12 +402,12 @@
         "INTERNAL_SERVER_ERROR": "Errore interno al server"
     },
     "error": {
-        "generic": "Error server site",
+        "generic": "Errore lato server",
         "alert": {
-            "send": "Error send alert"
+            "send": "Errore invio messaggio di allerta"
         },
         "notification": {
-            "send": "Error send notification"
+            "send": "Errore invio notifiche"
         },
         "code": {
             "lang": "Lingua non supportata",

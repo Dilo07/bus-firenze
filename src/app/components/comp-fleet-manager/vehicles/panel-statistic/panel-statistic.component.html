@@ -1,5 +1,5 @@
 <mat-accordion>
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel [expanded]="panelOpenState">
         <mat-expansion-panel-header [collapsedHeight]="'80px'" [expandedHeight]="'80px'">
             <mat-panel-description>
                 {{'STATISTIC.LAST-MONTH' | translate}}
@@ -35,7 +35,7 @@
         </div>
         <div fxLayout="row wrap" fxLayoutAlign="center">
             <app-trip-statistic [vehicleStatTrip]="tripStat" [viewOuter]="viewOuter"></app-trip-statistic>
-            <form [formGroup]="FormGroup">
+            <form [formGroup]="formGroup">
                 <mat-form-field appearance="fill">
                     <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
                     <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
@@ -45,10 +45,10 @@
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>
     
-                    <mat-error *ngIf="FormGroup.controls.start.hasError('required') || FormGroup.controls.start.hasError('matStartDateInvalid')">
+                    <mat-error *ngIf="formGroup.controls.start.hasError('required') || formGroup.controls.start.hasError('matStartDateInvalid')">
                         {{'STATISTIC.INVALID_START' | translate}}
                     </mat-error>
-                    <mat-error *ngIf="FormGroup.controls.end.hasError('required') || FormGroup.controls.end.hasError('matEndDateInvalid')">
+                    <mat-error *ngIf="formGroup.controls.end.hasError('required') || formGroup.controls.end.hasError('matEndDateInvalid')">
                         {{'STATISTIC.INVALID_END' | translate}}
                     </mat-error>
                 </mat-form-field>

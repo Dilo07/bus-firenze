@@ -8,10 +8,9 @@ import { FleetManager, VatValidation } from '../components/domain/bus-firenze-do
   providedIn: 'root'
 })
 export class RegisterService {
+  private apiUrl = this.url + '/noauth';
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
-
-  private apiUrl = this.url + '/noauth';
 
   getOtpCode(contact: string, lang: string): Observable<string> {
     return this.http.post<string>(this.apiUrl + '/register/code/' + lang, contact)

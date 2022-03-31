@@ -28,6 +28,7 @@ import { PanelStatisticComponent } from './vehicles/panel-statistic/panel-statis
 import { TableStatisticComponent } from './vehicles/table-statistic/table-statistic.component';
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
+import { ExpansionInfoComponent } from './form-fleet-manager/expansion-info/expansion-info.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
     AssociationDriversVehiclesComponent,
     AnagraphicDriverComponent,
     AssociationVehiclesComponent,
-    Ng2telinputDirective
+    Ng2telinputDirective,
+    ExpansionInfoComponent
   ],
   imports: [
     CommonModule,

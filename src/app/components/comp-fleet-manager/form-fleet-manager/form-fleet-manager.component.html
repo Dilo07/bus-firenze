@@ -9,9 +9,10 @@
         {{'FLEET-MANAGER.REGISTRATION' | translate}}
     </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
-        <div fxLayout="row" fxLayoutAlign="center" *ngIf="register">
+        <app-expansion-info></app-expansion-info>
+        <!-- <div fxLayout="row" fxLayoutAlign="center" *ngIf="register">
             {{'FLEET-MANAGER.REGISTRATION_HEADER' | translate}}
-        </div>
+        </div> -->
         <form [formGroup]="formGroup" fxLayout="column">
             <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
@@ -198,8 +199,8 @@
         </form>
         <div fxLayout="row" fxLayoutAlign="center center">{{selectedFile?.name}}</div>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" *ngIf="!data">
-            <button mat-button class="bluButton" (click)="downloadTemplate()">
-                {{'FLEET-MANAGER.DOWNLOAD_TEMPLATE' | translate}}</button>
+            <!-- <button mat-button class="bluButton" (click)="downloadTemplate()">
+                {{'FLEET-MANAGER.DOWNLOAD_TEMPLATE' | translate}}</button> -->
             <input style="display: none" type="file" #fileInput accept="application/pdf, image/jpeg, image/png"
                 (change)="uploadFile($event)">
             <button mat-button class="bluButton" (click)="fileInput.click()">

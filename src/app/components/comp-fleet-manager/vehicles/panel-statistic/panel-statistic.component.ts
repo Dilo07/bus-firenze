@@ -20,7 +20,7 @@ export class PanelStatisticComponent implements OnInit, OnDestroy {
   @Input() fleetManager: FleetManager;
   public panelOpenState = false;
   public tripStat: TripStat;
-  public FormGroup: FormGroup;
+  public formGroup: FormGroup;
   public start = moment(moment.now()).subtract(1, 'month');
   public end = moment(moment.now());
   public maxDate = moment(moment.now()).toDate();
@@ -32,7 +32,7 @@ export class PanelStatisticComponent implements OnInit, OnDestroy {
     private statisticService: StatisticService) { }
 
   ngOnInit(): void {
-    this.FormGroup = new FormGroup({
+    this.formGroup = new FormGroup({
       start: new FormControl(moment(this.start).toDate(), Validators.required),
       end: new FormControl(moment(this.end).toDate(), Validators.required),
     });
@@ -45,6 +45,14 @@ export class PanelStatisticComponent implements OnInit, OnDestroy {
     });
   }
 
+  public changeDate(e: MatDatepickerInputEvent<any>): void {
+    if (e.value && !this.formGroup.invalid) {
+      this.start = this.formGroup.get('start').value;
+      this.end = this.formGroup.get('end').value;
+      this.getStatistic();
+    }
+  }
+
   private getStatistic(): void {
     const start = moment(this.start).format('yyyy-MM-DD');
     const end = moment(this.end).format('yyyy-MM-DD');
@@ -52,14 +60,6 @@ export class PanelStatisticComponent implements OnInit, OnDestroy {
     this.subscription.push(this.statisticService.getTripInfoByFleetId(inner, start, end, this.fleetManager?.id).subscribe(
       (data) => this.tripStat = data
     ));
-  }
-
-  public changeDate(e: MatDatepickerInputEvent<any>): void {
-    if (e.value && !this.FormGroup.invalid) {
-      this.start = this.FormGroup.get('start').value;
-      this.end = this.FormGroup.get('end').value;
-      this.getStatistic();
-    }
   }
 
 }

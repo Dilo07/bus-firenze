@@ -68,6 +68,13 @@
         "CLEAN": "Clean",
         "SEARCH": "Search Here",
         "NO_DATA": "Nobody Fleet manager present",
+        "FORM-INFO": "Instructions for fleet manager registration",
+        "STEP-1": "Download the ",
+        "NEED_DOC": "documentation",
+        "STEP-2": "fill in and sign the registration form (found in the downloaded documentation).",
+        "STEP-3": "once you have filled out the form, enter the data in the registration form on this page.",
+        "STEP-4": "upload the scan of the completed and signed registration form using the button ",
+        "STEP-5": "To complete the registration, this form requires the verification of the mobile number by sending an OTP code.",
         "INITIAL MESSAGE": "Insert a new Fleet Manager or search for an existing one",
         "MESSAGE_NEW": "Insert the data of new Fleet Manager",
         "MESSAGE_VIEW": "Fleet manager information",
@@ -395,7 +402,7 @@
         "INTERNAL_SERVER_ERROR": "Internal server error"
     },
     "error": {
-        "generic": "Error server site",
+        "generic": "Error server side",
         "alert": {
             "send": "Errore nell'invio messaggio"
         },
