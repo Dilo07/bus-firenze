@@ -19,16 +19,17 @@ import { DriversComponent } from './drivers/drivers.component';
 import { AssociationDriversVehiclesComponent } from './drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
 import { FleetManagerRoutingModule } from './fleet-manager.routing';
+import { ExpansionInfoComponent } from './form-fleet-manager/expansion-info/expansion-info.component';
 import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manager.component';
 import { ModalOTPComponent } from './register-page/modal-otp/modal-otp.component';
 import { RegisterComponent } from './register-page/register.component';
+import { ExpansionInfoVehicleComponent } from './vehicles/modal-form-vehicle/expansion-info-vehicle/expansion-info-vehicle.component';
 import { ModalFormVehicleComponent } from './vehicles/modal-form-vehicle/modal-form-vehicle.component';
 import { StatisticComponent } from './vehicles/page-statistic/statistic.component';
 import { PanelStatisticComponent } from './vehicles/panel-statistic/panel-statistic.component';
 import { TableStatisticComponent } from './vehicles/table-statistic/table-statistic.component';
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
-import { ExpansionInfoComponent } from './form-fleet-manager/expansion-info/expansion-info.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { ExpansionInfoComponent } from './form-fleet-manager/expansion-info/expa
     AnagraphicDriverComponent,
     AssociationVehiclesComponent,
     Ng2telinputDirective,
-    ExpansionInfoComponent
+    ExpansionInfoComponent,
+    ExpansionInfoVehicleComponent
   ],
   imports: [
     CommonModule,

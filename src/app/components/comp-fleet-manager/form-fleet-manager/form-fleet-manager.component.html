@@ -9,7 +9,7 @@
         {{'FLEET-MANAGER.REGISTRATION' | translate}}
     </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
-        <app-expansion-info></app-expansion-info>
+        <app-expansion-info *ngIf="!data"></app-expansion-info>
         <!-- <div fxLayout="row" fxLayoutAlign="center" *ngIf="register">
             {{'FLEET-MANAGER.REGISTRATION_HEADER' | translate}}
         </div> -->

@@ -1,0 +1,26 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState">
+        <mat-expansion-panel-header [collapsedHeight]="'50px'" [expandedHeight]="'50px'">
+            <mat-panel-description>
+                {{'VEHICLE.FORM-INFO' | translate}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list role="list">
+            <mat-list-item role="listitem">
+                <p mat-line>1. {{'VEHICLE.STEP-1' | translate}}
+                </p>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+                <p mat-line>2. {{'VEHICLE.STEP-2' | translate}} <b>{{'VEHICLE.UPLOAD_LIB' | translate}}</b></p>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+                <p mat-line>3. {{'VEHICLE.STEP-3' | translate}} <b>{{'VEHICLE.UPLOAD_DEP' | translate}}</b></p>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+                <p mat-line>{{'VEHICLE.STEP-4' | translate}}
+                    <a class="link" (click)="downloadDocument()">{{'VEHICLE.ECONOMICDOC' | translate}}</a>.
+                </p>
+            </mat-list-item>
+        </mat-list>
+    </mat-expansion-panel>
+</mat-accordion>
