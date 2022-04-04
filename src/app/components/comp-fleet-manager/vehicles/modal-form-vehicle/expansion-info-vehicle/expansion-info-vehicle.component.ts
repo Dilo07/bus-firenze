@@ -1,22 +1,26 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DocumentService } from 'src/app/services/document.service';
-import { Modules } from '../../domain/bus-firenze-domain';
 
 @Component({
-  selector: 'app-documents',
-  templateUrl: './documents.component.html',
-  styles: [
+  selector: 'app-expansion-info-vehicle',
+  templateUrl: './expansion-info-vehicle.component.html',
+  styles: [`
+  .link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  `
   ]
 })
-export class DocumentsComponent implements OnDestroy {
+export class ExpansionInfoVehicleComponent implements OnDestroy {
+  public panelOpenState = true;
+
   private subscription: Subscription[] = [];
 
-  constructor(
-    private documentService: DocumentService,
-    @Inject('modulesData') public modules: Modules[]
-  ) { }
+  constructor(private documentService: DocumentService) { }
 
   ngOnDestroy(): void {
     this.subscription.forEach(subscription => {
@@ -24,8 +28,9 @@ export class DocumentsComponent implements OnDestroy {
     });
   }
 
-  public download(path: string): void {
+  public downloadDocument(): void {
     const fileSaver = require('file-saver');
+    const path = 'IBUS_Firenze_Condizioni_Economiche.v0.8.pdf';
     this.subscription.push(this.documentService.getDocument(path).subscribe(
       (data: HttpResponse<Blob>) => {
         const contentDispositionHeader = data.headers.get('Content-Disposition');
@@ -33,4 +38,5 @@ export class DocumentsComponent implements OnDestroy {
         fileSaver.saveAs(data.body, filename);
       }));
   }
+
 }

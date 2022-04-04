@@ -2,9 +2,10 @@
     <mat-card-title fxLayout="row" fxLayoutAlign="center center">
         {{ (data.vehicle ? 'VEHICLE.EDIT' : 'VEHICLE.NEW') | translate }}
     </mat-card-title>
-    <mat-card-content>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <app-expansion-info-vehicle *ngIf="!data.vehicle"></app-expansion-info-vehicle>
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-        <form [formGroup]="formGroup" fxLayout="column" fxLayoutGap="20px">
+        <form [formGroup]="formGroup" fxLayout="column" fxLayoutGap="10px">
             <!-- <div *ngIf="!data.vehicle else viewContractType" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
                 <label>{{'VEHICLE.CONTRACT' | translate}}</label>
                 <mat-radio-group formControlName="CtrlContract">
@@ -102,6 +103,7 @@
                     <button mat-icon-button [cdkCopyToClipboard]="iban">
                         <mat-icon matTooltip="{{'COMMON.ACTION.COPY' | translate}}">content_copy</mat-icon>
                     </button>
+                    {{'VEHICLE.TEXTCAUSAL' | translate}}
                 </p>
                 <mat-label> {{libDocument?.name}}</mat-label>
                 <button mat-button class="bluButton" (click)="fileInput.click();">

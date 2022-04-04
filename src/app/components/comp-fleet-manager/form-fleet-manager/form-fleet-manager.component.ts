@@ -35,7 +35,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public filteredList = this.nations.slice();
   public fleetType = FLEETMNG_TYPE;
   public userTypes = [this.fleetType.DITTA_INDIVIDUALE, this.fleetType.AZIENDA_PRIVATA, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
-  public userSel: string = this.fleetType.AZIENDA_PRIVATA;
+  public userSel: string;
   public completePiva = true;
   public completePiva2 = true;
 
@@ -80,6 +80,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ctrlCAP: [this.data.cap],
         ctrlNat: [{ value: this.data.country, disabled: this.roleFleetManager ? true : false }, Validators.required]
       });
+      this.userSel = this.data.companyType;
       const phoneNumber = parsePhoneNumber(this.formGroup.get('ctrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
     } else {
@@ -101,6 +102,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ctrlCAP: [''],
         ctrlNat: ['IT', Validators.required]
       });
+      this.userSel = this.fleetType.AZIENDA_PRIVATA;
     }
     this.changeFormNat(true);
   }

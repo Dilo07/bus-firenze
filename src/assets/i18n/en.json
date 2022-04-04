@@ -68,6 +68,13 @@
         "CLEAN": "Clean",
         "SEARCH": "Search Here",
         "NO_DATA": "Nobody Fleet manager present",
+        "FORM-INFO": "Instructions for fleet manager registration",
+        "STEP-1": "Download the ",
+        "NEED_DOC": "documentation",
+        "STEP-2": "fill in and sign the registration form (found in the downloaded documentation).",
+        "STEP-3": "once you have filled out the form, enter the data in the registration form on this page.",
+        "STEP-4": "upload the scan of the completed and signed registration form using the button ",
+        "STEP-5": "To complete the registration, this form requires the verification of the mobile number by sending an OTP code.",
         "INITIAL MESSAGE": "Insert a new Fleet Manager or search for an existing one",
         "MESSAGE_NEW": "Insert the data of new Fleet Manager",
         "MESSAGE_VIEW": "Fleet manager information",
@@ -136,7 +143,8 @@
         "CHANGE_FILE": "Change file",
         "VERIFYCF": "Verify fiscal code",
         "USERTYPE": "Company type",
-        "TEXTFILE": "* To creare the fleet manager you need to download, sign and attach the file"
+        "TEXTFILE": "* To creare the fleet manager you need to download, sign and attach the file",
+        "SELECT": "Select a fleet Manager"
     },
     "USERTYPE": {
         "PERS": "Individual company",
@@ -146,11 +154,17 @@
     },
     "VEHICLE": {
         "TITLE": "Vehicles",
-        "NEW": "New",
-        "EDIT": "Edit",
+        "NEW": "New vehicle",
+        "EDIT": "Edit vehicle",
         "CONTRACT": "Contract",
         "BUYING": "Buying",
         "RENT": "Rent",
+        "FORM-INFO":"Instruction for new vehicle registration",
+        "STEP-1": "fill out the form on this page.",
+        "STEP-2": "scan the vehicle registration document and upload it (mandatory) using the button ",
+        "STEP-3": "make the payment of the security deposit and upload the receipt using the button ",
+        "STEP-4": "This last step can also be carried out later. For the exact amount consult the ",
+        "ECONOMICDOC": "Economic condition",
         "CERTIFICATE": "Certificate",
         "NOCERTIFICATE": "Certificate not uploaded",
         "CERTIFICATE_MODIFY": "Edit certificate",
@@ -200,9 +214,12 @@
         "UPLOAD_SUCC": "Upload document correctly",
         "TEXTLIB": "* The certificate document is mandatory for new vehicle",
         "TEXTIBAN": "* To make the caution deposit, is request a payment on follow IBAN: ",
+        "TEXTCAUSAL": "- Causal ZTLBUS caution deposit for plate (vehicle plate)",
         "TYPE_DOC": "Document type",
-        "deposit": "Deposit",
-        "request": "Request",
+        "RIC_DEPOSIT": "Receive deposit",
+        "deposit": "Receive deposit",
+        "RIM_DEPOSIT": "Refund deposit",
+        "request": "Refund deposit",
         "VIEWDEPOSIT": "View deposit",
         "NODEPOSIT": "Deposit not uploaded",
         "ADDDEPOSIT": "Add deposito",
@@ -394,7 +411,7 @@
         "INTERNAL_SERVER_ERROR": "Internal server error"
     },
     "error": {
-        "generic": "Error server site",
+        "generic": "Error server side",
         "alert": {
             "send": "Errore nell'invio messaggio"
         },

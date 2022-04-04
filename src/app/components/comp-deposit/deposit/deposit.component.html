@@ -50,9 +50,9 @@
                     </ng-container>
 
                     <ng-container matColumnDef="depositDocument">
-                        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.deposit' | translate}} </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.RIC_DEPOSIT' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">{{'VEHICLE.deposit' | translate}}</span>
+                            <span class="mobile-label">{{'VEHICLE.RIC_DEPOSIT' | translate}}</span>
                             <button mat-icon-button [disabled]="!(element.documents | hasDeposit: false)"
                                 (click)="viewDeposit(element.id, element.documents, true)">
                                 <mat-icon [style.color]="(element.documents | hasDeposit: false) ? '#0066CC' : 'grey'"
@@ -74,8 +74,9 @@
                     </ng-container>
 
                     <ng-container matColumnDef="requestDocument">
-                        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.request' | translate}} </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.RIM_DEPOSIT' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">{{'VEHICLE.RIM_DEPOSIT' | translate}}</span>
                             <button mat-icon-button *ngIf="element.documents | hasRequest: false"
                                 (click)="viewDeposit(element.id, element.documents, false)">
                                 <mat-icon style="color: #0066CC" matTooltip="visualizza richiesta deposito">
