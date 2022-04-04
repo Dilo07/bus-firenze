@@ -32,7 +32,7 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Input() idFleet: number;
   public dataSource = new MatTableDataSource<Vehicle>();
-  public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'type', 'certificateId', 'actions'];
+  public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'certificateId', 'type', 'actions'];
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
 
   private subscription: Subscription[] = [];
