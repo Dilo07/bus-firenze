@@ -112,8 +112,8 @@ export class DriversComponent implements OnInit, OnDestroy {
       data: { text: 'DRIVERS.DELETE_CONFIRM' },
       autoFocus: false
     });
-    dialogRef.afterClosed().subscribe((data) => {
-      if (data) {
+    dialogRef.afterClosed().subscribe((confirm) => {
+      if (confirm) {
         this.driverService.deleteDriver(idDriver, this.fleetManagerId).subscribe(
           () => this.snackBar.showMessage('DRIVERS.DELETE_SUCCESS', 'INFO'),
           () => null,

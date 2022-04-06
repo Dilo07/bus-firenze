@@ -8,9 +8,10 @@ import { catchError } from 'rxjs/operators';
 })
 export class DocumentService {
 
+  private apiUrl = this.url + '/api/download';
+
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
-  private apiUrl = this.url + '/api/download';
 
   getDocument(path: string): Observable<HttpResponse<Blob> | Blob> {
     const options = {

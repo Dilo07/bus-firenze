@@ -10,13 +10,12 @@ import { driversByVehicle, vehiclesByDriver } from './mokup/getDriverVehicle';
   providedIn: 'root'
 })
 export class DriverService {
+  private apiUrl = this.url + '/api/fleet';
+  private driversByVehicle = driversByVehicle;
+  private vehiclesByDriver = vehiclesByDriver;
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
-  private apiUrl = this.url + '/api/fleet';
-
-  private driversByVehicle = driversByVehicle;
-  private vehiclesByDriver = vehiclesByDriver;
 
   getDriver(): Observable<Driver> {
     return this.http.get<Driver>(this.apiUrl + '/driver')
