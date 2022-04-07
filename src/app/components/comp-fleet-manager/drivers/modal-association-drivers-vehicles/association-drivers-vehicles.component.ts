@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { DriverVehicle } from 'src/app/components/domain/bus-firenze-domain';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DriverService } from 'src/app/services/driver.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-association-drivers-vehicles',
@@ -14,9 +15,11 @@ import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
   }
   `]
 })
-export class AssociationDriversVehiclesComponent {
+export class AssociationDriversVehiclesComponent implements OnDestroy {
   public selectedElement: DriverVehicle[] = [];
   public arrayForDB: DriverVehicle[];
+
+  private subscription: Subscription[] = [];
 
   constructor(
     private driverService: DriverService,
@@ -24,6 +27,12 @@ export class AssociationDriversVehiclesComponent {
     public dialogRef: MatDialogRef<AssociationDriversVehiclesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { driverVehicle: DriverVehicle[]; idVehicle: number; idDriver: number; fleetManagerId: number }
   ) { }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+  }
 
   public saveAssociation(): void {
     this.arrayForDB = [];
@@ -44,21 +53,19 @@ export class AssociationDriversVehiclesComponent {
     });
     if (this.arrayForDB.length > 0) { // se ci sono state modifiche chiama l'api altrimenti no
       if (!this.data.idVehicle) {
-        this.driverService.updateVehiclesByDriver(this.arrayForDB, this.data.idDriver, this.data.fleetManagerId).subscribe(
+        this.subscription.push(this.driverService.updateVehiclesByDriver(this.arrayForDB, this.data.idDriver, this.data.fleetManagerId).subscribe(
           () => {
             this.snackBar.showMessage('DRIVERS.ASSOCIATION_SUCCESS', 'INFO');
             this.dialogRef.close(true);
-          },
-          () => null
-        );
+          }
+        ));
       } else {
-        this.driverService.updateDriversByVehicle(this.data.idVehicle, this.arrayForDB, this.data.fleetManagerId).subscribe(
+        this.subscription.push(this.driverService.updateDriversByVehicle(this.arrayForDB, this.data.idVehicle, this.data.fleetManagerId).subscribe(
           () => {
             this.snackBar.showMessage('DRIVERS.ASSOCIATION_SUCCESS', 'INFO');
             this.dialogRef.close(true);
-          },
-          () => null
-        );
+          }
+        ));
       }
     } else {
       this.dialogRef.close(false);

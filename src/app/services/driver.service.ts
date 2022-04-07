@@ -107,7 +107,7 @@ export class DriverService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  updateDriversByVehicle(vehicleId: number, driverVehicle: DriverVehicle[], fleetManagerId?: number): Observable<void> {
+  updateDriversByVehicle(driverVehicle: DriverVehicle[], vehicleId: number, fleetManagerId?: number): Observable<void> {
     let urlFleet = '';
     if (fleetManagerId) {
       urlFleet = '/' + fleetManagerId;

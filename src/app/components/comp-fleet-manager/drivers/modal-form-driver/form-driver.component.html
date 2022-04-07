@@ -9,23 +9,23 @@
             </span>
         </ng-template>
     </mat-card-title>
-    <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="FormGroup">
-        <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px">
+    <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
+        <form [formGroup]="formGroup" fxLayout="column" fxLayoutGap="20px">
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.NAME' | translate}}</mat-label>
-                    <input matInput type="text" formControlName="CtrlName" maxlength="25" required>
+                    <input matInput type="text" formControlName="ctrlName" maxlength="25" required>
                     <mat-error>{{'FLEET-MANAGER.INSERT_NAME' | translate}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.SURNAME' | translate}}</mat-label>
-                    <input matInput type="text" formControlName="CtrlSurname" maxlength="25" required>
+                    <input matInput type="text" formControlName="ctrlSurname" maxlength="25" required>
                     <mat-error>{{'FLEET-MANAGER.INSERT_SURNAME' | translate}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label>E-Mail</mat-label>
-                    <input matInput type="text" formControlName="CtrlMail" maxlength="100" required>
-                    <mat-error *ngIf="FormGroup.get('CtrlMail').invalid">{{'FLEET-MANAGER.INSERT_MAIL' | translate}}
+                    <input matInput type="text" formControlName="ctrlMail" maxlength="100" required>
+                    <mat-error *ngIf="formGroup.get('ctrlMail').invalid">{{'FLEET-MANAGER.INSERT_MAIL' | translate}}
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -37,7 +37,7 @@
                         (countryChange)="onCountryChange($event)" formControlName="CtrlCell" maxlength="25" required
                         [readonly]="verifyOtp">
                     <button matSuffix mat-icon-button matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}"
-                        *ngIf="FormGroup.get('CtrlCell').value && !verifyOtp" (click)="modalOTP()">
+                        *ngIf="formGroup.get('CtrlCell').value && !verifyOtp" (click)="modalOTP()">
                         <mat-icon>mobile_screen_share</mat-icon>
                     </button>
                     <mat-icon matSuffix *ngIf="verifyOtp" matTooltip="{{'FLEET-MANAGER.MOBILE_VERIFIED' | translate}}"
@@ -52,12 +52,12 @@
                 [state]="{fleetManagerId: fleetManagerId}" class="backButton">
                 {{'FLEET-MANAGER.BACK' | translate}}
             </button>
-            <button *ngIf="!driver" mat-button [disabled]="FormGroup.invalid" class="greenButtons"
+            <button *ngIf="!driver" mat-button [disabled]="formGroup.invalid" class="greenButtons"
                 (click)="addDriver()">
                 {{'FLEET-MANAGER.SAVE' | translate}}
             </button>
             <button *ngIf="driver" mat-button
-                [disabled]="FormGroup.invalid || !FormGroup.dirty || (roleDriver && !verifyOtp)" class="greenButtons"
+                [disabled]="formGroup.invalid || !formGroup.dirty || (roleDriver && !verifyOtp)" class="greenButtons"
                 (click)="editDriver()">
                 {{'FLEET-MANAGER.EDIT' | translate}}
             </button>

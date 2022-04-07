@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
 import { DriverService } from 'src/app/services/driver.service';
@@ -13,7 +12,6 @@ import { DriverService } from 'src/app/services/driver.service';
 export class AnagraphicDriverComponent implements OnInit, OnDestroy {
   public complete = true;
   public driver: Driver;
-  public FormGroup: FormGroup;
 
   private subscription: Subscription[] = [];
 
