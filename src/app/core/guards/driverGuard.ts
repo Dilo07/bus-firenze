@@ -18,7 +18,7 @@ export class DriveGuard implements CanActivate {
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     let guard: boolean;
-    const checkGuard = this.sessionService.getSessionStorage('checkDriverGuard');
+    const checkGuard = this.sessionService.getSessionMemory('checkDriverGuard');
     const id = this.authService.getUserId();
     if (!checkGuard) { // verifica in sessione che non sia già stata fatta la call api
       if (id) {
@@ -37,11 +37,11 @@ export class DriveGuard implements CanActivate {
             guard = false;
           } else {
             guard = true;
-            this.sessionService.setSessionStorage('checkDriverGuard', true);
+            this.sessionService.setSessionMemory('checkDriverGuard', true);
           }
         } else { // se non è un driver passa la guardia
           guard = true;
-          this.sessionService.setSessionStorage('checkDriverGuard', true);
+          this.sessionService.setSessionMemory('checkDriverGuard', true);
         }
       }
     } else {
