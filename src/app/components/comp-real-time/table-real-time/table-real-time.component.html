@@ -60,7 +60,7 @@
         </ng-container>
 
         <mat-header-row class="mobileHeader" [style.display]="vehicleTable.length === 0 ? 'none' : '' "
-            *matHeaderRowDef="displayedColumns"></mat-header-row>
+            *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 </div>

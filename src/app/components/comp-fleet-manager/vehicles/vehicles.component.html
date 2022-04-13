@@ -160,7 +160,7 @@
 						</mat-cell>
 					</ng-container>
 
-					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
+					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
 						[style.display]="vehicleList.data.length === 0 ? 'none' : '' "></mat-header-row>
 					<mat-row *matRowDef="let row; columns: displayedColumns;"
 						[ngClass]="row.deleted ? 'obuDisactive' : ''"  class="hover-row"></mat-row>

@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IAuthenticationService } from '@npt/npt-template';
-import { CountryCallingCode, NationalNumber, parsePhoneNumber } from 'libphonenumber-js';
+import { CountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
@@ -23,7 +23,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   @Input() driver: Driver;
   @Input() fleetManagerId: number;
   @Input() cellularRequired: boolean;
-  public FormGroup: FormGroup;
+  public formGroup: FormGroup;
   public roleDriver: boolean;
   public verifyOtp = false;
   public dialCode: CountryCallingCode = '39';
@@ -49,23 +49,23 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   async ngOnInit(): Promise<void> {
     await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
     if (this.driver) {
-      this.FormGroup = this.formBuilder.group({
-        CtrlName: [this.driver.name, Validators.required],
-        CtrlSurname: [this.driver.surname, Validators.required],
-        CtrlMail: [this.findContactValue(3), Validators.email]
+      this.formGroup = this.formBuilder.group({
+        ctrlName: [this.driver.name, Validators.required],
+        ctrlSurname: [this.driver.surname, Validators.required],
+        ctrlMail: [this.findContactValue(3), Validators.email]
       });
     } else {
-      this.FormGroup = this.formBuilder.group({
-        CtrlName: ['', Validators.required],
-        CtrlSurname: ['', Validators.required],
-        CtrlMail: ['', Validators.email]
+      this.formGroup = this.formBuilder.group({
+        ctrlName: ['', Validators.required],
+        ctrlSurname: ['', Validators.required],
+        ctrlMail: ['', Validators.email]
       });
     }
     if (this.cellularRequired) {
-      this.FormGroup.addControl('CtrlCell', this.formBuilder.control('', Validators.required));
+      this.formGroup.addControl('CtrlCell', this.formBuilder.control('', Validators.required));
     }
     if (this.roleDriver) {
-      this.FormGroup.addControl('CtrlCell', this.formBuilder.control(this.findContactValue(1), Validators.required));
+      this.formGroup.addControl('CtrlCell', this.formBuilder.control(this.findContactValue(1), Validators.required));
     }
   }
 
@@ -77,13 +77,13 @@ export class FormDriverComponent implements OnInit, OnDestroy {
 
   public modalOTP(): void {
     if (this.cellularRequired) {
-      this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value.replace(/\s/g, '');
+      this.cellForm = '+' + this.dialCode + this.formGroup.get('CtrlCell').value.replace(/\s/g, '');
     } else {
-      if (this.FormGroup.get('CtrlCell').value.charAt(0) === '+') { // se c'è già un dial code prende solo il numero senza dial code
-        const natNumber = parsePhoneNumber(this.FormGroup.get('CtrlCell').value).nationalNumber; // estrae il num cell senza prefisso
+      if (this.formGroup.get('CtrlCell').value.charAt(0) === '+') { // se c'è già un dial code prende solo il numero senza dial code
+        const natNumber = parsePhoneNumber(this.formGroup.get('CtrlCell').value).nationalNumber; // estrae il num cell senza prefisso
         this.cellForm = '+' + this.dialCode + natNumber;
       } else {
-        this.cellForm = '+' + this.dialCode + this.FormGroup.get('CtrlCell').value.replace(/\s/g, '');
+        this.cellForm = '+' + this.dialCode + this.formGroup.get('CtrlCell').value.replace(/\s/g, '');
       }
     }
     const lang = this.translateService.currentLang;
@@ -110,10 +110,10 @@ export class FormDriverComponent implements OnInit, OnDestroy {
 
   public addDriver(): void {
     const newDriver = new Driver();
-    newDriver.name = this.FormGroup.get('CtrlName').value;
-    newDriver.surname = this.FormGroup.get('CtrlSurname').value;
+    newDriver.name = this.formGroup.get('ctrlName').value;
+    newDriver.surname = this.formGroup.get('ctrlSurname').value;
     newDriver.contacts = [];
-    const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
+    const mail = { code: 3, value: this.formGroup.get('ctrlMail').value };
     newDriver.contacts.push(mail);
     this.driverService.addDriver(newDriver, this.fleetManagerId).subscribe(
       () => null,
@@ -128,10 +128,10 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   public editDriver(): void {
     const editDriver = this.driver;
     const mobile = this.findContactValue(1);
-    editDriver.name = this.FormGroup.get('CtrlName').value;
-    editDriver.surname = this.FormGroup.get('CtrlSurname').value;
+    editDriver.name = this.formGroup.get('ctrlName').value;
+    editDriver.surname = this.formGroup.get('ctrlSurname').value;
     editDriver.contacts = [];
-    const mail = { code: 3, value: this.FormGroup.get('CtrlMail').value };
+    const mail = { code: 3, value: this.formGroup.get('ctrlMail').value };
     /* se è stata eseguita la verifica otp prende da cellForm,, altrimenti è un fleet role (che non può modificare il numero)
     e lascia quello che c'è */
     const cell = { code: 1, value: this.cellForm ? this.cellForm : mobile };
@@ -140,19 +140,19 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       editDriver,
       this.roleDriver ? null : editDriver.id,
       this.roleDriver ? null : this.fleetManagerId).subscribe(
-        () => null,
-        () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
-        () => {
-          this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO');
-          if (this.roleDriver && this.cellularRequired) {
-            this.router.navigate(['user-driver/anagraphic-driver']);
-            this.cellularRequired = false;
-          }
-          if (!this.roleDriver) {
-            this.router.navigate(['fleet-manager-manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
-          }
+      () => null,
+      () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
+      () => {
+        this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO');
+        if (this.roleDriver && this.cellularRequired) {
+          this.router.navigate(['user-driver/anagraphic-driver']);
+          this.cellularRequired = false;
         }
-      );
+        if (!this.roleDriver) {
+          this.router.navigate(['fleet-manager-manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
+        }
+      }
+    );
   }
 
   public onCountryChange(evt: any): void {

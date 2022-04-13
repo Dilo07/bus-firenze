@@ -21,6 +21,17 @@ export class Ng2telinputDirective implements OnInit {
     @Inject(PLATFORM_ID) private platformId: string) {
   }
 
+  @HostListener('blur') onBlur(): void {
+    const isInputValid: boolean = this.isInputValid();
+    if (isInputValid) {
+      const telOutput = this.ngTelInput.getNumber();
+      this.hasError.emit(isInputValid);
+      this.ng2TelOutput.emit(telOutput);
+    } else {
+      this.hasError.emit(isInputValid);
+    }
+  }
+
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.ng2TelInputOptions = {
@@ -36,17 +47,6 @@ export class Ng2telinputDirective implements OnInit {
       });
 
       this.intlTelInputObject.emit(this.ngTelInput);
-    }
-  }
-
-  @HostListener('blur') onBlur(): void {
-    const isInputValid: boolean = this.isInputValid();
-    if (isInputValid) {
-      const telOutput = this.ngTelInput.getNumber();
-      this.hasError.emit(isInputValid);
-      this.ng2TelOutput.emit(telOutput);
-    } else {
-      this.hasError.emit(isInputValid);
     }
   }
 
