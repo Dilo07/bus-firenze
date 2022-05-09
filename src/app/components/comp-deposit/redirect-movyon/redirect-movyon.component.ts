@@ -1,13 +1,10 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-redirect-movyon',
-  template: `
-    <p>
-      redirect-movyon works!
-    </p>
-  `,
+  template: ``,
   styles: [
   ]
 })
@@ -17,7 +14,6 @@ export class RedirectMovyonComponent implements OnInit {
 
   ngOnInit(): void {
     const url = this.router.url;
-    console.log(this.router.url);
     if(url === '/deposit'){
       this.router.navigate(['deposit/deposit']);
     }
