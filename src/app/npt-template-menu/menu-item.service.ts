@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { IMenuItemService, Menu } from '@npt/npt-template';
 
@@ -29,6 +30,7 @@ const SUBMENU_ROUTES = [
   { state: 'association-driver', name: 'Association-vehicles', icon: 'directions_car', roles: [ROLES.DRIVER] },
   { state: 'add-ticket', name: 'Add-ticket', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] },
   { state: 'manage-ticket', name: 'Manage-ticket', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] },
+  { state: 'billing', name: 'Billing', icon: 'euro_symbol', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] },
 ];
 
 const MENUITEMS = [
@@ -48,15 +50,19 @@ const MENUITEMS = [
   },
   {
     state: '', name: 'Manage', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1], SUBMENU_ROUTES[18]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
     state: '', name: 'Validation', type: 'submenu', icon: 'manage_accounts',
     children: [SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
+    state: 'payments', name: 'Payments', type: 'submenu', icon: 'manage_accounts',
+    children: [SUBMENU_ROUTES[1], SUBMENU_ROUTES[18]], roles: [ROLES.FLEETMNG]
+  },
+  {
     state: 'user-fleet-manager', name: 'User-Fleet', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[4], SUBMENU_ROUTES[5], SUBMENU_ROUTES[6], SUBMENU_ROUTES[1]], roles: [ROLES.FLEETMNG]
+    children: [SUBMENU_ROUTES[4], SUBMENU_ROUTES[5], SUBMENU_ROUTES[6]], roles: [ROLES.FLEETMNG]
   },
   {
     state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'assignment',

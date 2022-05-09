@@ -24,10 +24,14 @@ const routes: Routes = [
   },
   {
     path: 'deposit',
-    loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule)
+    loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule),
   },
   {
-    path: 'user-fleet-manager/deposit', // fm
+    path: 'billing',
+    loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule),
+  },
+  {
+    path: 'payments', // fm
     loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule)
   },
   {

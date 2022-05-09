@@ -8,12 +8,16 @@ import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-c
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 import { DepositRoutingModule } from './deposit.routing';
 import { DepositComponent } from './deposit/deposit.component';
+import { BillingItemsComponent } from './billing-items/billing-items.component';
+import { RedirectMovyonComponent } from './redirect-movyon/redirect-movyon.component';
 
 
 
 @NgModule({
   declarations: [
-    DepositComponent
+    DepositComponent,
+    BillingItemsComponent,
+    RedirectMovyonComponent
   ],
   imports: [
     CommonModule,
