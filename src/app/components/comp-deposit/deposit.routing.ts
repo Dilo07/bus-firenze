@@ -8,8 +8,10 @@ import { RedirectMovyonComponent } from './redirect-movyon/redirect-movyon.compo
 
 const routes: Routes = [
   { path: '', component: RedirectMovyonComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
-  { path: 'deposit', component: DepositComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } },
-  { path: 'billing', component: BillingItemsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } }
+  { path: 'dep-mov', component: DepositComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
+  { path: 'bil-mov', component: BillingItemsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
+  { path: 'deposit', component: DepositComponent, canActivate: [AuthGuard], data: { roles: [ROLES.FLEETMNG] } },
+  { path: 'billing', component: BillingItemsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.FLEETMNG] } }
 ];
 
 @NgModule({

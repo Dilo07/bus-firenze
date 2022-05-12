@@ -183,7 +183,7 @@
         "LPN_NAT": "Country",
         "EURO-CLASS": "EuroClass",
         "EUROPEAN-GROUP": "Category",
-        "EXPIRED": "Vehicle expired at",
+        "EXPIRED": "Vehicle expired ",
         "WILLEXPIRE": "Vehicle will expire at",
         "UNKNOWN": "Vehicle unknow on ines",
         "CONSENT": "Contract consent",

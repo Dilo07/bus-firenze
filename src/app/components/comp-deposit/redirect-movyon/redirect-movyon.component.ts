@@ -15,10 +15,10 @@ export class RedirectMovyonComponent implements OnInit {
   ngOnInit(): void {
     const url = this.router.url;
     if(url === '/deposit'){
-      this.router.navigate(['deposit/deposit']);
+      this.router.navigate(['deposit/dep-mov']);
     }
     if(url === '/billing'){
-      this.router.navigate(['billing/billing']);
+      this.router.navigate(['billing/bil-mov']);
     }
   }
 
