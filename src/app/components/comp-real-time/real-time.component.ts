@@ -8,7 +8,7 @@ import Map from 'ol/Map';
 import { Subscription } from 'rxjs';
 import { LiveStreamService } from 'src/app/services/live-stream.service';
 import { FirenzeMapUtils } from 'src/app/shared/utils/map/Firenze-map.utils';
-import { TimesRefresh } from '../domain/bus-firenze-constants';
+import { TIMEREFRESH } from '../domain/bus-firenze-constants';
 import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
 
 @Component({
@@ -25,8 +25,8 @@ export class RealTimeComponent {
   public vehicleTrip: VehicleTripPersistence[] = [];
   public center = [11.206119915108518, 43.81031349352526];
   public stop = true;
-  public actualTime = RefreshOption._5_minutes;
-  public times: RefreshInterface[] = TimesRefresh;
+  public actualTime = RefreshOption.time5minutes;
+  public times: RefreshInterface[] = TIMEREFRESH;
   public layersPopup = [FirenzeMapUtils.LayerEnum.POINT_REAL_TIME];
 
   private subscription: Subscription[] = [];
@@ -160,16 +160,16 @@ export class RealTimeComponent {
       this.stop = true;
     }
     switch (this.actualTime) {
-      case 0:
+      case RefreshOption.time1minute:
         milliseconds = 60000; // 1 min
         break;
-      case 1:
+      case RefreshOption.time5minutes:
         milliseconds = 300000; // 5 min
         break;
-      case 2:
+      case RefreshOption.time10minutes:
         milliseconds = 600000; // 10 min
         break;
-      case 3:
+      case RefreshOption.time30minutes:
         milliseconds = 1800000; // 30 min
         break;
     }

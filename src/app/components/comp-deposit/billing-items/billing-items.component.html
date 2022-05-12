@@ -1,1 +1,6 @@
-<p>billing-items works!</p>
+<div *ngIf="viewFleetTable else fmItems">
+    <app-table-fleet (callManageTicket)="getBillingItems($event)"></app-table-fleet>
+</div>
+<ng-template #fmItems>
+    <div> fleet user</div>
+</ng-template>
