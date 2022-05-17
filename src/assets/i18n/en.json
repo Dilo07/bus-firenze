@@ -390,6 +390,14 @@
         "GROUP6": "Motorcycles (class L)",
         "GROUP7": "Other vehicles"
     },
+    "BILLING_ITEMS": {
+        "NO_DATA": "Nobody billing items present"
+    },
+    "BILLING_TYPE": {
+        "INSTALL": "Install",
+        "DELTA_NOT_MERGEABLE": "Monthly fee",
+        "DELTA_MERGEABLE": "Periodic monthly fee"
+    },
     "COMMON": {
         "DATE": {
             "START": "Start",

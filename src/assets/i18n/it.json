@@ -390,6 +390,14 @@
         "GROUP6": "Motocicli (classe L)",
         "GROUP7": "Altri veicoli"
     },
+    "BILLING_ITEMS": {
+        "NO_DATA": "Nessuna fattura presente"
+    },
+    "BILLING_TYPE": {
+        "INSTALL": "Installazione",
+        "DELTA_NOT_MERGEABLE": "Canone mensile",
+        "DELTA_MERGEABLE": "Canone mensile periodico"
+    },
     "COMMON": {
         "DATE": {
             "START": "Inizio",

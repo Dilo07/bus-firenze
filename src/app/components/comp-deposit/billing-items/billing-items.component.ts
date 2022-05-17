@@ -2,17 +2,24 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { IAuthenticationService } from '@npt/npt-template';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
+import { BillingItems } from '../../domain/bus-firenze-domain';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-billing-items',
   templateUrl: './billing-items.component.html',
-  styles: [
+  styles: [`
+  table { width: 100%; }
+  `
   ]
 })
 export class BillingItemsComponent implements OnInit {
   public viewFleetTable: boolean;
+  public dataSource = new MatTableDataSource<BillingItems>();
+  public displayedColumns = ['id', 'fmId', 'vehicleId', 'typeId', 'price'];
+  public roleMovyon: boolean;
+  public complete = true;
 
-  private roleMovyon: boolean;
   private fleetManagerId: number;
 
   constructor(
@@ -29,12 +36,15 @@ export class BillingItemsComponent implements OnInit {
   }
 
   getBillingItems(fmId?: number): void{
+    this.complete = false;
     if (fmId) { // se è op o movyon verrà valorizzato flmId altrimenti se ruolo fm non verrà valorizzato
       this.fleetManagerId = fmId;
       this.viewFleetTable = false;
     }
     this.billingItemsService.getBillingItems(this.fleetManagerId).subscribe(
-      items => console.log(items)
+      items => this.dataSource.data = items,
+      () => this.complete = true,
+      () => this.complete = true
     );
   }
 

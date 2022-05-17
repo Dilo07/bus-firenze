@@ -177,9 +177,10 @@ export interface VatValidation {
 
 export interface BillingItems {
   id: number;
+  fmId: number;
+  vehicleId: number;
   billingSapId: number;
   billingState: string;
-  fmId: number;
   nptGopId: number;
   price: number;
   processedDate: Date;
@@ -188,5 +189,4 @@ export interface BillingItems {
   resSapMessage: string;
   sendDate: Date;
   typeId: string;
-  vehicleId: number;
 }

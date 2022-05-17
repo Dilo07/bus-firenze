@@ -12,13 +12,13 @@ export class BillingItemsService {
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
-  getBillingItems(fmId?: number): Observable<BillingItems> {
+  getBillingItems(fmId?: number): Observable<BillingItems[]> {
     let url = '';
     if (fmId) {
       url = '/' + fmId;
     }
 
-    return this.http.get<BillingItems>(this.apiUrl + '/all' + url)
+    return this.http.get<BillingItems[]>(this.apiUrl + '/all' + url)
       .pipe(catchError(err => { throw err; }));
   }
 }
