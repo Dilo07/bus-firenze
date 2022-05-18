@@ -2,9 +2,8 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IAuthenticationService } from '@npt/npt-template';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Subscription } from 'rxjs';
-import { debounceTime, take } from 'rxjs/operators';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
@@ -23,7 +22,7 @@ import { Ticket } from '../../domain/bus-firenze-domain';
 })
 export class ModalTestTicketComponent implements OnInit, OnDestroy {
   public FormGroup: FormGroup;
-  public validTicket: { valid: boolean, ticket: Ticket } = { valid: false, ticket: null };
+  public validTicket: { valid: boolean; ticket: Ticket } = { valid: false, ticket: null };
   public ticketType: string;
   public ticketsType = TICKETS_TYPE;
 

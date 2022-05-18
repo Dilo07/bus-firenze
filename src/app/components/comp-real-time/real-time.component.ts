@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Coordinate, MapUtils, NptMapComponent } from '@npt/npt-map';
 import { Geometry } from '@npt/npt-net';
-import * as moment from 'moment';
+import moment from 'moment';
 import Map from 'ol/Map';
 import { Subscription } from 'rxjs';
 import { LiveStreamService } from 'src/app/services/live-stream.service';
