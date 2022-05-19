@@ -4,7 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IAuthenticationService } from '@npt/npt-template';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
-import { debounceTime, take } from 'rxjs/operators';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
@@ -23,7 +22,7 @@ import { Ticket } from '../../domain/bus-firenze-domain';
 })
 export class ModalTestTicketComponent implements OnInit, OnDestroy {
   public FormGroup: FormGroup;
-  public validTicket: { valid: boolean, ticket: Ticket } = { valid: false, ticket: null };
+  public validTicket: { valid: boolean; ticket: Ticket } = { valid: false, ticket: null };
   public ticketType: string;
   public ticketsType = TICKETS_TYPE;
 
@@ -35,7 +34,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number, fleetManagerId: number, extend: boolean },
+    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number; fleetManagerId: number; extend: boolean },
     @Inject('authService') private authService: IAuthenticationService,
     @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {

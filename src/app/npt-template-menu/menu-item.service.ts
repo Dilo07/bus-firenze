@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { IMenuItemService, Menu } from '@npt/npt-template';
 
 /* Roles allowed by the application */
@@ -14,7 +14,7 @@ export const ROLES = Object.freeze({
 const SUBMENU_ROUTES = [
   { state: 'fleet-manager-manage', name: 'Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'deposit', name: 'Deposit', icon: 'euro_symbol', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] },
-  { state: 'billing', name: 'Billing', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] },
+  { state: 'billing', name: 'Billing', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'fleet-manager-valid', name: 'Valid-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicle-valid', name: 'Vehicle-valid', icon: 'directions_car', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
@@ -89,7 +89,12 @@ const MENUITEMS = [
 
 @Injectable()
 export class MenuItemService implements IMenuItemService {
+  constructor(@Inject('hideBillingData') private hideBilling: boolean) { }
+
   getMenuitem(): Menu[] {
+    if (!this.hideBilling) {
+      SUBMENU_ROUTES[2].roles.concat(ROLES.FLEETMNG);
+    }
     return MENUITEMS;
   }
 }
