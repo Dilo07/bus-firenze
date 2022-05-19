@@ -20,6 +20,9 @@ export class RedirectMovyonComponent implements OnInit {
     if(url === '/billing'){
       this.router.navigate(['billing/bil-mov']);
     }
+    if(url === '/penalties'){
+      this.router.navigate(['penalties/pen-mov']);
+    }
   }
 
 }

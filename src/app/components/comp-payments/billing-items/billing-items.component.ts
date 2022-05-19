@@ -4,6 +4,7 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { BillingItems } from '../../domain/bus-firenze-domain';
 import { MatTableDataSource } from '@angular/material/table';
+import { BILLING_STATUS } from '../../domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-billing-items',
@@ -19,6 +20,8 @@ export class BillingItemsComponent implements OnInit {
   public displayedColumns = ['id', 'fmId', 'vehicleId', 'typeId', 'price'];
   public roleMovyon: boolean;
   public complete = true;
+  public defaultBillingStatus = BILLING_STATUS.pending;
+  public billingStatus = [BILLING_STATUS.unknown, BILLING_STATUS.pending, BILLING_STATUS.success, BILLING_STATUS.failed];
 
   private fleetManagerId: number;
 
@@ -35,13 +38,13 @@ export class BillingItemsComponent implements OnInit {
     }
   }
 
-  getBillingItems(fmId?: number): void{
+  public getBillingItems(fmId?: number): void{
     this.complete = false;
     if (fmId) { // se è op o movyon verrà valorizzato flmId altrimenti se ruolo fm non verrà valorizzato
       this.fleetManagerId = fmId;
       this.viewFleetTable = false;
     }
-    this.billingItemsService.getBillingItems(this.fleetManagerId).subscribe(
+    this.billingItemsService.getBillingItems(this.defaultBillingStatus, this.fleetManagerId).subscribe(
       items => this.dataSource.data = items,
       () => this.complete = true,
       () => this.complete = true

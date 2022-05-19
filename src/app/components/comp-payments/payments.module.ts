@@ -10,14 +10,15 @@ import { PaymentsRoutingModule } from './payments.routing';
 import { DepositComponent } from './deposit/deposit.component';
 import { BillingItemsComponent } from './billing-items/billing-items.component';
 import { RedirectMovyonComponent } from './redirect-movyon/redirect-movyon.component';
-
+import { PenaltiesComponent } from './penalties/penalties.component';
 
 
 @NgModule({
   declarations: [
     DepositComponent,
     BillingItemsComponent,
-    RedirectMovyonComponent
+    RedirectMovyonComponent,
+    PenaltiesComponent
   ],
   imports: [
     CommonModule,

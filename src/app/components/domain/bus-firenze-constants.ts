@@ -81,8 +81,8 @@ export const STATUS_VEHICLE = Object.freeze({
 });
 
 export const CONTRACT_TYPE = {
-  RENT: 'RENT',
-  BUY: 'BUY'
+  rent: 'RENT',
+  buy: 'BUY'
 };
 
 export const TICKETS_TYPE = {
@@ -101,4 +101,11 @@ export const FLEETMNG_TYPE = Object.freeze({
 export const DEPOSIT_TYPE = {
   DEPOSIT: 'deposit',
   REQUEST: 'request'
+};
+
+export const BILLING_STATUS = {
+  unknown: 'UNKNOWN',
+  pending: 'PENDING',
+  success: 'SUCCESS',
+  failed: 'FAILED'
 };

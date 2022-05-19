@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { HttpUtils } from '@npt/npt-template';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BillingItems } from '../components/domain/bus-firenze-domain';
@@ -12,13 +13,17 @@ export class BillingItemsService {
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
-  getBillingItems(fmId?: number): Observable<BillingItems[]> {
+  getBillingItems(billingStatus: string, fmId?: number): Observable<BillingItems[]> {
     let url = '';
     if (fmId) {
       url = '/' + fmId;
     }
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({status: billingStatus })
+    };
 
-    return this.http.get<BillingItems[]>(this.apiUrl + '/all' + url)
+    return this.http.get<BillingItems[]>(this.apiUrl + '/all' + url, options)
       .pipe(catchError(err => { throw err; }));
   }
 }

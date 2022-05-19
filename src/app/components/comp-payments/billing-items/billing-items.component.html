@@ -6,9 +6,17 @@
         </div>
         <ng-template #fmItems>
             <div style="margin-bottom: 20px;" fxLayout="row" fxLayoutGap="20px">
-                <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
+                <span><button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
                     {{'FLEET-MANAGER.BACK' | translate}}
-                </button>
+                </button></span>
+                <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
+                    <mat-label> {{'BILLING_ITEMS.STATUS' | translate}}</mat-label>
+                    <mat-select [(ngModel)]="defaultBillingStatus" required (selectionChange)="getBillingItems()">
+                        <mat-option *ngFor="let status of billingStatus;" [value]="status">
+                            {{status}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

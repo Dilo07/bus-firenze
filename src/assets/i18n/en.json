@@ -15,6 +15,7 @@
         "Payments": "Payments",
         "Deposit": "Deposit",
         "Billing": "Billing",
+        "Penalties": "Penalties",
         "Validation": "Validation",
         "Valid-Fleet-manager": "Fleet manager",
         "Vehicle-valid": "Vehicles",
@@ -391,7 +392,8 @@
         "GROUP7": "Other vehicles"
     },
     "BILLING_ITEMS": {
-        "NO_DATA": "Nobody billing items present"
+        "NO_DATA": "Nobody billing items present",
+        "STATUS": "Billing status"
     },
     "BILLING_TYPE": {
         "INSTALL": "Install",
