@@ -5,19 +5,39 @@
             <app-table-fleet (callManageTicket)="getBillingItems($event)"></app-table-fleet>
         </div>
         <ng-template #fmItems>
-            <div style="margin-bottom: 20px;" fxLayout="row" fxLayoutGap="20px">
-                <span><button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
-                    {{'FLEET-MANAGER.BACK' | translate}}
-                </button></span>
-                <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
-                    <mat-label> {{'BILLING_ITEMS.STATUS' | translate}}</mat-label>
-                    <mat-select [(ngModel)]="defaultBillingStatus" required (selectionChange)="getBillingItems()">
-                        <mat-option *ngFor="let status of billingStatus;" [value]="status">
-                            {{status}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+            <mat-card>
+                <mat-card-content fxLayout="column" fxLayoutGap="20px">
+                    <span><button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
+                            {{'FLEET-MANAGER.BACK' | translate}}
+                        </button></span>
+                    <form [formGroup]="formGroup" style="margin-bottom: 20px;" fxLayout="column" fxLayoutGap="20px">
+                        <div fxLayout="row wrap" fxLayoutGap="20px">
+                            <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
+                                <mat-label>{{'COMMON.DATE.RANGE' | translate}}</mat-label>
+                                <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+                                    <input matStartDate formControlName="ctrlRangeStart">
+                                    <input matEndDate formControlName="ctrlRangeEnd">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                                <mat-error>{{'COMMON.DATE.INVALID' | translate}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
+                                <mat-label> {{'BILLING_ITEMS.STATUS' | translate}}</mat-label>
+                                <mat-select formControlName="ctrlBillingStatus" required>
+                                    <mat-option *ngFor="let status of billingStatus;" [value]="status">
+                                        {{status}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <span><button mat-raised-button class="bluButton" [disabled]="formGroup.invalid"
+                                (click)="getBillingItems()">
+                                {{'COMMON.ACTION.SEARCH' | translate}}
+                            </button></span>
+                    </form>
+                </mat-card-content>
+            </mat-card>
             <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                 <ng-container matColumnDef="id">
@@ -45,7 +65,8 @@
                     <td mat-cell *matCellDef="let element"> {{element.price}} € </td>
                 </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns" [style.display]="dataSource.data.length === 0 ? 'none' : '' "></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"
+                    [style.display]="dataSource.data.length === 0 ? 'none' : '' "></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
             <div *ngIf="dataSource.data.length === 0 && complete"> {{'BILLING_ITEMS.NO_DATA' | translate}}</div>

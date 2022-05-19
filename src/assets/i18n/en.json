@@ -403,7 +403,9 @@
     "COMMON": {
         "DATE": {
             "START": "Start",
-            "END": "End"
+            "END": "End",
+            "RANGE": "Select a range of date",
+            "INVALID": "Invalid range"
         },
         "ACTION": {
             "YES": "Yes",

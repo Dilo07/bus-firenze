@@ -13,14 +13,14 @@ export class BillingItemsService {
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
-  getBillingItems(billingStatus: string, fmId?: number): Observable<BillingItems[]> {
+  getBillingItems(start: string, end: string, billingStatus: string, fmId?: number): Observable<BillingItems[]> {
     let url = '';
     if (fmId) {
       url = '/' + fmId;
     }
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({status: billingStatus })
+      params: HttpUtils.createHttpParams({start, end, status: billingStatus })
     };
 
     return this.http.get<BillingItems[]>(this.apiUrl + '/all' + url, options)

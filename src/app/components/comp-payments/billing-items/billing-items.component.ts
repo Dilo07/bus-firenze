@@ -5,6 +5,8 @@ import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { BillingItems } from '../../domain/bus-firenze-domain';
 import { MatTableDataSource } from '@angular/material/table';
 import { BILLING_STATUS } from '../../domain/bus-firenze-constants';
+import * as moment from 'moment';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-billing-items',
@@ -15,13 +17,14 @@ import { BILLING_STATUS } from '../../domain/bus-firenze-constants';
   ]
 })
 export class BillingItemsComponent implements OnInit {
-  public viewFleetTable: boolean;
+  public viewFleetTable = false;
   public dataSource = new MatTableDataSource<BillingItems>();
   public displayedColumns = ['id', 'fmId', 'vehicleId', 'typeId', 'price'];
   public roleMovyon: boolean;
   public complete = true;
-  public defaultBillingStatus = BILLING_STATUS.pending;
   public billingStatus = [BILLING_STATUS.unknown, BILLING_STATUS.pending, BILLING_STATUS.success, BILLING_STATUS.failed];
+  public maxDate = moment().toDate();
+  public formGroup: FormGroup;
 
   private fleetManagerId: number;
 
@@ -30,6 +33,11 @@ export class BillingItemsComponent implements OnInit {
     @Inject('authService') private authService: IAuthenticationService) { }
 
   async ngOnInit(): Promise<void> {
+    this.formGroup = new FormGroup({
+      ctrlBillingStatus: new FormControl(BILLING_STATUS.pending),
+      ctrlRangeStart: new FormControl(moment().subtract(30, 'day').toDate(), Validators.required),
+      ctrlRangeEnd: new FormControl(moment().toDate(), Validators.required),
+    });
     await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON) || res.includes(ROLES.OPER_MOVYON));
     if (this.roleMovyon) {
       this.viewFleetTable = true;
@@ -44,7 +52,10 @@ export class BillingItemsComponent implements OnInit {
       this.fleetManagerId = fmId;
       this.viewFleetTable = false;
     }
-    this.billingItemsService.getBillingItems(this.defaultBillingStatus, this.fleetManagerId).subscribe(
+    const start = moment(this.formGroup.get('ctrlRangeStart').value).format('yyyy-MM-DD');
+    const end = moment(this.formGroup.get('ctrlRangeEnd').value).format('yyyy-MM-DD');
+    const billingStatus = this.formGroup.get('ctrlBillingStatus').value;
+    this.billingItemsService.getBillingItems(start, end, billingStatus, this.fleetManagerId).subscribe(
       items => this.dataSource.data = items,
       () => this.complete = true,
       () => this.complete = true
