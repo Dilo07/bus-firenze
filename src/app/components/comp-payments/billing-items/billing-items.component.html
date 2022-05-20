@@ -7,9 +7,6 @@
         <ng-template #fmItems>
             <mat-card>
                 <mat-card-content fxLayout="column" fxLayoutGap="20px">
-                    <span><button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
-                            {{'FLEET-MANAGER.BACK' | translate}}
-                        </button></span>
                     <form [formGroup]="formGroup" style="margin-bottom: 20px;" fxLayout="column" fxLayoutGap="20px">
                         <div fxLayout="row wrap" fxLayoutGap="20px">
                             <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
@@ -31,10 +28,15 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <span><button mat-raised-button class="bluButton" [disabled]="formGroup.invalid"
+                        <div fxLayout="row wrap" fxLayoutGap="20px">
+                            <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
+                                {{'FLEET-MANAGER.BACK' | translate}}
+                            </button>
+                            <button mat-raised-button class="bluButton" [disabled]="formGroup.invalid"
                                 (click)="getBillingItems()">
                                 {{'COMMON.ACTION.SEARCH' | translate}}
-                            </button></span>
+                            </button>
+                        </div>
                     </form>
                 </mat-card-content>
             </mat-card>

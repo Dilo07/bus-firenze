@@ -11,6 +11,7 @@ import { DepositComponent } from './deposit/deposit.component';
 import { BillingItemsComponent } from './billing-items/billing-items.component';
 import { RedirectMovyonComponent } from './redirect-movyon/redirect-movyon.component';
 import { PenaltiesComponent } from './penalties/penalties.component';
+import { ModalPenalComponent } from './penalties/modal-penal/modal-penal.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PenaltiesComponent } from './penalties/penalties.component';
     DepositComponent,
     BillingItemsComponent,
     RedirectMovyonComponent,
-    PenaltiesComponent
+    PenaltiesComponent,
+    ModalPenalComponent
   ],
   imports: [
     CommonModule,

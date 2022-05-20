@@ -395,6 +395,9 @@
         "NO_DATA": "Nessuna fattura presente",
         "STATUS": "Stato fatture"
     },
+    "PENALTIES": {
+        "ADD": "Applica una penale"
+    },
     "BILLING_TYPE": {
         "INSTALL": "Installazione",
         "DELTA_NOT_MERGEABLE": "Canone mensile",

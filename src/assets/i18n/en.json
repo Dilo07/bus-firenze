@@ -395,6 +395,9 @@
         "NO_DATA": "Nobody billing items present",
         "STATUS": "Billing status"
     },
+    "PENALTIES": {
+        "ADD": "Add a penal"
+    },
     "BILLING_TYPE": {
         "INSTALL": "Install",
         "DELTA_NOT_MERGEABLE": "Monthly fee",

@@ -90,7 +90,6 @@ export class VehicleTripPersistence {
 }
 
 export class LineString {
-  SRID: number;
   points: Points;
 }
 

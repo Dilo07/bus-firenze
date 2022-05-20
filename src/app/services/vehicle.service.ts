@@ -55,8 +55,7 @@ export class VehicleService {
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
-    return this.http.get<Vehicle[]>(
-      this.apiUrl + url + '/vehicles/' + onlyActive, options)
+    return this.http.get<Vehicle[]>(this.apiUrl + url + '/vehicles/' + onlyActive, options)
       .pipe(catchError(err => { throw err; }));
   }
 
