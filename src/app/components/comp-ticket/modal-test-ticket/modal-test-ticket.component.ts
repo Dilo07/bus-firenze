@@ -34,7 +34,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number, fleetManagerId: number, extend: boolean },
+    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number; fleetManagerId: number; extend: boolean },
     @Inject('authService') private authService: IAuthenticationService,
     @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {

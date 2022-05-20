@@ -159,18 +159,34 @@ export interface User {
 
 export interface RefreshInterface {
   label: string;
-  code: RefreshOption._1_minute | RefreshOption._5_minutes | RefreshOption._10_minutes | RefreshOption._30_minutes;
+  code: RefreshOption.time1minute | RefreshOption.time5minutes | RefreshOption.time10minutes | RefreshOption.time30minutes;
 }
 
 export enum RefreshOption {
-  _1_minute,
-  _5_minutes,
-  _10_minutes,
-  _30_minutes
+  time1minute,
+  time5minutes,
+  time10minutes,
+  time30minutes
 }
 
 export interface VatValidation {
   address: string;
   name: string;
   valid: boolean;
+}
+
+export interface BillingItems {
+  id: number;
+  fmId: number;
+  vehicleId: number;
+  billingSapId: number;
+  billingState: string;
+  nptGopId: number;
+  price: number;
+  processedDate: Date;
+  quantity: number;
+  resSapCode: number;
+  resSapMessage: string;
+  sendDate: Date;
+  typeId: string;
 }

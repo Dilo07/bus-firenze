@@ -7,7 +7,7 @@
                 {{element.obuId}}
                 <button *ngIf="element.ticketExpiresAt < now" mat-icon-button [disabled]="true">
                     <mat-icon style="color: red; opacity: 0.8;" matTooltip="{{'TICKET.EXPIRED' | translate}}
-                    {{element.ticketExpiresAt | date : 'dd/MM/yyyy HH:mm:ss'}}">error</mat-icon>
+                    {{element.ticketExpiresAt ? (element.ticketExpiresAt | date : 'dd/MM/yyyy HH:mm:ss') : ''}}">error</mat-icon>
                 </button>
                 <button *ngIf="element.ticketExpiresAt > now && element.ticketExpiresAt < nowPlus15" mat-icon-button
                     [disabled]="true">

@@ -42,8 +42,10 @@
 							<span class="mobile-label">id</span>
 							{{element.id}}
 							<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button [disabled]="true">
-								<mat-icon style="color: red; opacity: 0.8;" matTooltip="{{'VEHICLE.EXPIRED' | translate}}
-								{{element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year }}">error</mat-icon>
+								<mat-icon style="color: red; opacity: 0.8;"
+									matTooltip="{{'VEHICLE.EXPIRED' | translate}}
+								{{element.expiresAt ? '(' + element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year + ')' : '' }}">error
+								</mat-icon>
 							</button>
 							<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button
 								(click)="updateStatus(element.id)">
@@ -149,7 +151,8 @@
 								<mat-icon style="color: #0066CC;">edit</mat-icon>
 							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
-								matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}" (click)="deleteVehicle(element.id, element.documents)">
+								matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
+								(click)="deleteVehicle(element.id, element.documents)">
 								<mat-icon style="color: red;">delete</mat-icon>
 							</button>
 							<button *ngIf="element.deleted" mat-icon-button [disabled]="true">
@@ -163,7 +166,7 @@
 					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
 						[style.display]="vehicleList.data.length === 0 ? 'none' : '' "></mat-header-row>
 					<mat-row *matRowDef="let row; columns: displayedColumns;"
-						[ngClass]="row.deleted ? 'obuDisactive' : ''"  class="hover-row"></mat-row>
+						[ngClass]="row.deleted ? 'obuDisactive' : ''" class="hover-row"></mat-row>
 				</mat-table>
 			</div>
 			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"

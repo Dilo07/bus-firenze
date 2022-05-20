@@ -1,11 +1,11 @@
 import { RefreshOption } from './bus-firenze-domain';
 
-export const TimesRefresh =
+export const TIMEREFRESH =
   [
-    { label: '1 Minute', code: RefreshOption._1_minute },
-    { label: '5 Minutes', code: RefreshOption._5_minutes },
-    { label: '10 Minutes', code: RefreshOption._10_minutes },
-    { label: '30 Minutes', code: RefreshOption._30_minutes }
+    { label: '1 Minute', code: RefreshOption.time1minute },
+    { label: '5 Minutes', code: RefreshOption.time5minutes },
+    { label: '10 Minutes', code: RefreshOption.time10minutes },
+    { label: '30 Minutes', code: RefreshOption.time30minutes }
   ];
 
 
@@ -81,8 +81,8 @@ export const STATUS_VEHICLE = Object.freeze({
 });
 
 export const CONTRACT_TYPE = {
-  RENT: 'RENT',
-  BUY: 'BUY'
+  rent: 'RENT',
+  buy: 'BUY'
 };
 
 export const TICKETS_TYPE = {
@@ -101,4 +101,11 @@ export const FLEETMNG_TYPE = Object.freeze({
 export const DEPOSIT_TYPE = {
   DEPOSIT: 'deposit',
   REQUEST: 'request'
+};
+
+export const BILLING_STATUS = {
+  unknown: 'UNKNOWN',
+  pending: 'PENDING',
+  success: 'SUCCESS',
+  failed: 'FAILED'
 };

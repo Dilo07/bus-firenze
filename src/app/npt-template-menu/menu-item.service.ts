@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { Inject, Injectable } from '@angular/core';
 import { IMenuItemService, Menu } from '@npt/npt-template';
 
 /* Roles allowed by the application */
@@ -13,6 +14,8 @@ export const ROLES = Object.freeze({
 const SUBMENU_ROUTES = [
   { state: 'fleet-manager-manage', name: 'Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'deposit', name: 'Deposit', icon: 'euro_symbol', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] },
+  { state: 'billing', name: 'Billing', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
+  { state: 'penalties', name: 'Penalties', icon: 'back_hand', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'fleet-manager-valid', name: 'Valid-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicle-valid', name: 'Vehicle-valid', icon: 'directions_car', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
@@ -28,7 +31,7 @@ const SUBMENU_ROUTES = [
   { state: 'anagraphic-driver', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.DRIVER] },
   { state: 'association-driver', name: 'Association-vehicles', icon: 'directions_car', roles: [ROLES.DRIVER] },
   { state: 'add-ticket', name: 'Add-ticket', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] },
-  { state: 'manage-ticket', name: 'Manage-ticket', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] },
+  { state: 'manage-ticket', name: 'Manage-ticket', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] }
 ];
 
 const MENUITEMS = [
@@ -48,32 +51,36 @@ const MENUITEMS = [
   },
   {
     state: '', name: 'Manage', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1], SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
     state: '', name: 'Validation', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    children: [SUBMENU_ROUTES[4], SUBMENU_ROUTES[5]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+  },
+  {
+    state: 'payments', name: 'Payments', type: 'submenu', icon: 'manage_accounts',
+    children: [SUBMENU_ROUTES[1], SUBMENU_ROUTES[2]], roles: [ROLES.FLEETMNG]
   },
   {
     state: 'user-fleet-manager', name: 'User-Fleet', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[4], SUBMENU_ROUTES[5], SUBMENU_ROUTES[6], SUBMENU_ROUTES[1]], roles: [ROLES.FLEETMNG]
+    children: [SUBMENU_ROUTES[6], SUBMENU_ROUTES[7], SUBMENU_ROUTES[8]], roles: [ROLES.FLEETMNG]
   },
   {
     state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'assignment',
-    children: [SUBMENU_ROUTES[7], SUBMENU_ROUTES[8], SUBMENU_ROUTES[9], SUBMENU_ROUTES[10], SUBMENU_ROUTES[11]],
+    children: [SUBMENU_ROUTES[9], SUBMENU_ROUTES[10], SUBMENU_ROUTES[11], SUBMENU_ROUTES[12], SUBMENU_ROUTES[13]],
     roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
   {
     state: 'appointment', name: 'Appointment', type: 'submenu', icon: 'assignment',
-    children: [SUBMENU_ROUTES[12], SUBMENU_ROUTES[13]], roles: [ROLES.MOVYON, ROLES.INSTALLER]
+    children: [SUBMENU_ROUTES[14], SUBMENU_ROUTES[15]], roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
   {
     state: 'user-driver', name: 'User-Driver', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[14], SUBMENU_ROUTES[15]], roles: [ROLES.DRIVER]
+    children: [SUBMENU_ROUTES[16], SUBMENU_ROUTES[17],], roles: [ROLES.DRIVER]
   },
   {
     state: 'ticket', name: 'Ticket', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[16], SUBMENU_ROUTES[17]], roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER]
+    children: [SUBMENU_ROUTES[18], SUBMENU_ROUTES[19]], roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER]
   },
   {
     state: 'documents', name: 'Documents', type: 'link', icon: 'assignment',
@@ -83,7 +90,12 @@ const MENUITEMS = [
 
 @Injectable()
 export class MenuItemService implements IMenuItemService {
+  constructor(@Inject('hideBillingData') private hideBilling: boolean) { }
+
   getMenuitem(): Menu[] {
+    if (!this.hideBilling) {
+      SUBMENU_ROUTES[2].roles.concat(ROLES.FLEETMNG);
+    }
     return MENUITEMS;
   }
 }

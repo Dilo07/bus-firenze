@@ -10,9 +10,9 @@ import { TripStat, VehicleTripPersistence } from '../components/domain/bus-firen
 })
 export class StatisticService {
 
-  constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
-
   private apiUrl = this.url + '/api/stat';
+
+  constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
   getVehicleTrip(id: number, start: string, end?: string, fleetManagerId?: number): Observable<TripStat> {
     const options = {

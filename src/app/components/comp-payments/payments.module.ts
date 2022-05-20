@@ -6,18 +6,23 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from '@npt/npt-template';
 import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
-import { DepositRoutingModule } from './deposit.routing';
+import { PaymentsRoutingModule } from './payments.routing';
 import { DepositComponent } from './deposit/deposit.component';
-
+import { BillingItemsComponent } from './billing-items/billing-items.component';
+import { RedirectMovyonComponent } from './redirect-movyon/redirect-movyon.component';
+import { PenaltiesComponent } from './penalties/penalties.component';
 
 
 @NgModule({
   declarations: [
-    DepositComponent
+    DepositComponent,
+    BillingItemsComponent,
+    RedirectMovyonComponent,
+    PenaltiesComponent
   ],
   imports: [
     CommonModule,
-    DepositRoutingModule,
+    PaymentsRoutingModule,
     MaterialModule,
     FlexLayoutModule,
     TranslateModule,
@@ -27,4 +32,4 @@ import { DepositComponent } from './deposit/deposit.component';
     PipesModule
   ]
 })
-export class DepositModule { }
+export class PaymentsModule { }

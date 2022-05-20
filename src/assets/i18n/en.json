@@ -12,11 +12,14 @@
         "Area-monitoring": "Area monitoring",
         "Fleet-manager": "Fleet manager",
         "Manage": "Management",
+        "Payments": "Payments",
         "Deposit": "Deposit",
+        "Billing": "Billing",
+        "Penalties": "Penalties",
         "Validation": "Validation",
         "Valid-Fleet-manager": "Fleet manager",
         "Vehicle-valid": "Vehicles",
-        "User-Fleet": "Fleet manager",
+        "User-Fleet": "Fleet",
         "User-Driver": "Driver",
         "Anagraphic": "Anagraphic",
         "Vehicles": "Vehicles",
@@ -181,7 +184,7 @@
         "LPN_NAT": "Country",
         "EURO-CLASS": "EuroClass",
         "EUROPEAN-GROUP": "Category",
-        "EXPIRED": "Vehicle expired at",
+        "EXPIRED": "Vehicle expired ",
         "WILLEXPIRE": "Vehicle will expire at",
         "UNKNOWN": "Vehicle unknow on ines",
         "CONSENT": "Contract consent",
@@ -388,10 +391,21 @@
         "GROUP6": "Motorcycles (class L)",
         "GROUP7": "Other vehicles"
     },
+    "BILLING_ITEMS": {
+        "NO_DATA": "Nobody billing items present",
+        "STATUS": "Billing status"
+    },
+    "BILLING_TYPE": {
+        "INSTALL": "Install",
+        "DELTA_NOT_MERGEABLE": "Monthly fee",
+        "DELTA_MERGEABLE": "Periodic monthly fee"
+    },
     "COMMON": {
         "DATE": {
             "START": "Start",
-            "END": "End"
+            "END": "End",
+            "RANGE": "Select a range of date",
+            "INVALID": "Invalid range"
         },
         "ACTION": {
             "YES": "Yes",
