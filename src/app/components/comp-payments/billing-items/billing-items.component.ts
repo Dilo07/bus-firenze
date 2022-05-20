@@ -5,7 +5,7 @@ import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { BillingItems } from '../../domain/bus-firenze-domain';
 import { MatTableDataSource } from '@angular/material/table';
 import { BILLING_STATUS } from '../../domain/bus-firenze-constants';
-import * as moment from 'moment';
+import moment from 'moment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
