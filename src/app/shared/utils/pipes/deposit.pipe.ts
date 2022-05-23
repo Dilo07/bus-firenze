@@ -11,8 +11,8 @@ export class HasDepositPipe implements PipeTransform {
     let hasDeposit = false;
     const deposit = DEPOSIT_TYPE;
     documents.map(document => { // controlla se ha deposito in caso di checkValid true controlla anche se è valido
-      if (document.type === deposit.DEPOSIT && !checkValid) { hasDeposit = true; }
-      if (document.type === deposit.DEPOSIT && document.valid && checkValid) { hasDeposit = true; }
+      if (document.type === deposit.deposit && !checkValid) { hasDeposit = true; }
+      if (document.type === deposit.deposit && document.valid && checkValid) { hasDeposit = true; }
     });
     return hasDeposit;
   }
@@ -28,8 +28,8 @@ export class HasRequestDepositPipe implements PipeTransform {
     let hasReqDeposit = false;
     const deposit = DEPOSIT_TYPE;
     documents.map(document => { // controlla se ha una richiesta restituzione deposito
-      if (document.type === deposit.REQUEST && !checkValid) { hasReqDeposit = true; }
-      if (document.type === deposit.REQUEST && document.valid && checkValid) { hasReqDeposit = true; }
+      if (document.type === deposit.request && !checkValid) { hasReqDeposit = true; }
+      if (document.type === deposit.request && document.valid && checkValid) { hasReqDeposit = true; }
     });
     return hasReqDeposit;
   }
@@ -44,7 +44,7 @@ export class DateValidPipe implements PipeTransform {
     let dateValid = null;
     const deposit = DEPOSIT_TYPE;
     documents.map(document => { // ritorna la data di validità del deposito
-      if (document.type === deposit.DEPOSIT && document.valid) { dateValid = document.valid; }
+      if (document.type === deposit.deposit && document.valid) { dateValid = document.valid; }
     });
     return dateValid;
   }
@@ -59,7 +59,7 @@ export class RequestDateValidPipe implements PipeTransform {
     let dateValid = null;
     const deposit = DEPOSIT_TYPE;
     documents.map(document => { // ritorna la data di validità della richiesta
-      if (document.type === deposit.REQUEST && document.valid) { dateValid = document.valid; }
+      if (document.type === deposit.request && document.valid) { dateValid = document.valid; }
     });
     return dateValid;
   }

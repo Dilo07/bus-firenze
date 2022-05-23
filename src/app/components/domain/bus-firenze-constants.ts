@@ -74,10 +74,10 @@ export const worldNations = [
   { value: 'WF', text: 'Wallis And Futuna' }, { value: 'YE', text: 'Yemen' }, { value: 'ZM', text: 'Zambia' }, { value: 'ZW', text: 'Zimbabwe' }];
 
 export const STATUS_VEHICLE = Object.freeze({
-  DELETED: 'DELETED',
-  TEMP: 'TEMP',
-  REGISTERED: 'REGISTERED',
-  UNKNOWN: 'UNKNOWN'
+  deleted: 'DELETED',
+  temp: 'TEMP',
+  registered: 'REGISTERED',
+  unknown: 'UNKNOWN'
 });
 
 export const CONTRACT_TYPE = {
@@ -99,8 +99,8 @@ export const FLEETMNG_TYPE = Object.freeze({
 });
 
 export const DEPOSIT_TYPE = {
-  DEPOSIT: 'deposit',
-  REQUEST: 'request'
+  deposit: 'deposit',
+  request: 'request'
 };
 
 export const BILLING_STATUS = {
