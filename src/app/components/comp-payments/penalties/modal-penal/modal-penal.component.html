@@ -1,1 +1,11 @@
-<p>modal-penal works!</p>
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="50px">
+    <mat-card-title>{{'PENALTIES.SELECT' | translate}}</mat-card-title>
+    <mat-radio-group [(ngModel)]="penalSelected">
+        <mat-radio-button [value]="penalties.missedAppointment">Mancato appuntamento</mat-radio-button><br>
+        <mat-radio-button [value]="penalties.cancelledAppointment">Disdetta appuntamento entro 24h</mat-radio-button>
+    </mat-radio-group>
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+        <button mat-button (click)="dialogRef.close(false)" class="backButton">{{'COMMON.ACTION.BACK' | translate}}</button>
+        <button mat-button (click)="dialogRef.close(penalSelected)" [disabled]="!penalSelected" class="greenButtons">Applica</button>
+    </div>
+</div>

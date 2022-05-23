@@ -10,6 +10,7 @@
             </button>
             <mat-card-subtitle fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}
             </mat-card-subtitle>
+            <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
             <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id"
                 matSortDirection="asc">
 
@@ -61,7 +62,7 @@
             </mat-table>
             <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
                 [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
-            <div *ngIf="dataSource.data.length === 0"> {{'VEHICLE.NO_DATA' | translate}}</div>
+            <div *ngIf="dataSource.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
         </ng-template>
     </mat-card-content>
 </mat-card>

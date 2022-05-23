@@ -20,10 +20,15 @@ export class BillingItemsService {
     }
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({start, end, status: billingStatus })
+      params: HttpUtils.createHttpParams({ start, end, status: billingStatus })
     };
 
     return this.http.get<BillingItems[]>(this.apiUrl + '/all' + url, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  addPenal(billingType: number, fmId: number, vehicleId: number): Observable<void> {
+    return this.http.post<void>(this.apiUrl + `/penalties/${billingType}/fleet/${fmId}/vehicle/${vehicleId}`, null)
       .pipe(catchError(err => { throw err; }));
   }
 }

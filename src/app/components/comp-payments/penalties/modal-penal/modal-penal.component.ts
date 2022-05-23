@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PENALTIES } from 'src/app/components/domain/bus-firenze-constants';
 
 @Component({
   selector: 'app-modal-penal',
@@ -7,13 +8,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styles: [
   ]
 })
-export class ModalPenalComponent implements OnInit {
+export class ModalPenalComponent {
+  public penalSelected: number;
+  public penalties = PENALTIES;
 
   constructor(
     public dialogRef: MatDialogRef<ModalPenalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { vehicleId: Number; fleetId: number }) {};
-
-  ngOnInit(): void {
-  }
 
 }

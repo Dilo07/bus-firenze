@@ -396,7 +396,8 @@
         "STATUS": "Billing status"
     },
     "PENALTIES": {
-        "ADD": "Add a penal"
+        "ADD": "Add a penal",
+        "SELECT": "Select the penale tpye to add"
     },
     "BILLING_TYPE": {
         "INSTALL": "Install",

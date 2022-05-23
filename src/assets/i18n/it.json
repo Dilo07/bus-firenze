@@ -396,7 +396,8 @@
         "STATUS": "Stato fatture"
     },
     "PENALTIES": {
-        "ADD": "Applica una penale"
+        "ADD": "Applica una penale",
+        "SELECT": "Seleziona il tipo di penale da applicare"
     },
     "BILLING_TYPE": {
         "INSTALL": "Installazione",
