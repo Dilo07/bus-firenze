@@ -1,8 +1,9 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
@@ -32,6 +33,7 @@ export class PenaltiesComponent implements OnDestroy {
 
   constructor(
     private dialog: MatDialog,
+    private snackBar: SnackBar,
     private vehicleService: VehicleService,
     private billingItemService: BillingItemsService
   ) { }
@@ -52,6 +54,11 @@ export class PenaltiesComponent implements OnDestroy {
     );
   }
 
+  public applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   public modalPenal(vehicleid: number, fmId: number): void {
     const dialogRef = this.dialog.open(ModalPenalComponent, {
       width: '50%',
@@ -67,6 +74,10 @@ export class PenaltiesComponent implements OnDestroy {
   }
 
   private addPenal(penalType: number, fmId: number, vehicleId: number, date: string): void {
-    this.billingItemService.addPenal(penalType, fmId, vehicleId, date).subscribe();
+    this.billingItemService.addPenal(penalType, fmId, vehicleId, date).subscribe(
+      () => null,
+      () => null,
+      () => this.snackBar.showMessage('PENALTIES.SUCCESS', 'INFO')
+    );
   }
 }

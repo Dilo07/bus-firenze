@@ -398,7 +398,9 @@
     "PENALTIES": {
         "ADD": "Add a penal",
         "DATE": "Select a date",
-        "SELECT": "Select the penale tpye to add"
+        "SELECT": "Select the penale tpye to add",
+        "SUCCESS":"Penal added successfully",
+        "SEARCH": "Search for plate"
     },
     "BILLING_TYPE": {
         "INSTALL": "Install",
