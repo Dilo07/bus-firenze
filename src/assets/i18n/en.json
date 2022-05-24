@@ -397,6 +397,7 @@
     },
     "PENALTIES": {
         "ADD": "Add a penal",
+        "DATE": "Select a date",
         "SELECT": "Select the penale tpye to add"
     },
     "BILLING_TYPE": {

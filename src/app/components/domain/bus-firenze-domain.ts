@@ -189,3 +189,8 @@ export interface BillingItems {
   sendDate: Date;
   typeId: string;
 }
+
+export interface PenalInfo {
+  penalType: number;
+  date: string;
+}

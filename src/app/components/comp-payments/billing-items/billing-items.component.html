@@ -28,16 +28,16 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div fxLayout="row wrap" fxLayoutGap="20px">
-                            <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
-                                {{'FLEET-MANAGER.BACK' | translate}}
-                            </button>
-                            <button mat-raised-button class="bluButton" [disabled]="formGroup.invalid"
-                                (click)="getBillingItems()">
-                                {{'COMMON.ACTION.SEARCH' | translate}}
-                            </button>
-                        </div>
                     </form>
+                    <div fxLayout="row wrap" fxLayoutGap="20px">
+                        <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
+                            {{'FLEET-MANAGER.BACK' | translate}}
+                        </button>
+                        <button mat-raised-button class="bluButton" [disabled]="formGroup.invalid"
+                            (click)="getBillingItems()">
+                            {{'COMMON.ACTION.SEARCH' | translate}}
+                        </button>
+                    </div>
                 </mat-card-content>
             </mat-card>
             <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>

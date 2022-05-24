@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { Vehicle } from '../../domain/bus-firenze-domain';
+import { PenalInfo, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalPenalComponent } from './modal-penal/modal-penal.component';
 
 @Component({
@@ -60,13 +60,13 @@ export class PenaltiesComponent implements OnDestroy {
       autoFocus: false
     });
     this.subscription.push(dialogRef.afterClosed().subscribe(
-      penal => {
-        if (penal) { this.addPenal(penal, fmId, vehicleid); }
+      (penal: PenalInfo) => {
+        if (penal) { this.addPenal(penal.penalType, fmId, vehicleid, penal.date); }
       }
     ));
   }
 
-  private addPenal(penal: number, fmId: number, vehicleId: number): void {
-    this.billingItemService.addPenal(penal, fmId, vehicleId).subscribe();
+  private addPenal(penalType: number, fmId: number, vehicleId: number, date: string): void {
+    this.billingItemService.addPenal(penalType, fmId, vehicleId, date).subscribe();
   }
 }

@@ -4,8 +4,19 @@
         <mat-radio-button [value]="penalties.missedAppointment">Mancato appuntamento</mat-radio-button><br>
         <mat-radio-button [value]="penalties.cancelledAppointment">Disdetta appuntamento entro 24h</mat-radio-button>
     </mat-radio-group>
+    <span fxLayout="row" fxLayoutAlign="center">
+        <mat-form-field appearance="fill" fxFlex.gt-lg="100" fxFlex.gt-md="100" fxFlex.gt-xs="100">
+            <mat-label>{{'PENALTIES.DATE' | translate}}</mat-label>
+            <input matInput placeholder="{{'MODAL-FORM.DATE' | translate}}" [matDatepicker]="pickerDate"
+                (focus)="pickerDate.open()" [(ngModel)]="datePenal">
+            <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDate></mat-datepicker>
+        </mat-form-field>
+    </span>
     <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
-        <button mat-button (click)="dialogRef.close(false)" class="backButton">{{'COMMON.ACTION.BACK' | translate}}</button>
-        <button mat-button (click)="dialogRef.close(penalSelected)" [disabled]="!penalSelected" class="greenButtons">Applica</button>
+        <button mat-button (click)="dialogRef.close(false)" class="backButton">{{'COMMON.ACTION.BACK' |
+            translate}}</button>
+        <button mat-button (click)="addPenal()" [disabled]="!penalSelected"
+            class="greenButtons">Applica</button>
     </div>
 </div>

@@ -397,6 +397,7 @@
     },
     "PENALTIES": {
         "ADD": "Applica una penale",
+        "DATE": "Seleziona una data",
         "SELECT": "Seleziona il tipo di penale da applicare"
     },
     "BILLING_TYPE": {
