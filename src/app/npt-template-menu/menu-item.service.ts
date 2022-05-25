@@ -94,7 +94,7 @@ export class MenuItemService implements IMenuItemService {
 
   getMenuitem(): Menu[] {
     if (!this.hideBilling) {
-      SUBMENU_ROUTES[2].roles.concat(ROLES.FLEETMNG);
+      SUBMENU_ROUTES[2].roles.push(ROLES.FLEETMNG);
     }
     return MENUITEMS;
   }

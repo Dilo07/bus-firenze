@@ -86,9 +86,9 @@ export const CONTRACT_TYPE = {
 };
 
 export const TICKETS_TYPE = {
-  TICKET: 'contrassegno',
-  ABBONAMENTO: 'abbonamento',
-  VOUCHER: 'voucher'
+  ticket: 'contrassegno',
+  abbonamento: 'abbonamento',
+  voucher: 'voucher'
 };
 
 export const FLEETMNG_TYPE = Object.freeze({

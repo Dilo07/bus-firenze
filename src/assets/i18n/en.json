@@ -405,7 +405,10 @@
     "BILLING_TYPE": {
         "INSTALL": "Install",
         "DELTA_NOT_MERGEABLE": "Monthly fee",
-        "DELTA_MERGEABLE": "Periodic monthly fee"
+        "DELTA_MERGEABLE": "Periodic monthly fee",
+        "MISSED_APPOINTMENT": "Missed appointment",
+        "PRICE": "Price",
+        "PRICETOT": "Total price"
     },
     "COMMON": {
         "DATE": {

@@ -174,6 +174,17 @@ export interface VatValidation {
   valid: boolean;
 }
 
+export interface BillingItemsAgg {
+  nptGopId: number;
+  typeId: BillingType;
+  startPeriod: Date;
+  endPeriod: Date;
+  price: number;
+  quantity: number;
+  priceTot: number;
+  items: BillingItems;
+}
+
 export interface BillingItems {
   id: number;
   fmId: number;
@@ -188,6 +199,17 @@ export interface BillingItems {
   resSapMessage: string;
   sendDate: Date;
   typeId: string;
+}
+
+export enum BillingType {
+  all,
+  install,
+  deltaNotMergeable,
+  deltaMergeable,
+  uninstall,
+  missedAppointment,
+  cancelledAppointment,
+  reversal
 }
 
 export interface PenalInfo {

@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { BillingItems } from '../components/domain/bus-firenze-domain';
+import { BillingItems, BillingItemsAgg } from '../components/domain/bus-firenze-domain';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,19 @@ export class BillingItemsService {
     };
 
     return this.http.get<BillingItems[]>(this.apiUrl + '/all' + url, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  getBillingItemsAggregate(start: string, end: string, billingStatus: string, fmId?: number): Observable<BillingItemsAgg[]> {
+    let url = '';
+    if (fmId) {
+      url = '/' + fmId;
+    }
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ start, end, status: billingStatus })
+    };
+    return this.http.get<BillingItemsAgg[]>(this.apiUrl + '/gopId/all' + url, options)
       .pipe(catchError(err => { throw err; }));
   }
 

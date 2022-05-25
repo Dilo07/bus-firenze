@@ -14,7 +14,7 @@
                     {{ (viewHistoric ? 'TICKET.ACTIVE' : 'TICKET.HISTORY') | translate }}
                 </button>
             </div>
-            <form *ngIf="viewHistoric" [formGroup]="FormGroup" fxLayout="row" fxLayoutAlign="left center"
+            <form *ngIf="viewHistoric" [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="left center"
                 fxLayoutGap="20px">
                 <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
                     <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>

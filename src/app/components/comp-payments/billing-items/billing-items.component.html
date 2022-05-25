@@ -41,36 +41,72 @@
                 </mat-card-content>
             </mat-card>
             <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef> id </th>
-                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            <mat-table multiTemplateDataRows [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="expandButton">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label"></span>
+                        <button mat-icon-button (click)="expandedElement = expandedElement === element ? null : element"
+                            matTooltip="{{'TICKET.DETAILS' | translate}}">
+                            <mat-icon style="color: grey">
+                                {{expandedElement &&
+                                expandedElement.nptGopId === element.nptGopId ? 'expand_more' : 'chevron_right' }}
+                            </mat-icon>
+                        </button>
+                    </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="fmId">
-                    <th mat-header-cell *matHeaderCellDef> fmId </th>
-                    <td mat-cell *matCellDef="let element"> {{element.fmId}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="vehicleId">
-                    <th mat-header-cell *matHeaderCellDef> vehicleId </th>
-                    <td mat-cell *matCellDef="let element"> {{element.vehicleId}} </td>
+                <ng-container matColumnDef="gopId">
+                    <mat-header-cell *matHeaderCellDef> gop id </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">gop id</span>
+                        {{element.nptGopId}}
+                    </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="typeId">
-                    <th mat-header-cell *matHeaderCellDef> typeId </th>
-                    <td mat-cell *matCellDef="let element"> {{'BILLING_TYPE.' + element.typeId | translate}} </td>
+                    <mat-header-cell *matHeaderCellDef> typeId </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">typeId</span>
+                        {{'BILLING_TYPE.' + element.typeId | translate}}
+                    </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="price">
-                    <th mat-header-cell *matHeaderCellDef> price </th>
-                    <td mat-cell *matCellDef="let element"> {{element.price}} € </td>
+                    <mat-header-cell *matHeaderCellDef> {{'BILLING_TYPE.PRICE' | translate }} </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">{{'BILLING_TYPE.PRICE' | translate }}</span>
+                        {{element.price}} €
+                    </mat-cell>
                 </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"
-                    [style.display]="dataSource.data.length === 0 ? 'none' : '' "></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
+                <ng-container matColumnDef="priceTot">
+                    <mat-header-cell *matHeaderCellDef> {{'BILLING_TYPE.PRICETOT' | translate }} </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">{{'BILLING_TYPE.PRICETOT' | translate }}</span>
+                        {{element.priceTot}} €
+                    </mat-cell>
+                </ng-container>
+
+                <!--Collapse div-->
+                <ng-container matColumnDef="expandedDetail">
+                    <mat-cell *matCellDef="let element">
+                        <div class="example-element-detail"
+                            [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
+                            <div class="example-element-description">
+                                test
+                            </div>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
+                    [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+                    [class.example-expanded-row]="expandedElement === row"></mat-row>
+                <mat-row [style.display]="expandedElement && expandedElement.nptGopId === row.nptGopId ? '' : 'none'"
+                    *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
+            </mat-table>
             <div *ngIf="dataSource.data.length === 0 && complete"> {{'BILLING_ITEMS.NO_DATA' | translate}}</div>
         </ng-template>
     </mat-card-content>
