@@ -1,0 +1,21 @@
+<mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span class="mobile-label">id</span>
+            {{element.id}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICE' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span class="mobile-label">{{'BILLING_ITEMS.PRICE' | translate }}</span>
+            {{element.price}} €
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
+        [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
+</mat-table>

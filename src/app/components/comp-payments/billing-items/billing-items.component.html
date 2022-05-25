@@ -65,25 +65,33 @@
                 </ng-container>
 
                 <ng-container matColumnDef="typeId">
-                    <mat-header-cell *matHeaderCellDef> typeId </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.TYPE' | translate }} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <span class="mobile-label">typeId</span>
+                        <span class="mobile-label">{{'BILLING_ITEMS.TYPE' | translate }}</span>
                         {{'BILLING_TYPE.' + element.typeId | translate}}
                     </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="price">
-                    <mat-header-cell *matHeaderCellDef> {{'BILLING_TYPE.PRICE' | translate }} </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICE' | translate }} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <span class="mobile-label">{{'BILLING_TYPE.PRICE' | translate }}</span>
+                        <span class="mobile-label">{{'BILLING_ITEMS.PRICE' | translate }}</span>
                         {{element.price}} €
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="priceTot">
-                    <mat-header-cell *matHeaderCellDef> {{'BILLING_TYPE.PRICETOT' | translate }} </mat-header-cell>
+                <ng-container matColumnDef="quantity">
+                    <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.QUANTITY' | translate }} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <span class="mobile-label">{{'BILLING_TYPE.PRICETOT' | translate }}</span>
+                        <span class="mobile-label">{{'BILLING_ITEMS.QUANTITY' | translate }}</span>
+                        {{element.quantity}}
+                    </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="priceTot">
+                    <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICETOT' | translate }} </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">{{'BILLING_ITEMS.PRICETOT' | translate }}</span>
                         {{element.priceTot}} €
                     </mat-cell>
                 </ng-container>
@@ -94,7 +102,7 @@
                         <div class="example-element-detail"
                             [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
                             <div class="example-element-description">
-                                test
+                                <app-table-items [billingItems]="element.items"></app-table-items>
                             </div>
                         </div>
                     </mat-cell>

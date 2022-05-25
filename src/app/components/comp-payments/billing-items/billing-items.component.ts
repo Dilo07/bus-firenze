@@ -14,6 +14,14 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
   templateUrl: './billing-items.component.html',
   styles: [`
   table { width: 100%; }
+  @media(min-width: 1180px) {
+    .mat-column-expandButton { max-width: 10%}
+    .mat-column-gopId { max-width: 10%;}
+    .mat-column-typeId { max-width: 30%;}
+    .mat-column-price { max-width: 10%;}
+    .mat-column-quantity { max-width: 10%;}
+    .mat-column-priceTot { max-width: 10%;}
+  }
   `
   ],
   animations: [
@@ -27,7 +35,7 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
 export class BillingItemsComponent implements OnInit {
   public viewFleetTable = false;
   public dataSource = new MatTableDataSource<BillingItemsAgg>();
-  public displayedColumns = ['expandButton', 'gopId', 'typeId', 'price', 'priceTot'];
+  public displayedColumns = ['expandButton', 'gopId', 'typeId', 'price', 'quantity', 'priceTot'];
   public roleMovyon: boolean;
   public complete = true;
   public billingStatus = [BILLING_STATUS.unknown, BILLING_STATUS.pending, BILLING_STATUS.success, BILLING_STATUS.failed];

@@ -393,7 +393,11 @@
     },
     "BILLING_ITEMS": {
         "NO_DATA": "Nobody billing items present",
-        "STATUS": "Billing status"
+        "STATUS": "Billing status",
+        "PRICE": "Price",
+        "PRICETOT": "Total price",
+        "QUANTITY": "Quantity",
+        "TYPE": "Tipo fattura"
     },
     "PENALTIES": {
         "ADD": "Add a penal",
@@ -407,8 +411,7 @@
         "DELTA_NOT_MERGEABLE": "Monthly fee",
         "DELTA_MERGEABLE": "Periodic monthly fee",
         "MISSED_APPOINTMENT": "Missed appointment",
-        "PRICE": "Price",
-        "PRICETOT": "Total price"
+        "CANCELLED_APPOINTMENT": "Appointment cancelled within 24h"
     },
     "COMMON": {
         "DATE": {

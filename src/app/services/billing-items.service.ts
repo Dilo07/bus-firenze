@@ -41,7 +41,11 @@ export class BillingItemsService {
   }
 
   addPenal(billingType: number, fmId: number, vehicleId: number, date: string): Observable<void> {
-    return this.http.post<void>(this.apiUrl + `/penalties/${billingType}/fleet/${fmId}/vehicle/${vehicleId}/date/${date}`, null)
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ date })
+    };
+    return this.http.post<void>(this.apiUrl + `/penalties/${billingType}/fleet/${fmId}/vehicle/${vehicleId}`, null, options)
       .pipe(catchError(err => { throw err; }));
   }
 }
