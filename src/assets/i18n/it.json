@@ -404,7 +404,9 @@
         "DATE": "Seleziona una data",
         "SELECT": "Seleziona il tipo di penale da applicare",
         "SUCCESS":"Penale aggiunta con successo",
-        "SEARCH": "Ricerca per targa"
+        "SEARCH": "Ricerca per targa",
+        "TYPE": "Tipo di penale",
+        "PENAL_DATE": "Data penale"
     },
     "BILLING_TYPE": {
         "INSTALL": "Installazione",

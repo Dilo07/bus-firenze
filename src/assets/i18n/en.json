@@ -404,7 +404,9 @@
         "DATE": "Select a date",
         "SELECT": "Select the penale tpye to add",
         "SUCCESS":"Penal added successfully",
-        "SEARCH": "Search for plate"
+        "SEARCH": "Search for plate",
+        "TYPE": "Penal type",
+        "PENAL_DATE": "Penal date"
     },
     "BILLING_TYPE": {
         "INSTALL": "Install",

@@ -28,6 +28,7 @@ export class PenaltiesComponent implements OnDestroy {
   public dataSource = new MatTableDataSource<Vehicle>();
   public displayedColumns = ['id', 'plate', 'nat', 'obuId', 'actions'];
   public complete = true;
+  public fleetId: number;
 
   private subscription: Subscription[] = [];
 

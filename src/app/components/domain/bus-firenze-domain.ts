@@ -212,6 +212,11 @@ export enum BillingType {
   reversal
 }
 
+export interface PenalType{
+  type: string;
+  value: number;
+}
+
 export interface PenalInfo {
   penalType: number;
   date: string;

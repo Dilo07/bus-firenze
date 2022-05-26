@@ -13,6 +13,7 @@ import { RedirectMovyonComponent } from './redirect-movyon/redirect-movyon.compo
 import { PenaltiesComponent } from './penalties/penalties.component';
 import { ModalPenalComponent } from './penalties/modal-penal/modal-penal.component';
 import { TableItemsComponent } from './billing-items/table-items/table-items.component';
+import { EmittedPenaltiesComponent } from './penalties/emitted-penalties/emitted-penalties.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TableItemsComponent } from './billing-items/table-items/table-items.com
     RedirectMovyonComponent,
     PenaltiesComponent,
     ModalPenalComponent,
-    TableItemsComponent
+    TableItemsComponent,
+    EmittedPenaltiesComponent
   ],
   imports: [
     CommonModule,
