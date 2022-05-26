@@ -14,6 +14,7 @@ import { PenaltiesComponent } from './penalties/penalties.component';
 import { ModalPenalComponent } from './penalties/modal-penal/modal-penal.component';
 import { TableItemsComponent } from './billing-items/table-items/table-items.component';
 import { EmittedPenaltiesComponent } from './penalties/emitted-penalties/emitted-penalties.component';
+import { AddPenaltiesComponent } from './penalties/add-penalties/add-penalties.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { EmittedPenaltiesComponent } from './penalties/emitted-penalties/emitted
     PenaltiesComponent,
     ModalPenalComponent,
     TableItemsComponent,
-    EmittedPenaltiesComponent
+    EmittedPenaltiesComponent,
+    AddPenaltiesComponent
   ],
   imports: [
     CommonModule,
