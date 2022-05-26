@@ -1,9 +1,25 @@
-<mat-table [dataSource]="dataSource" matSort>
+<mat-table [dataSource]="dataSource" style="background-color: white" matSort>
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
         <mat-cell *matCellDef="let element">
             <span class="mobile-label">id</span>
             {{element.id}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="startDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'BILLING_ITEMS.START' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span class="mobile-label">{{'BILLING_ITEMS.START' | translate }}</span>
+            {{element.startPeriod.day + '/' + element.startPeriod.month + '/' + element.startPeriod.year  }}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="endDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'BILLING_ITEMS.END' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span class="mobile-label">{{'BILLING_ITEMS.END' | translate }}</span>
+            {{element.endPeriod.day + '/' + element.endPeriod.month + '/' + element.endPeriod.year }}
         </mat-cell>
     </ng-container>
 

@@ -397,7 +397,10 @@
         "PRICE": "Price",
         "PRICETOT": "Total price",
         "QUANTITY": "Quantity",
-        "TYPE": "Tipo fattura"
+        "TYPE": "Tipo fattura",
+        "START": "Start billing item",
+        "END": "End billing item",
+        "DETAILS": "Billing item details"
     },
     "PENALTIES": {
         "ADD": "Add a penal",
@@ -406,7 +409,8 @@
         "SUCCESS":"Penal added successfully",
         "SEARCH": "Search for plate",
         "TYPE": "Penal type",
-        "PENAL_DATE": "Penal date"
+        "PENAL_DATE": "Penal date",
+        "NO_DATA": "Nobody penal found"
     },
     "BILLING_TYPE": {
         "INSTALL": "Install",

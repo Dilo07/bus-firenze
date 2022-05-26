@@ -55,7 +55,7 @@ export class Vehicle {
   euroClass: number;
   europeanGroup: number;
   europeanGroupLabel: string;
-  expiresAt: Date;
+  expiresAt: LocalDate;
   numAxis: number;
   maxWeight: number;
   associationDate: Date;
@@ -191,6 +191,8 @@ export interface BillingItems {
   vehicleId: number;
   billingSapId: number;
   billingState: string;
+  startPeriod: LocalDate;
+  endPeriod: LocalDate;
   nptGopId: number;
   price: number;
   processedDate: Date;
@@ -210,6 +212,12 @@ export enum BillingType {
   missedAppointment,
   cancelledAppointment,
   reversal
+}
+
+export interface LocalDate{
+  year: number;
+  month: number;
+  day: number;
 }
 
 export interface PenalType{

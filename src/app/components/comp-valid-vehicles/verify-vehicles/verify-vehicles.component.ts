@@ -2,12 +2,11 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Vehicle } from '@npt/npt-obu';
 import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ValidVehicleService } from 'src/app/services/valid-vehicle.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DocumentVehicle } from '../../domain/bus-firenze-domain';
+import { DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({

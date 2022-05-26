@@ -47,7 +47,7 @@
                     <mat-cell *matCellDef="let element">
                         <span class="mobile-label"></span>
                         <button mat-icon-button (click)="expandedElement = expandedElement === element ? null : element"
-                            matTooltip="{{'TICKET.DETAILS' | translate}}">
+                            matTooltip="{{'BILLING_ITEMS.DETAILS' | translate}}">
                             <mat-icon style="color: grey">
                                 {{expandedElement &&
                                 expandedElement.nptGopId === element.nptGopId ? 'expand_more' : 'chevron_right' }}

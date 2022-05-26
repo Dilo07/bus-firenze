@@ -58,4 +58,5 @@
             [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+    <div *ngIf="dataSource.data.length === 0 ">{{ 'PENALTIES.NO_DATA' | translate}}</div>
 </div>

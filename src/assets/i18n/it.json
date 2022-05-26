@@ -397,7 +397,10 @@
         "PRICE": "Prezzo",
         "PRICETOT": "Prezzo totale",
         "QUANTITY": "Quantità",
-        "TYPE": "Tipo fattura"
+        "TYPE": "Tipo fattura",
+        "START": "Inizio periodo",
+        "END": "Fine periodo",
+        "DETAILS": "Dettagli fatture"
     },
     "PENALTIES": {
         "ADD": "Applica una penale",
@@ -406,7 +409,8 @@
         "SUCCESS":"Penale aggiunta con successo",
         "SEARCH": "Ricerca per targa",
         "TYPE": "Tipo di penale",
-        "PENAL_DATE": "Data penale"
+        "PENAL_DATE": "Data penale",
+        "NO_DATA":"Nessuna penale presente"
     },
     "BILLING_TYPE": {
         "INSTALL": "Installazione",
