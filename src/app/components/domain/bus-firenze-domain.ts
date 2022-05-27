@@ -201,7 +201,8 @@ export interface BillingItems {
   resSapCode: number;
   resSapMessage: string;
   sendDate: Date;
-  typeId: string;
+  billingType: string;
+  typeId: number;
 }
 
 export enum BillingType {

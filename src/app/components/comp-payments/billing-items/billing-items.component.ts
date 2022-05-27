@@ -35,7 +35,7 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
 export class BillingItemsComponent implements OnInit {
   public viewFleetTable = false;
   public dataSource = new MatTableDataSource<BillingItemsAgg>();
-  public displayedColumns = ['expandButton', 'gopId', 'typeId', 'price', 'quantity', 'priceTot'];
+  public displayedColumns = ['expandButton', 'gopId', 'billingType', 'price', 'quantity', 'priceTot'];
   public roleMovyon: boolean;
   public complete = true;
   public billingStatus = [BILLING_STATUS.unknown, BILLING_STATUS.pending, BILLING_STATUS.success, BILLING_STATUS.failed];

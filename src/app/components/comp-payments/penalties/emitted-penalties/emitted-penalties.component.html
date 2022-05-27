@@ -38,11 +38,11 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="typeId">
+        <ng-container matColumnDef="billingType">
             <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.TYPE' | translate }} </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">{{'BILLING_ITEMS.TYPE' | translate }}</span>
-                {{'BILLING_TYPE.' + element.typeId | translate}}
+                {{'BILLING_TYPE.' + element.billingType | translate}}
             </mat-cell>
         </ng-container>
 

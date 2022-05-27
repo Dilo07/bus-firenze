@@ -16,7 +16,7 @@ export class EmittedPenaltiesComponent implements OnInit, OnChanges {
   public maxDate = moment().toDate();
   public formGroup: FormGroup;
   public dataSource = new MatTableDataSource<BillingItems>();
-  public displayedColumns = ['id', 'plate', 'date', 'price', 'typeId'];
+  public displayedColumns = ['id', 'plate', 'date', 'price', 'billingType'];
 
   constructor(
     private billingItemService: BillingItemsService
