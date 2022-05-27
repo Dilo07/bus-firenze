@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import moment from 'moment';
 import { PENALTIES } from 'src/app/components/domain/bus-firenze-constants';
-import { BillingType, PenalInfo, PenalType } from 'src/app/components/domain/bus-firenze-domain';
+import { BillingType, PenalInfo } from 'src/app/components/domain/bus-firenze-domain';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { BillingItemsService } from 'src/app/services/billing-items.service';
 export class ModalPenalComponent implements OnInit {
   public penalties = PENALTIES;
   public formGroup: FormGroup;
-  public listPenalType: PenalType[];
+  public listPenalType: number[];
   public complete = true;
 
   constructor(

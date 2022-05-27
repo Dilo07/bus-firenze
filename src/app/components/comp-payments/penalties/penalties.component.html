@@ -5,17 +5,23 @@
             <app-table-fleet (callManageTicket)="viewFleetTable = false; fleetId = $event"></app-table-fleet>
         </div>
         <ng-template #vehicleFleet>
-            <span>
-                <button mat-button class="backButton" (click)="viewFleetTable = true">
-                    {{'FLEET-MANAGER.BACK' | translate}}
-                </button>
-            </span>
+            <div fxLayout="row" fxLayoutGap="20px">
+                <span>
+                    <button mat-button class="backButton" (click)="viewFleetTable = true">
+                        {{'FLEET-MANAGER.BACK' | translate}}
+                    </button>
+                </span>
+                <mat-form-field appearance="fill" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
+                    <mat-label>{{'PENALTIES.SEARCH' | translate}}</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" #input autocomplete="off">
+                </mat-form-field>
+            </div>
             <mat-tab-group mat-align-tabs="center">
                 <mat-tab label="Applica penale">
-                    <app-add-penalties [fleetId]="fleetId"></app-add-penalties>
+                    <app-add-penalties [fleetId]="fleetId" [keyword]="filter"></app-add-penalties>
                 </mat-tab>
                 <mat-tab label="Penali emesse">
-                    <app-emitted-penalties [fleetId]="fleetId"></app-emitted-penalties>
+                    <app-emitted-penalties [fleetId]="fleetId" [keyword]="filter"></app-emitted-penalties>
                 </mat-tab>
             </mat-tab-group>
         </ng-template>

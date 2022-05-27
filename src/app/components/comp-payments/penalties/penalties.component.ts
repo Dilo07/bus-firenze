@@ -8,8 +8,12 @@ import { Component } from '@angular/core';
 export class PenaltiesComponent {
 
   public viewFleetTable = true;
+  public filter = '';
   public fleetId: number;
 
   constructor( ) { }
 
+  public applyFilter(event: Event): void {
+    this.filter = (event.target as HTMLInputElement).value;
+  }
 }

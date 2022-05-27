@@ -410,7 +410,7 @@
         "SEARCH": "Ricerca per targa",
         "TYPE": "Tipo di penale",
         "PENAL_DATE": "Data penale",
-        "NO_DATA":"Nessuna penale presente"
+        "NO_DATA": "Nessuna penale presente"
     },
     "BILLING_TYPE": {
         "INSTALL": "Installazione",

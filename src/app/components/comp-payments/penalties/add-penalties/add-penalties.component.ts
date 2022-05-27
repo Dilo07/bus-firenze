@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,8 +20,9 @@ import { ModalPenalComponent } from '../modal-penal/modal-penal.component';
   `
   ]
 })
-export class AddPenaltiesComponent implements OnInit, OnDestroy {
+export class AddPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
   @Input() fleetId: number;
+  @Input() keyword: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -43,6 +44,13 @@ export class AddPenaltiesComponent implements OnInit, OnDestroy {
     this.getVehiclesByManagerId();
   }
 
+  ngOnChanges(): void {
+    this.dataSource.filter = this.keyword.trim();
+    this.dataSource.filterPredicate = (data, filter: string): boolean => {
+      return data.lpn.toLowerCase().includes(filter);
+    };
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach(subscription => {
       subscription.unsubscribe();
@@ -57,11 +65,6 @@ export class AddPenaltiesComponent implements OnInit, OnDestroy {
       () => this.viewFleetTable = true,
       () => this.complete = true
     );
-  }
-
-  public applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   public modalPenal(vehicleid: number, fmId: number): void {

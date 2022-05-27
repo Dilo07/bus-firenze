@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import moment from 'moment';
@@ -10,8 +10,9 @@ import { BillingItemsService } from 'src/app/services/billing-items.service';
   templateUrl: './emitted-penalties.component.html',
   styles: [` `]
 })
-export class EmittedPenaltiesComponent implements OnInit {
+export class EmittedPenaltiesComponent implements OnInit, OnChanges {
   @Input() fleetId: number;
+  @Input() keyword: string;
   public maxDate = moment().toDate();
   public formGroup: FormGroup;
   public dataSource = new MatTableDataSource<BillingItems>();
@@ -27,6 +28,13 @@ export class EmittedPenaltiesComponent implements OnInit {
       ctrlRangeEnd: new FormControl(moment().toDate(), Validators.required),
     });
     this.getPenalties();
+  }
+
+  ngOnChanges(): void {
+    this.dataSource.filter = this.keyword.trim();
+    this.dataSource.filterPredicate = (data, filter: string): boolean => {
+      return data.lpn.toLowerCase().includes(filter);
+    };
   }
 
   getPenalties(): void {

@@ -21,7 +21,7 @@
                 {{element.id}}
             </mat-cell>
         </ng-container>
-    
+
         <ng-container matColumnDef="plate">
             <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let element">
@@ -37,7 +37,7 @@
                 {{ element.startPeriod.day + '/' + element.startPeriod.month + '/' + element.startPeriod.year}}
             </mat-cell>
         </ng-container>
-    
+
         <ng-container matColumnDef="typeId">
             <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.TYPE' | translate }} </mat-header-cell>
             <mat-cell *matCellDef="let element">
@@ -45,7 +45,7 @@
                 {{'BILLING_TYPE.' + element.typeId | translate}}
             </mat-cell>
         </ng-container>
-    
+
         <ng-container matColumnDef="price">
             <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICE' | translate }} </mat-header-cell>
             <mat-cell *matCellDef="let element">
@@ -53,10 +53,13 @@
                 {{element.price}} €
             </mat-cell>
         </ng-container>
-    
+
         <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
             [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">{{'VEHICLE.NO_DATA' | translate}}
+            </td>
+        </tr>
     </mat-table>
-    <div *ngIf="dataSource.data.length === 0 ">{{ 'PENALTIES.NO_DATA' | translate}}</div>
 </div>

@@ -189,6 +189,7 @@ export interface BillingItems {
   id: number;
   fmId: number;
   vehicleId: number;
+  lpn: string;
   billingSapId: number;
   billingState: string;
   startPeriod: LocalDate;
@@ -218,11 +219,6 @@ export interface LocalDate{
   year: number;
   month: number;
   day: number;
-}
-
-export interface PenalType{
-  type: string;
-  value: number;
 }
 
 export interface PenalInfo {
