@@ -222,7 +222,12 @@ export interface LocalDate{
   day: number;
 }
 
-export interface PenalInfo {
+export interface PenalType{
+  typeId: number;
+  billingType: number;
+}
+
+export interface AddPenal {
   penalType: number;
   date: string;
 }

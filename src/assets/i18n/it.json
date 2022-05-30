@@ -417,7 +417,9 @@
         "DELTA_NOT_MERGEABLE": "Canone mensile",
         "DELTA_MERGEABLE": "Canone mensile periodico",
         "MISSED_APPOINTMENT": "Mancato appuntamento",
-        "CANCELLED_APPOINTMENT": "Appuntamento cancellato entro 24h"
+        "CANCELLED_APPOINTMENT": "Appuntamento cancellato entro 24h",
+        "5": "Mancato appuntamento",
+        "6": "Appuntamento cancellato entro 24h"
     },
     "COMMON": {
         "DATE": {

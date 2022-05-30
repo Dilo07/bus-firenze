@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { BillingItems, BillingItemsAgg } from '../components/domain/bus-firenze-domain';
+import { BillingItems, BillingItemsAgg, PenalType } from '../components/domain/bus-firenze-domain';
 
 @Injectable({
   providedIn: 'root'
@@ -59,8 +59,8 @@ export class BillingItemsService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getPenalType(manual: boolean): Observable<number[]> {
-    return this.http.get<number[]>(this.apiUrl + `/type/${manual}`)
+  getPenalType(manual: boolean): Observable<PenalType[]> {
+    return this.http.get<PenalType[]>(this.apiUrl + `/type/${manual}`)
       .pipe(catchError(err => { throw err; }));
   }
 }

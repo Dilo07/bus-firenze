@@ -2,8 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import moment from 'moment';
-import { PENALTIES } from 'src/app/components/domain/bus-firenze-constants';
-import { BillingType, PenalInfo } from 'src/app/components/domain/bus-firenze-domain';
+import { BillingType, AddPenal, PenalType } from 'src/app/components/domain/bus-firenze-domain';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 
 @Component({
@@ -13,9 +12,8 @@ import { BillingItemsService } from 'src/app/services/billing-items.service';
   ]
 })
 export class ModalPenalComponent implements OnInit {
-  public penalties = PENALTIES;
   public formGroup: FormGroup;
-  public listPenalType: number[];
+  public listPenalType: PenalType[];
   public complete = true;
 
   constructor(
@@ -28,7 +26,7 @@ export class ModalPenalComponent implements OnInit {
     this.listPenalType = await this.billingItemService.getPenalType(true).toPromise();
     this.complete = true;
     this.formGroup = new FormGroup({
-      penalSelected: new FormControl(this.listPenalType[0], Validators.required),
+      penalSelected: new FormControl(this.listPenalType[0].typeId, Validators.required),
       datePenal: new FormControl(moment().toDate(), Validators.required)
     });
   }
@@ -36,7 +34,7 @@ export class ModalPenalComponent implements OnInit {
   public addPenal(): void {
     const penalSelected = this.formGroup.get('penalSelected').value;
     const datePenal = this.formGroup.get('datePenal').value;
-    const penalInfo: PenalInfo = { penalType: penalSelected, date: moment(datePenal).format('YYYY-MM-DD') };
+    const penalInfo: AddPenal = { penalType: penalSelected, date: moment(datePenal).format('YYYY-MM-DD') };
     this.dialogRef.close(penalInfo);
   }
 

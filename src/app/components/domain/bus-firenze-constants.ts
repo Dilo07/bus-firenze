@@ -109,9 +109,3 @@ export const BILLING_STATUS = {
   success: 'SUCCESS',
   failed: 'FAILED'
 };
-
-export const PENALTIES = {
-  missedAppointment: 5,
-  cancelledAppointment: 6
-};
-

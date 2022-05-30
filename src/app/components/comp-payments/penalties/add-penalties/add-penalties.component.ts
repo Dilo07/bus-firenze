@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
-import { PenalInfo, Vehicle } from 'src/app/components/domain/bus-firenze-domain';
+import { AddPenal, Vehicle } from 'src/app/components/domain/bus-firenze-domain';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { ModalPenalComponent } from '../modal-penal/modal-penal.component';
@@ -75,7 +75,7 @@ export class AddPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
       autoFocus: false
     });
     this.subscription.push(dialogRef.afterClosed().subscribe(
-      (penal: PenalInfo) => {
+      (penal: AddPenal) => {
         if (penal) { this.addPenal(penal.penalType, fmId, vehicleid, penal.date); }
       }
     ));
