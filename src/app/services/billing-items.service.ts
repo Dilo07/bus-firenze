@@ -13,20 +13,6 @@ export class BillingItemsService {
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
-  /* getBillingItems(start: string, end: string, billingStatus: string, fmId?: number): Observable<BillingItems[]> {
-    let url = '';
-    if (fmId) {
-      url = '/' + fmId;
-    }
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ start, end, status: billingStatus })
-    };
-
-    return this.http.get<BillingItems[]>(this.apiUrl + '/all' + url, options)
-      .pipe(catchError(err => { throw err; }));
-  } */
-
   getBillingItemsAggregate(start: string, end: string, billingStatus: string, fmId?: number): Observable<BillingItemsAgg[]> {
     let url = '';
     if (fmId) {

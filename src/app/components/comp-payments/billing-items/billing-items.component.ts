@@ -17,7 +17,7 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
   @media(min-width: 1180px) {
     .mat-column-expandButton { max-width: 10%}
     .mat-column-gopId { max-width: 10%;}
-    .mat-column-typeId { max-width: 30%;}
+    .mat-column-billingType { max-width: 20%;}
     .mat-column-price { max-width: 10%;}
     .mat-column-quantity { max-width: 10%;}
     .mat-column-priceTot { max-width: 10%;}
