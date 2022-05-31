@@ -28,7 +28,9 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public formGroup: FormGroup;
   public verifyOtp = false;
   public dialCode: CountryCallingCode = '39';
-  public selectedFile: File;
+  public fileModule: File;
+  public fileIdentityCard: File;
+  public fileCommerceReg: File;
   public roleFleetManager: boolean;
   public isEuropeNat: boolean;
   public nations = worldNations;
@@ -100,7 +102,11 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ctrlCity: ['', Validators.required],
         ctrlDistrict: [''],
         ctrlCAP: [''],
-        ctrlNat: ['IT', Validators.required]
+        ctrlNat: ['IT', Validators.required],
+        ctrlFileModule: ['', Validators.required],
+        ctrlFileIdentityCrd: ['', Validators.required],
+        ctrlFileCommerceReg: ['', Validators.required],
+        ctrlConsent: [false, Validators.requiredTrue]
       });
       this.userSel = this.fleetType.AZIENDA_PRIVATA;
     }
@@ -152,13 +158,13 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe((resp) => {
         if (resp) {
-          this.subscription.push(this.registerService.registerFleet(this.selectedFile, newFleetManager).subscribe(
+          this.subscription.push(this.registerService.registerFleet(this.fileModule, newFleetManager).subscribe(
             () => { this.router.navigate(['../']); }
           ));
         }
       });
     } else {
-      this.subscription.push(this.fleetManagerService.insertFleetManager(this.selectedFile, newFleetManager).subscribe(
+      this.subscription.push(this.fleetManagerService.insertFleetManager(this.fileModule, newFleetManager).subscribe(
         () => { this.router.navigate(['../fleet-manager-manage']); },
       ));
     }
@@ -209,12 +215,38 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         }));
   }
 
-  public uploadFile(event: any): void {
-    const type = event.target.files[0].type;
-    if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png') {
-      this.selectedFile = event.target.files[0];
-    } else {
-      this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR');
+  public uploadFile(event: any, typeFile: number): void {
+    if (event.target.files.length > 0) {
+      const type = event.target.files[0].type;
+      switch (typeFile) {
+        case 1:
+          if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png') {
+            this.fileModule = event.target.files[0];
+          } else {
+            this.fileModule = null;
+            this.formGroup.patchValue({ ctrlFileModule: '' });
+            this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR');
+          }
+          break;
+        case 2:
+          if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png') {
+            this.fileIdentityCard = event.target.files[0];
+          } else {
+            this.fileIdentityCard = null;
+            this.formGroup.patchValue({ ctrlFileIdentityCrd: '' });
+            this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR');
+          }
+          break;
+        case 3:
+          if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png') {
+            this.fileCommerceReg = event.target.files[0];
+          } else {
+            this.fileCommerceReg = null;
+            this.formGroup.patchValue({ ctrlFileCommerceReg: '' });
+            this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR');
+          }
+          break;
+      }
     }
   }
 
@@ -226,7 +258,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.completePiva = false;
       this.subscription.push(this.registerService.checkVatNumber(nat, pIva).subscribe(
         vatVerify => {
-          console.log(vatVerify);
           if (!vatVerify.valid) {
             this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
           } else {
@@ -267,7 +298,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         this.completePiva2 = false;
         this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode).subscribe(
           vatVerify => {
-            console.log(vatVerify);
             if (!vatVerify.valid) {
               this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
             } else {
