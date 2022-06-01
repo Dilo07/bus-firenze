@@ -12,7 +12,8 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
-import { ColumnSort, FleetManager } from '../domain/bus-firenze-domain';
+import { DOCUMENT_TYPE } from '../domain/bus-firenze-constants';
+import { ColumnSort, FleetDocument, FleetManager } from '../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 
 @Component({
@@ -48,6 +49,7 @@ export class FleetManagerComponent implements OnInit {
   public manageFleet: boolean;
   public roleOpMovyon: boolean;
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
+  public docType = DOCUMENT_TYPE;
 
   private offset = 0;
   private limit = 10;
@@ -85,20 +87,21 @@ export class FleetManagerComponent implements OnInit {
       this.manageFleet,
       this.offset,
       this.limit,
-      this.columnOrder).subscribe(
-      (data) => {
-        this.fleetManagerList.length = currentSize;
-        this.fleetManagerList = this.fleetManagerList.concat(data);
-        if (data.length < this.limit) {
-          this.paginator.length = this.fleetManagerList.length;
-          this.endTable = true;
-        } else {
-          this.paginator.length = ((this.offset + 1) * this.limit) + 1;
-        }
-        this.dataSource.data = data;
-      },
-      () => this.complete = true,
-      () => { this.complete = true; this.unSubscribe(); }));
+      this.columnOrder)
+      .subscribe(
+        (data) => {
+          this.fleetManagerList.length = currentSize;
+          this.fleetManagerList = this.fleetManagerList.concat(data);
+          if (data.length < this.limit) {
+            this.paginator.length = this.fleetManagerList.length;
+            this.endTable = true;
+          } else {
+            this.paginator.length = ((this.offset + 1) * this.limit) + 1;
+          }
+          this.dataSource.data = data;
+        },
+        () => this.complete = true,
+        () => { this.complete = true; this.unSubscribe(); }));
     this.sessionService.setSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
   }
 
@@ -157,8 +160,14 @@ export class FleetManagerComponent implements OnInit {
     });
   }
 
-  public getFleetDocument(fleetManagerId: number, fileId: number): void {
+  public getFleetDocument(fleetManagerId: number, documents: FleetDocument[],  documentType: string): void {
     this.complete = false;
+    let fileId: number;
+    documents.forEach(document => {
+      if (document.type === documentType) {
+        fileId = document.fileId;
+      }
+    });
     this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(
       (data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf

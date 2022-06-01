@@ -19,6 +19,7 @@ export class FleetManager {
   country: string;
   extraUE: boolean;
   codeDest: string;
+  documents: FleetDocument[];
 }
 
 export interface Contact {
@@ -172,5 +173,11 @@ export enum RefreshOption {
 export interface VatValidation {
   address: string;
   name: string;
+  valid: boolean;
+}
+
+export interface FleetDocument {
+  fileId: number;
+  type: 'reqForm' | 'idDoc' | 'comReg';
   valid: boolean;
 }

@@ -158,9 +158,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe((resp) => {
         if (resp) {
-          this.subscription.push(this.registerService.registerFleet(this.fileModule, newFleetManager).subscribe(
-            () => { this.router.navigate(['../']); }
-          ));
+          this.subscription.push(
+            this.registerService.registerFleet(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
+              () => { this.router.navigate(['../']); }
+            ));
         }
       });
     } else {

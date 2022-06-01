@@ -108,7 +108,8 @@
 							<a matSuffix mat-icon-button
 								href="https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCf"
 								target="_blank" *ngIf="element.companyType === 'ENTE'">
-								<mat-icon style="color: #0066CC;" matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">verified_user</mat-icon>
+								<mat-icon style="color: #0066CC;"
+									matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">verified_user</mat-icon>
 							</a>
 						</mat-cell>
 					</ng-container>
@@ -117,34 +118,50 @@
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span *ngIf="manageFleet">
-								<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}"
-									[routerLink]="['form-Fleet']" [state]="{fleetManager: element}">
-									<mat-icon style="color: #0066CC;">edit</mat-icon>
+								<button mat-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
+									<mat-icon style="color: #0066CC;">more_vert</mat-icon>
 								</button>
+								<mat-menu #actionsMenuManage="matMenu">
+									<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}"
+										[routerLink]="['form-Fleet']" [state]="{fleetManager: element}">
+										<mat-icon style="color: #0066CC;">edit</mat-icon>
+									</button>
+									<button *ngIf="!roleOpMovyon" mat-icon-button
+										matTooltip="{{'DRIVERS.TITLE' | translate}}" [routerLink]="['drivers']"
+										[state]="{fleetManagerId: element.id}">
+										<mat-icon style="color: #0066CC;">airline_seat_recline_normal</mat-icon>
+									</button>
+									<button mat-icon-button matTooltip="{{'VEHICLE.TITLE' | translate}}"
+										[routerLink]="['vehicles']" [state]="{fleetManager: element}">
+										<mat-icon style="color: #0066CC;">directions_car</mat-icon>
+									</button>
+									<button mat-icon-button matTooltip="Real time" [routerLink]="['../real-time']"
+										[state]="{fleetManager: element}">
+										<mat-icon style="color: #0066CC;">place</mat-icon>
+									</button>
+								</mat-menu>
 								<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
 									(click)="deleteFleetManager(element.id)">
 									<mat-icon style="color: red;">delete</mat-icon>
 								</button>
-								<button *ngIf="!roleOpMovyon" mat-icon-button
-									matTooltip="{{'DRIVERS.TITLE' | translate}}" [routerLink]="['drivers']"
-									[state]="{fleetManagerId: element.id}">
-									<mat-icon style="color: #0066CC;">airline_seat_recline_normal</mat-icon>
-								</button>
-								<button mat-icon-button matTooltip="{{'VEHICLE.TITLE' | translate}}"
-									[routerLink]="['vehicles']" [state]="{fleetManager: element}">
-									<mat-icon style="color: #0066CC;">directions_car</mat-icon>
-								</button>
-								<button mat-icon-button matTooltip="Real time" [routerLink]="['../real-time']"
-									[state]="{fleetManager: element}">
-									<mat-icon style="color: #0066CC;">place</mat-icon>
-								</button>
+
 							</span>
 							<span *ngIf="validFleet">
 								<button mat-icon-button style="color: #0066CC;"
-									matTooltip="{{'OBU.VIEW_FILE' | translate}}"
-									(click)="getFleetDocument(element.id, element.fileId)">
+									matTooltip="{{'OBU.VIEW_FILE' | translate}}" [matMenuTriggerFor]="menuFile">
 									<mat-icon>find_in_page</mat-icon>
 								</button>
+								<mat-menu #menuFile="matMenu">
+									<button mat-menu-item
+										(click)="getFleetDocument(element.id, element.documents, docType.module)">
+										{{'FLEET-MANAGER.MODULE' | translate}}</button>
+									<button mat-menu-item
+										(click)="getFleetDocument(element.id, element.documents, docType.identityCard)">
+										{{'FLEET-MANAGER.INDENTITY_CARD' | translate}}</button>
+									<button mat-menu-item
+										(click)="getFleetDocument(element.id, element.documents, docType.commerceRegister)">
+										{{'FLEET-MANAGER.COMMERCE_REG' | translate}}</button>
+								</mat-menu>
 								<button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
 									(click)="validInvalidFleet(element.id, true)">
 									<mat-icon style="color: green;">done</mat-icon>
