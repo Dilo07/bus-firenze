@@ -1,9 +1,11 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FleetDocument } from '../../domain/bus-firenze-domain';
+import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-modal-fleet-documents',
@@ -20,6 +22,7 @@ export class FleetDocumentsComponent implements OnDestroy {
 
   constructor(
     private router: Router,
+    private dialog: MatDialog,
     private fleetManagerService: FleetManagerService
   ) {
     this.fmId = this.router.getCurrentNavigation()?.extras.state?.fmId as number;
@@ -53,12 +56,24 @@ export class FleetDocumentsComponent implements OnDestroy {
   }
 
   public validDocument(fileId: number): void {
-    this.complete = false;
-    this.subscription.push(this.fleetManagerService.validDocumentFleet(this.fmId, fileId).subscribe(
-      () => null,
-      () => this.complete = true,
-      () => (this.refreshFleetDocuments(), this.complete = true)
-    ));
+    const dialogRef = this.dialog.open(ModalConfirmComponent, {
+      width: '50%',
+      height: '30%',
+      data: { text: 'FLEET-MANAGER.DOCUMENT_CONFIRM' },
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe(
+      (confirm) => {
+        if (confirm) {
+          this.complete = false;
+          this.subscription.push(this.fleetManagerService.validDocumentFleet(this.fmId, fileId).subscribe(
+            () => null,
+            () => this.complete = true,
+            () => (this.refreshFleetDocuments(), this.complete = true)
+          ));
+        }
+      }
+    );
   }
 
   private refreshFleetDocuments(): void {
