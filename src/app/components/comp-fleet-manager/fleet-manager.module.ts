@@ -30,7 +30,7 @@ import { PanelStatisticComponent } from './vehicles/panel-statistic/panel-statis
 import { TableStatisticComponent } from './vehicles/table-statistic/table-statistic.component';
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
-import { ModalFleetDocumentsComponent } from './modal-fleet-documents/modal-fleet-documents.component';
+import { FleetDocumentsComponent } from './fleet-documents/fleet-documents.component';
 
 
 @NgModule({
@@ -54,7 +54,7 @@ import { ModalFleetDocumentsComponent } from './modal-fleet-documents/modal-flee
     Ng2telinputDirective,
     ExpansionInfoComponent,
     ExpansionInfoVehicleComponent,
-    ModalFleetDocumentsComponent
+    FleetDocumentsComponent
   ],
   imports: [
     CommonModule,

@@ -21,6 +21,11 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  getFleetManagerById(fmId: number): Observable<FleetManager> {
+    return this.http.get<FleetManager>(this.apiUrl + `/${fmId}`)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   searchFleetManager(keyword: string, valid: boolean, offset: number, limit: number, columnOrder: ColumnSort): Observable<FleetManager[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

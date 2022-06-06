@@ -137,7 +137,8 @@
 									</button>
 									<button mat-icon-button
 										matTooltip="{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}"
-										(click)="modalDocuments(element.id, element.documents)">
+										[routerLink]="['fleet-documents']" [state]="{fmId: element.id, documents: element.documents}">
+										<!-- (click)="modalDocuments(element.id, element.documents)" -->
 										<mat-icon style="color: #0066CC;">fact_check</mat-icon>
 									</button>
 								</mat-menu>

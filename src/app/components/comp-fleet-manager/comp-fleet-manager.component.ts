@@ -14,7 +14,6 @@ import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.consta
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ColumnSort, FleetDocumentTypes, FleetDocument, FleetManager } from '../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
-import { ModalFleetDocumentsComponent } from './modal-fleet-documents/modal-fleet-documents.component';
 
 @Component({
   selector: 'app-comp-fleet-manager',
@@ -185,14 +184,14 @@ export class FleetManagerComponent implements OnInit {
     ));
   }
 
-  public modalDocuments(fleetManageId: number, documents: FleetDocument[]): void{
+  /* public modalDocuments(fleetManageId: number, documents: FleetDocument[]): void{
     const dialogRef = this.dialog.open(ModalFleetDocumentsComponent, {
       width: '50%',
       height: '50%',
       autoFocus: false,
       data: {fmId: fleetManageId, documents: documents}
     });
-  }
+  } */
 
   public sortData(event: { active: string; direction: string }): void {
     this.columnOrder.active = event.active;
