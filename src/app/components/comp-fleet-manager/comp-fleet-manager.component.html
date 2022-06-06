@@ -3,7 +3,7 @@
 	<mat-card-content>
 		<app-view-file [file]="src"></app-view-file>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<span fxFlex="20" *ngIf="manageFleet">
+			<span fxFlex="20" *ngIf="isManageFleet">
 				<button mat-button class="greenButtons" [routerLink]="['form-Fleet']">
 					{{'FLEET-MANAGER.NEW' | translate}}
 				</button>
@@ -66,10 +66,10 @@
 
 					<ng-container matColumnDef="city">
 						<!-- solo manage table -->
-						<mat-header-cell *matHeaderCellDef [style.display]="validFleet ? 'none' : ''">
+						<mat-header-cell *matHeaderCellDef [style.display]="isValidFleet ? 'none' : ''">
 							{{'FLEET-MANAGER.CITY' | translate}}
 						</mat-header-cell>
-						<mat-cell *matCellDef="let element" [style.display]="validFleet ? 'none' : ''">
+						<mat-cell *matCellDef="let element" [style.display]="isValidFleet ? 'none' : ''">
 							<span class="mobile-label">{{'FLEET-MANAGER.CITY' | translate}}</span>
 							{{ element.city}}
 						</mat-cell>
@@ -77,10 +77,10 @@
 
 					<ng-container matColumnDef="district">
 						<!-- solo manage table -->
-						<mat-header-cell *matHeaderCellDef [style.display]="validFleet ? 'none' : ''">
+						<mat-header-cell *matHeaderCellDef [style.display]="isValidFleet ? 'none' : ''">
 							{{'FLEET-MANAGER.DISTRICT' | translate}}
 						</mat-header-cell>
-						<mat-cell *matCellDef="let element" [style.display]="validFleet ? 'none' : ''">
+						<mat-cell *matCellDef="let element" [style.display]="isValidFleet ? 'none' : ''">
 							<span class="mobile-label">{{'FLEET-MANAGER.DISTRICT' | translate}}</span>
 							{{ element.district}}
 						</mat-cell>
@@ -88,10 +88,10 @@
 
 					<ng-container matColumnDef="pIva">
 						<!-- solo valid table -->
-						<mat-header-cell *matHeaderCellDef [style.display]="validFleet ? '' : 'none'">
+						<mat-header-cell *matHeaderCellDef [style.display]="isValidFleet ? '' : 'none'">
 							{{'FLEET-MANAGER.VAT_NUMBER' | translate}}
 						</mat-header-cell>
-						<mat-cell *matCellDef="let element" [style.display]="validFleet ? '' : 'none'">
+						<mat-cell *matCellDef="let element" [style.display]="isValidFleet ? '' : 'none'">
 							<span class="mobile-label">{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</span>
 							{{ element.pIva}}
 						</mat-cell>
@@ -99,10 +99,10 @@
 
 					<ng-container matColumnDef="fiscalCode">
 						<!-- solo valid table -->
-						<mat-header-cell *matHeaderCellDef [style.display]="validFleet ? '' : 'none'">
+						<mat-header-cell *matHeaderCellDef [style.display]="isValidFleet ? '' : 'none'">
 							{{'FLEET-MANAGER.FISCALCODE' | translate}}
 						</mat-header-cell>
-						<mat-cell *matCellDef="let element" [style.display]="validFleet ? '' : 'none'">
+						<mat-cell *matCellDef="let element" [style.display]="isValidFleet ? '' : 'none'">
 							<span class="mobile-label">{{'FLEET-MANAGER.FISCALCODE' | translate}}</span>
 							{{ element.fiscalCode}}
 							<a matSuffix mat-icon-button
@@ -117,15 +117,11 @@
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span *ngIf="manageFleet">
-								<button mat-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
+							<span *ngIf="isManageFleet">
+								<button mat-icon-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
 									<mat-icon style="color: #0066CC;">more_vert</mat-icon>
 								</button>
 								<mat-menu #actionsMenuManage="matMenu">
-									<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}"
-										[routerLink]="['form-Fleet']" [state]="{fleetManager: element}">
-										<mat-icon style="color: #0066CC;">edit</mat-icon>
-									</button>
 									<button *ngIf="!roleOpMovyon" mat-icon-button
 										matTooltip="{{'DRIVERS.TITLE' | translate}}" [routerLink]="['drivers']"
 										[state]="{fleetManagerId: element.id}">
@@ -139,28 +135,36 @@
 										[state]="{fleetManager: element}">
 										<mat-icon style="color: #0066CC;">place</mat-icon>
 									</button>
+									<button mat-icon-button
+										matTooltip="{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}"
+										(click)="modalDocuments(element.id, element.documents)">
+										<mat-icon style="color: #0066CC;">fact_check</mat-icon>
+									</button>
 								</mat-menu>
+								<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}"
+									[routerLink]="['form-Fleet']" [state]="{fleetManager: element}">
+									<mat-icon style="color: #0066CC;">edit</mat-icon>
+								</button>
 								<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
 									(click)="deleteFleetManager(element.id)">
 									<mat-icon style="color: red;">delete</mat-icon>
 								</button>
-
 							</span>
-							<span *ngIf="validFleet">
+							<span *ngIf="isValidFleet">
 								<button mat-icon-button style="color: #0066CC;"
 									matTooltip="{{'OBU.VIEW_FILE' | translate}}" [matMenuTriggerFor]="menuFile">
 									<mat-icon>find_in_page</mat-icon>
 								</button>
 								<mat-menu #menuFile="matMenu">
 									<button mat-menu-item
-										(click)="getFleetDocument(element.id, element.documents, docType.module)">
-										{{'FLEET-MANAGER.MODULE' | translate}}</button>
+										(click)="getFleetDocument(element.id, element.documents, 'reqForm')">
+										{{'FLEET-MANAGER.reqForm' | translate}}</button>
 									<button mat-menu-item
-										(click)="getFleetDocument(element.id, element.documents, docType.identityCard)">
-										{{'FLEET-MANAGER.INDENTITY_CARD' | translate}}</button>
+										(click)="getFleetDocument(element.id, element.documents, 'idDoc')">
+										{{'FLEET-MANAGER.idDoc' | translate}}</button>
 									<button mat-menu-item
-										(click)="getFleetDocument(element.id, element.documents, docType.commerceRegister)">
-										{{'FLEET-MANAGER.COMMERCE_REG' | translate}}</button>
+										(click)="getFleetDocument(element.id, element.documents, 'comReg')">
+										{{'FLEET-MANAGER.comReg' | translate}}</button>
 								</mat-menu>
 								<button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
 									(click)="validInvalidFleet(element.id, true)">

@@ -68,4 +68,9 @@ export class FleetManagerService {
     return this.http.get(this.apiUrl + '/' + fleetManagerId + '/upload/' + fileId, options)
       .pipe(catchError(err => { throw err; }));
   }
+
+  validDocumentFleet(fleetManagerId: number, fileId: number): Observable<void> {
+    return this.http.put<void>(this.apiUrl + `/${fleetManagerId}/document/${fileId}`, null)
+      .pipe(catchError(err => { throw err; }));
+  }
 }

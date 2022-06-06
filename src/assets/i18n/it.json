@@ -138,9 +138,11 @@
         "VERIFY_MOBILE": "verifica numero",
         "MOBILE_VERIFIED": "numero verificato",
         "DOWNLOAD_TEMPLATE": "Scarica file",
-        "MODULE": "Modulo adesione",
-        "INDENTITY_CARD": "Carta d'intentità",
-        "COMMERCE_REG": "Visura camerale",
+        "VALID_DOCUMENTS": "Valida documenti",
+        "VALID_AT": "Validato il ",
+        "reqForm": "Modulo adesione",
+        "idDoc": "Carta d'intentità",
+        "comReg": "Visura camerale",
         "UPLOAD_FILE": "Carica modulo",
         "CHANGE_FILE": "Modifica modulo",
         "UPLOAD_IDENTIYCRD": "Carica carta d'indentità",
@@ -489,7 +491,8 @@
             "match": "Errore nel cambio di targa",
             "remove": "non è possibile rimuovere l'obu",
             "installer": "L'installer non ha installato questo obu",
-            "associate_to_other_domains": "L'obu da sostituire è associato ad un altro dominio, rimuovilo da tutti i domini"
+            "associate_to_other_domains": "L'obu da sostituire è associato ad un altro dominio, rimuovilo da tutti i domini",
+            "ticket": "Non è possibile rimuovere un OBU da un veicolo con un abbonamento attivo associato"
         },
         "ines": {
             "request": "Servizi ines non raggiungibili",

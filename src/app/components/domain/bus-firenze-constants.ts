@@ -102,9 +102,3 @@ export const DEPOSIT_TYPE = {
   DEPOSIT: 'deposit',
   REQUEST: 'request'
 };
-
-export const DOCUMENT_TYPE = {
-  module: 'reqForm',
-  identityCard: 'idDoc',
-  commerceRegister: 'comReg'
-};

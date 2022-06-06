@@ -138,9 +138,11 @@
         "VERIFY_MOBILE": "verify mobile",
         "MOBILE_VERIFIED": "mobile verified",
         "DOWNLOAD_TEMPLATE": "Download file",
-        "MODULE": "Membership form",
-        "INDENTITY_CARD": "Identity card",
-        "COMMERCE_REG": "Commerce registration",
+        "VALID_DOCUMENTS": "Valid documents",
+        "VALID_AT": "Validate at ",
+        "reqForm": "Membership form",
+        "idDoc": "Identity card",
+        "comReg": "Commerce registration",
         "UPLOAD_FILE": "Upload form",
         "CHANGE_FILE": "Edit form",
         "UPLOAD_IDENTIYCRD": "Upload identity card",
@@ -488,7 +490,8 @@
             "match": "Error on change plate",
             "remove": "Cannot remove the obu",
             "installer": "Installer didn't install this obu",
-            "associate_to_other_domains": "The obu to be replaced is associated to another domain, remove it from all domains"
+            "associate_to_other_domains": "The obu to be replaced is associated to another domain, remove it from all domains",
+            "ticket": "Not is possible remove a OBU from vehicle with active ticket"
         },
         "ines": {
             "request": "Ines service unavailable",

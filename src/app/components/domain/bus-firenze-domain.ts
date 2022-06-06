@@ -178,6 +178,8 @@ export interface VatValidation {
 
 export interface FleetDocument {
   fileId: number;
-  type: 'reqForm' | 'idDoc' | 'comReg';
-  valid: boolean;
+  type: FleetDocumentTypes;
+  valid: Date;
 }
+
+export type FleetDocumentTypes = 'reqForm' | 'idDoc' | 'comReg';

@@ -12,9 +12,9 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
-import { DOCUMENT_TYPE } from '../domain/bus-firenze-constants';
-import { ColumnSort, FleetDocument, FleetManager } from '../domain/bus-firenze-domain';
+import { ColumnSort, FleetDocumentTypes, FleetDocument, FleetManager } from '../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
+import { ModalFleetDocumentsComponent } from './modal-fleet-documents/modal-fleet-documents.component';
 
 @Component({
   selector: 'app-comp-fleet-manager',
@@ -45,11 +45,10 @@ export class FleetManagerComponent implements OnInit {
   public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'pIva', 'fiscalCode', 'city', 'district', 'actions'];
   public search: FormGroup;
   public complete = true;
-  public validFleet: boolean;
-  public manageFleet: boolean;
+  public isValidFleet: boolean;
+  public isManageFleet: boolean;
   public roleOpMovyon: boolean;
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
-  public docType = DOCUMENT_TYPE;
 
   private offset = 0;
   private limit = 10;
@@ -68,11 +67,11 @@ export class FleetManagerComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
-    this.validFleet = this.router.url === '/fleet-manager-valid';
-    this.manageFleet = this.router.url === '/fleet-manager-manage';
+    this.isValidFleet = this.router.url === '/fleet-manager-valid';
+    this.isManageFleet = this.router.url === '/fleet-manager-manage';
     this.search = this.formBuilder.group({
       ctrlSearch: [
-        this.sessionService.getSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID)
+        this.sessionService.getSessionStorage(this.isManageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID)
       ],
     });
     this.callGetFleetManager();
@@ -84,7 +83,7 @@ export class FleetManagerComponent implements OnInit {
     const currentSize = this.offset * this.limit;
     this.subscription.push(this.fleetManagerService.searchFleetManager(
       search,
-      this.manageFleet,
+      this.isManageFleet,
       this.offset,
       this.limit,
       this.columnOrder)
@@ -102,7 +101,7 @@ export class FleetManagerComponent implements OnInit {
         },
         () => this.complete = true,
         () => { this.complete = true; this.unSubscribe(); }));
-    this.sessionService.setSessionStorage(this.manageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
+    this.sessionService.setSessionStorage(this.isManageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
   }
 
   public pageChanged(event: PageEvent): void {
@@ -160,7 +159,7 @@ export class FleetManagerComponent implements OnInit {
     });
   }
 
-  public getFleetDocument(fleetManagerId: number, documents: FleetDocument[],  documentType: string): void {
+  public getFleetDocument(fleetManagerId: number, documents: FleetDocument[],  documentType: FleetDocumentTypes): void {
     this.complete = false;
     let fileId: number;
     documents.forEach(document => {
@@ -184,6 +183,15 @@ export class FleetManagerComponent implements OnInit {
       () => this.complete = true,
       () => this.complete = true
     ));
+  }
+
+  public modalDocuments(fleetManageId: number, documents: FleetDocument[]): void{
+    const dialogRef = this.dialog.open(ModalFleetDocumentsComponent, {
+      width: '50%',
+      height: '50%',
+      autoFocus: false,
+      data: {fmId: fleetManageId, documents: documents}
+    });
   }
 
   public sortData(event: { active: string; direction: string }): void {
