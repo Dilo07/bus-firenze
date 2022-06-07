@@ -21,6 +21,11 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  getFleetManagerById(fmId: number): Observable<FleetManager> {
+    return this.http.get<FleetManager>(this.apiUrl + `/${fmId}`)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   searchFleetManager(keyword: string, valid: boolean, offset: number, limit: number, columnOrder: ColumnSort): Observable<FleetManager[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -66,6 +71,11 @@ export class FleetManagerService {
       responseType: 'blob' as 'blob'
     };
     return this.http.get(this.apiUrl + '/' + fleetManagerId + '/upload/' + fileId, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  validDocumentFleet(fleetManagerId: number, fileId: number): Observable<void> {
+    return this.http.put<void>(this.apiUrl + `/${fleetManagerId}/document/${fileId}`, null)
       .pipe(catchError(err => { throw err; }));
   }
 }
