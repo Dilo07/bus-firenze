@@ -1,7 +1,7 @@
 <div fxLayout="column" *ngIf="!staticPage else static">
     <span fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
         <button mat-icon-button [matMenuTriggerFor]="menuLingua" aria-label="Example icon-button with a menu">
-            <span>{{getLang() | slice : 0 : 2}}</span>
+            <span>{{translateService.currentLang | slice : 0 : 2}}</span>
         </button>
         <mat-menu #menuLingua="matMenu">
             <span *ngFor="let lang of langs">

@@ -9,16 +9,11 @@ export class RegisterComponent implements OnInit {
   public langs: string[];
 
   constructor(
-    private translateService: TranslateService,
+    public translateService: TranslateService,
     @Inject('static_pageData') public staticPage: boolean) { }
 
   ngOnInit(): void {
     this.langs = this.translateService.getLangs();
-  }
-
-  /* Get current language */
-  public getLang(): string {
-    return this.translateService.currentLang;
   }
 
   /* Change current language */
