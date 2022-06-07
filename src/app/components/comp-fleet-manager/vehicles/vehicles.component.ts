@@ -23,7 +23,6 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   styles: [`
   table {
     width: 100%;
-    background-color: beige;
   }
   .obuDisactive{
     opacity: 0.8;

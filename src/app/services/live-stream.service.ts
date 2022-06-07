@@ -11,10 +11,10 @@ import { vehicleTrip } from './mokup/getStreamLive';
 })
 export class LiveStreamService {
 
-  constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
-
   private apiUrl = this.url + '/api/stream';
   private getVehicleTrip = vehicleTrip;
+
+  constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
   getGeometryLive(): Observable<Geometry[]> {
     return this.http.get<Geometry[]>(this.apiUrl + '/live/inner/geom')

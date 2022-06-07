@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { VehicleTripPersistence } from '../../domain/bus-firenze-domain';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalVehicleDetailsComponent } from '../modal-vehicle-details/modal-vehicle-details.component';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'app-table-real-time',

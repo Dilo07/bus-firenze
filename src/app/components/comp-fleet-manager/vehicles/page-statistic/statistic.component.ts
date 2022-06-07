@@ -5,7 +5,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NptMapComponent } from '@npt/npt-map';
-import * as moment from 'moment';
+import moment from 'moment';
 import { forkJoin, Subscription } from 'rxjs';
 import { FleetManager, TripStat, Vehicle, VehicleTripPersistence } from 'src/app/components/domain/bus-firenze-domain';
 import { StatisticService } from 'src/app/services/statistic.service';

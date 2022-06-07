@@ -21,6 +21,7 @@ mat-card-content {
     overflow: auto;
     max-height: 550px;
     background-color: beige;
+    z-index: 1;
 }
 
 .mobile-label {

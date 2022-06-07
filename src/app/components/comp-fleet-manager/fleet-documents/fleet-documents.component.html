@@ -1,0 +1,35 @@
+<app-view-file [file]="src"></app-view-file>
+<mat-card>
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
+    </mat-card-title>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center">
+        <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+        <span fxLayout="row" fxLayoutAlign="start">
+            <button mat-button class="backButton" [routerLink]="['../']"> {{'COMMON.ACTION.BACK' | translate}}
+            </button>
+        </span>
+        <span fxLayoutAlign="center">
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let document of documents">
+                    <div matLine>
+                        {{'FLEET-MANAGER.' + document.type | translate}}
+                        <button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}" [disabled]="!complete"
+                            (click)="viewDocument(document.fileId)">
+                            <mat-icon>find_in_page</mat-icon>
+                        </button>
+                        <button mat-icon-button *ngIf="!document.valid else viewDate"
+                            matTooltip="{{'FLEET-MANAGER.VALID' | translate}}" [disabled]="!complete"
+                            (click)="validDocument(document.fileId)">
+                            <mat-icon>fact_check</mat-icon>
+                        </button>
+                        <ng-template #viewDate>
+                            <span style="color: green;">
+                                {{('FLEET-MANAGER.VALID_AT' | translate) + (document.valid | date : 'dd/MM/YYYY')}}
+                            </span>
+                        </ng-template>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </span>
+    </mat-card-content>
+</mat-card>
