@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IAuthenticationService } from '@npt/npt-template';
-import moment from 'moment';
+import * as moment from 'moment';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';

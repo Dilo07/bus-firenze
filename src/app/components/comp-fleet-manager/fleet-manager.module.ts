@@ -18,6 +18,7 @@ import { AssociationVehiclesComponent } from './drivers/association-vehicles/ass
 import { DriversComponent } from './drivers/drivers.component';
 import { AssociationDriversVehiclesComponent } from './drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
+import { FleetDocumentsComponent } from './fleet-documents/fleet-documents.component';
 import { FleetManagerRoutingModule } from './fleet-manager.routing';
 import { ExpansionInfoComponent } from './form-fleet-manager/expansion-info/expansion-info.component';
 import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manager.component';
@@ -30,7 +31,6 @@ import { PanelStatisticComponent } from './vehicles/panel-statistic/panel-statis
 import { TableStatisticComponent } from './vehicles/table-statistic/table-statistic.component';
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
-import { FleetDocumentsComponent } from './fleet-documents/fleet-documents.component';
 
 
 @NgModule({

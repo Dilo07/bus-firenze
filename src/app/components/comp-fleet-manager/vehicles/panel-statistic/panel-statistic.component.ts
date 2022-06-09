@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import moment from 'moment';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { FleetManager, TripStat } from 'src/app/components/domain/bus-firenze-domain';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
