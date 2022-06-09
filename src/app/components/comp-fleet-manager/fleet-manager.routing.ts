@@ -9,6 +9,7 @@ import { AnagraphicDriverComponent } from './drivers/anagraphic-driver/anagraphi
 import { AssociationVehiclesComponent } from './drivers/association-vehicles/association-vehicles.component';
 import { DriversComponent } from './drivers/drivers.component';
 import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
+import { FleetDocumentsComponent } from './fleet-documents/fleet-documents.component';
 import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manager.component';
 import { FleetDocumentsComponent } from './fleet-documents/fleet-documents.component';
 import { StatisticComponent } from './vehicles/page-statistic/statistic.component';
