@@ -2,10 +2,7 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
     "analytics": "128b7b48-3ae5-4702-a4e7-0d000613fa44",
-    "defaultCollection": "@angular-eslint/schematics",
-    "cache": {
-      "enabled": false
-    }
+    "defaultCollection": "@angular-eslint/schematics"
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -66,6 +63,7 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
+              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
