@@ -24,7 +24,7 @@
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
-    "allowSyntheticDefaultImports": true,
+    /* "allowSyntheticDefaultImports": true, */
     "strictTemplates": true
   }
 }
