@@ -54,7 +54,7 @@
                         <mat-cell *matCellDef="let element">
                             <span class="mobile-label">{{'VEHICLE.RIC_DEPOSIT' | translate}}</span>
                             <button mat-icon-button [disabled]="!(element.documents | hasDeposit: false)"
-                                (click)="viewDeposit(element.id, element.documents, true)">
+                                (click)="viewDeposit(element.id, element.documents, 'deposit')">
                                 <mat-icon [style.color]="(element.documents | hasDeposit: false) ? '#0066CC' : 'grey'"
                                     matTooltip="{{((element.documents | hasDeposit: false)  ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
                                     description
@@ -62,7 +62,7 @@
                             </button>
                             <input style="display: none" type="file" #depositInput
                                 accept="application/pdf, image/jpeg, image/png"
-                                (change)="uploadDeposit(element.id, $event, true)">
+                                (change)="uploadDeposit(element.id, $event, 'deposit')">
                             <button mat-icon-button *ngIf="!element.deleted && !(element.documents | hasDeposit: true)"
                                 (click)="depositInput.click()">
                                 <mat-icon style="color: #0066CC;" matTooltip="{{'VEHICLE.ADDDEPOSIT' | translate}}">
@@ -78,14 +78,14 @@
                         <mat-cell *matCellDef="let element">
                             <span class="mobile-label">{{'VEHICLE.RIM_DEPOSIT' | translate}}</span>
                             <button mat-icon-button *ngIf="element.documents | hasRequest: false"
-                                (click)="viewDeposit(element.id, element.documents, false)">
+                                (click)="viewDeposit(element.id, element.documents, 'request')">
                                 <mat-icon style="color: #0066CC" matTooltip="visualizza richiesta deposito">
                                     description
                                 </mat-icon>
                             </button>
                             <input style="display: none" type="file" #depositReqInput
                                 accept="application/pdf, image/jpeg, image/png"
-                                (change)="uploadDeposit(element.id, $event, false)">
+                                (change)="uploadDeposit(element.id, $event, 'request')">
                             <button *ngIf="element.deleted && !(element.documents | hasRequest: true)" mat-icon-button
                                 (click)="depositReqInput.click()">
                                 <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
@@ -93,6 +93,19 @@
                             </button>
                             <mat-icon *ngIf="element.documents | requestDateValid" style="margin: 10px; color: green;"
                                 matTooltip="{{('VEHICLE.REQVALID' | translate) + (element.documents | requestDateValid | date: 'dd/MM/YYYY')}}">task_alt</mat-icon>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="testing">
+                        <mat-header-cell *matHeaderCellDef> collaudo rimozione </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">collaudo rimozione</span>
+                            <button mat-icon-button *ngIf="element.documents | documentRemObu"
+                                (click)="viewDeposit(element.id, element.documents, 'remObu')">
+                                <mat-icon style="color: #0066CC" matTooltip="visualizza richiesta deposito">
+                                    description
+                                </mat-icon>
+                            </button>
                         </mat-cell>
                     </ng-container>
 

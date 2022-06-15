@@ -7,8 +7,7 @@ import { IAuthenticationService, SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DEPOSIT_TYPE } from '../../domain/bus-firenze-constants';
-import { DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
+import { DepositType, DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-deposit',
@@ -18,10 +17,11 @@ import { DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
   @media(min-width: 1180px) {
   .mat-column-id { max-width: 10%}
   .mat-column-vehicleState { max-width: 10%}
-  .mat-column-plate { max-width: 20%}
+  .mat-column-plate { max-width: 10%}
   .mat-column-nat { max-width: 10%}
-  .mat-column-depositDocument { max-width: 10%}
-  .mat-column-requestDocument { max-width: 10%}
+  .mat-column-depositDocument { max-width: 13%}
+  .mat-column-requestDocument { max-width: 13%}
+  .mat-column-testing { max-width: 13%}
   .mat-column-obuId { max-width: 20%}
   }
   `
@@ -34,12 +34,11 @@ export class DepositComponent implements OnInit {
   public roleMovyon: boolean;
   public viewAll = false;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
-  public displayedColumns = ['id', 'vehicleState', 'plate', 'nat', 'depositDocument', 'requestDocument', 'obuId'];
+  public displayedColumns = ['id', 'vehicleState', 'plate', 'nat', 'depositDocument', 'requestDocument', 'testing', 'obuId'];
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
   public complete = true;
 
   private fleetManagerId: number;
-  private depositType = DEPOSIT_TYPE;
   private subscription: Subscription[] = [];
 
   constructor(
@@ -70,12 +69,10 @@ export class DepositComponent implements OnInit {
     ));
   }
 
-  public viewDeposit(vehicleId: number, documents: DocumentVehicle[], isDeposit: boolean): void {
+  public viewDeposit(vehicleId: number, documents: DocumentVehicle[], depositType: DepositType): void {
     let depositId: number;
-    const depositType = isDeposit ? this.depositType.deposit : this.depositType.request;
     documents.map(document => {
-      if (document.type === this.depositType.deposit && isDeposit) { depositId = document.fileId; }
-      if (document.type === this.depositType.request && !isDeposit) { depositId = document.fileId; }
+      if (document.type === depositType) { depositId = document.fileId; }
     });
     this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)
       .subscribe((data: HttpResponse<Blob>) => {
@@ -92,7 +89,7 @@ export class DepositComponent implements OnInit {
       }));
   }
 
-  public uploadDeposit(vehicleId: number, event: any, isDeposit: boolean): void {
+  public uploadDeposit(vehicleId: number, event: any, depositType: DepositType): void {
     this.complete = false;
     const file = event.target.files[0];
     const size = event.target.files[0].size;
@@ -100,8 +97,7 @@ export class DepositComponent implements OnInit {
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
       this.complete = true;
     }else{
-      const deposit = isDeposit ? this.depositType.deposit : this.depositType.request;
-      this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, deposit, file, this.fleetManagerId).subscribe(
+      this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, depositType, file, this.fleetManagerId).subscribe(
         () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
         () => this.complete = true,
         () => { this.getVehicle(); this.complete = true; }

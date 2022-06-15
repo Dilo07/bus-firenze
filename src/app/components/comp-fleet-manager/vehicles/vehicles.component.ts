@@ -11,8 +11,8 @@ import { DriverService } from 'src/app/services/driver.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ViewFileComponent } from 'src/app/shared/utils/components/view-file/view-file.component';
-import { DEPOSIT_TYPE, STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
-import { DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
+import { DepositType, DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from '../drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehicle.component';
@@ -52,7 +52,6 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public statusVehicle = STATUS_VEHICLE;
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
 
-  private depositType = DEPOSIT_TYPE;
   private subscription: Subscription[] = [];
 
   constructor(
@@ -126,8 +125,9 @@ export class VehiclesComponent implements OnInit, OnDestroy {
 
   public deleteVehicle(vehicleId: number, documents: DocumentVehicle[]): void {
     let hasDepositValid = false;
+    const deposit: DepositType = 'deposit';
     documents.map(document => {
-      if (document.type === this.depositType.deposit && document.valid) { hasDepositValid = true; }
+      if (document.type === deposit && document.valid) { hasDepositValid = true; }
     });
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',

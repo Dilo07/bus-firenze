@@ -6,7 +6,7 @@ import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ValidVehicleService } from 'src/app/services/valid-vehicle.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
+import { DepositType, DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
@@ -79,7 +79,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
 
   public viewDeposit(vehicleId: number, documents: DocumentVehicle[]): void {
     let depositId: number;
-    let depositType: string;
+    let depositType: DepositType;
     documents.map(document => {
       if (!document.valid) { depositId = document.fileId; depositType = document.type; }
     });

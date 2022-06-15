@@ -73,8 +73,10 @@ export interface DocumentVehicle {
   fileId: number;
   valid: Date;
   sink: Date;
-  type: 'deposit' | 'request';
+  type: DepositType;
 }
+
+export type DepositType = 'deposit' | 'request' | 'remObu';
 
 export class VehicleTripPersistence {
   ticketNumber: string;
@@ -182,6 +184,7 @@ export interface FleetDocument {
 }
 
 export type FleetDocumentTypes = 'reqForm' | 'idDoc' | 'comReg';
+
 export interface BillingItemsAgg {
   nptGopId: number;
   typeId: BillingType;

@@ -98,10 +98,6 @@ export const FLEETMNG_TYPE = Object.freeze({
   ENTE: 'ENTE'
 });
 
-export const DEPOSIT_TYPE = {
-  deposit: 'deposit',
-  request: 'request'
-};
 
 export const BILLING_STATUS = {
   unknown: 'UNKNOWN',
