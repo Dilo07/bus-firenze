@@ -12,11 +12,14 @@
         "Area-monitoring": "Area monitoring",
         "Fleet-manager": "Fleet manager",
         "Manage": "Management",
+        "Payments": "Payments",
         "Deposit": "Deposit",
+        "Billing": "Billing",
+        "Penalties": "Penalties",
         "Validation": "Validation",
         "Valid-Fleet-manager": "Fleet manager",
         "Vehicle-valid": "Vehicles",
-        "User-Fleet": "Fleet manager",
+        "User-Fleet": "Fleet",
         "User-Driver": "Driver",
         "Anagraphic": "Anagraphic",
         "Vehicles": "Vehicles",
@@ -191,7 +194,7 @@
         "LPN_NAT": "Country",
         "EURO-CLASS": "EuroClass",
         "EUROPEAN-GROUP": "Category",
-        "EXPIRED": "Vehicle expired at",
+        "EXPIRED": "Vehicle expired ",
         "WILLEXPIRE": "Vehicle will expire at",
         "UNKNOWN": "Vehicle unknow on ines",
         "CONSENT": "Contract consent",
@@ -398,10 +401,42 @@
         "GROUP6": "Motorcycles (class L)",
         "GROUP7": "Other vehicles"
     },
+    "BILLING_ITEMS": {
+        "NO_DATA": "Nobody billing items present",
+        "STATUS": "Billing status",
+        "PRICE": "Price",
+        "PRICETOT": "Total price",
+        "QUANTITY": "Quantity",
+        "TYPE": "Tipo fattura",
+        "START": "Start billing item",
+        "END": "End billing item",
+        "DETAILS": "Billing item details"
+    },
+    "PENALTIES": {
+        "ADD": "Add a penal",
+        "DATE": "Select a date",
+        "SELECT": "Select the penale tpye to add",
+        "SUCCESS":"Penal added successfully",
+        "SEARCH": "Search for plate",
+        "TYPE": "Penal type",
+        "PENAL_DATE": "Penal date",
+        "NO_DATA": "Nobody penal found"
+    },
+    "BILLING_TYPE": {
+        "INSTALL": "Install",
+        "DELTA_NOT_MERGEABLE": "Monthly fee",
+        "DELTA_MERGEABLE": "Periodic monthly fee",
+        "MISSED_APPOINTMENT": "Missed appointment",
+        "CANCELLED_APPOINTMENT": "Appointment cancelled within 24h",
+        "5": "Missed appointment",
+        "6": "Appointment cancelled within 24h"
+    },
     "COMMON": {
         "DATE": {
             "START": "Start",
-            "END": "End"
+            "END": "End",
+            "RANGE": "Select a range of date",
+            "INVALID": "Invalid range"
         },
         "ACTION": {
             "YES": "Yes",

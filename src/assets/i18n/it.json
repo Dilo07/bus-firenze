@@ -12,11 +12,14 @@
         "Area-monitoring": "Monitoriggio aree",
         "Fleet-manager": "Fleet manager",
         "Manage": "Gestione",
+        "Payments": "Pagamenti",
         "Deposit": "Depositi",
+        "Billing": "Fatture",
+        "Penalties": "Penali",
         "Validation": "Validazione",
         "Valid-Fleet-manager": "Fleet manager",
         "Vehicle-valid": "Veicoli",
-        "User-Fleet": "Fleet Manager",
+        "User-Fleet": "Flotta",
         "User-Driver": "Autista",
         "Anagraphic": "Anagrafica",
         "Vehicles": "Veicoli",
@@ -192,7 +195,7 @@
         "LPN_NAT": "Nazione",
         "EURO-CLASS": "EuroClass",
         "EUROPEAN-GROUP": "Categoria",
-        "EXPIRED": "Veicolo scaduto in data",
+        "EXPIRED": "Veicolo scaduto",
         "WILLEXPIRE": "Il veicolo scadrà in data",
         "UNKNOWN": "Veicolo sconosciuto su ines",
         "CONSENT": "Consenso contratto",
@@ -399,10 +402,42 @@
         "GROUP6": "Motocicli (classe L)",
         "GROUP7": "Altri veicoli"
     },
+    "BILLING_ITEMS": {
+        "NO_DATA": "Nessuna fattura presente",
+        "STATUS": "Stato fatture",
+        "PRICE": "Prezzo",
+        "PRICETOT": "Prezzo totale",
+        "QUANTITY": "Quantità",
+        "TYPE": "Tipo fattura",
+        "START": "Inizio periodo",
+        "END": "Fine periodo",
+        "DETAILS": "Dettagli fatture"
+    },
+    "PENALTIES": {
+        "ADD": "Applica una penale",
+        "DATE": "Seleziona una data",
+        "SELECT": "Seleziona il tipo di penale da applicare",
+        "SUCCESS":"Penale aggiunta con successo",
+        "SEARCH": "Ricerca per targa",
+        "TYPE": "Tipo di penale",
+        "PENAL_DATE": "Data penale",
+        "NO_DATA": "Nessuna penale presente"
+    },
+    "BILLING_TYPE": {
+        "INSTALL": "Installazione",
+        "DELTA_NOT_MERGEABLE": "Canone mensile",
+        "DELTA_MERGEABLE": "Canone mensile periodico",
+        "MISSED_APPOINTMENT": "Mancato appuntamento",
+        "CANCELLED_APPOINTMENT": "Appuntamento cancellato entro 24h",
+        "5": "Mancato appuntamento",
+        "6": "Appuntamento cancellato entro 24h"
+    },
     "COMMON": {
         "DATE": {
             "START": "Inizio",
-            "END": "Fine"
+            "END": "Fine",
+            "RANGE": "Seleziona un rage di date",
+            "INVALID": "Range inserito non valido"
         },
         "ACTION": {
             "YES": "Si",

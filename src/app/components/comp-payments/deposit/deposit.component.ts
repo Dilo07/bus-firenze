@@ -72,10 +72,10 @@ export class DepositComponent implements OnInit {
 
   public viewDeposit(vehicleId: number, documents: DocumentVehicle[], isDeposit: boolean): void {
     let depositId: number;
-    const depositType = isDeposit ? this.depositType.DEPOSIT : this.depositType.REQUEST;
+    const depositType = isDeposit ? this.depositType.deposit : this.depositType.request;
     documents.map(document => {
-      if (document.type === this.depositType.DEPOSIT && isDeposit) { depositId = document.fileId; }
-      if (document.type === this.depositType.REQUEST && !isDeposit) { depositId = document.fileId; }
+      if (document.type === this.depositType.deposit && isDeposit) { depositId = document.fileId; }
+      if (document.type === this.depositType.request && !isDeposit) { depositId = document.fileId; }
     });
     this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)
       .subscribe((data: HttpResponse<Blob>) => {
@@ -100,7 +100,7 @@ export class DepositComponent implements OnInit {
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
       this.complete = true;
     }else{
-      const deposit = isDeposit ? this.depositType.DEPOSIT : this.depositType.REQUEST;
+      const deposit = isDeposit ? this.depositType.deposit : this.depositType.request;
       this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, deposit, file, this.fleetManagerId).subscribe(
         () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
         () => this.complete = true,

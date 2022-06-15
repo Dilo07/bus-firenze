@@ -41,23 +41,25 @@
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">id</span>
 							{{element.id}}
-							<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button [disabled]="true">
-								<mat-icon style="color: red; opacity: 0.8;" matTooltip="{{'VEHICLE.EXPIRED' | translate}}
-								{{element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year }}">error</mat-icon>
+							<button *ngIf="element.status === statusVehicle.deleted" mat-icon-button [disabled]="true">
+								<mat-icon style="color: red; opacity: 0.8;"
+									matTooltip="{{'VEHICLE.EXPIRED' | translate}}
+								{{element.expiresAt ? '(' + element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year + ')' : '' }}">error
+								</mat-icon>
 							</button>
-							<button *ngIf="element.status === statusVehicle.DELETED" mat-icon-button
+							<button *ngIf="element.status === statusVehicle.deleted" mat-icon-button
 								(click)="updateStatus(element.id)">
 								<mat-icon style="color: #0066CC; opacity: 0.8;"
 									matTooltip="{{'VEHICLE.REFRESH_EXPDATE' | translate}}">
 									rotate_right
 								</mat-icon>
 							</button>
-							<button *ngIf="element.status === statusVehicle.TEMP" mat-icon-button [disabled]="true">
+							<button *ngIf="element.status === statusVehicle.temp" mat-icon-button [disabled]="true">
 								<mat-icon style="color: #eed202; opacity: 0.8;" matTooltip="{{'VEHICLE.WILLEXPIRE' | translate}}
 								{{element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year }}">warning
 								</mat-icon>
 							</button>
-							<button *ngIf="element.status === statusVehicle.UNKNOWN" mat-icon-button [disabled]="true">
+							<button *ngIf="element.status === statusVehicle.unknown" mat-icon-button [disabled]="true">
 								<mat-icon style="color: #9c8b0979; opacity: 0.8;"
 									matTooltip="{{'VEHICLE.UNKNOWN' | translate}}">
 									warning_amber

@@ -24,7 +24,7 @@ export class DriveGuard implements CanActivate {
       if (id) {
         const roles = await this.authService.getUserRoles();
         if (roles.includes(ROLES.DRIVER)) {
-          const respDriver = await this.driverService.getDriver().toPromise();
+          const respDriver = await this.driverService.getDriver().toPromise(); // attende il servizio getDriver()
           let mobileNum = null;
           respDriver.contacts.find(contact => {
             if (contact.code === 1) {

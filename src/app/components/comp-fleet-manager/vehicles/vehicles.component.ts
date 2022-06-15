@@ -127,7 +127,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public deleteVehicle(vehicleId: number, documents: DocumentVehicle[]): void {
     let hasDepositValid = false;
     documents.map(document => {
-      if (document.type === this.depositType.DEPOSIT && document.valid) { hasDepositValid = true; }
+      if (document.type === this.depositType.deposit && document.valid) { hasDepositValid = true; }
     });
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',

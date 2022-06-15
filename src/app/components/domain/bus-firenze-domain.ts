@@ -56,7 +56,7 @@ export class Vehicle {
   euroClass: number;
   europeanGroup: number;
   europeanGroupLabel: string;
-  expiresAt: Date;
+  expiresAt: LocalDate;
   numAxis: number;
   maxWeight: number;
   associationDate: Date;
@@ -91,7 +91,6 @@ export class VehicleTripPersistence {
 }
 
 export class LineString {
-  SRID: number;
   points: Points;
 }
 
@@ -160,14 +159,14 @@ export interface User {
 
 export interface RefreshInterface {
   label: string;
-  code: RefreshOption._1_minute | RefreshOption._5_minutes | RefreshOption._10_minutes | RefreshOption._30_minutes;
+  code: RefreshOption.time1minute | RefreshOption.time5minutes | RefreshOption.time10minutes | RefreshOption.time30minutes;
 }
 
 export enum RefreshOption {
-  _1_minute,
-  _5_minutes,
-  _10_minutes,
-  _30_minutes
+  time1minute,
+  time5minutes,
+  time10minutes,
+  time30minutes
 }
 
 export interface VatValidation {
@@ -183,3 +182,60 @@ export interface FleetDocument {
 }
 
 export type FleetDocumentTypes = 'reqForm' | 'idDoc' | 'comReg';
+export interface BillingItemsAgg {
+  nptGopId: number;
+  typeId: BillingType;
+  startPeriod: Date;
+  endPeriod: Date;
+  price: number;
+  quantity: number;
+  priceTot: number;
+  items: BillingItems;
+}
+
+export interface BillingItems {
+  id: number;
+  fmId: number;
+  vehicleId: number;
+  lpn: string;
+  billingSapId: number;
+  billingState: string;
+  startPeriod: LocalDate;
+  endPeriod: LocalDate;
+  nptGopId: number;
+  price: number;
+  processedDate: Date;
+  quantity: number;
+  resSapCode: number;
+  resSapMessage: string;
+  sendDate: Date;
+  billingType: string;
+  typeId: number;
+}
+
+export enum BillingType {
+  all,
+  install,
+  deltaNotMergeable,
+  deltaMergeable,
+  uninstall,
+  missedAppointment,
+  cancelledAppointment,
+  reversal
+}
+
+export interface LocalDate{
+  year: number;
+  month: number;
+  day: number;
+}
+
+export interface PenalType{
+  typeId: number;
+  billingType: number;
+}
+
+export interface AddPenal {
+  penalType: number;
+  date: string;
+}

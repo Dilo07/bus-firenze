@@ -10,6 +10,7 @@
   "flow_implicit": false,
   "rangeDateStatisticVehicle": null,
   "hideActiveTicket": false,
+  "hideBilling": false,
   "no_auth": {
     "roles": [
       "driver",
