@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NptObuComponent, RouteObu, VehicleDocumentComponent } from '@npt/npt-obu';
+import { NptObuComponent, RouteObu, VehicleDocumentComponent, TestingObuComponent } from '@npt/npt-obu';
 import { AuthGuard } from '@npt/npt-template';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 
@@ -20,7 +20,10 @@ const routes: Routes = [
   },
   {
     path: 'remove-obu', component: NptObuComponent, canActivate: [AuthGuard],
-    data: { route: RouteObu.removeObu, roles: [ROLES.MOVYON, ROLES.INSTALLER] }
+    data: { route: RouteObu.removeObu, roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER] }
+  },
+  {
+    path: 'testing', component: TestingObuComponent, data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER] }
   },
   {
     path: 'vehicle-document', component: VehicleDocumentComponent, canActivate: [AuthGuard],

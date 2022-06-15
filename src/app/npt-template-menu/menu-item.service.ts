@@ -20,7 +20,7 @@ const SUBMENU_ROUTES = [
   { state: 'anagraphic-fleet', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.FLEETMNG] },
   { state: 'assign-obu', name: 'Assign-obu', icon: 'new_label', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'change-obu', name: 'Change-obu', icon: 'assignment_return', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'remove-obu', name: 'Remove-obu', icon: 'code_off', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'remove-obu', name: 'Remove-obu', icon: 'code_off', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER] },
   { state: 'change-plate', name: 'Change-plate', icon: 'assignment_return', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'vehicle-document', name: 'Vehicle-document', icon: 'description', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'add-appointment', name: 'Add-appointment', icon: 'contact_phone', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
@@ -61,7 +61,7 @@ const MENUITEMS = [
   {
     state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'assignment',
     children: [SUBMENU_ROUTES[7], SUBMENU_ROUTES[8], SUBMENU_ROUTES[9], SUBMENU_ROUTES[10], SUBMENU_ROUTES[11]],
-    roles: [ROLES.MOVYON, ROLES.INSTALLER]
+    roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER]
   },
   {
     state: 'appointment', name: 'Appointment', type: 'submenu', icon: 'assignment',

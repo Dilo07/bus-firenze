@@ -51,7 +51,8 @@
         "RULE-PASSWORD": "The password must have 8 carapter with almost one uppercase, on lowercase, a special character and one number",
         "PASSWORD-DIFFERENT": "The two password inserted are different",
         "ERROR": "password change not performed correctly",
-        "SUCCESS": "Password changed successfully"
+        "SUCCESS": "Password changed successfully",
+        "CONTACT_US": "Contact us"
     },
     "PAGINATOR": {
         "ITEM": "Item for page",

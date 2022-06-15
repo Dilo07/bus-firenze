@@ -51,7 +51,8 @@
         "RULE-PASSWORD": "E' richiesta una password di almeno 8 caratteri con almeno una lettera maiuscola, una minuscola, un carattere speciale ed un numero",
         "PASSWORD-DIFFERENT": "Le password inserite sono diverse",
         "ERROR": "Cambio password non eseguito correttamente",
-        "SUCCESS": "Password modificata correttamente"
+        "SUCCESS": "Password modificata correttamente",
+        "CONTACT_US": "Contattaci"
     },
     "PAGINATOR": {
         "ITEM": "Elementi per pagina",
