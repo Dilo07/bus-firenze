@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import {
+  DateValidPipe, DocumentRemoveObu, DocumentRemoveObuFail, DocumentToValidPipe, HasDepositPipe, HasRequestDepositPipe, RequestDateValidPipe
+} from './deposit.pipe';
 import { FindContactValuePipe } from './find-contact-value.pipe';
-import { DateValidPipe, DocumentToValidPipe, HasDepositPipe, HasRequestDepositPipe, RequestDateValidPipe, DocumentRemoveObu } from './deposit.pipe';
 
 @NgModule({
   declarations: [
@@ -11,7 +13,8 @@ import { DateValidPipe, DocumentToValidPipe, HasDepositPipe, HasRequestDepositPi
     DateValidPipe,
     DocumentToValidPipe,
     RequestDateValidPipe,
-    DocumentRemoveObu
+    DocumentRemoveObu,
+    DocumentRemoveObuFail
   ],
   imports: [CommonModule],
   exports: [
@@ -21,7 +24,8 @@ import { DateValidPipe, DocumentToValidPipe, HasDepositPipe, HasRequestDepositPi
     DateValidPipe,
     DocumentToValidPipe,
     RequestDateValidPipe,
-    DocumentRemoveObu
+    DocumentRemoveObu,
+    DocumentRemoveObuFail
   ]
 })
 export class PipesModule { }

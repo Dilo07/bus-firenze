@@ -93,3 +93,20 @@ export class DocumentRemoveObu implements PipeTransform {
     return hasRemoveObu;
   }
 }
+
+
+@Pipe({
+  name: 'documentRemObuFail'
+})
+export class DocumentRemoveObuFail implements PipeTransform {
+  transform(documents: DocumentVehicle[]): boolean {
+    let hasRemoveObuFail = false;
+    const remObuFail: DepositType = 'remObuFail';
+    documents.map(document => {
+      if (document.type === remObuFail) {
+        hasRemoveObuFail = true;
+      }
+    });
+    return hasRemoveObuFail;
+  }
+}

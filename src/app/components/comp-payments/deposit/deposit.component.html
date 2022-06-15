@@ -69,7 +69,8 @@
                                     edit_note</mat-icon>
                             </button>
                             <mat-icon *ngIf="element.documents | depositDateValid" style="margin: 10px; color: green;"
-                                matTooltip="{{('VEHICLE.DEPVALID' | translate) + (element.documents | depositDateValid | date: 'dd/MM/YYYY')}}">task_alt</mat-icon>
+                                matTooltip="{{('VEHICLE.DEPVALID' | translate) + (element.documents | depositDateValid | date: 'dd/MM/YYYY')}}">
+                                task_alt</mat-icon>
                         </mat-cell>
                     </ng-container>
 
@@ -79,7 +80,8 @@
                             <span class="mobile-label">{{'VEHICLE.RIM_DEPOSIT' | translate}}</span>
                             <button mat-icon-button *ngIf="element.documents | hasRequest: false"
                                 (click)="viewDeposit(element.id, element.documents, 'request')">
-                                <mat-icon style="color: #0066CC" matTooltip="visualizza richiesta deposito">
+                                <mat-icon style="color: #0066CC"
+                                    matTooltip="{{'VEHICLE.VIEW_DEPOSIT_REQ' | translate}}">
                                     description
                                 </mat-icon>
                             </button>
@@ -92,20 +94,31 @@
                                     edit_note</mat-icon>
                             </button>
                             <mat-icon *ngIf="element.documents | requestDateValid" style="margin: 10px; color: green;"
-                                matTooltip="{{('VEHICLE.REQVALID' | translate) + (element.documents | requestDateValid | date: 'dd/MM/YYYY')}}">task_alt</mat-icon>
+                                matTooltip="{{('VEHICLE.REQVALID' | translate) + (element.documents | requestDateValid | date: 'dd/MM/YYYY')}}">
+                                task_alt</mat-icon>
                         </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="testing">
-                        <mat-header-cell *matHeaderCellDef> collaudo rimozione </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.REMOVE_TEST' | translate}} </mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">collaudo rimozione</span>
-                            <button mat-icon-button *ngIf="element.documents | documentRemObu"
-                                (click)="viewDeposit(element.id, element.documents, 'remObu')">
-                                <mat-icon style="color: #0066CC" matTooltip="visualizza richiesta deposito">
-                                    description
-                                </mat-icon>
-                            </button>
+                            <span class="mobile-label">{{'VEHICLE.REMOVE_TEST' | translate}}</span>
+                            <ng-container *ngIf="element.documents | documentRemObu">
+                                <button mat-icon-button (click)="viewDeposit(element.id, element.documents, 'remObu')">
+                                    <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
+                                        description
+                                    </mat-icon>
+                                </button>
+                                <mat-icon style="margin: 10px; color: green;">task_alt</mat-icon>
+                            </ng-container>
+                            <ng-container *ngIf="element.documents | documentRemObuFail">
+                                <button mat-icon-button (click)="viewDeposit(element.id, element.documents, 'remObuFail')">
+                                    <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
+                                        description
+                                    </mat-icon>
+                                </button>
+                                <mat-icon style="margin: 10px; color: red;">cancel</mat-icon>
+                            </ng-container>
                         </mat-cell>
                     </ng-container>
 

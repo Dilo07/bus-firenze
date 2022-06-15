@@ -76,7 +76,7 @@ export interface DocumentVehicle {
   type: DepositType;
 }
 
-export type DepositType = 'deposit' | 'request' | 'remObu';
+export type DepositType = 'deposit' | 'request' | 'remObu' | 'remObuFail';
 
 export class VehicleTripPersistence {
   ticketNumber: string;
