@@ -69,12 +69,36 @@ export class DepositComponent implements OnInit {
     ));
   }
 
-  public viewDeposit(vehicleId: number, documents: DocumentVehicle[] | DocumentObu[], depositType: DepositType): void {
+  public viewDeposit(vehicleId: number, documents: DocumentVehicle[], depositType: DepositType): void {
     let depositId: number;
-    documents.map((document: DocumentVehicle | DocumentObu) => {
+    documents.map((document: DocumentVehicle) => {
       if (document.type === depositType) { depositId = document.fileId; }
     });
     this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)
+      .subscribe((data: HttpResponse<Blob>) => {
+        if (data.body.type === 'application/pdf') { // se è un pdf
+          const objectUrl = window.URL.createObjectURL(data.body);
+          this.src = { url: objectUrl, type: data.body.type };
+        } else { // altrimenti se è un'immagine
+          const reader = new FileReader();
+          reader.readAsDataURL(data.body);
+          reader.onload = () => {
+            this.src = { url: reader.result, type: data.body.type };
+          };
+        }
+      }));
+  }
+
+  public viewDocObu(vehicleId: number, documents: DocumentObu[], depositType: DepositType): void {
+    let depositId: number;
+    let obu: string;
+    documents.map((document: DocumentObu) => {
+      if (document.type === depositType) {
+        depositId = document.fileId;
+        obu = document.obuId;
+      }
+    });
+    this.subscription.push(this.vehicleService.getDocObu(vehicleId, obu, depositType, depositId)
       .subscribe((data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const objectUrl = window.URL.createObjectURL(data.body);

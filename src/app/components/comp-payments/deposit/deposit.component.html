@@ -110,7 +110,7 @@
                                 <span class="mobile-label">{{'VEHICLE.REMOVE_TEST' | translate}}</span>
                                 <ng-container *ngIf="element.documentsObu | documentRemObu">
                                     <button mat-icon-button
-                                        (click)="viewDeposit(element.id, element.documentsObu, 'remObu')">
+                                        (click)="viewDocObu(element.id, element.documentsObu, 'remObu')">
                                         <mat-icon style="color: #0066CC"
                                             matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
                                             description
@@ -120,7 +120,7 @@
                                 </ng-container>
                                 <ng-container *ngIf="element.documentsObu | documentRemObuFail">
                                     <button mat-icon-button
-                                        (click)="viewDeposit(element.id, element.documentsObu, 'remObuFail')">
+                                        (click)="viewDocObu(element.id, element.documentsObu, 'remObuFail')">
                                         <mat-icon style="color: #0066CC"
                                             matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
                                             description

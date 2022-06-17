@@ -113,6 +113,15 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  getDocObu(vehicleId: number, obu: string, type: DepositType, documentId: number): Observable<HttpResponse<Blob> | Blob> {
+    const options = {
+      observe: 'response' as 'body',
+      responseType: 'blob' as 'blob'
+    };
+    return this.http.get(this.apiUrl + `/vehicle/${vehicleId}/obu/${obu}/${type}/${documentId}`, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   uploadCertificate(vehicleId: number, file: File, fleetManagerId?: number): Observable<void> {
     let url = '';
     if (fleetManagerId) {
