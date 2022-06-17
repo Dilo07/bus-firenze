@@ -1,8 +1,8 @@
-<mat-card (click)="viewFile.close()">
+<mat-card>
 	<mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 	<mat-card-content>
 		<app-view-file [file]="src"></app-view-file>
-		<div fxLayout="column" fxLayoutGap="20px">
+		<div fxLayout="column" fxLayoutGap="20px" (click)="viewFile.close()">
 			<app-panel-statistic [fleetManager]="fleetManager"></app-panel-statistic>
 			<div fxLayout="row wrap" fxLayoutGap="20px">
 				<button mat-button class="backButton" *ngIf="fleetManager" [routerLink]="['../']">

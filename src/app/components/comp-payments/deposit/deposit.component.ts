@@ -7,7 +7,7 @@ import { IAuthenticationService, SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DepositType, DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
+import { DepositType, DocumentObu, DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-deposit',
@@ -69,9 +69,9 @@ export class DepositComponent implements OnInit {
     ));
   }
 
-  public viewDeposit(vehicleId: number, documents: DocumentVehicle[], depositType: DepositType): void {
+  public viewDeposit(vehicleId: number, documents: DocumentVehicle[] | DocumentObu[], depositType: DepositType): void {
     let depositId: number;
-    documents.map(document => {
+    documents.map((document: DocumentVehicle | DocumentObu) => {
       if (document.type === depositType) { depositId = document.fileId; }
     });
     this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)

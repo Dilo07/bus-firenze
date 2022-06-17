@@ -108,9 +108,9 @@
                             <mat-header-cell *matHeaderCellDef> {{'VEHICLE.REMOVE_TEST' | translate}} </mat-header-cell>
                             <mat-cell *matCellDef="let element">
                                 <span class="mobile-label">{{'VEHICLE.REMOVE_TEST' | translate}}</span>
-                                <ng-container *ngIf="element.documents | documentRemObu">
+                                <ng-container *ngIf="element.documentsObu | documentRemObu">
                                     <button mat-icon-button
-                                        (click)="viewDeposit(element.id, element.documents, 'remObu')">
+                                        (click)="viewDeposit(element.id, element.documentsObu, 'remObu')">
                                         <mat-icon style="color: #0066CC"
                                             matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
                                             description
@@ -118,9 +118,9 @@
                                     </button>
                                     <mat-icon style="margin: 10px; color: green;">task_alt</mat-icon>
                                 </ng-container>
-                                <ng-container *ngIf="element.documents | documentRemObuFail">
+                                <ng-container *ngIf="element.documentsObu | documentRemObuFail">
                                     <button mat-icon-button
-                                        (click)="viewDeposit(element.id, element.documents, 'remObuFail')">
+                                        (click)="viewDeposit(element.id, element.documentsObu, 'remObuFail')">
                                         <mat-icon style="color: #0066CC"
                                             matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
                                             description

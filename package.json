@@ -26,7 +26,7 @@
     "@angular/router": "13.3.11",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
-    "@npt/npt-map": "^13.0.3",
+    "@npt/npt-map": "file:../npt-npt-map-13.0.4.tgz",
     "@npt/npt-net": "file:../npt-npt-net-13.0.4.tgz",
     "@npt/npt-obu": "file:../npt-npt-obu-13.0.4.tgz",
     "@npt/npt-template": "file:../npt-npt-template-13.0.4.tgz",

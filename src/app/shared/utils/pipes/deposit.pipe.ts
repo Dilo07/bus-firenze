@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DepositType, DocumentVehicle } from 'src/app/components/domain/bus-firenze-domain';
+import { DepositType, DocumentObu, DocumentVehicle } from 'src/app/components/domain/bus-firenze-domain';
 
 @Pipe({
   name: 'hasDeposit'
@@ -82,7 +82,7 @@ export class DocumentToValidPipe implements PipeTransform {
   name: 'documentRemObu'
 })
 export class DocumentRemoveObu implements PipeTransform {
-  transform(documents: DocumentVehicle[]): boolean {
+  transform(documents: DocumentObu[]): boolean {
     let hasRemoveObu = false;
     const remObu: DepositType = 'remObu';
     documents.map(document => {
@@ -99,7 +99,7 @@ export class DocumentRemoveObu implements PipeTransform {
   name: 'documentRemObuFail'
 })
 export class DocumentRemoveObuFail implements PipeTransform {
-  transform(documents: DocumentVehicle[]): boolean {
+  transform(documents: DocumentObu[]): boolean {
     let hasRemoveObuFail = false;
     const remObuFail: DepositType = 'remObuFail';
     documents.map(document => {

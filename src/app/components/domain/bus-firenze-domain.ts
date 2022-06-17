@@ -67,12 +67,19 @@ export class Vehicle {
   allowContacted: boolean;
   status: string;
   documents: DocumentVehicle[];
+  documentsObu: DocumentObu[];
 }
 
 export interface DocumentVehicle {
   fileId: number;
   valid: Date;
   sink: Date;
+  type: DepositType;
+}
+
+export interface DocumentObu {
+  fileId: number;
+  obuId: string;
   type: DepositType;
 }
 
