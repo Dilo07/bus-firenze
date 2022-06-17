@@ -33,7 +33,7 @@
                         <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
                             {{'FLEET-MANAGER.BACK' | translate}}
                         </button>
-                        <button mat-raised-button class="bluButton" [disabled]="formGroup.invalid"
+                        <button mat-raised-button class="actionButtons" [disabled]="formGroup.invalid"
                             (click)="getBillingItems()">
                             {{'COMMON.ACTION.SEARCH' | translate}}
                         </button>

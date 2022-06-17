@@ -52,12 +52,12 @@
                 [state]="{fleetManagerId: fleetManagerId}" class="backButton">
                 {{'FLEET-MANAGER.BACK' | translate}}
             </button>
-            <button *ngIf="!driver" mat-button [disabled]="formGroup.invalid" class="greenButtons"
+            <button *ngIf="!driver" mat-button [disabled]="formGroup.invalid" class="actionButtons"
                 (click)="addDriver()">
                 {{'FLEET-MANAGER.SAVE' | translate}}
             </button>
             <button *ngIf="driver" mat-button
-                [disabled]="formGroup.invalid || !formGroup.dirty || (roleDriver && !verifyOtp)" class="greenButtons"
+                [disabled]="formGroup.invalid || !formGroup.dirty || (roleDriver && !verifyOtp)" class="actionButtons"
                 (click)="editDriver()">
                 {{'FLEET-MANAGER.EDIT' | translate}}
             </button>

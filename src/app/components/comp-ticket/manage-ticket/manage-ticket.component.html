@@ -10,7 +10,7 @@
                 <button mat-button class="backButton" *ngIf="roleMovyon" (click)="backFleetTable()">
                     {{'FLEET-MANAGER.BACK' | translate}}
                 </button>
-                <button mat-raised-button class="bluButton" *ngIf="!roleDriver" (click)="switchHistoric()">
+                <button mat-raised-button class="actionButtons" *ngIf="!roleDriver" (click)="switchHistoric()">
                     {{ (viewHistoric ? 'TICKET.ACTIVE' : 'TICKET.HISTORY') | translate }}
                 </button>
             </div>

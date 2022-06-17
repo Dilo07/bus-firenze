@@ -87,7 +87,7 @@
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="15px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">
                     {{'COMMON.ACTION.CANCEL' | translate}}</button>
-                <button mat-button class="greenButtons" [disabled]="!validTicket.valid" (click)="addTicket()">
+                <button mat-button class="actionButtons" [disabled]="!validTicket.valid" (click)="addTicket()">
                     {{'COMMON.ACTION.SAVE' | translate}}
                 </button>
             </div>

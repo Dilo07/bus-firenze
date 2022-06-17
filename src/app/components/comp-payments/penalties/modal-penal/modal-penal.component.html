@@ -25,7 +25,7 @@
         <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
             <button mat-button (click)="dialogRef.close(false)" class="backButton">
                 {{'COMMON.ACTION.BACK' | translate}}</button>
-            <button mat-button (click)="addPenal()" [disabled]="formGroup.invalid" class="greenButtons">
+            <button mat-button (click)="addPenal()" [disabled]="formGroup.invalid" class="actionButtons">
                 {{'COMMON.ACTION.SAVE' | translate}}</button>
         </div>
     </ng-container>

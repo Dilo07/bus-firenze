@@ -18,8 +18,16 @@ mat-card-content {
 .mat-table {
     overflow: auto;
     max-height: 550px;
-    background-color: beige;
+    /* background-color: beige; */
     z-index: 1;
+}
+
+.mat-header-row {
+    background-color: #1C3775;
+}
+
+.mat-header-cell {
+    color: white;
 }
 
 .mobile-label {
@@ -49,7 +57,13 @@ mat-card-content {
 }
 
 .hover-row:hover {
-    background-color: #EDF4F8;
+    background-color: #cfd1d3;
+}
+
+
+.mat-paginator {
+    border: 1px solid #1C3775;
+    border-radius: 10px;
 }
 
 /* paginator on mobile */
@@ -91,37 +105,6 @@ mat-card-content {
 .redButtons {
     background-color: red;
     color: white;
-}
-
-.greenButtons {
-    background-color: green;
-    color: white;
-}
-
-.greenButtons[disabled]:hover {
-    background-color: green;
-}
-
-.greenButtons:hover {
-    background-color: rgb(46, 175, 46);
-}
-
-.backButton {
-    background-color: gray;
-    color: white;
-}
-
-.backButton:hover {
-    background-color: #616161;
-}
-
-.bluButton {
-    background-color: #1E88E5;
-    color: white;
-}
-
-.bluButton:hover {
-    background-color: #1878cc;
 }
 
 /* control map */
