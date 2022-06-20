@@ -11,7 +11,7 @@
 				<button mat-button class="actionButtons" (click)="addVehicle()">
 					{{'FLEET-MANAGER.NEW' | translate}}
 				</button>
-				<button mat-button class="actionButtons" [matMenuTriggerFor]="menuDownload">
+				<button mat-button class="downloadButtons" [matMenuTriggerFor]="menuDownload">
 					{{'VEHICLE.DOWNLOAD' | translate}}
 				</button>
 				<mat-menu #menuDownload="matMenu">
