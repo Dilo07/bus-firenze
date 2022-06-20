@@ -92,7 +92,8 @@
                                 <input style="display: none" type="file" #depositReqInput
                                     accept="application/pdf, image/jpeg, image/png"
                                     (change)="uploadDeposit(element.id, $event, 'request')">
-                                <button *ngIf="element.deleted && !(element.documents | hasRequest: true)"
+                                <button
+                                    *ngIf="element.deleted && !(element.documents | hasRequest: true) && !(element.documentsObu | documentRemObuFail)"
                                     mat-icon-button (click)="depositReqInput.click()">
                                     <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
                                         edit_note</mat-icon>
