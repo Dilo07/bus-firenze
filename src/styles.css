@@ -101,12 +101,6 @@ mat-card-content {
     color: white !important;
 }
 
-/* buttons */
-.redButtons {
-    background-color: red;
-    color: white;
-}
-
 /* control map */
 
 .ol-control button {
