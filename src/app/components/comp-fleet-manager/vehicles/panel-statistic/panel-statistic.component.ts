@@ -9,12 +9,7 @@ import { StatisticService } from 'src/app/services/statistic.service';
 @Component({
   selector: 'app-panel-statistic',
   templateUrl: './panel-statistic.component.html',
-  styles: [`
-  .vehicle {
-    background-color: burlywood;
-  }
-  `
-  ]
+  styles: [``]
 })
 export class PanelStatisticComponent implements OnInit, OnDestroy {
   @Input() fleetManager: FleetManager;
