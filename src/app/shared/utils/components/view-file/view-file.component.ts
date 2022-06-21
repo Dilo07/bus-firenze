@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
@@ -10,10 +10,11 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       state(
         'on',
         style({
-          'background-color': 'darkseagreen',
+          'background-color': '#E4F1F5',
           'z-index': '10',
           padding: '6px',
           'border-style': 'solid',
+          'border-color': '#1C3775',
           position: 'fixed',
           right: '10%',
           width: '50%',

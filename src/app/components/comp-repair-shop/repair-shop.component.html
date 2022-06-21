@@ -2,17 +2,6 @@
     <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'MENU.Repair-shop' | translate}}</mat-card-title>
     <mat-card-content fxLayout="row" fxLayoutAlign="center">
         <div style="white-space: pre-wrap;">{{'REPAIR-SHOP.TITLE' | translate}}</div>
-        <!-- <mat-list>
-            <mat-list-item *ngFor="let repairShop of repairShops" style="margin-bottom: 20px;">
-                <mat-icon mat-list-icon>remove</mat-icon>
-                <div mat-line><b>{{repairShop.nameShop}}</b></div>
-                <a href="http://maps.google.com/?q=`{{repairShop.nameShop}} + {{repairShop.address}}`" target="_blank">
-                    <mat-icon>
-                        location_on
-                    </mat-icon>
-                </a>
-            </mat-list-item>
-        </mat-list> -->
     </mat-card-content>
 </mat-card>
 <mat-card *ngFor="let repairShop of repairShops">
@@ -28,3 +17,10 @@
         </div>
     </mat-card-content>
 </mat-card>
+
+<!-- <mat-card>
+    <mat-card-title fxLayout="row" fxLayoutAlign="start">{{'MENU.Repair-shop' | translate}}</mat-card-title>
+    <mat-card-content fxLayout="row" fxLayoutAlign="center">
+        <div style="white-space: pre-wrap;">{{'REPAIR-SHOP.TITLE' | translate}}</div>
+    </mat-card-content>
+</mat-card> -->

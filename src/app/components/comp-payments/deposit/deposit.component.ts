@@ -89,10 +89,10 @@ export class DepositComponent implements OnInit {
       }));
   }
 
-  public viewDocObu(vehicleId: number, documents: DocumentObu[], depositType: DepositType): void {
+  public viewDocObu(vehicleId: number, documentsObu: DocumentObu[], depositType: DepositType): void {
     let depositId: number;
     let obu: string;
-    documents.map((document: DocumentObu) => {
+    documentsObu.map((document: DocumentObu) => {
       if (document.type === depositType) {
         depositId = document.fileId;
         obu = document.obuId;

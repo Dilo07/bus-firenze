@@ -1,6 +1,12 @@
 /* app */
 
-html, body { height: 100% !important }
+html, body {
+    height: 100% !important
+}
+
+mat-card-title {
+    color: #1C3775;
+}
 
 mat-card-content {
     border-radius: 10px !important;
@@ -18,7 +24,6 @@ mat-card-content {
 .mat-table {
     overflow: auto;
     max-height: 550px;
-    /* background-color: beige; */
     z-index: 1;
 }
 
@@ -120,18 +125,18 @@ mat-card-content {
     border-radius: 2px;
 }
 
-.material-icons{
+.material-icons {
     display: none;
 }
 
-#activeVehicle{
-    background-color: rgba(0, 255, 0, 0.7);
+#activeVehicle {
+    background-color: #91D6AC;
 }
 
-#warningVehicle{
-    background-color: rgb(255, 255, 0, 0.7);
+#warningVehicle {
+    background-color: #BBBCBC;
 }
 
-#errorVehicle{
-    background-color: rgb(255, 0, 0, 0.7);
+#errorVehicle {
+    background-color: #E89CAE;
 }
