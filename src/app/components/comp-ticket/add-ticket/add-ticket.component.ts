@@ -13,7 +13,7 @@ import { IAuthenticationService } from '@npt/npt-template';
   selector: 'app-ticket',
   templateUrl: './add-ticket.component.html',
   styles: [`
-  table { width: 100%; background-color: beige; }
+  table { width: 100%; }
   .mat-column-actions { max-width: 20%; display: table-column;}
   `
   ]
@@ -63,11 +63,11 @@ export class AddTicketComponent implements OnInit {
     );
   }
 
-  public modalTicket(VehicleId: number): void {
+  public modalTicket(vehicleId: number): void {
     const dialogRef = this.dialog.open(ModalTestTicketComponent, {
       width: '90%',
       height: '80%',
-      data: { vehicleId: VehicleId, fleetManagerId: this.fleetManagerId, extend: false }
+      data: { vehicleId: vehicleId, fleetManagerId: this.fleetManagerId, extend: false }
     });
     dialogRef.afterClosed().subscribe(save => {
       if (save) {

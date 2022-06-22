@@ -1,5 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar } from '@npt/npt-template';
@@ -30,6 +30,7 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 })
 export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Input() idFleet: number;
+  @Output() public callRefreshTableFleet = new EventEmitter();
   public dataSource = new MatTableDataSource<Vehicle>();
   public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'certificateId', 'type', 'actions'];
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
@@ -53,7 +54,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
     });
   }
 
-  public validVehicle(vehicleId: number,  documents: DocumentVehicle[]): void {
+  public validVehicle(vehicleId: number, documents: DocumentVehicle[]): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',
       height: '30%',
@@ -114,9 +115,14 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
       }));
   }
 
-  private getVehicles(): void{
+  private getVehicles(): void {
     this.subscription.push(this.vehicleService.getVehicleDeposit(true, this.idFleet, true).subscribe(
-      vehicles => this.dataSource.data = vehicles
+      vehicles => {
+        this.dataSource.data = vehicles;
+        if(this.dataSource.data.length === 0){
+          this.callRefreshTableFleet.emit();
+        }
+      }
     ));
   }
 

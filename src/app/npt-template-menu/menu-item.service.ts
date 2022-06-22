@@ -8,14 +8,15 @@ export const ROLES = Object.freeze({
   INSTALLER: 'installer',
   MOVYON: 'movyon',
   OPER_MOVYON: 'opmovyon',
-  FLEETMNG: 'fleet'
+  FLEETMNG: 'fleet',
+  UNUSUED: 'unusued'
 });
 
 const SUBMENU_ROUTES = [
   { state: 'fleet-manager-manage', name: 'Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'deposit', name: 'Deposit', icon: 'euro_symbol', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] },
-  { state: 'billing', name: 'Billing', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
-  { state: 'penalties', name: 'Penalties', icon: 'back_hand', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
+  { state: 'billing', name: 'Billing', icon: 'receipt_long', roles: [ROLES.UNUSUED] },
+  { state: 'penalties', name: 'Penalties', icon: 'back_hand', roles: [ROLES.UNUSUED] },
   { state: 'fleet-manager-valid', name: 'Valid-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicle-valid', name: 'Vehicle-valid', icon: 'directions_car', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
@@ -94,7 +95,8 @@ export class MenuItemService implements IMenuItemService {
 
   getMenuitem(): Menu[] {
     if (!this.hideBilling) {
-      SUBMENU_ROUTES[2].roles.push(ROLES.FLEETMNG);
+      SUBMENU_ROUTES[2].roles.push(ROLES.FLEETMNG, ROLES.OPER_MOVYON, ROLES.MOVYON);
+      SUBMENU_ROUTES[3].roles.push(ROLES.OPER_MOVYON, ROLES.MOVYON);
     }
     return MENUITEMS;
   }

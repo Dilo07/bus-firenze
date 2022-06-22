@@ -516,7 +516,8 @@
             "notfound": "Veicolo non trovato",
             "invalid": "Assegnato un ticket ad un veicolo non valido",
             "already_present": "Ticket già presente sul veicolo",
-            "already_associated": "Il veicolo è già associato ad un altro obu"
+            "already_associated": "Il veicolo è già associato ad un altro obu",
+            "request": "impossibile allegare la richiesta di rimborso a causa del collaudo fallito"
         },
         "ticket": {
             "already_assigned": "Ticket già assegnato a un veicolo",

@@ -11,7 +11,7 @@ import { FleetManagerService } from 'src/app/services/fleet-manager.service';
   selector: 'app-table-fleet',
   templateUrl: './table-fleet.component.html',
   styles: [`
-  table { width: 100%; background-color: beige; }
+  table { width: 100%;}
   @media(min-width: 1180px) {
     .mat-column-id { max-width: 20%}
     .mat-column-name { max-width: 20%;}
@@ -51,7 +51,7 @@ export class TableFleetComponent implements OnInit {
     this.callGetFleetManager();
   }
 
-  public manageTicket(fleetManagerId: number): void{
+  public manageTicket(fleetManagerId: number): void {
     this.callManageTicket.emit(fleetManagerId);
   }
 
@@ -65,19 +65,22 @@ export class TableFleetComponent implements OnInit {
         true,
         this.offset,
         this.limit,
-        this.columnOrder).subscribe((data) => {
-          this.fleetManagerList.length = currentSize;
-          this.fleetManagerList = this.fleetManagerList.concat(data);
-          if (data.length < this.limit) {
-            this.paginator.length = this.fleetManagerList.length;
-            this.endTable = true;
-          } else {
-            this.paginator.length = ((this.offset + 1) * this.limit) + 1;
-          }
-          this.dataSource.data = data;
-        },
-          () => this.complete = true,
-          () => { this.complete = true; this.unSubscribe(); })
+        this.columnOrder)
+        .subscribe({
+          next: (data) => {
+            this.fleetManagerList.length = currentSize;
+            this.fleetManagerList = this.fleetManagerList.concat(data);
+            if (data.length < this.limit) {
+              this.paginator.length = this.fleetManagerList.length;
+              this.endTable = true;
+            } else {
+              this.paginator.length = ((this.offset + 1) * this.limit) + 1;
+            }
+            this.dataSource.data = data;
+          },
+          error: () => this.complete = true,
+          complete: () => { this.complete = true; this.unSubscribe(); }
+        })
     );
   }
 
