@@ -90,15 +90,10 @@ export class DepositComponent implements OnInit {
   }
 
   public viewDocObu(vehicleId: number, documentsObu: DocumentObu[], depositType: DepositType): void {
-    let depositId: number;
-    let obu: string;
-    documentsObu.map((document: DocumentObu) => {
-      if (document.type === depositType) {
-        depositId = document.fileId;
-        obu = document.obuId;
-      }
-    });
-    this.subscription.push(this.vehicleService.getDocObu(vehicleId, obu, depositType, depositId)
+    // prende il primo documento
+    let doc: DocumentObu = documentsObu.find((value: DocumentObu) => value.type === depositType);
+    if(doc) {
+      this.subscription.push(this.vehicleService.getDocObu(vehicleId, doc.obuId, depositType, doc.fileId)
       .subscribe((data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const objectUrl = window.URL.createObjectURL(data.body);
@@ -111,6 +106,7 @@ export class DepositComponent implements OnInit {
           };
         }
       }));
+    }
   }
 
   public uploadDeposit(vehicleId: number, event: any, depositType: DepositType): void {
