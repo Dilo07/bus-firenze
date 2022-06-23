@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
   selector: 'app-fleetmanager',
   templateUrl: './list-fleetmanager.component.html',
   styles: [`
-  table { width: 100%; background-color: beige; }
+  table { width: 100%; }
   @media(min-width: 1180px) {
     .mat-column-expandButton { max-width: 5% }
     .mat-column-id { max-width: 10%}
@@ -40,7 +40,7 @@ export class ListFleetmanagerComponent implements OnInit {
     this.callFleetDeposit();
   }
 
-  private callFleetDeposit(): void {
+  public callFleetDeposit(): void {
     this.complete = false;
     this.validVehiclerService.getFleetDeposit().subscribe(
       fleetM => this.dataSource.data = fleetM,

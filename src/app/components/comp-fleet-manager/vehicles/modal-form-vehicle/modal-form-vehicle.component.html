@@ -6,7 +6,8 @@
         <app-expansion-info-vehicle *ngIf="!data.vehicle"></app-expansion-info-vehicle>
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
         <form [formGroup]="formGroup" fxLayout="column" fxLayoutGap="10px">
-            <!-- <div *ngIf="!data.vehicle else viewContractType" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+            <!-- selezione contratto noleggio o acquisto 
+                <div *ngIf="!data.vehicle else viewContractType" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
                 <label>{{'VEHICLE.CONTRACT' | translate}}</label>
                 <mat-radio-group formControlName="CtrlContract">
                     <mat-radio-button style="margin-right: 10px; display: none;" [value]="contractType.BUY">
@@ -35,7 +36,7 @@
                                 (filteredReturn)="filteredList = $event"></mat-select-filter>
                             <mat-option *ngFor="let nation of filteredList" [value]="nation.value">
                                 <!-- selezione nazione -->
-                                {{nation.text | translate}}
+                                {{nation.text}}
                                 <span [ngClass]="'fi fi-' + nation.value.toLowerCase()"></span>
                             </mat-option>
                             <mat-select-trigger>
@@ -95,7 +96,7 @@
                 <input style="display: none" type="file" formControlName="ctrlLibretto" #fileInput
                     accept="application/pdf, image/jpeg, image/png" (change)="uploadFile($event, true);">
                 <mat-label> {{depositDocument?.name}}</mat-label>
-                <button mat-button class="bluButton" (click)="fileDeposit.click()">
+                <button mat-button class="uploadButtons" (click)="fileDeposit.click()">
                     {{(depositDocument ? 'VEHICLE.CHANGE_DEP' : 'VEHICLE.UPLOAD_DEP') | translate}}
                 </button>
                 <p style="font-size: 12px;" *ngIf="iban">
@@ -106,7 +107,7 @@
                     {{'VEHICLE.TEXTCAUSAL' | translate}}
                 </p>
                 <mat-label> {{libDocument?.name}}</mat-label>
-                <button mat-button class="bluButton" (click)="fileInput.click();">
+                <button mat-button class="uploadButtons" (click)="fileInput.click();">
                     {{(libDocument ? 'VEHICLE.CHANGE_LIB' : 'VEHICLE.UPLOAD_LIB') | translate}}
                 </button>
                 <p style="font-size: 12px;">{{'VEHICLE.TEXTLIB' | translate}}</p>
@@ -114,10 +115,10 @@
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">
                     {{'COMMON.ACTION.BACK' | translate}}</button>
-                <button *ngIf="!data.vehicle" mat-button [disabled]="formGroup.invalid" class="greenButtons"
+                <button *ngIf="!data.vehicle" mat-button [disabled]="formGroup.invalid" class="actionButtons"
                     (click)="addVehicle()"> {{'COMMON.ACTION.SAVE' | translate}}</button>
                 <button *ngIf="data.vehicle" mat-button [disabled]="formGroup.invalid || !formGroup.dirty"
-                    class="greenButtons" (click)="updateVehicle()"> {{'COMMON.ACTION.EDIT' | translate}}</button>
+                    class="actionButtons" (click)="updateVehicle()"> {{'COMMON.ACTION.EDIT' | translate}}</button>
             </div>
         </form>
     </mat-card-content>

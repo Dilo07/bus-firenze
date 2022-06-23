@@ -5,14 +5,14 @@
     <mat-card-content>
         <div fxLayout="row" fxLayoutAlign="center">
             <mat-button-toggle-group [(ngModel)]="ticketType" (change)="changeValidator()">
-                <mat-button-toggle value="{{ticketsType.TICKET}}">
-                    {{'TICKET.' + ticketsType.TICKET | translate}}
+                <mat-button-toggle value="{{ticketsType.ticket}}">
+                    {{'TICKET.' + ticketsType.ticket | translate}}
                 </mat-button-toggle>
-                <mat-button-toggle value="{{ticketsType.ABBONAMENTO}}">
-                    {{'TICKET.' + ticketsType.ABBONAMENTO | translate}}
+                <mat-button-toggle value="{{ticketsType.abbonamento}}">
+                    {{'TICKET.' + ticketsType.abbonamento | translate}}
                 </mat-button-toggle>
-                <mat-button-toggle value="{{ticketsType.VOUCHER}}">
-                    {{'TICKET.' + ticketsType.VOUCHER | translate}}
+                <mat-button-toggle value="{{ticketsType.voucher}}">
+                    {{'TICKET.' + ticketsType.voucher | translate}}
                 </mat-button-toggle>
             </mat-button-toggle-group>
         </div>
@@ -28,7 +28,7 @@
                     date: 'dd/MM/yyyy HH:mm') : '-'}}
                 </div>
             </div>
-            <div *ngIf="ticketType !== ticketsType.VOUCHER else voucher">
+            <div *ngIf="ticketType !== ticketsType.voucher else voucher">
                 <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start"
                     [style.display]="validTicket.valid ? 'none' : ''">
                     <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
@@ -87,7 +87,7 @@
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="15px">
                 <button mat-button (click)="dialogRef.close(false);" class="backButton">
                     {{'COMMON.ACTION.CANCEL' | translate}}</button>
-                <button mat-button class="greenButtons" [disabled]="!validTicket.valid" (click)="addTicket()">
+                <button mat-button class="actionButtons" [disabled]="!validTicket.valid" (click)="addTicket()">
                     {{'COMMON.ACTION.SAVE' | translate}}
                 </button>
             </div>

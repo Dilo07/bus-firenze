@@ -1,13 +1,12 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Vehicle } from '@npt/npt-obu';
 import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ValidVehicleService } from 'src/app/services/valid-vehicle.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DocumentVehicle } from '../../domain/bus-firenze-domain';
+import { DepositType, DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
@@ -31,6 +30,7 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 })
 export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Input() idFleet: number;
+  @Output() public callRefreshTableFleet = new EventEmitter();
   public dataSource = new MatTableDataSource<Vehicle>();
   public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'certificateId', 'type', 'actions'];
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
@@ -54,7 +54,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
     });
   }
 
-  public validVehicle(vehicleId: number,  documents: DocumentVehicle[]): void {
+  public validVehicle(vehicleId: number, documents: DocumentVehicle[]): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',
       height: '30%',
@@ -80,7 +80,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
 
   public viewDeposit(vehicleId: number, documents: DocumentVehicle[]): void {
     let depositId: number;
-    let depositType: string;
+    let depositType: DepositType;
     documents.map(document => {
       if (!document.valid) { depositId = document.fileId; depositType = document.type; }
     });
@@ -115,9 +115,14 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
       }));
   }
 
-  private getVehicles(): void{
+  private getVehicles(): void {
     this.subscription.push(this.vehicleService.getVehicleDeposit(true, this.idFleet, true).subscribe(
-      vehicles => this.dataSource.data = vehicles
+      vehicles => {
+        this.dataSource.data = vehicles;
+        if(this.dataSource.data.length === 0){
+          this.callRefreshTableFleet.emit();
+        }
+      }
     ));
   }
 

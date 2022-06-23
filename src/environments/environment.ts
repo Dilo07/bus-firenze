@@ -17,7 +17,8 @@ export const environment = {
   footer: {
     year: 'v. ' + version + ' 2021',
     title: 'Powered by Movyon',
-    link: 'https://www.movyon.com/'
+    link: 'https://www.movyon.com/',
+    mail: 'ZTLFi.BusSupport@movyon.com'
   }
 };
 

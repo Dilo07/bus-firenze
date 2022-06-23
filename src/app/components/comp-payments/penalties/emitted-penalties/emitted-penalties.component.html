@@ -1,0 +1,65 @@
+<div fxLayout="column" fxLayoutGap="20px" style="margin-top: 2%;">
+    <form [formGroup]="formGroup" style="margin-bottom: 20px;">
+        <div fxLayout="row wrap" fxLayoutGap="20px">
+            <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
+                <mat-label>{{'COMMON.DATE.RANGE' | translate}}</mat-label>
+                <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+                    <input matStartDate formControlName="ctrlRangeStart">
+                    <input matEndDate formControlName="ctrlRangeEnd" (dateChange)="getPenalties()">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+                <mat-error>{{'COMMON.DATE.INVALID' | translate}}</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+    <mat-table multiTemplateDataRows [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">id</span>
+                {{element.id}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="plate">
+            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
+                {{ element.lpn}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef> {{'PENALTIES.PENAL_DATE' | translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'PENALTIES.PENAL_DATE' | translate}}</span>
+                {{ element.startPeriod.day + '/' + element.startPeriod.month + '/' + element.startPeriod.year}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="billingType">
+            <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.TYPE' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'BILLING_ITEMS.TYPE' | translate }}</span>
+                {{'BILLING_TYPE.' + element.billingType | translate}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICE' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'BILLING_ITEMS.PRICE' | translate }}</span>
+                {{element.price}} €
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
+            [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">{{'VEHICLE.NO_DATA' | translate}}
+            </td>
+        </tr>
+    </mat-table>
+</div>

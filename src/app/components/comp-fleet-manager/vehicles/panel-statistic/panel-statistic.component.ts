@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Subscription } from 'rxjs';
 import { FleetManager, TripStat } from 'src/app/components/domain/bus-firenze-domain';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -9,12 +9,7 @@ import { StatisticService } from 'src/app/services/statistic.service';
 @Component({
   selector: 'app-panel-statistic',
   templateUrl: './panel-statistic.component.html',
-  styles: [`
-  .vehicle {
-    background-color: burlywood;
-  }
-  `
-  ]
+  styles: [``]
 })
 export class PanelStatisticComponent implements OnInit, OnDestroy {
   @Input() fleetManager: FleetManager;

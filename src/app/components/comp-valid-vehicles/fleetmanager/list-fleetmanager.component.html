@@ -63,7 +63,8 @@
 							<div class="example-element-description">
 								<span class="example-element-description-attribution">
 									<app-verify-vehicles *ngIf="expandedElement === element"
-										[idFleet]="expandedElement.id"></app-verify-vehicles>
+										(callRefreshTableFleet)="callFleetDeposit()" [idFleet]="expandedElement.id">
+									</app-verify-vehicles>
 								</span>
 							</div>
 						</div>

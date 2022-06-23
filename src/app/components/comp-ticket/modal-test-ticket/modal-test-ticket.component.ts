@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IAuthenticationService } from '@npt/npt-template';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
@@ -34,7 +34,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number, fleetManagerId: number, extend: boolean },
+    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number; fleetManagerId: number; extend: boolean },
     @Inject('authService') private authService: IAuthenticationService,
     @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {
@@ -66,7 +66,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     });
     this.validTicket.valid = false;
     this.validTicket.ticket = null;
-    if (this.ticketType === this.ticketsType.VOUCHER) {
+    if (this.ticketType === this.ticketsType.voucher) {
       this.FormGroup.controls.CtrlVoucher.setValidators([Validators.minLength(7), Validators.maxLength(7), Validators.required]);
       this.FormGroup.controls.CtrlProgressive.setValidators(null);
       this.FormGroup.controls.CtrlCode.setValidators(null);
@@ -83,10 +83,10 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     this.updateControls();
     let ticketTest = '';
     if (!this.FormGroup.invalid) {
-      if (this.ticketType !== this.ticketsType.VOUCHER) {
+      if (this.ticketType !== this.ticketsType.voucher) {
         ticketTest = this.FormGroup.get('CtrlProgressive').value + '/'
           + this.FormGroup.get('CtrlCode').value + '/' + this.FormGroup.get('CtrlYear').value;
-      } else if (this.ticketType === this.ticketsType.VOUCHER) {
+      } else if (this.ticketType === this.ticketsType.voucher) {
         ticketTest = this.FormGroup.get('CtrlVoucher').value;
       }
       console.log(ticketTest);
@@ -110,10 +110,10 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
       delayed,
       this.data.extend,
       this.data.fleetManagerId).subscribe(
-        () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
-        () => null,
-        () => this.dialogRef.close(true)
-      ));
+      () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
+      () => null,
+      () => this.dialogRef.close(true)
+    ));
   }
 
   public cleanTicket(): void {

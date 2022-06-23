@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'MENU.Penalties' | translate}}</mat-card-title>
+    <mat-card-content>
+        <div *ngIf="viewFleetTable else vehicleFleet">
+            <app-table-fleet (callManageTicket)="viewFleetTable = false; fleetId = $event"></app-table-fleet>
+        </div>
+        <ng-template #vehicleFleet>
+            <div fxLayout="row" fxLayoutGap="20px">
+                <span>
+                    <button mat-button class="backButton" (click)="viewFleetTable = true">
+                        {{'FLEET-MANAGER.BACK' | translate}}
+                    </button>
+                </span>
+                <mat-form-field appearance="fill" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
+                    <mat-label>{{'PENALTIES.SEARCH' | translate}}</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" #input autocomplete="off">
+                </mat-form-field>
+            </div>
+            <mat-tab-group mat-align-tabs="center">
+                <mat-tab label="Applica penale">
+                    <app-add-penalties [fleetId]="fleetId" [keyword]="filter"></app-add-penalties>
+                </mat-tab>
+                <mat-tab label="Penali emesse">
+                    <app-emitted-penalties [fleetId]="fleetId" [keyword]="filter"></app-emitted-penalties>
+                </mat-tab>
+            </mat-tab-group>
+        </ng-template>
+    </mat-card-content>
+</mat-card>

@@ -2,7 +2,10 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
     "analytics": "128b7b48-3ae5-4702-a4e7-0d000613fa44",
-    "defaultCollection": "@angular-eslint/schematics"
+    "defaultCollection": "@angular-eslint/schematics",
+    "cache": {
+      "enabled": false
+    }
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -22,7 +25,6 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
             "allowedCommonJsDependencies": [
               "rxjs-compat",
               "rxjs",
@@ -38,13 +40,19 @@
             "styles": [
               "node_modules/@npt/npt-template/assets/styles/style.scss",
               "node_modules/@npt/npt-map/assets/styles/ol.css",
-              "node_modules/@npt/npt-obu/assets/styles/css/flag-icons.min.css",
+              "node_modules/@npt/npt-template/assets/styles/css/flag-icons.min.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/styles.css"
             ],
             "scripts": [
               "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -74,7 +82,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -106,14 +115,22 @@
             "styles": [
               "node_modules/@npt/npt-template/assets/styles/style.scss",
               "node_modules/@npt/npt-map/assets/styles/ol.css",
-              "node_modules/@npt/npt-obu/assets/styles/css/flag-icons.min.css",
+              "node_modules/@npt/npt-template/assets/styles/css/flag-icons.min.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/styles.css"
             ],
             "scripts": [
               "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
-            ]
-          }
+            ],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "defaultConfiguration": ""
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",

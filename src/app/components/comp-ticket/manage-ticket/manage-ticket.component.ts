@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IAuthenticationService } from '@npt/npt-template';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
@@ -47,7 +47,7 @@ export class ManageTicketComponent implements OnInit {
   public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'lpnNat', 'ticketStart', 'ticketEnd', 'type', 'dateSink', 'actions'];
   public complete = true;
   public expandedElement: CompleteFleetManager | null;
-  public FormGroup: FormGroup;
+  public formGroup: FormGroup;
   public maxDate = moment(moment.now()).toDate();
   public start: string;
   public end: string;
@@ -64,7 +64,7 @@ export class ManageTicketComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
     await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON));
-    this.FormGroup = new FormGroup({
+    this.formGroup = new FormGroup({
       start: new FormControl(''),
       end: new FormControl(''),
     });
@@ -117,11 +117,11 @@ export class ManageTicketComponent implements OnInit {
     );
   }
 
-  public modalTicket(VehicleId: number): void {
+  public modalTicket(vehicleId: number): void {
     const dialogRef = this.dialog.open(ModalTestTicketComponent, {
       width: '90%',
       height: '80%',
-      data: { vehicleId: VehicleId, fleetManagerId: this.fleetManagerId, extend: true }
+      data: { vehicleId: vehicleId, fleetManagerId: this.fleetManagerId, extend: true }
     });
     dialogRef.afterClosed().subscribe(save => {
       if (save) {
@@ -133,9 +133,9 @@ export class ManageTicketComponent implements OnInit {
   public changeDate(): void {
     this.start = '';
     this.end = '';
-    if (this.FormGroup.get('end').value) {
-      this.start = moment(this.FormGroup.get('start').value).format('yyyy-MM-DD');
-      this.end = moment(this.FormGroup.get('end').value).format('yyyy-MM-DD');
+    if (this.formGroup.get('end').value) {
+      this.start = moment(this.formGroup.get('start').value).format('yyyy-MM-DD');
+      this.end = moment(this.formGroup.get('end').value).format('yyyy-MM-DD');
       this.getActiveTicket();
     }
   }
@@ -155,7 +155,7 @@ export class ManageTicketComponent implements OnInit {
   }
 
   private resetDate(): void {
-    this.FormGroup.patchValue({
+    this.formGroup.patchValue({
       start: '',
       end: ''
     });

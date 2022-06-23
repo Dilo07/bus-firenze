@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Vehicle } from '../components/domain/bus-firenze-domain';
+import { DepositType, Vehicle } from '../components/domain/bus-firenze-domain';
 
 @Injectable({
   providedIn: 'root'
@@ -55,8 +55,7 @@ export class VehicleService {
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
-    return this.http.get<Vehicle[]>(
-      this.apiUrl + url + '/vehicles/' + onlyActive, options)
+    return this.http.get<Vehicle[]>(this.apiUrl + url + '/vehicles/' + onlyActive, options)
       .pipe(catchError(err => { throw err; }));
   }
 
@@ -105,12 +104,21 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getDeposit(vehicleId: number, type: string, documentId: number): Observable<HttpResponse<Blob> | Blob> {
+  getDeposit(vehicleId: number, type: DepositType, documentId: number): Observable<HttpResponse<Blob> | Blob> {
     const options = {
       observe: 'response' as 'body',
       responseType: 'blob' as 'blob'
     };
     return this.http.get(this.apiUrl + `/vehicle/${vehicleId}/${type}/${documentId}`, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  getDocObu(vehicleId: number, obu: string, type: DepositType, documentId: number): Observable<HttpResponse<Blob> | Blob> {
+    const options = {
+      observe: 'response' as 'body',
+      responseType: 'blob' as 'blob'
+    };
+    return this.http.get(this.apiUrl + `/vehicle/${vehicleId}/obu/${obu}/${type}/${documentId}`, options)
       .pipe(catchError(err => { throw err; }));
   }
 
@@ -126,7 +134,7 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  uploadDeposit(vehicleId: number, type: string, file: File, fleetManagerId?: number): Observable<void> {
+  uploadDeposit(vehicleId: number, type: DepositType, file: File, fleetManagerId?: number): Observable<void> {
     let url = '';
     if (fleetManagerId) {
       url = '/' + fleetManagerId;

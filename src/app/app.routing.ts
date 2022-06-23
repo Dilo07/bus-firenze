@@ -24,11 +24,19 @@ const routes: Routes = [
   },
   {
     path: 'deposit',
-    loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule)
+    loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule),
   },
   {
-    path: 'user-fleet-manager/deposit', // fm
-    loadChildren: () => import('./components/comp-deposit/deposit.module').then(m => m.DepositModule)
+    path: 'billing',
+    loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule),
+  },
+  {
+    path: 'penalties',
+    loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule),
+  },
+  {
+    path: 'payments', // fm
+    loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule)
   },
   {
     path: 'fleet-manager-valid',

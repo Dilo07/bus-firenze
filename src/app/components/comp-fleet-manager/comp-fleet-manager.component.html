@@ -3,8 +3,8 @@
 	<mat-card-content>
 		<app-view-file [file]="src"></app-view-file>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<span fxFlex="20" *ngIf="isManageFleet">
-				<button mat-button class="greenButtons" [routerLink]="['form-Fleet']">
+			<span *ngIf="isManageFleet">
+				<button mat-button class="actionButtons" [routerLink]="['form-Fleet']">
 					{{'FLEET-MANAGER.NEW' | translate}}
 				</button>
 			</span>

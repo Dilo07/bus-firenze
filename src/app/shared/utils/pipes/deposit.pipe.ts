@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DEPOSIT_TYPE } from 'src/app/components/domain/bus-firenze-constants';
-import { DocumentVehicle } from 'src/app/components/domain/bus-firenze-domain';
+import { DepositType, DocumentObu, DocumentVehicle } from 'src/app/components/domain/bus-firenze-domain';
 
 @Pipe({
   name: 'hasDeposit'
@@ -9,10 +8,10 @@ export class HasDepositPipe implements PipeTransform {
 
   transform(documents: DocumentVehicle[], checkValid: boolean): boolean {
     let hasDeposit = false;
-    const deposit = DEPOSIT_TYPE;
+    const deposit: DepositType = 'deposit';
     documents.map(document => { // controlla se ha deposito in caso di checkValid true controlla anche se è valido
-      if (document.type === deposit.DEPOSIT && !checkValid) { hasDeposit = true; }
-      if (document.type === deposit.DEPOSIT && document.valid && checkValid) { hasDeposit = true; }
+      if (document.type === deposit && !checkValid) { hasDeposit = true; }
+      if (document.type === deposit && document.valid && checkValid) { hasDeposit = true; }
     });
     return hasDeposit;
   }
@@ -26,10 +25,10 @@ export class HasRequestDepositPipe implements PipeTransform {
 
   transform(documents: DocumentVehicle[], checkValid: boolean): boolean {
     let hasReqDeposit = false;
-    const deposit = DEPOSIT_TYPE;
+    const request: DepositType = 'request';
     documents.map(document => { // controlla se ha una richiesta restituzione deposito
-      if (document.type === deposit.REQUEST && !checkValid) { hasReqDeposit = true; }
-      if (document.type === deposit.REQUEST && document.valid && checkValid) { hasReqDeposit = true; }
+      if (document.type === request && !checkValid) { hasReqDeposit = true; }
+      if (document.type === request && document.valid && checkValid) { hasReqDeposit = true; }
     });
     return hasReqDeposit;
   }
@@ -42,9 +41,9 @@ export class DateValidPipe implements PipeTransform {
 
   transform(documents: DocumentVehicle[]): number {
     let dateValid = null;
-    const deposit = DEPOSIT_TYPE;
+    const deposit: DepositType = 'deposit';
     documents.map(document => { // ritorna la data di validità del deposito
-      if (document.type === deposit.DEPOSIT && document.valid) { dateValid = document.valid; }
+      if (document.type === deposit && document.valid) { dateValid = document.valid; }
     });
     return dateValid;
   }
@@ -57,9 +56,9 @@ export class RequestDateValidPipe implements PipeTransform {
 
   transform(documents: DocumentVehicle[]): number {
     let dateValid = null;
-    const deposit = DEPOSIT_TYPE;
+    const request: DepositType = 'request';
     documents.map(document => { // ritorna la data di validità della richiesta
-      if (document.type === deposit.REQUEST && document.valid) { dateValid = document.valid; }
+      if (document.type === request && document.valid) { dateValid = document.valid; }
     });
     return dateValid;
   }
@@ -76,5 +75,38 @@ export class DocumentToValidPipe implements PipeTransform {
       if (!document.valid) { documentType = document.type; }
     });
     return documentType;
+  }
+}
+
+@Pipe({
+  name: 'documentRemObu'
+})
+export class DocumentRemoveObu implements PipeTransform {
+  transform(documents: DocumentObu[]): boolean {
+    let hasRemoveObu = false;
+    const remObu: DepositType = 'remObu';
+    documents.map(document => {
+      if (document.type === remObu) {
+        hasRemoveObu = true;
+      }
+    });
+    return hasRemoveObu;
+  }
+}
+
+
+@Pipe({
+  name: 'documentRemObuFail'
+})
+export class DocumentRemoveObuFail implements PipeTransform {
+  transform(documents: DocumentObu[]): boolean {
+    let hasRemoveObuFail = false;
+    const remObuFail: DepositType = 'remObuFail';
+    documents.map(document => {
+      if (document.type === remObuFail) {
+        hasRemoveObuFail = true;
+      }
+    });
+    return hasRemoveObuFail;
   }
 }

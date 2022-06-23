@@ -4,13 +4,13 @@
         <p>{{fileDeposit?.name}}</p>
         <input style="display: none" type="file" #depositInput accept="application/pdf, image/jpeg, image/png"
             (change)="uploadDeposit($event)">
-        <button mat-button class="bluButton" (click)="depositInput.click()">{{data.uploadDoc | translate}}</button>
+        <button mat-button class="uploadButtons" (click)="depositInput.click()">{{data.uploadDoc | translate}}</button>
     </span>
     <div fxLayout="row" fxLayoutGap="20px">
-        <button mat-button (click)="dialogRef.close(fileDeposit ? {file: fileDeposit} : true)" class="greenButtons">
+        <button mat-button (click)="dialogRef.close(false)" class="backButton"> no </button>
+        <button mat-button (click)="dialogRef.close(fileDeposit ? {file: fileDeposit} : true)" class="actionButtons">
             {{'COMMON.ACTION.YES' | translate}}
         </button>
-        <button mat-button (click)="dialogRef.close(false)" class="redButtons"> no </button>
     </div>
 </div>
 <ng-template #valid>
@@ -21,11 +21,11 @@
             <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>
         </mat-form-field>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
-            <button mat-button (click)="dialogRef.close(contractCode.value)" class="greenButtons"
+            <button mat-button (click)="dialogRef.close(false)" class="backButton"> {{'COMMON.ACTION.BACK' | translate}}
+            </button>
+            <button mat-button (click)="dialogRef.close(contractCode.value)" class="actionButtons"
                 [disabled]="contractCode.status === 'INVALID'">
                 {{'COMMON.ACTION.SAVE' | translate}}
-            </button>
-            <button mat-button (click)="dialogRef.close(false)" class="redButtons"> {{'COMMON.ACTION.BACK' | translate}}
             </button>
         </div>
     </div>

@@ -12,11 +12,14 @@
         "Area-monitoring": "Monitoriggio aree",
         "Fleet-manager": "Fleet manager",
         "Manage": "Gestione",
+        "Payments": "Pagamenti",
         "Deposit": "Depositi",
+        "Billing": "Fatture",
+        "Penalties": "Penali",
         "Validation": "Validazione",
         "Valid-Fleet-manager": "Fleet manager",
         "Vehicle-valid": "Veicoli",
-        "User-Fleet": "Fleet Manager",
+        "User-Fleet": "Flotta",
         "User-Driver": "Autista",
         "Anagraphic": "Anagrafica",
         "Vehicles": "Veicoli",
@@ -51,7 +54,8 @@
         "RULE-PASSWORD": "E' richiesta una password di almeno 8 caratteri con almeno una lettera maiuscola, una minuscola, un carattere speciale ed un numero",
         "PASSWORD-DIFFERENT": "Le password inserite sono diverse",
         "ERROR": "Cambio password non eseguito correttamente",
-        "SUCCESS": "Password modificata correttamente"
+        "SUCCESS": "Password modificata correttamente",
+        "CONTACT_US": "Contattaci"
     },
     "PAGINATOR": {
         "ITEM": "Elementi per pagina",
@@ -139,14 +143,14 @@
         "MOBILE_VERIFIED": "numero verificato",
         "DOWNLOAD_TEMPLATE": "Scarica file",
         "DOCUMENT_CONFIRM": "Sei sicuro di voler validare questo documento?",
-        "VALID_DOCUMENTS": "Validazione documenti",
+        "VALID_DOCUMENTS": "Ricezione documenti cartacei",
         "VALID_AT": "Validato il ",
         "reqForm": "Modulo adesione",
         "idDoc": "Carta d'intentità",
         "comReg": "Visura camerale",
         "UPLOAD_FILE": "Carica modulo",
         "CHANGE_FILE": "Modifica modulo",
-        "UPLOAD_IDENTIYCRD": "Carica carta d'indentità",
+        "UPLOAD_IDENTIYCRD": "Carica carta d'identità",
         "CHANGE_IDENTIYCRD": "Modifica carta d'identità",
         "UPLOAD_COMMERCEREG": "Carica visura camerale",
         "CHANGE_COMMERCEREG": "Modifica visura camerale",
@@ -191,7 +195,7 @@
         "LPN_NAT": "Nazione",
         "EURO-CLASS": "EuroClass",
         "EUROPEAN-GROUP": "Categoria",
-        "EXPIRED": "Veicolo scaduto in data",
+        "EXPIRED": "Veicolo scaduto",
         "WILLEXPIRE": "Il veicolo scadrà in data",
         "UNKNOWN": "Veicolo sconosciuto su ines",
         "CONSENT": "Consenso contratto",
@@ -234,6 +238,9 @@
         "NODEPOSIT": "Deposito non caricato",
         "ADDDEPOSIT": "Aggiungi deposito",
         "DEPOSIT_REQ": "Allega richiesta deposito",
+        "VIEW_DEPOSIT_REQ": "Visualizza richiesta deposito",
+        "REMOVE_TEST": "Collaudo rimozione",
+        "VIEW_REMOBU": "Visualizza collaudo rimozione",
         "VALID_CONFIRM": "Sei sicuro di voler validare questo veicolo?",
         "VALID_SUCCESS": "Veicolo validato correttamente",
         "NEEDDOC": "Veicoli con documenti da caricare",
@@ -398,10 +405,42 @@
         "GROUP6": "Motocicli (classe L)",
         "GROUP7": "Altri veicoli"
     },
+    "BILLING_ITEMS": {
+        "NO_DATA": "Nessuna fattura presente",
+        "STATUS": "Stato fatture",
+        "PRICE": "Prezzo",
+        "PRICETOT": "Prezzo totale",
+        "QUANTITY": "Quantità",
+        "TYPE": "Tipo fattura",
+        "START": "Inizio periodo",
+        "END": "Fine periodo",
+        "DETAILS": "Dettagli fatture"
+    },
+    "PENALTIES": {
+        "ADD": "Applica una penale",
+        "DATE": "Seleziona una data",
+        "SELECT": "Seleziona il tipo di penale da applicare",
+        "SUCCESS":"Penale aggiunta con successo",
+        "SEARCH": "Ricerca per targa",
+        "TYPE": "Tipo di penale",
+        "PENAL_DATE": "Data penale",
+        "NO_DATA": "Nessuna penale presente"
+    },
+    "BILLING_TYPE": {
+        "INSTALL": "Installazione",
+        "DELTA_NOT_MERGEABLE": "Canone mensile",
+        "DELTA_MERGEABLE": "Canone mensile periodico",
+        "MISSED_APPOINTMENT": "Mancato appuntamento",
+        "CANCELLED_APPOINTMENT": "Appuntamento cancellato entro 24h",
+        "5": "Mancato appuntamento",
+        "6": "Appuntamento cancellato entro 24h"
+    },
     "COMMON": {
         "DATE": {
             "START": "Inizio",
-            "END": "Fine"
+            "END": "Fine",
+            "RANGE": "Seleziona un rage di date",
+            "INVALID": "Range inserito non valido"
         },
         "ACTION": {
             "YES": "Si",
@@ -477,7 +516,8 @@
             "notfound": "Veicolo non trovato",
             "invalid": "Assegnato un ticket ad un veicolo non valido",
             "already_present": "Ticket già presente sul veicolo",
-            "already_associated": "Il veicolo è già associato ad un altro obu"
+            "already_associated": "Il veicolo è già associato ad un altro obu",
+            "request": "impossibile allegare la richiesta di rimborso a causa del collaudo fallito"
         },
         "ticket": {
             "already_assigned": "Ticket già assegnato a un veicolo",
