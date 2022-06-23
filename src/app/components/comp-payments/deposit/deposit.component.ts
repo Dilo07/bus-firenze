@@ -91,21 +91,21 @@ export class DepositComponent implements OnInit {
 
   public viewDocObu(vehicleId: number, documentsObu: DocumentObu[], depositType: DepositType): void {
     // prende il primo documento
-    let doc: DocumentObu = documentsObu.find((value: DocumentObu) => value.type === depositType);
-    if(doc) {
+    const doc: DocumentObu = documentsObu.find((value: DocumentObu) => value.type === depositType);
+    if (doc) {
       this.subscription.push(this.vehicleService.getDocObu(vehicleId, doc.obuId, depositType, doc.fileId)
-      .subscribe((data: HttpResponse<Blob>) => {
-        if (data.body.type === 'application/pdf') { // se è un pdf
-          const objectUrl = window.URL.createObjectURL(data.body);
-          this.src = { url: objectUrl, type: data.body.type };
-        } else { // altrimenti se è un'immagine
-          const reader = new FileReader();
-          reader.readAsDataURL(data.body);
-          reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type };
-          };
-        }
-      }));
+        .subscribe((data: HttpResponse<Blob>) => {
+          if (data.body.type === 'application/pdf') { // se è un pdf
+            const objectUrl = window.URL.createObjectURL(data.body);
+            this.src = { url: objectUrl, type: data.body.type };
+          } else { // altrimenti se è un'immagine
+            const reader = new FileReader();
+            reader.readAsDataURL(data.body);
+            reader.onload = () => {
+              this.src = { url: reader.result, type: data.body.type };
+            };
+          }
+        }));
     }
   }
 
@@ -116,7 +116,7 @@ export class DepositComponent implements OnInit {
     if (size > 2097152) { // dimensione massima
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
       this.complete = true;
-    }else{
+    } else {
       this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, depositType, file, this.fleetManagerId).subscribe(
         () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
         () => this.complete = true,

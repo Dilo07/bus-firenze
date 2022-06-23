@@ -55,7 +55,7 @@ const MENUITEMS = [
     children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1], SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
-    state: '', name: 'Validation', type: 'submenu', icon: 'manage_accounts',
+    state: '', name: 'Validation', type: 'submenu', icon: 'rule',
     children: [SUBMENU_ROUTES[4], SUBMENU_ROUTES[5]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
@@ -67,12 +67,12 @@ const MENUITEMS = [
     children: [SUBMENU_ROUTES[6], SUBMENU_ROUTES[7], SUBMENU_ROUTES[8]], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'assignment',
+    state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'ad_units',
     children: [SUBMENU_ROUTES[9], SUBMENU_ROUTES[10], SUBMENU_ROUTES[11], SUBMENU_ROUTES[12], SUBMENU_ROUTES[13]],
     roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
   {
-    state: 'appointment', name: 'Appointment', type: 'submenu', icon: 'assignment',
+    state: 'appointment', name: 'Appointment', type: 'submenu', icon: 'contact_phone',
     children: [SUBMENU_ROUTES[14], SUBMENU_ROUTES[15]], roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
   {
@@ -80,7 +80,7 @@ const MENUITEMS = [
     children: [SUBMENU_ROUTES[16], SUBMENU_ROUTES[17],], roles: [ROLES.DRIVER]
   },
   {
-    state: 'ticket', name: 'Ticket', type: 'submenu', icon: 'manage_accounts',
+    state: 'ticket', name: 'Ticket', type: 'submenu', icon: 'wysiwyg',
     children: [SUBMENU_ROUTES[18], SUBMENU_ROUTES[19]], roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER]
   },
   {

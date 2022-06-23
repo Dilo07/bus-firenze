@@ -131,7 +131,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     });
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',
-      height: '30%',
+      height: '50%',
       data: { text: 'VEHICLE.DELETE_CONFIRM', uploadDoc: hasDepositValid ? 'VEHICLE.DEPOSIT_REQ' : null },
       autoFocus: false
     });
