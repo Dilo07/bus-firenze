@@ -11,8 +11,9 @@ export const environment = {
     configFile: 'assets/config/test/config-app.json?version=' + version
   },
   header: {
-    img: 'assets/images/Logo_BUS_Firenze.png',
-    title: 'BUS Firenze'
+    img: 'assets/images/logo-firenze.png',
+    imgBottom: 'assets/images/logo-bottom-movyon.png',
+    title: 'Bus Firenze'
   },
   footer: {
     year: 'v. ' + version + ' 2021',
