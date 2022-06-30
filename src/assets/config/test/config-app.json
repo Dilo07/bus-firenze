@@ -43,23 +43,23 @@
   "modules": [
     {
       "name": "Norme e Condizioni di Adesione",
-      "path": "IBUS_Firenze_Norme_Condizioni_Adesione.v0.7.pdf"
+      "path": "IBUS_Firenze_Norme_Condizioni_Adesione.pdf"
     },
     {
       "name": "Nomina a Responsabile del Trattamento dei Dati Personali",
-      "path": "IBUS_Firenze_Nomina_Responsabile_Trattamento.v0.4.pdf"
+      "path": "IBUS_Firenze_Nomina_Responsabile_Trattamento.pdf"
     },
     {
       "name": "Condizioni Economiche",
-      "path": "IBUS_Firenze_Condizioni_Economiche.v0.8.pdf"
+      "path": "IBUS_Firenze_Condizioni_Economiche.pdf"
     },
     {
       "name": "Manuale di Utilizzo per il Fleet Manager",
-      "path": "FirenzeBus_Manuale_FleetManager_v.0.2.pdf"
+      "path": "FirenzeBus_Manuale_FleetManager.pdf"
     },
     {
       "name": "Manuale di Installazione delle On Board Unit",
-      "path": "FirenzeBus_Manuale_Installazione_Arianna_V.0.3.pdf"
+      "path": "FirenzeBus_Manuale_Utente_Arianna1.pdf"
     }
   ]
 }

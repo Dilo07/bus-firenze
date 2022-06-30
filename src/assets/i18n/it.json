@@ -609,7 +609,7 @@
             "ERR_NO_OBU_MANAGER_FOR_BUS": "INES: Gestore OBU non associato alla targa inserita",
             "ERR_NO_OBU_FOUND_WITH_PLATE": "INES: Nessun OBU trovato per la targa fornita",
             "ERR_TARIFFA_NOT_VALID": "INES: Tariffa non valida per la targa data",
-            "ERR_BUS_NOT_PREAUTORIZZATO ": "INES: Il bus non possiede la preautorizzazione richiesta",
+            "ERR_BUS_NOT_PREAUTORIZZATO": "INES: Il bus non possiede la preautorizzazione richiesta",
             "ERR_NO_PLATE_FOUND": "INES: Nessuna targa trovata per i dati forniti",
             "MSG_OBU_INSERT_SUCCESSFUL": "INES: Operazione di inserimento OBU effettuata con successo",
             "MSG_OBU_UPDATE_SUCCESSFUL": "INES: Operazione di aggiornamento OBU effettuata con successo",

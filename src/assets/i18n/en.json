@@ -608,7 +608,7 @@
             "ERR_NO_OBU_MANAGER_FOR_BUS": "INES: Manage OBU not associated for inserted plate",
             "ERR_NO_OBU_FOUND_WITH_PLATE": "INES: Nobody OBU found for supplied plate",
             "ERR_TARIFFA_NOT_VALID": "INES: Invalid ammount for this plate",
-            "ERR_BUS_NOT_PREAUTORIZZATO ": "INES: The bus hasn't the request preautorization",
+            "ERR_BUS_NOT_PREAUTORIZZATO": "INES: The bus hasn't the request preautorization",
             "ERR_NO_PLATE_FOUND": "INES: Nobody plate found for this data",
             "MSG_OBU_INSERT_SUCCESSFUL": "INES: Insert OBU operation completed successfully",
             "MSG_OBU_UPDATE_SUCCESSFUL": "INES: Update OBU operation completed successfully",

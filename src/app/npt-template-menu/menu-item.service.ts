@@ -27,12 +27,12 @@ const SUBMENU_ROUTES = [
   { state: 'remove-obu', name: 'Remove-obu', icon: 'code_off', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER] },
   { state: 'change-plate', name: 'Change-plate', icon: 'assignment_return', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'vehicle-document', name: 'Vehicle-document', icon: 'description', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'add-appointment', name: 'Add-appointment', icon: 'contact_phone', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'manage-appointment', name: 'Manage-appointment', icon: 'contact_phone', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'add-appointment', name: 'Add-appointment', icon: 'add', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
+  { state: 'manage-appointment', name: 'Manage-appointment', icon: 'manage_search', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'anagraphic-driver', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.DRIVER] },
   { state: 'association-driver', name: 'Association-vehicles', icon: 'directions_car', roles: [ROLES.DRIVER] },
-  { state: 'add-ticket', name: 'Add-ticket', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] },
-  { state: 'manage-ticket', name: 'Manage-ticket', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] }
+  { state: 'add-ticket', name: 'Add-ticket', icon: 'add', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] },
+  { state: 'manage-ticket', name: 'Manage-ticket', icon: 'manage_search', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] }
 ];
 
 const MENUITEMS = [
@@ -63,7 +63,7 @@ const MENUITEMS = [
     children: [SUBMENU_ROUTES[1], SUBMENU_ROUTES[2]], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'user-fleet-manager', name: 'User-Fleet', type: 'submenu', icon: 'manage_accounts',
+    state: 'user-fleet-manager', name: 'User-Fleet', type: 'submenu', icon: 'directions_car',
     children: [SUBMENU_ROUTES[6], SUBMENU_ROUTES[7], SUBMENU_ROUTES[8]], roles: [ROLES.FLEETMNG]
   },
   {
