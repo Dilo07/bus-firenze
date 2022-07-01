@@ -1,14 +1,17 @@
 <mat-card>
-	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Real-Time</mat-card-title>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<span fxFlex="20" *ngIf="fleetManager">
-				<button mat-button class="backButton" (click)="backFromRealTime()">
-					{{'FLEET-MANAGER.BACK' | translate}}</button>
-			</span>
-			<mat-card>
+			<div fxLayout="row wrap" fxLayoutAlign="space-between">
+				<mat-card-title>Real-Time</mat-card-title>
+				<span fxFlex="20" *ngIf="fleetManager">
+					<button mat-button class="backButton" (click)="backFromRealTime()">
+						{{'FLEET-MANAGER.BACK' | translate}}</button>
+				</span>
+			</div>
+			<mat-card style="background-color: #E4F1F5;">
 				<mat-card-content fxLayout="row wrap" fxLayoutGap="20px">
-					<mat-form-field appearance="fill" fxFlex.gt-lg="25" fxFlex.gt-md="25" fxFlex.gt-xs="100" fxFlex="100">
+					<mat-form-field appearance="fill" fxFlex.gt-lg="25" fxFlex.gt-md="25" fxFlex.gt-xs="100"
+						fxFlex="100">
 						<mat-label>{{'REAL-TIME.SELECT' | translate}}</mat-label>
 						<mat-select [(ngModel)]="actualTime" (selectionChange)="onChangedRefresh()">
 							<mat-option *ngFor="let time of times" [value]="time.code">
@@ -16,16 +19,23 @@
 							</mat-option>
 						</mat-select>
 					</mat-form-field>
-					<button mat-icon-button matTooltip="{{'REAL-TIME.REFRESH' | translate}}" (click)="getTrip()">
-						<mat-icon>refresh</mat-icon>
-					</button>
-					<button mat-icon-button matTooltip="{{'REAL-TIME.STOP' | translate}}" [disabled]="!stop" (click)="stopPlayRefresh()">
-						<mat-icon [style.color]="!stop ? 'grey' : 'red'">stop</mat-icon>
-					</button>
-					<button mat-icon-button matTooltip="{{'REAL-TIME.PLAY' | translate}}" [disabled]="stop" (click)="stopPlayRefresh()">
-						<mat-icon [style.color]="stop ? 'grey' : 'green'">play_arrow</mat-icon>
-					</button>
-					<mat-card-title> {{'REAL-TIME.VEHICLES' | translate}} {{vehicleTrip.length}}</mat-card-title>
+					<div fxLayout="row wrap" fxLayoutAlign="center center" fxFlexOffset="40" fxLayoutGap="20px">
+						<h3> {{'REAL-TIME.VEHICLES' | translate}} {{vehicleTrip.length}}</h3>
+						<ng-container>
+							<button mat-icon-button matTooltip="{{'REAL-TIME.REFRESH' | translate}}" (click)="getTrip()">
+								<mat-icon>refresh</mat-icon>
+							</button>
+							<button mat-icon-button matTooltip="{{'REAL-TIME.STOP' | translate}}" [disabled]="!stop"
+								(click)="stopPlayRefresh()">
+								<mat-icon [style.color]="!stop ? 'grey' : 'red'">stop</mat-icon>
+							</button>
+							<button mat-icon-button matTooltip="{{'REAL-TIME.PLAY' | translate}}" [disabled]="stop"
+								(click)="stopPlayRefresh()">
+								<mat-icon [style.color]="stop ? 'grey' : 'green'">play_arrow</mat-icon>
+							</button>
+						</ng-container>
+					</div>
+
 				</mat-card-content>
 			</mat-card>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>

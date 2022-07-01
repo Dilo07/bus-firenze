@@ -43,6 +43,7 @@
     "ACCOUNT": {
         "PROFILE": "Profile",
         "LOGOUT": "Log Out",
+        "LANG": "Change language",
         "DARK": "Dark theme",
         "OLD-PASSWORD": "Insert old password",
         "NEW-PASSWORD": "Insert new password",
