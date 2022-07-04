@@ -8,7 +8,7 @@
             </button>
         </span>
         <form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
-            <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
+            <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
                 <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
                 <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
                     <input matStartDate formControlName="start">

@@ -21,7 +21,7 @@
 				</mat-menu>
 			</div>
 			<form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
-				<mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+				<mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
 					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>
 					<input matInput type="search" formControlName="ctrlSearch" placeholder="cerca" autocomplete="off">
 				</mat-form-field>
@@ -133,7 +133,7 @@
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
 							<button mat-icon-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
-								<mat-icon style="color: #0066CC;">more_vert</mat-icon>
+								<mat-icon style="color: #0066CC;">more_horiz</mat-icon>
 							</button>
 							<mat-menu #actionsMenuManage="matMenu">
 								<button mat-icon-button matTooltip="{{'STATISTIC.VEHICLE' | translate}}"

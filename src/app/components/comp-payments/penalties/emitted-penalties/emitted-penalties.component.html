@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutGap="20px" style="margin-top: 2%;">
     <form [formGroup]="formGroup" style="margin-bottom: 20px;">
         <div fxLayout="row wrap" fxLayoutGap="20px">
-            <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
+            <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
                 <mat-label>{{'COMMON.DATE.RANGE' | translate}}</mat-label>
                 <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
                     <input matStartDate formControlName="ctrlRangeStart">

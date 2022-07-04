@@ -4,7 +4,7 @@
     <ng-container *ngIf="formGroup">
         <form [formGroup]="formGroup" style="margin-bottom: 20px;" fxLayout="column" fxLayoutGap="20px">
             <div fxLayout="row wrap" fxLayoutAlign="center">
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-lg="80" fxFlex.gt-md="80" fxFlex.gt-xs="100">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-lg="80" fxFlex.gt-md="80" fxFlex.gt-xs="100">
                     <mat-label>{{'PENALTIES.TYPE' | translate}}</mat-label>
                     <mat-select formControlName="penalSelected" required>
                         <mat-option *ngFor="let penalType of listPenalType" [value]="penalType.typeId">
@@ -13,7 +13,7 @@
                     </mat-select>
                 </mat-form-field>
         
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-lg="80" fxFlex.gt-md="80" fxFlex.gt-xs="100">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-lg="80" fxFlex.gt-md="80" fxFlex.gt-xs="100">
                     <mat-label>{{'PENALTIES.DATE' | translate}}</mat-label>
                     <input matInput placeholder="{{'MODAL-FORM.DATE' | translate}}" [matDatepicker]="pickerDate"
                         (focus)="pickerDate.open()" formControlName="datePenal">
