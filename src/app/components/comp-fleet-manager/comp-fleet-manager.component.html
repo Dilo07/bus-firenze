@@ -1,13 +1,15 @@
 <mat-card>
-	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
 	<mat-card-content>
 		<app-view-file [file]="src"></app-view-file>
-		<div fxLayout="column" fxLayoutGap="20px">
+		<div fxLayout="row wrap" fxLayoutAlign="space-between">
+			<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
 			<span *ngIf="isManageFleet">
 				<button mat-button class="actionButtons" [routerLink]="['form-Fleet']">
 					{{'FLEET-MANAGER.NEW' | translate}}
 				</button>
 			</span>
+		</div>
+		<div fxLayout="column" fxLayoutGap="20px">
 			<form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field appearance="outline" fxFlex="30">
 					<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>

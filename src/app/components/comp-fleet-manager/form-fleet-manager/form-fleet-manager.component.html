@@ -1,15 +1,22 @@
 <mat-card>
-    <mat-card-title *ngIf="!data && !register" fxLayout="row" fxLayoutAlign="center center">
-        {{'FLEET-MANAGER.MESSAGE_NEW' | translate}}</mat-card-title>
-    <mat-card-title *ngIf="data && !roleFleetManager" fxLayout="row" fxLayoutAlign="center center">
-        {{'FLEET-MANAGER.MESSAGE_EDIT' | translate}}</mat-card-title>
-    <mat-card-title *ngIf="data && roleFleetManager" fxLayout="row" fxLayoutAlign="center center">
-        {{'FLEET-MANAGER.MESSAGE_VIEW' | translate}}</mat-card-title>
-    <mat-card-title *ngIf="register" fxLayout="row" fxLayoutAlign="center center">
-        {{'FLEET-MANAGER.REGISTRATION' | translate}}
-    </mat-card-title>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-card-title *ngIf="!data && !register" fxFlexOffset="5">
+            {{'FLEET-MANAGER.MESSAGE_NEW' | translate}}</mat-card-title>
+        <mat-card-title *ngIf="data && !roleFleetManager" fxFlexOffset="5">
+            {{'FLEET-MANAGER.MESSAGE_EDIT' | translate}}</mat-card-title>
+        <mat-card-title *ngIf="data && roleFleetManager" fxFlexOffset="5">
+            {{'FLEET-MANAGER.MESSAGE_VIEW' | translate}}</mat-card-title>
+        <mat-card-title *ngIf="register" fxFlexOffset="5">
+            {{'FLEET-MANAGER.REGISTRATION' | translate}}
+        </mat-card-title>
+        <button mat-icon-button *ngIf="!data" (click)="helper = helper === 'on' ? 'off' : 'on'">
+            <mat-icon> {{helper === 'on' ? 'close' : 'help'}}</mat-icon>
+        </button>
+    </div>
+    <div [@slideInOut]="helper">
+        <app-expansion-info></app-expansion-info>
+    </div>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
-        <app-expansion-info *ngIf="!data"></app-expansion-info>
         <form [formGroup]="formGroup" fxLayout="column">
             <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
                 <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
@@ -82,7 +89,8 @@
                 </mat-card-content>
             </mat-card>
             <div fxLayout="row wrap" fxLayoutAlign="center">
-                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="100" fxFlex.gt-md="100">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="100"
+                    fxFlex.gt-md="100">
                     <mat-label>{{'FLEET-MANAGER.USERTYPE' | translate}}</mat-label>
                     <mat-select formControlName="ctrlUser" required
                         (selectionChange)="userSel=$event.value; formGroup.patchValue({ ctrlNat: 'IT' }); changeFormNat();">

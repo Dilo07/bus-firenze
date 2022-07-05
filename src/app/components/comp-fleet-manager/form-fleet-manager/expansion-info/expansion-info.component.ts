@@ -16,7 +16,6 @@ import { RegisterService } from 'src/app/services/register.service';
   ]
 })
 export class ExpansionInfoComponent {
-  public panelOpenState = true;
 
   private subscription: Subscription[] = [];
   constructor(private registerService: RegisterService) { }
