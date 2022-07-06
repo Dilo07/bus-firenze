@@ -68,7 +68,7 @@ const MENUITEMS = [
   },
   {
     state: 'manage-obu', name: 'Manage-obu', type: 'link', icon: 'ad_units',
-    roles: [ROLES.MOVYON, ROLES.INSTALLER]
+    roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER]
   },
   {
     state: 'appointment', name: 'Appointment', type: 'submenu', icon: 'contact_phone',
