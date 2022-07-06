@@ -15,7 +15,8 @@ const routes: Routes = [
   },
   { path: 'real-time', loadChildren: () => import('./components/comp-real-time/real-time.module').then(m => m.RealTimeModule) }, // fm
   {
-    path: 'area-monitoring', loadChildren: () => import('@npt/npt-net').then(m => m.NptNetModule),
+    path: 'area-monitoring',
+    loadChildren: () => import('@npt/npt-net').then(m => m.NptNetModule),
     canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
@@ -52,7 +53,8 @@ const routes: Routes = [
   },
   {
     path: 'manage-obu', // installer
-    loadChildren: () => import('@npt/npt-obu').then(m => m.NptObuModule)
+    loadChildren: () => import('@npt/npt-obu').then(m => m.NptObuModule),
+    canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER] }
   },
   {
     path: 'appointment', // installer
