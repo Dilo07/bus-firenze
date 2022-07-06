@@ -52,7 +52,7 @@ const routes: Routes = [
   },
   {
     path: 'manage-obu', // installer
-    loadChildren: () => import('./components/comp-manage-obu/manage-obu.module').then(m => m.ManageObuModule)
+    loadChildren: () => import('@npt/npt-obu').then(m => m.NptObuModule)
   },
   {
     path: 'appointment', // installer

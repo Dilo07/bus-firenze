@@ -496,7 +496,8 @@
         "driver": {
             "notfound": "Driver not found",
             "delete": "Error on deleting driver",
-            "insert": "Error on insert driver"
+            "insert": "Error on insert driver",
+            "null": "Driver informations missing"
         },
         "fleetmanager": {
             "insert": "Failed to insert a fleet manager",
@@ -505,7 +506,8 @@
             "delete": "Cannot delete a fleet manager with assigned vehicles",
             "company": "duplicate company identity",
             "piva": "missing p.iva",
-            "fc": "missing fiscal code"
+            "fc": "missing fiscal code",
+            "cc": "The entered contract code already exists"
         },
         "vehicle": {
             "update": "Failed to update the vehicle",

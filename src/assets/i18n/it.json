@@ -497,7 +497,8 @@
         "driver": {
             "notfound": "Driver non trovato",
             "delete": "Errore nella cancellazione driver",
-            "insert": "Errore nell'inserimento driver"
+            "insert": "Errore nell'inserimento driver",
+            "null": "Informazioni driver mancanti"
         },
         "fleetmanager": {
             "insert": "Non è possibile inserire il fleet manager",
@@ -506,7 +507,8 @@
             "delete": "Non è possibile cancellare un fleet manager con veicoli associati",
             "company": "Ragione sociale duplicata",
             "piva": "P.IVA mancante",
-            "fc": "Codice fiscale mancante"
+            "fc": "Codice fiscale mancante",
+            "cc": "Il contract code inserito è già esistente"
         },
         "vehicle": {
             "update": "Aggiornamento dei dati del veicolo fallito",

@@ -67,8 +67,7 @@ const MENUITEMS = [
     children: [SUBMENU_ROUTES[6], SUBMENU_ROUTES[7], SUBMENU_ROUTES[8]], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'manage-obu', name: 'Manage-obu', type: 'submenu', icon: 'ad_units',
-    children: [SUBMENU_ROUTES[9], SUBMENU_ROUTES[10], SUBMENU_ROUTES[11], SUBMENU_ROUTES[12], SUBMENU_ROUTES[13]],
+    state: 'manage-obu', name: 'Manage-obu', type: 'link', icon: 'ad_units',
     roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
   {
