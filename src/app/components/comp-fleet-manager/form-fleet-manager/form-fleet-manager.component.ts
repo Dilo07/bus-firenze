@@ -15,11 +15,31 @@ import { euroNations, FLEETMNG_TYPE, worldNations } from '../../domain/bus-firen
 import { FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-form-fleet-manager',
   templateUrl: './form-fleet-manager.component.html',
-  styleUrls: ['./form-fleet-manager.component.css']
+  styleUrls: ['./form-fleet-manager.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      state(
+        'on',
+        style({
+          opacity: 1
+        })
+      ),
+      state(
+        'off',
+        style({
+          height: '0',
+          opacity: 0
+        })
+      ),
+      transition('on => off', animate('400ms')),
+      transition('off => on', animate('400ms')),
+    ]),
+  ],
 })
 export class FormFleetManagerComponent implements OnInit, OnDestroy {
   @Input() register = false;
@@ -40,6 +60,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public userSel: string;
   public completePiva = true;
   public completePiva2 = true;
+  public helper = 'off';
 
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
@@ -165,9 +186,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         }
       });
     } else {
-      this.subscription.push(this.fleetManagerService.insertFleetManager(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
-        () => { this.router.navigate(['../fleet-manager-manage']); },
-      ));
+      this.subscription.push(
+        this.fleetManagerService.insertFleetManager(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
+          () => { this.router.navigate(['../fleet-manager-manage']); },
+        ));
     }
   }
 

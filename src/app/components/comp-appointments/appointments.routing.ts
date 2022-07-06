@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'manage-appointment', component: AppointmentsComponent, canActivate: [AuthGuard],
-    data: { roles: [ROLES.MOVYON, ROLES.INSTALLER], hasAppointment: true, redirectAssign: 'manage-obu/assign-obu' }
+    data: { roles: [ROLES.MOVYON, ROLES.INSTALLER], hasAppointment: true, redirectAssign: 'manage-obu' }
   }
 ];
 

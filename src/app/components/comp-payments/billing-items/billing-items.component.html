@@ -9,7 +9,7 @@
                 <mat-card-content fxLayout="column" fxLayoutGap="20px">
                     <form [formGroup]="formGroup" style="margin-bottom: 20px;" fxLayout="column" fxLayoutGap="20px">
                         <div fxLayout="row wrap" fxLayoutGap="20px">
-                            <mat-form-field appearance="fill" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
+                            <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
                                 <mat-label>{{'COMMON.DATE.RANGE' | translate}}</mat-label>
                                 <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
                                     <input matStartDate formControlName="ctrlRangeStart">
@@ -19,7 +19,7 @@
                                 <mat-date-range-picker #picker></mat-date-range-picker>
                                 <mat-error>{{'COMMON.DATE.INVALID' | translate}}</mat-error>
                             </mat-form-field>
-                            <mat-form-field appearance="fill" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
+                            <mat-form-field appearance="outline" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
                                 <mat-label> {{'BILLING_ITEMS.STATUS' | translate}}</mat-label>
                                 <mat-select formControlName="ctrlBillingStatus" required>
                                     <mat-option *ngFor="let status of billingStatus;" [value]="status">

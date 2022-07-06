@@ -43,6 +43,7 @@
     "ACCOUNT": {
         "PROFILE": "Profilo",
         "LOGOUT": "Esci",
+        "LANG": "Cambia lingua",
         "DARK": "Tema scuro",
         "OLD-PASSWORD": "Inserisci la vecchia password",
         "NEW-PASSWORD": "Inserisci la nuova password",
@@ -146,7 +147,7 @@
         "VALID_DOCUMENTS": "Ricezione documenti cartacei",
         "VALID_AT": "Validato il ",
         "reqForm": "Modulo adesione",
-        "idDoc": "Carta d'intentità",
+        "idDoc": "Carta d'identità",
         "comReg": "Visura camerale",
         "UPLOAD_FILE": "Carica modulo",
         "CHANGE_FILE": "Modifica modulo",
@@ -393,8 +394,7 @@
     "REPAIR-SHOP": {
         "TITLE": "Per l'installazione delle On Board Unit è possibile rivolgersi ai seguenti partner di Movyon. \nL'installazione avverrà in luogo e data da concordare tra le parti e nella maniera più conveniente possibile per il Fleet Manager.",
         "TELEPHON": "Telefono",
-        "RANGE": "(dal lunedì al venerdì dalle ore ",
-        "AT": "alle ore "
+        "RANGE": "dal lunedì al venerdì"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",
@@ -497,7 +497,8 @@
         "driver": {
             "notfound": "Driver non trovato",
             "delete": "Errore nella cancellazione driver",
-            "insert": "Errore nell'inserimento driver"
+            "insert": "Errore nell'inserimento driver",
+            "null": "Informazioni driver mancanti"
         },
         "fleetmanager": {
             "insert": "Non è possibile inserire il fleet manager",
@@ -506,7 +507,8 @@
             "delete": "Non è possibile cancellare un fleet manager con veicoli associati",
             "company": "Ragione sociale duplicata",
             "piva": "P.IVA mancante",
-            "fc": "Codice fiscale mancante"
+            "fc": "Codice fiscale mancante",
+            "cc": "Il contract code inserito è già esistente"
         },
         "vehicle": {
             "update": "Aggiornamento dei dati del veicolo fallito",
@@ -610,7 +612,7 @@
             "ERR_NO_OBU_MANAGER_FOR_BUS": "INES: Gestore OBU non associato alla targa inserita",
             "ERR_NO_OBU_FOUND_WITH_PLATE": "INES: Nessun OBU trovato per la targa fornita",
             "ERR_TARIFFA_NOT_VALID": "INES: Tariffa non valida per la targa data",
-            "ERR_BUS_NOT_PREAUTORIZZATO ": "INES: Il bus non possiede la preautorizzazione richiesta",
+            "ERR_BUS_NOT_PREAUTORIZZATO": "INES: Il bus non possiede la preautorizzazione richiesta",
             "ERR_NO_PLATE_FOUND": "INES: Nessuna targa trovata per i dati forniti",
             "MSG_OBU_INSERT_SUCCESSFUL": "INES: Operazione di inserimento OBU effettuata con successo",
             "MSG_OBU_UPDATE_SUCCESSFUL": "INES: Operazione di aggiornamento OBU effettuata con successo",

@@ -1,26 +1,23 @@
-<mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'MENU.Repair-shop' | translate}}</mat-card-title>
-    <mat-card-content fxLayout="row" fxLayoutAlign="center">
-        <div style="white-space: pre-wrap;">{{'REPAIR-SHOP.TITLE' | translate}}</div>
-    </mat-card-content>
-</mat-card>
-<mat-card *ngFor="let repairShop of repairShops">
-    <mat-card-content>
-        <div>
-            <b>{{repairShop.nameShop}}</b><br>
-            E-mail: {{repairShop.mail}}<br>
-            {{'REPAIR-SHOP.TELEPHON' | translate}}: {{repairShop.mobileNumber}}
-            <span *ngIf="repairShop.contactRangeStart">
-                {{'REPAIR-SHOP.RANGE' | translate}}{{repairShop.contactRangeStart}}
-                {{'REPAIR-SHOP.AT' | translate}}{{repairShop.contactRangeEnd}})
-            </span>
-        </div>
-    </mat-card-content>
-</mat-card>
-
-<!-- <mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="start">{{'MENU.Repair-shop' | translate}}</mat-card-title>
-    <mat-card-content fxLayout="row" fxLayoutAlign="center">
-        <div style="white-space: pre-wrap;">{{'REPAIR-SHOP.TITLE' | translate}}</div>
-    </mat-card-content>
-</mat-card> -->
+<div fxLayout="column" fxFlexOffset="10">
+    <mat-card-title>{{'MENU.Repair-shop' | translate}}</mat-card-title>
+    <mat-card style="border: 3px solid #1C3775; border-radius: 10px;">
+        <mat-card-content>
+            <div style="white-space: pre-wrap;">{{'REPAIR-SHOP.TITLE' | translate}}</div>
+        </mat-card-content>
+    </mat-card>
+    <div fxLayout="row wrap" *ngFor="let repairShop of repairShops">
+        <mat-card style="background-color: #91D6AC;" fxFlex="60">
+            <mat-card-content>
+                <b>{{repairShop.nameShop}}</b><br>
+                E-mail: {{repairShop.mail}}<br>
+                {{'REPAIR-SHOP.TELEPHON' | translate}}: {{repairShop.mobileNumber}}
+            </mat-card-content>
+        </mat-card>
+        <mat-card style="background-color: #E89CAE;" fxFlex="30">
+            <mat-card-content *ngIf="repairShop.contactRangeStart">
+                {{'REPAIR-SHOP.RANGE' | translate}}<br>
+                {{repairShop.contactRangeStart}} - {{repairShop.contactRangeEnd}}
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

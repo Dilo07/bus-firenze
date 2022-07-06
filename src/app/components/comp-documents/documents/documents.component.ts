@@ -7,10 +7,21 @@ import { Modules } from '../../domain/bus-firenze-domain';
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
-  styles: [
-  ]
+  styles: [`
+  .mat-grid-tile .mat-figure {
+   justify-content: flex-start !important ;
+   align-items: flex-start !important;
+}
+  `]
 })
 export class DocumentsComponent implements OnDestroy {
+  public settingsGrid = [
+    { col: 2, row: 1, color: '#91D6AC' },
+    { col: 2, row: 1, color: '#E4F1F5' },
+    { col: 1, row: 1, color: '#E4F1F5' },
+    { col: 1, row: 1, color: '#E89CAE' },
+    { col: 2, row: 1, color: '#91D6AC' }
+  ];
   private subscription: Subscription[] = [];
 
   constructor(

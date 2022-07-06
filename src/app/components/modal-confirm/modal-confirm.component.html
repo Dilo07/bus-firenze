@@ -15,7 +15,7 @@
 </div>
 <ng-template #valid>
     <div fxLayout="column" fxLayoutAlign="center">
-        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxLayoutAlign="center">
+        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxLayoutAlign="center">
             <mat-label>{{'FLEET-MANAGER.CONTRACT_CODE' | translate}}</mat-label>
             <input matInput type="text" [formControl]="contractCode" maxlength="7" required autocomplete="off">
             <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>

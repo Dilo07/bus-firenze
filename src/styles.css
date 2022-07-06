@@ -1,7 +1,13 @@
 /* app */
 
 html, body {
-    height: 100% !important
+    height: 100% !important;
+}
+
+.white-button {
+    background: #FFFFFF;
+    border-radius: 20px !important;
+    color: #1C3775;
 }
 
 mat-card-title {

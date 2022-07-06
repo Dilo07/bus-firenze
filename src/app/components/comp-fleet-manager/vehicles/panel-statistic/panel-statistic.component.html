@@ -36,7 +36,7 @@
         <div fxLayout="row wrap" fxLayoutAlign="center">
             <app-trip-statistic [vehicleStatTrip]="tripStat" [viewOuter]="viewOuter"></app-trip-statistic>
             <form [formGroup]="formGroup">
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
                     <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
                         <input matStartDate formControlName="start">

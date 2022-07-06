@@ -1,15 +1,17 @@
 <mat-card>
-	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
 	<mat-card-content>
 		<app-view-file [file]="src"></app-view-file>
-		<div fxLayout="column" fxLayoutGap="20px">
+		<div fxLayout="row wrap" fxLayoutAlign="space-between">
+			<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
 			<span *ngIf="isManageFleet">
 				<button mat-button class="actionButtons" [routerLink]="['form-Fleet']">
 					{{'FLEET-MANAGER.NEW' | translate}}
 				</button>
 			</span>
+		</div>
+		<div fxLayout="column" fxLayoutGap="20px">
 			<form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
-				<mat-form-field appearance="fill" fxFlex="30">
+				<mat-form-field appearance="outline" fxFlex="30">
 					<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
 					<input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
 				</mat-form-field>
@@ -119,7 +121,7 @@
 						<mat-cell *matCellDef="let element">
 							<span *ngIf="isManageFleet">
 								<button mat-icon-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
-									<mat-icon style="color: #0066CC;">more_vert</mat-icon>
+									<mat-icon style="color: #0066CC;">more_horiz</mat-icon>
 								</button>
 								<mat-menu #actionsMenuManage="matMenu">
 									<button *ngIf="!roleOpMovyon" mat-icon-button

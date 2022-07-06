@@ -20,7 +20,7 @@
                     Contratto: {{data.vehicle.contractType === contractType.BUY ? 'Acquisto' : 'Noleggio'}}</p>
             </ng-template> -->
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
                     <mat-label> {{'VEHICLE.LPN' | translate}}</mat-label>
                     <input *ngIf="!data.vehicle" matInput type="text" #input [value]="input.value.toUpperCase()"
                         formControlName="ctrlLpn" maxlength="20" autocomplete="off" required>
@@ -28,7 +28,7 @@
                         readonly>
                     <mat-error> {{'VEHICLE.INSERT LPN' | translate}}</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="40" fxFlex.gt-md="40">
                     <mat-label> {{'VEHICLE.LPN_NAT' | translate}}</mat-label>
                     <span *ngIf="!data.vehicle else readOnlyNat" fxLayout="row">
                         <mat-select formControlName="ctrlLpnNat" required>
@@ -56,7 +56,7 @@
                 </mat-form-field>
             </div>
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label> {{'VEHICLE.EURO-CLASS' | translate}}</mat-label>
                     <input matInput type="number" formControlName="ctrlEuroClass" max="999" min="1" autocomplete="off"
                         required>
@@ -67,7 +67,7 @@
                         {{'VEHICLE.ERROR_NEGATIVE' | translate}}
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label> {{'VEHICLE.AXIS' | translate}}</mat-label>
                     <input matInput type="number" formControlName="ctrlNumAxis" max="999999" min="1" autocomplete="off"
                         required>
@@ -76,7 +76,7 @@
                     <mat-error *ngIf="formGroup.controls.ctrlNumAxis.hasError('min')">
                         {{'VEHICLE.ERROR_NEGATIVE' | translate}}</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
                     <mat-label> {{'VEHICLE.WEIGHT' | translate}}</mat-label>
                     <input matInput type="number" formControlName="ctrlMaxWeight" max="999999" min="1"
                         autocomplete="off" required>

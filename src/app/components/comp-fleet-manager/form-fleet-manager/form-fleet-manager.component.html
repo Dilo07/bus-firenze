@@ -1,25 +1,32 @@
 <mat-card>
-    <mat-card-title *ngIf="!data && !register" fxLayout="row" fxLayoutAlign="center center">
-        {{'FLEET-MANAGER.MESSAGE_NEW' | translate}}</mat-card-title>
-    <mat-card-title *ngIf="data && !roleFleetManager" fxLayout="row" fxLayoutAlign="center center">
-        {{'FLEET-MANAGER.MESSAGE_EDIT' | translate}}</mat-card-title>
-    <mat-card-title *ngIf="data && roleFleetManager" fxLayout="row" fxLayoutAlign="center center">
-        {{'FLEET-MANAGER.MESSAGE_VIEW' | translate}}</mat-card-title>
-    <mat-card-title *ngIf="register" fxLayout="row" fxLayoutAlign="center center">
-        {{'FLEET-MANAGER.REGISTRATION' | translate}}
-    </mat-card-title>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-card-title *ngIf="!data && !register" fxFlexOffset="5">
+            {{'FLEET-MANAGER.MESSAGE_NEW' | translate}}</mat-card-title>
+        <mat-card-title *ngIf="data && !roleFleetManager" fxFlexOffset="5">
+            {{'FLEET-MANAGER.MESSAGE_EDIT' | translate}}</mat-card-title>
+        <mat-card-title *ngIf="data && roleFleetManager" fxFlexOffset="5">
+            {{'FLEET-MANAGER.MESSAGE_VIEW' | translate}}</mat-card-title>
+        <mat-card-title *ngIf="register" fxFlexOffset="5">
+            {{'FLEET-MANAGER.REGISTRATION' | translate}}
+        </mat-card-title>
+        <button mat-icon-button *ngIf="!data" (click)="helper = helper === 'on' ? 'off' : 'on'">
+            <mat-icon> {{helper === 'on' ? 'close' : 'help'}}</mat-icon>
+        </button>
+    </div>
+    <div [@slideInOut]="helper">
+        <app-expansion-info></app-expansion-info>
+    </div>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
-        <app-expansion-info *ngIf="!data"></app-expansion-info>
         <form [formGroup]="formGroup" fxLayout="column">
             <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
                     *ngIf="!roleFleetManager && !register">
                     <mat-label>{{'FLEET-MANAGER.CONTRACT_CODE' | translate}}</mat-label>
                     <input matInput type="text" formControlName="ctrlContractCode" required minlength="7" maxlength="7"
                         [readonly]="data?.name">
                     <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
                     *ngIf="!roleFleetManager && !register && data">
                     <mat-label>{{'FLEET-MANAGER.SAP_CODE' | translate}}</mat-label>
                     <input matInput type="text" formControlName="ctrlSapCode" readonly>
@@ -29,21 +36,21 @@
                 <mat-card-content>
                     <mat-card-title>{{'FLEET-MANAGER.PERSONREF' | translate}}</mat-card-title>
                     <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                             fxFlex.gt-md="30">
                             <mat-label>{{'FLEET-MANAGER.NAME' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlName" maxlength="40" required
                                 [readonly]="data && roleFleetManager">
                             <mat-error>{{'FLEET-MANAGER.INSERT_NAME' | translate}}</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                             fxFlex.gt-md="30">
                             <mat-label>{{'FLEET-MANAGER.SURNAME' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlSurname" maxlength="40" required
                                 [readonly]="data && roleFleetManager">
                             <mat-error>{{'FLEET-MANAGER.INSERT_SURNAME' | translate}}</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                             fxFlex.gt-md="30">
                             <mat-label>E-Mail</mat-label>
                             <input matInput type="text" formControlName="ctrlMail" maxlength="100" required
@@ -53,7 +60,7 @@
                         </mat-form-field>
                     </div>
                     <div fxLayout="row wrap" fxLayoutGap="20px">
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                             fxFlex.gt-md="30">
                             <mat-label>{{'FLEET-MANAGER.CELL' | translate}}</mat-label>
                             <input matInput type="text" ng2TelInput
@@ -72,7 +79,7 @@
                             </mat-icon>
                             <mat-error>{{'FLEET-MANAGER.INSERT_CELL' | translate}}</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                             fxFlex.gt-md="30">
                             <mat-label>{{'FLEET-MANAGER.OFFICE' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlOffice" maxlength="100"
@@ -82,7 +89,8 @@
                 </mat-card-content>
             </mat-card>
             <div fxLayout="row wrap" fxLayoutAlign="center">
-                <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="100"
+                    fxFlex.gt-md="100">
                     <mat-label>{{'FLEET-MANAGER.USERTYPE' | translate}}</mat-label>
                     <mat-select formControlName="ctrlUser" required
                         (selectionChange)="userSel=$event.value; formGroup.patchValue({ ctrlNat: 'IT' }); changeFormNat();">
@@ -98,7 +106,7 @@
                         {{'FLEET-MANAGER.DATA' | translate}} {{('USERTYPE.' + userSel) | translate}}
                     </mat-card-title>
                     <div fxLayout="row wrap" fxLayoutGap="20px">
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="10"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="10"
                             fxFlex.gt-md="10" *ngIf="userSel === fleetType.AZIENDA_PRIVATA">
                             <mat-label>{{'FLEET-MANAGER.NATIONALITY' | translate}}</mat-label>
                             <mat-select formControlName="ctrlNat" required (selectionChange)="changeFormNat()">
@@ -115,7 +123,7 @@
                                 </mat-select-trigger>
                             </mat-select>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
                             fxFlex.gt-md="25">
                             <mat-label>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlpIva" maxlength="11"
@@ -124,7 +132,7 @@
                             <mat-error> {{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
                             <mat-progress-bar mode="indeterminate" *ngIf="!completePiva"></mat-progress-bar>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
                             fxFlex.gt-md="25" [style.visibility]="isEuropeNat ? '' : 'hidden'">
                             <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlCF" (focusout)="pivaOrFcValidator()"
@@ -139,7 +147,7 @@
                             <mat-error>{{'FLEET-MANAGER.INSERT_FISCALCODE' | translate}}</mat-error>
                             <mat-progress-bar mode="indeterminate" *ngIf="!completePiva2"></mat-progress-bar>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
                             fxFlex.gt-md="25"
                             *ngIf="(userSel === fleetType.AZIENDA_PRIVATA || userSel === fleetType.PUBBLICA_AMM) && formGroup.get('ctrlNat').value === 'IT'">
                             <mat-label>{{(userSel === fleetType.AZIENDA_PRIVATA ? 'FLEET-MANAGER.DESTCODE' :
@@ -154,35 +162,35 @@
                         </mat-form-field>
                     </div>
                     <div fxLayout="row wrap" fxLayoutGap="20px">
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
                             fxFlex.gt-md="18">
                             <mat-label>{{'FLEET-MANAGER.COMPANY_NAME' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlCompanyName" maxlength="40" required
                                 [readonly]="data && roleFleetManager">
                             <mat-error>{{'FLEET-MANAGER.INSERT_COMPANY_NAME' | translate}}</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
                             fxFlex.gt-md="18">
                             <mat-label>{{'FLEET-MANAGER.ADDRESS' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlAddress" maxlength="60" required
                                 [readonly]="data && roleFleetManager">
                             <mat-error>{{'FLEET-MANAGER.INSERT_ADDRESS' | translate}}</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
                             fxFlex.gt-md="18">
                             <mat-label>{{'FLEET-MANAGER.CITY' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlCity" maxlength="35" required
                                 [readonly]="data && roleFleetManager">
                             <mat-error>{{'FLEET-MANAGER.INSERT_CITY' | translate}}</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
                             fxFlex.gt-md="18" *ngIf="formGroup.get('ctrlNat').value === 'IT'">
                             <mat-label>{{'FLEET-MANAGER.DISTRICT' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlDistrict" required
                                 [readonly]="data && roleFleetManager">
                             <mat-error>{{'FLEET-MANAGER.INSERT_DISTRICT' | translate}}</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
+                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
                             fxFlex.gt-md="18" [style.visibility]="isEuropeNat ? '' : 'hidden'">
                             <mat-label>{{'FLEET-MANAGER.POSTAL_CODE' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlCAP" maxlength="10"

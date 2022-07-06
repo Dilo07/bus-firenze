@@ -1,10 +1,6 @@
-<mat-accordion>
-    <mat-expansion-panel [expanded]="panelOpenState">
-        <mat-expansion-panel-header [collapsedHeight]="'50px'" [expandedHeight]="'50px'">
-            <mat-panel-description>
-                {{'FLEET-MANAGER.FORM-INFO' | translate}}
-            </mat-panel-description>
-        </mat-expansion-panel-header>
+<mat-card style="background-color: #E4F1F5;">
+    <h5 style="padding-left: 20px; padding-top: 20px;"><b>{{'FLEET-MANAGER.FORM-INFO' | translate}}</b></h5>
+    <mat-card-content>
         <mat-list role="list">
             <mat-list-item role="listitem">
                 <p mat-line>1. {{'FLEET-MANAGER.STEP-1' | translate}}
@@ -26,5 +22,5 @@
                 </p>
             </mat-list-item>
         </mat-list>
-    </mat-expansion-panel>
-</mat-accordion>
+    </mat-card-content>
+</mat-card>

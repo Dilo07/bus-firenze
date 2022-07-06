@@ -1,9 +1,14 @@
-<mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'MENU.Documents' | translate}}</mat-card-title>
-    <mat-card-content>
-        <div *ngFor="let document of modules" fxLayout="row" fxLayoutAlign="start">
-            <div>{{document.name}}</div>
-            <button mat-icon-button (click)="download(document.path)"><mat-icon matTooltip="download">download</mat-icon></button>
-        </div>
-    </mat-card-content>
-</mat-card>
+<div fxLayout="column" fxFlexOffset="10" style="width: 60%;">
+    <mat-card-title>{{'MENU.Documents' | translate}}</mat-card-title>
+    <mat-grid-list cols="4" rowHeight="200px">
+        <mat-grid-tile *ngFor="let document of modules; let i = index" [colspan]="settingsGrid[i].col"
+            [rowspan]="settingsGrid[i].row">
+            <mat-card [style.background]="settingsGrid[i].color">
+                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                    <p>{{document.name}}</p>
+                    <button mat-button class="white-button" (click)="download(document.path)">{{'FLEET-MANAGER.DOWNLOAD_TEMPLATE' | translate}}</button>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

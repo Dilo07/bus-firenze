@@ -43,6 +43,7 @@
     "ACCOUNT": {
         "PROFILE": "Profile",
         "LOGOUT": "Log Out",
+        "LANG": "Change language",
         "DARK": "Dark theme",
         "OLD-PASSWORD": "Insert old password",
         "NEW-PASSWORD": "Insert new password",
@@ -392,8 +393,7 @@
     "REPAIR-SHOP": {
         "TITLE": "For On Board Unit installation it is possible to contact the following Movyon partners. \nThe installation will take place at a place and date to be agreed between the parties and in the most convenient way possible for the Fleet Manager.",
         "TELEPHON": "Telephone",
-        "RANGE": "(Monday to Friday from ",
-        "AT": "to "
+        "RANGE": "Monday to Friday"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",
@@ -496,7 +496,8 @@
         "driver": {
             "notfound": "Driver not found",
             "delete": "Error on deleting driver",
-            "insert": "Error on insert driver"
+            "insert": "Error on insert driver",
+            "null": "Driver informations missing"
         },
         "fleetmanager": {
             "insert": "Failed to insert a fleet manager",
@@ -505,7 +506,8 @@
             "delete": "Cannot delete a fleet manager with assigned vehicles",
             "company": "duplicate company identity",
             "piva": "missing p.iva",
-            "fc": "missing fiscal code"
+            "fc": "missing fiscal code",
+            "cc": "The entered contract code already exists"
         },
         "vehicle": {
             "update": "Failed to update the vehicle",
@@ -609,7 +611,7 @@
             "ERR_NO_OBU_MANAGER_FOR_BUS": "INES: Manage OBU not associated for inserted plate",
             "ERR_NO_OBU_FOUND_WITH_PLATE": "INES: Nobody OBU found for supplied plate",
             "ERR_TARIFFA_NOT_VALID": "INES: Invalid ammount for this plate",
-            "ERR_BUS_NOT_PREAUTORIZZATO ": "INES: The bus hasn't the request preautorization",
+            "ERR_BUS_NOT_PREAUTORIZZATO": "INES: The bus hasn't the request preautorization",
             "ERR_NO_PLATE_FOUND": "INES: Nobody plate found for this data",
             "MSG_OBU_INSERT_SUCCESSFUL": "INES: Insert OBU operation completed successfully",
             "MSG_OBU_UPDATE_SUCCESSFUL": "INES: Update OBU operation completed successfully",

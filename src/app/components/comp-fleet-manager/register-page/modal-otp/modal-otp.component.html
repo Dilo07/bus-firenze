@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <p>{{'FLEET-MANAGER.REGISTRATION_SMS' | translate}} {{data.cell}}</p>
     <div fxLayout="row wrap" fxLayoutGap="20px">
-        <mat-form-field appearance="fill" fxFlex="100">
+        <mat-form-field appearance="outline" fxFlex="100">
             <mat-label>{{'FLEET-MANAGER.REGISTRATION_OTP' | translate}}</mat-label>
             <input matInput type="password" [(ngModel)]="otp" maxlength="6" [readonly]="readonly" (ngModelChange)="onChangeEvent()">
         </mat-form-field>
