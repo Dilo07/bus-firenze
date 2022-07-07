@@ -5,9 +5,25 @@
     },
     "WELCOME": {
         "TITLE": "Welcome ",
+        "TITLE-FLEET": "Manage fleet manager",
+        "TITLE-OBU": "Assign obu",
+        "TITLE-TICKET": "Add ticket",
+        "TITLE-MANAGE-TICKET": "Manage ticket",
+        "TITLE-VALID-FLEET": "Fleet Manager validation",
+        "TITLE-VALID-VEHICLE": "Vehicles validation",
+        "TITLE-VEHICLE": "Vehicles",
+        "TITLE-DOCUMENTS": "Documents",
+        "TITLE-APPOINTMENTS": "Add appointment",
+        "VALID-FLEET": "Check and approve a Fleet Manager that performed the self-registration procedure.",
+        "VALID-VEHICLE": "Check and approve vehicles inserted by Fleet Manager.",
+        "VEHICLE": "View main and statistichal data of your vehicles. Assign a driver to a vehicle. ",
         "FLEET-MANAGER": "Insert a new Fleet Manager user or change dat of an existing Fleet Manager.",
         "ADD-OBU": "Assign an OBU to a vehicle belonging to a Fleet Manager; bail was previously paid",
-        "ADD-TICKET": "Assign a Ticket sold by SaS to a vehicle belonging to a Fleet Manager with installed OBU."
+        "ADD-TICKET": "Assign a Ticket sold by SaS to a vehicle belonging to a Fleet Manager with installed OBU.",
+        "MANAGE-TICKET": "Manage Tickets sold by SaS assigned to your vehicles.",
+        "DOCUMENTS": "Check the inspection documents of vehicles. Perform the inspection procedure on an installed OBU.",
+        "APPOINTMENTS": "Insert a new appointment to install an OBU. View main data of Fleet Manager owning the vehicles on which OBUs should be installed.",
+        "GO": "Go"
     },
     "MENU": {
         "Dashboard": "Dashboard",

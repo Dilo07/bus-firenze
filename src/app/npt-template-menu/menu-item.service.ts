@@ -84,7 +84,7 @@ const MENUITEMS = [
   },
   {
     state: 'documents', name: 'Documents', type: 'link', icon: 'assignment',
-    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG]
+    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER, ROLES.FLEETMNG]
   }
 ];
 

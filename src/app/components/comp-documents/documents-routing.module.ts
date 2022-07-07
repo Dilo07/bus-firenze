@@ -5,7 +5,10 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DocumentsComponent } from './documents/documents.component';
 
 const routes: Routes = [
-  { path: '', component: DocumentsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } }
+  {
+    path: '', component: DocumentsComponent,
+    canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER, ROLES.FLEETMNG] }
+  }
 ];
 
 @NgModule({

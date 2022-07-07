@@ -9,12 +9,12 @@
     </div>
 </div> -->
 <div fxLayout="column" fxFlexOffset="5" fxFlex="100">
-    <mat-card-title>{{'WELCOME.TITLE' | translate}} {{user.firstName | titlecase}}</mat-card-title>
+    <mat-card-title>{{'WELCOME.TITLE' | translate}} {{user?.firstName | titlecase}}</mat-card-title>
     <div [ngSwitch]="role">
         <div *ngSwitchCase="roles.MOVYON"><app-admin-cards></app-admin-cards></div>
-        <div *ngSwitchCase="roles.OPER_MOVYON"><app-admin-cards></app-admin-cards></div>
-        <div *ngSwitchCase="roles.FLEETMNG"><app-admin-cards></app-admin-cards></div>
-        <div *ngSwitchCase="roles.INSTALLER"><app-admin-cards></app-admin-cards></div>
+        <div *ngSwitchCase="roles.OPER_MOVYON"><app-operator-cards></app-operator-cards></div>
+        <div *ngSwitchCase="roles.FLEETMNG"><app-fleet-cards></app-fleet-cards></div>
+        <div *ngSwitchCase="roles.INSTALLER"><app-installer-cards></app-installer-cards></div>
         <div *ngSwitchDefault>no role found</div>
     </div>
 </div>
