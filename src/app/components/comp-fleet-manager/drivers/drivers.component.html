@@ -12,13 +12,13 @@
 				</button>
 			</div>
 			<form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
-				<mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+				<mat-form-field appearance="outline" fxFlex="100">
 					<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
 					<input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
+					<button matSuffix mat-icon-button (click)="getDrivers()">
+						<mat-icon>search</mat-icon>
+					</button>
 				</mat-form-field>
-				<button mat-icon-button (click)="getDrivers()">
-					<mat-icon matPrefix>search</mat-icon>
-				</button>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<div class="mat-elevation-z8 example-container">
