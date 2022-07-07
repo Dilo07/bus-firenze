@@ -4,7 +4,10 @@
         "IT": "Italian"
     },
     "WELCOME": {
-        "TITLE": "Welcome on APP"
+        "TITLE": "Welcome ",
+        "FLEET-MANAGER": "Insert a new Fleet Manager user or change dat of an existing Fleet Manager.",
+        "ADD-OBU": "Assign an OBU to a vehicle belonging to a Fleet Manager; bail was previously paid",
+        "ADD-TICKET": "Assign a Ticket sold by SaS to a vehicle belonging to a Fleet Manager with installed OBU."
     },
     "MENU": {
         "Dashboard": "Dashboard",
