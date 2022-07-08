@@ -3,7 +3,7 @@
 		<app-view-file [file]="src"></app-view-file>
 		<div fxLayout="column" fxLayoutGap="20px">
 			<div fxLayout="row wrap" fxLayoutAlign="space-between">
-				<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
+				<mat-card-title fxLayout="row">Fleet Manager</mat-card-title>
 				<span *ngIf="isManageFleet">
 					<button mat-button class="actionButtons" [routerLink]="['form-Fleet']">
 						{{'FLEET-MANAGER.NEW' | translate}}

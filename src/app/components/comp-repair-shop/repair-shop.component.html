@@ -6,14 +6,16 @@
         </mat-card-content>
     </mat-card>
     <div fxLayout="row wrap" *ngFor="let repairShop of repairShops">
-        <mat-card style="background-color: #91D6AC;" fxFlex="60">
+        <mat-card style="background-color: #91D6AC;" fxFlex.gt-lg="60" fxFlex.gt-md="60" fxFlex.gt-xs="100"
+            fxFlex="100">
             <mat-card-content>
                 <b>{{repairShop.nameShop}}</b><br>
                 E-mail: {{repairShop.mail}}<br>
                 {{'REPAIR-SHOP.TELEPHON' | translate}}: {{repairShop.mobileNumber}}
             </mat-card-content>
         </mat-card>
-        <mat-card style="background-color: #E89CAE;" fxFlex="30">
+        <mat-card style="background-color: #E89CAE;" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100"
+            fxFlex="100">
             <mat-card-content *ngIf="repairShop.contactRangeStart">
                 {{'REPAIR-SHOP.RANGE' | translate}}<br>
                 {{repairShop.contactRangeStart}} - {{repairShop.contactRangeEnd}}

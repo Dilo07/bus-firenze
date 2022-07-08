@@ -27,7 +27,7 @@ export class RealTimeComponent {
   public stop = true;
   public actualTime = RefreshOption.time5minutes;
   public times: RefreshInterface[] = TIMEREFRESH;
-  public layersPopup = [FirenzeMapUtils.LayerEnum.POINT_REAL_TIME];
+  public layersPopup = [FirenzeMapUtils.layerEnum.POINT_REAL_TIME];
 
   private subscription: Subscription[] = [];
   private geometry: Geometry[] = [];
@@ -50,7 +50,7 @@ export class RealTimeComponent {
   }
 
   public getTrip(): void {
-    this.mapChild.removeLayers([FirenzeMapUtils.LayerEnum.LINE_REAL_TIME, FirenzeMapUtils.LayerEnum.POINT_REAL_TIME]);
+    this.mapChild.removeLayers([FirenzeMapUtils.layerEnum.LINE_REAL_TIME, FirenzeMapUtils.layerEnum.POINT_REAL_TIME]);
 
     this.subscription.push(this.liveStreamService.getStreamLive(this.fleetManager?.id).subscribe(data => {
       this.vehicleTrip = data;
@@ -97,17 +97,17 @@ export class RealTimeComponent {
     this.geometry.forEach(geom => {
       geom.coordinates.forEach(cord => {
         const geoJson = this.createGeoJSON({ coordinates: [cord] });
-        this.mapChild.viewGeometry(geoJson, FirenzeMapUtils.LayerEnum.CHARGE_POLYGON, FirenzeMapUtils.Style.POLYGON_SELECTOR);
+        this.mapChild.viewGeometry(geoJson, FirenzeMapUtils.layerEnum.CHARGE_POLYGON, FirenzeMapUtils.style.POLYGON_SELECTOR);
       });
     });
-    this.mapChild.zoomToLayer(FirenzeMapUtils.LayerEnum.CHARGE_POLYGON, 12);
+    this.mapChild.zoomToLayer(FirenzeMapUtils.layerEnum.CHARGE_POLYGON, 12);
   }
 
 
   private drawLine(): void {
     this.vehicleTrip.forEach(trip => {
       const style = this.getStyle(trip);
-      this.mapChild.drawLine([trip.shape.points], FirenzeMapUtils.LayerEnum.LINE_REAL_TIME, style);
+      this.mapChild.drawLine([trip.shape.points], FirenzeMapUtils.layerEnum.LINE_REAL_TIME, style);
     });
   }
 
@@ -115,11 +115,11 @@ export class RealTimeComponent {
     const now = moment.now();
     const nowPlus15 = moment(now).add(15, 'minutes').valueOf();
     if (!trip.ticketNumber || trip.ticketExpiresAt < now) {
-      return FirenzeMapUtils.Style.SECTION_LINKS_ERROR;
+      return FirenzeMapUtils.style.SECTION_LINKS_ERROR;
     } else if (trip.ticketExpiresAt > now && trip.ticketExpiresAt < nowPlus15) {
-      return FirenzeMapUtils.Style.SECTION_LINKS_WARNING;
+      return FirenzeMapUtils.style.SECTION_LINKS_WARNING;
     } else {
-      return FirenzeMapUtils.Style.SECTION_LINKS;
+      return FirenzeMapUtils.style.SECTION_LINKS;
     }
   }
 
@@ -131,7 +131,7 @@ export class RealTimeComponent {
         const rotation = this.calculateRotation(trip);
         const text = this.generateText(trip);
         this.mapChild.drawPoint([trip.shape.points.coordinates[length - 1].x, trip.shape.points.coordinates[length - 1].y],
-          FirenzeMapUtils.LayerEnum.POINT_REAL_TIME, FirenzeMapUtils.Style.ARROW_BLUE(rotation), text, true);
+          FirenzeMapUtils.layerEnum.POINT_REAL_TIME, FirenzeMapUtils.style.ARROW_BLUE(rotation), text, true);
       }
     });
   }

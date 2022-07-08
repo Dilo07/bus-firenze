@@ -1,19 +1,19 @@
 <mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'MENU.Deposit' | translate}}</mat-card-title>
     <mat-card-content>
+        <mat-card-title fxLayout="row">{{'MENU.Deposit' | translate}}</mat-card-title>
         <app-view-file [file]="src"></app-view-file>
         <div *ngIf="viewFleetTable else vehicleTicket">
             <app-table-fleet (callManageTicket)="getVehicle($event)"></app-table-fleet>
         </div>
         <ng-template #vehicleTicket>
             <div fxLayout="column" fxLayoutGap="20px">
-                <div style="margin-bottom: 20px;" fxLayout="row" fxLayoutGap="20px">
-                    <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
-                        {{'FLEET-MANAGER.BACK' | translate}}
-                    </button>
+                <div style="margin-bottom: 20px;" fxLayout="row wrap" fxLayoutAlign="end" fxLayoutGap="20px">
                     <mat-slide-toggle [(ngModel)]="viewAll" (change)="getVehicle()">
                         {{ (viewAll ? 'VEHICLE.WITHDOC' : 'VEHICLE.NEEDDOC') | translate}}
                     </mat-slide-toggle>
+                    <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
+                        {{'FLEET-MANAGER.BACK' | translate}}
+                    </button>
                 </div>
                 <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
                 <div class="mat-elevation-z8 example-container">

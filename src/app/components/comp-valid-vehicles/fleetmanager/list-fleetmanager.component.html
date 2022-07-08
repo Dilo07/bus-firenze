@@ -1,6 +1,6 @@
 <mat-card>
-	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
-	<mat-card-content>
+	<mat-card-content fxLayout="column" fxLayoutGap="20px">
+		<mat-card-title>{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 		<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 		<div class="mat-elevation-z8 example-container">
 			<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows>

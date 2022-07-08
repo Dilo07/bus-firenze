@@ -5,10 +5,10 @@ import { MapUtils } from '@npt/npt-map';
 // COLORS
 
 export const COLOR = {
-  LIGHT_GREEN: '#91D6AC',
+  LIGHT_GREEN: 'rgb(145, 214, 172, 0.7)',
   LIGHT_BLUE: 'rgb(102, 204, 255, 0.8)',
-  GREY: '#BBBCBC',
-  RED: '#E89CAE',
+  GREY: 'rgb(187, 188, 188, 0.8)',
+  RED: 'rgb(232, 156, 174, 0.8)',
   YELLOW: 'rgb(255, 255, 0, 0.7)',
   BLUE: 'rgb(0, 0, 255, 0.8)',
   BLACK: 'rgba(0, 0, 0, 1)',
