@@ -9,6 +9,7 @@ import { AdminCardsComponent } from './admin-cards/admin-cards.component';
 import { OperatorCardsComponent } from './operator-cards/operator-cards.component';
 import { FleetCardsComponent } from './fleet-cards/fleet-cards.component';
 import { InstallerCardsComponent } from './installer-cards/installer-cards.component';
+import { DriverCardsComponent } from './driver-cards/driver-cards.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { InstallerCardsComponent } from './installer-cards/installer-cards.compo
     AdminCardsComponent,
     OperatorCardsComponent,
     FleetCardsComponent,
-    InstallerCardsComponent
+    InstallerCardsComponent,
+    DriverCardsComponent
   ],
   imports: [
     CommonModule,

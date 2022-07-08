@@ -7,7 +7,7 @@ import { DocumentsComponent } from './documents/documents.component';
 const routes: Routes = [
   {
     path: '', component: DocumentsComponent,
-    canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER, ROLES.FLEETMNG] }
+    canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] }
   }
 ];
 

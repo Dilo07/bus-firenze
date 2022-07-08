@@ -13,7 +13,7 @@
         <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-OBU' | translate}}</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
             <p class="font-14">{{'WELCOME.ADD-OBU' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../manage-obu']">
+            <button mat-button class="white-button" [routerLink]="['../manage-obu', {viewNotAssociated: true}]">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>

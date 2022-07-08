@@ -1,28 +1,28 @@
 <div fxLayout="row wrap">
     <mat-card style="background-color: #91D6AC; padding: 20px !important;" fxFlex.gt-lg="28" fxFlex.gt-md="28"
         fxFlex.gt-xs="100" fxFlex="100">
-        <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-OBU' | translate}}</mat-card-title>
+        <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-VEHICLE' | translate}}</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
-            <p class="font-14">{{'WELCOME.ADD-OBU' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../manage-obu', {viewNotAssociated: true}]">
+            <p class="font-14">{{'WELCOME.VEHICLE-DRIVER' | translate}}</p>
+            <button mat-button class="white-button" [routerLink]="['../user-driver/association-driver']">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>
     <mat-card style="background-color: #E4F1F5; padding: 20px !important;" fxFlex.gt-lg="28" fxFlex.gt-md="28"
         fxFlex.gt-xs="100" fxFlex="100">
-        <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-TEST' | translate}}</mat-card-title>
+        <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-TICKET' | translate}}</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
-            <p class="font-14">{{'WELCOME.TEST' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../manage-obu']">
+            <p class="font-14">{{'WELCOME.ADD-TICKET' | translate}}</p>
+            <button mat-button class="white-button" [routerLink]="['../ticket/add-ticket']">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>
     <mat-card style="background-color: #E89CAE; padding: 20px !important;" fxFlex.gt-lg="28" fxFlex.gt-md="28"
         fxFlex.gt-xs="100" fxFlex="100">
-        <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-APPOINTMENTS' | translate}}</mat-card-title>
+        <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-MANAGE-TICKET' | translate}}</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
-            <p class="font-14">{{'WELCOME.APPOINTMENTS' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../appointment/add-appointment']">
+            <p class="font-14">{{'WELCOME.MANAGE-TICKET' | translate}}</p>
+            <button mat-button class="white-button" [routerLink]="['../ticket/manage-ticket']">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>

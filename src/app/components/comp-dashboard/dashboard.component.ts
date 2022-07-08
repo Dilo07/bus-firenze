@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
       if (res.includes(ROLES.OPER_MOVYON)) { this.role = ROLES.OPER_MOVYON; }
       if (res.includes(ROLES.FLEETMNG)) { this.role = ROLES.FLEETMNG; }
       if (res.includes(ROLES.INSTALLER)) { this.role = ROLES.INSTALLER; }
+      if (res.includes(ROLES.DRIVER)) { this.role = ROLES.DRIVER; }
     });
   }
 }
