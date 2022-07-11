@@ -10,12 +10,14 @@ import { TicketRoutingModule } from './ticket.routing';
 import { ModalTestTicketComponent } from './modal-test-ticket/modal-test-ticket.component';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
+import { PageTicketComponent } from './page-ticket.component';
 
 @NgModule({
   declarations: [
     AddTicketComponent,
     ManageTicketComponent,
-    ModalTestTicketComponent
+    ModalTestTicketComponent,
+    PageTicketComponent
   ],
   imports: [
     CommonModule,

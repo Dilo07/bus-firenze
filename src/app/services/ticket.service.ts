@@ -10,11 +10,11 @@ import { ActiveTicket } from './mokup/getTicket';
   providedIn: 'root'
 })
 export class TicketService {
+  private apiUrl = this.url + '/api/fleet';
+  private activeVehicle = ActiveTicket;
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
-  private apiUrl = this.url + '/api/fleet';
-  private activeVehicle = ActiveTicket;
 
   getVehicleNoTicket(isDriver: boolean, fleetManagerId?: number): Observable<Ticket[]> {
     let url = '';
