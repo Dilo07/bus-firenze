@@ -22,13 +22,6 @@ const SUBMENU_ROUTES = [
   { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
   { state: 'drivers', name: 'Drivers', icon: 'airline_seat_recline_normal', roles: [ROLES.FLEETMNG] },
   { state: 'anagraphic-fleet', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.FLEETMNG] },
-  /* { state: 'assign-obu', name: 'Assign-obu', icon: 'new_label', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'change-obu', name: 'Change-obu', icon: 'assignment_return', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'remove-obu', name: 'Remove-obu', icon: 'code_off', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER] },
-  { state: 'change-plate', name: 'Change-plate', icon: 'assignment_return', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'vehicle-document', name: 'Vehicle-document', icon: 'description', roles: [ROLES.MOVYON, ROLES.INSTALLER] }, */
-  { state: 'add-appointment', name: 'Add-appointment', icon: 'add', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'manage-appointment', name: 'Manage-appointment', icon: 'manage_search', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'anagraphic-driver', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.DRIVER] },
   { state: 'association-driver', name: 'Association-vehicles', icon: 'directions_car', roles: [ROLES.DRIVER] }
 ];
@@ -69,12 +62,12 @@ const MENUITEMS = [
     roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER]
   },
   {
-    state: 'appointment', name: 'Appointment', type: 'submenu', icon: 'contact_phone',
-    children: [SUBMENU_ROUTES[9], SUBMENU_ROUTES[10]], roles: [ROLES.MOVYON, ROLES.INSTALLER]
+    state: 'appointments', name: 'Appointment', type: 'link', icon: 'contact_phone',
+    roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
   {
     state: 'user-driver', name: 'User-Driver', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[11], SUBMENU_ROUTES[12],], roles: [ROLES.DRIVER]
+    children: [SUBMENU_ROUTES[9], SUBMENU_ROUTES[10]], roles: [ROLES.DRIVER]
   },
   {
     state: 'ticket', name: 'Ticket', type: 'link', icon: 'wysiwyg',

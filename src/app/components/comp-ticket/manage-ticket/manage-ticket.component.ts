@@ -18,6 +18,7 @@ import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket
   selector: 'app-manage-ticket',
   templateUrl: './manage-ticket.component.html',
   styles: [`
+  .example-container { margin: 10px; }
   @media(min-width: 1180px) {
     .mat-column-expandButton { max-width: 5%}
     .mat-column-ticketId { max-width: 15%;}

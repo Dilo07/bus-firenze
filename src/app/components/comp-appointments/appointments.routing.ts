@@ -6,12 +6,8 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 
 const routes: Routes = [
   {
-    path: 'add-appointment', component: AppointmentsComponent, canActivate: [AuthGuard],
-    data: { roles: [ROLES.MOVYON, ROLES.INSTALLER], hasAppointment: false }
-  },
-  {
-    path: 'manage-appointment', component: AppointmentsComponent, canActivate: [AuthGuard],
-    data: { roles: [ROLES.MOVYON, ROLES.INSTALLER], hasAppointment: true, redirectAssign: 'manage-obu' }
+    path: '', component: AppointmentsComponent, canActivate: [AuthGuard],
+    data: { roles: [ROLES.MOVYON, ROLES.INSTALLER], redirectAssign: 'manage-obu' }
   }
 ];
 

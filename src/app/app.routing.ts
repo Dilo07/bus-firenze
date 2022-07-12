@@ -52,7 +52,7 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER] }
   },
   {
-    path: 'appointment', // installer
+    path: 'appointments', // installer
     loadChildren: () => import('./components/comp-appointments/appointments.module').then(m => m.AppointmentsModule)
   },
   {
