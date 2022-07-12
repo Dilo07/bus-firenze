@@ -60,7 +60,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public userSel: string;
   public completePiva = true;
   public completePiva2 = true;
-  public helper = 'off';
+  public helper = 'on';
 
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
