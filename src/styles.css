@@ -147,3 +147,19 @@ mat-card {
 #errorVehicle {
     background-color: #E89CAE;
 }
+
+/* slide toogle  */
+
+.mat-slide-toggle-bar {
+    background-color: #91D6AC !important;
+    height: 20px !important;
+}
+
+.mat-slide-toggle-thumb {
+    background-color: white !important;
+    height: 20px !important;
+}
+
+.mat-slide-toggle-thumb-container{
+    top: 0px !important;
+}
