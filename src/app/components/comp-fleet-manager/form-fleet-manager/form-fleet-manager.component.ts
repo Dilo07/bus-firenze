@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +16,6 @@ import { euroNations, FLEETMNG_TYPE, worldNations } from '../../domain/bus-firen
 import { FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-form-fleet-manager',
@@ -60,7 +60,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public userSel: string;
   public completePiva = true;
   public completePiva2 = true;
-  public helper = 'on';
+  public helper: 'on' | 'off';
 
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
@@ -106,6 +106,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       this.userSel = this.data.companyType;
       const phoneNumber = parsePhoneNumber(this.formGroup.get('ctrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
+      this.helper = 'off';
     } else {
       this.formGroup = this.formBuilder.group({
         ctrlContractCode: [''],
@@ -130,6 +131,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ctrlConsent: [false, Validators.requiredTrue]
       });
       this.userSel = this.fleetType.AZIENDA_PRIVATA;
+      this.helper = 'on';
     }
     this.changeFormNat(true);
   }
