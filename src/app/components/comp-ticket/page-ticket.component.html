@@ -12,10 +12,10 @@
         </div>
         <ng-template #vehicleTicket>
             <mat-tab-group mat-align-tabs="center">
-                <mat-tab label="Aggiungi">
+                <mat-tab label="{{'TICKET.ADD' | translate}}">
                     <app-add-ticket [fleetManagerId]="fmId"></app-add-ticket>
                 </mat-tab>
-                <mat-tab label="Gestisci">
+                <mat-tab label="{{'TICKET.MANAGE' | translate}}">
                     <app-manage-ticket [fleetManagerId]="fmId"></app-manage-ticket>
                 </mat-tab>
             </mat-tab-group>

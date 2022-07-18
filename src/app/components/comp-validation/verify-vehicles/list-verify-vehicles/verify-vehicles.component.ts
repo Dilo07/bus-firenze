@@ -6,17 +6,17 @@ import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ValidVehicleService } from 'src/app/services/valid-vehicle.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DepositType, DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
-import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
+import { DepositType, DocumentVehicle, Vehicle } from '../../../domain/bus-firenze-domain';
+import { ModalConfirmComponent } from '../../../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-verify-vehicles',
   templateUrl: './verify-vehicles.component.html',
   styles: [`
   .mat-elevation-z8 {
-    width: 1000px;
+    width: 870px;
     background-color: white;
-    margin: 2px;
+    margin: 10px;
   }
   @media(min-width: 1180px) {
     .mat-column-id { max-width: 10%}
@@ -30,10 +30,12 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 })
 export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Input() idFleet: number;
+  @Input() disableViewPdf: boolean;
   @Output() public callRefreshTableFleet = new EventEmitter();
+  @Output() public viewDeposit = new EventEmitter<{vehicleId: number; documents: DocumentVehicle[]}>();
+  @Output() public viewCertificate = new EventEmitter<{vehicleId: number; certificateId: number}>();
   public dataSource = new MatTableDataSource<Vehicle>();
   public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'certificateId', 'type', 'actions'];
-  public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
 
   private subscription: Subscription[] = [];
 
@@ -76,43 +78,6 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
         }
       }
     );
-  }
-
-  public viewDeposit(vehicleId: number, documents: DocumentVehicle[]): void {
-    let depositId: number;
-    let depositType: DepositType;
-    documents.map(document => {
-      if (!document.valid) { depositId = document.fileId; depositType = document.type; }
-    });
-    this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)
-      .subscribe((data: HttpResponse<Blob>) => {
-        if (data.body.type === 'application/pdf') { // se è un pdf
-          const objectUrl = window.URL.createObjectURL(data.body);
-          this.src = { url: objectUrl, type: data.body.type };
-        } else { // altrimenti se è un'immagine
-          const reader = new FileReader();
-          reader.readAsDataURL(data.body);
-          reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type };
-          };
-        }
-      }));
-  }
-
-  public viewCertificate(vehicleId: number, certificateId: number): void {
-    this.subscription.push(this.vehicleService.getCertificateFile(vehicleId, certificateId)
-      .subscribe((data: HttpResponse<Blob>) => {
-        if (data.body.type === 'application/pdf') { // se è un pdf
-          const objectUrl = window.URL.createObjectURL(data.body);
-          this.src = { url: objectUrl, type: data.body.type };
-        } else { // altrimenti se è un'immagine
-          const reader = new FileReader();
-          reader.readAsDataURL(data.body);
-          reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type };
-          };
-        }
-      }));
   }
 
   private getVehicles(): void {

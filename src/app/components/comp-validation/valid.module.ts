@@ -5,15 +5,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from '@npt/npt-template';
 import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
-import { ListFleetmanagerComponent } from './fleetmanager/list-fleetmanager.component';
-import { ValidVehiclesRoutingModule } from './valid-vehicles.routing';
-import { VerifyVehiclesComponent } from './verify-vehicles/verify-vehicles.component';
+import { ListFleetmanagerComponent } from './verify-vehicles/list-fleetmanager.component';
+import { PageValidComponent } from './page-valid.component';
+import { ValidVehiclesRoutingModule } from './valid.routing';
+import { VerifyVehiclesComponent } from './verify-vehicles/list-verify-vehicles/verify-vehicles.component';
+import { FleetManagerModule } from '../comp-fleet-manager/fleet-manager.module';
 
 
 @NgModule({
   declarations: [
     ListFleetmanagerComponent,
-    VerifyVehiclesComponent
+    VerifyVehiclesComponent,
+    PageValidComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +25,8 @@ import { VerifyVehiclesComponent } from './verify-vehicles/verify-vehicles.compo
     FlexLayoutModule,
     TranslateModule,
     ValidVehiclesRoutingModule,
-    PipesModule
+    PipesModule,
+    FleetManagerModule
   ]
 })
 export class ValidVehiclesModule { }

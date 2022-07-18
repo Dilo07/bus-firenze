@@ -77,7 +77,7 @@ export class RealTimeComponent {
 
   public backFromRealTime(): void {
     if (this.fleetManager) {
-      this.router.navigate(['../fleet-manager-manage'], { state: { fleetManager: this.fleetManager } });
+      this.router.navigate(['../manage'], { state: { fleetManager: this.fleetManager } });
     }
   }
 

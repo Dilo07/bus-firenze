@@ -8,12 +8,13 @@ import { PenaltiesComponent } from './penalties/penalties.component';
 import { RedirectMovyonComponent } from './redirect-movyon/redirect-movyon.component';
 
 const routes: Routes = [
-  { path: '', component: RedirectMovyonComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
+  /* { path: '', component: RedirectMovyonComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
   { path: 'dep-mov', component: DepositComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
   { path: 'bil-mov', component: BillingItemsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
-  { path: 'pen-mov', component: PenaltiesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
-  { path: 'deposit', component: DepositComponent, canActivate: [AuthGuard], data: { roles: [ROLES.FLEETMNG] } },
-  { path: 'billing', component: BillingItemsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.FLEETMNG] } }
+  { path: 'pen-mov', component: PenaltiesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } }, */
+  { path: 'penalties', component: PenaltiesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
+  { path: 'deposit', component: DepositComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } },
+  { path: 'billing', component: BillingItemsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } }
 ];
 
 @NgModule({

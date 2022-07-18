@@ -124,7 +124,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
       () => {
         this.snackBar.showMessage('DRIVERS.ADD_SUCCESS', 'INFO');
-        this.router.navigate(['fleet-manager-manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
+        this.router.navigate(['manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
       }
     );
   }
@@ -153,7 +153,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
           this.cellularRequired = false;
         }
         if (!this.roleDriver) {
-          this.router.navigate(['fleet-manager-manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
+          this.router.navigate(['manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
         }
       }
     );

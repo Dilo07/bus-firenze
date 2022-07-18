@@ -2,23 +2,25 @@
 	<mat-card-content>
 		<app-view-file [file]="src"></app-view-file>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<div fxLayout="row wrap" fxLayoutAlign="space-between">
-				<mat-card-title fxLayout="row">Fleet Manager</mat-card-title>
-				<span *ngIf="isManageFleet">
-					<button mat-button class="actionButtons" [routerLink]="['form-Fleet']">
-						{{'FLEET-MANAGER.NEW' | translate}}
-					</button>
-				</span>
-			</div>
-			<form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
-				<mat-form-field appearance="outline" fxFlex="100">
-					<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
-					<input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
-					<button matSuffix mat-icon-button (click)="refreshTable()">
-						<mat-icon>search</mat-icon>
-					</button>
-				</mat-form-field>
-			</form>
+			<ng-container *ngIf="!isValidFleet">
+				<div fxLayout="row wrap" fxLayoutAlign="space-between">
+					<mat-card-title fxLayout="row">Fleet Manager</mat-card-title>
+					<span>
+						<button mat-button class="actionButtons" [routerLink]="['form-Fleet']">
+							{{'FLEET-MANAGER.NEW' | translate}}
+						</button>
+					</span>
+				</div>
+				<form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+					<mat-form-field appearance="outline" fxFlex="100">
+						<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
+						<input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
+						<button matSuffix mat-icon-button (click)="refreshTable()">
+							<mat-icon>search</mat-icon>
+						</button>
+					</mat-form-field>
+				</form>
+			</ng-container>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<div class="mat-elevation-z8 example-container">
 				<mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
@@ -119,7 +121,7 @@
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span *ngIf="isManageFleet">
+							<span *ngIf="!isValidFleet else valid">
 								<button mat-icon-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
 									<mat-icon style="color: #0066CC;">more_horiz</mat-icon>
 								</button>
@@ -152,7 +154,7 @@
 									<mat-icon style="color: red;">delete</mat-icon>
 								</button>
 							</span>
-							<span *ngIf="isValidFleet">
+							<ng-template #valid>
 								<button mat-icon-button style="color: #0066CC;"
 									matTooltip="{{'OBU.VIEW_FILE' | translate}}" [matMenuTriggerFor]="menuFile">
 									<mat-icon>find_in_page</mat-icon>
@@ -176,7 +178,7 @@
 									(click)="validInvalidFleet(element.id, false)">
 									<mat-icon style="color: red;">clear</mat-icon>
 								</button>
-							</span>
+							</ng-template>
 						</mat-cell>
 					</ng-container>
 

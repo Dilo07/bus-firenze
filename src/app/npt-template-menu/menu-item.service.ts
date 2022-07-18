@@ -42,16 +42,20 @@ const MENUITEMS = [
     children: [], roles: [ROLES.MOVYON, ROLES.FLEETMNG]
   },
   {
+    state: 'manage', name: 'Manage', type: 'link', icon: 'manage_accounts',
+    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+  },
+  /*   {
     state: '', name: 'Manage', type: 'submenu', icon: 'manage_accounts',
     children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1], SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+  }, */
+  {
+    state: 'payments', name: 'Payments', type: 'submenu', icon: 'euro_symbol',
+    children: [SUBMENU_ROUTES[1], SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG]
   },
   {
-    state: '', name: 'Validation', type: 'submenu', icon: 'rule',
-    children: [SUBMENU_ROUTES[4], SUBMENU_ROUTES[5]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
-  },
-  {
-    state: 'payments', name: 'Payments', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[1], SUBMENU_ROUTES[2]], roles: [ROLES.FLEETMNG]
+    state: 'validation', name: 'Validation', type: 'link', icon: 'rule',
+    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
     state: 'user-fleet-manager', name: 'User-Fleet', type: 'submenu', icon: 'directions_car',
@@ -84,6 +88,7 @@ export class MenuItemService implements IMenuItemService {
   constructor(@Inject('hideBillingData') private hideBilling: boolean) { }
 
   getMenuitem(): Menu[] {
+    // nasconse se nel config app hideBilling è true altrimenti aggiunge i ruoli
     if (!this.hideBilling) {
       SUBMENU_ROUTES[2].roles.push(ROLES.FLEETMNG, ROLES.OPER_MOVYON, ROLES.MOVYON);
       SUBMENU_ROUTES[3].roles.push(ROLES.OPER_MOVYON, ROLES.MOVYON);

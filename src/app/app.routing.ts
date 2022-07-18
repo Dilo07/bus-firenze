@@ -15,7 +15,7 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
-    path: 'fleet-manager-manage',
+    path: 'manage',
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
@@ -34,13 +34,13 @@ const routes: Routes = [
     path: 'payments', // fm
     loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule)
   },
+  /*   {
+      path: 'fleet-manager-valid',
+      loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
+    }, */
   {
-    path: 'fleet-manager-valid',
-    loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
-  },
-  {
-    path: 'vehicle-valid',
-    loadChildren: () => import('./components/comp-valid-vehicles/valid-vehicles.module').then(m => m.ValidVehiclesModule)
+    path: 'validation',
+    loadChildren: () => import('./components/comp-validation/valid.module').then(m => m.ValidVehiclesModule)
   },
   {
     path: 'user-fleet-manager', // fm

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
-import { Driver, FleetManager } from '../../domain/bus-firenze-domain';
+import { Driver } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from './modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { FormDriverComponent } from './modal-form-driver/form-driver.component';

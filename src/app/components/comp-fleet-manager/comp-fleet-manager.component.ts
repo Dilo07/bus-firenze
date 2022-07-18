@@ -1,11 +1,10 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { IAuthenticationService, SessionService } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
@@ -20,7 +19,6 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
   templateUrl: './comp-fleet-manager.component.html',
   styles: [`
   table { width: 100%; }
-  /* mat-card { z-index: 2;} */
   @media(min-width: 1180px) {
     .mat-column-id { max-width: 5%}
     .mat-column-name { max-width: 8%;}
@@ -38,14 +36,13 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
 export class FleetManagerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @Input() public isValidFleet = false;
 
   public dataSource = new MatTableDataSource<FleetManager>();
   public fleetManagerList: FleetManager[] = [];
   public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'pIva', 'fiscalCode', 'city', 'district', 'actions'];
   public search: FormGroup;
   public complete = true;
-  public isValidFleet: boolean;
-  public isManageFleet: boolean;
   public roleOpMovyon: boolean;
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
 
@@ -56,7 +53,6 @@ export class FleetManagerComponent implements OnInit {
   private subscription: Subscription[] = [];
 
   constructor(
-    private router: Router,
     private dialog: MatDialog,
     private snackBar: SnackBar,
     private fleetManagerService: FleetManagerService,
@@ -66,11 +62,9 @@ export class FleetManagerComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
-    this.isValidFleet = this.router.url === '/fleet-manager-valid';
-    this.isManageFleet = this.router.url === '/fleet-manager-manage';
     this.search = this.formBuilder.group({
       ctrlSearch: [
-        this.sessionService.getSessionStorage(this.isManageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID)
+        this.sessionService.getSessionStorage(!this.isValidFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID)
       ],
     });
     this.callGetFleetManager();
@@ -82,7 +76,7 @@ export class FleetManagerComponent implements OnInit {
     const currentSize = this.offset * this.limit;
     this.subscription.push(this.fleetManagerService.searchFleetManager(
       search,
-      this.isManageFleet,
+      !this.isValidFleet,
       this.offset,
       this.limit,
       this.columnOrder)
@@ -100,7 +94,7 @@ export class FleetManagerComponent implements OnInit {
         },
         () => this.complete = true,
         () => { this.complete = true; this.unSubscribe(); }));
-    this.sessionService.setSessionStorage(this.isManageFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
+    this.sessionService.setSessionStorage(!this.isValidFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
   }
 
   public pageChanged(event: PageEvent): void {

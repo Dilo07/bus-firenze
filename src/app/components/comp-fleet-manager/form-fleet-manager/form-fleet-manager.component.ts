@@ -190,7 +190,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     } else {
       this.subscription.push(
         this.fleetManagerService.insertFleetManager(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
-          () => { this.router.navigate(['../fleet-manager-manage']); },
+          () => { this.router.navigate(['../manage']); },
         ));
     }
   }
@@ -200,7 +200,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     this.subscription.push(this.fleetManagerService.updateFleetManager(fleetManagerEdit).subscribe(
       () => {
         this.snackBar.showMessage('FLEET-MANAGER.EDIT_SUCCESS', 'INFO');
-        this.router.navigate(['../fleet-manager-manage']);
+        this.router.navigate(['../manage']);
       }
     ));
   }
