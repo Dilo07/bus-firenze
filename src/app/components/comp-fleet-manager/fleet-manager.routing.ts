@@ -28,10 +28,10 @@ const routes: Routes = [
     path: 'form-Driver',
     component: FormDriverComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] }
   },
-  {
-    path: 'anagraphic-fleet',
-    component: AnagraphicFleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.FLEETMNG] }
-  },
+  /*  {
+     path: 'anagraphic-fleet',
+     component: AnagraphicFleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.FLEETMNG] }
+   }, */
   {
     path: 'drivers',
     component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.FLEETMNG] }

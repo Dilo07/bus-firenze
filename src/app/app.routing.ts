@@ -19,6 +19,18 @@ const routes: Routes = [
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
+    path: '', // fm anagraphic, vehicle
+    loadChildren: () => import('./components/comp-fleet-manager/redirect-fleet-role/redirect-fleet.module').then(m => m.RedirectFleetModule)
+  },
+  /* {
+    path: 'user-fleet-manager', // fm
+    loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
+  }, */
+  {
+    path: 'user-driver', // driver
+    loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
+  },
+  {
     path: 'deposit',
     loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule),
   },
@@ -34,17 +46,9 @@ const routes: Routes = [
     path: 'payments', // fm
     loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule)
   },
-  /*   {
-      path: 'fleet-manager-valid',
-      loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
-    }, */
   {
     path: 'validation',
     loadChildren: () => import('./components/comp-validation/valid.module').then(m => m.ValidVehiclesModule)
-  },
-  {
-    path: 'user-fleet-manager', // fm
-    loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
     path: 'manage-obu', // installer
@@ -54,10 +58,6 @@ const routes: Routes = [
   {
     path: 'appointments', // installer
     loadChildren: () => import('./components/comp-appointments/appointments.module').then(m => m.AppointmentsModule)
-  },
-  {
-    path: 'user-driver', // driver
-    loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
     path: 'repair-shop',

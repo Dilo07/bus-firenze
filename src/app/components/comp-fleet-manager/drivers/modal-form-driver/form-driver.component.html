@@ -1,15 +1,15 @@
 <mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center">
-        <span *ngIf="!cellularRequired else insertCell">
-            {{(driver ? 'DRIVERS.MESSAGE_EDIT' : 'DRIVERS.MESSAGE_NEW') | translate}}
-        </span>
-        <ng-template #insertCell>
-            <span style="color: red;">
-                {{'DRIVERS.MESSAGE_MOBILE' | translate}}
-            </span>
-        </ng-template>
-    </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
+        <mat-card-title fxLayout="row">
+            <span *ngIf="!cellularRequired else insertCell">
+                {{(driver ? 'DRIVERS.MESSAGE_EDIT' : 'DRIVERS.MESSAGE_NEW') | translate}}
+            </span>
+            <ng-template #insertCell>
+                <span style="color: red;">
+                    {{'DRIVERS.MESSAGE_MOBILE' | translate}}
+                </span>
+            </ng-template>
+        </mat-card-title>
         <form [formGroup]="formGroup" fxLayout="column" fxLayoutGap="20px">
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
