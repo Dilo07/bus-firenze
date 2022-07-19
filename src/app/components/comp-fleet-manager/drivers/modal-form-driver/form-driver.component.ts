@@ -149,7 +149,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       () => {
         this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO');
         if (this.roleDriver && this.cellularRequired) {
-          this.router.navigate(['user-driver/anagraphic-driver']);
+          this.router.navigate(['anagraphic-driver']);
           this.cellularRequired = false;
         }
         if (!this.roleDriver) {

@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'form-Driver',
-    component: FormDriverComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] }
+    component: FormDriverComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.FLEETMNG] }
   },
   /*  {
      path: 'anagraphic-fleet',
@@ -34,24 +34,24 @@ const routes: Routes = [
    }, */
   {
     path: 'drivers',
-    component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.FLEETMNG] }
+    component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON] }
   },
   {
     path: 'vehicles',
-    component: VehiclesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] }
+    component: VehiclesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
     path: 'vehicles/statistic', // per raggiungere le statistiche da fm
-    component: StatisticComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] }
+    component: StatisticComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
-  {
+/*   {
     path: 'anagraphic-driver',
     component: AnagraphicDriverComponent, canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.DRIVER] }
   },
   {
     path: 'association-driver',
     component: AssociationVehiclesComponent, canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.DRIVER] }
-  }
+  } */
 ];
 
 @NgModule({

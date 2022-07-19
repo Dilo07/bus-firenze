@@ -19,16 +19,18 @@ const routes: Routes = [
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
-    path: '', // fm anagraphic, vehicle
+    path: '', // fm role -> anagraphic, vehicle
     loadChildren: () => import('./components/comp-fleet-manager/redirect-fleet-role/redirect-fleet.module').then(m => m.RedirectFleetModule)
   },
-  /* {
-    path: 'user-fleet-manager', // fm
-    loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
-  }, */
   {
-    path: 'user-driver', // driver
-    loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
+    path: '', // driver role -> anagraphic, association
+    loadChildren:
+      () => import('./components/comp-fleet-manager/redirect-driver-role/redirect-driver-role.module').then(m => m.RedirectDriverRoleModule)
+  },
+  {
+    path: 'user-driver', // driver role -> form
+    loadChildren:
+      () => import('./components/comp-fleet-manager/redirect-driver-role/redirect-driver-role.module').then(m => m.RedirectDriverRoleModule)
   },
   {
     path: 'deposit',
@@ -43,7 +45,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule),
   },
   {
-    path: 'payments', // fm
+    path: 'payments',
     loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule)
   },
   {
