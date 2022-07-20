@@ -4,7 +4,7 @@
         <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-VEHICLE' | translate}}</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
             <p class="font-14">{{'WELCOME.VEHICLE' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../user-fleet-manager/vehicles']">
+            <button mat-button class="white-button" [routerLink]="['../vehicles']">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>
@@ -22,7 +22,7 @@
         <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-MANAGE-TICKET' | translate}}</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
             <p class="font-14">{{'WELCOME.MANAGE-TICKET' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../ticket']">
+            <button mat-button class="white-button" [routerLink]="['../ticket']" [state]="{index: 1}">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>

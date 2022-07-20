@@ -13,7 +13,7 @@
         <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-VALID-FLEET' | translate}}</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
             <p class="font-14">{{'WELCOME.VALID-FLEET' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../fleet-manager-valid']">
+            <button mat-button class="white-button" [routerLink]="['../validation']">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>
@@ -22,7 +22,7 @@
         <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-VALID-VEHICLE' | translate}}</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
             <p class="font-14">{{'WELCOME.VALID-VEHICLE' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../vehicle-valid']">
+            <button mat-button class="white-button" [routerLink]="['../validation']" [state]="{index: 1}">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>
