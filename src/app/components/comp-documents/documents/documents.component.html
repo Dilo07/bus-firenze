@@ -1,22 +1,8 @@
-<!-- <div fxLayout="column" fxFlexOffset="5" style="width: 100%;">
-    <mat-card-title>{{'MENU.Documents' | translate}}</mat-card-title>
-    <mat-grid-list cols="4" rowHeight="150px">
-        <mat-grid-tile *ngFor="let document of modules; let i = index" [colspan]="settingsGrid[i].col"
-            [rowspan]="settingsGrid[i].row">
-            <mat-card [style.background]="settingsGrid[i].color">
-                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-                    <h4>{{document.name}}</h4>
-                    <button mat-button class="white-button" (click)="download(document.path)">{{'FLEET-MANAGER.DOWNLOAD_TEMPLATE' | translate}}</button>
-                </mat-card-content>
-            </mat-card>
-        </mat-grid-tile>
-    </mat-grid-list>
-</div> -->
 <div fxLayout="column" fxFlexOffset="5">
     <mat-card-title>{{'MENU.Documents' | translate}}</mat-card-title>
     <div fxLayout="row wrap" fxLayoutAlign="center center">
         <ng-container *ngFor="let document of modules; let i = index">
-            <mat-card [style.background]="settingsGrid[i].color">
+            <mat-card [style.background]="colors[i%colors.length]">
                 <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="padding: 30px;">
                     <h4>{{document.name}}</h4>
                     <ng-container>
