@@ -1,10 +1,10 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { IAuthenticationService } from '@npt/npt-template';
 import moment from 'moment';
-import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
+import { Subscription } from 'rxjs';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { BILLING_STATUS } from '../../domain/bus-firenze-constants';
 import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
@@ -13,6 +13,7 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
   selector: 'app-billing-items',
   templateUrl: './billing-items.component.html',
   styles: [`
+  .mat-elevation-z8 { margin: 20px; }
   table { width: 100%; }
   @media(min-width: 1180px) {
     .mat-column-expandButton { max-width: 10%}
@@ -32,22 +33,20 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
     ]),
   ],
 })
-export class BillingItemsComponent implements OnInit {
-  public viewFleetTable = false;
+export class BillingItemsComponent implements OnInit, OnDestroy {
+  @Input() public fleetManagerId: number;
   public dataSource = new MatTableDataSource<BillingItemsAgg>();
   public displayedColumns = ['expandButton', 'gopId', 'billingType', 'price', 'quantity', 'priceTot'];
-  public roleMovyon: boolean;
   public complete = true;
   public billingStatus = [BILLING_STATUS.unknown, BILLING_STATUS.pending, BILLING_STATUS.success, BILLING_STATUS.failed];
   public maxDate = moment().toDate();
   public formGroup: FormGroup;
   public expandedElement: BillingItemsAgg | null;
 
-  private fleetManagerId: number;
+  private subscription: Subscription[] = [];
 
   constructor(
-    private billingItemsService: BillingItemsService,
-    @Inject('authService') private authService: IAuthenticationService) { }
+    private billingItemsService: BillingItemsService) { }
 
   async ngOnInit(): Promise<void> {
     this.formGroup = new FormGroup({
@@ -55,28 +54,25 @@ export class BillingItemsComponent implements OnInit {
       ctrlRangeStart: new FormControl(moment().subtract(30, 'day').toDate(), Validators.required),
       ctrlRangeEnd: new FormControl(moment().toDate(), Validators.required),
     });
-    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON) || res.includes(ROLES.OPER_MOVYON));
-    if (this.roleMovyon) {
-      this.viewFleetTable = true;
-    } else {
-      this.getBillingItems();
-    }
+    this.getBillingItems();
   }
 
-  public getBillingItems(fmId?: number): void{
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+  }
+
+  public getBillingItems(): void {
     this.complete = false;
-    if (fmId) { // se è op o movyon verrà valorizzato flmId altrimenti se ruolo fm non verrà valorizzato
-      this.fleetManagerId = fmId;
-      this.viewFleetTable = false;
-    }
     const start = moment(this.formGroup.get('ctrlRangeStart').value).format('yyyy-MM-DD');
     const end = moment(this.formGroup.get('ctrlRangeEnd').value).format('yyyy-MM-DD');
     const billingStatus = this.formGroup.get('ctrlBillingStatus').value;
-    this.billingItemsService.getBillingItemsAggregate(start, end, billingStatus, this.fleetManagerId).subscribe(
-      items => this.dataSource.data = items,
-      () => this.complete = true,
-      () => this.complete = true
-    );
+    this.subscription.push(this.billingItemsService.getBillingItemsAggregate(start, end, billingStatus, this.fleetManagerId).subscribe({
+      next: items => this.dataSource.data = items,
+      error: () => this.complete = true,
+      complete: () => this.complete = true
+    }));
   }
 
 }

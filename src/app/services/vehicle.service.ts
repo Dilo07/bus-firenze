@@ -59,10 +59,10 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getVehicleDeposit(all: boolean, fleetManagerId?: number, toVerify?: boolean): Observable<Vehicle[]> {
+  getVehicleDeposit(all: boolean, fleetManagerId: number, keyword?: string, toVerify?: boolean): Observable<Vehicle[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ toVerify })
+      params: HttpUtils.createHttpParams({ keyword, toVerify })
     };
     let url = '';
     if (fleetManagerId) {

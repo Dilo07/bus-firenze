@@ -22,11 +22,11 @@ export class AddTicketComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() public fleetManagerId: number;
-  public roleDriver: boolean;
   public dataSource = new MatTableDataSource<Ticket>();
   public displayedColumns = ['id', 'displayName', 'actions'];
   public complete = true;
 
+  private roleDriver: boolean;
 
   constructor(
     private ticketService: TicketService,

@@ -14,6 +14,7 @@ import { ModalPenalComponent } from '../modal-penal/modal-penal.component';
   selector: 'app-add-penalties',
   templateUrl: './add-penalties.component.html',
   styles: [`
+  .mat-elevation-z8 { margin: 20px; }
    @media(min-width: 1180px) {
     .mat-column-actions { display: table-column;}
   }

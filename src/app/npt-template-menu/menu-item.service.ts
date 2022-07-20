@@ -66,8 +66,8 @@ const MENUITEMS = [
     children: [], roles: [ROLES.DRIVER]
   },
   {
-    state: 'payments', name: 'Payments', type: 'submenu', icon: 'euro_symbol',
-    children: [SUBMENU_ROUTES[1], SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG]
+    state: 'payments', name: 'Payments', type: 'link', icon: 'euro_symbol',
+    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG]
   },
   {
     state: 'validation', name: 'Validation', type: 'link', icon: 'rule',

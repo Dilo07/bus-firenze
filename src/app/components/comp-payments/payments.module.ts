@@ -9,7 +9,7 @@ import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 import { PaymentsRoutingModule } from './payments.routing';
 import { DepositComponent } from './deposit/deposit.component';
 import { BillingItemsComponent } from './billing-items/billing-items.component';
-import { RedirectMovyonComponent } from './redirect-movyon/redirect-movyon.component';
+import { PagePaymentsComponent } from './page-payments.component';
 import { PenaltiesComponent } from './penalties/penalties.component';
 import { ModalPenalComponent } from './penalties/modal-penal/modal-penal.component';
 import { TableItemsComponent } from './billing-items/table-items/table-items.component';
@@ -21,7 +21,7 @@ import { AddPenaltiesComponent } from './penalties/add-penalties/add-penalties.c
   declarations: [
     DepositComponent,
     BillingItemsComponent,
-    RedirectMovyonComponent,
+    PagePaymentsComponent,
     PenaltiesComponent,
     ModalPenalComponent,
     TableItemsComponent,
