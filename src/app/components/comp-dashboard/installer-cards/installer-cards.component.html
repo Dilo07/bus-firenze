@@ -13,7 +13,7 @@
         <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-TEST' | translate}}</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
             <p class="font-14">{{'WELCOME.TEST' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../manage-obu']">
+            <button mat-button class="white-button" [routerLink]="['../manage-obu']" [state]="{index: 1}">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>
@@ -22,7 +22,7 @@
         <mat-card-title fxLayoutAlign="center">{{'WELCOME.TITLE-APPOINTMENTS' | translate}}</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
             <p class="font-14">{{'WELCOME.APPOINTMENTS' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../appointments']">
+            <button mat-button class="white-button" [routerLink]="['../appointments']" [state]="{index: 1}">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>
