@@ -69,6 +69,8 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
     FleetManagerRoutingModule,
     PipesModule
   ],
-  exports: []
+  exports: [
+    FleetManagerComponent
+  ]
 })
 export class FleetManagerModule { }

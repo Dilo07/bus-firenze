@@ -29,7 +29,7 @@ export class StatisticComponent implements OnInit {
   public index = 0;
   public vehicleStatTrip: TripStat;
   public vehicleTripPersistence: VehicleTripPersistence[];
-  public layersToCheck = [FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE];
+  public layersToCheck = [FirenzeMapUtils.layerEnum.LINE_STATISTICVEHICLE];
 
   private subscription: Subscription[] = [];
 
@@ -89,19 +89,19 @@ export class StatisticComponent implements OnInit {
 
   private drawLineTrip(): void {
     if (this.mapChild) {
-      this.mapChild.removeLayers([FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE]);
+      this.mapChild.removeLayers([FirenzeMapUtils.layerEnum.LINE_STATISTICVEHICLE]);
     }
 
     this.vehicleTripPersistence.forEach((trip: VehicleTripPersistence) => {
       const text = this.generateLineStringText(trip);
       this.mapChild.drawLine(
-        [trip.shape.points], FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE, FirenzeMapUtils.Style.SECTION_LINKS, text);
+        [trip.shape.points], FirenzeMapUtils.layerEnum.LINE_STATISTICVEHICLE, FirenzeMapUtils.style.SECTION_LINKS, text);
     });
 
-    this.mapChild.changeFeatureColorPointEvent('click', [FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE],
-      FirenzeMapUtils.Style.SECTION_LINKS, FirenzeMapUtils.Style.SECTION_LINKS_LIGHT);
+    this.mapChild.changeFeatureColorPointEvent('click', [FirenzeMapUtils.layerEnum.LINE_STATISTICVEHICLE],
+      FirenzeMapUtils.style.SECTION_LINKS, FirenzeMapUtils.style.SECTION_LINKS_LIGHT);
 
-    this.mapChild.zoomToLayer(FirenzeMapUtils.LayerEnum.LINE_STATISTICVEHICLE, 10);
+    this.mapChild.zoomToLayer(FirenzeMapUtils.layerEnum.LINE_STATISTICVEHICLE, 10);
   }
 
   private generateLineStringText(trip: VehicleTripPersistence): string {

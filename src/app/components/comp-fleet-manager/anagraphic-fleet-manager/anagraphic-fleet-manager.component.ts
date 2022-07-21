@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FleetManager } from '../../domain/bus-firenze-domain';
@@ -11,7 +10,6 @@ import { FleetManager } from '../../domain/bus-firenze-domain';
   ]
 })
 export class AnagraphicFleetManagerComponent implements OnInit, OnDestroy {
-  public FormGroup: FormGroup;
   public fleetManager: FleetManager;
 
   private subscription: Subscription[] = [];

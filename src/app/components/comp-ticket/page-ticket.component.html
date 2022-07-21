@@ -1,0 +1,24 @@
+<mat-card *ngIf="roleMovyon !== undefined">
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+            <mat-card-title>{{'MENU.Ticket' | translate}}
+            </mat-card-title>
+            <button mat-button class="backButton" *ngIf="roleMovyon && !viewFleetTable" (click)="viewFleetTable = true">
+                {{'FLEET-MANAGER.BACK' | translate}}
+            </button>
+        </div>
+        <div *ngIf="viewFleetTable else vehicleTicket">
+            <app-table-fleet (callManageTicket)="viewFleetTable = false; fmId= $event"></app-table-fleet>
+        </div>
+        <ng-template #vehicleTicket>
+            <mat-tab-group mat-align-tabs="center" [selectedIndex]="index">
+                <mat-tab label="{{'TICKET.ADD' | translate}}">
+                    <app-add-ticket [fleetManagerId]="fmId"></app-add-ticket>
+                </mat-tab>
+                <mat-tab label="{{'TICKET.MANAGE' | translate}}">
+                    <app-manage-ticket [fleetManagerId]="fmId"></app-manage-ticket>
+                </mat-tab>
+            </mat-tab-group>
+        </ng-template>
+    </mat-card-content>
+</mat-card>

@@ -1,13 +1,15 @@
 <app-view-file [file]="src"></app-view-file>
 <mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
-    </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutAlign="center">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+            <mat-card-title>{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
+            </mat-card-title>
+            <span>
+                <button mat-button class="backButton" [routerLink]="['../']"> {{'COMMON.ACTION.BACK' | translate}}
+                </button>
+            </span>
+        </div>
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-        <span fxLayout="row" fxLayoutAlign="start">
-            <button mat-button class="backButton" [routerLink]="['../']"> {{'COMMON.ACTION.BACK' | translate}}
-            </button>
-        </span>
         <span fxLayoutAlign="center">
             <mat-list role="list">
                 <mat-list-item role="listitem" *ngFor="let document of documents">
@@ -15,12 +17,12 @@
                         {{'FLEET-MANAGER.' + document.type | translate}}
                         <button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}" [disabled]="!complete"
                             (click)="viewDocument(document.fileId)">
-                            <mat-icon>find_in_page</mat-icon>
+                            <mat-icon><span class="icon-document_search"></span></mat-icon>
                         </button>
                         <button mat-icon-button *ngIf="!document.valid else viewDate"
                             matTooltip="{{'FLEET-MANAGER.VALID' | translate}}" [disabled]="!complete"
                             (click)="validDocument(document.fileId)">
-                            <mat-icon>fact_check</mat-icon>
+                            <mat-icon><span class="icon-rule"></span></mat-icon>
                         </button>
                         <ng-template #viewDate>
                             <span style="color: green;">

@@ -1,17 +1,36 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Inject, OnInit } from '@angular/core';
-import { Vehicle } from 'src/app/components/domain/bus-firenze-domain';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CONTRACT_TYPE, worldNations } from 'src/app/components/domain/bus-firenze-constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { VehicleService } from 'src/app/services/vehicle.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { CONTRACT_TYPE, worldNations } from 'src/app/components/domain/bus-firenze-constants';
+import { Vehicle } from 'src/app/components/domain/bus-firenze-domain';
+import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 
 @Component({
   selector: 'app-modal-form-vehicle',
   templateUrl: './modal-form-vehicle.component.html',
-  styles: [
-  ]
+  styles: [],
+  animations: [
+    trigger('slideInOut', [
+      state(
+        'on',
+        style({
+          opacity: 1
+        })
+      ),
+      state(
+        'off',
+        style({
+          height: '0',
+          opacity: 0
+        })
+      ),
+      transition('on => off', animate('400ms')),
+      transition('off => on', animate('400ms')),
+    ]),
+  ],
 })
 export class ModalFormVehicleComponent implements OnInit {
   public nations = worldNations;
@@ -21,6 +40,7 @@ export class ModalFormVehicleComponent implements OnInit {
   public libDocument: File;
   public depositDocument: File;
   public complete = true;
+  public helper: 'on' | 'off';
 
   private subscription: Subscription[] = [];
 
@@ -44,6 +64,7 @@ export class ModalFormVehicleComponent implements OnInit {
         ctrlContract: [this.data.vehicle.contractType, Validators.required],
         ctrlConsent: [this.data.vehicle.allowContacted]
       });
+      this.helper = 'off';
     } else {
       this.formGroup = this.formBuilder.group({
         ctrlLpn: ['', Validators.pattern('^[A-Za-z0-9]+$')],
@@ -55,6 +76,7 @@ export class ModalFormVehicleComponent implements OnInit {
         ctrlConsent: [false],
         ctrlLibretto: ['', Validators.required]
       });
+      this.helper = 'on';
     }
   }
 

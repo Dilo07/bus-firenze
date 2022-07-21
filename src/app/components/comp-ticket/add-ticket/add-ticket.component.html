@@ -1,52 +1,40 @@
-<mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'TICKET.MANAGE' | translate}}
+<div fxLayout="column" fxLayoutGap="20px" style="margin-top: 20px !important;">
+    <mat-card-title fxLayout="row">{{'TICKET.ADD' | translate}}
     </mat-card-title>
-    <mat-card-content>
-        <div *ngIf="viewFleetTable else vehicleTicket">
-            <app-table-fleet (callManageTicket)="getVehicle($event)"></app-table-fleet>
-        </div>
-        <ng-template #vehicleTicket>
-            <div style="margin-bottom: 20px;">
-                <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
-                    {{'FLEET-MANAGER.BACK' | translate}}
-                </button>
-            </div>
-            <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-            <div class="mat-elevation-z8 example-container">
-                <mat-table [dataSource]="dataSource" matSort>
-                    <ng-container matColumnDef="id">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">id</span>
-                            {{element.id}}
-                        </mat-cell>
-                    </ng-container>
+    <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+    <div class="mat-elevation-z8 example-container">
+        <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">id</span>
+                    {{element.id}}
+                </mat-cell>
+            </ng-container>
 
-                    <ng-container matColumnDef="displayName">
-                        <mat-header-cell *matHeaderCellDef> {{'TICKET.LPN' | translate}} </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                            <span class="mobile-label">{{'TICKET.LPN' | translate}}</span>
-                            {{element.displayName}}
-                        </mat-cell>
-                    </ng-container>
+            <ng-container matColumnDef="displayName">
+                <mat-header-cell *matHeaderCellDef> {{'TICKET.LPN' | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">{{'TICKET.LPN' | translate}}</span>
+                    {{element.displayName}}
+                </mat-cell>
+            </ng-container>
 
-                    <ng-container matColumnDef="actions">
-                        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                        <mat-cell *matCellDef="let element" style="text-align: end;">
-                            <button mat-icon-button matTooltip="{{'TICKET.ADD' | translate}}" (click)="modalTicket(element.id)">
-                                <mat-icon style="color: #0066CC;">receipt_long</mat-icon>
-                            </button>
-                        </mat-cell>
-                    </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let element" style="text-align: end;">
+                    <button mat-icon-button matTooltip="{{'TICKET.ADD' | translate}}" (click)="modalTicket(element.id)">
+                        <mat-icon style="color: #0066CC;">receipt_long</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
 
-                    <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-                        [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
-                </mat-table>
-            </div>
-            <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
-                [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
-            <div *ngIf="dataSource.data.length === 0 && complete">{{ 'TICKET.NO_DATA' | translate}}</div>
-        </ng-template>
-    </mat-card-content>
-</mat-card>
+            <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
+                [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
+        </mat-table>
+    </div>
+    <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+    <div *ngIf="dataSource.data.length === 0 && complete">{{ 'TICKET.NO_DATA' | translate}}</div>
+</div>

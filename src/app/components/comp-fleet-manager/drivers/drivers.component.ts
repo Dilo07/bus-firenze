@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
-import { Driver, FleetManager } from '../../domain/bus-firenze-domain';
+import { Driver } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from './modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { FormDriverComponent } from './modal-form-driver/form-driver.component';
@@ -125,14 +125,14 @@ export class DriversComponent implements OnInit, OnDestroy {
     });
   }
 
-  public associationVehicle(iddriver: number): void {
+  public associationVehicle(idDriver: number): void {
     this.subscription.push(
-      this.driverService.getVehiclesByDriver(iddriver, this.fleetManagerId).subscribe(
+      this.driverService.getVehiclesByDriver(idDriver, this.fleetManagerId).subscribe(
         vehicles => {
           const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
             width: '80%',
             height: '80%',
-            data: {driverVehicle: vehicles, idDriver: iddriver, fleetManagerId: this.fleetManagerId},
+            data: {driverVehicle: vehicles, idDriver: idDriver, fleetManagerId: this.fleetManagerId},
             autoFocus: false
           });
         }));

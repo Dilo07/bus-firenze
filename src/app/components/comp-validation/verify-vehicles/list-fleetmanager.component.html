@@ -1,6 +1,6 @@
+<app-view-file *ngIf="src.type" [file]="src"></app-view-file>
 <mat-card>
-	<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
-	<mat-card-content>
+	<mat-card-content fxLayout="column" fxLayoutGap="20px">
 		<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 		<div class="mat-elevation-z8 example-container">
 			<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows>
@@ -63,7 +63,10 @@
 							<div class="example-element-description">
 								<span class="example-element-description-attribution">
 									<app-verify-vehicles *ngIf="expandedElement === element"
-										(callRefreshTableFleet)="callFleetDeposit()" [idFleet]="expandedElement.id">
+										(callRefreshTableFleet)="callFleetDeposit()" (viewDeposit)="viewDeposit($event)"
+										(viewCertificate)="viewCertificate($event)"
+										[disableViewPdf]="complete"
+										[idFleet]="expandedElement.id">
 									</app-verify-vehicles>
 								</span>
 							</div>
@@ -78,6 +81,8 @@
 					*matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
 			</mat-table>
 		</div>
+		<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
+			[pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 		<div *ngIf="dataSource.data.length === 0">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>
 	</mat-card-content>
 </mat-card>

@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './components/comp-dashboard/dashboard.component';
 import { ConfigInitService, getPropertyFromConfig, MaterialModule, TemplateNptModule } from '@npt/npt-template';
 import { MenuItemService } from './npt-template-menu/menu-item.service';
 import { environment } from 'src/environments/environment';
@@ -25,7 +23,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     ModalConfirmComponent
   ],
   imports: [

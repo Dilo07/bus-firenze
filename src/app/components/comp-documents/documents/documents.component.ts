@@ -15,13 +15,7 @@ import { Modules } from '../../domain/bus-firenze-domain';
   `]
 })
 export class DocumentsComponent implements OnDestroy {
-  public settingsGrid = [
-    { col: 2, row: 1, color: '#91D6AC' },
-    { col: 2, row: 1, color: '#E4F1F5' },
-    { col: 1, row: 1, color: '#E4F1F5' },
-    { col: 1, row: 1, color: '#E89CAE' },
-    { col: 2, row: 1, color: '#91D6AC' }
-  ];
+  public colors = ['#91D6AC', '#E4F1F5', '#E89CAE', '#BBBCBC'];
   private subscription: Subscription[] = [];
 
   constructor(

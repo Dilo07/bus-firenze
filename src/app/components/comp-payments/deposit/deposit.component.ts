@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -24,45 +25,47 @@ import { DepositType, DocumentObu, DocumentVehicle, Vehicle } from '../../domain
   .mat-column-testing { max-width: 13%}
   .mat-column-obuId { max-width: 20%}
   }
+  .icon-assignment-grey:before {
+    color: grey;
+    font-weight: bold;
+  }
   `
   ]
 })
 export class DepositComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  public viewFleetTable = false;
+  @Input() public fleetManagerId: number;
   public roleMovyon: boolean;
-  public viewAll = false;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
   public displayedColumns = ['id', 'vehicleState', 'plate', 'nat', 'depositDocument', 'requestDocument', 'testing', 'obuId'];
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
+  public search: FormGroup;
   public complete = true;
 
-  private fleetManagerId: number;
   private subscription: Subscription[] = [];
 
   constructor(
     private vehicleService: VehicleService,
     private snackBar: SnackBar,
+    private formBuilder: FormBuilder,
     @Inject('authService') private authService: IAuthenticationService
   ) { }
 
   async ngOnInit(): Promise<void> {
+    this.search = this.formBuilder.group({
+      ctrlSearch: [''],
+      ctrlViewAll: [false]
+    });
     await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON) || res.includes(ROLES.OPER_MOVYON));
-    if (this.roleMovyon) {
-      this.viewFleetTable = true;
-    } else {
-      this.getVehicle();
-    }
+    this.getVehicle();
   }
 
-  public getVehicle(fleetManagerId?: any): void {
-    if (fleetManagerId) { // se è op o movyon verrà valorizzato flmId altrimenti se ruolo fm non verrà valorizzato
-      this.fleetManagerId = fleetManagerId;
-      this.viewFleetTable = false;
-    }
+  public getVehicle(): void {
     this.complete = false;
-    this.subscription.push(this.vehicleService.getVehicleDeposit(this.viewAll, this.fleetManagerId).subscribe(
+    const keyword = this.search.get('ctrlSearch').value;
+    const viewAll = this.search.get('ctrlViewAll').value;
+    this.subscription.push(this.vehicleService.getVehicleDeposit(viewAll, this.fleetManagerId, keyword).subscribe(
       vehicles => (this.vehicleList.data = vehicles, this.vehicleList.sort = this.sort, this.vehicleList.paginator = this.paginator),
       () => this.complete = true,
       () => this.complete = true

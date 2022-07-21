@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 /* app */
 
 html, body {
@@ -14,7 +15,7 @@ mat-card-title {
     color: #1C3775;
 }
 
-mat-card-content {
+mat-card {
     border-radius: 10px !important;
 }
 
@@ -145,4 +146,29 @@ mat-card-content {
 
 #errorVehicle {
     background-color: #E89CAE;
+}
+
+/* slide toogle  */
+
+.mat-slide-toggle-bar {
+    background-color: #91D6AC !important;
+    height: 20px !important;
+}
+
+.mat-slide-toggle-thumb {
+    background-color: white !important;
+    height: 20px !important;
+}
+
+.mat-slide-toggle-thumb-container {
+    top: 0px !important;
+}
+
+/* icons */
+.font-size-20 {
+    font-size: 20px !important;
+}
+
+.font-size-30 {
+    font-size: 30px !important;
 }

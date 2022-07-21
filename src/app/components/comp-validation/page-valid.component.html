@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+            <mat-card-title>{{'MENU.Validation' | translate}}
+            </mat-card-title>
+        </div>
+        <mat-tab-group mat-align-tabs="center" [selectedIndex]="index" (selectedTabChange)="onTabChanged()">
+            <mat-tab label="{{'MENU.Valid-Fleet-manager' | translate}}">
+                <app-comp-fleet-manager [isValidFleet]="true"></app-comp-fleet-manager>
+            </mat-tab>
+            <mat-tab label="{{'MENU.Vehicle-valid' | translate}}">
+                <app-list-fleetmanager></app-list-fleetmanager>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>

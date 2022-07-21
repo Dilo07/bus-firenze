@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-penalties',
@@ -6,10 +6,9 @@ import { Component } from '@angular/core';
   styles: [`` ]
 })
 export class PenaltiesComponent {
+  @Input() public fleetManagerId: number;
 
-  public viewFleetTable = true;
   public filter = '';
-  public fleetId: number;
 
   constructor( ) { }
 

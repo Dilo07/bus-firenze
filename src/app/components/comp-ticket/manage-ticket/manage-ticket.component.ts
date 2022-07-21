@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -15,9 +15,10 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket.component';
 
 @Component({
-  selector: 'app-active-ticket',
+  selector: 'app-manage-ticket',
   templateUrl: './manage-ticket.component.html',
   styles: [`
+  .example-container { margin: 10px; }
   @media(min-width: 1180px) {
     .mat-column-expandButton { max-width: 5%}
     .mat-column-ticketId { max-width: 15%;}
@@ -39,9 +40,8 @@ import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket
 export class ManageTicketComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @Input() public fleetManagerId: number;
   public roleDriver: boolean;
-  public roleMovyon: boolean;
-  public viewFleetTable = false;
   public viewHistoric = false;
   public dataSource = new MatTableDataSource<Ticket>();
   public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'lpnNat', 'ticketStart', 'ticketEnd', 'type', 'dateSink', 'actions'];
@@ -52,8 +52,6 @@ export class ManageTicketComponent implements OnInit {
   public start: string;
   public end: string;
 
-  private fleetManagerId: number;
-
   constructor(
     private ticketService: TicketService,
     private dialog: MatDialog,
@@ -63,23 +61,14 @@ export class ManageTicketComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
-    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON));
     this.formGroup = new FormGroup({
       start: new FormControl(''),
       end: new FormControl(''),
     });
-    if (this.roleMovyon) {
-      this.viewFleetTable = true;
-    } else {
-      this.getActiveTicket();
-    }
+    this.getActiveTicket();
   }
 
-  public getActiveTicket(fleetManagerId?: number): void {
-    if (fleetManagerId) {
-      this.fleetManagerId = fleetManagerId;
-      this.viewFleetTable = false;
-    }
+  public getActiveTicket(): void {
     this.complete = false;
     this.ticketService.getActiveTicket(this.roleDriver, this.fleetManagerId, this.start, this.end).subscribe(
       data => {
@@ -138,10 +127,6 @@ export class ManageTicketComponent implements OnInit {
       this.end = moment(this.formGroup.get('end').value).format('yyyy-MM-DD');
       this.getActiveTicket();
     }
-  }
-
-  public backFleetTable(): void {
-    this.viewFleetTable = true;
   }
 
   public switchHistoric(): void {

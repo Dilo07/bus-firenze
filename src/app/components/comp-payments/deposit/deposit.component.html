@@ -1,154 +1,147 @@
-<mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center">{{'MENU.Deposit' | translate}}</mat-card-title>
-    <mat-card-content>
-        <app-view-file [file]="src"></app-view-file>
-        <div *ngIf="viewFleetTable else vehicleTicket">
-            <app-table-fleet (callManageTicket)="getVehicle($event)"></app-table-fleet>
+<div>
+    <app-view-file [file]="src"></app-view-file>
+    <div fxLayout="column" fxLayoutGap="20px" style="margin: 20px">
+        <form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
+            <mat-form-field appearance="outline" fxFlex="75">
+                <mat-label>{{'COMMON.ACTION.SEARCH' | translate}}</mat-label>
+                <input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
+                <button matSuffix mat-icon-button (click)="getVehicle()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-slide-toggle formControlName="ctrlViewAll" (change)="getVehicle()">
+                {{ (search.get('ctrlViewAll').value ? 'VEHICLE.WITHDOC' : 'VEHICLE.NEEDDOC') | translate}}
+            </mat-slide-toggle>
+        </form>
+        <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+        <div class="mat-elevation-z8 example-container">
+            <mat-table [dataSource]="vehicleList" matSort matSortActive="id" matSortDirection="asc">
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">id</span>
+                        {{element.id}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicleState">
+                    <mat-header-cell *matHeaderCellDef> {{'VEHICLE.STATE' | translate}} </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">{{'VEHICLE.STATE' | translate}}</span>
+                        {{ (element.deleted ? 'VEHICLE.DELETED' : 'VEHICLE.ACTIVE') | translate}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="plate">
+                    <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
+                        {{ element.lpn}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="nat">
+                    <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
+                        {{ element.lpnNat}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="depositDocument">
+                    <mat-header-cell *matHeaderCellDef> {{'VEHICLE.RIC_DEPOSIT' | translate}} </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">{{'VEHICLE.RIC_DEPOSIT' | translate}}</span>
+                        <button mat-icon-button [disabled]="!(element.documents | hasDeposit: false)"
+                            (click)="viewDeposit(element.id, element.documents, 'deposit')">
+                            <mat-icon
+                                matTooltip="{{((element.documents | hasDeposit: false)  ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
+                                <span class="icon-assignment"
+                                    [ngClass]="(element.documents | hasDeposit: false) ? null : 'icon-assignment-grey'">
+                                </span>
+                            </mat-icon>
+                        </button>
+                        <input style="display: none" type="file" #depositInput
+                            accept="application/pdf, image/jpeg, image/png"
+                            (change)="uploadDeposit(element.id, $event, 'deposit')">
+                        <button mat-icon-button *ngIf="!element.deleted && !(element.documents | hasDeposit: true)"
+                            (click)="depositInput.click()">
+                            <mat-icon matTooltip="{{'VEHICLE.ADDDEPOSIT' | translate}}">
+                                <span class="icon-edit"></span>
+                            </mat-icon>
+                        </button>
+                        <mat-icon *ngIf="element.documents | depositDateValid" style="margin: 10px; color: green;"
+                            matTooltip="{{('VEHICLE.DEPVALID' | translate) + (element.documents | depositDateValid | date: 'dd/MM/YYYY')}}">
+                            task_alt</mat-icon>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="requestDocument">
+                    <mat-header-cell *matHeaderCellDef> {{'VEHICLE.RIM_DEPOSIT' | translate}} </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">{{'VEHICLE.RIM_DEPOSIT' | translate}}</span>
+                        <button mat-icon-button *ngIf="element.documents | hasRequest: false"
+                            (click)="viewDeposit(element.id, element.documents, 'request')">
+                            <mat-icon matTooltip="{{'VEHICLE.VIEW_DEPOSIT_REQ' | translate}}">
+                                <span class="icon-assignment"></span>
+                            </mat-icon>
+                        </button>
+                        <input style="display: none" type="file" #depositReqInput
+                            accept="application/pdf, image/jpeg, image/png"
+                            (change)="uploadDeposit(element.id, $event, 'request')">
+                        <button
+                            *ngIf="element.deleted && !(element.documents | hasRequest: true) && !(element.documentsObu | documentRemObuFail)"
+                            mat-icon-button (click)="depositReqInput.click()">
+                            <mat-icon matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
+                                <span class="icon-edit"></span>
+                            </mat-icon>
+                        </button>
+                        <mat-icon *ngIf="element.documents | requestDateValid" style="margin: 10px; color: green;"
+                            matTooltip="{{('VEHICLE.REQVALID' | translate) + (element.documents | requestDateValid | date: 'dd/MM/YYYY')}}">
+                            task_alt</mat-icon>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="testing">
+                    <mat-header-cell *matHeaderCellDef> {{'VEHICLE.REMOVE_TEST' | translate}} </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">{{'VEHICLE.REMOVE_TEST' | translate}}</span>
+                        <ng-container *ngIf="element.documentsObu | documentRemObu">
+                            <button mat-icon-button (click)="viewDocObu(element.id, element.documentsObu, 'remObu')">
+                                <mat-icon matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
+                                    <span class="icon-assignment"></span>
+                                </mat-icon>
+                            </button>
+                            <mat-icon style="margin: 10px; color: green;">task_alt</mat-icon>
+                        </ng-container>
+                        <ng-container *ngIf="element.documentsObu | documentRemObuFail">
+                            <button mat-icon-button
+                                (click)="viewDocObu(element.id, element.documentsObu, 'remObuFail')">
+                                <mat-icon matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
+                                    <span class="icon-assignment"></span>
+                                </mat-icon>
+                            </button>
+                            <mat-icon style="margin: 10px;"><span class="icon-delete"></span></mat-icon>
+                        </ng-container>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="obuId">
+                    <mat-header-cell *matHeaderCellDef> obuId </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">obuId</span>
+                        {{ element.obuId}}
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
+                    [style.display]="vehicleList.data.length === 0 ? 'none' : '' "></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
+            </mat-table>
         </div>
-        <ng-template #vehicleTicket>
-            <div fxLayout="column" fxLayoutGap="20px">
-                <div style="margin-bottom: 20px;" fxLayout="row" fxLayoutGap="20px">
-                    <button mat-button class="backButton" *ngIf="roleMovyon" (click)="viewFleetTable = true">
-                        {{'FLEET-MANAGER.BACK' | translate}}
-                    </button>
-                    <mat-slide-toggle [(ngModel)]="viewAll" (change)="getVehicle()">
-                        {{ (viewAll ? 'VEHICLE.WITHDOC' : 'VEHICLE.NEEDDOC') | translate}}
-                    </mat-slide-toggle>
-                </div>
-                <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-                <div class="mat-elevation-z8 example-container">
-                    <mat-table [dataSource]="vehicleList" matSort matSortActive="id" matSortDirection="asc">
-                        <ng-container matColumnDef="id">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">id</span>
-                                {{element.id}}
-                            </mat-cell>
-                        </ng-container>
+        <mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+        <div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
+    </div>
 
-                        <ng-container matColumnDef="vehicleState">
-                            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.STATE' | translate}} </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">{{'VEHICLE.STATE' | translate}}</span>
-                                {{ (element.deleted ? 'VEHICLE.DELETED' : 'VEHICLE.ACTIVE') | translate}}
-                            </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="plate">
-                            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
-                                {{ element.lpn}}
-                            </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="nat">
-                            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
-                                {{ element.lpnNat}}
-                            </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="depositDocument">
-                            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.RIC_DEPOSIT' | translate}} </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">{{'VEHICLE.RIC_DEPOSIT' | translate}}</span>
-                                <button mat-icon-button [disabled]="!(element.documents | hasDeposit: false)"
-                                    (click)="viewDeposit(element.id, element.documents, 'deposit')">
-                                    <mat-icon
-                                        [style.color]="(element.documents | hasDeposit: false) ? '#0066CC' : 'grey'"
-                                        matTooltip="{{((element.documents | hasDeposit: false)  ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
-                                        description
-                                    </mat-icon>
-                                </button>
-                                <input style="display: none" type="file" #depositInput
-                                    accept="application/pdf, image/jpeg, image/png"
-                                    (change)="uploadDeposit(element.id, $event, 'deposit')">
-                                <button mat-icon-button
-                                    *ngIf="!element.deleted && !(element.documents | hasDeposit: true)"
-                                    (click)="depositInput.click()">
-                                    <mat-icon style="color: #0066CC;" matTooltip="{{'VEHICLE.ADDDEPOSIT' | translate}}">
-                                        edit_note</mat-icon>
-                                </button>
-                                <mat-icon *ngIf="element.documents | depositDateValid"
-                                    style="margin: 10px; color: green;"
-                                    matTooltip="{{('VEHICLE.DEPVALID' | translate) + (element.documents | depositDateValid | date: 'dd/MM/YYYY')}}">
-                                    task_alt</mat-icon>
-                            </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="requestDocument">
-                            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.RIM_DEPOSIT' | translate}} </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">{{'VEHICLE.RIM_DEPOSIT' | translate}}</span>
-                                <button mat-icon-button *ngIf="element.documents | hasRequest: false"
-                                    (click)="viewDeposit(element.id, element.documents, 'request')">
-                                    <mat-icon style="color: #0066CC"
-                                        matTooltip="{{'VEHICLE.VIEW_DEPOSIT_REQ' | translate}}">
-                                        description
-                                    </mat-icon>
-                                </button>
-                                <input style="display: none" type="file" #depositReqInput
-                                    accept="application/pdf, image/jpeg, image/png"
-                                    (change)="uploadDeposit(element.id, $event, 'request')">
-                                <button
-                                    *ngIf="element.deleted && !(element.documents | hasRequest: true) && !(element.documentsObu | documentRemObuFail)"
-                                    mat-icon-button (click)="depositReqInput.click()">
-                                    <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
-                                        edit_note</mat-icon>
-                                </button>
-                                <mat-icon *ngIf="element.documents | requestDateValid"
-                                    style="margin: 10px; color: green;"
-                                    matTooltip="{{('VEHICLE.REQVALID' | translate) + (element.documents | requestDateValid | date: 'dd/MM/YYYY')}}">
-                                    task_alt</mat-icon>
-                            </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="testing">
-                            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.REMOVE_TEST' | translate}} </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">{{'VEHICLE.REMOVE_TEST' | translate}}</span>
-                                <ng-container *ngIf="element.documentsObu | documentRemObu">
-                                    <button mat-icon-button
-                                        (click)="viewDocObu(element.id, element.documentsObu, 'remObu')">
-                                        <mat-icon style="color: #0066CC"
-                                            matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
-                                            description
-                                        </mat-icon>
-                                    </button>
-                                    <mat-icon style="margin: 10px; color: green;">task_alt</mat-icon>
-                                </ng-container>
-                                <ng-container *ngIf="element.documentsObu | documentRemObuFail">
-                                    <button mat-icon-button
-                                        (click)="viewDocObu(element.id, element.documentsObu, 'remObuFail')">
-                                        <mat-icon style="color: #0066CC"
-                                            matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
-                                            description
-                                        </mat-icon>
-                                    </button>
-                                    <mat-icon style="margin: 10px; color: red;">cancel</mat-icon>
-                                </ng-container>
-                            </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="obuId">
-                            <mat-header-cell *matHeaderCellDef> obuId </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">obuId</span>
-                                {{ element.obuId}}
-                            </mat-cell>
-                        </ng-container>
-
-                        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-                            [style.display]="vehicleList.data.length === 0 ? 'none' : '' "></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
-                    </mat-table>
-                </div>
-                <mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"
-                    [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
-                <div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
-            </div>
-        </ng-template>
-    </mat-card-content>
-</mat-card>
+</div>

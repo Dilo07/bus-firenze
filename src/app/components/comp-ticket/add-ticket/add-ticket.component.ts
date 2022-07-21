@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,10 +10,10 @@ import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket
 import { IAuthenticationService } from '@npt/npt-template';
 
 @Component({
-  selector: 'app-ticket',
+  selector: 'app-add-ticket',
   templateUrl: './add-ticket.component.html',
   styles: [`
-  table { width: 100%; }
+  .example-container { width: 100%; margin: 10px; }
   .mat-column-actions { max-width: 20%; display: table-column;}
   `
   ]
@@ -21,14 +21,12 @@ import { IAuthenticationService } from '@npt/npt-template';
 export class AddTicketComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  public roleDriver: boolean;
-  public roleMovyon: boolean;
+  @Input() public fleetManagerId: number;
   public dataSource = new MatTableDataSource<Ticket>();
   public displayedColumns = ['id', 'displayName', 'actions'];
   public complete = true;
-  public viewFleetTable = false;
 
-  private fleetManagerId: number;
+  private roleDriver: boolean;
 
   constructor(
     private ticketService: TicketService,
@@ -38,29 +36,20 @@ export class AddTicketComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
-    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON));
-    if (this.roleMovyon) {
-      this.viewFleetTable = true;
-    } else {
-      this.getVehicle();
-    }
+    this.getVehicle();
   }
 
-  public getVehicle(fleetManagerId?: number): void {
-    if (fleetManagerId) {
-      this.fleetManagerId = fleetManagerId;
-      this.viewFleetTable = false;
-    }
+  public getVehicle(): void {
     this.complete = false;
-    this.ticketService.getVehicleNoTicket(this.roleDriver, this.fleetManagerId).subscribe(
-      data => {
+    this.ticketService.getVehicleNoTicket(this.roleDriver, this.fleetManagerId).subscribe({
+      next: (data) => {
         this.dataSource.data = data;
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
-      () => this.complete = true,
-      () => this.complete = true
-    );
+      error: () => this.complete = true,
+      complete: () => this.complete = true
+    });
   }
 
   public modalTicket(vehicleId: number): void {

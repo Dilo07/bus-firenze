@@ -1,24 +1,26 @@
 <mat-card>
 	<mat-card-content>
 		<app-view-file [file]="src"></app-view-file>
-		<div fxLayout="row wrap" fxLayoutAlign="space-between">
-			<mat-card-title fxLayout="row" fxLayoutAlign="center center">Fleet Manager</mat-card-title>
-			<span *ngIf="isManageFleet">
-				<button mat-button class="actionButtons" [routerLink]="['form-Fleet']">
-					{{'FLEET-MANAGER.NEW' | translate}}
-				</button>
-			</span>
-		</div>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
-				<mat-form-field appearance="outline" fxFlex="30">
-					<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
-					<input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
-				</mat-form-field>
-				<button mat-icon-button (click)="refreshTable()">
-					<mat-icon matPrefix>search</mat-icon>
-				</button>
-			</form>
+			<ng-container *ngIf="!isValidFleet">
+				<div fxLayout="row wrap" fxLayoutAlign="space-between">
+					<mat-card-title fxLayout="row">Fleet Manager</mat-card-title>
+					<span>
+						<button mat-button class="actionButtons" [routerLink]="['form-Fleet']">
+							{{'FLEET-MANAGER.NEW' | translate}}
+						</button>
+					</span>
+				</div>
+				<form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+					<mat-form-field appearance="outline" fxFlex="100">
+						<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
+						<input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
+						<button matSuffix mat-icon-button (click)="refreshTable()">
+							<mat-icon>search</mat-icon>
+						</button>
+					</mat-form-field>
+				</form>
+			</ng-container>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<div class="mat-elevation-z8 example-container">
 				<mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
@@ -119,43 +121,44 @@
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element">
-							<span *ngIf="isManageFleet">
+							<span *ngIf="!isValidFleet else valid">
 								<button mat-icon-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
-									<mat-icon style="color: #0066CC;">more_horiz</mat-icon>
+									<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
 								</button>
-								<mat-menu #actionsMenuManage="matMenu">
-									<button *ngIf="!roleOpMovyon" mat-icon-button
-										matTooltip="{{'DRIVERS.TITLE' | translate}}" [routerLink]="['drivers']"
+								<mat-menu #actionsMenuManage="matMenu" class="menu-color">
+									<button *ngIf="!roleOpMovyon" mat-menu-item [routerLink]="['drivers']"
 										[state]="{fleetManagerId: element.id}">
-										<mat-icon style="color: #0066CC;">airline_seat_recline_normal</mat-icon>
+										<mat-icon><span class="icon-driver"></span></mat-icon>
+										{{'DRIVERS.TITLE' | translate}}
 									</button>
-									<button mat-icon-button matTooltip="{{'VEHICLE.TITLE' | translate}}"
-										[routerLink]="['vehicles']" [state]="{fleetManager: element}">
-										<mat-icon style="color: #0066CC;">directions_car</mat-icon>
+									<button mat-menu-item [routerLink]="['vehicles']" [state]="{fleetManager: element}">
+										<mat-icon><span class="icon-car"></span></mat-icon>
+										{{'VEHICLE.TITLE' | translate}}
 									</button>
-									<button mat-icon-button matTooltip="Real time" [routerLink]="['../real-time']"
+									<button mat-menu-item [routerLink]="['../real-time']"
 										[state]="{fleetManager: element}">
-										<mat-icon style="color: #0066CC;">place</mat-icon>
+										<mat-icon><span class="icon-location_on"></span></mat-icon>
+										Real time
 									</button>
-									<button mat-icon-button
-										matTooltip="{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}"
-										[routerLink]="['fleet-documents']" [state]="{fmId: element.id, documents: element.documents}">
-										<mat-icon style="color: #0066CC;">fact_check</mat-icon>
+									<button mat-menu-item [routerLink]="['fleet-documents']"
+										[state]="{fmId: element.id, documents: element.documents}">
+										<mat-icon><span class="icon-document_search"></span></mat-icon>
+										{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
 									</button>
 								</mat-menu>
 								<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}"
 									[routerLink]="['form-Fleet']" [state]="{fleetManager: element}">
-									<mat-icon style="color: #0066CC;">edit</mat-icon>
+									<mat-icon><span class="icon-edit"></span></mat-icon>
 								</button>
 								<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
 									(click)="deleteFleetManager(element.id)">
-									<mat-icon style="color: red;">delete</mat-icon>
+									<mat-icon><span class="icon-delete"></span></mat-icon>
 								</button>
 							</span>
-							<span *ngIf="isValidFleet">
-								<button mat-icon-button style="color: #0066CC;"
-									matTooltip="{{'OBU.VIEW_FILE' | translate}}" [matMenuTriggerFor]="menuFile">
-									<mat-icon>find_in_page</mat-icon>
+							<ng-template #valid>
+								<button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}"
+									[matMenuTriggerFor]="menuFile">
+									<mat-icon><span class="icon-document_search"></span></mat-icon>
 								</button>
 								<mat-menu #menuFile="matMenu">
 									<button mat-menu-item
@@ -170,13 +173,13 @@
 								</mat-menu>
 								<button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
 									(click)="validInvalidFleet(element.id, true)">
-									<mat-icon style="color: green;">done</mat-icon>
+									<span class="icon-rule font-size-30"></span>
 								</button>
 								<button mat-icon-button matTooltip="{{'FLEET-MANAGER.REFUSE' | translate}}"
 									(click)="validInvalidFleet(element.id, false)">
-									<mat-icon style="color: red;">clear</mat-icon>
+									<mat-icon><span class="icon-delete"></span></mat-icon>
 								</button>
-							</span>
+							</ng-template>
 						</mat-cell>
 					</ng-container>
 

@@ -22,17 +22,8 @@ const SUBMENU_ROUTES = [
   { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
   { state: 'drivers', name: 'Drivers', icon: 'airline_seat_recline_normal', roles: [ROLES.FLEETMNG] },
   { state: 'anagraphic-fleet', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.FLEETMNG] },
-  { state: 'assign-obu', name: 'Assign-obu', icon: 'new_label', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'change-obu', name: 'Change-obu', icon: 'assignment_return', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'remove-obu', name: 'Remove-obu', icon: 'code_off', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER] },
-  { state: 'change-plate', name: 'Change-plate', icon: 'assignment_return', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'vehicle-document', name: 'Vehicle-document', icon: 'description', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'add-appointment', name: 'Add-appointment', icon: 'add', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
-  { state: 'manage-appointment', name: 'Manage-appointment', icon: 'manage_search', roles: [ROLES.MOVYON, ROLES.INSTALLER] },
   { state: 'anagraphic-driver', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.DRIVER] },
-  { state: 'association-driver', name: 'Association-vehicles', icon: 'directions_car', roles: [ROLES.DRIVER] },
-  { state: 'add-ticket', name: 'Add-ticket', icon: 'add', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] },
-  { state: 'manage-ticket', name: 'Manage-ticket', icon: 'manage_search', roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER] }
+  { state: 'association-driver', name: 'Association-vehicles', icon: 'directions_car', roles: [ROLES.DRIVER] }
 ];
 
 const MENUITEMS = [
@@ -51,36 +42,48 @@ const MENUITEMS = [
     children: [], roles: [ROLES.MOVYON, ROLES.FLEETMNG]
   },
   {
-    state: '', name: 'Manage', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[0], SUBMENU_ROUTES[1], SUBMENU_ROUTES[2], SUBMENU_ROUTES[3]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    state: 'manage', name: 'Manage', type: 'link', icon: 'manage_accounts',
+    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
-    state: '', name: 'Validation', type: 'submenu', icon: 'rule',
-    children: [SUBMENU_ROUTES[4], SUBMENU_ROUTES[5]], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    state: 'anagraphic-fleet', name: 'Anagraphic', type: 'link', icon: 'user',
+    children: [], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'payments', name: 'Payments', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[1], SUBMENU_ROUTES[2]], roles: [ROLES.FLEETMNG]
+    state: 'vehicles', name: 'Vehicles', type: 'link', icon: 'car',
+    children: [], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'user-fleet-manager', name: 'User-Fleet', type: 'submenu', icon: 'directions_car',
-    children: [SUBMENU_ROUTES[6], SUBMENU_ROUTES[7], SUBMENU_ROUTES[8]], roles: [ROLES.FLEETMNG]
+    state: 'drivers', name: 'Drivers', type: 'link', icon: 'driver',
+    children: [], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'manage-obu', name: 'Manage-obu', type: 'link', icon: 'ad_units',
+    state: 'anagraphic-driver', name: 'Anagraphic', type: 'link', icon: 'manage_accounts',
+    children: [], roles: [ROLES.DRIVER]
+  },
+  {
+    state: 'association-driver', name: 'Association-vehicles', type: 'link', icon: 'car',
+    children: [], roles: [ROLES.DRIVER]
+  },
+  {
+    state: 'payments', name: 'Payments', type: 'link', icon: 'ticket',
+    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG]
+  },
+  {
+    state: 'validation', name: 'Validation', type: 'link', icon: 'rule',
+    children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+  },
+  {
+    state: 'manage-obu', name: 'Manage-obu', type: 'link', icon: 'obu',
     roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER]
   },
   {
-    state: 'appointment', name: 'Appointment', type: 'submenu', icon: 'contact_phone',
-    children: [SUBMENU_ROUTES[14], SUBMENU_ROUTES[15]], roles: [ROLES.MOVYON, ROLES.INSTALLER]
+    state: 'appointments', name: 'Appointment', type: 'link', icon: 'appointment',
+    roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
   {
-    state: 'user-driver', name: 'User-Driver', type: 'submenu', icon: 'manage_accounts',
-    children: [SUBMENU_ROUTES[16], SUBMENU_ROUTES[17],], roles: [ROLES.DRIVER]
-  },
-  {
-    state: 'ticket', name: 'Ticket', type: 'submenu', icon: 'wysiwyg',
-    children: [SUBMENU_ROUTES[18], SUBMENU_ROUTES[19]], roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER]
+    state: 'ticket', name: 'Ticket', type: 'link', icon: 'wysiwyg',
+    children: [], roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER]
   },
   {
     state: 'documents', name: 'Documents', type: 'link', icon: 'assignment',
@@ -93,10 +96,6 @@ export class MenuItemService implements IMenuItemService {
   constructor(@Inject('hideBillingData') private hideBilling: boolean) { }
 
   getMenuitem(): Menu[] {
-    if (!this.hideBilling) {
-      SUBMENU_ROUTES[2].roles.push(ROLES.FLEETMNG, ROLES.OPER_MOVYON, ROLES.MOVYON);
-      SUBMENU_ROUTES[3].roles.push(ROLES.OPER_MOVYON, ROLES.MOVYON);
-    }
     return MENUITEMS;
   }
 }

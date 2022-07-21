@@ -1,70 +1,65 @@
-<mat-card>
-    <mat-card-subtitle fxLayout="row" fxLayoutAlign="center center">{{'FLEET-MANAGER.SELECT' | translate}}
-    </mat-card-subtitle>
-    <mat-card-content>
-        <form [formGroup]="Search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
-            <mat-form-field appearance="outline" fxFlex="30">
-                <mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
-                <input matInput type="search" formControlName="CtrlSearch" autocomplete="off">
-            </mat-form-field>
-            <button mat-icon-button (click)="refreshTable()">
-                <mat-icon matPrefix>search</mat-icon>
-            </button>
-        </form>
-        <div class="mat-elevation-z8 example-container">
-            <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-            <mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
-                (matSortChange)="sortData($event)">
-                <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                        <span class="mobile-label">id</span>
-                        {{element.id}}
-                    </mat-cell>
-                </ng-container>
+<h4 fxLayout="row" fxLayoutAlign="center center">{{'FLEET-MANAGER.SELECT' | translate}}</h4>
+<form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+    <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
+        <input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
+        <button matSuffix mat-icon-button (click)="refreshTable()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+</form>
+<div class="mat-elevation-z8 example-container">
+    <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+    <mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
+        (matSortChange)="sortData($event)">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">id</span>
+                {{element.id}}
+            </mat-cell>
+        </ng-container>
 
-                <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.NAME' |
-                        translate}} </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                        <span class="mobile-label">{{'FLEET-MANAGER.NAME' | translate}}</span>
-                        {{ element.name}}
-                    </mat-cell>
-                </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.NAME' |
+                translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'FLEET-MANAGER.NAME' | translate}}</span>
+                {{ element.name}}
+            </mat-cell>
+        </ng-container>
 
-                <ng-container matColumnDef="surname">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.SURNAME' |
-                        translate}} </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                        <span class="mobile-label">{{'FLEET-MANAGER.SURNAME' | translate}}</span>
-                        {{ element.surname}}
-                    </mat-cell>
-                </ng-container>
+        <ng-container matColumnDef="surname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.SURNAME' |
+                translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'FLEET-MANAGER.SURNAME' | translate}}</span>
+                {{ element.surname}}
+            </mat-cell>
+        </ng-container>
 
-                <ng-container matColumnDef="e-mail">
-                    <mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                        <span class="mobile-label">e-mail</span>
-                        {{ element | findContactValue: 3}}
-                    </mat-cell>
-                </ng-container>
+        <ng-container matColumnDef="e-mail">
+            <mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">e-mail</span>
+                {{ element | findContactValue: 3}}
+            </mat-cell>
+        </ng-container>
 
-                <ng-container matColumnDef="actions">
-                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                    <mat-cell *matCellDef="let element" style="text-align: end;">
-                        <button mat-icon-button matTooltip="Fleet Manager" (click)="manageTicket(element.id)">
-                            <mat-icon style="color: #0066CC;">manage_accounts</mat-icon>
-                        </button>
-                    </mat-cell>
-                </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element" style="text-align: end;">
+                <button mat-icon-button matTooltip="Fleet Manager" (click)="manageTicket(element.id)">
+                    <mat-icon><span class="icon-user"></span></mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
 
-                <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-                    [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
-            </mat-table>
-        </div>
-        <mat-paginator style="margin-top: 20px;" [style.display]="fleetManagerList.length === 0 ? 'none' : '' " [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 25]" (page)="pageChanged($event)"></mat-paginator>
-        <div *ngIf="fleetManagerList.length === 0 && complete">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>
-    </mat-card-content>
-</mat-card>
+        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
+            [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
+    </mat-table>
+</div>
+<mat-paginator style="margin-top: 20px;" [style.display]="fleetManagerList.length === 0 ? 'none' : '' " [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25]" (page)="pageChanged($event)"></mat-paginator>
+<div *ngIf="fleetManagerList.length === 0 && complete">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>

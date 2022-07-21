@@ -31,8 +31,9 @@ export class TableFleetComponent implements OnInit {
   public fleetManagerList: FleetManager[] = [];
   public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'actions'];
   public complete = true;
+  public search: FormGroup;
+
   private endTable = false;
-  public Search: FormGroup;
 
   private columnOrder: ColumnSort = { active: 'id', direction: 1 };
   private offset = 0;
@@ -45,8 +46,8 @@ export class TableFleetComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.Search = this.formBuilder.group({
-      CtrlSearch: [''],
+    this.search = this.formBuilder.group({
+      ctrlSearch: [''],
     });
     this.callGetFleetManager();
   }
@@ -56,7 +57,7 @@ export class TableFleetComponent implements OnInit {
   }
 
   public callGetFleetManager(): void {
-    const search = this.Search.get('CtrlSearch').value;
+    const search = this.search.get('ctrlSearch').value;
     this.complete = false;
     const currentSize = this.offset * this.limit;
     this.subscription.push(
@@ -103,7 +104,7 @@ export class TableFleetComponent implements OnInit {
     }
   }
 
-  public sortData(event: { active: string, direction: string }): void {
+  public sortData(event: { active: string; direction: string }): void {
     this.columnOrder.active = event.active;
     this.columnOrder.direction = event.direction === 'asc' ? 1 : -1;
     this.refreshTable();
