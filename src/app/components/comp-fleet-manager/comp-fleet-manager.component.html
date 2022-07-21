@@ -123,41 +123,42 @@
 						<mat-cell *matCellDef="let element">
 							<span *ngIf="!isValidFleet else valid">
 								<button mat-icon-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
-									<mat-icon style="color: #0066CC;">more_horiz</mat-icon>
+									<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
 								</button>
-								<mat-menu #actionsMenuManage="matMenu">
-									<button *ngIf="!roleOpMovyon" mat-icon-button
-										matTooltip="{{'DRIVERS.TITLE' | translate}}" [routerLink]="['drivers']"
+								<mat-menu #actionsMenuManage="matMenu" class="menu-color">
+									<button *ngIf="!roleOpMovyon" mat-menu-item [routerLink]="['drivers']"
 										[state]="{fleetManagerId: element.id}">
-										<mat-icon style="color: #0066CC;">airline_seat_recline_normal</mat-icon>
+										<mat-icon><span class="icon-driver"></span></mat-icon>
+										{{'DRIVERS.TITLE' | translate}}
 									</button>
-									<button mat-icon-button matTooltip="{{'VEHICLE.TITLE' | translate}}"
-										[routerLink]="['vehicles']" [state]="{fleetManager: element}">
-										<mat-icon style="color: #0066CC;">directions_car</mat-icon>
+									<button mat-menu-item [routerLink]="['vehicles']" [state]="{fleetManager: element}">
+										<mat-icon><span class="icon-car"></span></mat-icon>
+										{{'VEHICLE.TITLE' | translate}}
 									</button>
-									<button mat-icon-button matTooltip="Real time" [routerLink]="['../real-time']"
+									<button mat-menu-item [routerLink]="['../real-time']"
 										[state]="{fleetManager: element}">
-										<mat-icon style="color: #0066CC;">place</mat-icon>
+										<mat-icon><span class="icon-location_on"></span></mat-icon>
+										Real time
 									</button>
-									<button mat-icon-button
-										matTooltip="{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}"
-										[routerLink]="['fleet-documents']" [state]="{fmId: element.id, documents: element.documents}">
-										<mat-icon style="color: #0066CC;">fact_check</mat-icon>
+									<button mat-menu-item [routerLink]="['fleet-documents']"
+										[state]="{fmId: element.id, documents: element.documents}">
+										<mat-icon><span class="icon-document_search"></span></mat-icon>
+										{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
 									</button>
 								</mat-menu>
 								<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}"
 									[routerLink]="['form-Fleet']" [state]="{fleetManager: element}">
-									<mat-icon style="color: #0066CC;">edit</mat-icon>
+									<mat-icon><span class="icon-edit"></span></mat-icon>
 								</button>
 								<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
 									(click)="deleteFleetManager(element.id)">
-									<mat-icon style="color: red;">delete</mat-icon>
+									<mat-icon><span class="icon-delete"></span></mat-icon>
 								</button>
 							</span>
 							<ng-template #valid>
-								<button mat-icon-button style="color: #0066CC;"
-									matTooltip="{{'OBU.VIEW_FILE' | translate}}" [matMenuTriggerFor]="menuFile">
-									<mat-icon>find_in_page</mat-icon>
+								<button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}"
+									[matMenuTriggerFor]="menuFile">
+									<mat-icon><span class="icon-document_search"></span></mat-icon>
 								</button>
 								<mat-menu #menuFile="matMenu">
 									<button mat-menu-item

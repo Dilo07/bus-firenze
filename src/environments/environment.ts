@@ -13,7 +13,8 @@ export const environment = {
   header: {
     img: 'assets/images/logo-firenze.png',
     imgBottom: 'assets/images/logo-bottom-movyon.png',
-    title: 'Bus Firenze'
+    title: 'Bus Firenze',
+    viewSwitchTheme: false
   },
   footer: {
     year: 'v. ' + version + ' 2021',

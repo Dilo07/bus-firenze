@@ -27,7 +27,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@npt/npt-map": "^13.0.7",
-    "@npt/npt-net": "^13.0.7",
+    "@npt/npt-net": "file:../npt-npt-net-13.0.8.tgz",
     "@npt/npt-obu": "file:../npt-npt-obu-13.0.8.tgz",
     "@npt/npt-template": "file:../npt-npt-template-13.0.8.tgz",
     "codice-fiscale-js": "^2.3.15",

@@ -46,15 +46,15 @@ const MENUITEMS = [
     children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
-    state: 'anagraphic-fleet', name: 'Anagraphic', type: 'link', icon: 'account_box',
+    state: 'anagraphic-fleet', name: 'Anagraphic', type: 'link', icon: 'user',
     children: [], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'vehicles', name: 'Vehicles', type: 'link', icon: 'directions_car',
+    state: 'vehicles', name: 'Vehicles', type: 'link', icon: 'car',
     children: [], roles: [ROLES.FLEETMNG]
   },
   {
-    state: 'drivers', name: 'Drivers', type: 'link', icon: 'airline_seat_recline_normal',
+    state: 'drivers', name: 'Drivers', type: 'link', icon: 'driver',
     children: [], roles: [ROLES.FLEETMNG]
   },
   {
@@ -62,11 +62,11 @@ const MENUITEMS = [
     children: [], roles: [ROLES.DRIVER]
   },
   {
-    state: 'association-driver', name: 'Association-vehicles', type: 'link', icon: 'directions_car',
+    state: 'association-driver', name: 'Association-vehicles', type: 'link', icon: 'car',
     children: [], roles: [ROLES.DRIVER]
   },
   {
-    state: 'payments', name: 'Payments', type: 'link', icon: 'euro_symbol',
+    state: 'payments', name: 'Payments', type: 'link', icon: 'ticket',
     children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG]
   },
   {
@@ -74,11 +74,11 @@ const MENUITEMS = [
     children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
-    state: 'manage-obu', name: 'Manage-obu', type: 'link', icon: 'ad_units',
+    state: 'manage-obu', name: 'Manage-obu', type: 'link', icon: 'obu',
     roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER]
   },
   {
-    state: 'appointments', name: 'Appointment', type: 'link', icon: 'contact_phone',
+    state: 'appointments', name: 'Appointment', type: 'link', icon: 'appointment',
     roles: [ROLES.MOVYON, ROLES.INSTALLER]
   },
   {
@@ -96,11 +96,6 @@ export class MenuItemService implements IMenuItemService {
   constructor(@Inject('hideBillingData') private hideBilling: boolean) { }
 
   getMenuitem(): Menu[] {
-    // nasconse se nel config app hideBilling è true altrimenti aggiunge i ruoli
-    if (!this.hideBilling) {
-      SUBMENU_ROUTES[2].roles.push(ROLES.FLEETMNG, ROLES.OPER_MOVYON, ROLES.MOVYON);
-      SUBMENU_ROUTES[3].roles.push(ROLES.OPER_MOVYON, ROLES.MOVYON);
-    }
     return MENUITEMS;
   }
 }

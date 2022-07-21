@@ -15,10 +15,10 @@
                 <mat-tab label="{{'MENU.Deposit' | translate}}">
                     <app-deposit [fleetManagerId]="fmId"></app-deposit>
                 </mat-tab>
-                <mat-tab label="{{'MENU.Billing' | translate}}">
+                <mat-tab label="{{'MENU.Billing' | translate}}" *ngIf="!hideBilling">
                     <app-billing-items [fleetManagerId]="fmId"></app-billing-items>
                 </mat-tab>
-                <mat-tab label="{{'MENU.Penalties' | translate}}" *ngIf="!roleFleet">
+                <mat-tab label="{{'MENU.Penalties' | translate}}" *ngIf="!roleFleet && !hideBilling">
                     <app-penalties [fleetManagerId]="fmId"></app-penalties>
                 </mat-tab>
             </mat-tab-group>

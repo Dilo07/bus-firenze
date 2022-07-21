@@ -37,8 +37,8 @@
         "Billing": "Billing",
         "Penalties": "Penalties",
         "Validation": "Validation",
-        "Valid-Fleet-manager": "Fleet manager",
-        "Vehicle-valid": "Vehicles",
+        "Valid-Fleet-manager": "Valid Manager",
+        "Vehicle-valid": "Valid vehicles",
         "User-Fleet": "Fleet",
         "User-Driver": "Driver",
         "Anagraphic": "Anagraphic",
@@ -164,7 +164,7 @@
         "MOBILE_VERIFIED": "mobile verified",
         "DOWNLOAD_TEMPLATE": "Download file",
         "DOCUMENT_CONFIRM": "Are you sure to valid this documents?",
-        "VALID_DOCUMENTS": "Receipt of paper documents",
+        "VALID_DOCUMENTS": "Receipt paper documents",
         "VALID_AT": "Validate at ",
         "reqForm": "Membership form",
         "idDoc": "Identity card",
@@ -178,7 +178,7 @@
         "VERIFYCF": "Verify fiscal code",
         "USERTYPE": "Company type",
         "TEXTFILE": "* To creare the fleet manager you need attach the requested file",
-        "SELECT": "Select a fleet Manager"
+        "SELECT": "Select a Fleet Manager"
     },
     "USERTYPE": {
         "PERS": "Individual company",

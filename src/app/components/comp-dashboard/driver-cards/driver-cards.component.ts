@@ -3,14 +3,21 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-driver-cards',
   templateUrl: './driver-cards.component.html',
-  styles: [
+  styles: [`
+  .border-icon {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 15px;
+    width: 42px;
+    height: 42px;
+  }
+  .font-size {
+    font-size: 40px;
+  }
+  `
   ]
 })
-export class DriverCardsComponent implements OnInit {
+export class DriverCardsComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

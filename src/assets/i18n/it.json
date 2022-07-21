@@ -5,7 +5,7 @@
     },
     "WELCOME": {
         "TITLE": "Benvenuto ",
-        "TITLE-FLEET": "Gestione fleet manager",
+        "TITLE-FLEET": "Gestione Fleet Manager",
         "TITLE-OBU": "Assegna obu",
         "TITLE-TICKET": "Aggiungi contrassegno",
         "TITLE-MANAGE-TICKET": "Gestisci contrassegno",
@@ -37,8 +37,8 @@
         "Billing": "Fatture",
         "Penalties": "Penali",
         "Validation": "Validazione",
-        "Valid-Fleet-manager": "Fleet manager",
-        "Vehicle-valid": "Veicoli",
+        "Valid-Fleet-manager": "Valida Manager",
+        "Vehicle-valid": "Valida veicoli",
         "User-Fleet": "Flotta",
         "User-Driver": "Autista",
         "Anagraphic": "Anagrafica",
@@ -178,7 +178,7 @@
         "VERIFYCF": "Verifica codice fiscale",
         "USERTYPE": "Tipo di azienda",
         "TEXTFILE": "* Per creare il fleet manager è necessario allegare tutti i file richiesti",
-        "SELECT": "Seleziona un fleet Manager",
+        "SELECT": "Seleziona un Fleet Manager",
         "LEGALPART": "Il/la sottoscritto dichiara di conoscere e di accettare specificatamente, anche ai sensi degli artt. 1341 e 1342 c.c. quanto previsto agli artt. 14. 'Durata e diritto di recesso', 16. 'Cessione del contratto', 21. 'Foro competente', 24. 'Limitazione di responsabilità', e 26. 'Modifica delle condizioni contrattuali' delle 'Norme e Condizioni di Adesione al Servizio' e agli artt. 6. 'Recesso' e 9. 'Foro competente' della lettera di nomina di cui all'Allegato 2 delle 'Norme e Condizioni di Adesione al Servizio'"
     },
     "USERTYPE": {

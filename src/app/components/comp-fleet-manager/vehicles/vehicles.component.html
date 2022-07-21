@@ -135,33 +135,33 @@
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
 							<button mat-icon-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
-								<mat-icon style="color: #0066CC;">more_horiz</mat-icon>
+								<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
 							</button>
-							<mat-menu #actionsMenuManage="matMenu">
-								<button mat-icon-button matTooltip="{{'STATISTIC.VEHICLE' | translate}}"
-									[routerLink]="['statistic']"
+							<mat-menu #actionsMenuManage="matMenu" class="menu-color">
+								<button mat-menu-item [routerLink]="['statistic']"
 									[state]="{vehicle: element, fleetManager: fleetManager}">
-									<mat-icon style="color: #0066CC;">poll</mat-icon>
+									<mat-icon><span class="icon-statistic font-size-30"></span></mat-icon>
+									{{'STATISTIC.VEHICLE' | translate}}
 								</button>
-								<button *ngIf="element.hardware" mat-icon-button
-									matTooltip="{{'VEHICLE.DOWNLOAD' | translate}}"
+								<button *ngIf="element.hardware" mat-menu-item
 									(click)="downloadManualPdf(element.hardware)">
-									<mat-icon style="color: #0066CC;">assignment_returned</mat-icon>
+									<mat-icon><span class="icon-download"></span></mat-icon>
+									{{'VEHICLE.DOWNLOAD' | translate}}
 								</button>
-								<button *ngIf="!element.deleted && (element.documents | hasDeposit: true)"
-									mat-icon-button matTooltip="{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}"
+								<button *ngIf="!element.deleted && (element.documents | hasDeposit: true)" mat-menu-item
 									(click)="associationDriver(element.id)">
-									<mat-icon style="color: #0066CC;">sync_lock</mat-icon>
+									<mat-icon><span class="icon-refresh"></span></mat-icon>
+									{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}
 								</button>
 							</mat-menu>
 							<button *ngIf="!element.deleted" mat-icon-button
 								matTooltip="{{'COMMON.ACTION.EDIT' | translate}}" (click)="editVehicle(element)">
-								<mat-icon style="color: #0066CC;">edit</mat-icon>
+								<mat-icon><span class="icon-edit"></span></mat-icon>
 							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
 								matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
 								(click)="deleteVehicle(element.id, element.documents)">
-								<mat-icon style="color: red;">delete</mat-icon>
+								<mat-icon><span class="icon-delete"></span></mat-icon>
 							</button>
 							<button *ngIf="element.deleted" mat-icon-button [disabled]="true">
 								<mat-icon style="color: #8f9a27"

@@ -30,9 +30,10 @@
                 <span class="mobile-label">{{'VEHICLE.CERTIFICATE' | translate}}</span>
                 <button mat-icon-button [disabled]="!element.certificateId || !disableViewPdf"
                     (click)="viewCertificate.emit({vehicleId: element.id, certificateId: element.certificateId})">
-                    <mat-icon [style.color]="element.certificateId ? '#0066CC' : 'grey'"
+                    <mat-icon
                         matTooltip="{{(element.certificateId ? 'VEHICLE.CERTIFICATE' : 'VEHICLE.NOCERTIFICATE') | translate}}">
-                        description</mat-icon>
+                        <span class="icon-assignment"></span>
+                    </mat-icon>
                 </button>
             </mat-cell>
         </ng-container>
@@ -49,10 +50,9 @@
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span>
-                    <button mat-icon-button style="color: #0066CC;" matTooltip="{{'OBU.VIEW_FILE' | translate}}"
-                        [disabled]="!disableViewPdf"
+                    <button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}" [disabled]="!disableViewPdf"
                         (click)="viewDeposit.emit({vehicleId: element.id, documents: element.documents})">
-                        <mat-icon>find_in_page</mat-icon>
+                        <mat-icon><span class="icon-document_search"></span></mat-icon>
                     </button>
                     <button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
                         (click)="validVehicle(element.id, element.documents)">

@@ -31,6 +31,9 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
     .mat-column-fiscalCode { max-width: 12%} /* solo valid */
     .mat-column-actions { max-width: 20%; display: table-column; text-align: end;}
   }
+  ::ng-deep .menu-color {
+    background: #E4F1F5;
+  }
   `],
 })
 export class FleetManagerComponent implements OnInit {

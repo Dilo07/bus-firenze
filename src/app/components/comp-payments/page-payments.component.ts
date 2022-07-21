@@ -15,7 +15,8 @@ export class PagePaymentsComponent implements OnInit {
   public fmId: number;
 
   constructor(
-    @Inject('authService') private authService: IAuthenticationService
+    @Inject('authService') private authService: IAuthenticationService,
+    @Inject('hideBillingData') public hideBilling: boolean
   ) { }
 
   async ngOnInit(): Promise<void> {
