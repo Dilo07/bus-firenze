@@ -41,6 +41,13 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   ::ng-deep .menu-color {
     background: #E4F1F5;
   }
+  .icon-assignment-grey:before {
+    color: grey;
+    font-weight: bold;
+  }
+  .icon-warning:before {
+    color: red;
+  }
   `],
 })
 export class VehiclesComponent implements OnInit, OnDestroy {
