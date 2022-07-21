@@ -10,7 +10,9 @@
             {{'FLEET-MANAGER.REGISTRATION' | translate}}
         </mat-card-title>
         <button mat-icon-button (click)="helper = helper === 'on' ? 'off' : 'on'">
-            <mat-icon> {{helper === 'on' ? 'close' : 'help'}}</mat-icon>
+            <mat-icon>
+                <span [ngClass]="helper === 'on' ? 'icon-delete' : 'icon-info'"></span>
+            </mat-icon>
         </button>
     </div>
     <div [@slideInOut]="helper">

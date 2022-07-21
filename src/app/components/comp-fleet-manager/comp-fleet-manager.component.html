@@ -173,11 +173,11 @@
 								</mat-menu>
 								<button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
 									(click)="validInvalidFleet(element.id, true)">
-									<mat-icon style="color: green;">done</mat-icon>
+									<span class="icon-rule font-size-30"></span>
 								</button>
 								<button mat-icon-button matTooltip="{{'FLEET-MANAGER.REFUSE' | translate}}"
 									(click)="validInvalidFleet(element.id, false)">
-									<mat-icon style="color: red;">clear</mat-icon>
+									<mat-icon><span class="icon-delete"></span></mat-icon>
 								</button>
 							</ng-template>
 						</mat-cell>
