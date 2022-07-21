@@ -25,6 +25,10 @@ import { DepositType, DocumentObu, DocumentVehicle, Vehicle } from '../../domain
   .mat-column-testing { max-width: 13%}
   .mat-column-obuId { max-width: 20%}
   }
+  .icon-assignment-grey:before {
+    color: grey;
+    font-weight: bold;
+  }
   `
   ]
 })

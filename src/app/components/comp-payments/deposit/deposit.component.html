@@ -54,9 +54,11 @@
                         <span class="mobile-label">{{'VEHICLE.RIC_DEPOSIT' | translate}}</span>
                         <button mat-icon-button [disabled]="!(element.documents | hasDeposit: false)"
                             (click)="viewDeposit(element.id, element.documents, 'deposit')">
-                            <mat-icon [style.color]="(element.documents | hasDeposit: false) ? '#0066CC' : 'grey'"
+                            <mat-icon
                                 matTooltip="{{((element.documents | hasDeposit: false)  ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
-                                description
+                                <span class="icon-assignment"
+                                    [ngClass]="(element.documents | hasDeposit: false) ? null : 'icon-assignment-grey'">
+                                </span>
                             </mat-icon>
                         </button>
                         <input style="display: none" type="file" #depositInput
@@ -64,8 +66,9 @@
                             (change)="uploadDeposit(element.id, $event, 'deposit')">
                         <button mat-icon-button *ngIf="!element.deleted && !(element.documents | hasDeposit: true)"
                             (click)="depositInput.click()">
-                            <mat-icon style="color: #0066CC;" matTooltip="{{'VEHICLE.ADDDEPOSIT' | translate}}">
-                                edit_note</mat-icon>
+                            <mat-icon matTooltip="{{'VEHICLE.ADDDEPOSIT' | translate}}">
+                                <span class="icon-edit"></span>
+                            </mat-icon>
                         </button>
                         <mat-icon *ngIf="element.documents | depositDateValid" style="margin: 10px; color: green;"
                             matTooltip="{{('VEHICLE.DEPVALID' | translate) + (element.documents | depositDateValid | date: 'dd/MM/YYYY')}}">
@@ -79,8 +82,8 @@
                         <span class="mobile-label">{{'VEHICLE.RIM_DEPOSIT' | translate}}</span>
                         <button mat-icon-button *ngIf="element.documents | hasRequest: false"
                             (click)="viewDeposit(element.id, element.documents, 'request')">
-                            <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.VIEW_DEPOSIT_REQ' | translate}}">
-                                description
+                            <mat-icon matTooltip="{{'VEHICLE.VIEW_DEPOSIT_REQ' | translate}}">
+                                <span class="icon-assignment"></span>
                             </mat-icon>
                         </button>
                         <input style="display: none" type="file" #depositReqInput
@@ -89,8 +92,9 @@
                         <button
                             *ngIf="element.deleted && !(element.documents | hasRequest: true) && !(element.documentsObu | documentRemObuFail)"
                             mat-icon-button (click)="depositReqInput.click()">
-                            <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
-                                edit_note</mat-icon>
+                            <mat-icon matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
+                                <span class="icon-edit"></span>
+                            </mat-icon>
                         </button>
                         <mat-icon *ngIf="element.documents | requestDateValid" style="margin: 10px; color: green;"
                             matTooltip="{{('VEHICLE.REQVALID' | translate) + (element.documents | requestDateValid | date: 'dd/MM/YYYY')}}">
@@ -104,8 +108,8 @@
                         <span class="mobile-label">{{'VEHICLE.REMOVE_TEST' | translate}}</span>
                         <ng-container *ngIf="element.documentsObu | documentRemObu">
                             <button mat-icon-button (click)="viewDocObu(element.id, element.documentsObu, 'remObu')">
-                                <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
-                                    description
+                                <mat-icon matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
+                                    <span class="icon-assignment"></span>
                                 </mat-icon>
                             </button>
                             <mat-icon style="margin: 10px; color: green;">task_alt</mat-icon>
@@ -113,11 +117,11 @@
                         <ng-container *ngIf="element.documentsObu | documentRemObuFail">
                             <button mat-icon-button
                                 (click)="viewDocObu(element.id, element.documentsObu, 'remObuFail')">
-                                <mat-icon style="color: #0066CC" matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
-                                    description
+                                <mat-icon matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
+                                    <span class="icon-assignment"></span>
                                 </mat-icon>
                             </button>
-                            <mat-icon style="margin: 10px; color: red;">cancel</mat-icon>
+                            <mat-icon style="margin: 10px;"><span class="icon-delete"></span></mat-icon>
                         </ng-container>
                     </mat-cell>
                 </ng-container>
