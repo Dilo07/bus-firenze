@@ -36,7 +36,6 @@ export class DepositComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() public fleetManagerId: number;
-  public roleMovyon: boolean;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
   public displayedColumns = ['id', 'vehicleState', 'plate', 'nat', 'depositDocument', 'requestDocument', 'testing', 'obuId'];
   public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
@@ -57,7 +56,6 @@ export class DepositComponent implements OnInit {
       ctrlSearch: [''],
       ctrlViewAll: [false]
     });
-    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON) || res.includes(ROLES.OPER_MOVYON));
     this.getVehicle();
   }
 
