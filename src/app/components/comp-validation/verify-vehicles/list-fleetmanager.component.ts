@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -30,8 +30,9 @@ import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-fir
     ]),
   ],
 })
-export class ListFleetmanagerComponent implements OnInit, OnDestroy {
+export class ListFleetmanagerComponent implements OnChanges, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @Input() private callApi = true;
   public dataSource = new MatTableDataSource<FleetManager>();
   public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile', 'mail'];
   public expandedElement: FleetManager | null;
@@ -45,8 +46,8 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
     private vehicleService: VehicleService
   ) { }
 
-  ngOnInit(): void {
-    this.callFleetDeposit();
+  ngOnChanges(): void {
+    if (this.callApi) { this.callFleetDeposit(); }
   }
 
   ngOnDestroy(): void {
