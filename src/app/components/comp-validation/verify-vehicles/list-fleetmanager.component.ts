@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
-import { Component, Input, OnChanges, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -30,9 +30,8 @@ import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-fir
     ]),
   ],
 })
-export class ListFleetmanagerComponent implements OnChanges, OnDestroy {
+export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() private callApi = true;
   public dataSource = new MatTableDataSource<FleetManager>();
   public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile', 'mail'];
   public expandedElement: FleetManager | null;
@@ -46,8 +45,8 @@ export class ListFleetmanagerComponent implements OnChanges, OnDestroy {
     private vehicleService: VehicleService
   ) { }
 
-  ngOnChanges(): void {
-    if (this.callApi) { this.callFleetDeposit(); }
+  ngOnInit(): void {
+    this.callFleetDeposit();
   }
 
   ngOnDestroy(): void {
@@ -58,10 +57,11 @@ export class ListFleetmanagerComponent implements OnChanges, OnDestroy {
 
   public callFleetDeposit(): void {
     this.complete = false;
-    this.validVehiclerService.getFleetDeposit().subscribe(
-      fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator),
-      () => this.complete = true,
-      () => this.complete = true);
+    this.validVehiclerService.getFleetDeposit().subscribe({
+      next: fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator),
+      error: () => this.complete = true,
+      complete: () => this.complete = true
+    });
   }
 
   public viewDeposit(event: { vehicleId: number; documents: DocumentVehicle[] }): void {

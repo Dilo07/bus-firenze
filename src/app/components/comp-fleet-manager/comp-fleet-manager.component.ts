@@ -1,5 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Inject, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -36,11 +36,10 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
   }
   `],
 })
-export class FleetManagerComponent implements OnInit, OnChanges {
+export class FleetManagerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() public isValidFleet = false;
-  @Input() private callApi = true;
 
   public dataSource = new MatTableDataSource<FleetManager>();
   public fleetManagerList: FleetManager[] = [];
@@ -72,10 +71,6 @@ export class FleetManagerComponent implements OnInit, OnChanges {
       ],
     });
     this.callGetFleetManager();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void { // per la gestione chiamate api nelle tabs
-    if (this.callApi && changes.callApi.previousValue !== undefined) { this.callGetFleetManager(); }
   }
 
   public callGetFleetManager(): void {
