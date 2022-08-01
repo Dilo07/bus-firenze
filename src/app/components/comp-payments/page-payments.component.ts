@@ -20,7 +20,7 @@ export class PagePaymentsComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON));
+    await this.authService.getUserRoles().then((res: string[]) => this.roleMovyon = res.includes(ROLES.MOVYON) || res.includes(ROLES.OPER_MOVYON));
     await this.authService.getUserRoles().then((res: string[]) => this.roleFleet = res.includes(ROLES.FLEETMNG));
     if (this.roleMovyon) {
       this.viewFleetTable = true;
