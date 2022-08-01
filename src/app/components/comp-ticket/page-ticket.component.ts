@@ -9,7 +9,7 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
   styles: [``]
 })
 export class PageTicketComponent implements OnInit {
-  public index = 0;
+  public index: number;
   public roleMovyon: boolean;
   public viewFleetTable = false;
   public fmId: number;
@@ -18,7 +18,7 @@ export class PageTicketComponent implements OnInit {
     private router: Router,
     @Inject('authService') private authService: IAuthenticationService
   ) {
-    this.index = this.router.getCurrentNavigation()?.extras.state?.index as number;
+    this.index = this.router.getCurrentNavigation()?.extras.state?.index ? this.router.getCurrentNavigation()?.extras.state?.index : 0;
   }
 
   async ngOnInit(): Promise<void> {
