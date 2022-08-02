@@ -11,7 +11,7 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
-import { ColumnSort, FleetDocumentTypes, FleetDocument, FleetManager } from '../domain/bus-firenze-domain';
+import { ColumnSort, FleetDocument, FleetDocumentTypes, FleetManager } from '../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 
 @Component({
@@ -67,14 +67,14 @@ export class FleetManagerComponent implements OnInit {
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
     this.search = this.formBuilder.group({
       ctrlSearch: [
-        this.sessionService.getSessionStorage(!this.isValidFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID)
+        this.sessionService.getSessionStorage(FIRENZE_SESSION.FLEETSEARCHMANAGE)
       ],
     });
     this.callGetFleetManager();
   }
 
   public callGetFleetManager(): void {
-    const search = this.search.get('ctrlSearch').value;
+    const search = this.search?.get('ctrlSearch').value;
     this.complete = false;
     const currentSize = this.offset * this.limit;
     this.subscription.push(this.fleetManagerService.searchFleetManager(
@@ -83,8 +83,8 @@ export class FleetManagerComponent implements OnInit {
       this.offset,
       this.limit,
       this.columnOrder)
-      .subscribe(
-        (data) => {
+      .subscribe({
+        next: (data) => {
           this.fleetManagerList.length = currentSize;
           this.fleetManagerList = this.fleetManagerList.concat(data);
           if (data.length < this.limit) {
@@ -95,9 +95,10 @@ export class FleetManagerComponent implements OnInit {
           }
           this.dataSource.data = data;
         },
-        () => this.complete = true,
-        () => { this.complete = true; this.unSubscribe(); }));
-    this.sessionService.setSessionStorage(!this.isValidFleet ? FIRENZE_SESSION.FLEETSEARCHMANAGE : FIRENZE_SESSION.FLEETSEARCHVALID, search);
+        error: () => this.complete = true,
+        complete: () => { this.complete = true; this.unSubscribe(); }
+      }));
+    if (!this.isValidFleet) { this.sessionService.setSessionStorage(FIRENZE_SESSION.FLEETSEARCHMANAGE, search); }
   }
 
   public pageChanged(event: PageEvent): void {
@@ -155,7 +156,7 @@ export class FleetManagerComponent implements OnInit {
     });
   }
 
-  public getFleetDocument(fleetManagerId: number, documents: FleetDocument[],  documentType: FleetDocumentTypes): void {
+  public getFleetDocument(fleetManagerId: number, documents: FleetDocument[], documentType: FleetDocumentTypes): void {
     this.complete = false;
     let fileId: number;
     documents.forEach(document => {

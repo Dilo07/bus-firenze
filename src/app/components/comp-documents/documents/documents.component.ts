@@ -16,6 +16,7 @@ import { Modules } from '../../domain/bus-firenze-domain';
 })
 export class DocumentsComponent implements OnDestroy {
   public colors = ['#91D6AC', '#E4F1F5', '#E89CAE', '#BBBCBC'];
+  public classImages = ['backgroundImg1', 'backgroundImg2', 'backgroundImg3Left', 'backgroundImg4'];
   private subscription: Subscription[] = [];
 
   constructor(

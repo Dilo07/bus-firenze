@@ -57,10 +57,11 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
 
   public callFleetDeposit(): void {
     this.complete = false;
-    this.validVehiclerService.getFleetDeposit().subscribe(
-      fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator),
-      () => this.complete = true,
-      () => this.complete = true);
+    this.validVehiclerService.getFleetDeposit().subscribe({
+      next: fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator),
+      error: () => this.complete = true,
+      complete: () => this.complete = true
+    });
   }
 
   public viewDeposit(event: { vehicleId: number; documents: DocumentVehicle[] }): void {
