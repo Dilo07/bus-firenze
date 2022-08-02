@@ -172,3 +172,33 @@ mat-card {
 .font-size-30 {
     font-size: 30px !important;
 }
+
+/* dashboard images */
+
+.backgroundImg1 {
+    z-index: 1;
+    background: url('src/assets/images/image_movyon.png') no-repeat;
+}
+
+.backgroundImg2 {
+    z-index: 1;
+    background: url('src/assets/images/image_movyon2.png') no-repeat;
+}
+
+/* .backgroundImg2{
+    position: absolute;
+    z-index: 1;
+    transform: rotate(80.62deg);
+  } */
+
+.backgroundImg3 {
+    z-index: 1;
+    background: url('src/assets/images/image_movyon3.png') no-repeat;
+}
+
+/* .backgroundImg3 {
+    position: absolute;
+    z-index: 1;
+    transform: rotate(80.62deg);
+    left: 40%;
+} */
