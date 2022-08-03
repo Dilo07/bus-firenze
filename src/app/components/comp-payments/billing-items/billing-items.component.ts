@@ -1,8 +1,6 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { IAuthenticationService } from '@npt/npt-template';
 import moment from 'moment';
 import { Subscription } from 'rxjs';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
@@ -16,27 +14,25 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
   .mat-elevation-z8 { margin: 20px; }
   table { width: 100%; }
   @media(min-width: 1180px) {
-    .mat-column-expandButton { max-width: 10%}
     .mat-column-gopId { max-width: 10%;}
-    .mat-column-billingType { max-width: 20%;}
+    .mat-column-billingType { max-width: 40%;}
     .mat-column-price { max-width: 10%;}
     .mat-column-quantity { max-width: 10%;}
     .mat-column-priceTot { max-width: 10%;}
+    .mat-column-button { max-width: 20%; display: table-column; text-align: end;}
+  }
+  ::ng-deep .menu-style {
+    padding: 5px;
+    background: #E4F1F5;
+    min-width: 400px;
   }
   `
-  ],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+  ]
 })
 export class BillingItemsComponent implements OnInit, OnDestroy {
   @Input() public fleetManagerId: number;
   public dataSource = new MatTableDataSource<BillingItemsAgg>();
-  public displayedColumns = ['expandButton', 'gopId', 'billingType', 'price', 'quantity', 'priceTot'];
+  public displayedColumns = ['gopId', 'billingType', 'price', 'quantity', 'priceTot', 'button'];
   public complete = true;
   public billingStatus = [BILLING_STATUS.unknown, BILLING_STATUS.pending, BILLING_STATUS.success, BILLING_STATUS.failed];
   public maxDate = moment().toDate();
