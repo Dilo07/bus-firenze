@@ -19,10 +19,10 @@ import { DepositType, DocumentObu, DocumentVehicle, Vehicle } from '../../domain
   .mat-column-id { max-width: 10%}
   .mat-column-vehicleState { max-width: 10%}
   .mat-column-plate { max-width: 10%}
-  .mat-column-nat { max-width: 10%}
+  .mat-column-nat { max-width: 5%}
   .mat-column-depositDocument { max-width: 13%}
   .mat-column-requestDocument { max-width: 13%}
-  .mat-column-testing { max-width: 13%}
+  .mat-column-testing { max-width: 18%}
   .mat-column-obuId { max-width: 20%}
   }
   .icon-assignment-grey:before {

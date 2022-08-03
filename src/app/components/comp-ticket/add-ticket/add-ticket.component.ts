@@ -13,7 +13,7 @@ import { IAuthenticationService } from '@npt/npt-template';
   selector: 'app-add-ticket',
   templateUrl: './add-ticket.component.html',
   styles: [`
-  .example-container { width: 100%; margin: 10px; }
+  .example-container { width: 99%; margin: 10px; }
   .mat-column-actions { max-width: 20%; display: table-column;}
   `
   ]
