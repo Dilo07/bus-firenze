@@ -15,7 +15,8 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
   table { width: 100%; }
   @media(min-width: 1180px) {
     .mat-column-gopId { max-width: 10%;}
-    .mat-column-billingType { max-width: 40%;}
+    .mat-column-billingType { max-width: 30%;}
+    .mat-column-status { max-width: 10%;}
     .mat-column-price { max-width: 10%;}
     .mat-column-quantity { max-width: 10%;}
     .mat-column-priceTot { max-width: 10%;}
@@ -32,9 +33,9 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
 export class BillingItemsComponent implements OnInit, OnDestroy {
   @Input() public fleetManagerId: number;
   public dataSource = new MatTableDataSource<BillingItemsAgg>();
-  public displayedColumns = ['gopId', 'billingType', 'price', 'quantity', 'priceTot', 'button'];
+  public displayedColumns = ['gopId', 'billingType', 'status', 'price', 'quantity', 'priceTot', 'button'];
   public complete = true;
-  public billingStatus = [BILLING_STATUS.unknown, BILLING_STATUS.pending, BILLING_STATUS.success, BILLING_STATUS.failed];
+  public billingStatus = [BILLING_STATUS.all, BILLING_STATUS.unknown, BILLING_STATUS.pending, BILLING_STATUS.success, BILLING_STATUS.failed];
   public maxDate = moment().toDate();
   public formGroup: FormGroup;
   public expandedElement: BillingItemsAgg | null;
@@ -63,7 +64,7 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
     this.complete = false;
     const start = moment(this.formGroup.get('ctrlRangeStart').value).format('yyyy-MM-DD');
     const end = moment(this.formGroup.get('ctrlRangeEnd').value).format('yyyy-MM-DD');
-    const billingStatus = this.formGroup.get('ctrlBillingStatus').value;
+    const billingStatus = this.formGroup.get('ctrlBillingStatus').value === BILLING_STATUS.all ? null : this.formGroup.get('ctrlBillingStatus').value;
     this.subscription.push(this.billingItemsService.getBillingItemsAggregate(start, end, billingStatus, this.fleetManagerId).subscribe({
       next: items => this.dataSource.data = items,
       error: () => this.complete = true,

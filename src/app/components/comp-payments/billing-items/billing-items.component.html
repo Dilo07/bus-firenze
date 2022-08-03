@@ -17,7 +17,7 @@
                         <mat-label> {{'BILLING_ITEMS.STATUS' | translate}}</mat-label>
                         <mat-select formControlName="ctrlBillingStatus" required>
                             <mat-option *ngFor="let status of billingStatus;" [value]="status">
-                                {{status}}
+                                {{'BILLING_STATUS.' + status | translate}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -60,6 +60,14 @@
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">{{'BILLING_ITEMS.TYPE' | translate }}</span>
                 {{'BILLING_TYPE.' + element.billingType | translate}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.STATUS' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'BILLING_ITEMS.STATUS' | translate }}</span>
+                {{'BILLING_STATUS.' + element.billingStatus | translate}}
             </mat-cell>
         </ng-container>
 

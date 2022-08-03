@@ -446,6 +446,13 @@
         "PENAL_DATE": "Penal date",
         "NO_DATA": "Nobody penal found"
     },
+    "BILLING_STATUS": {
+        "ALL": "All",
+        "UNKNOWN": "UNKNOWN",
+        "PENDING": "PENDING",
+        "SUCCESS": "SUCCESS",
+        "FAILED": "FAILED"
+    },
     "BILLING_TYPE": {
         "INSTALL": "Install",
         "DELTA_NOT_MERGEABLE": "Monthly fee",
@@ -556,6 +563,10 @@
             "installer": "Installer didn't install this obu",
             "associate_to_other_domains": "The obu to be replaced is associated to another domain, remove it from all domains",
             "ticket": "Not is possible remove a OBU from vehicle with active ticket"
+        },
+        "penalty": {
+            "add": "Error in add penalty",
+            "duplicate": "Duplicate penalty for the vehicle"
         },
         "ines": {
             "request": "Ines service unavailable",
