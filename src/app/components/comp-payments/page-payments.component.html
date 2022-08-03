@@ -11,15 +11,15 @@
             <app-table-fleet (callManageTicket)="viewFleetTable = false; fmId= $event"></app-table-fleet>
         </div>
         <ng-template #vehicleTicket>
-            <mat-tab-group mat-align-tabs="center">
+            <mat-tab-group mat-align-tabs="center" [selectedIndex]="index" (selectedTabChange)="index = $event.index">
                 <mat-tab label="{{'MENU.Deposit' | translate}}">
-                    <app-deposit [fleetManagerId]="fmId"></app-deposit>
+                    <app-deposit [fleetManagerId]="fmId" *ngIf="index === 0"></app-deposit>
                 </mat-tab>
                 <mat-tab label="{{'MENU.Billing' | translate}}" *ngIf="!hideBilling">
-                    <app-billing-items [fleetManagerId]="fmId"></app-billing-items>
+                    <app-billing-items [fleetManagerId]="fmId" *ngIf="index === 1"></app-billing-items>
                 </mat-tab>
                 <mat-tab label="{{'MENU.Penalties' | translate}}" *ngIf="!roleFleet && !hideBilling">
-                    <app-penalties [fleetManagerId]="fmId"></app-penalties>
+                    <app-penalties [fleetManagerId]="fmId" *ngIf="index === 2"></app-penalties>
                 </mat-tab>
             </mat-tab-group>
         </ng-template>

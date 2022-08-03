@@ -13,6 +13,7 @@ export class PagePaymentsComponent implements OnInit {
   public roleFleet: boolean;
   public viewFleetTable = false;
   public fmId: number;
+  public index = 0;
 
   constructor(
     @Inject('authService') private authService: IAuthenticationService,
