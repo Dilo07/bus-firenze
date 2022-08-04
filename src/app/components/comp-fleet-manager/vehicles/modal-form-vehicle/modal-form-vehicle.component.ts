@@ -90,15 +90,12 @@ export class ModalFormVehicleComponent implements OnInit {
     newVehicle.contractType = this.formGroup.get('ctrlContract').value;
     newVehicle.allowContacted = this.formGroup.get('ctrlConsent').value;
     this.subscription.push(
-      this.vehicleService.addVehicle(this.depositDocument, this.libDocument, newVehicle, this.data?.fleetManagerId).subscribe(
-        () => null,
-        (err) => {
-          if (err.error) {
-            this.snackBar.showMessage(err.error.i18nKey, 'ERROR');
-          }
+      this.vehicleService.addVehicle(this.depositDocument, this.libDocument, newVehicle, this.data?.fleetManagerId).subscribe({
+        error: (err) => {
+          if (err.error) { this.snackBar.showMessage(err.error.i18nKey, 'ERROR'); }
         },
-        () => { this.snackBar.showMessage('VEHICLE.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
-      ));
+        complete: () => { this.snackBar.showMessage('VEHICLE.ADD_SUCCESS', 'INFO'); this.dialogRef.close(true); }
+      }));
   }
 
   public updateVehicle(): void {
@@ -107,14 +104,12 @@ export class ModalFormVehicleComponent implements OnInit {
     editVehicle.vehicle.numAxis = this.formGroup.get('ctrlNumAxis').value;
     editVehicle.vehicle.maxWeight = this.formGroup.get('ctrlMaxWeight').value;
     editVehicle.vehicle.allowContacted = this.formGroup.get('ctrlConsent').value;
-    this.subscription.push(this.vehicleService.updateVehicle(editVehicle.vehicle, this.data?.fleetManagerId).subscribe(
-      () => null,
-      (err) => {
-        if (err.error) {
-          this.snackBar.showMessage(err.error.i18nKey, 'ERROR');
-        }
+    this.subscription.push(this.vehicleService.updateVehicle(editVehicle.vehicle, this.data?.fleetManagerId).subscribe({
+      error: (err) => {
+        if (err.error) { this.snackBar.showMessage(err.error.i18nKey, 'ERROR'); }
       },
-      () => { this.snackBar.showMessage('VEHICLE.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }));
+      complete: () => { this.snackBar.showMessage('VEHICLE.EDIT_SUCCESS', 'INFO'); this.dialogRef.close(true); }
+    }));
   }
 
   public uploadFile(event: any, isLib: boolean): void {

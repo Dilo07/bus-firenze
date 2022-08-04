@@ -76,15 +76,15 @@ export class StatisticComponent implements OnInit {
       req1: this.statisticService.getVehicleTrip(this.vehicle.id, start, end, this.fleetManager?.id),
       req2: this.statisticService.getVehicleTripList(this.vehicle.id, inner, start, end, this.fleetManager?.id)
     })
-      .subscribe(
-        ({ req1, req2 }) => {
+      .subscribe({
+        next: ({ req1, req2 }) => {
           this.vehicleStatTrip = req1;
           this.vehicleTripPersistence = req2;
           this.drawLineTrip();
         },
-        () => this.complete = true,
-        () => this.complete = true
-      ));
+        error: () => this.complete = true,
+        complete: () => this.complete = true
+      }));
   }
 
   private drawLineTrip(): void {
@@ -95,7 +95,7 @@ export class StatisticComponent implements OnInit {
     this.vehicleTripPersistence.forEach((trip: VehicleTripPersistence) => {
       const text = this.generateLineStringText(trip);
       this.mapChild.drawLine(
-        [trip.shape.points], FirenzeMapUtils.layerEnum.LINE_STATISTICVEHICLE, FirenzeMapUtils.style.SECTION_LINKS, text);
+        [trip.shape.points], FirenzeMapUtils.layerEnum.LINE_STATISTICVEHICLE, FirenzeMapUtils.style.SECTION_LINKS_GREEN, text);
     });
 
     this.mapChild.changeFeatureColorPointEvent('click', [FirenzeMapUtils.layerEnum.LINE_STATISTICVEHICLE],
