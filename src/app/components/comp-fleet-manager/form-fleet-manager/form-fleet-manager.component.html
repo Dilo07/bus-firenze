@@ -71,9 +71,10 @@
                                 autocomplete="off" maxlength="25" required
                                 [readonly]="(verifyOtp && register) || (!register && data?.name)"
                                 [style.opacity]="!register && data ? '0.5' : ''">
-                            <button matSuffix mat-icon-button matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}"
+                            <button matSuffix mat-icon-button libDebounceClick [debounceTime]="1000"
+                                matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}"
                                 *ngIf="register && !formGroup.get('ctrlCell').invalid && !verifyOtp"
-                                (click)="modalOTP()">
+                                (debounceClick)="modalOTP()">
                                 <mat-icon>mobile_screen_share</mat-icon>
                             </button>
                             <mat-icon matSuffix *ngIf="register && verifyOtp"

@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NptMapModule } from '@npt/npt-map';
-import { MaterialModule } from '@npt/npt-template';
+import { DebounceClickModule, MaterialModule } from '@npt/npt-template';
 import { MatSelectFilterModule } from 'mat-select-filter';
 import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
@@ -60,6 +60,7 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
     SharedComponentsModule,
     HttpClientModule,
     MaterialModule,
+    DebounceClickModule,
     MatSelectFilterModule,
     FlexLayoutModule,
     FormsModule,
