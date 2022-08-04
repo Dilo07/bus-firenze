@@ -100,6 +100,7 @@ export const FLEETMNG_TYPE = Object.freeze({
 
 
 export const BILLING_STATUS = {
+  all: 'ALL',
   unknown: 'UNKNOWN',
   pending: 'PENDING',
   success: 'SUCCESS',

@@ -1,37 +1,8 @@
-<mat-table [dataSource]="dataSource" style="background-color: white" matSort>
-    <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <span class="mobile-label">id</span>
-            {{element.id}}
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="startDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'BILLING_ITEMS.START' | translate }} </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <span class="mobile-label">{{'BILLING_ITEMS.START' | translate }}</span>
-            {{element.startPeriod.day + '/' + element.startPeriod.month + '/' + element.startPeriod.year  }}
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="endDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'BILLING_ITEMS.END' | translate }} </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <span class="mobile-label">{{'BILLING_ITEMS.END' | translate }}</span>
-            {{element.endPeriod.day + '/' + element.endPeriod.month + '/' + element.endPeriod.year }}
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="price">
-        <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICE' | translate }} </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <span class="mobile-label">{{'BILLING_ITEMS.PRICE' | translate }}</span>
-            {{element.price}} €
-        </mat-cell>
-    </ng-container>
-
-    <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-        [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
-</mat-table>
+<mat-list>
+    <div *ngFor="let item of billingItems">
+        <mat-list-item> {{item.lpn}} ({{item.lpnNat}}) -
+            {{item.startPeriod.day + '/' + item.startPeriod.month + '/' + item.startPeriod.year }} :
+            {{item.endPeriod.day + '/' + item.endPeriod.month + '/' + item.endPeriod.year }} -
+            {{item.price}} €</mat-list-item>
+    </div>
+</mat-list>

@@ -12,17 +12,20 @@
         </mat-card-title>
         <form [formGroup]="formGroup" fxLayout="column" fxLayoutGap="20px">
             <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
-                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                    fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.NAME' | translate}}</mat-label>
                     <input matInput type="text" formControlName="ctrlName" maxlength="25" required>
                     <mat-error>{{'FLEET-MANAGER.INSERT_NAME' | translate}}</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                    fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.SURNAME' | translate}}</mat-label>
                     <input matInput type="text" formControlName="ctrlSurname" maxlength="25" required>
                     <mat-error>{{'FLEET-MANAGER.INSERT_SURNAME' | translate}}</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                    fxFlex.gt-md="30">
                     <mat-label>E-Mail</mat-label>
                     <input matInput type="text" formControlName="ctrlMail" maxlength="100" required>
                     <mat-error *ngIf="formGroup.get('ctrlMail').invalid">{{'FLEET-MANAGER.INSERT_MAIL' | translate}}
@@ -30,7 +33,8 @@
                 </mat-form-field>
             </div>
             <div *ngIf="cellularRequired || roleDriver" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
-                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                    fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.CELL' | translate}}</mat-label>
                     <input matInput type="text" ng2TelInput #countryTel
                         [ng2TelInputOptions]="{initialCountry: 'it', separateDialCode: true}"
@@ -52,13 +56,13 @@
                 [state]="{fleetManagerId: fleetManagerId}" class="backButton">
                 {{'FLEET-MANAGER.BACK' | translate}}
             </button>
-            <button *ngIf="!driver" mat-button [disabled]="formGroup.invalid" class="actionButtons"
-                (click)="addDriver()">
+            <button *ngIf="!driver" mat-button libDebounceClick [disabled]="formGroup.invalid" class="actionButtons"
+                (debounceClick)="addDriver()">
                 {{'FLEET-MANAGER.SAVE' | translate}}
             </button>
-            <button *ngIf="driver" mat-button
+            <button *ngIf="driver" mat-button libDebounceClick
                 [disabled]="formGroup.invalid || !formGroup.dirty || (roleDriver && !verifyOtp)" class="actionButtons"
-                (click)="editDriver()">
+                (debounceClick)="editDriver()">
                 {{'FLEET-MANAGER.EDIT' | translate}}
             </button>
         </div>

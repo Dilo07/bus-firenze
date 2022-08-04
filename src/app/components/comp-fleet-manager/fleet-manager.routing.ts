@@ -28,10 +28,6 @@ const routes: Routes = [
     path: 'form-Driver',
     component: FormDriverComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.FLEETMNG] }
   },
-  /*  {
-     path: 'anagraphic-fleet',
-     component: AnagraphicFleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.FLEETMNG] }
-   }, */
   {
     path: 'drivers',
     component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON] }
@@ -43,15 +39,7 @@ const routes: Routes = [
   {
     path: 'vehicles/statistic', // per raggiungere le statistiche da fm
     component: StatisticComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
-  },
-/*   {
-    path: 'anagraphic-driver',
-    component: AnagraphicDriverComponent, canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.DRIVER] }
-  },
-  {
-    path: 'association-driver',
-    component: AssociationVehiclesComponent, canActivate: [AuthGuard, DriveGuard], data: { roles: [ROLES.DRIVER] }
-  } */
+  }
 ];
 
 @NgModule({

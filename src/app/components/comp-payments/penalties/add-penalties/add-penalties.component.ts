@@ -61,33 +61,31 @@ export class AddPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
   public getVehiclesByManagerId(): void {
     this.viewFleetTable = false;
     this.complete = false;
-    this.vehicleService.getVehiclesById(false, this.fleetId).subscribe(
+    this.subscription.push(this.vehicleService.getVehiclesById(false, this.fleetId).subscribe(
       vehicles => (this.dataSource.data = vehicles, this.dataSource.sort = this.sort, this.dataSource.paginator = this.paginator),
       () => this.viewFleetTable = true,
       () => this.complete = true
-    );
+    ));
   }
 
   public modalPenal(vehicleid: number, fmId: number): void {
     const dialogRef = this.dialog.open(ModalPenalComponent, {
       width: '50%',
-      height: '50%',
+      height: '80%',
       data: { vehicleId: vehicleid, fleetId: fmId },
       autoFocus: false
     });
-    this.subscription.push(dialogRef.afterClosed().subscribe(
+    dialogRef.afterClosed().subscribe(
       (penal: AddPenal) => {
         if (penal) { this.addPenal(penal.penalType, fmId, vehicleid, penal.date); }
       }
-    ));
+    );
   }
 
   private addPenal(penalType: number, fmId: number, vehicleId: number, date: string): void {
-    this.billingItemService.addPenal(penalType, fmId, vehicleId, date).subscribe(
-      () => null,
-      () => null,
-      () => this.snackBar.showMessage('PENALTIES.SUCCESS', 'INFO')
-    );
+    this.subscription.push(this.billingItemService.addPenal(penalType, fmId, vehicleId, date).subscribe({
+      complete: () => this.snackBar.showMessage('PENALTIES.SUCCESS', 'INFO')
+    }));
   }
 
 }

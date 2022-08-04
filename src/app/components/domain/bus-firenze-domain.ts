@@ -208,6 +208,7 @@ export interface BillingItems {
   fmId: number;
   vehicleId: number;
   lpn: string;
+  lpnNat: string;
   billingSapId: number;
   billingState: string;
   startPeriod: LocalDate;
