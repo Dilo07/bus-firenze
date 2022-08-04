@@ -4,7 +4,8 @@
         <mat-list role="list">
             <mat-list-item role="listitem">
                 <p mat-line>1. {{'FLEET-MANAGER.STEP-1' | translate}}
-                    <a class="link" (click)="downloadTemplate()">{{'FLEET-MANAGER.NEED_DOC' | translate}}</a>.
+                    <a class="link" libDebounceClick (debounceClick)="downloadTemplate()">
+                        {{'FLEET-MANAGER.NEED_DOC' | translate}}</a>.
                 </p>
             </mat-list-item>
             <mat-list-item role="listitem">
@@ -18,8 +19,7 @@
                 </p>
             </mat-list-item>
             <mat-list-item role="listitem">
-                <p mat-line>{{'FLEET-MANAGER.STEP-5' | translate}}
-                </p>
+                <p mat-line>{{'FLEET-MANAGER.STEP-5' | translate}}</p>
             </mat-list-item>
         </mat-list>
     </mat-card-content>
