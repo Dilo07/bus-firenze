@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { MaterialModule } from '@npt/npt-template';
+import { MaterialModule, SharedLibComponentsModule } from '@npt/npt-template';
 import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 import { PaymentsRoutingModule } from './payments.routing';
@@ -37,6 +37,7 @@ import { AddPenaltiesComponent } from './penalties/add-penalties/add-penalties.c
     FormsModule,
     ReactiveFormsModule,
     SharedComponentsModule,
+    SharedLibComponentsModule,
     PipesModule
   ]
 })

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { IAuthenticationService, SnackBar } from '@npt/npt-template';
+import { FileViewer, IAuthenticationService, SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
@@ -38,7 +38,7 @@ export class DepositComponent implements OnInit {
   @Input() public fleetManagerId: number;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
   public displayedColumns = ['id', 'vehicleState', 'plate', 'nat', 'depositDocument', 'requestDocument', 'testing', 'obuId'];
-  public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
+  public src: FileViewer = { type: '', url: '', fileName: '' };
   public search: FormGroup;
   public complete = true;
 
@@ -79,12 +79,14 @@ export class DepositComponent implements OnInit {
       .subscribe((data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const objectUrl = window.URL.createObjectURL(data.body);
-          this.src = { url: objectUrl, type: data.body.type };
+          const contentDispositionHeader = data.headers.get('Content-Disposition');
+          const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+          this.src = { url: objectUrl, type: data.body.type, fileName: filename };
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data.body);
           reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type };
+            this.src = { url: reader.result, type: data.body.type, fileName: '' };
           };
         }
       }));
@@ -98,12 +100,14 @@ export class DepositComponent implements OnInit {
         .subscribe((data: HttpResponse<Blob>) => {
           if (data.body.type === 'application/pdf') { // se è un pdf
             const objectUrl = window.URL.createObjectURL(data.body);
-            this.src = { url: objectUrl, type: data.body.type };
+            const contentDispositionHeader = data.headers.get('Content-Disposition');
+            const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+            this.src = { url: objectUrl, type: data.body.type, fileName: filename };
           } else { // altrimenti se è un'immagine
             const reader = new FileReader();
             reader.readAsDataURL(data.body);
             reader.onload = () => {
-              this.src = { url: reader.result, type: data.body.type };
+              this.src = { url: reader.result, type: data.body.type, fileName: '' };
             };
           }
         }));

@@ -6,11 +6,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { FileViewer, ViewFileComponent } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
-import { ViewFileComponent } from 'src/app/shared/utils/components/view-file/view-file.component';
 import { STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
 import { DepositType, DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
@@ -61,7 +61,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public search: FormGroup;
   public complete = true;
   public statusVehicle = STATUS_VEHICLE;
-  public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
+  public src: FileViewer = { type: '', url: '', fileName: '' };
 
   private subscription: Subscription[] = [];
 
@@ -196,12 +196,14 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       .subscribe((data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const objectUrl = window.URL.createObjectURL(data.body);
-          this.src = { url: objectUrl, type: data.body.type };
+          const contentDispositionHeader = data.headers.get('Content-Disposition');
+          const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+          this.src = { url: objectUrl, type: data.body.type, fileName: filename };
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data.body);
           reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type };
+            this.src = { url: reader.result, type: data.body.type, fileName: '' };
           };
         }
       }));

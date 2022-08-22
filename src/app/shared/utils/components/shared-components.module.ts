@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ViewFileComponent } from './view-file/view-file.component';
 import { MaterialModule } from '@npt/npt-template';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TableFleetComponent } from './table-fleet/table-fleet.component';
@@ -11,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    ViewFileComponent,
     TableFleetComponent
   ],
   imports: [
@@ -21,11 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
-    PdfViewerModule,
     PipesModule
   ],
   exports: [
-    ViewFileComponent,
     TableFleetComponent
   ]
 })

@@ -2,6 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { FileViewer } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FleetDocument } from '../../domain/bus-firenze-domain';
@@ -14,7 +15,7 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
   ]
 })
 export class FleetDocumentsComponent implements OnDestroy {
-  public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
+  public src: FileViewer = { type: '', url: '', fileName: '' };
   public complete = true;
   public fmId: number;
   public documents: FleetDocument[];
@@ -41,12 +42,14 @@ export class FleetDocumentsComponent implements OnDestroy {
       (data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const URL = window.URL.createObjectURL(data.body);
-          this.src = { url: URL, type: data.body.type };
+          const contentDispositionHeader = data.headers.get('Content-Disposition');
+          const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+          this.src = { url: URL, type: data.body.type, fileName: filename };
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data.body);
           reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type };
+            this.src = { url: reader.result, type: data.body.type, fileName: '' };
           };
         }
       },

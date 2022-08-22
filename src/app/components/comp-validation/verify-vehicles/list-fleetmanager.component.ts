@@ -3,6 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { FileViewer } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ValidVehicleService } from 'src/app/services/valid-vehicle.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
@@ -36,7 +37,7 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile', 'mail'];
   public expandedElement: FleetManager | null;
   public complete = true;
-  public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
+  public src: FileViewer = { type: '', url: '', fileName: '' };
 
   private subscription: Subscription[] = [];
 
@@ -76,12 +77,14 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
         next: (data: HttpResponse<Blob>) => {
           if (data.body.type === 'application/pdf') { // se è un pdf
             const objectUrl = window.URL.createObjectURL(data.body);
-            this.src = { url: objectUrl, type: data.body.type };
+            const contentDispositionHeader = data.headers.get('Content-Disposition');
+            const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+            this.src = { url: objectUrl, type: data.body.type, fileName: filename };
           } else { // altrimenti se è un'immagine
             const reader = new FileReader();
             reader.readAsDataURL(data.body);
             reader.onload = () => {
-              this.src = { url: reader.result, type: data.body.type };
+              this.src = { url: reader.result, type: data.body.type, fileName: '' };
             };
           }
         },
@@ -97,12 +100,14 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
         next: (data: HttpResponse<Blob>) => {
           if (data.body.type === 'application/pdf') { // se è un pdf
             const objectUrl = window.URL.createObjectURL(data.body);
-            this.src = { url: objectUrl, type: data.body.type };
+            const contentDispositionHeader = data.headers.get('Content-Disposition');
+            const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+            this.src = { url: objectUrl, type: data.body.type, fileName: filename };
           } else { // altrimenti se è un'immagine
             const reader = new FileReader();
             reader.readAsDataURL(data.body);
             reader.onload = () => {
-              this.src = { url: reader.result, type: data.body.type };
+              this.src = { url: reader.result, type: data.body.type, fileName: '' };
             };
           }
         },
