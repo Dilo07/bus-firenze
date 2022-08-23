@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule, SharedLibComponentsModule } from '@npt/npt-template';
-import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
 import { ListFleetmanagerComponent } from './verify-vehicles/list-fleetmanager.component';
 import { PageValidComponent } from './page-valid.component';

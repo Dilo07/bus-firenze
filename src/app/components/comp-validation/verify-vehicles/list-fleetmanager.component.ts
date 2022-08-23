@@ -72,6 +72,7 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
       if (!document.valid) { depositId = document.fileId; depositType = document.type; }
     });
     this.complete = false;
+    this.src.type = null;
     this.subscription.push(this.vehicleService.getDeposit(event.vehicleId, depositType, depositId)
       .subscribe({
         next: (data: HttpResponse<Blob>) => {
@@ -95,6 +96,7 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
 
   public viewCertificate(event: { vehicleId: number; certificateId: number }): void {
     this.complete = false;
+    this.src.type = null;
     this.subscription.push(this.vehicleService.getCertificateFile(event.vehicleId, event.certificateId)
       .subscribe({
         next: (data: HttpResponse<Blob>) => {
