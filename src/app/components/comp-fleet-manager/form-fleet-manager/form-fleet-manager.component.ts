@@ -240,35 +240,42 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         }));
   }
 
-  public uploadFile(event: any, typeFile: number): void {
-    if (event.target.files.length > 0) {
-      const type = event.target.files[0].type;
+  public uploadFile(files: File[], typeFile: number): void {
+    if (files.length > 0) {
+      const type = files[0].type;
+      const size = files[0].size;
       switch (typeFile) {
         case 1:
-          if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png') {
-            this.fileModule = event.target.files[0];
-          } else {
+          if (type !== 'application/pdf' && type !== 'image/jpeg' && type !== 'image/png') {
             this.fileModule = null;
             this.formGroup.patchValue({ ctrlFileModule: '' });
             this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR');
+          } else if (size > 2097152) { // dimensione massima
+            this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
+          } else {
+            this.fileModule = files[0];
           }
           break;
         case 2:
-          if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png') {
-            this.fileIdentityCard = event.target.files[0];
-          } else {
+          if (type !== 'application/pdf' && type !== 'image/jpeg' && type !== 'image/png') {
             this.fileIdentityCard = null;
             this.formGroup.patchValue({ ctrlFileIdentityCrd: '' });
             this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR');
+          } else if (size > 2097152) { // dimensione massima
+            this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
+          } else {
+            this.fileIdentityCard = files[0];
           }
           break;
         case 3:
-          if (type === 'application/pdf' || type === 'image/jpeg' || type === 'image/png') {
-            this.fileCommerceReg = event.target.files[0];
-          } else {
+          if (type !== 'application/pdf' && type !== 'image/jpeg' && type !== 'image/png') {
             this.fileCommerceReg = null;
             this.formGroup.patchValue({ ctrlFileCommerceReg: '' });
             this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR');
+          } else if (size > 2097152) { // dimensione massima
+            this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
+          } else {
+            this.fileCommerceReg = files[0];
           }
           break;
       }
