@@ -129,7 +129,7 @@ export class ModalFormVehicleComponent implements OnInit {
         this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO');
       }
     } else {
-      if (isLib && this.libDocument) { // nel caso in cui annulla nella seleziona file rimane il file precedente e il validatore libretto è valido
+      if (isLib && this.libDocument) { // nel caso in cui annulla nella seleziona file, rimane il file precedente e il validatore libretto è valido
         this.formGroup.get('ctrlLibretto').setValidators(null);
         this.formGroup.get('ctrlLibretto').updateValueAndValidity();
       }

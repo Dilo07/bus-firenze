@@ -279,6 +279,27 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           }
           break;
       }
+    } else {
+      switch (typeFile) { // nel caso in cui annulla nella seleziona file, rimane il file precedente e il validatore rimane valido
+        case 1:
+          if (this.fileModule) {
+            this.formGroup.get('ctrlFileModule').setValidators(null);
+            this.formGroup.get('ctrlFileModule').updateValueAndValidity();
+          }
+          break;
+        case 2:
+          if (this.fileIdentityCard) {
+            this.formGroup.get('ctrlFileIdentityCrd').setValidators(null);
+            this.formGroup.get('ctrlFileIdentityCrd').updateValueAndValidity();
+          }
+          break;
+        case 3:
+          if (this.fileCommerceReg) {
+            this.formGroup.get('ctrlFileCommerceReg').setValidators(null);
+            this.formGroup.get('ctrlFileCommerceReg').updateValueAndValidity();
+          }
+          break;
+      }
     }
   }
 
