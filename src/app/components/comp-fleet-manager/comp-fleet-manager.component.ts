@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { IAuthenticationService, SessionService } from '@npt/npt-template';
+import { FileViewer, IAuthenticationService, SessionService } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
@@ -47,7 +47,7 @@ export class FleetManagerComponent implements OnInit {
   public search: FormGroup;
   public complete = true;
   public roleOpMovyon: boolean;
-  public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
+  public src: FileViewer = { type: '', url: '', fileName: '' };
 
   private offset = 0;
   private limit = 10;
@@ -168,12 +168,14 @@ export class FleetManagerComponent implements OnInit {
       (data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const URL = window.URL.createObjectURL(data.body);
-          this.src = { url: URL, type: data.body.type };
+          const contentDispositionHeader = data.headers.get('Content-Disposition');
+          const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+          this.src = { url: URL, type: data.body.type, fileName: filename };
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data.body);
           reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type };
+            this.src = { url: reader.result, type: data.body.type, fileName: '' };
           };
         }
       },
@@ -181,15 +183,6 @@ export class FleetManagerComponent implements OnInit {
       () => this.complete = true
     ));
   }
-
-  /* public modalDocuments(fleetManageId: number, documents: FleetDocument[]): void{
-    const dialogRef = this.dialog.open(ModalFleetDocumentsComponent, {
-      width: '50%',
-      height: '50%',
-      autoFocus: false,
-      data: {fmId: fleetManageId, documents: documents}
-    });
-  } */
 
   public sortData(event: { active: string; direction: string }): void {
     this.columnOrder.active = event.active;

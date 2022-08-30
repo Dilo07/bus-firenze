@@ -22,8 +22,8 @@ export class PageValidComponent {
   public onTabChanged(event: MatTabChangeEvent): void {
     this.index = event.index;
     // chiudo la finestra del pdf view file se è aperta
-    if (this.listFleet.src.type) {
-      this.listFleet.src = { type: '', url: '' };
+    if (this.listFleet?.src.type) {
+      this.listFleet.src = { type: '', url: '', fileName: '' };
     }
   }
 }

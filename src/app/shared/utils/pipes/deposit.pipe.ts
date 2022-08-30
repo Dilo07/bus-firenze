@@ -94,6 +94,22 @@ export class DocumentRemoveObu implements PipeTransform {
   }
 }
 
+@Pipe({
+  name: 'documentRemObuFree'
+})
+export class DocumentRemoveObuFree implements PipeTransform {
+  transform(documents: DocumentObu[]): boolean {
+    let hasRemoveObuFree = false;
+    const remObuFree: DepositType = 'remObuFree';
+    documents.map(document => {
+      if (document.type === remObuFree) {
+        hasRemoveObuFree = true;
+      }
+    });
+    return hasRemoveObuFree;
+  }
+}
+
 
 @Pipe({
   name: 'documentRemObuFail'

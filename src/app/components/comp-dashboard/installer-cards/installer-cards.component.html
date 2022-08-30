@@ -9,7 +9,7 @@
         </div>
         <mat-card-content fxLayout="column" fxLayoutAlign="center">
             <p class="font-14">{{'WELCOME.ADD-OBU' | translate}}</p>
-            <button mat-button class="white-button" [routerLink]="['../manage-obu', {viewNotAssociated: true}]">
+            <button mat-button class="white-button" [routerLink]="['../manage-obu']" [state]="{viewNotAssociated: true}">
                 {{'WELCOME.GO' | translate}}</button>
         </mat-card-content>
     </mat-card>

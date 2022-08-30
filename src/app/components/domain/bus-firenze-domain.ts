@@ -83,7 +83,7 @@ export interface DocumentObu {
   type: DepositType;
 }
 
-export type DepositType = 'deposit' | 'request' | 'remObu' | 'remObuFail';
+export type DepositType = 'deposit' | 'request' | 'remObu' | 'remObuFree' | 'remObuFail';
 
 export class VehicleTripPersistence {
   ticketNumber: string;
@@ -208,6 +208,7 @@ export interface BillingItems {
   fmId: number;
   vehicleId: number;
   lpn: string;
+  lpnNat: string;
   billingSapId: number;
   billingState: string;
   startPeriod: LocalDate;

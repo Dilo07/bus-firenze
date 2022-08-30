@@ -5,6 +5,7 @@ import { MapUtils } from '@npt/npt-map';
 // COLORS
 
 export const COLOR = {
+  GREEN: 'rgba(0, 255, 0, 0.5)',
   LIGHT_GREEN: 'rgb(145, 214, 172, 0.7)',
   LIGHT_BLUE: 'rgb(102, 204, 255, 0.8)',
   GREY: 'rgb(187, 188, 188, 0.8)',
@@ -49,21 +50,22 @@ const StyleDotOrderLabel = (Color: string, tExt: string): Style => {
   });
 };
 
-const StylePoint = (Color: string): Style => {
+const StylePoint = (color: string): Style => {
   return new Style({
     image: new Icon({
       src: IMG.ARROW_BLUE,
       scale: 0.3,
       anchor: [0.5, 0.5],
-      color: Color
+      color: color
     }),
   });
 };
 
 
-export const Expstyle: any = {
+export const expstyle: any = {
 
   SECTION_LINKS: MapUtils.Style.StyleLineString(COLOR.LIGHT_GREEN, 14),
+  SECTION_LINKS_GREEN: MapUtils.Style.StyleLineString(COLOR.GREEN, 14),
   SECTION_LINKS_ERROR: MapUtils.Style.StyleLineString(COLOR.RED, 14),
   SECTION_LINKS_WARNING: MapUtils.Style.StyleLineString(COLOR.GREY, 14),
   SECTION_LINKS_LIGHT: MapUtils.Style.StyleLineString(COLOR.LIGHT_BLUE, 14),

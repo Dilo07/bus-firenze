@@ -21,7 +21,7 @@ import { Ticket } from '../../domain/bus-firenze-domain';
   ]
 })
 export class ModalTestTicketComponent implements OnInit, OnDestroy {
-  public FormGroup: FormGroup;
+  public formGroup: FormGroup;
   public validTicket: { valid: boolean; ticket: Ticket } = { valid: false, ticket: null };
   public ticketType: string;
   public ticketsType = TICKETS_TYPE;
@@ -42,12 +42,12 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.FormGroup = this.formBuilder.group({
-      CtrlVoucher: [''],
-      CtrlProgressive: [''],
-      CtrlCode: [''],
-      CtrlYear: [moment().year()],
-      CtrlActive: [false]
+    this.formGroup = this.formBuilder.group({
+      ctrlVoucher: [''],
+      ctrlProgressive: [''],
+      ctrlCode: [''],
+      ctrlYear: [moment().year()],
+      ctrlActive: [false]
     });
   }
 
@@ -58,36 +58,36 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
   }
 
   public changeValidator(): void {
-    this.FormGroup.patchValue({
-      CtrlVoucher: '',
-      CtrlProgressive: '',
-      CtrlCode: '',
-      CtrlYear: moment().year(),
+    this.formGroup.patchValue({
+      ctrlVoucher: '',
+      ctrlProgressive: '',
+      ctrlCode: '',
+      ctrlYear: moment().year(),
     });
     this.validTicket.valid = false;
     this.validTicket.ticket = null;
     if (this.ticketType === this.ticketsType.voucher) {
-      this.FormGroup.controls.CtrlVoucher.setValidators([Validators.minLength(7), Validators.maxLength(7), Validators.required]);
-      this.FormGroup.controls.CtrlProgressive.setValidators(null);
-      this.FormGroup.controls.CtrlCode.setValidators(null);
-      this.FormGroup.controls.CtrlYear.setValidators(null);
+      this.formGroup.controls.ctrlVoucher.setValidators([Validators.minLength(7), Validators.maxLength(7), Validators.required]);
+      this.formGroup.controls.ctrlProgressive.setValidators(null);
+      this.formGroup.controls.ctrlCode.setValidators(null);
+      this.formGroup.controls.ctrlYear.setValidators(null);
     } else {
-      this.FormGroup.controls.CtrlVoucher.setValidators(null);
-      this.FormGroup.controls.CtrlProgressive.setValidators([Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.required]);
-      this.FormGroup.controls.CtrlCode.setValidators([Validators.minLength(3), Validators.maxLength(3), Validators.required]);
-      this.FormGroup.controls.CtrlYear.setValidators([Validators.required]);
+      this.formGroup.controls.ctrlVoucher.setValidators(null);
+      this.formGroup.controls.ctrlProgressive.setValidators([Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.required]);
+      this.formGroup.controls.ctrlCode.setValidators([Validators.minLength(3), Validators.maxLength(3), Validators.required]);
+      this.formGroup.controls.ctrlYear.setValidators([Validators.required]);
     }
   }
 
   public testTicket(): void {
     this.updateControls();
     let ticketTest = '';
-    if (!this.FormGroup.invalid) {
+    if (!this.formGroup.invalid) {
       if (this.ticketType !== this.ticketsType.voucher) {
-        ticketTest = this.FormGroup.get('CtrlProgressive').value + '/'
-          + this.FormGroup.get('CtrlCode').value + '/' + this.FormGroup.get('CtrlYear').value;
+        ticketTest = this.formGroup.get('ctrlProgressive').value + '/'
+          + this.formGroup.get('ctrlCode').value + '/' + this.formGroup.get('ctrlYear').value;
       } else if (this.ticketType === this.ticketsType.voucher) {
-        ticketTest = this.FormGroup.get('CtrlVoucher').value;
+        ticketTest = this.formGroup.get('ctrlVoucher').value;
       }
       console.log(ticketTest);
       this.subscription.push(this.ticketService.checkTicket(this.data.vehicleId, ticketTest).subscribe(
@@ -102,31 +102,31 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
 
   public addTicket(): void {
     const ticketSave = this.validTicket.ticket.ticketId;
-    const delayed = this.FormGroup.get('CtrlActive').value;
+    const delayed = this.formGroup.get('ctrlActive').value;
     this.subscription.push(this.ticketService.addTicket(
       this.roleDriver,
       this.data.vehicleId,
       ticketSave,
       delayed,
       this.data.extend,
-      this.data.fleetManagerId).subscribe(
-      () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
-      () => null,
-      () => this.dialogRef.close(true)
-    ));
+      this.data.fleetManagerId)
+      .subscribe({
+        next: () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
+        complete: () => this.dialogRef.close(true)
+      }));
   }
 
   public cleanTicket(): void {
-    this.FormGroup.patchValue({
-      CtrlVoucher: ''
+    this.formGroup.patchValue({
+      ctrlVoucher: ''
     });
   }
 
   private updateControls(): void {
-    this.FormGroup.controls.CtrlVoucher.updateValueAndValidity();
-    this.FormGroup.controls.CtrlProgressive.updateValueAndValidity();
-    this.FormGroup.controls.CtrlCode.updateValueAndValidity();
-    this.FormGroup.controls.CtrlYear.updateValueAndValidity();
+    this.formGroup.controls.ctrlVoucher.updateValueAndValidity();
+    this.formGroup.controls.ctrlProgressive.updateValueAndValidity();
+    this.formGroup.controls.ctrlCode.updateValueAndValidity();
+    this.formGroup.controls.ctrlYear.updateValueAndValidity();
   }
 
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { IMenuItemService, Menu } from '@npt/npt-template';
 
 /* Roles allowed by the application */
@@ -93,7 +93,6 @@ const MENUITEMS = [
 
 @Injectable()
 export class MenuItemService implements IMenuItemService {
-  constructor(@Inject('hideBillingData') private hideBilling: boolean) { }
 
   getMenuitem(): Menu[] {
     return MENUITEMS;

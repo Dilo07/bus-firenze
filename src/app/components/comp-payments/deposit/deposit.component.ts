@@ -1,12 +1,11 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { IAuthenticationService, SnackBar } from '@npt/npt-template';
+import { FileViewer, SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
-import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { DepositType, DocumentObu, DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
 
@@ -38,7 +37,7 @@ export class DepositComponent implements OnInit {
   @Input() public fleetManagerId: number;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
   public displayedColumns = ['id', 'vehicleState', 'plate', 'nat', 'depositDocument', 'requestDocument', 'testing', 'obuId'];
-  public src: { type: string; url: string | ArrayBuffer } = { type: '', url: '' };
+  public src: FileViewer = { type: '', url: '', fileName: '' };
   public search: FormGroup;
   public complete = true;
 
@@ -47,8 +46,7 @@ export class DepositComponent implements OnInit {
   constructor(
     private vehicleService: VehicleService,
     private snackBar: SnackBar,
-    private formBuilder: FormBuilder,
-    @Inject('authService') private authService: IAuthenticationService
+    private formBuilder: FormBuilder
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -71,41 +69,55 @@ export class DepositComponent implements OnInit {
   }
 
   public viewDeposit(vehicleId: number, documents: DocumentVehicle[], depositType: DepositType): void {
+    this.complete = false;
     let depositId: number;
     documents.map((document: DocumentVehicle) => {
       if (document.type === depositType) { depositId = document.fileId; }
     });
     this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)
-      .subscribe((data: HttpResponse<Blob>) => {
-        if (data.body.type === 'application/pdf') { // se è un pdf
-          const objectUrl = window.URL.createObjectURL(data.body);
-          this.src = { url: objectUrl, type: data.body.type };
-        } else { // altrimenti se è un'immagine
-          const reader = new FileReader();
-          reader.readAsDataURL(data.body);
-          reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type };
-          };
-        }
-      }));
-  }
-
-  public viewDocObu(vehicleId: number, documentsObu: DocumentObu[], depositType: DepositType): void {
-    // prende il primo documento
-    const doc: DocumentObu = documentsObu.find((value: DocumentObu) => value.type === depositType);
-    if (doc) {
-      this.subscription.push(this.vehicleService.getDocObu(vehicleId, doc.obuId, depositType, doc.fileId)
-        .subscribe((data: HttpResponse<Blob>) => {
+      .subscribe({
+        next: (data: HttpResponse<Blob>) => {
           if (data.body.type === 'application/pdf') { // se è un pdf
             const objectUrl = window.URL.createObjectURL(data.body);
-            this.src = { url: objectUrl, type: data.body.type };
+            const contentDispositionHeader = data.headers.get('Content-Disposition');
+            const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+            this.src = { url: objectUrl, type: data.body.type, fileName: filename };
           } else { // altrimenti se è un'immagine
             const reader = new FileReader();
             reader.readAsDataURL(data.body);
             reader.onload = () => {
-              this.src = { url: reader.result, type: data.body.type };
+              this.src = { url: reader.result, type: data.body.type, fileName: '' };
             };
           }
+        },
+        error: () => this.complete = true,
+        complete: () => this.complete = true
+      }));
+  }
+
+  public viewDocObu(vehicleId: number, documentsObu: DocumentObu[], depositType: DepositType): void {
+    this.complete = false;
+    // prende il primo documento
+    const doc: DocumentObu = documentsObu.find((value: DocumentObu) => value.type === depositType);
+    if (doc) {
+      this.subscription.push(this.vehicleService.getDocObu(vehicleId, doc.obuId, depositType, doc.fileId)
+        .subscribe({
+          next: (data: HttpResponse<Blob>) => {
+            if (data.body.type === 'application/pdf') { // se è un pdf
+              const objectUrl = window.URL.createObjectURL(data.body);
+              const contentDispositionHeader = data.headers.get('Content-Disposition');
+              const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+              this.src = { url: objectUrl, type: data.body.type, fileName: filename };
+            } else { // altrimenti se è un'immagine
+              const reader = new FileReader();
+              reader.readAsDataURL(data.body);
+              reader.onload = () => {
+                this.src = { url: reader.result, type: data.body.type, fileName: '' };
+              };
+            }
+          },
+          error: () => this.complete = true,
+          complete: () => this.complete = true
         }));
     }
   }

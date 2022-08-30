@@ -447,6 +447,13 @@
         "PENAL_DATE": "Data penale",
         "NO_DATA": "Nessuna penale presente"
     },
+    "BILLING_STATUS": {
+        "ALL": "Tutti",
+        "UNKNOWN": "Sconosciuto",
+        "PENDING": "In attesa",
+        "SUCCESS": "Inviato",
+        "FAILED": "Fallito"
+    },
     "BILLING_TYPE": {
         "INSTALL": "Installazione",
         "DELTA_NOT_MERGEABLE": "Canone mensile",
@@ -557,6 +564,10 @@
             "installer": "L'installer non ha installato questo obu",
             "associate_to_other_domains": "L'obu da sostituire è associato ad un altro dominio, rimuovilo da tutti i domini",
             "ticket": "Non è possibile rimuovere un OBU da un veicolo con un abbonamento attivo associato"
+        },
+        "penalty": {
+            "add": "Errore nell'aggiunta penale",
+            "duplicate": "non si possono aggiungere due penali dello stesso tipo sullo stesso veicolo lo stesso giorno"
         },
         "ines": {
             "request": "Servizi ines non raggiungibili",
