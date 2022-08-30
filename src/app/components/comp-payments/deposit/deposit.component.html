@@ -1,5 +1,5 @@
 <div>
-    <lib-view-file [file]="src"></lib-view-file>
+    <lib-view-file *ngIf="src.type" [file]="src"></lib-view-file>
     <div fxLayout="column" fxLayoutGap="20px" style="margin: 20px">
         <form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
             <mat-form-field appearance="outline" fxFlex="75">
@@ -106,7 +106,7 @@
                     <mat-header-cell *matHeaderCellDef> {{'VEHICLE.REMOVE_TEST' | translate}} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
                         <span class="mobile-label">{{'VEHICLE.REMOVE_TEST' | translate}}</span>
-                        <ng-container *ngIf="element.documentsObu | documentRemObu">
+                        <ng-container *ngIf="(element.documentsObu | documentRemObu) else remObuFree">
                             <button mat-icon-button (click)="viewDocObu(element.id, element.documentsObu, 'remObu')">
                                 <mat-icon matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
                                     <span class="icon-assignment"></span>
@@ -114,6 +114,16 @@
                             </button>
                             <mat-icon style="margin: 10px; color: green;">task_alt</mat-icon>
                         </ng-container>
+                        <ng-template #remObuFree>
+                            <ng-container *ngIf="element.documentsObu | documentRemObuFree">
+                                <button mat-icon-button (click)="viewDocObu(element.id, element.documentsObu, 'remObuFree')">
+                                    <mat-icon matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
+                                        <span class="icon-assignment"></span>
+                                    </mat-icon>
+                                </button>
+                                <mat-icon style="margin: 10px; color: green;">task_alt</mat-icon>
+                            </ng-container>
+                        </ng-template>
                         <ng-container *ngIf="element.documentsObu | documentRemObuFail">
                             <button mat-icon-button
                                 (click)="viewDocObu(element.id, element.documentsObu, 'remObuFail')">
