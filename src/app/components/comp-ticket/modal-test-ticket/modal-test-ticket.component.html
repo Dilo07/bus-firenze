@@ -16,7 +16,7 @@
                 </mat-button-toggle>
             </mat-button-toggle-group>
         </div>
-        <form [formGroup]="FormGroup" fxLayout="column" fxLayoutGap="20px" *ngIf="ticketType">
+        <form [formGroup]="formGroup" fxLayout="column" fxLayoutGap="20px" *ngIf="ticketType">
             <div *ngIf="validTicket.valid" style="color: green; text-align: center;">
                 {{validTicket.ticket.ticketId}} {{'TICKET.VERIFIED' | translate}} <br>
                 {{'TICKET.TYPE' | translate}}: {{'TICKET.' + validTicket.ticket.type | translate}}
@@ -34,19 +34,19 @@
                     <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                         fxFlex.gt-md="30">
                         <mat-label>{{'TICKET.PROGRESSIVE' | translate}}</mat-label>
-                        <input matInput type="text" formControlName="CtrlProgressive" required (focusout)="testTicket()">
+                        <input matInput type="text" formControlName="ctrlProgressive" required (focusout)="testTicket()">
                         <mat-error>{{('TICKET.INSERT_' + ticketType) | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                         fxFlex.gt-md="30">
                         <mat-label>{{'TICKET.CODE' | translate}}</mat-label>
-                        <input matInput type="text" formControlName="CtrlCode" required (ngModelChange)="testTicket()">
+                        <input matInput type="text" formControlName="ctrlCode" required (ngModelChange)="testTicket()">
                         <mat-error>{{('TICKET.INSERT_' + ticketType) | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                         fxFlex.gt-md="30">
                         <mat-label>{{'TICKET.YEAR' | translate}}</mat-label>
-                        <input matInput type="text" formControlName="CtrlYear" required (ngModelChange)="testTicket()">
+                        <input matInput type="text" formControlName="ctrlYear" required (ngModelChange)="testTicket()">
                         <mat-error>{{('TICKET.INSERT_' + ticketType) | translate}}</mat-error>
                     </mat-form-field>
                 </div>
@@ -58,7 +58,7 @@
                         fxFlex.gt-md="50">
                         <mat-label>{{ticketType}}</mat-label>
                         <div fxLayout="row">
-                            <input matInput type="text" formControlName="CtrlVoucher" required autocomplete="off"
+                            <input matInput type="text" formControlName="ctrlVoucher" required autocomplete="off"
                                 (ngModelChange)="testTicket()">
                             <button mat-icon-button (click)="cleanTicket()">
                                 <mat-icon>close</mat-icon>
@@ -69,7 +69,7 @@
                 </div>
             </ng-template>
             <div fxLayout="row" fxLayoutAlign="center" *ngIf="!hideActiveTicket && !data.extend && validTicket.valid">
-                <mat-radio-group formControlName="CtrlActive">
+                <mat-radio-group formControlName="ctrlActive">
                     <mat-radio-button [value]="true">
                         <span style="white-space: normal; margin-right: 10px;">
                             {{'TICKET.ACTIVE_AFTER' | translate}}

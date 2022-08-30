@@ -449,10 +449,10 @@
     },
     "BILLING_STATUS": {
         "ALL": "Tutti",
-        "UNKNOWN": "UNKNOWN",
-        "PENDING": "PENDING",
-        "SUCCESS": "SUCCESS",
-        "FAILED": "FAILED"
+        "UNKNOWN": "Sconosciuto",
+        "PENDING": "In attesa",
+        "SUCCESS": "Inviato",
+        "FAILED": "Fallito"
     },
     "BILLING_TYPE": {
         "INSTALL": "Installazione",

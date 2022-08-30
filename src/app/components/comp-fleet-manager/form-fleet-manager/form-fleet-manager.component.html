@@ -211,11 +211,11 @@
                 </div>
                 <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
                     <input style="display: none" type="file" formControlName="ctrlFileModule" #inpFileModule
-                        accept="application/pdf, image/jpeg, image/png" (change)="uploadFile($event, 1)">
+                        accept="application/pdf, image/jpeg, image/png" (change)="uploadFile($any($event.target).files, 1)">
                     <input style="display: none" type="file" formControlName="ctrlFileIdentityCrd" #InpFileIdentityCard
-                        accept="application/pdf, image/jpeg, image/png" (change)="uploadFile($event, 2)">
+                        accept="application/pdf, image/jpeg, image/png" (change)="uploadFile($any($event.target).files, 2)">
                     <input style="display: none" type="file" formControlName="ctrlFileCommerceReg" #InpFileCommerceReg
-                        accept="application/pdf, image/jpeg, image/png" (change)="uploadFile($event, 3)">
+                        accept="application/pdf, image/jpeg, image/png" (change)="uploadFile($any($event.target).files, 3)">
                     <button mat-button class="uploadButtons" (click)="inpFileModule.click()">
                         {{(fileModule ? 'FLEET-MANAGER.CHANGE_FILE' : 'FLEET-MANAGER.UPLOAD_FILE') | translate}}
                     </button>

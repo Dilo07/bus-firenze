@@ -29,8 +29,8 @@
               "rxjs-compat",
               "rxjs",
               "keycloak-js",
-              "pdfjs-dist/es5/build/pdf",
-              "pdfjs-dist/es5/web/pdf_viewer",
+              "pdfjs-dist/build/pdf",
+              "pdfjs-dist/web/pdf_viewer",
               "file-saver"
             ],
             "assets": [

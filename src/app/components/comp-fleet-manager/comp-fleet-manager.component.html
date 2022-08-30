@@ -1,6 +1,6 @@
 <mat-card>
 	<mat-card-content>
-		<app-view-file [file]="src"></app-view-file>
+		<lib-view-file *ngIf="src.type" [file]="src"></lib-view-file>
 		<div fxLayout="column" fxLayoutGap="20px">
 			<ng-container *ngIf="!isValidFleet">
 				<div fxLayout="row wrap" fxLayoutAlign="space-between">
