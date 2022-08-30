@@ -95,31 +95,28 @@ export class DepositComponent implements OnInit {
       }));
   }
 
-  public viewDocObu(vehicleId: number, documentsObu: DocumentObu[], depositType: DepositType): void {
+  public viewDocObu(vehicleId: number, documentsObu: DocumentObu): void {
     this.complete = false;
     // prende il primo documento
-    const doc: DocumentObu = documentsObu.find((value: DocumentObu) => value.type === depositType);
-    if (doc) {
-      this.subscription.push(this.vehicleService.getDocObu(vehicleId, doc.obuId, depositType, doc.fileId)
-        .subscribe({
-          next: (data: HttpResponse<Blob>) => {
-            if (data.body.type === 'application/pdf') { // se è un pdf
-              const objectUrl = window.URL.createObjectURL(data.body);
-              const contentDispositionHeader = data.headers.get('Content-Disposition');
-              const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
-              this.src = { url: objectUrl, type: data.body.type, fileName: filename };
-            } else { // altrimenti se è un'immagine
-              const reader = new FileReader();
-              reader.readAsDataURL(data.body);
-              reader.onload = () => {
-                this.src = { url: reader.result, type: data.body.type, fileName: '' };
-              };
-            }
-          },
-          error: () => this.complete = true,
-          complete: () => this.complete = true
-        }));
-    }
+    this.subscription.push(this.vehicleService.getDocObu(vehicleId, documentsObu.obuId, documentsObu.type, documentsObu.fileId)
+      .subscribe({
+        next: (data: HttpResponse<Blob>) => {
+          if (data.body.type === 'application/pdf') { // se è un pdf
+            const objectUrl = window.URL.createObjectURL(data.body);
+            const contentDispositionHeader = data.headers.get('Content-Disposition');
+            const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+            this.src = { url: objectUrl, type: data.body.type, fileName: filename };
+          } else { // altrimenti se è un'immagine
+            const reader = new FileReader();
+            reader.readAsDataURL(data.body);
+            reader.onload = () => {
+              this.src = { url: reader.result, type: data.body.type, fileName: '' };
+            };
+          }
+        },
+        error: () => this.complete = true,
+        complete: () => this.complete = true
+      }));
   }
 
   public uploadDeposit(vehicleId: number, event: any, depositType: DepositType): void {

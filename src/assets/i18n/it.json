@@ -261,6 +261,7 @@
         "DEPOSIT_REQ": "Allega richiesta deposito",
         "VIEW_DEPOSIT_REQ": "Visualizza richiesta deposito",
         "REMOVE_TEST": "Collaudo rimozione",
+        "VIEW_TEST": "View test",
         "VIEW_REMOBU": "Visualizza collaudo rimozione",
         "VALID_CONFIRM": "Sei sicuro di voler validare questo veicolo?",
         "VALID_SUCCESS": "Veicolo validato correttamente",

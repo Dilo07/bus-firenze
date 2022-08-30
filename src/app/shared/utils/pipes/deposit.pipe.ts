@@ -78,7 +78,7 @@ export class DocumentToValidPipe implements PipeTransform {
   }
 }
 
-@Pipe({
+/* @Pipe({
   name: 'documentRemObu'
 })
 export class DocumentRemoveObu implements PipeTransform {
@@ -92,21 +92,17 @@ export class DocumentRemoveObu implements PipeTransform {
     });
     return hasRemoveObu;
   }
-}
+} */
 
+// ricerca il primo oggetto che ha come tipo 'remObu' o 'remObuFree' o 'remObuFail' e lo rende alla view
 @Pipe({
-  name: 'documentRemObuFree'
+  name: 'documentRemObu'
 })
-export class DocumentRemoveObuFree implements PipeTransform {
-  transform(documents: DocumentObu[]): boolean {
-    let hasRemoveObuFree = false;
-    const remObuFree: DepositType = 'remObuFree';
-    documents.map(document => {
-      if (document.type === remObuFree) {
-        hasRemoveObuFree = true;
-      }
-    });
-    return hasRemoveObuFree;
+export class DocumentRemoveObu implements PipeTransform {
+  transform(documents: DocumentObu[]): DocumentObu {
+    let documentObu = null;
+    documentObu = documents.find((value: DocumentObu) => (value.type === 'remObu' || value.type === 'remObuFree' || value.type === 'remObuFail'));
+    return documentObu;
   }
 }
 
