@@ -260,6 +260,7 @@
         "DEPOSIT_REQ": "Attach deposit request",
         "VIEW_DEPOSIT_REQ": "View deposit request",
         "REMOVE_TEST": "Remove test",
+        "VIEW_TEST": "Visualizza collaudo",
         "VIEW_REMOBU": "view remove test",
         "VALID_CONFIRM": "Are you sure to validate this vehicle?",
         "VALID_SUCCESS": "Vehicle validate correctly",

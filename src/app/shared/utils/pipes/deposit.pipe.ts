@@ -64,6 +64,7 @@ export class RequestDateValidPipe implements PipeTransform {
   }
 }
 
+// ricerca nei documenti veicolo e ritorna il tipo di documento con validità null
 @Pipe({
   name: 'documentToValid'
 })
@@ -71,46 +72,26 @@ export class DocumentToValidPipe implements PipeTransform {
 
   transform(documents: DocumentVehicle[]): string {
     let documentType = null;
-    documents.map(document => { // ritorna il tipo di documento con validità a null
+    documents.map(document => {
       if (!document.valid) { documentType = document.type; }
     });
     return documentType;
   }
 }
 
+// ricerca nei documenti il primo oggetto che ha come tipo 'remObu' o 'remObuFree' o 'remObuFail' e lo rende alla view
 @Pipe({
   name: 'documentRemObu'
 })
 export class DocumentRemoveObu implements PipeTransform {
-  transform(documents: DocumentObu[]): boolean {
-    let hasRemoveObu = false;
-    const remObu: DepositType = 'remObu';
-    documents.map(document => {
-      if (document.type === remObu) {
-        hasRemoveObu = true;
-      }
-    });
-    return hasRemoveObu;
+  transform(documents: DocumentObu[]): DocumentObu {
+    let documentObu = null;
+    documentObu = documents.find((value: DocumentObu) => (value.type === 'remObu' || value.type === 'remObuFree' || value.type === 'remObuFail'));
+    return documentObu;
   }
 }
 
-@Pipe({
-  name: 'documentRemObuFree'
-})
-export class DocumentRemoveObuFree implements PipeTransform {
-  transform(documents: DocumentObu[]): boolean {
-    let hasRemoveObuFree = false;
-    const remObuFree: DepositType = 'remObuFree';
-    documents.map(document => {
-      if (document.type === remObuFree) {
-        hasRemoveObuFree = true;
-      }
-    });
-    return hasRemoveObuFree;
-  }
-}
-
-
+// ricerca nei documenti se c'è un oggetto con type remObuFail, in caso affermativo ritorna true altrimenti false
 @Pipe({
   name: 'documentRemObuFail'
 })
