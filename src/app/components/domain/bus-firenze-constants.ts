@@ -94,10 +94,10 @@ export const TICKETS_TYPE = {
 };
 
 export const FLEETMNG_TYPE = Object.freeze({
-  DITTA_INDIVIDUALE: 'PERS',
-  AZIENDA_PRIVATA: 'PRVT',
-  PUBBLICA_AMM: 'PA',
-  ENTE: 'ENTE'
+  dittaIndividuale: 'PERS',
+  aziendaPrivata: 'PRVT',
+  pubblicaAmm: 'PA',
+  ente: 'ENTE'
 });
 
 

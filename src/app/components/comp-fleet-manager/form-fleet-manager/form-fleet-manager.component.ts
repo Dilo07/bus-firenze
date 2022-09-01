@@ -56,7 +56,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public nations = worldNations;
   public filteredList = this.nations.slice();
   public fleetType = FLEETMNG_TYPE;
-  public userTypes = [this.fleetType.DITTA_INDIVIDUALE, this.fleetType.AZIENDA_PRIVATA, this.fleetType.PUBBLICA_AMM, this.fleetType.ENTE];
+  public userTypes = [this.fleetType.dittaIndividuale, this.fleetType.aziendaPrivata, this.fleetType.pubblicaAmm, this.fleetType.ente];
   public userSel: string;
   public completePiva = true;
   public completePiva2 = true;
@@ -110,7 +110,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     } else {
       this.formGroup = this.formBuilder.group({
         ctrlContractCode: [''],
-        ctrlUser: [this.fleetType.AZIENDA_PRIVATA, Validators.required],
+        ctrlUser: [this.fleetType.aziendaPrivata, Validators.required],
         ctrlDest: [''],
         ctrlName: ['', Validators.required],
         ctrlSurname: ['', Validators.required],
@@ -130,7 +130,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ctrlFileCommerceReg: ['', Validators.required],
         ctrlConsent: [false, Validators.requiredTrue]
       });
-      this.userSel = this.fleetType.AZIENDA_PRIVATA;
+      this.userSel = this.fleetType.aziendaPrivata;
       this.helper = 'on';
     }
     this.changeFormNat(true);
@@ -149,8 +149,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         this.formGroup.controls.ctrlDistrict.setValidators( // solo lettere (provincia italiana)
           [Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(2), Validators.required]);
         this.formGroup.controls.ctrlDest.setValidators( // se azienda Priv 7 caratteri se pubbl aministrazione 6
-          this.userSel === this.fleetType.AZIENDA_PRIVATA ? [Validators.required, Validators.minLength(7), Validators.maxLength(7)]
-            : this.userSel === this.fleetType.PUBBLICA_AMM ? [Validators.required, Validators.minLength(6), Validators.maxLength(6)]
+          this.userSel === this.fleetType.aziendaPrivata ? [Validators.required, Validators.minLength(7), Validators.maxLength(7)]
+            : this.userSel === this.fleetType.pubblicaAmm ? [Validators.required, Validators.minLength(6), Validators.maxLength(6)]
               : null);
       } else {
         this.formGroup.controls.ctrlDistrict.setValidators(null);
@@ -331,7 +331,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     const fiscalCode = this.formGroup.get('ctrlCF').value;
     const userType = this.formGroup.get('ctrlUser').value;
     if (!this.formGroup.controls.ctrlCF.invalid && !this.roleFleetManager) {
-      if (userType === this.fleetType.DITTA_INDIVIDUALE) {
+      if (userType === this.fleetType.dittaIndividuale) {
         const codiceFiscale = require('codice-fiscale-js');
         this.formGroup.patchValue({ ctrlCF: fiscalCode.toUpperCase() });
         if (codiceFiscale.check(fiscalCode)) {
@@ -339,7 +339,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         } else {
           this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         }
-      } else if (userType === this.fleetType.ENTE) {
+      } else if (userType === this.fleetType.ente) {
         if ((fiscalCode.charAt(0) === '8' || fiscalCode.charAt(0) === '9') && fiscalCode.length === 11) {
           this.formGroup.controls.ctrlCF.setErrors(null);
         } else {
