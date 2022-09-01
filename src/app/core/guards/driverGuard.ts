@@ -1,6 +1,7 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { IAuthenticationService, SessionService } from '@npt/npt-template';
+import { firstValueFrom } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
 
@@ -24,7 +25,7 @@ export class DriveGuard implements CanActivate {
       if (id) {
         const roles = await this.authService.getUserRoles();
         if (roles.includes(ROLES.DRIVER)) {
-          const respDriver = await this.driverService.getDriver().toPromise(); // attende il servizio getDriver()
+          const respDriver = await firstValueFrom(this.driverService.getDriver()); // attende il servizio getDriver()
           let mobileNum = null;
           respDriver.contacts.find(contact => {
             if (contact.code === 1) {
