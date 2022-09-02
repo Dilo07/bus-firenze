@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FileViewer, SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
+import { InstallerService } from 'src/app/services/installer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { DepositType, DocumentObu, DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
 
@@ -45,6 +46,7 @@ export class DepositComponent implements OnInit {
 
   constructor(
     private vehicleService: VehicleService,
+    private installerService: InstallerService,
     private snackBar: SnackBar,
     private formBuilder: FormBuilder
   ) { }
@@ -98,7 +100,7 @@ export class DepositComponent implements OnInit {
   public viewDocObu(vehicleId: number, documentsObu: DocumentObu): void {
     this.complete = false;
     // prende il primo documento
-    this.subscription.push(this.vehicleService.getDocObu(vehicleId, documentsObu.obuId, documentsObu.type, documentsObu.fileId)
+    this.subscription.push(this.installerService.getDocObu(vehicleId, documentsObu.obuId, documentsObu.type, documentsObu.fileId)
       .subscribe({
         next: (data: HttpResponse<Blob>) => {
           if (data.body.type === 'application/pdf') { // se è un pdf

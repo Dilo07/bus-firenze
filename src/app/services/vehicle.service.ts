@@ -9,7 +9,7 @@ import { DepositType, Vehicle } from '../components/domain/bus-firenze-domain';
   providedIn: 'root'
 })
 export class VehicleService {
-  private apiUrl = this.url + '/api/fleet';
+  private apiUrl = this.url + '/api/vehicle';
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
@@ -86,15 +86,6 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getManual(device: number, type: string): Observable<HttpResponse<Blob> | Blob> {
-    const options = {
-      observe: 'response' as 'body',
-      responseType: 'blob' as 'blob'
-    };
-    return this.http.get(this.apiUrl + '/manual/' + device + '/' + type, options)
-      .pipe(catchError(err => { throw err; }));
-  }
-
   getCertificateFile(vehicleId: number, certificateId: number): Observable<HttpResponse<Blob> | Blob> {
     const options = {
       observe: 'response' as 'body',
@@ -110,15 +101,6 @@ export class VehicleService {
       responseType: 'blob' as 'blob'
     };
     return this.http.get(this.apiUrl + `/vehicle/${vehicleId}/${type}/${documentId}`, options)
-      .pipe(catchError(err => { throw err; }));
-  }
-
-  getDocObu(vehicleId: number, obu: string, type: DepositType, documentId: number): Observable<HttpResponse<Blob> | Blob> {
-    const options = {
-      observe: 'response' as 'body',
-      responseType: 'blob' as 'blob'
-    };
-    return this.http.get(this.apiUrl + `/vehicle/${vehicleId}/obu/${obu}/${type}/${documentId}`, options)
       .pipe(catchError(err => { throw err; }));
   }
 

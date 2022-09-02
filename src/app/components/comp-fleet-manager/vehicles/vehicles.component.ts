@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { FileViewer, ViewFileComponent } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
+import { InstallerService } from 'src/app/services/installer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
@@ -69,6 +70,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     private router: Router,
     private snackBar: SnackBar,
     private vehicleService: VehicleService,
+    private installerService: InstallerService,
     private driverService: DriverService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog) {
@@ -182,7 +184,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
 
   public downloadManualPdf(device: number): void {
     const fileSaver = require('file-saver');
-    this.subscription.push(this.vehicleService.getManual(device, 'operating')
+    this.subscription.push(this.installerService.getManual(device, 'operating')
       .subscribe((data: HttpResponse<Blob>) => {
         const contentDispositionHeader = data.headers.get('Content-Disposition');
         const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');

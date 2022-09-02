@@ -10,7 +10,7 @@ import { ActiveTicket } from './mokup/getTicket';
   providedIn: 'root'
 })
 export class TicketService {
-  private apiUrl = this.url + '/api/fleet';
+  private apiUrl = this.url + '/api/vehicle';
   private activeVehicle = ActiveTicket;
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }

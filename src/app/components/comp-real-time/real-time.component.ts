@@ -44,21 +44,23 @@ export class RealTimeComponent {
 
   public onMapReady(event: any): void {
     this.map = event;
+    this.complete = false;
     this.getGeom();
-    this.getTrip();
+    /* this.getTrip(); */
     this.setMapControls();
   }
 
   public getTrip(): void {
     this.mapChild.removeLayers([FirenzeMapUtils.layerEnum.LINE_REAL_TIME, FirenzeMapUtils.layerEnum.POINT_REAL_TIME]);
-
-    this.subscription.push(this.liveStreamService.getStreamLive(this.fleetManager?.id).subscribe(data => {
-      this.vehicleTrip = data;
-      this.drawLine();
-      this.drawPoint();
+    this.subscription.push(this.liveStreamService.getStreamLive(this.fleetManager?.id).subscribe({
+      next: (trip) => {
+        this.vehicleTrip = trip;
+        this.drawLine();
+        this.drawPoint();
+      },
+      error: () => (this.complete = true, this.cdr.markForCheck()),
+      complete: () => (this.complete = true, this.cdr.markForCheck())
     }));
-
-    this.cdr.markForCheck();
   }
 
   public stopPlayRefresh(): void {
@@ -82,15 +84,14 @@ export class RealTimeComponent {
   }
 
   private getGeom(): void {
-    this.complete = false;
-    this.subscription.push(this.liveStreamService.getGeometryLive().subscribe(
-      data => {
-        this.geometry = data;
+    this.subscription.push(this.liveStreamService.getGeometryLive().subscribe({
+      next: (geom) => {
+        this.geometry = geom;
         this.drawGeom();
       },
-      () => this.complete = true,
-      () => { this.getTrip(); this.complete = true; }
-    ));
+      error: () => (this.complete = true, this.cdr.markForCheck()),
+      complete: () => this.getTrip()
+    }));
   }
 
   private drawGeom(): void {
