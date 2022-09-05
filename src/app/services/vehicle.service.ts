@@ -126,4 +126,9 @@ export class VehicleService {
     return this.http.put<void>(this.apiUrl + `${url}/vehicle/${vehicleId}/${type}/add`, formData)
       .pipe(catchError(err => { throw err; }));
   }
+
+  validVehicle(fleetManagerId: number, vehicleId: number, type: string, valid: boolean): Observable<void> {
+    return this.http.put<void>(this.apiUrl + `/${fleetManagerId}/vehicle/${vehicleId}/${type}/valid/${valid}`, null)
+      .pipe(catchError(err => { throw err; }));
+  }
 }
