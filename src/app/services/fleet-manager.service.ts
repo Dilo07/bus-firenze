@@ -80,4 +80,10 @@ export class FleetManagerService {
     return this.http.put<void>(this.apiUrl + `/${fleetManagerId}/document/${fileId}`, null)
       .pipe(catchError(err => { throw err; }));
   }
+
+  getFleetDeposit(): Observable<FleetManager[]> {
+    /* return of(this.fleetMokup); */
+    return this.http.get<FleetManager[]>(this.apiUrl + '/deposit')
+      .pipe(catchError(err => { throw err; }));
+  }
 }

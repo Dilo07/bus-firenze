@@ -4,9 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
-import { ValidVehicleService } from 'src/app/services/valid-vehicle.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DepositType, DocumentVehicle, Vehicle } from '../../../domain/bus-firenze-domain';
+import { DocumentVehicle, Vehicle } from '../../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../../modal-confirm/modal-confirm.component';
 
 @Component({
@@ -41,7 +40,6 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
 
   constructor(
     private vehicleService: VehicleService,
-    private vehicleValidService: ValidVehicleService,
     private dialog: MatDialog,
     private snackBar: SnackBar
   ) { }
@@ -70,7 +68,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
           documents.map(document => {
             if (!document.valid) { depositType = document.type; }
           });
-          this.subscription.push(this.vehicleValidService.validVehicle(this.idFleet, vehicleId, depositType, true).subscribe(
+          this.subscription.push(this.vehicleService.validVehicle(this.idFleet, vehicleId, depositType, true).subscribe(
             () => this.snackBar.showMessage('VEHICLE.VALID_SUCCESS', 'INFO'),
             () => null,
             () => this.getVehicles()

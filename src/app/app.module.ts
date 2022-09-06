@@ -13,6 +13,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './components/comp-dashboard/dashboard.component';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   const packageObj = require('../../package.json');
@@ -23,6 +24,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
     ModalConfirmComponent
   ],
   imports: [

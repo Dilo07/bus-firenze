@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FileViewer } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
-import { ValidVehicleService } from 'src/app/services/valid-vehicle.service';
+import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-firenze-domain';
 
@@ -42,7 +42,7 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
 
   constructor(
-    private validVehiclerService: ValidVehicleService,
+    private fleetService: FleetManagerService,
     private vehicleService: VehicleService
   ) { }
 
@@ -58,7 +58,7 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
 
   public callFleetDeposit(): void {
     this.complete = false;
-    this.validVehiclerService.getFleetDeposit().subscribe({
+    this.fleetService.getFleetDeposit().subscribe({
       next: fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator),
       error: () => this.complete = true,
       complete: () => this.complete = true
