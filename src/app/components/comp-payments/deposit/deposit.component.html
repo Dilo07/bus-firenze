@@ -53,7 +53,7 @@
                     <mat-cell *matCellDef="let element">
                         <span class="mobile-label">{{'VEHICLE.RIC_DEPOSIT' | translate}}</span>
                         <button mat-icon-button [disabled]="!(element.documents | hasDeposit: false)"
-                            (click)="viewDeposit(element.id, element.documents, 'deposit')">
+                            (click)="viewDeposit(element.id, element.documents, ['deposit', 'revoke', 'retention'])">
                             <mat-icon
                                 matTooltip="{{((element.documents | hasDeposit: false)  ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
                                 <span class="icon-assignment"
@@ -70,9 +70,16 @@
                                 <span class="icon-edit"></span>
                             </mat-icon>
                         </button>
-                        <mat-icon *ngIf="element.documents | depositDateValid" style="margin: 10px; color: green;"
+                        <mat-icon
+                            *ngIf="(element.documents | documentTypeFind) && (element.documents | documentTypeFind).type === 'deposit'"
+                            style="margin: 10px; color: green;"
                             matTooltip="{{('VEHICLE.DEPVALID' | translate) + (element.documents | depositDateValid | date: 'dd/MM/YYYY')}}">
                             task_alt</mat-icon>
+                        <mat-icon
+                            *ngIf="(element.documents | documentTypeFind) && ((element.documents | documentTypeFind).type === 'revoke' || (element.documents | documentTypeFind).type === 'retention')"
+                            style="margin: 10px;">
+                            <span class="icon-delete"></span>
+                        </mat-icon>
                     </mat-cell>
                 </ng-container>
 
@@ -81,7 +88,7 @@
                     <mat-cell *matCellDef="let element">
                         <span class="mobile-label">{{'VEHICLE.RIM_DEPOSIT' | translate}}</span>
                         <button mat-icon-button *ngIf="element.documents | hasRequest: false"
-                            (click)="viewDeposit(element.id, element.documents, 'request')">
+                            (click)="viewDeposit(element.id, element.documents, ['request'])">
                             <mat-icon matTooltip="{{'VEHICLE.VIEW_DEPOSIT_REQ' | translate}}">
                                 <span class="icon-assignment"></span>
                             </mat-icon>
@@ -89,8 +96,7 @@
                         <input style="display: none" type="file" #depositReqInput
                             accept="application/pdf, image/jpeg, image/png"
                             (change)="uploadDeposit(element.id, $event, 'request')">
-                        <button
-                            *ngIf="element.deleted && !(element.documents | hasRequest: true) && !(element.documentsObu | documentRemObuFail)"
+                        <button *ngIf="element.deleted && !(element.documents | hasRequest: true) && element.valid"
                             mat-icon-button (click)="depositReqInput.click()">
                             <mat-icon matTooltip="{{'VEHICLE.DEPOSIT_REQ' | translate}}">
                                 <span class="icon-edit"></span>
@@ -112,7 +118,9 @@
                                     <span class="icon-assignment"></span>
                                 </mat-icon>
                             </button>
-                            <mat-icon style="margin: 10px;" *ngIf="documentRead.type === 'remObuFail' else doneIcon"><span class="icon-delete"></span></mat-icon>
+                            <mat-icon style="margin: 10px;" *ngIf="documentRead.type === 'remObuFail' else doneIcon">
+                                <span class="icon-delete"></span>
+                            </mat-icon>
                             <ng-template #doneIcon>
                                 <mat-icon style="margin: 10px; color: green">task_alt</mat-icon>
                             </ng-template>

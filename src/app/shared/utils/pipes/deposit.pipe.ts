@@ -91,19 +91,15 @@ export class DocumentRemoveObu implements PipeTransform {
   }
 }
 
-// ricerca nei documenti se c'è un oggetto con type remObuFail, in caso affermativo ritorna true altrimenti false
 @Pipe({
-  name: 'documentRemObuFail'
+  name: 'documentTypeFind'
 })
-export class DocumentRemoveObuFail implements PipeTransform {
-  transform(documents: DocumentObu[]): boolean {
-    let hasRemoveObuFail = false;
-    const remObuFail: DepositType = 'remObuFail';
-    documents.map(document => {
-      if (document.type === remObuFail) {
-        hasRemoveObuFail = true;
-      }
-    });
-    return hasRemoveObuFail;
+
+export class DocumentTypeFind implements PipeTransform {
+  transform(documents: DocumentObu[]): DocumentObu {
+    let documentObu = null;
+    const typeAccept = ['deposit', 'revoke', 'retention'];
+    documentObu = documents.find((value: DocumentObu) => typeAccept.includes(value.type));
+    return documentObu;
   }
 }

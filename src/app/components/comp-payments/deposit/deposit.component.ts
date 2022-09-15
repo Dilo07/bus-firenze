@@ -70,13 +70,10 @@ export class DepositComponent implements OnInit {
     ));
   }
 
-  public viewDeposit(vehicleId: number, documents: DocumentVehicle[], depositType: DepositType): void {
+  public viewDeposit(vehicleId: number, documents: DocumentVehicle[], depositType: DepositType[]): void {
     this.complete = false;
-    let depositId: number;
-    documents.map((document: DocumentVehicle) => {
-      if (document.type === depositType) { depositId = document.fileId; }
-    });
-    this.subscription.push(this.vehicleService.getDeposit(vehicleId, depositType, depositId)
+    const documentFind: DocumentVehicle = documents.find((document) => depositType.includes(document.type));
+    this.subscription.push(this.vehicleService.getDeposit(vehicleId, documentFind.type, documentFind.fileId)
       .subscribe({
         next: (data: HttpResponse<Blob>) => {
           if (data.body.type === 'application/pdf') { // se è un pdf

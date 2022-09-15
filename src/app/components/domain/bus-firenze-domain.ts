@@ -83,7 +83,7 @@ export interface DocumentObu {
   type: DepositType;
 }
 
-export type DepositType = 'deposit' | 'request' | 'remObu' | 'remObuFree' | 'remObuFail';
+export type DepositType = 'deposit' | 'revoke' | 'retention' | 'request' | 'remObu' | 'remObuFree' | 'remObuFail';
 
 export class VehicleTripPersistence {
   ticketNumber: string;
