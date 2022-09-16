@@ -15,7 +15,6 @@ export class HasDepositPipe implements PipeTransform {
     });
     return hasDeposit;
   }
-
 }
 
 @Pipe({
@@ -91,6 +90,7 @@ export class DocumentRemoveObu implements PipeTransform {
   }
 }
 
+// ricerca nei documenti il primo oggetto che ha come tipo 'deposit' o 'revoke' o 'retention'
 @Pipe({
   name: 'documentTypeFind'
 })

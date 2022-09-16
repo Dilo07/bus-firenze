@@ -255,6 +255,7 @@
         "RIM_DEPOSIT": "Refund deposit",
         "request": "Refund deposit",
         "VIEWDEPOSIT": "View deposit",
+        "DEPREVOKE": "Deposit withheld",
         "NODEPOSIT": "Deposit not uploaded",
         "ADDDEPOSIT": "Add deposito",
         "DEPOSIT_REQ": "Attach deposit request",
@@ -547,7 +548,8 @@
             "invalid": "Ticket assigned to invalid vehicle",
             "already_present": "Ticket already present on vehicle",
             "already_associated": "The vehicle is already associated to another obu",
-            "request": "Cannot to attach the deposit request due to the failed testing"
+            "request": "Cannot to attach the deposit request due to the failed testing",
+            "invalid_depot": "The vehicle hasn't a valid deposit for this operation"
         },
         "ticket": {
             "already_assigned": "Ticket already assigned to another vehicle",
