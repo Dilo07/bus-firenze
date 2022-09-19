@@ -460,8 +460,13 @@
         "INSTALL": "Install",
         "DELTA_NOT_MERGEABLE": "Monthly fee",
         "DELTA_MERGEABLE": "Periodic monthly fee",
+        "UNINSTALL": "Uninstall obu",
         "MISSED_APPOINTMENT": "Missed appointment",
         "CANCELLED_APPOINTMENT": "Appointment cancelled within 24h",
+        "REVERSAL": "Credit note",
+        "CHANGE": "Change obu",
+        "UNINSTALL_FREE": "Uninstall free",
+        "CHANGE_FREE": "Change obu free",
         "5": "Missed appointment",
         "6": "Appointment cancelled within 24h"
     },
