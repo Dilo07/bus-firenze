@@ -13,7 +13,6 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
   styles: [`
   .mat-elevation-z8 {
     width: 870px;
-    background-color: white;
     margin: 10px;
   }
   @media(min-width: 1180px) {
