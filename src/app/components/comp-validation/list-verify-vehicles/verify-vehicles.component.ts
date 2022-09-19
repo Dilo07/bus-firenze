@@ -1,12 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DocumentVehicle, Vehicle } from '../../../domain/bus-firenze-domain';
-import { ModalConfirmComponent } from '../../../modal-confirm/modal-confirm.component';
+import { DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
+import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-verify-vehicles',

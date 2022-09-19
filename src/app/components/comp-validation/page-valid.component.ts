@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { ListFleetmanagerComponent } from './verify-vehicles/list-fleetmanager.component';
+import { ListFleetmanagerComponent } from './list-fleetManager/list-fleetmanager.component';
 
 @Component({
   selector: 'app-page-valid',

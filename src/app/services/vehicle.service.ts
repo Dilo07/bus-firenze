@@ -72,6 +72,15 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  getVehicleWarning(fleetManagerId: number, keyword?: string): Observable<Vehicle[]> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ keyword })
+    };
+    return this.http.get<Vehicle[]>(this.apiUrl + `/${fleetManagerId}/deposit/vehicles/warning`, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   getVehicleByObu(obuId: string, fleetManagerId?: number): Observable<Vehicle> {
     let url = '';
     if (fleetManagerId) {
