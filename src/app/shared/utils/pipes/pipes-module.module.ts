@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
-  DateValidPipe, DocumentRemoveObu, DocumentRemoveObuFail, DocumentToValidPipe,
+  DateValidPipe, DocumentRemoveObu, DocumentToValidPipe,
+  DocumentTypeFind,
   HasDepositPipe, HasRequestDepositPipe, RequestDateValidPipe
 } from './deposit.pipe';
 import { FindContactValuePipe } from './find-contact-value.pipe';
@@ -15,7 +16,7 @@ import { FindContactValuePipe } from './find-contact-value.pipe';
     DocumentToValidPipe,
     RequestDateValidPipe,
     DocumentRemoveObu,
-    DocumentRemoveObuFail
+    DocumentTypeFind
   ],
   imports: [CommonModule],
   exports: [
@@ -26,7 +27,7 @@ import { FindContactValuePipe } from './find-contact-value.pipe';
     DocumentToValidPipe,
     RequestDateValidPipe,
     DocumentRemoveObu,
-    DocumentRemoveObuFail
+    DocumentTypeFind
   ]
 })
 export class PipesModule { }

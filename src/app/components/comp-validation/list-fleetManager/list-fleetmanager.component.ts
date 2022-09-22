@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FileViewer } from '@npt/npt-template';
@@ -33,6 +33,7 @@ import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-fir
 })
 export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @Input() depositWarning: boolean;
   public dataSource = new MatTableDataSource<FleetManager>();
   public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile', 'mail'];
   public expandedElement: FleetManager | null;
@@ -58,7 +59,7 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
 
   public callFleetDeposit(): void {
     this.complete = false;
-    this.fleetService.getFleetDeposit().subscribe({
+    this.fleetService.getFleetDeposit(this.depositWarning).subscribe({
       next: fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator),
       error: () => this.complete = true,
       complete: () => this.complete = true

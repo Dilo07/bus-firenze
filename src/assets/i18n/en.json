@@ -39,6 +39,7 @@
         "Validation": "Validation",
         "Valid-Fleet-manager": "Valid Manager",
         "Vehicle-valid": "Valid vehicles",
+        "Deposit-valid": "Deposit to insert",
         "User-Fleet": "Fleet",
         "User-Driver": "Driver",
         "Anagraphic": "Anagraphic",
@@ -255,6 +256,7 @@
         "RIM_DEPOSIT": "Refund deposit",
         "request": "Refund deposit",
         "VIEWDEPOSIT": "View deposit",
+        "DEPREVOKE": "Deposit withheld",
         "NODEPOSIT": "Deposit not uploaded",
         "ADDDEPOSIT": "Add deposito",
         "DEPOSIT_REQ": "Attach deposit request",
@@ -458,8 +460,13 @@
         "INSTALL": "Install",
         "DELTA_NOT_MERGEABLE": "Monthly fee",
         "DELTA_MERGEABLE": "Periodic monthly fee",
+        "UNINSTALL": "Uninstall obu",
         "MISSED_APPOINTMENT": "Missed appointment",
         "CANCELLED_APPOINTMENT": "Appointment cancelled within 24h",
+        "REVERSAL": "Credit note",
+        "CHANGE": "Change obu",
+        "UNINSTALL_FREE": "Uninstall free",
+        "CHANGE_FREE": "Change obu free",
         "5": "Missed appointment",
         "6": "Appointment cancelled within 24h"
     },
@@ -547,7 +554,8 @@
             "invalid": "Ticket assigned to invalid vehicle",
             "already_present": "Ticket already present on vehicle",
             "already_associated": "The vehicle is already associated to another obu",
-            "request": "Cannot to attach the deposit request due to the failed testing"
+            "request": "Cannot to attach the deposit request due to the failed testing",
+            "invalid_depot": "The vehicle hasn't a valid deposit for this operation"
         },
         "ticket": {
             "already_assigned": "Ticket already assigned to another vehicle",

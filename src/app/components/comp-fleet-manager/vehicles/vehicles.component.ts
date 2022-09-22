@@ -136,12 +136,13 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     });
   }
 
-  public deleteVehicle(vehicleId: number, documents: DocumentVehicle[]): void {
+  public deleteVehicle(vehicleId: number, valid: boolean): void {
     let hasDepositValid = false;
-    const deposit: DepositType = 'deposit';
+    if (valid) { hasDepositValid = true; }
+    /* const deposit: DepositType = 'deposit';
     documents.map(document => {
       if (document.type === deposit && document.valid) { hasDepositValid = true; }
-    });
+    }); */
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',
       height: '50%',

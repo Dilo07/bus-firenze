@@ -9,7 +9,10 @@
                 <app-comp-fleet-manager [isValidFleet]="true" *ngIf="index === 0"></app-comp-fleet-manager>
             </mat-tab>
             <mat-tab label="{{'MENU.Vehicle-valid' | translate}}">
-                <app-list-fleetmanager *ngIf="index === 1"></app-list-fleetmanager>
+                <app-list-fleetmanager [depositWarning]="false" *ngIf="index === 1"></app-list-fleetmanager>
+            </mat-tab>
+            <mat-tab label="{{'MENU.Deposit-valid' | translate}}">
+                <app-list-fleetmanager [depositWarning]="true" *ngIf="index === 2"></app-list-fleetmanager>
             </mat-tab>
         </mat-tab-group>
     </mat-card-content>

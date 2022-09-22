@@ -81,9 +81,11 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getFleetDeposit(): Observable<FleetManager[]> {
+  getFleetDeposit(depositWarning: boolean): Observable<FleetManager[]> {
+    let path = '';
+    if (depositWarning) { path = '/warning'; }
     /* return of(this.fleetMokup); */
-    return this.http.get<FleetManager[]>(this.apiUrl + '/deposit')
+    return this.http.get<FleetManager[]>(this.apiUrl + '/deposit' + path)
       .pipe(catchError(err => { throw err; }));
   }
 }

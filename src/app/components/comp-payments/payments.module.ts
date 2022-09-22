@@ -12,7 +12,7 @@ import { BillingItemsComponent } from './billing-items/billing-items.component';
 import { PagePaymentsComponent } from './page-payments.component';
 import { PenaltiesComponent } from './penalties/penalties.component';
 import { ModalPenalComponent } from './penalties/modal-penal/modal-penal.component';
-import { TableItemsComponent } from './billing-items/table-items/table-items.component';
+import { ListItemsComponent } from './billing-items/list-items/list-items.component';
 import { EmittedPenaltiesComponent } from './penalties/emitted-penalties/emitted-penalties.component';
 import { AddPenaltiesComponent } from './penalties/add-penalties/add-penalties.component';
 
@@ -24,7 +24,7 @@ import { AddPenaltiesComponent } from './penalties/add-penalties/add-penalties.c
     PagePaymentsComponent,
     PenaltiesComponent,
     ModalPenalComponent,
-    TableItemsComponent,
+    ListItemsComponent,
     EmittedPenaltiesComponent,
     AddPenaltiesComponent
   ],

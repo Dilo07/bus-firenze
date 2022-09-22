@@ -39,6 +39,7 @@
         "Validation": "Validazione",
         "Valid-Fleet-manager": "Valida Manager",
         "Vehicle-valid": "Valida veicoli",
+        "Deposit-valid": "Depositi da inserire",
         "User-Fleet": "Flotta",
         "User-Driver": "Autista",
         "Anagraphic": "Anagrafica",
@@ -256,6 +257,7 @@
         "RIM_DEPOSIT": "Rimborso deposito",
         "request": "Rimborso deposito",
         "VIEWDEPOSIT": "Visualizza deposito",
+        "DEPREVOKE": "Deposito trattenuto",
         "NODEPOSIT": "Deposito non caricato",
         "ADDDEPOSIT": "Aggiungi deposito",
         "DEPOSIT_REQ": "Allega richiesta deposito",
@@ -459,8 +461,13 @@
         "INSTALL": "Installazione",
         "DELTA_NOT_MERGEABLE": "Canone mensile",
         "DELTA_MERGEABLE": "Canone mensile periodico",
+        "UNINSTALL": "Disinstallazione obu",
         "MISSED_APPOINTMENT": "Mancato appuntamento",
         "CANCELLED_APPOINTMENT": "Appuntamento cancellato entro 24h",
+        "REVERSAL": "Nota di credito",
+        "CHANGE": "Sostituzione obu",
+        "UNINSTALL_FREE": "Disinstallazione obu gratuita",
+        "CHANGE_FREE": "Sostituzione obu gratuita",
         "5": "Mancato appuntamento",
         "6": "Appuntamento cancellato entro 24h"
     },
@@ -548,7 +555,8 @@
             "invalid": "Assegnato un ticket ad un veicolo non valido",
             "already_present": "Ticket già presente sul veicolo",
             "already_associated": "Il veicolo è già associato ad un altro obu",
-            "request": "impossibile allegare la richiesta di rimborso a causa del collaudo fallito"
+            "request": "impossibile allegare la richiesta di rimborso a causa del collaudo fallito",
+            "invalid_depot": "Il veicolo non ha un deposito valido per effettuare questa operazione"
         },
         "ticket": {
             "already_assigned": "Ticket già assegnato a un veicolo",

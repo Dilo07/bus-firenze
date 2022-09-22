@@ -1,0 +1,47 @@
+<div class="example-container">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">id</span>
+                {{element.id}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lpn">
+            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
+                {{element.lpn}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lpnNat">
+            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
+                {{ element.lpnNat}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="obuId">
+            <mat-header-cell *matHeaderCellDef> Obu id </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">Obu id</span>
+                {{ element.obuId}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="associationDate">
+            <mat-header-cell *matHeaderCellDef> {{'VEHICLE.DATE_ASSOCIATION' | translate}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{'VEHICLE.DATE_ASSOCIATION' | translate}}</span>
+                {{ element.associationDate.dateTime | date: 'dd/MM/yyyy'}}
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
+            [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

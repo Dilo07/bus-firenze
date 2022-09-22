@@ -46,10 +46,10 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getVehiclesById(onlyActive: boolean, fleetManagerId?: number, keyword?: string, toVerify?: boolean): Observable<Vehicle[]> {
+  getVehiclesById(onlyActive: boolean, fleetManagerId?: number, keyword?: string): Observable<Vehicle[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ keyword, toVerify })
+      params: HttpUtils.createHttpParams({ keyword })
     };
     let url = '';
     if (fleetManagerId) {
@@ -69,6 +69,15 @@ export class VehicleService {
       url = '/' + fleetManagerId;
     }
     return this.http.get<Vehicle[]>(this.apiUrl + url + `/deposit/vehicles/${all}`, options)
+      .pipe(catchError(err => { throw err; }));
+  }
+
+  getVehicleWarning(fleetManagerId: number, keyword?: string): Observable<Vehicle[]> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ keyword })
+    };
+    return this.http.get<Vehicle[]>(this.apiUrl + `/${fleetManagerId}/deposit/vehicles/warning`, options)
       .pipe(catchError(err => { throw err; }));
   }
 

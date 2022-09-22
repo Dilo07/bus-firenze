@@ -45,6 +45,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     }),
   ],
   providers: [
+    // app
     { provide: 'iban', useValue: 'iban'},
     {
       provide: 'ibanData',

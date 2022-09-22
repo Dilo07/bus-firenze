@@ -163,7 +163,7 @@
 							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
 								matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
-								(click)="deleteVehicle(element.id, element.documents)">
+								(click)="deleteVehicle(element.id, element.valid)">
 								<mat-icon><span class="icon-delete"></span></mat-icon>
 							</button>
 							<button *ngIf="element.deleted" mat-icon-button [disabled]="true">
