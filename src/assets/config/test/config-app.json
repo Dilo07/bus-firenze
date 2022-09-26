@@ -13,11 +13,7 @@
   "hideBilling": false,
   "no_auth": {
     "roles": [
-      "driver",
-      "opmovyon",
-      "installer",
-      "movyon",
-      "fleet"
+      "movyon"
     ],
     "user": {
       "id": "myID",
