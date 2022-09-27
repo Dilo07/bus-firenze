@@ -7,7 +7,7 @@ const version = packageObj.version;
 export const environment = {
   production: false,
   security: {
-    type: 'keycloak', // noAuth - keycloak.
+    type: 'noAuth', // noAuth - keycloak.
     configFile: 'assets/config/test/config-app.json?version=' + version
   },
   header: {
