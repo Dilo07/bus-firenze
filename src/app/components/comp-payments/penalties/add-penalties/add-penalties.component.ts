@@ -61,11 +61,11 @@ export class AddPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
   public getVehiclesByManagerId(): void {
     this.viewFleetTable = false;
     this.complete = false;
-    this.subscription.push(this.vehicleService.getVehiclesById(false, this.fleetId).subscribe(
-      vehicles => (this.dataSource.data = vehicles, this.dataSource.sort = this.sort, this.dataSource.paginator = this.paginator),
-      () => this.viewFleetTable = true,
-      () => this.complete = true
-    ));
+    this.subscription.push(this.vehicleService.getVehiclesById(true, this.fleetId).subscribe({
+      next: (vehicles) => (this.dataSource.data = vehicles, this.dataSource.sort = this.sort, this.dataSource.paginator = this.paginator),
+      error: () => this.viewFleetTable = true,
+      complete: () => this.complete = true
+    }));
   }
 
   public modalPenal(vehicleid: number, fmId: number): void {
