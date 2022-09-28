@@ -475,7 +475,7 @@
         "DATE": {
             "START": "Inizio",
             "END": "Fine",
-            "RANGE": "Seleziona un rage di date",
+            "RANGE": "Seleziona un range di date",
             "INVALID": "Range inserito non valido"
         },
         "ACTION": {
