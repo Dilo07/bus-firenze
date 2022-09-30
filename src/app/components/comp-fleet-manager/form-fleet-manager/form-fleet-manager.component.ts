@@ -1,13 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IAuthenticationService } from '@npt/npt-template';
 import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { RegisterService } from 'src/app/services/register.service';
@@ -44,6 +44,7 @@ import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.componen
 export class FormFleetManagerComponent implements OnInit, OnDestroy {
   @Input() register = false;
   @Input() data: FleetManager;
+  @Input() captchaToken: string;
 
   public formGroup: FormGroup;
   public verifyOtp = false;
@@ -183,6 +184,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed().subscribe((resp) => {
         if (resp) {
           this.subscription.push(
+            // passare token
             this.registerService.registerFleet(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
               () => { this.router.navigate(['../']); }
             ));
@@ -209,8 +211,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public modalOTP(): void {
     const valCell = '+' + this.dialCode + this.formGroup.get('ctrlCell').value.replace(/\s/g, '');
     const lang = this.translateService.currentLang;
-    this.subscription.push(this.registerService.getOtpCode(valCell, lang).subscribe(
-      code => {
+    this.subscription.push(this.registerService.getOtpCode(valCell, lang, this.register ? this.captchaToken : null).subscribe({ // passare token
+      next: (code) => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',
           height: '50%',
@@ -225,14 +227,13 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           }
         );
       },
-      () => null,
-      () => this.ngOnDestroy()
-    ));
+      complete: () => this.ngOnDestroy()
+    }));
   }
 
   public downloadTemplate(): void {
     const fileSaver = require('file-saver');
-    this.subscription.push(this.registerService.getTemplateDocument()
+    this.subscription.push(this.registerService.getTemplateDocument() // passare token
       .subscribe(
         (data: HttpResponse<Blob>) => {
           const contentDispositionHeader = data.headers.get('Content-Disposition');
@@ -310,7 +311,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       const nat = this.formGroup.get('ctrlNat').value;
       this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
       this.completePiva = false;
-      this.subscription.push(this.registerService.checkVatNumber(nat, pIva).subscribe(
+      this.subscription.push(this.registerService.checkVatNumber(nat, pIva).subscribe( // passare token
         vatVerify => {
           if (!vatVerify.valid) {
             this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
@@ -350,7 +351,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         const nat = this.formGroup.get('ctrlNat').value;
         this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         this.completePiva2 = false;
-        this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode).subscribe(
+        this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode).subscribe( // passare token
           vatVerify => {
             if (!vatVerify.valid) {
               this.formGroup.controls.ctrlCF.setErrors({ invalid: true });

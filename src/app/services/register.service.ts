@@ -1,5 +1,6 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { HttpUtils } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FleetManager, VatValidation } from '../components/domain/bus-firenze-domain';
@@ -12,8 +13,12 @@ export class RegisterService {
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
-  getOtpCode(contact: string, lang: string): Observable<string> {
-    return this.http.post<string>(this.apiUrl + '/register/code/' + lang, contact)
+  getOtpCode(contact: string, lang: string, captchaToken?: string): Observable<string> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ captchaToken })
+    };
+    return this.http.post<string>(this.apiUrl + '/register/code/' + lang, contact, options)
       .pipe(catchError(err => { throw err; }));
   }
 

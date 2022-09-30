@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
 
 const recaptchaUrl = 'https://www.google.com/recaptcha/enterprise.js?render=6LdiEkMiAAAAAJKC6CZfGhRS0FIGNs3kPLhQ2hpO';
 
@@ -9,6 +10,7 @@ const recaptchaUrl = 'https://www.google.com/recaptcha/enterprise.js?render=6Ldi
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
   public langs: string[];
+  public captchaToken: string;
 
   constructor(
     public translateService: TranslateService,
@@ -23,7 +25,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(this.loadToken, 500);
+    setTimeout(() => this.loadToken(), 500);
   }
 
   /* Change current language */
@@ -34,7 +36,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   private loadToken(): void {
     grecaptcha.enterprise.ready(() => {
       grecaptcha.enterprise.execute('6LdiEkMiAAAAAJKC6CZfGhRS0FIGNs3kPLhQ2hpO', { action: 'register' }).then((token) => {
-        console.log(token);
+        this.captchaToken = token;
       });
     });
   }
