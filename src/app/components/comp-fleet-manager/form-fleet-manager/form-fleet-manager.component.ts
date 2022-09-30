@@ -315,7 +315,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
             this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
           } else {
             this.formGroup.controls.ctrlpIva.setErrors(null);
-            const companyName = vatVerify.name.substring(0, 40);
+            const companyName = vatVerify.name.substring(0, 35);
             this.formGroup.patchValue({
               ctrlCompanyName: companyName
             });
