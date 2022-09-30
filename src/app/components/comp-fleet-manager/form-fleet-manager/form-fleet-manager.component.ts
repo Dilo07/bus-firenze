@@ -128,7 +128,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ctrlFileModule: ['', Validators.required],
         ctrlFileIdentityCrd: ['', Validators.required],
         ctrlFileCommerceReg: ['', Validators.required],
-        ctrlConsent: [false, Validators.requiredTrue]
+        ctrlConsent: [false, Validators.requiredTrue],
+        ctrlCaptcha: ['', Validators.required]
       });
       this.userSel = this.fleetType.aziendaPrivata;
       this.helper = 'on';
@@ -362,6 +363,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ));
       }
     }
+  }
+
+  public captchaEvent(event: any): void {
+    console.log(event);
   }
 
   private resetCompanyInfo(): void {
