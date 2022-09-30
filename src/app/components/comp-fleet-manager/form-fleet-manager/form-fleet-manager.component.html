@@ -20,10 +20,6 @@
     </div>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
         <form [formGroup]="formGroup" fxLayout="column">
-            <span fxLayout="row" fxLayoutAlign="center">
-                <re-captcha formControlName="ctrlCaptcha" (resolved)="captchaEvent($event)" (error)="captchaEvent($event)"
-                    siteKey="AIzaSyCkeOus_8eqoH_OSx_BXGGsuTZyMq0j4Sg"></re-captcha>
-            </span>
             <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
                 <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
                     *ngIf="!roleFleetManager && !register">

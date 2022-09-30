@@ -31,7 +31,7 @@ import { TableStatisticComponent } from './vehicles/table-statistic/table-statis
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { FormFieldPersonComponent } from './form-fleet-manager/field-person/form-field-person.component';
-import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaV3Module } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -71,8 +71,7 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
     TranslateModule,
     NptMapModule,
     FleetManagerRoutingModule,
-    RecaptchaModule,
-    RecaptchaFormsModule,
+    RecaptchaV3Module,
     PipesModule
   ],
   exports: [
