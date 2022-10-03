@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
-import { RegisterService } from 'src/app/services/register.service';
+import { NoAuthService } from 'src/app/services/noAuth.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ModalOTPComponent } from '../../register-page/modal-otp/modal-otp.component';
 
@@ -40,7 +40,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private driverService: DriverService,
-    private registerService: RegisterService,
+    private noAuthService: NoAuthService,
     private translateService: TranslateService,
     private snackBar: SnackBar,
     @Inject('authService') private authService: IAuthenticationService,
@@ -91,7 +91,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       }
     }
     const lang = this.translateService.currentLang;
-    this.subscription.push(this.registerService.getOtpCode(this.cellForm, lang).subscribe(
+    this.subscription.push(this.noAuthService.getOtpCode(this.cellForm, lang).subscribe(
       code => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',

@@ -8,7 +8,7 @@ import { FleetManager, VatValidation } from '../components/domain/bus-firenze-do
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterService {
+export class NoAuthService {
   private apiUrl = this.url + '/noauth';
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
@@ -32,10 +32,12 @@ export class RegisterService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getTemplateDocument(): Observable<HttpResponse<Blob> | Blob> {
+  getTemplateDocument(captchaToken?: string): Observable<HttpResponse<Blob> | Blob> {
     const options = {
       observe: 'response' as 'body',
-      responseType: 'blob' as 'blob'
+      responseType: 'blob' as 'blob',
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ captchaToken })
     };
     return this.http.get(this.apiUrl + '/register/template', options)
       .pipe(catchError(err => { throw err; }));
