@@ -10,7 +10,7 @@ import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
 import { Observable, Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
-import { NoAuthService } from 'src/app/services/noAuth.service';
+import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { euroNations, FLEETMNG_TYPE, worldNations } from '../../domain/bus-firenze-constants';
 import { FleetManager } from '../../domain/bus-firenze-domain';
@@ -71,7 +71,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private snackBar: SnackBar,
-    private noAuthService: NoAuthService,
+    private registerService: NoAuthRegisterService,
     private translateService: TranslateService,
     private fleetManagerService: FleetManagerService,
     @Inject('authService') private authService: IAuthenticationService) {
@@ -185,7 +185,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         if (resp) {
           this.subscription.push(
             // passare token
-            this.noAuthService.registerFleet(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
+            this.registerService.registerFleet(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
               () => { this.router.navigate(['../']); }
             ));
         }
@@ -211,7 +211,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public modalOTP(): void {
     const valCell = '+' + this.dialCode + this.formGroup.get('ctrlCell').value.replace(/\s/g, '');
     const lang = this.translateService.currentLang;
-    this.subscription.push(this.noAuthService.getOtpCode(valCell, lang, this.register ? this.captchaToken : null).subscribe({ // passare token
+    this.subscription.push(this.registerService.getOtpCode(valCell, lang, this.register ? this.captchaToken : null).subscribe({ // passare token
       next: (code) => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',
@@ -233,7 +233,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
   public downloadTemplate(): void {
     const fileSaver = require('file-saver');
-    this.subscription.push(this.noAuthService.getTemplateDocument(this.register ? this.captchaToken : null) // passare token
+    this.subscription.push(this.registerService.getTemplateDocument(this.register ? this.captchaToken : null) // passare token
       .subscribe(
         (data: HttpResponse<Blob>) => {
           const contentDispositionHeader = data.headers.get('Content-Disposition');
@@ -311,7 +311,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       const nat = this.formGroup.get('ctrlNat').value;
       this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
       this.completePiva = false;
-      this.subscription.push(this.noAuthService.checkVatNumber(nat, pIva).subscribe( // passare token
+      this.subscription.push(this.registerService.checkVatNumber(nat, pIva).subscribe( // passare token
         vatVerify => {
           if (!vatVerify.valid) {
             this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
@@ -351,7 +351,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         const nat = this.formGroup.get('ctrlNat').value;
         this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         this.completePiva2 = false;
-        this.subscription.push(this.noAuthService.checkVatNumber(nat, fiscalCode).subscribe( // passare token
+        this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode).subscribe( // passare token
           vatVerify => {
             if (!vatVerify.valid) {
               this.formGroup.controls.ctrlCF.setErrors({ invalid: true });

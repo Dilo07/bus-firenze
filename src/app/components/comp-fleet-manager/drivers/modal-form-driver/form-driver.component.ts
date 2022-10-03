@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
-import { NoAuthService } from 'src/app/services/noAuth.service';
+import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service';
 import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ModalOTPComponent } from '../../register-page/modal-otp/modal-otp.component';
 
@@ -40,7 +40,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private driverService: DriverService,
-    private noAuthService: NoAuthService,
+    private registerService: NoAuthRegisterService,
     private translateService: TranslateService,
     private snackBar: SnackBar,
     @Inject('authService') private authService: IAuthenticationService,
@@ -91,8 +91,8 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       }
     }
     const lang = this.translateService.currentLang;
-    this.subscription.push(this.noAuthService.getOtpCode(this.cellForm, lang).subscribe(
-      code => {
+    this.subscription.push(this.registerService.getOtpCode(this.cellForm, lang).subscribe({
+      next: code => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',
           height: '50%',
@@ -107,9 +107,8 @@ export class FormDriverComponent implements OnInit, OnDestroy {
           }
         );
       },
-      () => null,
-      () => this.ngOnDestroy()
-    ));
+      complete: () => this.ngOnDestroy()
+    }));
   }
 
   public addDriver(): void {
@@ -119,14 +118,13 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     newDriver.contacts = [];
     const mail = { code: 3, value: this.formGroup.get('ctrlMail').value };
     newDriver.contacts.push(mail);
-    this.driverService.addDriver(newDriver, this.fleetManagerId).subscribe(
-      () => null,
-      () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
-      () => {
+    this.driverService.addDriver(newDriver, this.fleetManagerId).subscribe({
+      error: () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
+      complete: () => {
         this.snackBar.showMessage('DRIVERS.ADD_SUCCESS', 'INFO');
         this.router.navigate(['manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
       }
-    );
+    });
   }
 
   public editDriver(): void {
@@ -143,20 +141,20 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     this.driverService.editDriver(
       editDriver,
       this.roleDriver ? null : editDriver.id,
-      this.roleDriver ? null : this.fleetManagerId).subscribe(
-      () => null,
-      () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
-      () => {
-        this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO');
-        if (this.roleDriver && this.cellularRequired) {
-          this.router.navigate(['anagraphic-driver']);
-          this.cellularRequired = false;
+      this.roleDriver ? null : this.fleetManagerId)
+      .subscribe({
+        error: () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
+        complete: () => {
+          this.snackBar.showMessage('DRIVERS.EDIT_SUCCESS', 'INFO');
+          if (this.roleDriver && this.cellularRequired) {
+            this.router.navigate(['anagraphic-driver']);
+            this.cellularRequired = false;
+          }
+          if (!this.roleDriver) {
+            this.router.navigate(['manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
+          }
         }
-        if (!this.roleDriver) {
-          this.router.navigate(['manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
-        }
-      }
-    );
+      });
   }
 
   public onCountryChange(evt: any): void {
