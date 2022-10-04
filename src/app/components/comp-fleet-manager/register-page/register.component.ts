@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { RecaptchaTokenService } from '@npt/npt-template';
 
-const recaptchaUrl = 'https://www.google.com/recaptcha/enterprise.js?render=6LdiEkMiAAAAAJKC6CZfGhRS0FIGNs3kPLhQ2hpO';
-declare var grecaptcha: any;
 
 @Component({
   templateUrl: './register.component.html',
@@ -14,32 +13,19 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     public translateService: TranslateService,
+    private recaptchaTokenService: RecaptchaTokenService,
     @Inject('static_pageData') public staticPage: boolean) {
   }
 
   ngOnInit(): void {
-    const chatScript = document.createElement("script");
-    chatScript.type = "text/javascript";
-    chatScript.src = recaptchaUrl;
-    document.body.appendChild(chatScript);
-
-    chatScript.addEventListener('load', () => {
-      this.loadToken();
-    });
+    this.recaptchaTokenService.loadToken(document, 'register').then((captchaToken) => this.captchaToken = captchaToken);
+    /* this.captchaToken = this.recaptchaTokenService.getToken('register'); altro metodo con await sulla loadToken*/
     this.langs = this.translateService.getLangs();
   }
 
   /* Change current language */
   public changeLang(lang: string): void {
     this.translateService.use(lang);
-  }
-
-  private loadToken(): void {
-    grecaptcha.enterprise.ready(() => {
-      grecaptcha.enterprise.execute('6LdiEkMiAAAAAJKC6CZfGhRS0FIGNs3kPLhQ2hpO', { action: 'register' }).then((token: string) => {
-        this.captchaToken = token;
-      });
-    });
   }
 }
 

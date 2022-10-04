@@ -201,7 +201,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     } else {
       this.subscription.push(
         this.fleetManagerService.insertFleetManager(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
-          () => { this.router.navigate(['../manage']); },
+          () => {
+            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_REGISTER', 'INFO');
+            this.router.navigate(['../manage']);
+          },
         ));
     }
   }
