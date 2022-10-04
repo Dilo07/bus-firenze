@@ -2,11 +2,11 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { CONTRACT_TYPE, worldNations } from 'src/app/components/domain/bus-firenze-constants';
 import { Vehicle } from 'src/app/components/domain/bus-firenze-domain';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 
 @Component({
   selector: 'app-modal-form-vehicle',

@@ -23,13 +23,17 @@ export class NoAuthRegisterService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  registerFleet(fileModule: File, fileIdentityCard: File, fileCommerceReg: File, fleetManager: FleetManager): Observable<void> {
+  registerFleet(fileModule: File, fileIdentityCard: File, fileCommerceReg: File, fleetManager: FleetManager, captchaToken: string): Observable<void> {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ captchaToken })
+    };
     const formData = new FormData();
     formData.append('reqForm', fileModule);
     formData.append('idDoc', fileIdentityCard);
     formData.append('comReg', fileCommerceReg);
     formData.append('metadata', JSON.stringify(fleetManager));
-    return this.http.post<void>(this.apiUrl + '/register', formData)
+    return this.http.post<void>(this.apiUrl + '/register', formData, options)
       .pipe(catchError(err => { throw err; }));
   }
 

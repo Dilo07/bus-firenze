@@ -180,7 +180,8 @@
         "USERTYPE": "Tipo di azienda",
         "TEXTFILE": "* Per creare il fleet manager è necessario allegare tutti i file richiesti",
         "SELECT": "Seleziona un Fleet Manager",
-        "LEGALPART": "Il/la sottoscritto dichiara di conoscere e di accettare specificatamente, anche ai sensi degli artt. 1341 e 1342 c.c. quanto previsto agli artt. 14. 'Durata e diritto di recesso', 16. 'Cessione del contratto', 21. 'Foro competente', 24. 'Limitazione di responsabilità', e 26. 'Modifica delle condizioni contrattuali' delle 'Norme e Condizioni di Adesione al Servizio' e agli artt. 6. 'Recesso' e 9. 'Foro competente' della lettera di nomina di cui all'Allegato 2 delle 'Norme e Condizioni di Adesione al Servizio'"
+        "LEGALPART": "Il/la sottoscritto dichiara di conoscere e di accettare specificatamente, anche ai sensi degli artt. 1341 e 1342 c.c. quanto previsto agli artt. 14. 'Durata e diritto di recesso', 16. 'Cessione del contratto', 21. 'Foro competente', 24. 'Limitazione di responsabilità', e 26. 'Modifica delle condizioni contrattuali' delle 'Norme e Condizioni di Adesione al Servizio' e agli artt. 6. 'Recesso' e 9. 'Foro competente' della lettera di nomina di cui all'Allegato 2 delle 'Norme e Condizioni di Adesione al Servizio'",
+        "SUCCESS_REGISTER": "Registrazione avvenuta correttamente"
     },
     "USERTYPE": {
         "PERS": "Ditta individuale",

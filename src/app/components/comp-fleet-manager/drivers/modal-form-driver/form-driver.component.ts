@@ -3,14 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IAuthenticationService } from '@npt/npt-template';
+import { IAuthenticationService, SnackBar } from '@npt/npt-template';
 import { CountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service';
-import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ModalOTPComponent } from '../../register-page/modal-otp/modal-otp.component';
 
 @Component({

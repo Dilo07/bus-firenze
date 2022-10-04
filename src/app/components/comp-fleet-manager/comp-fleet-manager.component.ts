@@ -5,12 +5,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FileViewer, IAuthenticationService, SessionService } from '@npt/npt-template';
+import { FileViewer, IAuthenticationService, SessionService, SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
-import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { ColumnSort, FleetDocument, FleetDocumentTypes, FleetManager } from '../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 

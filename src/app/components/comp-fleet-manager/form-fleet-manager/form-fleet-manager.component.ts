@@ -1,17 +1,16 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
-import { Component, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IAuthenticationService } from '@npt/npt-template';
+import { IAuthenticationService, SnackBar } from '@npt/npt-template';
 import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service';
-import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { euroNations, FLEETMNG_TYPE, worldNations } from '../../domain/bus-firenze-constants';
 import { FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
@@ -185,9 +184,18 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         if (resp) {
           this.subscription.push(
             // passare token
-            this.registerService.registerFleet(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
-              () => { this.router.navigate(['../']); }
-            ));
+            this.registerService.registerFleet(
+              this.fileModule,
+              this.fileIdentityCard,
+              this.fileCommerceReg,
+              newFleetManager,
+              this.captchaToken)
+              .subscribe(
+                () => {
+                  this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_REGISTER', 'INFO');
+                  this.router.navigate(['../']);
+                }
+              ));
         }
       });
     } else {
