@@ -1,9 +1,9 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { DriverVehicle } from 'src/app/components/domain/bus-firenze-domain';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DriverService } from 'src/app/services/driver.service';
-import { SnackBar } from 'src/app/shared/utils/classUtils/snackBar';
 import { Subscription } from 'rxjs';
+import { SnackBar } from '@npt/npt-template';
 
 @Component({
   selector: 'app-association-drivers-vehicles',
