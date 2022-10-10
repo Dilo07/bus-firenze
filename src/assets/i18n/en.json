@@ -529,7 +529,8 @@
         },
         "user": {
             "duplicate-email": "Email is already used. Please try another one",
-            "insert": "Error in inserting new user"
+            "insert": "Error in inserting new user",
+            "config": "The user is not correctly configure, contact support"
         },
         "driver": {
             "notfound": "Driver not found",

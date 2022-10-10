@@ -529,7 +529,8 @@
         },
         "user": {
             "duplicate-email": "Questa email è già usata. Per favore, inserisci un'altra email",
-            "insert": "Errore nell'inserimento nuovo utente"
+            "insert": "Errore nell'inserimento nuovo utente",
+            "config": "L'utenza non è correttamente configurata, contattare l'assistenza"
         },
         "driver": {
             "notfound": "Driver non trovato",
