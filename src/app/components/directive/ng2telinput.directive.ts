@@ -5,7 +5,7 @@ declare const window: any;
 const defaultUtilScript = 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.1/js/utils.js';
 
 @Directive({
-  selector: '[ng2TelInput]'
+  selector: '[appNg2TelInput]'
 })
 export class Ng2telinputDirective implements OnInit {
   @Input() ng2TelInputOptions: { [key: string]: any } = {};

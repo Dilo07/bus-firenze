@@ -179,7 +179,9 @@
         "VERIFYCF": "Verify fiscal code",
         "USERTYPE": "Company type",
         "TEXTFILE": "* To creare the fleet manager you need attach the requested file",
-        "SELECT": "Select a Fleet Manager"
+        "SELECT": "Select a Fleet Manager",
+        "LEGALPART": "The undersigned declares to know and accept specifically, also pursuant to art. 1341 and 1342 of the Italian Civil Code the provisions of art. 14. 'Duration and right of withdrawal', 16. 'Transfer of the contract', 21. 'Jurisdiction', 24. 'Limitation of liability', and 26. 'Modification of the contractual conditions' of the' Rules and Conditions of Adherence to the Service 'and art. 6. 'Withdrawal' and 9. 'Jurisdiction' of the letter of appointment referred to in Annex 2 of the 'Rules and Conditions of Subscription to the Service'",
+        "SUCCESS_REGISTER": "Successful registration"
     },
     "USERTYPE": {
         "PERS": "Individual company",
@@ -527,7 +529,8 @@
         },
         "user": {
             "duplicate-email": "Email is already used. Please try another one",
-            "insert": "Error in inserting new user"
+            "insert": "Error in inserting new user",
+            "config": "The user is not correctly configure, contact support"
         },
         "driver": {
             "notfound": "Driver not found",

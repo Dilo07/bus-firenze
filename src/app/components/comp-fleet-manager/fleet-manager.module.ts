@@ -30,6 +30,7 @@ import { PanelStatisticComponent } from './vehicles/panel-statistic/panel-statis
 import { TableStatisticComponent } from './vehicles/table-statistic/table-statistic.component';
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
+import { FormFieldPersonComponent } from './form-fleet-manager/field-person/form-field-person.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
     Ng2telinputDirective,
     ExpansionInfoComponent,
     ExpansionInfoVehicleComponent,
-    FleetDocumentsComponent
+    FleetDocumentsComponent,
+    FormFieldPersonComponent
   ],
   imports: [
     CommonModule,

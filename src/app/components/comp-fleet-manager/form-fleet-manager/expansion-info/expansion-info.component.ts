@@ -1,7 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { RegisterService } from 'src/app/services/register.service';
+import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service';
 
 @Component({
   selector: 'app-expansion-info',
@@ -18,7 +18,7 @@ import { RegisterService } from 'src/app/services/register.service';
 export class ExpansionInfoComponent {
 
   private subscription: Subscription[] = [];
-  constructor(private registerService: RegisterService) { }
+  constructor(private registerService: NoAuthRegisterService) { }
 
   public downloadTemplate(): void {
     const fileSaver = require('file-saver');
