@@ -61,6 +61,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public completePiva = true;
   public completePiva2 = true;
   public helper: 'on' | 'off';
+  public complete = true;
 
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
@@ -128,8 +129,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ctrlFileModule: ['', Validators.required],
         ctrlFileIdentityCrd: ['', Validators.required],
         ctrlFileCommerceReg: ['', Validators.required],
-        ctrlConsent: [false, Validators.requiredTrue],
-        ctrlCaptcha: ['', Validators.required]
+        ctrlConsent: [false, Validators.requiredTrue]
       });
       this.userSel = this.fleetType.aziendaPrivata;
       this.helper = 'on';
@@ -200,7 +200,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       });
     } else {
       this.subscription.push(
-        this.fleetManagerService.insertFleetManager(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
+        this.registerService.registerFleet(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
           () => {
             this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_REGISTER', 'INFO');
             this.router.navigate(['../manage']);
@@ -243,14 +243,18 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public downloadTemplate(): void {
+    this.complete = false;
     const fileSaver = require('file-saver');
     this.subscription.push(this.registerService.getTemplateDocument(this.register ? this.captchaToken : null) // passare token
-      .subscribe(
-        (data: HttpResponse<Blob>) => {
+      .subscribe({
+        next: (data: HttpResponse<Blob>) => {
           const contentDispositionHeader = data.headers.get('Content-Disposition');
           const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
           fileSaver.saveAs(data.body, filename);
-        }));
+        },
+        error: () => this.complete = true,
+        complete: () => this.complete = true
+      }));
   }
 
   public uploadFile(files: File[], typeFile: number): void {
@@ -322,8 +326,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       const nat = this.formGroup.get('ctrlNat').value;
       this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
       this.completePiva = false;
-      this.subscription.push(this.registerService.checkVatNumber(nat, pIva).subscribe( // passare token
-        vatVerify => {
+      this.subscription.push(this.registerService.checkVatNumber(nat, pIva, this.register ? this.captchaToken : null).subscribe({ // passare token
+        next: (vatVerify) => {
           if (!vatVerify.valid) {
             this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
           } else {
@@ -334,9 +338,9 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
             });
           }
         },
-        () => this.completePiva = true,
-        () => this.completePiva = true
-      ));
+        error: () => this.completePiva = true,
+        complete: () => this.completePiva = true
+      }));
     }
   }
 
@@ -362,17 +366,18 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         const nat = this.formGroup.get('ctrlNat').value;
         this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         this.completePiva2 = false;
-        this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode).subscribe( // passare token
-          vatVerify => {
-            if (!vatVerify.valid) {
-              this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
-            } else {
-              this.formGroup.controls.ctrlCF.setErrors(null);
-            }
-          },
-          () => this.completePiva2 = true,
-          () => this.completePiva2 = true
-        ));
+        this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode, this.register ? this.captchaToken : null)
+          .subscribe({ // passare token
+            next: (vatVerify) => {
+              if (!vatVerify.valid) {
+                this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
+              } else {
+                this.formGroup.controls.ctrlCF.setErrors(null);
+              }
+            },
+            error: () => this.completePiva2 = true,
+            complete: () => this.completePiva2 = true
+          }));
       }
     }
   }

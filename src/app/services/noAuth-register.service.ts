@@ -23,7 +23,14 @@ export class NoAuthRegisterService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  registerFleet(fileModule: File, fileIdentityCard: File, fileCommerceReg: File, fleetManager: FleetManager, captchaToken: string): Observable<void> {
+  registerFleet(
+    fileModule: File,
+    fileIdentityCard: File,
+    fileCommerceReg: File,
+    fleetManager: FleetManager,
+    captchaToken?: string): Observable<void> {
+
+    const registerUrl = captchaToken ? '/noauth' : '/api/register';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ captchaToken })
@@ -33,7 +40,7 @@ export class NoAuthRegisterService {
     formData.append('idDoc', fileIdentityCard);
     formData.append('comReg', fileCommerceReg);
     formData.append('metadata', JSON.stringify(fleetManager));
-    return this.http.post<void>(this.apiUrl + '/register', formData, options)
+    return this.http.post<void>(this.apiUrl + registerUrl + '/register', formData, options)
       .pipe(catchError(err => { throw err; }));
   }
 
@@ -49,8 +56,13 @@ export class NoAuthRegisterService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  checkVatNumber(nation: string, vat: string): Observable<VatValidation> {
-    return this.http.get<VatValidation>(this.apiUrl + `/checkVat/${nation}/${vat}`)
+  checkVatNumber(nation: string, vat: string, captchaToken?: string): Observable<VatValidation> {
+    const registerUrl = captchaToken ? '/noauth' : '/api/register';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ captchaToken })
+    };
+    return this.http.get<VatValidation>(this.apiUrl + registerUrl + `/checkVat/${nation}/${vat}`, options)
       .pipe(catchError(err => { throw err; }));
   }
 }
