@@ -32,7 +32,7 @@ export class NoAuthRegisterService {
 
     const registerUrl = captchaToken ? '/noauth' : '/api/register';
     const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      // headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ captchaToken })
     };
     const formData = new FormData();
