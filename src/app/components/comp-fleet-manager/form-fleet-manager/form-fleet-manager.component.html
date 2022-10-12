@@ -15,7 +15,7 @@
             </mat-icon>
         </button>
     </div>
-    <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" *ngIf="!completeUp"></mat-progress-bar>
     <div [@slideInOut]="helper">
         <app-expansion-info (callForm)="downloadTemplate()"></app-expansion-info> <!-- component expansion-info-->
     </div>
@@ -231,5 +231,6 @@
                 [disabled]="formGroup.invalid || !formGroup.dirty" class="actionButtons"
                 (debounceClick)="updateFleetManager()">{{'FLEET-MANAGER.EDIT' | translate}}</button>
         </div>
+        <mat-progress-bar mode="indeterminate" *ngIf="!completeDown"></mat-progress-bar>
     </mat-card-content>
 </mat-card>

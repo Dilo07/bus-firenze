@@ -61,7 +61,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public completePiva = true;
   public completePiva2 = true;
   public helper: 'on' | 'off';
-  public complete = true;
+  public completeUp = true;
+  public completeDown = true;
 
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
@@ -172,7 +173,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public insertFleetManager(): void {
-    const newFleetManager = this.generateFleetManager();
     if (this.register) {
       const dialogRef = this.dialog.open(ModalConfirmComponent, {
         width: '50%',
@@ -182,30 +182,11 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe((resp) => {
         if (resp) {
-          this.subscription.push(
-            // passare token
-            this.registerService.registerFleet(
-              this.fileModule,
-              this.fileIdentityCard,
-              this.fileCommerceReg,
-              newFleetManager,
-              this.captchaToken)
-              .subscribe(
-                () => {
-                  this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_REGISTER', 'INFO');
-                  this.router.navigate(['../']);
-                }
-              ));
+          this.registerFleetApi();
         }
       });
     } else {
-      this.subscription.push(
-        this.registerService.registerFleet(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
-          () => {
-            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_REGISTER', 'INFO');
-            this.router.navigate(['../manage']);
-          },
-        ));
+      this.registerFleetApi();
     }
   }
 
@@ -222,7 +203,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public modalOTP(): void {
     const valCell = '+' + this.dialCode + this.formGroup.get('ctrlCell').value.replace(/\s/g, '');
     const lang = this.translateService.currentLang;
-    this.subscription.push(this.registerService.getOtpCode(valCell, lang, this.register ? this.captchaToken : null).subscribe({ // passare token
+    this.subscription.push(this.registerService.getOtpCode(valCell, lang, this.register ? this.captchaToken : null).subscribe({
       next: (code) => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',
@@ -243,17 +224,17 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public downloadTemplate(): void {
-    this.complete = false;
+    this.completeUp = false;
     const fileSaver = require('file-saver');
-    this.subscription.push(this.registerService.getTemplateDocument(this.register ? this.captchaToken : null) // passare token
+    this.subscription.push(this.registerService.getTemplateDocument(this.register ? this.captchaToken : null)
       .subscribe({
         next: (data: HttpResponse<Blob>) => {
           const contentDispositionHeader = data.headers.get('Content-Disposition');
           const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
           fileSaver.saveAs(data.body, filename);
         },
-        error: () => this.complete = true,
-        complete: () => this.complete = true
+        error: () => this.completeUp = true,
+        complete: () => this.completeUp = true
       }));
   }
 
@@ -326,7 +307,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       const nat = this.formGroup.get('ctrlNat').value;
       this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
       this.completePiva = false;
-      this.subscription.push(this.registerService.checkVatNumber(nat, pIva, this.register ? this.captchaToken : null).subscribe({ // passare token
+      this.subscription.push(this.registerService.checkVatNumber(nat, pIva, this.register ? this.captchaToken : null).subscribe({
         next: (vatVerify) => {
           if (!vatVerify.valid) {
             this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
@@ -367,7 +348,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         this.completePiva2 = false;
         this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode, this.register ? this.captchaToken : null)
-          .subscribe({ // passare token
+          .subscribe({
             next: (vatVerify) => {
               if (!vatVerify.valid) {
                 this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
@@ -382,8 +363,24 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public captchaEvent(event: any): void {
-    console.log(event);
+  private registerFleetApi(): void {
+    this.completeDown = false;
+    const newFleetManager = this.generateFleetManager();
+    this.subscription.push(
+      this.registerService.registerFleet(
+        this.fileModule,
+        this.fileIdentityCard,
+        this.fileCommerceReg,
+        newFleetManager,
+        this.register ? this.captchaToken : null)
+        .subscribe({
+          next: () => {
+            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_REGISTER', 'INFO');
+            this.register ? this.router.navigate(['../']) : this.router.navigate(['../manage']);
+          },
+          error: () => this.completeDown = true,
+          complete: () => this.completeDown = true,
+        }));
   }
 
   private resetCompanyInfo(): void {
