@@ -250,6 +250,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           } else if (size > 2097152) { // dimensione massima
             this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
           } else {
+            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_FILE', 'INFO');
             this.fileModule = files[0];
           }
           break;
@@ -261,6 +262,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           } else if (size > 2097152) { // dimensione massima
             this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
           } else {
+            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_IDENTIYCRD', 'INFO');
             this.fileIdentityCard = files[0];
           }
           break;
@@ -272,6 +274,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           } else if (size > 2097152) { // dimensione massima
             this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
           } else {
+            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_COMMERCEREG', 'INFO');
             this.fileCommerceReg = files[0];
           }
           break;
