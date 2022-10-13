@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { HttpUtils } from '@npt/npt-template';
+import { HttpUtils, RecaptchaTokenService } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FleetManager, VatValidation } from '../components/domain/bus-firenze-domain';
@@ -11,10 +11,17 @@ import { FleetManager, VatValidation } from '../components/domain/bus-firenze-do
 export class NoAuthRegisterService {
   private apiUrl = this.url;
 
-  constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
+  constructor(
+    private http: HttpClient,
+    private recaptchaTokenService: RecaptchaTokenService,
+    @Inject('beUrl') private url: string) { }
 
-  getOtpCode(contact: string, lang: string, captchaToken?: string): Observable<string> {
-    const registerUrl = captchaToken ? '/noauth' : '/api/register';
+  async getOtpCode(contact: string, lang: string, isCaptchaToken: boolean): Promise<Observable<string>> {
+    const registerUrl = isCaptchaToken ? '/noauth' : '/api/register';
+    let captchaToken = null;
+    if (isCaptchaToken) {
+      await this.recaptchaTokenService.getToken('register').then((token) => captchaToken = token);
+    }
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ captchaToken })
@@ -23,9 +30,19 @@ export class NoAuthRegisterService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  registerFleet(fileModule: File, fileIdentityCard: File, fileCommerceReg: File, fleetManager: FleetManager, captchaToken: string): Observable<void> {
+  async registerFleet(
+    fileModule: File,
+    fileIdentityCard: File,
+    fileCommerceReg: File,
+    fleetManager: FleetManager,
+    isCaptchaToken: boolean): Promise<Observable<void>> {
+
+    const registerUrl = isCaptchaToken ? '/noauth' : '/api/register';
+    let captchaToken = null;
+    if (isCaptchaToken) {
+      await this.recaptchaTokenService.getToken('register').then((token) => captchaToken = token);
+    }
     const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ captchaToken })
     };
     const formData = new FormData();
@@ -33,12 +50,16 @@ export class NoAuthRegisterService {
     formData.append('idDoc', fileIdentityCard);
     formData.append('comReg', fileCommerceReg);
     formData.append('metadata', JSON.stringify(fleetManager));
-    return this.http.post<void>(this.apiUrl + '/register', formData, options)
+    return this.http.post<void>(this.apiUrl + registerUrl + '/register', formData, options)
       .pipe(catchError(err => { throw err; }));
   }
 
-  getTemplateDocument(captchaToken?: string): Observable<HttpResponse<Blob> | Blob> {
-    const registerUrl = captchaToken ? '/noauth' : '/api/register';
+  async getTemplateDocument(isCaptchaToken: boolean): Promise<Observable<HttpResponse<Blob> | Blob>> {
+    const registerUrl = isCaptchaToken ? '/noauth' : '/api/register';
+    let captchaToken = null;
+    if (isCaptchaToken) {
+      await this.recaptchaTokenService.getToken('register').then((token) => captchaToken = token);
+    }
     const options = {
       observe: 'response' as 'body',
       responseType: 'blob' as 'blob',
@@ -49,8 +70,17 @@ export class NoAuthRegisterService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  checkVatNumber(nation: string, vat: string): Observable<VatValidation> {
-    return this.http.get<VatValidation>(this.apiUrl + `/checkVat/${nation}/${vat}`)
+  async checkVatNumber(nation: string, vat: string, isCaptchaToken: boolean): Promise<Observable<VatValidation>> {
+    const registerUrl = isCaptchaToken ? '/noauth' : '/api/register';
+    let captchaToken = null;
+    if (isCaptchaToken) {
+      await this.recaptchaTokenService.getToken('register').then((token) => captchaToken = token);
+    }
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: HttpUtils.createHttpParams({ captchaToken })
+    };
+    return this.http.get<VatValidation>(this.apiUrl + registerUrl + `/checkVat/${nation}/${vat}`, options)
       .pipe(catchError(err => { throw err; }));
   }
 }

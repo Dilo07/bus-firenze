@@ -1,7 +1,4 @@
-import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-expansion-info',
@@ -16,17 +13,11 @@ import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service'
   ]
 })
 export class ExpansionInfoComponent {
+  @Output() private callForm = new EventEmitter();
 
-  private subscription: Subscription[] = [];
-  constructor(private registerService: NoAuthRegisterService) { }
+  constructor() { }
 
   public downloadTemplate(): void {
-    const fileSaver = require('file-saver');
-    this.subscription.push(this.registerService.getTemplateDocument().subscribe(
-      (data: HttpResponse<Blob>) => {
-        const contentDispositionHeader = data.headers.get('Content-Disposition');
-        const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
-        fileSaver.saveAs(data.body, filename);
-      }));
+    this.callForm.emit();
   }
 }

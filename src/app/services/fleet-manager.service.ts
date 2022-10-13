@@ -38,16 +38,6 @@ export class FleetManagerService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  insertFleetManager(fileModule: File, fileIdentityCard: File, fileCommerceReg: File, fleetManager: FleetManager): Observable<void> {
-    const formData = new FormData();
-    formData.append('reqForm', fileModule);
-    formData.append('idDoc', fileIdentityCard);
-    formData.append('comReg', fileCommerceReg);
-    formData.append('metadata', JSON.stringify(fleetManager));
-    return this.http.post<void>(this.apiUrl + '/add', formData)
-      .pipe(catchError(err => { throw err; }));
-  }
-
   updateFleetManager(fleetManager: FleetManager): Observable<void> {
     return this.http.put<void>(this.apiUrl + '/update', fleetManager)
       .pipe(catchError(err => { throw err; }));

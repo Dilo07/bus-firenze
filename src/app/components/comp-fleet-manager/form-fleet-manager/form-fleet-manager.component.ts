@@ -43,7 +43,6 @@ import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.componen
 export class FormFleetManagerComponent implements OnInit, OnDestroy {
   @Input() register = false;
   @Input() data: FleetManager;
-  @Input() captchaToken: string;
 
   public formGroup: FormGroup;
   public verifyOtp = false;
@@ -61,6 +60,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public completePiva = true;
   public completePiva2 = true;
   public helper: 'on' | 'off';
+  public completeUp = true;
+  public completeDown = true;
 
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
@@ -128,8 +129,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ctrlFileModule: ['', Validators.required],
         ctrlFileIdentityCrd: ['', Validators.required],
         ctrlFileCommerceReg: ['', Validators.required],
-        ctrlConsent: [false, Validators.requiredTrue],
-        ctrlCaptcha: ['', Validators.required]
+        ctrlConsent: [false, Validators.requiredTrue]
       });
       this.userSel = this.fleetType.aziendaPrivata;
       this.helper = 'on';
@@ -172,7 +172,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public insertFleetManager(): void {
-    const newFleetManager = this.generateFleetManager();
     if (this.register) {
       const dialogRef = this.dialog.open(ModalConfirmComponent, {
         width: '50%',
@@ -182,30 +181,11 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe((resp) => {
         if (resp) {
-          this.subscription.push(
-            // passare token
-            this.registerService.registerFleet(
-              this.fileModule,
-              this.fileIdentityCard,
-              this.fileCommerceReg,
-              newFleetManager,
-              this.captchaToken)
-              .subscribe(
-                () => {
-                  this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_REGISTER', 'INFO');
-                  this.router.navigate(['../']);
-                }
-              ));
+          this.registerFleetApi();
         }
       });
     } else {
-      this.subscription.push(
-        this.fleetManagerService.insertFleetManager(this.fileModule, this.fileIdentityCard, this.fileCommerceReg, newFleetManager).subscribe(
-          () => {
-            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_REGISTER', 'INFO');
-            this.router.navigate(['../manage']);
-          },
-        ));
+      this.registerFleetApi();
     }
   }
 
@@ -219,10 +199,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     ));
   }
 
-  public modalOTP(): void {
+  public async modalOTP(): Promise<void> {
     const valCell = '+' + this.dialCode + this.formGroup.get('ctrlCell').value.replace(/\s/g, '');
     const lang = this.translateService.currentLang;
-    this.subscription.push(this.registerService.getOtpCode(valCell, lang, this.register ? this.captchaToken : null).subscribe({ // passare token
+    this.subscription.push((await this.registerService.getOtpCode(valCell, lang, this.register ? true : false)).subscribe({
       next: (code) => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',
@@ -242,15 +222,19 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }));
   }
 
-  public downloadTemplate(): void {
+  public async downloadTemplate(): Promise<void> {
+    this.completeUp = false;
     const fileSaver = require('file-saver');
-    this.subscription.push(this.registerService.getTemplateDocument(this.register ? this.captchaToken : null) // passare token
-      .subscribe(
-        (data: HttpResponse<Blob>) => {
+    this.subscription.push((await this.registerService.getTemplateDocument(this.register ? true : false))
+      .subscribe({
+        next: (data: HttpResponse<Blob>) => {
           const contentDispositionHeader = data.headers.get('Content-Disposition');
           const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
           fileSaver.saveAs(data.body, filename);
-        }));
+        },
+        error: () => this.completeUp = true,
+        complete: () => this.completeUp = true
+      }));
   }
 
   public uploadFile(files: File[], typeFile: number): void {
@@ -266,6 +250,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           } else if (size > 2097152) { // dimensione massima
             this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
           } else {
+            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_FILE', 'INFO');
             this.fileModule = files[0];
           }
           break;
@@ -277,6 +262,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           } else if (size > 2097152) { // dimensione massima
             this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
           } else {
+            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_IDENTIYCRD', 'INFO');
             this.fileIdentityCard = files[0];
           }
           break;
@@ -288,6 +274,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           } else if (size > 2097152) { // dimensione massima
             this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
           } else {
+            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_COMMERCEREG', 'INFO');
             this.fileCommerceReg = files[0];
           }
           break;
@@ -316,14 +303,14 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public pivaValidator(): void {
+  public async pivaValidator(): Promise<void> {
     if (!this.formGroup.controls.ctrlpIva.invalid && this.isEuropeNat && !this.roleFleetManager) {
       const pIva = this.formGroup.get('ctrlpIva').value;
       const nat = this.formGroup.get('ctrlNat').value;
       this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
       this.completePiva = false;
-      this.subscription.push(this.registerService.checkVatNumber(nat, pIva).subscribe( // passare token
-        vatVerify => {
+      this.subscription.push((await this.registerService.checkVatNumber(nat, pIva, this.register ? true : false)).subscribe({
+        next: (vatVerify) => {
           if (!vatVerify.valid) {
             this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
           } else {
@@ -334,13 +321,13 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
             });
           }
         },
-        () => this.completePiva = true,
-        () => this.completePiva = true
-      ));
+        error: () => this.completePiva = true,
+        complete: () => this.completePiva = true
+      }));
     }
   }
 
-  public pivaOrFcValidator(): void {
+  public async pivaOrFcValidator(): Promise<void> {
     const fiscalCode = this.formGroup.get('ctrlCF').value;
     const userType = this.formGroup.get('ctrlUser').value;
     if (!this.formGroup.controls.ctrlCF.invalid && !this.roleFleetManager) {
@@ -362,23 +349,40 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         const nat = this.formGroup.get('ctrlNat').value;
         this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         this.completePiva2 = false;
-        this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode).subscribe( // passare token
-          vatVerify => {
-            if (!vatVerify.valid) {
-              this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
-            } else {
-              this.formGroup.controls.ctrlCF.setErrors(null);
-            }
-          },
-          () => this.completePiva2 = true,
-          () => this.completePiva2 = true
-        ));
+        this.subscription.push((await this.registerService.checkVatNumber(nat, fiscalCode, this.register ? true : false))
+          .subscribe({
+            next: (vatVerify) => {
+              if (!vatVerify.valid) {
+                this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
+              } else {
+                this.formGroup.controls.ctrlCF.setErrors(null);
+              }
+            },
+            error: () => this.completePiva2 = true,
+            complete: () => this.completePiva2 = true
+          }));
       }
     }
   }
 
-  public captchaEvent(event: any): void {
-    console.log(event);
+  private async registerFleetApi(): Promise<void> {
+    this.completeDown = false;
+    const newFleetManager = this.generateFleetManager();
+    this.subscription.push(
+      (await this.registerService.registerFleet(
+        this.fileModule,
+        this.fileIdentityCard,
+        this.fileCommerceReg,
+        newFleetManager,
+        this.register ? true : false))
+        .subscribe({
+          next: () => {
+            this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_REGISTER', 'INFO');
+            this.register ? this.router.navigate(['../']) : this.router.navigate(['../manage']);
+          },
+          error: () => this.completeDown = true,
+          complete: () => this.completeDown = true,
+        }));
   }
 
   private resetCompanyInfo(): void {
