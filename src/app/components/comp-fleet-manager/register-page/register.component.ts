@@ -9,7 +9,6 @@ import { RecaptchaTokenService } from '@npt/npt-template';
 })
 export class RegisterComponent implements OnInit {
   public langs: string[];
-  public captchaToken: string;
 
   constructor(
     public translateService: TranslateService,
@@ -18,8 +17,8 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recaptchaTokenService.loadToken(document, 'register').then((captchaToken) => this.captchaToken = captchaToken);
-    /* this.captchaToken = this.recaptchaTokenService.getToken('register'); altro metodo con await sulla loadToken*/
+    // fai solo il load non passi nessun captcha, modifica il service
+    this.recaptchaTokenService.loadToken(document, 'register').then();
     this.langs = this.translateService.getLangs();
   }
 

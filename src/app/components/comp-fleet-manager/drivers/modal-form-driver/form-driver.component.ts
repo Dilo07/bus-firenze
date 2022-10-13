@@ -78,7 +78,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     });
   }
 
-  public modalOTP(): void {
+  public async modalOTP(): Promise<void> {
     if (this.cellularRequired) {
       this.cellForm = '+' + this.dialCode + this.formGroup.get('CtrlCell').value.replace(/\s/g, '');
     } else {
@@ -90,7 +90,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       }
     }
     const lang = this.translateService.currentLang;
-    this.subscription.push(this.registerService.getOtpCode(this.cellForm, lang).subscribe({
+    this.subscription.push((await this.registerService.getOtpCode(this.cellForm, lang, false)).subscribe({
       next: code => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',

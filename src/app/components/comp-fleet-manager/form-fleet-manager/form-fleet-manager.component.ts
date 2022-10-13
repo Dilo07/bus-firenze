@@ -43,7 +43,6 @@ import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.componen
 export class FormFleetManagerComponent implements OnInit, OnDestroy {
   @Input() register = false;
   @Input() data: FleetManager;
-  @Input() captchaToken: string;
 
   public formGroup: FormGroup;
   public verifyOtp = false;
@@ -200,10 +199,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     ));
   }
 
-  public modalOTP(): void {
+  public async modalOTP(): Promise<void> {
     const valCell = '+' + this.dialCode + this.formGroup.get('ctrlCell').value.replace(/\s/g, '');
     const lang = this.translateService.currentLang;
-    this.subscription.push(this.registerService.getOtpCode(valCell, lang, this.register ? this.captchaToken : null).subscribe({
+    this.subscription.push((await this.registerService.getOtpCode(valCell, lang, this.register ? true : false)).subscribe({
       next: (code) => {
         const dialogRef = this.dialog.open(ModalOTPComponent, {
           width: '80%',
@@ -223,10 +222,10 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }));
   }
 
-  public downloadTemplate(): void {
+  public async downloadTemplate(): Promise<void> {
     this.completeUp = false;
     const fileSaver = require('file-saver');
-    this.subscription.push(this.registerService.getTemplateDocument(this.register ? this.captchaToken : null)
+    this.subscription.push((await this.registerService.getTemplateDocument(this.register ? true : false))
       .subscribe({
         next: (data: HttpResponse<Blob>) => {
           const contentDispositionHeader = data.headers.get('Content-Disposition');
@@ -301,13 +300,13 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public pivaValidator(): void {
+  public async pivaValidator(): Promise<void> {
     if (!this.formGroup.controls.ctrlpIva.invalid && this.isEuropeNat && !this.roleFleetManager) {
       const pIva = this.formGroup.get('ctrlpIva').value;
       const nat = this.formGroup.get('ctrlNat').value;
       this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
       this.completePiva = false;
-      this.subscription.push(this.registerService.checkVatNumber(nat, pIva, this.register ? this.captchaToken : null).subscribe({
+      this.subscription.push((await this.registerService.checkVatNumber(nat, pIva, this.register ? true : false)).subscribe({
         next: (vatVerify) => {
           if (!vatVerify.valid) {
             this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
@@ -325,7 +324,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public pivaOrFcValidator(): void {
+  public async pivaOrFcValidator(): Promise<void> {
     const fiscalCode = this.formGroup.get('ctrlCF').value;
     const userType = this.formGroup.get('ctrlUser').value;
     if (!this.formGroup.controls.ctrlCF.invalid && !this.roleFleetManager) {
@@ -347,7 +346,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         const nat = this.formGroup.get('ctrlNat').value;
         this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         this.completePiva2 = false;
-        this.subscription.push(this.registerService.checkVatNumber(nat, fiscalCode, this.register ? this.captchaToken : null)
+        this.subscription.push((await this.registerService.checkVatNumber(nat, fiscalCode, this.register ? true : false))
           .subscribe({
             next: (vatVerify) => {
               if (!vatVerify.valid) {
@@ -363,16 +362,16 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  private registerFleetApi(): void {
+  private async registerFleetApi(): Promise<void> {
     this.completeDown = false;
     const newFleetManager = this.generateFleetManager();
     this.subscription.push(
-      this.registerService.registerFleet(
+      (await this.registerService.registerFleet(
         this.fileModule,
         this.fileIdentityCard,
         this.fileCommerceReg,
         newFleetManager,
-        this.register ? this.captchaToken : null)
+        this.register ? true : false))
         .subscribe({
           next: () => {
             this.snackBar.showMessage('FLEET-MANAGER.SUCCESS_REGISTER', 'INFO');

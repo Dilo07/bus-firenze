@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import moment from 'moment';
+import { firstValueFrom } from 'rxjs';
 import { BillingType, AddPenal, PenalType } from 'src/app/components/domain/bus-firenze-domain';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 
@@ -23,7 +24,7 @@ export class ModalPenalComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.complete = false;
-    this.listPenalType = await this.billingItemService.getPenalType(true).toPromise();
+    this.listPenalType = await firstValueFrom(this.billingItemService.getPenalType(true));
     this.complete = true;
     this.formGroup = new FormGroup({
       penalSelected: new FormControl(this.listPenalType[0].typeId, Validators.required),
