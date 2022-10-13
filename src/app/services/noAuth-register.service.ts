@@ -43,7 +43,6 @@ export class NoAuthRegisterService {
       await this.recaptchaTokenService.getToken('register').then((token) => captchaToken = token);
     }
     const options = {
-      // headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ captchaToken })
     };
     const formData = new FormData();
