@@ -1,12 +1,13 @@
 <mat-card>
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center"> {{'STATISTIC.VEHICLE' | translate}}
-    </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
-        <span>
-            <button mat-button class="backButton" [routerLink]="['../']" [state]="{fleetManager: fleetManager}">
-                {{'FLEET-MANAGER.BACK' |translate}}
-            </button>
-        </span>
+        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+            <mat-card-title> {{'STATISTIC.VEHICLE' | translate}}</mat-card-title>
+            <span>
+                <button mat-button class="backButton" [routerLink]="['../']" [state]="{fleetManager: fleetManager}">
+                    {{'FLEET-MANAGER.BACK' |translate}}
+                </button>
+            </span>
+        </div>
         <form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
             <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
                 <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
