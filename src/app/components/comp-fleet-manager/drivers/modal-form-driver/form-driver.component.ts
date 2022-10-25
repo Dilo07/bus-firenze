@@ -121,7 +121,10 @@ export class FormDriverComponent implements OnInit, OnDestroy {
       error: () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
       complete: () => {
         this.snackBar.showMessage('DRIVERS.ADD_SUCCESS', 'INFO');
-        this.router.navigate(['manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
+        if (!this.roleDriver) {
+          const url = this.fleetManagerId ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
+          this.router.navigate([url], { state: { fleetManagerId: this.fleetManagerId } });
+        }
       }
     });
   }
@@ -150,7 +153,8 @@ export class FormDriverComponent implements OnInit, OnDestroy {
             this.cellularRequired = false;
           }
           if (!this.roleDriver) {
-            this.router.navigate(['manage/drivers'], { state: { fleetManagerId: this.fleetManagerId } });
+            const url = this.fleetManagerId ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
+            this.router.navigate([url], { state: { fleetManagerId: this.fleetManagerId } });
           }
         }
       });

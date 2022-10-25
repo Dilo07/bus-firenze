@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'form-Driver',
-    component: FormDriverComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.FLEETMNG] }
+    component: FormDriverComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON] }
   },
   {
     path: 'drivers',

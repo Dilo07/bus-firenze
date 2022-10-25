@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="center" style="margin-top: 2%;">
     <div fxLayout="row wrap" fxLayoutGap="20px">
-<!--         <mat-form-field appearance="outline" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
+        <!--         <mat-form-field appearance="outline" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
             <mat-label>{{'COMMON.ACTION.SEARCH' | translate}}</mat-label>
             <input matInput (keyup)="applyFilter($event)" #input autocomplete="off">
         </mat-form-field> -->
@@ -60,6 +60,6 @@
             </td>
         </tr>
     </mat-table>
-    <mat-paginator style="margin-top: 20px;" [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+    <mat-paginator style="margin-top: 20px;" [style.display]="dataSource.data.length === 0 ? 'none' : '' "
+        [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 </div>
