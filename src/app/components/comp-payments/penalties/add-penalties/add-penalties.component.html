@@ -1,10 +1,4 @@
 <div fxLayout="column" fxLayoutAlign="center" style="margin-top: 2%;">
-    <div fxLayout="row wrap" fxLayoutGap="20px">
-<!--         <mat-form-field appearance="outline" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
-            <mat-label>{{'COMMON.ACTION.SEARCH' | translate}}</mat-label>
-            <input matInput (keyup)="applyFilter($event)" #input autocomplete="off">
-        </mat-form-field> -->
-    </div>
     <mat-card-subtitle fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}
     </mat-card-subtitle>
     <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
@@ -14,7 +8,7 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">id</span>
-                {{ element.id}}
+                {{element.id}}
             </mat-cell>
         </ng-container>
 
@@ -22,7 +16,7 @@
             <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
-                {{ element.lpn}}
+                {{element.lpn}}
             </mat-cell>
         </ng-container>
 
@@ -30,7 +24,7 @@
             <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
-                {{ element.lpnNat}}
+                {{element.lpnNat}}
             </mat-cell>
         </ng-container>
 
@@ -38,14 +32,14 @@
             <mat-header-cell *matHeaderCellDef> obuId </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">obuId</span>
-                {{ element.obuId}}
+                {{element.obuId}}
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element" style="text-align: end;">
-                <button mat-icon-button matTooltip="{{'PENALTIES.ADD' | translate}}"
+                <button mat-icon-button matTooltip="{{'PENALTIES.ADD' | translate}}" [attr.i18nKey]="'PENALTIES.ADD'"
                     (click)="modalPenal(element.id, element.fleetManagerId)">
                     <mat-icon style="color: #0066CC;">do_not_disturb</mat-icon>
                 </button>
@@ -60,6 +54,6 @@
             </td>
         </tr>
     </mat-table>
-    <mat-paginator style="margin-top: 20px;" [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+    <mat-paginator style="margin-top: 20px;" [style.display]="dataSource.data.length === 0 ? 'none' : '' "
+        [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 </div>

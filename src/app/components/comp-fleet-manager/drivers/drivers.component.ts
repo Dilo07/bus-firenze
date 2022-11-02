@@ -77,34 +77,6 @@ export class DriversComponent implements OnInit, OnDestroy {
       ));
   }
 
-  public addDriver(): void {
-    const dialogRef = this.dialog.open(FormDriverComponent, {
-      width: '90%',
-      height: '90%',
-      data: { driver: null, fleetManagerId: this.fleetManagerId }
-    });
-    dialogRef.afterClosed().subscribe((add) => {
-      if (add) {
-        this.getDrivers();
-        this.resetSearchField();
-      }
-    });
-  }
-
-  public editDriver(dRiver: Driver): void {
-    const dialogRef = this.dialog.open(FormDriverComponent, {
-      width: '90%',
-      height: '90%',
-      data: { driver: dRiver, fleetManagerId: this.fleetManagerId }
-    });
-    dialogRef.afterClosed().subscribe((edit) => {
-      if (edit) {
-        this.getDrivers();
-        this.resetSearchField();
-      }
-    });
-  }
-
   public deleteDriver(idDriver: number): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',

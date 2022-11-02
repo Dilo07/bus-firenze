@@ -40,7 +40,8 @@
                     <mat-card-title>{{'FLEET-MANAGER.PERSONREF' | translate}}</mat-card-title>
                     <app-form-field-person [personForm]="formGroup" [readOnlyName]="data && roleFleetManager"
                         [readlOnlyMail]="$any(!register && data?.name)"
-                        [opacity]="!register && data?.name ? '0.5' : ''"></app-form-field-person><!--component-->
+                        [opacity]="!register && data?.name ? '0.5' : ''"></app-form-field-person>
+                    <!--component-->
                     <div fxLayout="row wrap" fxLayoutGap="20px">
                         <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                             fxFlex.gt-md="30">
@@ -51,8 +52,9 @@
                                 autocomplete="off" maxlength="25" required
                                 [readonly]="(verifyOtp && register) || (!register && data?.name)"
                                 [style.opacity]="!register && data ? '0.5' : ''">
-                            <button matSuffix mat-icon-button libDebounceClick [debounceTime]="1000"
-                                matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}"
+                            <button matSuffix mat-icon-button libDebounceClick
+                                matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}" [debounceTime]="1000"
+                                [attr.i18nKey]="'FLEET-MANAGER.VERIFY_MOBILE'"
                                 *ngIf="register && !formGroup.get('ctrlCell').invalid && !verifyOtp"
                                 (debounceClick)="modalOTP()">
                                 <mat-icon>mobile_screen_share</mat-icon>
@@ -123,7 +125,7 @@
                                 [maxlength]="userSel === fleetType.dittaIndividuale ? 16 : 11">
                             <a matSuffix mat-icon-button *ngIf="userSel === fleetType.ente"
                                 href="https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCf"
-                                target="_blank">
+                                target="_blank" [attr.i18nKey]="'FLEET-MANAGER.VERIFYCF'">
                                 <mat-icon matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">verified_user
                                 </mat-icon>
                             </a>
@@ -133,8 +135,10 @@
                         <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
                             fxFlex.gt-md="25"
                             *ngIf="(userSel === fleetType.aziendaPrivata || userSel === fleetType.pubblicaAmm) && formGroup.get('ctrlNat').value === 'IT'">
-                            <mat-label>{{(userSel === fleetType.aziendaPrivata ? 'FLEET-MANAGER.DESTCODE' :
-                                'FLEET-MANAGER.IPACODE') | translate}}</mat-label>
+                            <mat-label>
+                                {{(userSel === fleetType.aziendaPrivata ? 'FLEET-MANAGER.DESTCODE' :
+                                'FLEET-MANAGER.IPACODE') | translate}}
+                            </mat-label>
                             <input matInput type="text" formControlName="ctrlDest"
                                 [required]="(userSel === fleetType.aziendaPrivata || userSel === fleetType.pubblicaAmm) && formGroup.get('ctrlNat').value === 'IT'"
                                 [minlength]="userSel === fleetType.aziendaPrivata ? 7 : userSel === fleetType.pubblicaAmm ? 6 : null"
@@ -220,16 +224,17 @@
             </ng-container>
         </form>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <button mat-button *ngIf="!roleFleetManager" [routerLink]="['../']"
+            <button mat-button *ngIf="!roleFleetManager" [routerLink]="['../']" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
                 class="backButton">{{'FLEET-MANAGER.BACK' | translate}}</button>
             <button *ngIf="!data" mat-button libDebounceClick
-                [disabled]="formGroup.invalid || ((register && !verifyOtp))" class="actionButtons"
-                (debounceClick)="insertFleetManager()">
+                [disabled]="formGroup.invalid || ((register && !verifyOtp))" [attr.i18nKey]="'FLEET-MANAGER.SAVE'"
+                class="actionButtons" (debounceClick)="insertFleetManager()">
                 {{'FLEET-MANAGER.SAVE' | translate}}
             </button>
             <button *ngIf="data && !roleFleetManager" mat-button libDebounceClick
-                [disabled]="formGroup.invalid || !formGroup.dirty" class="actionButtons"
-                (debounceClick)="updateFleetManager()">{{'FLEET-MANAGER.EDIT' | translate}}</button>
+                [disabled]="formGroup.invalid || !formGroup.dirty" [attr.i18nKey]="'FLEET-MANAGER.EDIT'"
+                class="actionButtons" (debounceClick)="updateFleetManager()">
+                {{'FLEET-MANAGER.EDIT' | translate}}</button>
         </div>
         <mat-progress-bar mode="indeterminate" *ngIf="!completeDown"></mat-progress-bar>
     </mat-card-content>

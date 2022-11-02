@@ -7,10 +7,10 @@
 				<ng-container matColumnDef="expandButton">
 					<mat-header-cell *matHeaderCellDef></mat-header-cell>
 					<mat-cell *matCellDef="let element">
-						<button mat-icon-button
+						<button mat-icon-button [attr.i18nKey]="'VEHICLE.OPEN'"
 							(click)="expandedElement = expandedElement === element ? null : element;">
 							<mat-icon style="color: grey"
-								matTooltip="{{expandedElement && expandedElement.id === element.id ? 'chiudi veicoli' : 'apri veicoli' }}">
+								matTooltip="{{(expandedElement && expandedElement.id === element.id ? 'VEHICLE.CLOSE' : 'VEHICLE.OPEN') | translate }}">
 								{{expandedElement && expandedElement.id === element.id ? 'expand_more' :
 								'chevron_right'}}
 							</mat-icon>
@@ -63,14 +63,16 @@
 							<div class="example-element-description">
 								<span class="example-element-description-attribution">
 									<ng-container *ngIf="depositWarning else verifyVehicles">
-										<app-warning-vehicles *ngIf="expandedElement === element" [idFleet]="expandedElement.id"></app-warning-vehicles>
+										<app-warning-vehicles *ngIf="expandedElement === element"
+											[idFleet]="expandedElement.id"></app-warning-vehicles> <!--component-->
 									</ng-container>
 									<ng-template #verifyVehicles>
 										<app-verify-vehicles *ngIf="expandedElement === element"
-											(callRefreshTableFleet)="callFleetDeposit()" (viewDeposit)="viewDeposit($event)"
+											(callRefreshTableFleet)="callFleetDeposit()"
+											(viewDeposit)="viewDeposit($event)"
 											(viewCertificate)="viewCertificate($event)" [disableViewPdf]="complete"
 											[idFleet]="expandedElement.id">
-										</app-verify-vehicles>
+										</app-verify-vehicles> <!--component-->
 									</ng-template>
 								</span>
 							</div>

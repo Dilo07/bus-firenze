@@ -28,7 +28,7 @@
                     fxFlex.gt-md="30">
                     <mat-label>E-Mail</mat-label>
                     <input matInput type="text" formControlName="ctrlMail" maxlength="100" required>
-                    <mat-error *ngIf="formGroup.get('ctrlMail').invalid">{{'FLEET-MANAGER.INSERT_MAIL' | translate}}
+                    <mat-error>{{'FLEET-MANAGER.INSERT_MAIL' | translate}}
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -41,6 +41,7 @@
                         (countryChange)="onCountryChange($event)" formControlName="CtrlCell" maxlength="25" required
                         [readonly]="verifyOtp">
                     <button matSuffix mat-icon-button matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}"
+                        [attr.i18nKey]="'FLEET-MANAGER.VERIFY_MOBILE'"
                         *ngIf="formGroup.get('CtrlCell').value && !verifyOtp" (click)="modalOTP()">
                         <mat-icon>mobile_screen_share</mat-icon>
                     </button>

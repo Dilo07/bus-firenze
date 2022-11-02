@@ -14,7 +14,8 @@
             </mat-list-item>
             <mat-list-item role="listitem">
                 <p mat-line>{{'VEHICLE.STEP-4' | translate}}
-                    <a class="link" (click)="downloadDocument()">{{'VEHICLE.ECONOMICDOC' | translate}}</a>.
+                    <a class="link" [attr.i18nKey]="'VEHICLE.ECONOMICDOC'"
+                        (click)="downloadDocument()">{{'VEHICLE.ECONOMICDOC' | translate}}</a>.
                 </p>
             </mat-list-item>
         </mat-list>

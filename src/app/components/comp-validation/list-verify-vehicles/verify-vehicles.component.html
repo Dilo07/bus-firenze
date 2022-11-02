@@ -29,6 +29,7 @@
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">{{'VEHICLE.CERTIFICATE' | translate}}</span>
                 <button mat-icon-button [disabled]="!element.certificateId || !disableViewPdf"
+                    [attr.i18nKey]="'VEHICLE.CERTIFICATE'"
                     (click)="viewCertificate.emit({vehicleId: element.id, certificateId: element.certificateId})">
                     <mat-icon
                         matTooltip="{{(element.certificateId ? 'VEHICLE.CERTIFICATE' : 'VEHICLE.NOCERTIFICATE') | translate}}">
@@ -51,11 +52,12 @@
             <mat-cell *matCellDef="let element">
                 <span>
                     <button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}" [disabled]="!disableViewPdf"
+                        [attr.i18nKey]="'OBU.VIEW_FILE'"
                         (click)="viewDeposit.emit({vehicleId: element.id, documents: element.documents})">
                         <mat-icon><span class="icon-document_search"></span></mat-icon>
                     </button>
                     <button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
-                        (click)="validVehicle(element.id, element.documents)">
+                        [attr.i18nKey]="'FLEET-MANAGER.VALID'" (click)="validVehicle(element.id, element.documents)">
                         <span class="icon-rule font-size-30"></span>
                     </button>
                 </span>

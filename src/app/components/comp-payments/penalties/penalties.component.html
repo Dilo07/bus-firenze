@@ -3,14 +3,15 @@
         <div fxLayout="row" fxLayoutGap="20px">
             <mat-form-field appearance="outline" fxFlex="100">
                 <mat-label>{{'PENALTIES.SEARCH' | translate}}</mat-label>
-                <input matInput (keyup)="applyFilter($event)" #input autocomplete="off">
+                <input matInput [attr.i18nKey]="'PENALTIES.SEARCH'" (keyup)="applyFilter($event)" #input
+                    autocomplete="off">
             </mat-form-field>
         </div>
         <mat-tab-group mat-align-tabs="center">
-            <mat-tab label="Applica penale">
+            <mat-tab label="{{'PENALTIES.ADD' | translate}}">
                 <app-add-penalties [fleetId]="fleetManagerId" [keyword]="filter"></app-add-penalties>
             </mat-tab>
-            <mat-tab label="Penali emesse">
+            <mat-tab label="{{'PENALTIES.EMITTED' | translate}}">
                 <app-emitted-penalties [fleetId]="fleetManagerId" [keyword]="filter"></app-emitted-penalties>
             </mat-tab>
         </mat-tab-group>

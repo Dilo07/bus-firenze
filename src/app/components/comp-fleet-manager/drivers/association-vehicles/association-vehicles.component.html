@@ -2,7 +2,8 @@
 	<mat-card-content>
 		<div fxLayout="row wrap" fxLayoutAlign="space-between">
 			<mat-card-title fxLayout="row">{{'DRIVERS.ASSOCIATION' | translate}}</mat-card-title>
-			<button mat-button class="actionButtons" (click)="openModal()"> {{'COMMON.ACTION.EDIT' | translate}}</button>
+			<button mat-button class="actionButtons" [attr.i18nKey]="'COMMON.ACTION.EDIT'" (click)="openModal()">
+				{{'COMMON.ACTION.EDIT' | translate}}</button>
 		</div>
 		<hr>
 		<h4 fxLayout="row" fxLayoutAlign="center">
