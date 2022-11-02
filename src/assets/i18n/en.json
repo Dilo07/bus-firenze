@@ -274,7 +274,9 @@
         "NEEDDOC": "Vehicle with need documents",
         "WITHDOC": "Vehicle with upload documents",
         "DEPVALID": "Deposit validate at ",
-        "REQVALID": "Deposit request validate at "
+        "REQVALID": "Deposit request validate at ",
+        "OPEN": "Open vehicles",
+        "CLOSE": "Close vehicles"
     },
     "DRIVERS": {
         "TITLE": "Drivers",
@@ -338,6 +340,7 @@
         "30 Minutes": "30 Minutes"
     },
     "STATISTIC": {
+        "TITLE": "Statistic",
         "KM_STATISTIC": "km traveled in the inner area",
         "DURATION_STATISTIC": "Route duration in the inner area",
         "VEHICLE": "Vehicle statistic",
@@ -355,7 +358,8 @@
         "DURATION": "Duration",
         "METERS": "Meters",
         "SECONDS": "Seconds",
-        "SECOND": "Second"
+        "SECOND": "Second",
+        "MAP": "Map"
     },
     "APPOINTMENT": {
         "SELECT-VEHICLE": "Select a vehicle",
@@ -446,6 +450,7 @@
     },
     "PENALTIES": {
         "ADD": "Add a penal",
+        "EMITTED": "Emitted penalties",
         "DATE": "Select a date",
         "SELECT": "Select the penale tpye to add",
         "SUCCESS":"Penal added successfully",

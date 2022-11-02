@@ -5,7 +5,8 @@
             <mat-card-title>{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
             </mat-card-title>
             <span>
-                <button mat-button class="backButton" [routerLink]="['../']"> {{'COMMON.ACTION.BACK' | translate}}
+                <button mat-button class="backButton" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.BACK'">
+                    {{'COMMON.ACTION.BACK' | translate}}
                 </button>
             </span>
         </div>
@@ -16,12 +17,12 @@
                     <div matLine>
                         {{'FLEET-MANAGER.' + document.type | translate}}
                         <button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}" [disabled]="!complete"
-                            (click)="viewDocument(document.fileId)">
+                            [attr.i18nKey]="'OBU.VIEW_FILE'" (click)="viewDocument(document.fileId)">
                             <mat-icon><span class="icon-document_search"></span></mat-icon>
                         </button>
                         <button mat-icon-button *ngIf="!document.valid else viewDate"
-                            matTooltip="{{'FLEET-MANAGER.VALID' | translate}}" [disabled]="!complete"
-                            (click)="validDocument(document.fileId)">
+                            matTooltip="{{'FLEET-MANAGER.VALID' | translate}}" [attr.i18nKey]="'FLEET-MANAGER.VALID'"
+                            [disabled]="!complete" (click)="validDocument(document.fileId)">
                             <mat-icon><span class="icon-rule"></span></mat-icon>
                         </button>
                         <ng-template #viewDate>

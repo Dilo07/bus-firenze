@@ -4,7 +4,8 @@
     <ng-container *ngIf="formGroup">
         <form [formGroup]="formGroup" style="margin-bottom: 20px;" fxLayout="column" fxLayoutGap="20px">
             <div fxLayout="row wrap" fxLayoutAlign="center">
-                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-lg="80" fxFlex.gt-md="80" fxFlex.gt-xs="100">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-lg="80" fxFlex.gt-md="80"
+                    fxFlex.gt-xs="100">
                     <mat-label>{{'PENALTIES.TYPE' | translate}}</mat-label>
                     <mat-select formControlName="penalSelected" required>
                         <mat-option *ngFor="let penalType of listPenalType" [value]="penalType.typeId">
@@ -12,8 +13,9 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-        
-                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-lg="80" fxFlex.gt-md="80" fxFlex.gt-xs="100">
+
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-lg="80" fxFlex.gt-md="80"
+                    fxFlex.gt-xs="100">
                     <mat-label>{{'PENALTIES.DATE' | translate}}</mat-label>
                     <input matInput placeholder="{{'MODAL-FORM.DATE' | translate}}" [matDatepicker]="pickerDate"
                         (focus)="pickerDate.open()" formControlName="datePenal">
@@ -23,9 +25,11 @@
             </div>
         </form>
         <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
-            <button mat-button (click)="dialogRef.close(false)" class="backButton">
+            <button mat-button class="backButton" [attr.i18nKey]="'COMMON.ACTION.BACK'"
+                (click)="dialogRef.close(false)">
                 {{'COMMON.ACTION.BACK' | translate}}</button>
-            <button mat-button (click)="addPenal()" [disabled]="formGroup.invalid" class="actionButtons">
+            <button mat-button class="actionButtons" [disabled]="formGroup.invalid"
+                [attr.i18nKey]="'COMMON.ACTION.SAVE'" (click)="addPenal()">
                 {{'COMMON.ACTION.SAVE' | translate}}</button>
         </div>
     </ng-container>

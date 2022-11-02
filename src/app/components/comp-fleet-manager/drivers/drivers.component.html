@@ -4,11 +4,12 @@
 			<div fxLayout="row wrap" fxLayoutAlign="space-between">
 				<mat-card-title>{{'DRIVERS.TITLE' | translate}}</mat-card-title>
 				<span fxLayoutGap="20px">
-					<button mat-button class="backButton" *ngIf="fleetManagerId" [routerLink]="['../']">
+					<button mat-button class="backButton" *ngIf="fleetManagerId" [routerLink]="['../']"
+						[attr.i18nKey]="'COMMON.ACTION.BACK'">
 						{{'COMMON.ACTION.BACK' |translate}}
 					</button>
 					<button mat-button class="actionButtons" [routerLink]="['../form-Driver']"
-						[state]="{ driver: null, fleetManagerId: this.fleetManagerId }">
+						[state]="{ driver: null, fleetManagerId: this.fleetManagerId }" [attr.i18nKey]="'DRIVERS.NEW'">
 						{{'DRIVERS.NEW' | translate}}
 					</button>
 				</span>
@@ -63,15 +64,18 @@
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
 							<button mat-icon-button matTooltip="{{'DRIVERS.VEHICLES_ASSOCIATION' | translate}}"
+								[attr.i18nKey]="'DRIVERS.VEHICLES_ASSOCIATION'"
 								(click)="associationVehicle(element.id)">
 								<mat-icon><span class="icon-refresh"></span></mat-icon>
 							</button>
-							<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}" [routerLink]="['../form-Driver']"
-								[state]="{driver: element, fleetManagerId: fleetManagerId}">
+							<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}"
+								[routerLink]="['../form-Driver']"
+								[state]="{driver: element, fleetManagerId: fleetManagerId}"
+								[attr.i18nKey]="'COMMON.ACTION.EDIT'">
 								<mat-icon><span class="icon-edit"></span></mat-icon>
 							</button>
 							<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
-								(click)="deleteDriver(element.id)">
+								[attr.i18nKey]="'COMMON.ACTION.CANCEL'" (click)="deleteDriver(element.id)">
 								<mat-icon><span class="icon-delete"></span></mat-icon>
 							</button>
 						</mat-cell>

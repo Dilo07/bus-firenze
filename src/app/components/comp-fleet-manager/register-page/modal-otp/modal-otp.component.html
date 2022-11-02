@@ -3,9 +3,9 @@
     <div fxLayout="row wrap" fxLayoutGap="20px">
         <mat-form-field appearance="outline" fxFlex="100">
             <mat-label>{{'FLEET-MANAGER.REGISTRATION_OTP' | translate}}</mat-label>
-            <input matInput type="password" [(ngModel)]="otp" maxlength="6" [readonly]="readonly" (ngModelChange)="onChangeEvent()">
+            <input matInput type="password" maxlength="6" [(ngModel)]="otp" [readonly]="readonly"
+                [attr.i18nKey]="'FLEET-MANAGER.REGISTRATION_OTP'" (ngModelChange)="onChangeEvent()">
         </mat-form-field>
         <mat-error *ngIf="errorOtp"> {{'FLEET-MANAGER.REGISTRATION_ERROROTP' | translate}} </mat-error>
     </div>
 </div>
-

@@ -5,13 +5,16 @@
 			<div fxLayout="row wrap" fxLayoutAlign="space-between">
 				<mat-card-title>{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 				<span fxLayoutGap="20px">
-					<button mat-button class="backButton" *ngIf="fleetManager" [routerLink]="['../']">
+					<button mat-button class="backButton" *ngIf="fleetManager" [routerLink]="['../']"
+						[attr.i18nKey]="'FLEET-MANAGER.BACK'">
 						{{'FLEET-MANAGER.BACK' |translate}}
 					</button>
-					<button mat-button class="actionButtons" (click)="addVehicle()">
+					<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'"
+						(click)="addVehicle()">
 						{{'FLEET-MANAGER.NEW' | translate}}
 					</button>
-					<button mat-button class="downloadButtons" [matMenuTriggerFor]="menuDownload">
+					<button mat-button class="downloadButtons" [matMenuTriggerFor]="menuDownload"
+						[attr.i18nKey]="'VEHICLE.DOWNLOAD'">
 						{{'VEHICLE.DOWNLOAD' | translate}}
 					</button>
 				</span>
@@ -43,24 +46,27 @@
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">id</span>
 							{{element.id}}
-							<button *ngIf="element.status === statusVehicle.deleted" mat-icon-button [disabled]="true">
+							<button *ngIf="element.status === statusVehicle.deleted" mat-icon-button [disabled]="true"
+								[attr.i18nKey]="'VEHICLE.EXPIRED'">
 								<mat-icon
 									matTooltip="{{'VEHICLE.EXPIRED' | translate}} {{element.expiresAt ? '(' + element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year + ')' : '' }}">
 									<span class="icon-warning"></span>
 								</mat-icon>
 							</button>
 							<button *ngIf="element.status === statusVehicle.deleted" mat-icon-button
-								(click)="updateStatus(element.id)">
+								[attr.i18nKey]="'VEHICLE.REFRESH_EXPDATE'" (click)="updateStatus(element.id)">
 								<mat-icon matTooltip="{{'VEHICLE.REFRESH_EXPDATE' | translate}}">
 									<span class="icon-refresh"></span>
 								</mat-icon>
 							</button>
-							<button *ngIf="element.status === statusVehicle.temp" mat-icon-button [disabled]="true">
+							<button *ngIf="element.status === statusVehicle.temp" mat-icon-button [disabled]="true"
+								[attr.i18nKey]="'VEHICLE.WILLEXPIRE'">
 								<mat-icon style="color: #eed202; opacity: 0.8;" matTooltip="{{'VEHICLE.WILLEXPIRE' | translate}}
 								{{element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year }}">warning
 								</mat-icon>
 							</button>
-							<button *ngIf="element.status === statusVehicle.unknown" mat-icon-button [disabled]="true">
+							<button *ngIf="element.status === statusVehicle.unknown" mat-icon-button [disabled]="true"
+								[attr.i18nKey]="'VEHICLE.UNKNOWN'">
 								<mat-icon style="color: #9c8b0979; opacity: 0.8;"
 									matTooltip="{{'VEHICLE.UNKNOWN' | translate}}">
 									warning_amber
@@ -90,6 +96,7 @@
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.CERTIFICATE' | translate}}</span>
 							<button mat-icon-button [disabled]="!element.certificateId"
+								[attr.i18nKey]="'VEHICLE.CERTIFICATE'"
 								(click)="viewCertificate(element.id, element.certificateId)">
 								<mat-icon
 									matTooltip="{{(element.certificateId ? 'VEHICLE.CERTIFICATE' : 'VEHICLE.NOCERTIFICATE') | translate}}">
@@ -137,36 +144,42 @@
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
-							<button mat-icon-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
+							<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
+								[attr.i18nKey]="'menu'">
 								<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
 							</button>
 							<mat-menu #actionsMenuManage="matMenu" class="menu-color">
 								<button mat-menu-item [routerLink]="['statistic']"
-									[state]="{vehicle: element, fleetManager: fleetManager}">
+									[state]="{vehicle: element, fleetManager: fleetManager}"
+									[attr.i18nKey]="'STATISTIC.VEHICLE'">
 									<mat-icon><span class="icon-statistic font-size-30"></span></mat-icon>
 									{{'STATISTIC.VEHICLE' | translate}}
 								</button>
-								<button *ngIf="element.hardware" mat-menu-item
+								<button *ngIf="element.hardware" mat-menu-item [attr.i18nKey]="'VEHICLE.DOWNLOAD'"
 									(click)="downloadManualPdf(element.hardware)">
 									<mat-icon><span class="icon-download"></span></mat-icon>
 									{{'VEHICLE.DOWNLOAD' | translate}}
 								</button>
 								<button *ngIf="!element.deleted && (element.documents | hasDeposit: true)" mat-menu-item
+									[attr.i18nKey]="'VEHICLE.DRIVER_ASSOCIATION'"
 									(click)="associationDriver(element.id)">
 									<mat-icon><span class="icon-refresh"></span></mat-icon>
 									{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}
 								</button>
 							</mat-menu>
 							<button *ngIf="!element.deleted" mat-icon-button
-								matTooltip="{{'COMMON.ACTION.EDIT' | translate}}" (click)="editVehicle(element)">
+								matTooltip="{{'COMMON.ACTION.EDIT' | translate}}" [attr.i18nKey]="'COMMON.ACTION.EDIT'"
+								(click)="editVehicle(element)">
 								<mat-icon><span class="icon-edit"></span></mat-icon>
 							</button>
 							<button *ngIf="!element.deleted" mat-icon-button
 								matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
+								[attr.i18nKey]="'COMMON.ACTION.CANCEL'"
 								(click)="deleteVehicle(element.id, element.valid)">
 								<mat-icon><span class="icon-delete"></span></mat-icon>
 							</button>
-							<button *ngIf="element.deleted" mat-icon-button [disabled]="true">
+							<button *ngIf="element.deleted" mat-icon-button [disabled]="true"
+								[attr.i18nKey]="'VEHICLE.DISABLED'">
 								<mat-icon style="color: #8f9a27"
 									matTooltip="{{('VEHICLE.DISABLED' | translate) +  (element.deleted | date : 'dd/MM/yyyy')}}">
 									disabled_by_default</mat-icon>

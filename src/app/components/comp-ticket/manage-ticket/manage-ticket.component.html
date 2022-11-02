@@ -2,7 +2,8 @@
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
         <mat-card-title>{{(viewHistoric ? 'TICKET.HISTORY' : 'TICKET.ACTIVE') | translate}}
         </mat-card-title>
-        <button mat-raised-button class="actionButtons" *ngIf="!roleDriver" (click)="switchHistoric()">
+        <button mat-raised-button class="actionButtons" *ngIf="!roleDriver" [attr.i18nKey]="'TICKET.VIEW_HISTORY'"
+            (click)="switchHistoric()">
             {{ (viewHistoric ? 'TICKET.ACTIVE' : 'TICKET.VIEW_HISTORY') | translate }}
         </button>
     </div>
@@ -24,8 +25,9 @@
                 <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <span class="mobile-label"></span>
-                    <button mat-icon-button (click)="expandedElement = expandedElement === element ? null : element"
-                        matTooltip="{{'TICKET.DETAILS' | translate}}">
+                    <button mat-icon-button matTooltip="{{'TICKET.DETAILS' | translate}}"
+                        [attr.i18nKey]="'TICKET.DETAILS'"
+                        (click)="expandedElement = expandedElement === element ? null : element">
                         <mat-icon style="color: grey">
                             {{expandedElement &&
                             expandedElement.ticketId === element.ticketId ? 'expand_more' : 'chevron_right' }}
@@ -95,16 +97,17 @@
                 <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                 <mat-cell *matCellDef="let element" style="text-align: end;">
                     <button mat-icon-button matTooltip="{{'TICKET.END' | translate}}"
-                        *ngIf="element.ticketSubscription && !element.dateDel">
+                        *ngIf="element.ticketSubscription && !element.dateDel" [attr.i18nKey]="'TICKET.END'">
                         <mat-icon style="color: #0066CC;" (click)="removeTicket(element.ticketId, element.vehicleId)">
                             pan_tool</mat-icon>
                     </button>
                     <button mat-icon-button matTooltip="{{'TICKET.CANCEL' | translate}}"
-                        *ngIf="!element.dateSink && !element.dateDel">
+                        *ngIf="!element.dateSink && !element.dateDel" [attr.i18nKey]="'TICKET.CANCEL'">
                         <mat-icon style="color: #0066CC;" (click)="removeTicket(element.ticketId, element.vehicleId)">
                             event_busy</mat-icon>
                     </button>
-                    <button mat-icon-button matTooltip="{{'TICKET.ADD' | translate}}" *ngIf="!element.dateDel">
+                    <button mat-icon-button matTooltip="{{'TICKET.ADD' | translate}}" *ngIf="!element.dateDel"
+                        [attr.i18nKey]="'TICKET.ADD'">
                         <mat-icon style="color: #0066CC;" (click)="modalTicket(element.vehicleId)">receipt_long
                         </mat-icon>
                     </button>

@@ -49,7 +49,8 @@
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element" style="text-align: end;">
-                <button mat-icon-button matTooltip="Fleet Manager" (click)="manageTicket(element.id)">
+                <button mat-icon-button matTooltip="Fleet Manager" [attr.i18nKey]="'Fleet Manager'"
+                    (click)="manageTicket(element.id)">
                     <mat-icon><span class="icon-user"></span></mat-icon>
                 </button>
             </mat-cell>

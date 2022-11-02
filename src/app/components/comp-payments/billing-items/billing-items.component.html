@@ -23,7 +23,7 @@
                     </mat-form-field>
                     <span>
                         <button mat-button class="actionButtons" [disabled]="formGroup.invalid"
-                            (click)="getBillingItems()">
+                            [attr.i18nKey]="'COMMON.ACTION.SEARCH'" (click)="getBillingItems()">
                             {{'COMMON.ACTION.SEARCH' | translate}}
                         </button>
                     </span>
@@ -33,7 +33,6 @@
     </mat-card>
     <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
         <ng-container matColumnDef="gopId">
             <mat-header-cell *matHeaderCellDef> gop id </mat-header-cell>
             <mat-cell *matCellDef="let element">
@@ -86,8 +85,8 @@
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label"></span>
-                <button mat-icon-button [matMenuTriggerFor]="selectMenu"
-                    matTooltip="{{'BILLING_ITEMS.DETAILS' | translate}}">
+                <button mat-icon-button matTooltip="{{'BILLING_ITEMS.DETAILS' | translate}}"
+                    [matMenuTriggerFor]="selectMenu" [attr.i18nKey]="'BILLING_ITEMS.DETAILS'">
                     <mat-icon><span class="icon-ticket"></span></mat-icon>
                 </button>
                 <mat-menu #selectMenu="matMenu" yPosition="above" xPosition="after" class="menu-style">
@@ -99,7 +98,6 @@
         <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
             [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
-
     </mat-table>
     <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
         [pageSizeOptions]="[5, 10, 25]"></mat-paginator>

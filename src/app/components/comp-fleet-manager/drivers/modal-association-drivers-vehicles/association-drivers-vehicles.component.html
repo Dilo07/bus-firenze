@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutGap="20px">
-	<h4 fxLayout="row" fxLayoutAlign="center center">
+    <h4 fxLayout="row" fxLayoutAlign="center center">
         {{(data.idVehicle ? 'DRIVERS.ASSOCIATION_DRIVERS' : 'DRIVERS.ASSOCIATION_VEHICLES') | translate}}
     </h4>
     <mat-selection-list [(ngModel)]="selectedElement" style="background-color: #E4F1F5;">
@@ -8,8 +8,11 @@
         </mat-list-option>
     </mat-selection-list>
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-        <button mat-button class="backButton" (click)="dialogRef.close()">{{'FLEET-MANAGER.BACK' | translate}}</button>
-        <button mat-button class="actionButtons" (click)="saveAssociation()"> {{'COMMON.ACTION.SAVE' | translate}} </button>
+        <button mat-button class="backButton" [attr.i18nKey]="'FLEET-MANAGER.BACK'" (click)="dialogRef.close()">
+            {{'FLEET-MANAGER.BACK' | translate}}
+        </button>
+        <button mat-button class="actionButtons" [attr.i18nKey]="'COMMON.ACTION.SAVE'" (click)="saveAssociation()">
+            {{'COMMON.ACTION.SAVE' | translate}}
+        </button>
     </div>
 </div>
-  

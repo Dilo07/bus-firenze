@@ -53,6 +53,7 @@
                     <mat-cell *matCellDef="let element">
                         <span class="mobile-label">{{'VEHICLE.RIC_DEPOSIT' | translate}}</span>
                         <button mat-icon-button [disabled]="!(element.documents | documentTypeDeposit)"
+                            [attr.i18nKey]="'VEHICLE.VIEWDEPOSIT'"
                             (click)="viewDeposit(element.id, element.documents, ['deposit', 'revoke', 'retention'])">
                             <mat-icon
                                 matTooltip="{{((element.documents | documentTypeDeposit) ? 'VEHICLE.VIEWDEPOSIT' : 'VEHICLE.NODEPOSIT') | translate}}">
@@ -70,7 +71,7 @@
                             <span class="icon-delete"></span>
                         </mat-icon>
                         <input style="display: none" type="file" #depositInput
-                            accept="application/pdf, image/jpeg, image/png"
+                            accept="application/pdf, image/jpeg, image/png" [attr.i18nKey]="'VEHICLE.ADDDEPOSIT'"
                             (change)="uploadDeposit(element.id, $event, 'deposit')">
                         <button mat-icon-button *ngIf="!element.deleted && !(element.documents | hasDeposit: true)"
                             (click)="depositInput.click()">
@@ -86,13 +87,14 @@
                     <mat-cell *matCellDef="let element">
                         <span class="mobile-label">{{'VEHICLE.RIM_DEPOSIT' | translate}}</span>
                         <button mat-icon-button *ngIf="element.documents | hasRequest: false"
+                            [attr.i18nKey]="'VEHICLE.VIEW_DEPOSIT_REQ'"
                             (click)="viewDeposit(element.id, element.documents, ['request'])">
                             <mat-icon matTooltip="{{'VEHICLE.VIEW_DEPOSIT_REQ' | translate}}">
                                 <span class="icon-assignment"></span>
                             </mat-icon>
                         </button>
                         <input style="display: none" type="file" #depositReqInput
-                            accept="application/pdf, image/jpeg, image/png"
+                            accept="application/pdf, image/jpeg, image/png" [attr.i18nKey]="'VEHICLE.DEPOSIT_REQ'"
                             (change)="uploadDeposit(element.id, $event, 'request')">
                         <button *ngIf="element.deleted && !(element.documents | hasRequest: true) && element.valid"
                             mat-icon-button (click)="depositReqInput.click()">
@@ -111,7 +113,8 @@
                     <mat-cell *matCellDef="let element">
                         <span class="mobile-label">{{'VEHICLE.REMOVE_TEST' | translate}}</span>
                         <ng-container *ngIf="(element.documentsObu | documentRemObu) as documentRead">
-                            <button mat-icon-button (click)="viewDocObu(element.id, documentRead)">
+                            <button mat-icon-button [attr.i18nKey]="'VEHICLE.VIEW_REMOBU'"
+                                (click)="viewDocObu(element.id, documentRead)">
                                 <mat-icon matTooltip="{{'VEHICLE.VIEW_REMOBU' | translate}}">
                                     <span class="icon-assignment"></span>
                                 </mat-icon>

@@ -5,13 +5,13 @@
     <mat-card-content>
         <div fxLayout="row" fxLayoutAlign="center">
             <mat-button-toggle-group [(ngModel)]="ticketType" (change)="changeValidator()">
-                <mat-button-toggle value="{{ticketsType.ticket}}">
+                <mat-button-toggle value="{{ticketsType.ticket}}" [attr.i18nKey]="'TICKET.' + ticketsType.ticket">
                     {{'TICKET.' + ticketsType.ticket | translate}}
                 </mat-button-toggle>
-                <mat-button-toggle value="{{ticketsType.abbonamento}}">
+                <mat-button-toggle value="{{ticketsType.abbonamento}}" [attr.i18nKey]="'TICKET.' + ticketsType.abbonamento">
                     {{'TICKET.' + ticketsType.abbonamento | translate}}
                 </mat-button-toggle>
-                <mat-button-toggle value="{{ticketsType.voucher}}">
+                <mat-button-toggle value="{{ticketsType.voucher}}" [attr.i18nKey]="'TICKET.' + ticketsType.voucher">
                     {{'TICKET.' + ticketsType.voucher | translate}}
                 </mat-button-toggle>
             </mat-button-toggle-group>
@@ -34,7 +34,8 @@
                     <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
                         fxFlex.gt-md="30">
                         <mat-label>{{'TICKET.PROGRESSIVE' | translate}}</mat-label>
-                        <input matInput type="text" formControlName="ctrlProgressive" required (focusout)="testTicket()">
+                        <input matInput type="text" formControlName="ctrlProgressive" required
+                            (focusout)="testTicket()">
                         <mat-error>{{('TICKET.INSERT_' + ticketType) | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
@@ -60,7 +61,7 @@
                         <div fxLayout="row">
                             <input matInput type="text" formControlName="ctrlVoucher" required autocomplete="off"
                                 (ngModelChange)="testTicket()">
-                            <button mat-icon-button (click)="cleanTicket()">
+                            <button mat-icon-button [attr.i18nKey]="'TICKET.CLEAN'" (click)="cleanTicket()">
                                 <mat-icon>close</mat-icon>
                             </button>
                         </div>
@@ -70,13 +71,13 @@
             </ng-template>
             <div fxLayout="row" fxLayoutAlign="center" *ngIf="!hideActiveTicket && !data.extend && validTicket.valid">
                 <mat-radio-group formControlName="ctrlActive">
-                    <mat-radio-button [value]="true">
+                    <mat-radio-button [value]="true" [attr.i18nKey]="'TICKET.ACTIVE_AFTER'">
                         <span style="white-space: normal; margin-right: 10px;">
                             {{'TICKET.ACTIVE_AFTER' | translate}}
                         </span>
                     </mat-radio-button>
                     <br>
-                    <mat-radio-button [value]="false">
+                    <mat-radio-button [value]="false" [attr.i18nKey]="'TICKET.ACTIVE_NOW'">
                         <span style="white-space: normal;"> {{'TICKET.ACTIVE_NOW' | translate}}</span>
                     </mat-radio-button>
                 </mat-radio-group>
@@ -85,9 +86,11 @@
                 {{'TICKET.EXTEND_TEXT' | translate}}
             </div>
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="15px">
-                <button mat-button (click)="dialogRef.close(false);" class="backButton">
+                <button mat-button class="backButton" [attr.i18nKey]="'COMMON.ACTION.CANCEL'"
+                    (click)="dialogRef.close(false);">
                     {{'COMMON.ACTION.CANCEL' | translate}}</button>
-                <button mat-button class="actionButtons" [disabled]="!validTicket.valid" (click)="addTicket()">
+                <button mat-button class="actionButtons" [disabled]="!validTicket.valid"
+                    [attr.i18nKey]="'COMMON.ACTION.SAVE'" (click)="addTicket()">
                     {{'COMMON.ACTION.SAVE' | translate}}
                 </button>
             </div>

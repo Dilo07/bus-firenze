@@ -2,13 +2,14 @@
     <p> {{data.text | translate}}</p>
     <span *ngIf="data.uploadDoc">
         <p>{{fileDeposit?.name}}</p>
-        <input style="display: none" type="file" #depositInput accept="application/pdf, image/jpeg, image/png"
-            (change)="uploadDeposit($event)">
+        <input style="display: none" type="file" [attr.i18nKey]="'depositInput'" #depositInput
+            accept="application/pdf, image/jpeg, image/png" (change)="uploadDeposit($event)">
         <button mat-button class="uploadButtons" (click)="depositInput.click()">{{data.uploadDoc | translate}}</button>
     </span>
     <div fxLayout="row" fxLayoutGap="20px">
-        <button mat-button (click)="dialogRef.close(false)" class="backButton"> no </button>
-        <button mat-button (click)="dialogRef.close(fileDeposit ? {file: fileDeposit} : true)" class="actionButtons">
+        <button mat-button class="backButton" [attr.i18nKey]="'no'" (click)="dialogRef.close(false)"> no </button>
+        <button mat-button class="actionButtons" [attr.i18nKey]="'COMMON.ACTION.YES'"
+            (click)="dialogRef.close(fileDeposit ? {file: fileDeposit} : true)">
             {{'COMMON.ACTION.YES' | translate}}
         </button>
     </div>
@@ -21,10 +22,11 @@
             <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>
         </mat-form-field>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
-            <button mat-button (click)="dialogRef.close(false)" class="backButton"> {{'COMMON.ACTION.BACK' | translate}}
+            <button mat-button class="backButton" (click)="dialogRef.close(false)"
+                [attr.i18nKey]="'COMMON.ACTION.BACK'"> {{'COMMON.ACTION.BACK' | translate}}
             </button>
-            <button mat-button (click)="dialogRef.close(contractCode.value)" class="actionButtons"
-                [disabled]="contractCode.status === 'INVALID'">
+            <button mat-button class="actionButtons" (click)="dialogRef.close(contractCode.value)"
+                [disabled]="contractCode.status === 'INVALID'" [attr.i18nKey]="'COMMON.ACTION.SAVE'">
                 {{'COMMON.ACTION.SAVE' | translate}}
             </button>
         </div>

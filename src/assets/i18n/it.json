@@ -267,14 +267,16 @@
         "DEPOSIT_REQ": "Allega richiesta deposito",
         "VIEW_DEPOSIT_REQ": "Visualizza richiesta deposito",
         "REMOVE_TEST": "Collaudo rimozione",
-        "VIEW_TEST": "View test",
+        "VIEW_TEST": "Visualizza collaudo",
         "VIEW_REMOBU": "Visualizza collaudo rimozione",
         "VALID_CONFIRM": "Sei sicuro di voler validare questo veicolo?",
         "VALID_SUCCESS": "Veicolo validato correttamente",
         "NEEDDOC": "Veicoli con documenti da caricare",
         "WITHDOC": "Veicoli con documenti caricati",
         "DEPVALID": "Deposito validato il ",
-        "REQVALID": "Richiesta deposito validata il "
+        "REQVALID": "Richiesta deposito validata il ",
+        "OPEN": "Apri veicoli",
+        "CLOSE": "Chiudi veicoli"
     },
     "DRIVERS": {
         "TITLE": "Autisti",
@@ -338,6 +340,7 @@
         "30 Minutes": "30 Minuti"
     },
     "STATISTIC": {
+        "TITLE": "Statistiche",
         "KM_STATISTIC": "km percorsi nell'area interna",
         "DURATION_STATISTIC": "Durata percorso nell'area interna",
         "VEHICLE": "Statistiche veicolo",
@@ -355,7 +358,8 @@
         "DURATION": "Durata",
         "METERS": "Metri",
         "SECONDS": "Secondi",
-        "SECOND": "Secondo"
+        "SECOND": "Secondo",
+        "MAP": "Mappa"
     },
     "APPOINTMENT": {
         "SELECT-VEHICLE": "Seleziona un veicolo",
@@ -446,6 +450,7 @@
     },
     "PENALTIES": {
         "ADD": "Applica una penale",
+        "EMITTED": "Penali emesse",
         "DATE": "Seleziona una data",
         "SELECT": "Seleziona il tipo di penale da applicare",
         "SUCCESS":"Penale aggiunta con successo",

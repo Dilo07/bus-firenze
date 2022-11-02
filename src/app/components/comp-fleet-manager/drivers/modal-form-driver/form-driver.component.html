@@ -41,6 +41,7 @@
                         (countryChange)="onCountryChange($event)" formControlName="CtrlCell" maxlength="25" required
                         [readonly]="verifyOtp">
                     <button matSuffix mat-icon-button matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}"
+                        [attr.i18nKey]="'FLEET-MANAGER.VERIFY_MOBILE'"
                         *ngIf="formGroup.get('CtrlCell').value && !verifyOtp" (click)="modalOTP()">
                         <mat-icon>mobile_screen_share</mat-icon>
                     </button>

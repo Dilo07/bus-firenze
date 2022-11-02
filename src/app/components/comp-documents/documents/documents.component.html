@@ -2,12 +2,12 @@
     <mat-card-title>{{'MENU.Documents' | translate}}</mat-card-title>
     <div fxLayout="row wrap" fxLayoutAlign="center center">
         <ng-container *ngFor="let document of modules; let i = index">
-            <mat-card [style.background-color]="colors[i%colors.length]" [ngClass]="classImages[i%classImages.length]" fxFlex.gt-lg="30" fxFlex.gt-md="30"
-                fxFlex.gt-xs="100" fxFlex="100">
+            <mat-card [style.background-color]="colors[i%colors.length]" [ngClass]="classImages[i%classImages.length]"
+                fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100" fxFlex="100">
                 <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="padding: 30px;">
                     <h4>{{document.name}}</h4>
                     <ng-container>
-                        <button mat-button class="white-button"
+                        <button mat-button class="white-button" [attr.i18nKey]="'FLEET-MANAGER.DOWNLOAD_TEMPLATE'"
                             (click)="download(document.path)">{{'FLEET-MANAGER.DOWNLOAD_TEMPLATE' | translate}}</button>
                     </ng-container>
                 </mat-card-content>

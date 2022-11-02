@@ -11,22 +11,19 @@ import { VehicleTripPersistence } from 'src/app/components/domain/bus-firenze-do
   `
   ]
 })
-export class TableStatisticComponent implements OnInit, OnChanges {
+export class TableStatisticComponent implements OnChanges {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() TripPersistence: VehicleTripPersistence[];
+  @Input() tripPersistence: VehicleTripPersistence[];
   @Input() viewOuter: boolean;
   public displayedColumns: string[] = ['start', 'end', 'trip length', 'duration', 'type', 'obuId'];
   public dataSource = new MatTableDataSource<VehicleTripPersistence>([]);
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
   ngOnChanges(): void {
-    if (this.TripPersistence) {
-      this.dataSource.data = this.TripPersistence;
+    if (this.tripPersistence) {
+      this.dataSource.data = this.tripPersistence;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     }
