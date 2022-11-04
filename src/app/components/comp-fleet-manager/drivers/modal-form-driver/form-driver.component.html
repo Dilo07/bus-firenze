@@ -53,17 +53,17 @@
             </div>
         </form>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <button mat-button *ngIf="!roleDriver" [routerLink]="['../drivers']"
-                [state]="{fleetManagerId: fleetManagerId}" class="backButton">
+            <button mat-button class="backButton" *ngIf="!roleDriver" [routerLink]="['../drivers']"
+                [state]="{fleetManagerId: fleetManagerId}" [attr.i18nKey]="'FLEET-MANAGER.BACK'">
                 {{'FLEET-MANAGER.BACK' | translate}}
             </button>
-            <button *ngIf="!driver" mat-button libDebounceClick [disabled]="formGroup.invalid" class="actionButtons"
-                (debounceClick)="addDriver()">
+            <button *ngIf="!driver" mat-button libDebounceClick class="actionButtons" [disabled]="formGroup.invalid"
+                [attr.i18nKey]="'FLEET-MANAGER.SAVE'" (debounceClick)="addDriver()">
                 {{'FLEET-MANAGER.SAVE' | translate}}
             </button>
-            <button *ngIf="driver" mat-button libDebounceClick
-                [disabled]="formGroup.invalid || !formGroup.dirty || (roleDriver && !verifyOtp)" class="actionButtons"
-                (debounceClick)="editDriver()">
+            <button *ngIf="driver" mat-button libDebounceClick class="actionButtons"
+                [disabled]="formGroup.invalid || !formGroup.dirty || (roleDriver && !verifyOtp)"
+                [attr.i18nKey]="'FLEET-MANAGER.EDIT'" (debounceClick)="editDriver()">
                 {{'FLEET-MANAGER.EDIT' | translate}}
             </button>
         </div>
