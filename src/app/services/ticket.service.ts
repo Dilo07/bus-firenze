@@ -4,14 +4,14 @@ import { HttpUtils } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Ticket } from '../components/domain/bus-firenze-domain';
-import { ActiveTicket } from './mokup/getTicket';
+import { activeTicket } from './mokup/getTicket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
   private apiUrl = this.url + '/api/vehicle';
-  private activeVehicle = ActiveTicket;
+  private activeVehicle = activeTicket;
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
