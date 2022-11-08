@@ -205,21 +205,12 @@ export interface BillingItemsAgg {
 
 export interface BillingItems {
   id: number;
-  fmId: number;
-  vehicleId: number;
   lpn: string;
   lpnNat: string;
-  billingSapId: number;
-  billingState: string;
   startPeriod: LocalDate;
   endPeriod: LocalDate;
-  nptGopId: number;
   price: number;
-  processedDate: Date;
   quantity: number;
-  resSapCode: number;
-  resSapMessage: string;
-  sendDate: Date;
   billingType: string;
   typeId: number;
 }

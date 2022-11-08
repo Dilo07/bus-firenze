@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { BillingItems } from 'src/app/components/domain/bus-firenze-domain';
 
 @Component({
@@ -6,9 +7,14 @@ import { BillingItems } from 'src/app/components/domain/bus-firenze-domain';
   templateUrl: './list-items.component.html',
   styles: [``]
 })
-export class ListItemsComponent {
+export class ListItemsComponent implements OnInit {
   @Input() billingItems: BillingItems[];
+  @Input() gopId: number;
+  public dataSource = new MatTableDataSource<BillingItems>();
+  public displayedColumns = ['lpn', 'lpnNat', 'startPeriod', 'endPeriod', 'price'];
 
-  constructor() { }
+  ngOnInit(): void {
+    this.dataSource.data = this.billingItems;
+  }
 
 }
