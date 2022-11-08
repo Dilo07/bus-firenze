@@ -276,7 +276,8 @@
         "DEPVALID": "Deposit validate at ",
         "REQVALID": "Deposit request validate at ",
         "OPEN": "Open vehicles",
-        "CLOSE": "Close vehicles"
+        "CLOSE": "Close vehicles",
+        "VERIFY": "Verify vehicle"
     },
     "DRIVERS": {
         "TITLE": "Drivers",

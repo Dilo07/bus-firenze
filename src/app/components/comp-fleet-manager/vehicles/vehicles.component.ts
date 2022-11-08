@@ -56,6 +56,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   @ViewChild(ViewFileComponent) viewFile: ViewFileComponent;
 
   public fleetManager: FleetManager;
+  public vehicleLpn: string;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
   public displayedColumns = ['id', 'plate', 'nat', 'certificateId', 'euroClass', 'obuId', 'consent', 'actions'];
   public search: FormGroup;
@@ -75,11 +76,13 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     private dialog: MatDialog) {
     // se è utente movyon op movyon fleetManager sarà valorizzato in caso di ruolo fleetmanger no
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    // se arriva da validazione veicoli viene valorizzata la targa in vehicleLpn
+    this.vehicleLpn = this.router.getCurrentNavigation().extras.state?.vehicleLpn ? this.router.getCurrentNavigation().extras.state?.vehicleLpn : '';
   }
 
   ngOnInit(): void {
     this.search = this.formBuilder.group({
-      ctrlSearch: [''],
+      ctrlSearch: [this.vehicleLpn],
       onlyActive: [true]
     });
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
@@ -138,10 +141,6 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public deleteVehicle(vehicleId: number, valid: boolean): void {
     let hasDepositValid = false;
     if (valid) { hasDepositValid = true; }
-    /* const deposit: DepositType = 'deposit';
-    documents.map(document => {
-      if (document.type === deposit && document.valid) { hasDepositValid = true; }
-    }); */
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',
       height: '50%',
@@ -151,23 +150,21 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((respConfirm) => {
       if (respConfirm) {
         const file = respConfirm.file ? respConfirm.file : null;
-        this.vehicleService.deleteVehicle(vehicleId, file, this.fleetManager?.id).subscribe(
-          () => this.snackBar.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
-          () => null,
-          () => {
+        this.vehicleService.deleteVehicle(vehicleId, file, this.fleetManager?.id).subscribe({
+          next: () => this.snackBar.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
+          complete: () => {
             this.getVehiclesByManagerId();
             this.resetSearchField();
-          });
+          }
+        });
       }
     });
   }
 
   public updateStatus(vehicleId: number): void {
-    this.vehicleService.updateStatusVehicle(vehicleId).subscribe(
-      () => null,
-      () => null,
-      () => this.getVehiclesByManagerId()
-    );
+    this.vehicleService.updateStatusVehicle(vehicleId).subscribe({
+      complete: () => this.getVehiclesByManagerId()
+    });
   }
 
   public associationDriver(vehicleId: number): void {
@@ -228,6 +225,14 @@ export class VehiclesComponent implements OnInit, OnDestroy {
         () => this.complete = true,
         () => { this.getVehiclesByManagerId(); this.complete = true; }
       ));
+    }
+  }
+
+  public backToValidVehicle(): void {
+    if (this.vehicleLpn) {
+      this.router.navigate(['validation'], { state: { index: 1 } });
+    } else {
+      this.router.navigate(['manage']);
     }
   }
 

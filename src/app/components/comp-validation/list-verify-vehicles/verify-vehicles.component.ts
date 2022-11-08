@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
+import { DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
@@ -26,11 +27,11 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
   ]
 })
 export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
-  @Input() idFleet: number;
+  @Input() fleet: FleetManager;
   @Input() disableViewPdf: boolean;
   @Output() public callRefreshTableFleet = new EventEmitter();
-  @Output() public viewDeposit = new EventEmitter<{vehicleId: number; documents: DocumentVehicle[]}>();
-  @Output() public viewCertificate = new EventEmitter<{vehicleId: number; certificateId: number}>();
+  @Output() public viewDeposit = new EventEmitter<{ vehicleId: number; documents: DocumentVehicle[] }>();
+  @Output() public viewCertificate = new EventEmitter<{ vehicleId: number; certificateId: number }>();
   public dataSource = new MatTableDataSource<Vehicle>();
   public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'certificateId', 'type', 'actions'];
 
@@ -39,7 +40,8 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   constructor(
     private vehicleService: VehicleService,
     private dialog: MatDialog,
-    private snackBar: SnackBar
+    private snackBar: SnackBar,
+    private router: Router
   ) { }
 
   ngOnChanges(): void {
@@ -66,21 +68,24 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
           documents.map(document => {
             if (!document.valid) { depositType = document.type; }
           });
-          this.subscription.push(this.vehicleService.validVehicle(this.idFleet, vehicleId, depositType, true).subscribe(
-            () => this.snackBar.showMessage('VEHICLE.VALID_SUCCESS', 'INFO'),
-            () => null,
-            () => this.getVehicles()
-          ));
+          this.subscription.push(this.vehicleService.validVehicle(this.fleet.id, vehicleId, depositType, true).subscribe({
+            next: () => this.snackBar.showMessage('VEHICLE.VALID_SUCCESS', 'INFO'),
+            complete: () => this.getVehicles()
+          }));
         }
       }
     );
   }
 
+  public verifyVehicle(lpn: string): void {
+    this.router.navigate(['../manage/vehicles'], { state: { fleetManager: this.fleet, vehicleLpn: lpn } });
+  }
+
   private getVehicles(): void {
-    this.subscription.push(this.vehicleService.getVehicleDeposit(true, this.idFleet, '', true).subscribe(
+    this.subscription.push(this.vehicleService.getVehicleDeposit(true, this.fleet.id, '', true).subscribe(
       vehicles => {
         this.dataSource.data = vehicles;
-        if(this.dataSource.data.length === 0){
+        if (this.dataSource.data.length === 0) {
           this.callRefreshTableFleet.emit();
         }
       }

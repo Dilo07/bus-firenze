@@ -276,7 +276,8 @@
         "DEPVALID": "Deposito validato il ",
         "REQVALID": "Richiesta deposito validata il ",
         "OPEN": "Apri veicoli",
-        "CLOSE": "Chiudi veicoli"
+        "CLOSE": "Chiudi veicoli",
+        "VERIFY": "Verifica veicolo"
     },
     "DRIVERS": {
         "TITLE": "Autisti",

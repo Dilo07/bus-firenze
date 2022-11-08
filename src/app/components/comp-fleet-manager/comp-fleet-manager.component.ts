@@ -65,9 +65,7 @@ export class FleetManagerComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
     this.search = this.formBuilder.group({
-      ctrlSearch: [
-        this.sessionService.getSessionStorage(FIRENZE_SESSION.fleetManageSearch)
-      ],
+      ctrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.fleetManageSearch)],
     });
     this.callGetFleetManager();
   }
@@ -134,10 +132,10 @@ export class FleetManagerComponent implements OnInit {
     // chiama il modal confirm in caso di scelta si cancella
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-        this.subscription.push(this.fleetManagerService.deleteFleetManager(id).subscribe(
-          () => this.snackBar.showMessage('FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
-          () => null,
-          () => this.callGetFleetManager()));
+        this.subscription.push(this.fleetManagerService.deleteFleetManager(id).subscribe({
+          next: () => this.snackBar.showMessage('FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
+          complete: () => this.callGetFleetManager()
+        }));
       }
     });
   }
@@ -151,11 +149,10 @@ export class FleetManagerComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((contractCode) => {
       if (contractCode) {
-        this.subscription.push(this.fleetManagerService.validInvalidFleetManager(id, valid, valid ? contractCode : null).subscribe(
-          () => this.snackBar.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
-          () => null,
-          () => this.callGetFleetManager()
-        ));
+        this.subscription.push(this.fleetManagerService.validInvalidFleetManager(id, valid, valid ? contractCode : null).subscribe({
+          next: () => this.snackBar.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
+          complete: () => this.callGetFleetManager()
+        }));
       }
     });
   }

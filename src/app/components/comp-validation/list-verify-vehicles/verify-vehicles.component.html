@@ -56,6 +56,10 @@
                         (click)="viewDeposit.emit({vehicleId: element.id, documents: element.documents})">
                         <mat-icon><span class="icon-document_search"></span></mat-icon>
                     </button>
+                    <button mat-icon-button matTooltip="{{'VEHICLE.VERIFY' | translate}}"
+                        [attr.i18nKey]="'VEHICLE.VERIFY'" (click)="verifyVehicle(element.lpn)">
+                        <span class="icon-car font-size-30"></span>
+                    </button>
                     <button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
                         [attr.i18nKey]="'FLEET-MANAGER.VALID'" (click)="validVehicle(element.id, element.documents)">
                         <span class="icon-rule font-size-30"></span>

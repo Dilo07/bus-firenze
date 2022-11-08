@@ -24,7 +24,7 @@ export class AppComponent {
   private cleanSession(): void {
     this.authService.getEventLogout().subscribe(
       (logout) => {
-        if (logout) {
+        if (logout) { // quando fa il logout cancella tutto la session storage
           this.sessionService.deleteAllSessionStorage();
           this.sessionService.deleteAllSessionMemory();
         }
