@@ -84,15 +84,20 @@ export class FleetManagerComponent implements OnInit {
       this.columnOrder)
       .subscribe({
         next: (data) => {
-          this.fleetManagerList.length = currentSize;
-          this.fleetManagerList = this.fleetManagerList.concat(data);
-          if (data.length < this.limit) {
-            this.paginator.length = this.fleetManagerList.length;
+          if (data.length === 0) {
             this.endTable = true;
+            this.paginator.previousPage();
           } else {
-            this.paginator.length = ((this.offset + 1) * this.limit) + 1;
+            this.fleetManagerList.length = currentSize;
+            this.fleetManagerList = this.fleetManagerList.concat(data);
+            if (data.length < this.limit) {
+              this.paginator.length = this.fleetManagerList.length;
+              this.endTable = true;
+            } else {
+              this.paginator.length = ((this.offset + 1) * this.limit) + 1;
+            }
+            this.dataSource.data = data;
           }
-          this.dataSource.data = data;
         },
         error: () => this.complete = true,
         complete: () => { this.complete = true; this.unSubscribe(); }
