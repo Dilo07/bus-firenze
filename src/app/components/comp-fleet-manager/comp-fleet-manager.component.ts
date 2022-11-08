@@ -66,7 +66,7 @@ export class FleetManagerComponent implements OnInit {
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
     this.search = this.formBuilder.group({
       ctrlSearch: [
-        this.sessionService.getSessionStorage(FIRENZE_SESSION.FLEETSEARCHMANAGE)
+        this.sessionService.getSessionStorage(FIRENZE_SESSION.fleetManageSearch)
       ],
     });
     this.callGetFleetManager();
@@ -102,7 +102,7 @@ export class FleetManagerComponent implements OnInit {
         error: () => this.complete = true,
         complete: () => { this.complete = true; this.unSubscribe(); }
       }));
-    if (!this.isValidFleet) { this.sessionService.setSessionStorage(FIRENZE_SESSION.FLEETSEARCHMANAGE, search); }
+    if (!this.isValidFleet) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, search); }
   }
 
   public pageChanged(event: PageEvent): void {
