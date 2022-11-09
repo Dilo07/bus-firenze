@@ -447,6 +447,8 @@
         "TYPE": "Tipo fattura",
         "START": "Start billing item",
         "END": "End billing item",
+        "PERIOD": "Reference period",
+        "DATE": "Billing date",
         "DETAILS": "Billing item details"
     },
     "PENALTIES": {

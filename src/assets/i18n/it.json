@@ -447,6 +447,8 @@
         "TYPE": "Tipo fattura",
         "START": "Inizio periodo",
         "END": "Fine periodo",
+        "PERIOD": "Periodo di riferimento",
+        "DATE": "Data fattura",
         "DETAILS": "Dettagli fatture"
     },
     "PENALTIES": {

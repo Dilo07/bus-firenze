@@ -90,7 +90,7 @@
                     <mat-icon><span class="icon-ticket"></span></mat-icon>
                 </button>
                 <mat-menu #selectMenu="matMenu" yPosition="above" xPosition="after" class="menu-style">
-                    <app-list-items [billingItems]="element.items" [gopId]="element.nptGopId"></app-list-items>
+                    <app-list-items [billingType]="element.billingType" [billingItems]="element.items" [gopId]="element.nptGopId"></app-list-items>
                 </mat-menu>
             </mat-cell>
         </ng-container>

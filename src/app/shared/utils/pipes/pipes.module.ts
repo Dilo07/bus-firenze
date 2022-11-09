@@ -6,6 +6,7 @@ import {
   HasDepositPipe, HasRequestDepositPipe, RequestDateValidPipe
 } from './deposit.pipe';
 import { FindContactValuePipe } from './find-contact-value.pipe';
+import { SingleDatePipe } from './single-date.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FindContactValuePipe } from './find-contact-value.pipe';
     DocumentToValidPipe,
     RequestDateValidPipe,
     DocumentRemoveObu,
-    DocumentTypeFind
+    DocumentTypeFind,
+    SingleDatePipe
   ],
   imports: [CommonModule],
   exports: [
@@ -27,7 +29,8 @@ import { FindContactValuePipe } from './find-contact-value.pipe';
     DocumentToValidPipe,
     RequestDateValidPipe,
     DocumentRemoveObu,
-    DocumentTypeFind
+    DocumentTypeFind,
+    SingleDatePipe
   ]
 })
 export class PipesModule { }

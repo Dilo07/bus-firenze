@@ -44,8 +44,7 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription[] = [];
 
-  constructor(
-    private billingItemsService: BillingItemsService) { }
+  constructor(private billingItemsService: BillingItemsService) { }
 
   async ngOnInit(): Promise<void> {
     this.formGroup = new FormGroup({
