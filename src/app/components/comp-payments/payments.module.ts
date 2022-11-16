@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule, SharedLibComponentsModule } from '@npt/npt-template';
 import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
-import { PipesModule } from 'src/app/shared/utils/pipes/pipes-module.module';
+import { PipesModule } from 'src/app/shared/utils/pipes/pipes.module';
 import { PaymentsRoutingModule } from './payments.routing';
 import { DepositComponent } from './deposit/deposit.component';
 import { BillingItemsComponent } from './billing-items/billing-items.component';

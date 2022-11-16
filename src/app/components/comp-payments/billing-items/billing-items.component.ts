@@ -26,7 +26,7 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
   ::ng-deep .menu-style {
     padding: 5px;
     background: #E4F1F5;
-    min-width: 400px;
+    min-width: 600px;
   }
   `
   ]
@@ -44,8 +44,7 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription[] = [];
 
-  constructor(
-    private billingItemsService: BillingItemsService) { }
+  constructor(private billingItemsService: BillingItemsService) { }
 
   async ngOnInit(): Promise<void> {
     this.formGroup = new FormGroup({

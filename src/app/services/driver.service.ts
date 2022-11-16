@@ -4,6 +4,7 @@ import { HttpUtils } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Driver, DriverVehicle } from '../components/domain/bus-firenze-domain';
+import { drivers } from './mokup/getDrivers';
 import { driversByVehicle, vehiclesByDriver } from './mokup/getDriverVehicle';
 
 @Injectable({
@@ -13,6 +14,7 @@ export class DriverService {
   private apiUrl = this.url + '/api/fleet';
   private driversByVehicle = driversByVehicle;
   private vehiclesByDriver = vehiclesByDriver;
+  private drivers = drivers;
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
@@ -31,6 +33,7 @@ export class DriverService {
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
+    /* return of(drivers); */
     return this.http.get<Driver[]>(this.apiUrl + url + '/drivers', options)
       .pipe(catchError(err => { throw err; }));
   }

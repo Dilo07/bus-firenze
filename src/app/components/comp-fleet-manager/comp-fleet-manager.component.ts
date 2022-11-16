@@ -65,9 +65,7 @@ export class FleetManagerComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
     this.search = this.formBuilder.group({
-      ctrlSearch: [
-        this.sessionService.getSessionStorage(FIRENZE_SESSION.FLEETSEARCHMANAGE)
-      ],
+      ctrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.fleetManageSearch)],
     });
     this.callGetFleetManager();
   }
@@ -84,20 +82,25 @@ export class FleetManagerComponent implements OnInit {
       this.columnOrder)
       .subscribe({
         next: (data) => {
-          this.fleetManagerList.length = currentSize;
-          this.fleetManagerList = this.fleetManagerList.concat(data);
-          if (data.length < this.limit) {
-            this.paginator.length = this.fleetManagerList.length;
+          if (data.length === 0) {
             this.endTable = true;
+            this.paginator.previousPage();
           } else {
-            this.paginator.length = ((this.offset + 1) * this.limit) + 1;
+            this.fleetManagerList.length = currentSize;
+            this.fleetManagerList = this.fleetManagerList.concat(data);
+            if (data.length < this.limit) {
+              this.paginator.length = this.fleetManagerList.length;
+              this.endTable = true;
+            } else {
+              this.paginator.length = ((this.offset + 1) * this.limit) + 1;
+            }
+            this.dataSource.data = data;
           }
-          this.dataSource.data = data;
         },
         error: () => this.complete = true,
         complete: () => { this.complete = true; this.unSubscribe(); }
       }));
-    if (!this.isValidFleet) { this.sessionService.setSessionStorage(FIRENZE_SESSION.FLEETSEARCHMANAGE, search); }
+    if (!this.isValidFleet) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, search); }
   }
 
   public pageChanged(event: PageEvent): void {
@@ -129,10 +132,10 @@ export class FleetManagerComponent implements OnInit {
     // chiama il modal confirm in caso di scelta si cancella
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-        this.subscription.push(this.fleetManagerService.deleteFleetManager(id).subscribe(
-          () => this.snackBar.showMessage('FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
-          () => null,
-          () => this.callGetFleetManager()));
+        this.subscription.push(this.fleetManagerService.deleteFleetManager(id).subscribe({
+          next: () => this.snackBar.showMessage('FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
+          complete: () => this.callGetFleetManager()
+        }));
       }
     });
   }
@@ -146,11 +149,10 @@ export class FleetManagerComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((contractCode) => {
       if (contractCode) {
-        this.subscription.push(this.fleetManagerService.validInvalidFleetManager(id, valid, valid ? contractCode : null).subscribe(
-          () => this.snackBar.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
-          () => null,
-          () => this.callGetFleetManager()
-        ));
+        this.subscription.push(this.fleetManagerService.validInvalidFleetManager(id, valid, valid ? contractCode : null).subscribe({
+          next: () => this.snackBar.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
+          complete: () => this.callGetFleetManager()
+        }));
       }
     });
   }

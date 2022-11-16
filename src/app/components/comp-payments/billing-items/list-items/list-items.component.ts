@@ -1,14 +1,28 @@
-import { Component, Input } from '@angular/core';
-import { BillingItems } from 'src/app/components/domain/bus-firenze-domain';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { BillingItems, BillingType } from 'src/app/components/domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-list-items',
   templateUrl: './list-items.component.html',
-  styles: [``]
+  styles: [`
+  @media(min-width: 1180px) {
+    .mat-column-lpn { max-width: 20%}
+    .mat-column-lpnNat { max-width: 20%;}
+    .mat-column-periodOrDate { max-width: 40%;}
+    .mat-column-price { max-width: 20%;}
+  }
+  `]
 })
-export class ListItemsComponent {
+export class ListItemsComponent implements OnInit {
   @Input() billingItems: BillingItems[];
+  @Input() billingType: BillingType;
+  @Input() gopId: number;
+  public dataSource = new MatTableDataSource<BillingItems>();
+  public displayedColumns = ['lpn', 'lpnNat', 'periodOrDate', 'price'];
 
-  constructor() { }
+  ngOnInit(): void {
+    this.dataSource.data = this.billingItems;
+  }
 
 }

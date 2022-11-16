@@ -124,7 +124,7 @@
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span *ngIf="!isValidFleet else valid">
-								<button mat-icon-button [matMenuTriggerFor]="actionsMenuManage" matTooltip="menu">
+								<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage" [attr.i18nKey]="'menu'">
 									<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
 								</button>
 								<mat-menu #actionsMenuManage="matMenu" class="menu-color">

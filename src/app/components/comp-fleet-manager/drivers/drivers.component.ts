@@ -66,15 +66,15 @@ export class DriversComponent implements OnInit, OnDestroy {
     this.complete = false;
     const keyword = this.search.get('ctrlSearch').value;
     this.subscription.push(
-      this.driverService.getDrivers(keyword, this.fleetManagerId).subscribe(
-        data => {
+      this.driverService.getDrivers(keyword, this.fleetManagerId).subscribe({
+        next: (data) => {
           this.dataSource.data = data;
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
         },
-        () => this.complete = true,
-        () => this.complete = true
-      ));
+        error: () => this.complete = true,
+        complete: () => this.complete = true
+      }));
   }
 
   public deleteDriver(idDriver: number): void {
@@ -86,13 +86,13 @@ export class DriversComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe((confirm) => {
       if (confirm) {
-        this.driverService.deleteDriver(idDriver, this.fleetManagerId).subscribe(
-          () => this.snackBar.showMessage('DRIVERS.DELETE_SUCCESS', 'INFO'),
-          () => null,
-          () => {
+        this.driverService.deleteDriver(idDriver, this.fleetManagerId).subscribe({
+          next: () => this.snackBar.showMessage('DRIVERS.DELETE_SUCCESS', 'INFO'),
+          complete: () => {
             this.getDrivers();
             this.resetSearchField();
-          });
+          }
+        });
       }
     });
   }
@@ -104,7 +104,7 @@ export class DriversComponent implements OnInit, OnDestroy {
           const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
             width: '80%',
             height: '80%',
-            data: {driverVehicle: vehicles, idDriver: idDriver, fleetManagerId: this.fleetManagerId},
+            data: { driverVehicle: vehicles, idDriver: idDriver, fleetManagerId: this.fleetManagerId },
             autoFocus: false
           });
         }));

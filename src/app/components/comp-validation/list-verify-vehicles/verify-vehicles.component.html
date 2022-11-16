@@ -20,7 +20,7 @@
             <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
-                {{ element.lpnNat}}
+                <span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
             </mat-cell>
         </ng-container>
 
@@ -55,6 +55,10 @@
                         [attr.i18nKey]="'OBU.VIEW_FILE'"
                         (click)="viewDeposit.emit({vehicleId: element.id, documents: element.documents})">
                         <mat-icon><span class="icon-document_search"></span></mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="{{'VEHICLE.VERIFY' | translate}}"
+                        [attr.i18nKey]="'VEHICLE.VERIFY'" (click)="verifyVehicle(element.lpn)">
+                        <span class="icon-car font-size-30"></span>
                     </button>
                     <button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
                         [attr.i18nKey]="'FLEET-MANAGER.VALID'" (click)="validVehicle(element.id, element.documents)">

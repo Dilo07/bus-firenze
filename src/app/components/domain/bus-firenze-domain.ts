@@ -1,4 +1,5 @@
 import { Coordinate } from '@npt/npt-map';
+import { type } from 'os';
 
 export class FleetManager {
   id: number;
@@ -194,56 +195,40 @@ export type FleetDocumentTypes = 'reqForm' | 'idDoc' | 'comReg';
 
 export interface BillingItemsAgg {
   nptGopId: number;
-  typeId: BillingType;
+  typeId: number;
   startPeriod: Date;
   endPeriod: Date;
   price: number;
   quantity: number;
   priceTot: number;
   items: BillingItems;
+  billingType: BillingType;
 }
 
 export interface BillingItems {
   id: number;
-  fmId: number;
-  vehicleId: number;
   lpn: string;
   lpnNat: string;
-  billingSapId: number;
-  billingState: string;
   startPeriod: LocalDate;
   endPeriod: LocalDate;
-  nptGopId: number;
   price: number;
-  processedDate: Date;
   quantity: number;
-  resSapCode: number;
-  resSapMessage: string;
-  sendDate: Date;
-  billingType: string;
+  billingType: BillingType;
   typeId: number;
 }
 
-export enum BillingType {
-  all,
-  install,
-  deltaNotMergeable,
-  deltaMergeable,
-  uninstall,
-  missedAppointment,
-  cancelledAppointment,
-  reversal
-}
+export type BillingType =
+  'INSTALL' | 'DELTA_NOT_MERGEABLE' | 'DELTA_MERGEABLE' | 'UNINSTALL' | 'MISSED_APPOINTMENT' | 'CANCELLED_APPOINTMENT' | 'REVERSAL';
 
-export interface LocalDate{
+export interface LocalDate {
   year: number;
   month: number;
   day: number;
 }
 
-export interface PenalType{
+export interface PenalType {
   typeId: number;
-  billingType: number;
+  billingType: BillingType;
 }
 
 export interface AddPenal {

@@ -276,7 +276,8 @@
         "DEPVALID": "Deposito validato il ",
         "REQVALID": "Richiesta deposito validata il ",
         "OPEN": "Apri veicoli",
-        "CLOSE": "Chiudi veicoli"
+        "CLOSE": "Chiudi veicoli",
+        "VERIFY": "Verifica veicolo"
     },
     "DRIVERS": {
         "TITLE": "Autisti",
@@ -446,6 +447,8 @@
         "TYPE": "Tipo fattura",
         "START": "Inizio periodo",
         "END": "Fine periodo",
+        "PERIOD": "Periodo di riferimento",
+        "DATE": "Data fattura",
         "DETAILS": "Dettagli fatture"
     },
     "PENALTIES": {

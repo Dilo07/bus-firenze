@@ -5,8 +5,8 @@
 			<div fxLayout="row wrap" fxLayoutAlign="space-between">
 				<mat-card-title>{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 				<span fxLayoutGap="20px">
-					<button mat-button class="backButton" *ngIf="fleetManager" [routerLink]="['../']"
-						[attr.i18nKey]="'FLEET-MANAGER.BACK'">
+					<button mat-button class="backButton" *ngIf="fleetManager" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
+						(click)="backToValidVehicle()">
 						{{'FLEET-MANAGER.BACK' |translate}}
 					</button>
 					<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'"
@@ -87,7 +87,7 @@
 						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
-							{{ element.lpnNat}}
+							<span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
 						</mat-cell>
 					</ng-container>
 

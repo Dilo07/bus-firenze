@@ -4,7 +4,7 @@ import { MaterialModule } from '@npt/npt-template';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TableFleetComponent } from './table-fleet/table-fleet.component';
-import { PipesModule } from '../pipes/pipes-module.module';
+import { PipesModule } from '../pipes/pipes.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({

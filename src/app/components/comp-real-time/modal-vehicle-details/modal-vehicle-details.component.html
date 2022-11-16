@@ -29,7 +29,8 @@
         <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
             <mat-card-content>
                 <mat-card-title>{{'VEHICLE.LPN_NAT' | translate }}</mat-card-title>
-                <mat-card-subtitle> {{vehicleInfo?.lpnNat}} </mat-card-subtitle>
+                <mat-card-subtitle> <span [ngClass]="'fi fi-' + vehicleInfo?.lpnNat.toLowerCase()"></span>
+                </mat-card-subtitle>
             </mat-card-content>
         </mat-card>
         <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">

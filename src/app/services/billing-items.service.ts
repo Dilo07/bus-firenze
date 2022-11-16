@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { BillingItems, BillingItemsAgg, PenalType } from '../components/domain/bus-firenze-domain';
+import { BillingItems, BillingItemsAgg, BillingType, PenalType } from '../components/domain/bus-firenze-domain';
 
 @Injectable({
   providedIn: 'root'
@@ -36,12 +36,12 @@ export class BillingItemsService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  addPenal(billingType: number, fmId: number, vehicleId: number, date: string): Observable<void> {
+  addPenal(penalType: number, fmId: number, vehicleId: number, date: string): Observable<void> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ date })
     };
-    return this.http.post<void>(this.apiUrl + `/penalties/${billingType}/fleet/${fmId}/vehicle/${vehicleId}`, null, options)
+    return this.http.post<void>(this.apiUrl + `/penalties/${penalType}/fleet/${fmId}/vehicle/${vehicleId}`, null, options)
       .pipe(catchError(err => { throw err; }));
   }
 
