@@ -9,10 +9,10 @@
 					<mat-cell *matCellDef="let element">
 						<button mat-icon-button [attr.i18nKey]="'VEHICLE.OPEN'"
 							(click)="expandedElement = expandedElement === element ? null : element;">
-							<mat-icon style="color: grey"
+							<mat-icon
 								matTooltip="{{(expandedElement && expandedElement.id === element.id ? 'VEHICLE.CLOSE' : 'VEHICLE.OPEN') | translate }}">
-								{{expandedElement && expandedElement.id === element.id ? 'expand_more' :
-								'chevron_right'}}
+								<span
+									[class]="expandedElement && expandedElement.id === element.nptGopId ? 'icon-down_arrow' : 'icon-right_arrow'"></span>
 							</mat-icon>
 						</button>
 					</mat-cell>
@@ -64,7 +64,8 @@
 								<span class="example-element-description-attribution">
 									<ng-container *ngIf="depositWarning else verifyVehicles">
 										<app-warning-vehicles *ngIf="expandedElement === element"
-											[idFleet]="expandedElement.id"></app-warning-vehicles> <!--component-->
+											[idFleet]="expandedElement.id"></app-warning-vehicles>
+										<!--component-->
 									</ng-container>
 									<ng-template #verifyVehicles>
 										<app-verify-vehicles *ngIf="expandedElement === element"
@@ -72,7 +73,8 @@
 											(viewDeposit)="viewDeposit($event)"
 											(viewCertificate)="viewCertificate($event)" [disableViewPdf]="complete"
 											[fleet]="expandedElement">
-										</app-verify-vehicles> <!--component-->
+										</app-verify-vehicles>
+										<!--component-->
 									</ng-template>
 								</span>
 							</div>

@@ -28,9 +28,8 @@
                     <button mat-icon-button matTooltip="{{'TICKET.DETAILS' | translate}}"
                         [attr.i18nKey]="'TICKET.DETAILS'"
                         (click)="expandedElement = expandedElement === element ? null : element">
-                        <mat-icon style="color: grey">
-                            {{expandedElement &&
-                            expandedElement.ticketId === element.ticketId ? 'expand_more' : 'chevron_right' }}
+                        <mat-icon>
+                            <span [class]="expandedElement && expandedElement.ticketId === element.ticketId ? 'icon-down_arrow' : 'icon-right_arrow'"></span>
                         </mat-icon>
                     </button>
                 </mat-cell>

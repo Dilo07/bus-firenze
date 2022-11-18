@@ -442,6 +442,7 @@
         "NO_DATA": "Nessuna fattura presente",
         "STATUS": "Stato fatture",
         "PRICE": "Prezzo",
+        "PRICE_UNIT": "Prezzo unitario",
         "PRICETOT": "Prezzo totale",
         "QUANTITY": "Quantità",
         "TYPE": "Tipo fattura",
@@ -449,7 +450,8 @@
         "END": "Fine periodo",
         "PERIOD": "Periodo di riferimento",
         "DATE": "Data fattura",
-        "DETAILS": "Dettagli fatture"
+        "DETAILS": "Dettagli fatture",
+        "CLOSE_DETAILS": "Chiudi dettagli"
     },
     "PENALTIES": {
         "ADD": "Applica una penale",

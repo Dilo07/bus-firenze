@@ -13,7 +13,7 @@
             </mat-form-field>
         </div>
     </form>
-    <mat-table multiTemplateDataRows [dataSource]="dataSource" class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
             <mat-cell *matCellDef="let element">

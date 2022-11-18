@@ -442,6 +442,7 @@
         "NO_DATA": "Nobody billing items present",
         "STATUS": "Billing status",
         "PRICE": "Price",
+        "PRICE_UNIT": "Unit price",
         "PRICETOT": "Total price",
         "QUANTITY": "Quantity",
         "TYPE": "Tipo fattura",
@@ -449,7 +450,8 @@
         "END": "End billing item",
         "PERIOD": "Reference period",
         "DATE": "Billing date",
-        "DETAILS": "Billing item details"
+        "DETAILS": "Billing item details",
+        "CLOSE_DETAILS": "Close details"
     },
     "PENALTIES": {
         "ADD": "Add a penal",
