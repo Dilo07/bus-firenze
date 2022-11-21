@@ -23,6 +23,10 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
     .mat-column-type { max-width: 20%}
     .mat-column-actions { max-width: 20%; display: table-column; text-align: end;}
   }
+  .icon-assignment-grey:before {
+    color: grey;
+    font-weight: bold;
+  }
   `
   ]
 })

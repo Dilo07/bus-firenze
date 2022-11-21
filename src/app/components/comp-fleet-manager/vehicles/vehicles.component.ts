@@ -37,10 +37,6 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
     .mat-column-consent { max-width: 10%;}
     .mat-column-actions { max-width: 20%; display: table-column;}
   }
-
-  ::ng-deep .menu-color {
-    background: #E4F1F5;
-  }
   .icon-assignment-grey:before {
     color: grey;
     font-weight: bold;
