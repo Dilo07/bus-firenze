@@ -24,7 +24,7 @@
 				</mat-form-field>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div class="mat-elevation-z8 example-container">
+			<div class="mat-elevation-z8 example-container" *ngIf="dataSource.data.length > 0">
 				<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="name"
 					matSortDirection="asc">
 					<ng-container matColumnDef="name">
@@ -81,8 +81,7 @@
 						</mat-cell>
 					</ng-container>
 
-					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-						[style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
 					<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 				</mat-table>
 			</div>

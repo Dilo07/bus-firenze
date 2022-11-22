@@ -38,7 +38,7 @@
 				</mat-slide-toggle>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div class="mat-elevation-z8 example-container">
+			<div class="mat-elevation-z8 example-container" *ngIf="vehicleList.data.length > 0">
 				<mat-table [dataSource]="vehicleList" class="mat-elevation-z8" matSort matSortActive="id"
 					matSortDirection="asc">
 					<ng-container matColumnDef="id">
@@ -187,8 +187,8 @@
 						</mat-cell>
 					</ng-container>
 
-					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-						[style.display]="vehicleList.data.length === 0 ? 'none' : '' "></mat-header-row>
+					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true">
+					</mat-header-row>
 					<mat-row *matRowDef="let row; columns: displayedColumns;"
 						[ngClass]="row.deleted ? 'obuDisactive' : ''" class="hover-row"></mat-row>
 				</mat-table>

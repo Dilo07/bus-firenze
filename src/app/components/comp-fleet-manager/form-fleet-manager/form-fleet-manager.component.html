@@ -99,12 +99,12 @@
                                     (filteredReturn)="filteredList = $event.length > 0 ? $event : filteredList">
                                 </mat-select-filter>
                                 <mat-option *ngFor="let nation of filteredList" [value]="nation.value">
-                                    {{nation.text | translate}}
                                     <span [ngClass]="'fi fi-' + nation.value.toLowerCase()"></span>
+                                    {{nation.text | translate}}
                                 </mat-option>
                                 <mat-select-trigger>
-                                    {{formGroup.get('ctrlNat').value}}
                                     <span [ngClass]="'fi fi-' + formGroup.get('ctrlNat').value?.toLowerCase()"></span>
+                                    {{formGroup.get('ctrlNat').value}}
                                 </mat-select-trigger>
                             </mat-select>
                         </mat-form-field>

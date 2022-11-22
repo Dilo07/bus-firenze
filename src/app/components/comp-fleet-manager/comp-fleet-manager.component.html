@@ -23,7 +23,7 @@
 				</form>
 			</ng-container>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div class="mat-elevation-z8 example-container">
+			<div class="mat-elevation-z8 example-container" *ngIf="dataSource.data.length > 0">
 				<mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
 					(matSortChange)="sortData($event)">
 					<ng-container matColumnDef="id">
@@ -124,7 +124,8 @@
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span *ngIf="!isValidFleet else valid">
-								<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage" [attr.i18nKey]="'menu'">
+								<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
+									[attr.i18nKey]="'menu'">
 									<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
 								</button>
 								<mat-menu #actionsMenuManage="matMenu" class="menu-color">
@@ -190,8 +191,8 @@
 						</mat-cell>
 					</ng-container>
 
-					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-						[style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true">
+					</mat-header-row>
 					<mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
 				</mat-table>
 			</div>
