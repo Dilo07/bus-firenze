@@ -29,7 +29,7 @@
 				<mat-form-field appearance="outline" fxFlex="80">
 					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>
 					<input matInput type="search" formControlName="ctrlSearch" placeholder="cerca" autocomplete="off">
-					<button matSuffix mat-icon-button (click)="getVehiclesByManagerId()">
+					<button matPrefix mat-icon-button (click)="getVehiclesByManagerId()">
 						<mat-icon>search</mat-icon>
 					</button>
 				</mat-form-field>
@@ -38,11 +38,11 @@
 				</mat-slide-toggle>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div class="mat-elevation-z8 example-container" *ngIf="vehicleList.data.length > 0">
+			<div class="mat-elevation-z8 example-container" [style.display]="vehicleList.data.length === 0 ? 'none' : ''">
 				<mat-table [dataSource]="vehicleList" class="mat-elevation-z8" matSort matSortActive="id"
 					matSortDirection="asc">
 					<ng-container matColumnDef="id">
-						<mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">id</span>
 							{{element.id}}

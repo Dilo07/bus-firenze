@@ -2,7 +2,7 @@
     <mat-card-title fxLayout="row" fxLayoutAlign="center center" style="padding-top: 1%;">
         {{'STATISTIC.TABLE_ROUTES' | translate}}</mat-card-title>
     <mat-card-content>
-        <div class="mat-elevation-z8 example-container" *ngIf="dataSource.data.length > 0">
+        <div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
             <mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="start">
                     <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'STATISTIC.START' | translate}}

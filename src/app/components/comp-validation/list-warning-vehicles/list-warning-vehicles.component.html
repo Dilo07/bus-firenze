@@ -1,7 +1,7 @@
-<div class="example-container" *ngIf="dataSource.data.length > 0">
+<div class="example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc">
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">id</span>
                 {{element.id}}

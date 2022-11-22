@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8 example-container" *ngIf="vehicleTable.length > 0">
+<div class="mat-elevation-z8 example-container" [style.display]="vehicleTable.length === 0 ? 'none' : ''">
     <mat-table [dataSource]="vehicleTable">
         <ng-container matColumnDef="OBUID">
             <mat-header-cell *matHeaderCellDef> OBUID </mat-header-cell>

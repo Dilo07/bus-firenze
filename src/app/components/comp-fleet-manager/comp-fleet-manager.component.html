@@ -16,14 +16,14 @@
 					<mat-form-field appearance="outline" fxFlex="100">
 						<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
 						<input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
-						<button matSuffix mat-icon-button (click)="refreshTable()">
+						<button matPrefix mat-icon-button (click)="refreshTable()">
 							<mat-icon>search</mat-icon>
 						</button>
 					</mat-form-field>
 				</form>
 			</ng-container>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div class="mat-elevation-z8 example-container" *ngIf="dataSource.data.length > 0">
+			<div class="mat-elevation-z8 example-container" [style.display]="fleetManagerList.length === 0 ? 'none' : ''">
 				<mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
 					(matSortChange)="sortData($event)">
 					<ng-container matColumnDef="id">

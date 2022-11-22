@@ -19,7 +19,7 @@
         </mat-form-field>
     </form>
     <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-    <div class="mat-elevation-z8 example-container" *ngIf="dataSource.data.length > 0">
+    <div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
         <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
             <ng-container matColumnDef="expandButton">
                 <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>

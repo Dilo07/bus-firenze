@@ -2,8 +2,8 @@
 <mat-card>
 	<mat-card-content fxLayout="column" fxLayoutGap="20px">
 		<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-		<div class="mat-elevation-z8 example-container" *ngIf="dataSource.data.length > 0">
-			<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows>
+		<div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
+			<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows matSortActive="id" matSortDirection="asc">
 				<ng-container matColumnDef="expandButton">
 					<mat-header-cell *matHeaderCellDef></mat-header-cell>
 					<mat-cell *matCellDef="let element">

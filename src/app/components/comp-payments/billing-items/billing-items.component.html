@@ -32,8 +32,7 @@
         </mat-card-content>
     </mat-card>
     <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows
-        *ngIf="dataSource.data.length > 0">
+    <mat-table [dataSource]="dataSource" [style.display]="dataSource.data.length === 0 ? 'none' : ''" class="mat-elevation-z8" multiTemplateDataRows>
         <ng-container matColumnDef="expandButton">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element">
