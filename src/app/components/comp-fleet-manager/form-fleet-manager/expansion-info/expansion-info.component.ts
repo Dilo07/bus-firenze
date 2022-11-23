@@ -9,6 +9,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
     text-decoration: underline;
     cursor: pointer;
   }
+  .mat-expansion-panel {
+    width: 97%;
+    background-color: #E4F1F5;
+  }
   `
   ]
 })

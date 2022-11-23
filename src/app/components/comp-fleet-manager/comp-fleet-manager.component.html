@@ -23,7 +23,8 @@
 				</form>
 			</ng-container>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div class="mat-elevation-z8 example-container" [style.display]="fleetManagerList.length === 0 ? 'none' : ''">
+			<div class="mat-elevation-z8 example-container"
+				[style.display]="fleetManagerList.length === 0 ? 'none' : ''">
 				<mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
 					(matSortChange)="sortData($event)">
 					<ng-container matColumnDef="id">
@@ -129,6 +130,11 @@
 									<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
 								</button>
 								<mat-menu #actionsMenuManage="matMenu" class="menu-color">
+									<button mat-menu-item [routerLink]="['form-Fleet']"
+										[state]="{fleetManager: element}" [attr.i18nKey]="'COMMON.ACTION.EDIT'">
+										<mat-icon><span class="icon-edit"></span></mat-icon>
+										{{'COMMON.ACTION.EDIT' | translate}}
+									</button>
 									<button *ngIf="!roleOpMovyon" mat-menu-item [routerLink]="['drivers']"
 										[state]="{fleetManagerId: element.id}" [attr.i18nKey]="'DRIVERS.TITLE'">
 										<mat-icon><span class="icon-driver"></span></mat-icon>
@@ -151,13 +157,8 @@
 										{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
 									</button>
 								</mat-menu>
-								<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}"
-									[routerLink]="['form-Fleet']" [state]="{fleetManager: element}"
-									[attr.i18nKey]="'COMMON.ACTION.EDIT'">
-									<mat-icon><span class="icon-edit"></span></mat-icon>
-								</button>
-								<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
-									[attr.i18nKey]="'COMMON.ACTION.CANCEL'" (click)="deleteFleetManager(element.id)">
+								<button mat-icon-button matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
+									[attr.i18nKey]="'COMMON.ACTION.DELETE'" (click)="deleteFleetManager(element.id)">
 									<mat-icon><span class="icon-delete"></span></mat-icon>
 								</button>
 							</span>

@@ -495,7 +495,8 @@
         "ACTION": {
             "YES": "Si",
             "BACK": "Indietro",
-            "CANCEL": "Cancella",
+            "DELETE": "Elimina",
+            "CANCEL": "Annulla",
             "SAVE": "Salva",
             "EDIT": "Modifica",
             "ACTIVE": "Attiva",

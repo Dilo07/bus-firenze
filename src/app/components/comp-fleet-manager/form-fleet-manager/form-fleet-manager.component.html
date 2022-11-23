@@ -9,16 +9,17 @@
         <mat-card-title *ngIf="register" fxFlexOffset="5">
             {{'FLEET-MANAGER.REGISTRATION' | translate}}
         </mat-card-title>
-        <button mat-icon-button (click)="helper = helper === 'on' ? 'off' : 'on'">
+        <!-- <button mat-icon-button (click)="helper = helper === 'on' ? 'off' : 'on'">
             <mat-icon>
                 <span [ngClass]="helper === 'on' ? 'icon-delete' : 'icon-info'"></span>
             </mat-icon>
-        </button>
+        </button> -->
     </div>
+    <!-- <div [@slideInOut]="helper">
+        <app-expansion-info (callForm)="downloadTemplate()"></app-expansion-info> component expansion-info
+    </div> -->
     <mat-progress-bar mode="indeterminate" *ngIf="!completeUp"></mat-progress-bar>
-    <div [@slideInOut]="helper">
-        <app-expansion-info (callForm)="downloadTemplate()"></app-expansion-info> <!-- component expansion-info-->
-    </div>
+    <app-expansion-info (callForm)="downloadTemplate()"></app-expansion-info> <!-- component expansion-info -->
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
         <form [formGroup]="formGroup" fxLayout="column">
             <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
@@ -225,7 +226,7 @@
         </form>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
             <button mat-button *ngIf="!roleFleetManager" [routerLink]="['../']" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
-                class="backButton">{{'FLEET-MANAGER.BACK' | translate}}</button>
+                class="backButton">{{'COMMON.ACTION.CANCEL' | translate}}</button>
             <button *ngIf="!data" mat-button libDebounceClick
                 [disabled]="formGroup.invalid || ((register && !verifyOtp))" [attr.i18nKey]="'FLEET-MANAGER.SAVE'"
                 class="actionButtons" (debounceClick)="insertFleetManager()">

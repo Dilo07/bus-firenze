@@ -24,11 +24,13 @@
 				</mat-form-field>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
+			<div class="mat-elevation-z8 example-container"
+				[style.display]="dataSource.data.length === 0 ? 'none' : ''">
 				<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="name"
 					matSortDirection="asc">
 					<ng-container matColumnDef="name">
-						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.NAME' | translate}}
+						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+							{{'FLEET-MANAGER.NAME' | translate}}
 						</mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'FLEET-MANAGER.NAME' | translate}}</span>
@@ -37,10 +39,12 @@
 					</ng-container>
 
 					<ng-container matColumnDef="surname">
-						<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.SURNAME' | translate}} </mat-header-cell>
+						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+							{{'FLEET-MANAGER.SURNAME' | translate}}
+						</mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'FLEET-MANAGER.SURNAME' | translate}}</span>
-							{{ element.surname}}
+							{{element.surname}}
 						</mat-cell>
 					</ng-container>
 
@@ -48,7 +52,7 @@
 						<mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">e-mail</span>
-							{{ element | findContactValue: 3}}
+							{{element | findContactValue: 3}}
 						</mat-cell>
 					</ng-container>
 
@@ -56,32 +60,39 @@
 						<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.CELL' | translate}} </mat-header-cell>
 						<mat-cell *matCellDef="let element">
 							<span class="mobile-label">{{'FLEET-MANAGER.CELL' | translate}}</span>
-							{{ element | findContactValue: 1}}
+							{{element | findContactValue: 1}}
 						</mat-cell>
 					</ng-container>
 
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
-							<button mat-icon-button matTooltip="{{'DRIVERS.VEHICLES_ASSOCIATION' | translate}}"
-								[attr.i18nKey]="'DRIVERS.VEHICLES_ASSOCIATION'"
-								(click)="associationVehicle(element.id)">
-								<mat-icon><span class="icon-refresh"></span></mat-icon>
+							<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
+								[attr.i18nKey]="'menu'">
+								<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
 							</button>
-							<button mat-icon-button matTooltip="{{'COMMON.ACTION.EDIT' | translate}}"
-								[routerLink]="['../form-Driver']"
-								[state]="{driver: element, fleetManagerId: fleetManagerId}"
-								[attr.i18nKey]="'COMMON.ACTION.EDIT'">
-								<mat-icon><span class="icon-edit"></span></mat-icon>
-							</button>
-							<button mat-icon-button matTooltip="{{'COMMON.ACTION.CANCEL' | translate}}"
-								[attr.i18nKey]="'COMMON.ACTION.CANCEL'" (click)="deleteDriver(element.id)">
+							<mat-menu #actionsMenuManage="matMenu" class="menu-color">
+								<button mat-menu-item [attr.i18nKey]="'DRIVERS.VEHICLES_ASSOCIATION'"
+									(click)="associationVehicle(element.id)">
+									<mat-icon><span class="icon-refresh"></span></mat-icon>
+									{{'DRIVERS.VEHICLES_ASSOCIATION' | translate}}
+								</button>
+								<button mat-menu-item [routerLink]="['../form-Driver']"
+									[state]="{driver: element, fleetManagerId: fleetManagerId}"
+									[attr.i18nKey]="'COMMON.ACTION.EDIT'">
+									<mat-icon><span class="icon-edit"></span></mat-icon>
+									{{'COMMON.ACTION.EDIT' | translate}}
+								</button>
+							</mat-menu>
+							<button mat-icon-button matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
+								[attr.i18nKey]="'COMMON.ACTION.DELETE'" (click)="deleteDriver(element.id)">
 								<mat-icon><span class="icon-delete"></span></mat-icon>
 							</button>
 						</mat-cell>
 					</ng-container>
 
-					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true">
+					</mat-header-row>
 					<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 				</mat-table>
 			</div>

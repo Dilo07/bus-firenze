@@ -495,6 +495,7 @@
         "ACTION": {
             "YES": "Yes",
             "BACK": "Back",
+            "DELETE": "Delete",
             "CANCEL": "Cancel",
             "SAVE": "Save",
             "EDIT": "Edit",
