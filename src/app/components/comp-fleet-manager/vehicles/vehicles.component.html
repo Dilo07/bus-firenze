@@ -38,7 +38,8 @@
 				</mat-slide-toggle>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div class="mat-elevation-z8 example-container" [style.display]="vehicleList.data.length === 0 ? 'none' : ''">
+			<div class="mat-elevation-z8 example-container"
+				[style.display]="vehicleList.data.length === 0 ? 'none' : ''">
 				<mat-table [dataSource]="vehicleList" class="mat-elevation-z8" matSort matSortActive="id"
 					matSortDirection="asc">
 					<ng-container matColumnDef="id">
@@ -71,6 +72,12 @@
 									matTooltip="{{'VEHICLE.UNKNOWN' | translate}}">
 									warning_amber
 								</mat-icon>
+							</button>
+							<button *ngIf="element.deleted" mat-icon-button [disabled]="true"
+								[attr.i18nKey]="'VEHICLE.DISABLED'">
+								<mat-icon style="color: #8f9a27"
+									matTooltip="{{('VEHICLE.DISABLED' | translate) +  (element.deleted | date : 'dd/MM/yyyy')}}">
+									disabled_by_default</mat-icon>
 							</button>
 						</mat-cell>
 					</ng-container>
@@ -144,46 +151,52 @@
 					<ng-container matColumnDef="actions">
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
-							<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
-								[attr.i18nKey]="'menu'">
-								<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
-							</button>
-							<mat-menu #actionsMenuManage="matMenu" class="menu-color">
-								<button mat-menu-item [routerLink]="['statistic']"
+							<ng-container *ngIf="!element.deleted else deleted">
+								<!--attivi-->
+								<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
+									[attr.i18nKey]="'menu'">
+									<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
+								</button>
+								<mat-menu #actionsMenuManage="matMenu" class="menu-color">
+									<button mat-menu-item [attr.i18nKey]="'COMMON.ACTION.EDIT'"
+										(click)="editVehicle(element)">
+										<mat-icon><span class="icon-edit"></span></mat-icon>
+										{{'COMMON.ACTION.EDIT' | translate}}
+									</button>
+									<button mat-menu-item [routerLink]="['statistic']"
+										[state]="{vehicle: element, fleetManager: fleetManager}"
+										[attr.i18nKey]="'STATISTIC.VEHICLE'">
+										<mat-icon><span class="icon-statistic font-size-30"></span></mat-icon>
+										{{'STATISTIC.VEHICLE' | translate}}
+									</button>
+									<button *ngIf="element.hardware" mat-menu-item [attr.i18nKey]="'VEHICLE.DOWNLOAD'"
+										(click)="downloadManualPdf(element.hardware)">
+										<mat-icon><span class="icon-download"></span></mat-icon>
+										{{'VEHICLE.DOWNLOAD' | translate}}
+									</button>
+									<button *ngIf="element.documents | hasDeposit: true" mat-menu-item
+										[attr.i18nKey]="'VEHICLE.DRIVER_ASSOCIATION'"
+										(click)="associationDriver(element.id)">
+										<mat-icon><span class="icon-refresh"></span></mat-icon>
+										{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}
+									</button>
+								</mat-menu>
+								<button mat-icon-button matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
+									[attr.i18nKey]="'COMMON.ACTION.DELETE'"
+									(click)="deleteVehicle(element.id, element.valid)">
+									<mat-icon><span class="icon-delete"></span></mat-icon>
+								</button>
+							</ng-container>
+							<ng-template #deleted>
+								<!--eliminati-->
+								<button mat-icon-button [routerLink]="['statistic']"
 									[state]="{vehicle: element, fleetManager: fleetManager}"
 									[attr.i18nKey]="'STATISTIC.VEHICLE'">
-									<mat-icon><span class="icon-statistic font-size-30"></span></mat-icon>
-									{{'STATISTIC.VEHICLE' | translate}}
+									<mat-icon matTooltip="{{'STATISTIC.VEHICLE' | translate}}">
+										<span class="icon-statistic font-size-30"></span>
+									</mat-icon>
 								</button>
-								<button *ngIf="element.hardware" mat-menu-item [attr.i18nKey]="'VEHICLE.DOWNLOAD'"
-									(click)="downloadManualPdf(element.hardware)">
-									<mat-icon><span class="icon-download"></span></mat-icon>
-									{{'VEHICLE.DOWNLOAD' | translate}}
-								</button>
-								<button *ngIf="!element.deleted && (element.documents | hasDeposit: true)" mat-menu-item
-									[attr.i18nKey]="'VEHICLE.DRIVER_ASSOCIATION'"
-									(click)="associationDriver(element.id)">
-									<mat-icon><span class="icon-refresh"></span></mat-icon>
-									{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}
-								</button>
-							</mat-menu>
-							<button *ngIf="!element.deleted" mat-icon-button
-								matTooltip="{{'COMMON.ACTION.EDIT' | translate}}" [attr.i18nKey]="'COMMON.ACTION.EDIT'"
-								(click)="editVehicle(element)">
-								<mat-icon><span class="icon-edit"></span></mat-icon>
-							</button>
-							<button *ngIf="!element.deleted" mat-icon-button
-								matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
-								[attr.i18nKey]="'COMMON.ACTION.DELETE'"
-								(click)="deleteVehicle(element.id, element.valid)">
-								<mat-icon><span class="icon-delete"></span></mat-icon>
-							</button>
-							<button *ngIf="element.deleted" mat-icon-button [disabled]="true"
-								[attr.i18nKey]="'VEHICLE.DISABLED'">
-								<mat-icon style="color: #8f9a27"
-									matTooltip="{{('VEHICLE.DISABLED' | translate) +  (element.deleted | date : 'dd/MM/yyyy')}}">
-									disabled_by_default</mat-icon>
-							</button>
+							</ng-template>
 						</mat-cell>
 					</ng-container>
 
