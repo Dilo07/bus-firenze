@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,7 +15,7 @@ import { ModalPenalComponent } from '../modal-penal/modal-penal.component';
   templateUrl: './add-penalties.component.html',
   styles: [`
   .mat-elevation-z8 { margin: 20px; }
-   @media(min-width: 1180px) {
+  @media(min-width: 1180px) {
     .mat-column-actions { display: table-column;}
   }
   `
@@ -45,11 +45,10 @@ export class AddPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
     this.getVehiclesByManagerId();
   }
 
-  ngOnChanges(): void {
-    this.dataSource.filter = this.keyword.trim();
-    this.dataSource.filterPredicate = (data, filter: string): boolean => {
-      return data.lpn.toLowerCase().includes(filter);
-    };
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes.keyword.firstChange) {
+      this.getVehiclesByManagerId();
+    }
   }
 
   ngOnDestroy(): void {
@@ -61,7 +60,7 @@ export class AddPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
   public getVehiclesByManagerId(): void {
     this.viewFleetTable = false;
     this.complete = false;
-    this.subscription.push(this.vehicleService.getVehiclesById(true, this.fleetId).subscribe({
+    this.subscription.push(this.vehicleService.getVehiclesById(true, this.fleetId, this.keyword).subscribe({
       next: (vehicles) => (this.dataSource.data = vehicles, this.dataSource.sort = this.sort, this.dataSource.paginator = this.paginator),
       error: () => this.viewFleetTable = true,
       complete: () => this.complete = true

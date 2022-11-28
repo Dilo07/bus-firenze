@@ -2,6 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import moment from 'moment';
 import { Subscription } from 'rxjs';
@@ -42,6 +43,7 @@ import { BillingItemsAgg } from '../../domain/bus-firenze-domain';
 export class BillingItemsComponent implements OnInit, OnDestroy {
   @Input() public fleetManagerId: number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   public dataSource = new MatTableDataSource<BillingItemsAgg>();
   public displayedColumns = ['expandButton', 'gopId', 'billingType', 'status', 'price', 'quantity', 'priceTot'];
   public complete = true;
@@ -75,7 +77,7 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
     const end = moment(this.formGroup.get('ctrlRangeEnd').value).format('yyyy-MM-DD');
     const billingStatus = this.formGroup.get('ctrlBillingStatus').value;
     this.subscription.push(this.billingItemsService.getBillingItemsAggregate(start, end, billingStatus, this.fleetManagerId).subscribe({
-      next: items => (this.dataSource.data = items, this.dataSource.paginator = this.paginator),
+      next: items => (this.dataSource.data = items, this.dataSource.sort = this.sort, this.dataSource.paginator = this.paginator),
       error: () => this.complete = true,
       complete: () => this.complete = true
     }));

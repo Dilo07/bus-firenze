@@ -32,7 +32,8 @@
         </mat-card-content>
     </mat-card>
     <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-    <mat-table [dataSource]="dataSource" [style.display]="dataSource.data.length === 0 ? 'none' : ''" class="mat-elevation-z8" multiTemplateDataRows>
+    <mat-table [dataSource]="dataSource" [style.display]="dataSource.data.length === 0 ? 'none' : ''"
+        class="mat-elevation-z8" multiTemplateDataRows matSort matSortActive="gopId" matSortDirection="asc">
         <ng-container matColumnDef="expandButton">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element">
@@ -48,7 +49,7 @@
         </ng-container>
 
         <ng-container matColumnDef="gopId">
-            <mat-header-cell *matHeaderCellDef> gop id </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> gop id </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">gop id</span>
                 {{element.nptGopId}}

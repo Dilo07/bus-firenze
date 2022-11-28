@@ -1,18 +1,20 @@
 <mat-card>
     <mat-card-content>
-        <div fxLayout="row" fxLayoutGap="20px">
+        <form>
             <mat-form-field appearance="outline" fxFlex="100">
                 <mat-label>{{'PENALTIES.SEARCH' | translate}}</mat-label>
-                <input matInput [attr.i18nKey]="'PENALTIES.SEARCH'" (keyup)="applyFilter($event)" #input
-                    autocomplete="off">
+                <input matInput [attr.i18nKey]="'PENALTIES.SEARCH'" [value]="keyword" #keywordVal autocomplete="off">
+                <button matPrefix mat-icon-button (click)="keyword = keywordVal.value">
+                    <mat-icon>search</mat-icon>
+                </button>
             </mat-form-field>
-        </div>
+        </form>
         <mat-tab-group mat-align-tabs="center">
             <mat-tab label="{{'PENALTIES.ADD' | translate}}">
-                <app-add-penalties [fleetId]="fleetManagerId" [keyword]="filter"></app-add-penalties>
+                <app-add-penalties [fleetId]="fleetManagerId" [keyword]="keyword"></app-add-penalties>
             </mat-tab>
             <mat-tab label="{{'PENALTIES.EMITTED' | translate}}">
-                <app-emitted-penalties [fleetId]="fleetManagerId" [keyword]="filter"></app-emitted-penalties>
+                <app-emitted-penalties [fleetId]="fleetManagerId" [keyword]="keyword"></app-emitted-penalties>
             </mat-tab>
         </mat-tab-group>
     </mat-card-content>

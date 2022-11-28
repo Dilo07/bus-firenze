@@ -1,11 +1,10 @@
-<div fxLayout="column" fxLayoutAlign="center" style="margin-top: 2%;">
-    <mat-card-subtitle fxLayout="row" fxLayoutAlign="center center">{{'VEHICLE.TITLE' | translate}}
-    </mat-card-subtitle>
+<div fxLayout="column" fxLayoutAlign="center">
     <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc"
+        [style.display]="dataSource.data.length === 0 ? 'none' : '' ">
 
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">id</span>
                 {{element.id}}
@@ -46,14 +45,10 @@
             </mat-cell>
         </ng-container>
 
-        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-            [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">{{'VEHICLE.NO_DATA' | translate}}
-            </td>
-        </tr>
     </mat-table>
     <mat-paginator style="margin-top: 20px;" [style.display]="dataSource.data.length === 0 ? 'none' : '' "
         [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+    <div *ngIf="dataSource.data.length === 0 && complete">{{'VEHICLE.NO_DATA' | translate}}</div>
 </div>
