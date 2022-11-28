@@ -29,7 +29,7 @@ export class TableFleetComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<FleetManager>();
   public fleetManagerList: FleetManager[] = [];
-  public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'actions'];
+  public displayedColumns = ['id', 'name', 'surname', 'e-mail'];
   public complete = true;
   public search: FormGroup;
 

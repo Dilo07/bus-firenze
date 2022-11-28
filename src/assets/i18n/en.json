@@ -345,7 +345,7 @@
         "KM_STATISTIC": "km traveled in the inner area",
         "DURATION_STATISTIC": "Route duration in the inner area",
         "VEHICLE": "Vehicle statistic",
-        "LAST-MONTH": "Last month statistic",
+        "LAST-MONTH": "Last month fleet manager statistic",
         "LABEL-RANGE": "Insert a range dates",
         "INVALID_START": "Start range date invalid",
         "INVALID_END": "End range date invalid",

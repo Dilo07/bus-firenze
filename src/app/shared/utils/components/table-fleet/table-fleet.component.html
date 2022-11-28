@@ -8,8 +8,8 @@
         </button>
     </mat-form-field>
 </form>
+<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 <div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
-    <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
     <mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
         (matSortChange)="sortData($event)">
         <ng-container matColumnDef="id">
@@ -46,18 +46,8 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-            <mat-cell *matCellDef="let element" style="text-align: end;">
-                <button mat-icon-button matTooltip="Fleet Manager" [attr.i18nKey]="'Fleet Manager'"
-                    (click)="manageTicket(element.id)">
-                    <mat-icon><span class="icon-user"></span></mat-icon>
-                </button>
-            </mat-cell>
-        </ng-container>
-
         <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row" [attr.i18nKey]="row.id" (click)="manageTicket(row.id)"></mat-row>
     </mat-table>
 </div>
 <mat-paginator style="margin-top: 20px;" [style.display]="fleetManagerList.length === 0 ? 'none' : '' " [pageSize]="10"

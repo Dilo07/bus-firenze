@@ -42,7 +42,7 @@ export class DriversComponent implements OnInit, OnDestroy {
   public complete = true;
 
   private subscription: Subscription[] = [];
-  private mobileQuery: MediaQueryList;
+  private desktopQuery: MediaQueryList;
 
   constructor(
     private router: Router,
@@ -52,7 +52,7 @@ export class DriversComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private media: MediaMatcher) {
     this.fleetManagerId = this.router.getCurrentNavigation()?.extras.state?.fleetManagerId as number;
-    this.mobileQuery = this.media.matchMedia('(min-width: 768px)'); // se è un tablet o schermo grande
+    this.desktopQuery = this.media.matchMedia('(min-width: 768px)'); // se è un tablet o schermo grande
   }
 
   ngOnInit(): void {
@@ -85,8 +85,8 @@ export class DriversComponent implements OnInit, OnDestroy {
 
   public deleteDriver(idDriver: number): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
-      width: this.mobileQuery.matches ? '30%' : '100%',
-      height: this.mobileQuery.matches ? '20%' : '30%',
+      width: this.desktopQuery.matches ? '30%' : '100%',
+      height: this.desktopQuery.matches ? '20%' : '30%',
       data: { text: 'DRIVERS.DELETE_CONFIRM' },
       autoFocus: false
     });
@@ -109,7 +109,7 @@ export class DriversComponent implements OnInit, OnDestroy {
         vehicles => {
           const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
             width: '80%',
-            height: this.mobileQuery.matches ? '60%' : '80%',
+            height: this.desktopQuery.matches ? '60%' : '80%',
             data: { driverVehicle: vehicles, idDriver: idDriver, fleetManagerId: this.fleetManagerId },
             autoFocus: false
           });

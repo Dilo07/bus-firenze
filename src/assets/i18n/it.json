@@ -345,7 +345,7 @@
         "KM_STATISTIC": "km percorsi nell'area interna",
         "DURATION_STATISTIC": "Durata percorso nell'area interna",
         "VEHICLE": "Statistiche veicolo",
-        "LAST-MONTH": "Statistiche dell'ultimo mese",
+        "LAST-MONTH": "Statistiche fleet manager dell'ultimo mese",
         "LABEL-RANGE": "Inserisci un range di date",
         "INVALID_START": "Data di inizio range non valida",
         "INVALID_END": "Data di fine range non valida",
