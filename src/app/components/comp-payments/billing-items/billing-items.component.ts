@@ -45,7 +45,7 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   public dataSource = new MatTableDataSource<BillingItemsAgg>();
-  public displayedColumns = ['expandButton', 'gopId', 'billingType', 'status', 'price', 'quantity', 'priceTot'];
+  public displayedColumns = ['expandButton', 'nptGopId', 'billingType', 'status', 'price', 'quantity', 'priceTot'];
   public complete = true;
   public billingStatus = [BILLING_STATUS.all, BILLING_STATUS.unknown, BILLING_STATUS.pending, BILLING_STATUS.success, BILLING_STATUS.failed];
   public maxDate = moment().toDate();
