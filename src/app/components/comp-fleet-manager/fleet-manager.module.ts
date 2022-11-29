@@ -30,6 +30,7 @@ import { TableStatisticComponent } from './vehicles/table-statistic/table-statis
 import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { FormFieldPersonComponent } from './form-fleet-manager/field-person/form-field-person.component';
+import { NgDynamicBreadcrumbModule } from 'ng-dynamic-breadcrumb';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { FormFieldPersonComponent } from './form-fleet-manager/field-person/form
     TranslateModule,
     NptMapModule,
     FleetManagerRoutingModule,
-    PipesModule
+    PipesModule,
+    NgDynamicBreadcrumbModule
   ],
   exports: [
     FleetManagerComponent

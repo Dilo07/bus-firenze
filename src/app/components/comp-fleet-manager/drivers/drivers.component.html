@@ -3,6 +3,7 @@
 		<div fxLayout="column" fxLayoutGap="20px">
 			<div fxLayout="row wrap" fxLayoutAlign="space-between">
 				<mat-card-title>{{'DRIVERS.TITLE' | translate}}</mat-card-title>
+				<app-ng-dynamic-breadcrumb [bgColor]="'white'" [fontSize]="'14px'" style="height: 1px;"></app-ng-dynamic-breadcrumb>
 				<span fxLayoutGap="20px">
 					<button mat-button class="backButton" *ngIf="fleetManagerId" [routerLink]="['../']"
 						[attr.i18nKey]="'COMMON.ACTION.BACK'">

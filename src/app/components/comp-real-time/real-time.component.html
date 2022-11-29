@@ -3,6 +3,7 @@
 		<div fxLayout="column" fxLayoutGap="20px">
 			<div fxLayout="row wrap" fxLayoutAlign="space-between">
 				<mat-card-title>Real Time</mat-card-title>
+				<app-ng-dynamic-breadcrumb [bgColor]="'white'" [fontSize]="'14px'" style="height: 1px;"></app-ng-dynamic-breadcrumb>
 				<span *ngIf="fleetManager">
 					<button mat-button class="backButton" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
 						(click)="backFromRealTime()">
