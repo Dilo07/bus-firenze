@@ -16,6 +16,7 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 
 const routes: Routes = [
   { path: '', component: FleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
+  { path: 'real-time', loadChildren: () => import('../comp-real-time/real-time.module').then(m => m.RealTimeModule) },
   {
     path: 'form-Fleet',
     component: FormFleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }

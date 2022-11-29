@@ -25,14 +25,14 @@
 					</mat-cell>
 				</ng-container>
 				<ng-container matColumnDef="name">
-					<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.NAME' | translate}} </mat-header-cell>
+					<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.NAME' | translate}} </mat-header-cell>
 					<mat-cell *matCellDef="let element">
 						<span class="mobile-label">{{'FLEET-MANAGER.NAME' | translate}}</span>
 						{{element.name}}
 					</mat-cell>
 				</ng-container>
 				<ng-container matColumnDef="surname">
-					<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.SURNAME' | translate}} </mat-header-cell>
+					<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.SURNAME' | translate}} </mat-header-cell>
 					<mat-cell *matCellDef="let element">
 						<span class="mobile-label">{{'FLEET-MANAGER.SURNAME' | translate}}</span>
 						{{element.surname}}

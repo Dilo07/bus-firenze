@@ -3,7 +3,7 @@
 		<div fxLayout="column" fxLayoutGap="20px">
 			<div fxLayout="row wrap" fxLayoutAlign="space-between">
 				<mat-card-title>Real Time</mat-card-title>
-				<span fxFlex="20" *ngIf="fleetManager">
+				<span *ngIf="fleetManager">
 					<button mat-button class="backButton" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
 						(click)="backFromRealTime()">
 						{{'FLEET-MANAGER.BACK' | translate}}</button>

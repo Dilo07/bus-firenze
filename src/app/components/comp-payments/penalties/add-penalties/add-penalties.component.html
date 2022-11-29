@@ -40,7 +40,7 @@
             <mat-cell *matCellDef="let element" style="text-align: end;">
                 <button mat-icon-button matTooltip="{{'PENALTIES.ADD' | translate}}" [attr.i18nKey]="'PENALTIES.ADD'"
                     (click)="modalPenal(element.id, element.fleetManagerId)">
-                    <mat-icon style="color: #0066CC;">do_not_disturb</mat-icon>
+                    <mat-icon><span class="icon-edit"></span></mat-icon>
                 </button>
             </mat-cell>
         </ng-container>
