@@ -42,7 +42,7 @@ const MENUITEMS = [
     children: [], roles: [ROLES.MOVYON, ROLES.FLEETMNG]
   },
   {
-    state: 'manage', name: 'Manage', type: 'link', icon: 'manage_accounts',
+    state: 'manage', name: 'Fleet-manager', type: 'link', icon: 'manage_accounts',
     children: [], roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
   },
   {
