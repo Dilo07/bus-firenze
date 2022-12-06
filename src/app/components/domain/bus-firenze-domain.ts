@@ -1,5 +1,4 @@
 import { Coordinate } from '@npt/npt-map';
-import { type } from 'os';
 
 export class FleetManager {
   id: number;

@@ -4,7 +4,7 @@
 		<div fxLayout="column" fxLayoutGap="20px">
 			<ng-container *ngIf="!isValidFleet">
 				<div fxLayout="row wrap" fxLayoutAlign="space-between">
-					<mat-card-title fxLayout="row">{{'MENU.Fleet-manager' | translate}}</mat-card-title>
+					<mat-card-title fxLayout="row">{{'MENU.Fleet-manager' | translate}} </mat-card-title>
 					<span>
 						<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'"
 							[routerLink]="['form-Fleet']">

@@ -152,13 +152,15 @@ mat-card {
 
 /* slide toogle  */
 
-.mat-slide-toggle-bar {
-    background-color: #91D6AC !important;
-    height: 20px !important;
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #91D6AC;
 }
 
-.mat-slide-toggle-thumb {
-    background-color: white !important;
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: white;
+}
+
+.mat-slide-toggle-bar {
     height: 20px !important;
 }
 
