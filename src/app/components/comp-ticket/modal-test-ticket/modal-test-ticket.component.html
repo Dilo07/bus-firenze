@@ -86,9 +86,9 @@
                 {{'TICKET.EXTEND_TEXT' | translate}}
             </div>
             <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="15px">
-                <button mat-button class="backButton" [attr.i18nKey]="'COMMON.ACTION.CANCEL'"
+                <button mat-button class="backButton" [attr.i18nKey]="'COMMON.ACTION.DELETE'"
                     (click)="dialogRef.close(false);">
-                    {{'COMMON.ACTION.CANCEL' | translate}}</button>
+                    {{'COMMON.ACTION.DELETE' | translate}}</button>
                 <button mat-button class="actionButtons" [disabled]="!validTicket.valid"
                     [attr.i18nKey]="'COMMON.ACTION.SAVE'" (click)="addTicket()">
                     {{'COMMON.ACTION.SAVE' | translate}}

@@ -10,7 +10,7 @@ import moment from 'moment';
   styles: [
   ]
 })
-export class TableRealTimeComponent implements OnInit {
+export class TableRealTimeComponent {
   @Input() public vehicleTable: VehicleTripPersistence[];
   @Input() public fleetManagerId: number;
   public displayedColumns: string[] = ['OBUID', 'Start', 'End', 'ticketNumber', 'ticketExpiresAt', 'actions'];
@@ -18,8 +18,6 @@ export class TableRealTimeComponent implements OnInit {
   public nowPlus15 = moment(this.now).add(15, 'minutes').valueOf();
 
   constructor(public dialog: MatDialog) { }
-
-  ngOnInit(): void {}
 
   public viewDetails(obuId: string): void{
     this.dialog.open(ModalVehicleDetailsComponent, {

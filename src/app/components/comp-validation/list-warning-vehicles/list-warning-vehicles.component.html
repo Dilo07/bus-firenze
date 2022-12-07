@@ -1,7 +1,7 @@
-<div class="example-container">
+<div class="example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc">
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">id</span>
                 {{element.id}}
@@ -40,8 +40,7 @@
             </mat-cell>
         </ng-container>
 
-        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-            [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 </div>

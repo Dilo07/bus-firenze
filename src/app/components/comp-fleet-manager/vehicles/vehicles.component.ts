@@ -6,13 +6,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { FileViewer, ViewFileComponent, SnackBar } from '@npt/npt-template';
+import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { InstallerService } from 'src/app/services/installer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
-import { DepositType, DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from '../drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehicle.component';
@@ -28,18 +28,14 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
     opacity: 0.8;
   }
   @media(min-width: 1180px) {
-    .mat-column-id { max-width: 20%}
+    .mat-column-id { max-width: 10%}
     .mat-column-plate { max-width: 10%;}
-    .mat-column-nat { max-width: 5%}
+    .mat-column-nat { max-width: 10%}
     .mat-column-certificateId { max-width: 10%}
     .mat-column-euroClass { max-width: 10%;}
-    .mat-column-obuId { max-width: 15%;}
+    .mat-column-obuId { max-width: 20%;}
     .mat-column-consent { max-width: 10%;}
     .mat-column-actions { max-width: 20%; display: table-column;}
-  }
-
-  ::ng-deep .menu-color {
-    background: #E4F1F5;
   }
   .icon-assignment-grey:before {
     color: grey;
@@ -53,7 +49,6 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
 export class VehiclesComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(ViewFileComponent) viewFile: ViewFileComponent;
 
   public fleetManager: FleetManager;
   public vehicleLpn: string;
@@ -191,20 +186,35 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   }
 
   public viewCertificate(vehicleId: number, certificateId: number): void {
+    this.complete = false;
     this.subscription.push(this.vehicleService.getCertificateFile(vehicleId, certificateId)
-      .subscribe((data: HttpResponse<Blob>) => {
-        if (data.body.type === 'application/pdf') { // se è un pdf
-          const objectUrl = window.URL.createObjectURL(data.body);
-          const contentDispositionHeader = data.headers.get('Content-Disposition');
-          const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
-          this.src = { url: objectUrl, type: data.body.type, fileName: filename };
-        } else { // altrimenti se è un'immagine
-          const reader = new FileReader();
-          reader.readAsDataURL(data.body);
-          reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type, fileName: '' };
-          };
-        }
+      .subscribe({
+        next: (data: HttpResponse<Blob>) => {
+          if (data.body.type === 'application/pdf') { // se è un pdf
+            const objectUrl = window.URL.createObjectURL(data.body);
+            const contentDispositionHeader = data.headers.get('Content-Disposition');
+            const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
+            this.dialog.open(ViewFileModalComponent, {
+              width: '50%',
+              height: '90%',
+              autoFocus: false,
+              data: { url: objectUrl, type: data.body.type, fileName: filename }
+            });
+          } else { // altrimenti se è un'immagine
+            const reader = new FileReader();
+            reader.readAsDataURL(data.body);
+            reader.onload = () => {
+              this.dialog.open(ViewFileModalComponent, {
+                width: '50%',
+                height: '90%',
+                autoFocus: false,
+                data: { url: reader.result, type: data.body.type, fileName: '' }
+              });
+            };
+          }
+        },
+        error: () => this.complete = true,
+        complete: () => this.complete = true
       }));
   }
 

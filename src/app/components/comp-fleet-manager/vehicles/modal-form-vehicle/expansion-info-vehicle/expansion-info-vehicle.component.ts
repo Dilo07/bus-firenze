@@ -12,6 +12,10 @@ import { DocumentService } from 'src/app/services/document.service';
     text-decoration: underline;
     cursor: pointer;
   }
+  .mat-expansion-panel {
+    width: 97%;
+    background-color: #E4F1F5;
+  }
   `
   ]
 })

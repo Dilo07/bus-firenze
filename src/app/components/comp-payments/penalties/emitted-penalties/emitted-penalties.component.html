@@ -1,5 +1,5 @@
-<div fxLayout="column" fxLayoutGap="20px" style="margin-top: 2%;">
-    <form [formGroup]="formGroup" style="margin-bottom: 20px;">
+<div fxLayout="column" fxLayoutGap="20px">
+    <form [formGroup]="formGroup">
         <div fxLayout="row wrap" fxLayoutGap="20px">
             <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
                 <mat-label>{{'COMMON.DATE.RANGE' | translate}}</mat-label>
@@ -13,9 +13,10 @@
             </mat-form-field>
         </div>
     </form>
-    <mat-table multiTemplateDataRows [dataSource]="dataSource" class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc"
+        [style.display]="dataSource.data.length === 0 || dataSource.filteredData.length === 0 ? 'none' : '' ">
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span class="mobile-label">id</span>
                 {{element.id}}
@@ -54,12 +55,11 @@
             </mat-cell>
         </ng-container>
 
-        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-            [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">{{'VEHICLE.NO_DATA' | translate}}
-            </td>
-        </tr>
     </mat-table>
+    <mat-paginator style="margin-top: 20px;" [style.display]="dataSource.data.length === 0 || dataSource.filteredData.length === 0 ? 'none' : '' "
+        [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+    <div *ngIf="dataSource.data.length === 0 || dataSource.filteredData.length === 0 ">{{'VEHICLE.NO_DATA' | translate}}
+    </div>
 </div>

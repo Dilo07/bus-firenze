@@ -1,9 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FileViewer } from '@npt/npt-template';
+import { FileViewer, ViewFileModalComponent } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
@@ -33,6 +35,7 @@ import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-fir
 })
 export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   @Input() depositWarning: boolean;
   public dataSource = new MatTableDataSource<FleetManager>();
   public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile', 'mail'];
@@ -44,7 +47,8 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
 
   constructor(
     private fleetService: FleetManagerService,
-    private vehicleService: VehicleService
+    private vehicleService: VehicleService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -60,7 +64,7 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   public callFleetDeposit(): void {
     this.complete = false;
     this.fleetService.getFleetDeposit(this.depositWarning).subscribe({
-      next: fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator),
+      next: fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator, this.dataSource.sort = this.sort),
       error: () => this.complete = true,
       complete: () => this.complete = true
     });
@@ -81,12 +85,22 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
             const objectUrl = window.URL.createObjectURL(data.body);
             const contentDispositionHeader = data.headers.get('Content-Disposition');
             const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
-            this.src = { url: objectUrl, type: data.body.type, fileName: filename };
+            this.dialog.open(ViewFileModalComponent, {
+              width: '50%',
+              height: '90%',
+              autoFocus: false,
+              data: { url: objectUrl, type: data.body.type, fileName: filename }
+            });
           } else { // altrimenti se è un'immagine
             const reader = new FileReader();
             reader.readAsDataURL(data.body);
             reader.onload = () => {
-              this.src = { url: reader.result, type: data.body.type, fileName: '' };
+              this.dialog.open(ViewFileModalComponent, {
+                width: '50%',
+                height: '90%',
+                autoFocus: false,
+                data: { url: reader.result, type: data.body.type, fileName: '' }
+              });
             };
           }
         },
@@ -105,12 +119,22 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
             const objectUrl = window.URL.createObjectURL(data.body);
             const contentDispositionHeader = data.headers.get('Content-Disposition');
             const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
-            this.src = { url: objectUrl, type: data.body.type, fileName: filename };
+            this.dialog.open(ViewFileModalComponent, {
+              width: '50%',
+              height: '90%',
+              autoFocus: false,
+              data: { url: objectUrl, type: data.body.type, fileName: filename }
+            });
           } else { // altrimenti se è un'immagine
             const reader = new FileReader();
             reader.readAsDataURL(data.body);
             reader.onload = () => {
-              this.src = { url: reader.result, type: data.body.type, fileName: '' };
+              this.dialog.open(ViewFileModalComponent, {
+                width: '50%',
+                height: '90%',
+                autoFocus: false,
+                data: { url: reader.result, type: data.body.type, fileName: '' }
+              });
             };
           }
         },

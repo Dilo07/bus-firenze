@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SnackBar } from '@npt/npt-template';
@@ -23,10 +24,15 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
     .mat-column-type { max-width: 20%}
     .mat-column-actions { max-width: 20%; display: table-column; text-align: end;}
   }
+  .icon-assignment-grey:before {
+    color: grey;
+    font-weight: bold;
+  }
   `
   ]
 })
 export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
+  @ViewChild(MatSort) sort: MatSort;
   @Input() fleet: FleetManager;
   @Input() disableViewPdf: boolean;
   @Output() public callRefreshTableFleet = new EventEmitter();
@@ -85,6 +91,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
     this.subscription.push(this.vehicleService.getVehicleDeposit(true, this.fleet.id, '', true).subscribe(
       vehicles => {
         this.dataSource.data = vehicles;
+        this.dataSource.sort = this.sort;
         if (this.dataSource.data.length === 0) {
           this.callRefreshTableFleet.emit();
         }

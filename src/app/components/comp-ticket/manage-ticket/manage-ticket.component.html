@@ -19,7 +19,7 @@
         </mat-form-field>
     </form>
     <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-    <div class="mat-elevation-z8 example-container">
+    <div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
         <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
             <ng-container matColumnDef="expandButton">
                 <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
@@ -28,9 +28,9 @@
                     <button mat-icon-button matTooltip="{{'TICKET.DETAILS' | translate}}"
                         [attr.i18nKey]="'TICKET.DETAILS'"
                         (click)="expandedElement = expandedElement === element ? null : element">
-                        <mat-icon style="color: grey">
-                            {{expandedElement &&
-                            expandedElement.ticketId === element.ticketId ? 'expand_more' : 'chevron_right' }}
+                        <mat-icon>
+                            <span
+                                [class]="expandedElement && expandedElement.ticketId === element.ticketId ? 'icon-down_arrow' : 'icon-right_arrow'"></span>
                         </mat-icon>
                     </button>
                 </mat-cell>
@@ -143,8 +143,7 @@
                 </mat-cell>
             </ng-container>
 
-            <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-                [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+            <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
                 [class.example-expanded-row]="expandedElement === row"></mat-row>
             <mat-row [style.display]="expandedElement && expandedElement.ticketId === row.ticketId ? '' : 'none'"

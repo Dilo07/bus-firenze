@@ -1,4 +1,3 @@
-<mat-card-title>{{'BILLING_ITEMS.DETAILS' | translate}} - Gop Id {{gopId}}</mat-card-title>
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="lpn">
         <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
@@ -35,7 +34,6 @@
             {{element.price}} €
         </mat-cell>
     </ng-container>
-    <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
-        [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+    <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
 </mat-table>

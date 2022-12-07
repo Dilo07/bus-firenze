@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FileViewer, IAuthenticationService, SessionService, SnackBar } from '@npt/npt-template';
+import { FileViewer, IAuthenticationService, SessionService, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
@@ -171,12 +171,22 @@ export class FleetManagerComponent implements OnInit {
           const URL = window.URL.createObjectURL(data.body);
           const contentDispositionHeader = data.headers.get('Content-Disposition');
           const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
-          this.src = { url: URL, type: data.body.type, fileName: filename };
+          this.dialog.open(ViewFileModalComponent, {
+            width: '50%',
+            height: '90%',
+            autoFocus: false,
+            data: { url: URL, type: data.body.type, fileName: filename }
+          });
         } else { // altrimenti se è un'immagine
           const reader = new FileReader();
           reader.readAsDataURL(data.body);
           reader.onload = () => {
-            this.src = { url: reader.result, type: data.body.type, fileName: '' };
+            this.dialog.open(ViewFileModalComponent, {
+              width: '50%',
+              height: '90%',
+              autoFocus: false,
+              data: { url: reader.result, type: data.body.type, fileName: '' }
+            });
           };
         }
       },

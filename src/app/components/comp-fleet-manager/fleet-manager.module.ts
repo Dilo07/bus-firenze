@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NptMapModule } from '@npt/npt-map';
-import { DebounceClickModule, MaterialModule, SharedLibComponentsModule } from '@npt/npt-template';
+import { DebounceClickModule, MaterialModule, ViewFileComponentsModule } from '@npt/npt-template';
 import { MatSelectFilterModule } from 'mat-select-filter';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes.module';
 import { Ng2telinputDirective } from '../directive/ng2telinput.directive';
@@ -58,7 +58,7 @@ import { FormFieldPersonComponent } from './form-fleet-manager/field-person/form
   ],
   imports: [
     CommonModule,
-    SharedLibComponentsModule,
+    ViewFileComponentsModule,
     HttpClientModule,
     MaterialModule,
     DebounceClickModule,
@@ -71,8 +71,6 @@ import { FormFieldPersonComponent } from './form-fleet-manager/field-person/form
     FleetManagerRoutingModule,
     PipesModule
   ],
-  exports: [
-    FleetManagerComponent
-  ]
+  exports: [FleetManagerComponent]
 })
 export class FleetManagerModule { }
