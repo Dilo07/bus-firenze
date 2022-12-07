@@ -34,7 +34,6 @@
             {{element.price}} €
         </mat-cell>
     </ng-container>
-    <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"
-        [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+    <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
 </mat-table>

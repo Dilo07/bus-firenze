@@ -1,9 +1,8 @@
-<lib-view-file *ngIf="src.type" [file]="src"></lib-view-file>
 <mat-card>
 	<mat-card-content fxLayout="column" fxLayoutGap="20px">
 		<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-		<div class="mat-elevation-z8 example-container">
-			<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows>
+		<div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
+			<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows matSortActive="id" matSortDirection="asc">
 				<ng-container matColumnDef="expandButton">
 					<mat-header-cell *matHeaderCellDef></mat-header-cell>
 					<mat-cell *matCellDef="let element">
@@ -25,14 +24,14 @@
 					</mat-cell>
 				</ng-container>
 				<ng-container matColumnDef="name">
-					<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.NAME' | translate}} </mat-header-cell>
+					<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.NAME' | translate}} </mat-header-cell>
 					<mat-cell *matCellDef="let element">
 						<span class="mobile-label">{{'FLEET-MANAGER.NAME' | translate}}</span>
 						{{element.name}}
 					</mat-cell>
 				</ng-container>
 				<ng-container matColumnDef="surname">
-					<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.SURNAME' | translate}} </mat-header-cell>
+					<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.SURNAME' | translate}} </mat-header-cell>
 					<mat-cell *matCellDef="let element">
 						<span class="mobile-label">{{'FLEET-MANAGER.SURNAME' | translate}}</span>
 						{{element.surname}}
@@ -81,8 +80,7 @@
 						</div>
 					</mat-cell>
 				</ng-container>
-				<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-					[style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+				<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
 				<mat-row *matRowDef="let element; columns: displayedColumns;" class="hover-row">
 				</mat-row>
 				<mat-row [style.display]="expandedElement && expandedElement.id === row.id ? '' : 'none'"

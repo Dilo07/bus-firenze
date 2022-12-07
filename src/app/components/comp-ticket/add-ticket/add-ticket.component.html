@@ -1,8 +1,6 @@
 <div fxLayout="column" fxLayoutGap="20px" style="margin-top: 20px !important;">
-    <mat-card-title fxLayout="row">{{'TICKET.ADD' | translate}}
-    </mat-card-title>
     <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-    <div class="mat-elevation-z8 example-container">
+    <div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
         <mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
@@ -30,8 +28,7 @@
                 </mat-cell>
             </ng-container>
 
-            <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-                [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+            <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
         </mat-table>
     </div>

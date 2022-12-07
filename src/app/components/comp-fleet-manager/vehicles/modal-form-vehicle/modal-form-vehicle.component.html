@@ -4,13 +4,14 @@
             <mat-card-title>
                 {{ (data.vehicle ? 'VEHICLE.EDIT' : 'VEHICLE.NEW') | translate }}
             </mat-card-title>
-            <button mat-icon-button (click)="helper = helper === 'on' ? 'off' : 'on'">
+            <!-- <button mat-icon-button (click)="helper = helper === 'on' ? 'off' : 'on'">
                 <mat-icon><span [ngClass]="helper === 'on' ? 'icon-delete' : 'icon-info'"></span></mat-icon>
-            </button>
+            </button> -->
         </div>
-        <div [@slideInOut]="helper">
+        <!-- <div [@slideInOut]="helper">
             <app-expansion-info-vehicle></app-expansion-info-vehicle>
-        </div>
+        </div> -->
+        <app-expansion-info-vehicle></app-expansion-info-vehicle>
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
         <form [formGroup]="formGroup" fxLayout="column" fxLayoutGap="10px">
             <!-- selezione contratto noleggio o acquisto 
@@ -125,9 +126,9 @@
                 <p style="font-size: 12px;">{{'VEHICLE.TEXTLIB' | translate}}</p>
             </div>
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-                <button mat-button class="backButton" [attr.i18nKey]="'COMMON.ACTION.BACK'"
+                <button mat-button class="backButton" [attr.i18nKey]="'COMMON.ACTION.CANCEL'"
                     (click)="dialogRef.close(false);">
-                    {{'COMMON.ACTION.BACK' | translate}}</button>
+                    {{'COMMON.ACTION.CANCEL' | translate}}</button>
                 <button *ngIf="!data.vehicle" mat-button libDebounceClick class="actionButtons"
                     [disabled]="formGroup.invalid" [attr.i18nKey]="'COMMON.ACTION.SAVE'" (debounceClick)="addVehicle()">
                     {{'COMMON.ACTION.SAVE' | translate}}</button>

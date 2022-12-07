@@ -78,6 +78,12 @@ mat-card {
     border-radius: 10px;
 }
 
+/* mat-form-field hover */
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(0, 0, 0, 0.12)
+}
+
 /* paginator on mobile */
 
 @media(max-width: 470px) {
@@ -87,10 +93,6 @@ mat-card {
 }
 
 /* npt-template style */
-
-/* .topbar {
-    background-color: #C30C26 !important;
-} */
 
 /* snackbar */
 
@@ -150,13 +152,15 @@ mat-card {
 
 /* slide toogle  */
 
-.mat-slide-toggle-bar {
-    background-color: #91D6AC !important;
-    height: 20px !important;
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #91D6AC;
 }
 
-.mat-slide-toggle-thumb {
-    background-color: white !important;
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: white;
+}
+
+.mat-slide-toggle-bar {
     height: 20px !important;
 }
 

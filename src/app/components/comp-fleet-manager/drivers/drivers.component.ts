@@ -1,22 +1,25 @@
+import { MediaMatcher } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { Driver } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from './modal-association-drivers-vehicles/association-drivers-vehicles.component';
-import { FormDriverComponent } from './modal-form-driver/form-driver.component';
-import { SnackBar } from '@npt/npt-template';
 
 @Component({
   selector: 'app-drivers',
   templateUrl: './drivers.component.html',
   styles: [`
+  ::ng-deep .menu-color {
+    background: #E4F1F5;
+  }
   @media(min-width: 1180px) {
     .mat-column-name { max-width: 20%;}
     .mat-column-surname { max-width: 20%;}
@@ -39,14 +42,17 @@ export class DriversComponent implements OnInit, OnDestroy {
   public complete = true;
 
   private subscription: Subscription[] = [];
+  private desktopQuery: MediaQueryList;
 
   constructor(
     private router: Router,
     private dialog: MatDialog,
     private snackBar: SnackBar,
     private driverService: DriverService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private media: MediaMatcher) {
     this.fleetManagerId = this.router.getCurrentNavigation()?.extras.state?.fleetManagerId as number;
+    this.desktopQuery = this.media.matchMedia('(min-width: 768px)'); // se è un tablet o schermo grande
   }
 
   ngOnInit(): void {
@@ -79,8 +85,8 @@ export class DriversComponent implements OnInit, OnDestroy {
 
   public deleteDriver(idDriver: number): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
-      width: '50%',
-      height: '30%',
+      width: this.desktopQuery.matches ? '30%' : '100%',
+      height: this.desktopQuery.matches ? '20%' : '30%',
       data: { text: 'DRIVERS.DELETE_CONFIRM' },
       autoFocus: false
     });
@@ -103,7 +109,7 @@ export class DriversComponent implements OnInit, OnDestroy {
         vehicles => {
           const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
             width: '80%',
-            height: '80%',
+            height: this.desktopQuery.matches ? '60%' : '80%',
             data: { driverVehicle: vehicles, idDriver: idDriver, fleetManagerId: this.fleetManagerId },
             autoFocus: false
           });

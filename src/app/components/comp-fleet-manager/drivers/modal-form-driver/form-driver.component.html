@@ -54,8 +54,8 @@
         </form>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
             <button mat-button class="backButton" *ngIf="!roleDriver" [routerLink]="['../drivers']"
-                [state]="{fleetManagerId: fleetManagerId}" [attr.i18nKey]="'FLEET-MANAGER.BACK'">
-                {{'FLEET-MANAGER.BACK' | translate}}
+                [state]="{fleetManagerId: fleetManagerId}" [attr.i18nKey]="'COMMON.ACTION.CANCEL'">
+                {{'COMMON.ACTION.CANCEL' | translate}}
             </button>
             <button *ngIf="!driver" mat-button libDebounceClick class="actionButtons" [disabled]="formGroup.invalid"
                 [attr.i18nKey]="'FLEET-MANAGER.SAVE'" (debounceClick)="addDriver()">

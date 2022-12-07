@@ -2,7 +2,7 @@
     <mat-card-title fxLayout="row" fxLayoutAlign="center center" style="padding-top: 1%;">
         {{'STATISTIC.TABLE_ROUTES' | translate}}</mat-card-title>
     <mat-card-content>
-        <div class="mat-elevation-z8 example-container">
+        <div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
             <mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="start">
                     <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'STATISTIC.START' | translate}}
@@ -13,7 +13,7 @@
                         {{element.start | date: 'HH:mm:ss'}}
                     </mat-cell>
                 </ng-container>
-    
+
                 <ng-container matColumnDef="end">
                     <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'STATISTIC.END' | translate}}
                     </mat-header-cell>
@@ -23,7 +23,7 @@
                         {{element.end | date: 'HH:mm:ss'}}
                     </mat-cell>
                 </ng-container>
-    
+
                 <ng-container matColumnDef="trip length">
                     <mat-header-cell *matHeaderCellDef> {{'STATISTIC.TRIP_LENGHT' | translate}} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
@@ -31,31 +31,33 @@
                         {{element.tripLength}} {{'STATISTIC.METERS' | translate}}
                     </mat-cell>
                 </ng-container>
-    
+
                 <ng-container matColumnDef="duration">
                     <mat-header-cell *matHeaderCellDef> {{'STATISTIC.DURATION' | translate}} </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> 
+                    <mat-cell *matCellDef="let element">
                         <span class="mobile-label">{{'STATISTIC.DURATION' | translate}}</span>
-                        {{element.duration * 1000 | date : 'HH:mm:ss' : 'UTC'}} </mat-cell>
+                        {{element.duration * 1000 | date : 'HH:mm:ss' : 'UTC'}}
+                    </mat-cell>
                 </ng-container>
-    
+
                 <ng-container matColumnDef="type">
-                    <mat-header-cell *matHeaderCellDef [style.display]="!viewOuter ? 'none' : '' "> type </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef [style.display]="!viewOuter ? 'none' : '' "> type
+                    </mat-header-cell>
                     <mat-cell *matCellDef="let element" [style.display]="!viewOuter ? 'none' : '' ">
                         <span class="mobile-label">type</span>
                         {{element.type}}
                     </mat-cell>
                 </ng-container>
-    
+
                 <ng-container matColumnDef="obuId">
                     <mat-header-cell *matHeaderCellDef> obuId </mat-header-cell>
                     <mat-cell *matCellDef="let element">
                         <span class="mobile-label">obuId</span>
-                        {{element.obuId}} </mat-cell>
+                        {{element.obuId}}
+                    </mat-cell>
                 </ng-container>
-    
-                <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"
-                    [style.display]="dataSource.data.length === 0 ? 'none' : '' "></mat-header-row>
+
+                <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
         </div>
