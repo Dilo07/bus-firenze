@@ -1,7 +1,6 @@
 <mat-card>
 	<mat-card-content>
-		<lib-view-file [file]="src"></lib-view-file>
-		<div fxLayout="column" fxLayoutGap="20px" (click)="viewFile.close()">
+		<div fxLayout="column" fxLayoutGap="20px">
 			<div fxLayout="row wrap" fxLayoutAlign="space-between">
 				<mat-card-title>{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 				<app-ng-dynamic-breadcrumb [bgColor]="'white'" [fontSize]="'14px'" style="height: 1px;"></app-ng-dynamic-breadcrumb>
