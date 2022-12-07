@@ -3,7 +3,6 @@
 		<div fxLayout="column" fxLayoutGap="20px">
 			<div fxLayout="row wrap" fxLayoutAlign="space-between">
 				<mat-card-title>{{'VEHICLE.TITLE' | translate}}</mat-card-title>
-				<app-ng-dynamic-breadcrumb [bgColor]="'white'" [fontSize]="'14px'" style="height: 1px;"></app-ng-dynamic-breadcrumb>
 				<span fxLayoutGap="20px">
 					<button mat-button class="backButton" *ngIf="fleetManager" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
 						(click)="backToValidVehicle()">
