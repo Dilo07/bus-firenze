@@ -1,26 +1,26 @@
 <mat-card>
+	<div fxLayout="column" fxLayoutGap="20px" *ngIf="!isValidFleet">
+		<div fxLayout="row wrap" fxLayoutAlign="space-between">
+			<mat-card-title fxLayout="row">{{'MENU.Fleet-manager' | translate}} </mat-card-title>
+			<span>
+				<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'"
+					[routerLink]="['form-Fleet']">
+					{{'FLEET-MANAGER.NEW' | translate}}
+				</button>
+			</span>
+		</div>
+		<form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
+			<mat-form-field appearance="outline" fxFlex="100">
+				<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
+				<input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
+				<button matPrefix mat-icon-button (click)="refreshTable()">
+					<mat-icon>search</mat-icon>
+				</button>
+			</mat-form-field>
+		</form>
+	</div>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<ng-container *ngIf="!isValidFleet">
-				<div fxLayout="row wrap" fxLayoutAlign="space-between">
-					<mat-card-title fxLayout="row">{{'MENU.Fleet-manager' | translate}} </mat-card-title>
-					<span>
-						<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'"
-							[routerLink]="['form-Fleet']">
-							{{'FLEET-MANAGER.NEW' | translate}}
-						</button>
-					</span>
-				</div>
-				<form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
-					<mat-form-field appearance="outline" fxFlex="100">
-						<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
-						<input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
-						<button matPrefix mat-icon-button (click)="refreshTable()">
-							<mat-icon>search</mat-icon>
-						</button>
-					</mat-form-field>
-				</form>
-			</ng-container>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<div class="mat-elevation-z8 example-container"
 				[style.display]="fleetManagerList.length === 0 ? 'none' : ''">

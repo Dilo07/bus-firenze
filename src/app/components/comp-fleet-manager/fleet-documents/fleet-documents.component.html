@@ -1,14 +1,14 @@
 <mat-card>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-card-title>{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
+        </mat-card-title>
+        <span>
+            <button mat-button class="backButton" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.BACK'">
+                {{'COMMON.ACTION.BACK' | translate}}
+            </button>
+        </span>
+    </div>
     <mat-card-content fxLayout="column" fxLayoutAlign="center">
-        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-            <mat-card-title>{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
-            </mat-card-title>
-            <span>
-                <button mat-button class="backButton" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.BACK'">
-                    {{'COMMON.ACTION.BACK' | translate}}
-                </button>
-            </span>
-        </div>
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
         <span fxLayoutAlign="center">
             <mat-list role="list">

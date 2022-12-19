@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -12,25 +11,6 @@ import { VehicleService } from 'src/app/services/vehicle.service';
   selector: 'app-modal-form-vehicle',
   templateUrl: './modal-form-vehicle.component.html',
   styles: [],
-  animations: [
-    trigger('slideInOut', [
-      state(
-        'on',
-        style({
-          opacity: 1
-        })
-      ),
-      state(
-        'off',
-        style({
-          height: '0',
-          opacity: 0
-        })
-      ),
-      transition('on => off', animate('400ms')),
-      transition('off => on', animate('400ms')),
-    ]),
-  ],
 })
 export class ModalFormVehicleComponent implements OnInit {
   public nations = worldNations;
