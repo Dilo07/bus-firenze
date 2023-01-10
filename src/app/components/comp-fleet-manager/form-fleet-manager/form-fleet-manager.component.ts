@@ -340,7 +340,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         }
       } else if (userType === this.fleetType.ente) {
-        if ((fiscalCode.charAt(0) === '8' || fiscalCode.charAt(0) === '9') && fiscalCode.length === 11) {
+        if (fiscalCode.length === 11) {
           this.formGroup.controls.ctrlCF.setErrors(null);
         } else {
           this.formGroup.controls.ctrlCF.setErrors({ invalid: true });

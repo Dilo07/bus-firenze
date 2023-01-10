@@ -138,7 +138,7 @@
                             *ngIf="(userSel === fleetType.aziendaPrivata || userSel === fleetType.pubblicaAmm) && formGroup.get('ctrlNat').value === 'IT'">
                             <mat-label>
                                 {{(userSel === fleetType.aziendaPrivata ? 'FLEET-MANAGER.DESTCODE' :
-                                'FLEET-MANAGER.IPACODE') | translate}}
+                                'FLEET-MANAGER.UNIQUECODE') | translate}}
                             </mat-label>
                             <input matInput type="text" formControlName="ctrlDest"
                                 [required]="(userSel === fleetType.aziendaPrivata || userSel === fleetType.pubblicaAmm) && formGroup.get('ctrlNat').value === 'IT'"
@@ -146,7 +146,7 @@
                                 [maxlength]="userSel === fleetType.aziendaPrivata ? 7 : userSel === fleetType.pubblicaAmm ? 6 : null"
                                 [readonly]="data && roleFleetManager">
                             <mat-error>{{(userSel === fleetType.aziendaPrivata ?
-                                'FLEET-MANAGER.INSERT_DEST' : 'FLEET-MANAGER.INSERT_IPA') | translate}}</mat-error>
+                                'FLEET-MANAGER.INSERT_DEST' : 'FLEET-MANAGER.INSERT_UNIQUECODE') | translate}}</mat-error>
                         </mat-form-field>
                     </div>
                     <div fxLayout="row wrap" fxLayoutGap="20px">
