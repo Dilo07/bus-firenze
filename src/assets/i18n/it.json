@@ -132,7 +132,9 @@
         "NAME": "Nome",
         "SURNAME": "Cognome",
         "FISCALCODE": "Codice fiscale",
+        "FISCALCODE_VERIFY": "Codice fiscale verificato",
         "VAT_NUMBER": "Partita Iva",
+        "VAT_VERIFY": "Partita iva verificata",
         "COMPANY_NAME": "Ragione Sociale",
         "UNIQUECODE": "Codice univoco",
         "DESTCODE": "Codice destinatario",
@@ -198,7 +200,7 @@
         "CONTRACT": "Contratto",
         "BUYING": "Acquisto",
         "RENT": "Noleggio",
-        "FORM-INFO":"Istruzioni per la registrazione di un nuovo veicolo",
+        "FORM-INFO": "Istruzioni per la registrazione di un nuovo veicolo",
         "STEP-1": "compila il form presente in questa pagina.",
         "STEP-2": "scansionare il libretto di circolazione e caricarlo (obbligatorio) mediante il pulsante ",
         "STEP-3": "effettua il pagamento del deposito cauzionale e carica la ricevuta mediante il pulsante ",
@@ -399,7 +401,7 @@
         "REMOVE_CONFIRM": "Sei sicuro di voler terminare questo ticket?",
         "REMOVE_SUCCESS": "Ticket terminato correttamente",
         "VIEW_HISTORY": "Vedi storico",
-        "HISTORY" : "Storico",
+        "HISTORY": "Storico",
         "ACTIVE": "Ticket attivi",
         "MANAGE": "Gestisci ticket",
         "LPN": "Targa",
@@ -457,7 +459,7 @@
         "EMITTED": "Penali emesse",
         "DATE": "Seleziona una data",
         "SELECT": "Seleziona il tipo di penale da applicare",
-        "SUCCESS":"Penale aggiunta con successo",
+        "SUCCESS": "Penale aggiunta con successo",
         "SEARCH": "Ricerca per targa",
         "TYPE": "Tipo di penale",
         "PENAL_DATE": "Data penale",
@@ -592,6 +594,10 @@
         "penalty": {
             "add": "Errore nell'aggiunta penale",
             "duplicate": "non si possono aggiungere due penali dello stesso tipo sullo stesso veicolo lo stesso giorno"
+        },
+        "vies": {
+            "invalid": "Partita iva non valida, vuoi comunque inserire questo valore?",
+            "unavailable": "Servizio di verifica partita iva non valido, vuoi comunque inserire questo valore?"
         },
         "ines": {
             "request": "Servizi ines non raggiungibili",

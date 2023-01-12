@@ -19,6 +19,7 @@ export class FleetManager {
   country: string;
   extraUE: boolean;
   codeDest: string;
+  failedCheck: boolean;
   documents: FleetDocument[];
 }
 

@@ -9,15 +9,7 @@
         <mat-card-title *ngIf="register">
             {{'FLEET-MANAGER.REGISTRATION' | translate}}
         </mat-card-title>
-        <!-- <button mat-icon-button (click)="helper = helper === 'on' ? 'off' : 'on'">
-            <mat-icon>
-                <span [ngClass]="helper === 'on' ? 'icon-delete' : 'icon-info'"></span>
-            </mat-icon>
-        </button> -->
     </div>
-    <!-- <div [@slideInOut]="helper">
-        <app-expansion-info (callForm)="downloadTemplate()"></app-expansion-info> component expansion-info
-    </div> -->
     <app-expansion-info (callForm)="downloadTemplate()"></app-expansion-info> <!-- component expansion-info -->
     <mat-progress-bar mode="indeterminate" *ngIf="!completeUp"></mat-progress-bar>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">

@@ -132,7 +132,9 @@
         "NAME": "Name",
         "SURNAME": "Surname",
         "FISCALCODE": "Fiscale code",
+        "FISCALCODE_VERIFY": "Fiscal code verified",
         "VAT_NUMBER": "VAT Number",
+        "VAT_VERIFY": "Vat number verify",
         "COMPANY_NAME": "Company Name",
         "UNIQUECODE": "Unique code",
         "DESTCODE": "Receiver code",
@@ -198,7 +200,7 @@
         "CONTRACT": "Contract",
         "BUYING": "Buying",
         "RENT": "Rent",
-        "FORM-INFO":"Instruction for new vehicle registration",
+        "FORM-INFO": "Instruction for new vehicle registration",
         "STEP-1": "fill out the form on this page.",
         "STEP-2": "scan the vehicle registration document and upload it (mandatory) using the button ",
         "STEP-3": "make the payment of the security deposit and upload the receipt using the button ",
@@ -399,7 +401,7 @@
         "REMOVE_CONFIRM": "Are you sure to terminate this ticket?",
         "REMOVE_SUCCESS": "Ticket correctly terminated",
         "VIEW_HISTORY": "View history",
-        "HISTORY" : "History",
+        "HISTORY": "History",
         "ACTIVE": "Active ticket",
         "MANAGE": "Manage ticket",
         "LPN": "Plate",
@@ -457,7 +459,7 @@
         "EMITTED": "Emitted penalties",
         "DATE": "Select a date",
         "SELECT": "Select the penale tpye to add",
-        "SUCCESS":"Penal added successfully",
+        "SUCCESS": "Penal added successfully",
         "SEARCH": "Search for plate",
         "TYPE": "Penal type",
         "PENAL_DATE": "Penal date",
@@ -592,6 +594,10 @@
         "penalty": {
             "add": "Error in add penalty",
             "duplicate": "Duplicate penalty for the vehicle"
+        },
+        "vies": {
+            "invalid": "Invalid vat number, do you still want to enter this value?",
+            "unavailable": "Service vat verify unavailable,  do you still want to enter this value?"
         },
         "ines": {
             "request": "Ines service unavailable",
