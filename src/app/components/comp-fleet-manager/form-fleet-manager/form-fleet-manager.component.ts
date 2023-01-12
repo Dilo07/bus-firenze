@@ -44,7 +44,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public completeUp = true;
   public completeDown = true;
 
-  private failedCheck = false;
+  private failedCheck: boolean;
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
 
@@ -429,7 +429,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     fleetManager.cap = this.formGroup.get('ctrlCAP').value;
     fleetManager.country = this.formGroup.get('ctrlNat').value;
     fleetManager.extraUE = !this.isEuropeNat;
-    fleetManager.failedCheck = this.failedCheck;
+    // se è un edit e non è stata modificata la p.iva o c.f. lascia l'esistente altrimenti prende il valore di failedCheck
+    fleetManager.failedCheck = this.data ? (this.failedCheck === undefined ? this.data.failedCheck : this.failedCheck) : this.failedCheck;
     fleetManager.contacts = [];
 
     const office = { code: 2, value: this.formGroup.get('ctrlOffice').value };

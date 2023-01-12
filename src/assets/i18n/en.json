@@ -181,6 +181,7 @@
         "CHANGE_COMMERCEREG": "Edit commerce registration",
         "SUCCESS_COMMERCEREG": "Commerce registration upload correctly",
         "VERIFYCF": "Verify fiscal code",
+        "VERIFYVAT": "Verify vat number",
         "USERTYPE": "Company type",
         "TEXTFILE": "* To creare the fleet manager you need attach the requested file",
         "SELECT": "Select a Fleet Manager",

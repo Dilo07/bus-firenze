@@ -181,6 +181,7 @@
         "CHANGE_COMMERCEREG": "Modifica visura camerale",
         "SUCCESS_COMMERCEREG": "Visura camerale caricata correttamente",
         "VERIFYCF": "Verifica codice fiscale",
+        "VERIFYVAT": "Verifica p.iva",
         "USERTYPE": "Tipo di azienda",
         "TEXTFILE": "* Per creare il fleet manager è necessario allegare tutti i file richiesti",
         "SELECT": "Seleziona un Fleet Manager",
