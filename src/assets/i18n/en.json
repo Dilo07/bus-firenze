@@ -321,7 +321,9 @@
         "UPLOAD_FILE": "Upload file",
         "UPLOAD_SUCCESS": "File uploaded correctly",
         "ATTENTION_PLATE1": "Attention: Will be remove the vehicle with plate",
-        "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number."
+        "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number.",
+        "TEST_FAIL": "Test fail",
+        "TEST_PASS": "Test pass"
     },
     "REAL-TIME": {
         "NOT-FOUND": "Not found",
