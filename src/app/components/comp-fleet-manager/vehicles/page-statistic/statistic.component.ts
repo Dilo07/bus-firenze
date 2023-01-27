@@ -99,7 +99,7 @@ export class StatisticComponent implements OnInit {
     });
 
     this.mapChild.changeFeatureColorPointEvent('click', [FirenzeMapUtils.layerEnum.LINE_STATISTICVEHICLE],
-      FirenzeMapUtils.style.SECTION_LINKS, FirenzeMapUtils.style.SECTION_LINKS_LIGHT);
+      FirenzeMapUtils.style.SECTION_LINKS_GREEN, FirenzeMapUtils.style.SECTION_LINKS_LIGHT);
 
     this.mapChild.zoomToLayer(FirenzeMapUtils.layerEnum.LINE_STATISTICVEHICLE, 10);
   }
