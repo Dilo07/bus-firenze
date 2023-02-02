@@ -99,6 +99,12 @@
 						<mat-cell *matCellDef="let element" [style.display]="isValidFleet ? '' : 'none'">
 							<span class="mobile-label">{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</span>
 							{{element.pIva}}
+							<a matSuffix mat-icon-button
+								href="https://telematici.agenziaentrate.gov.it/VerificaPIVA/Scegli.do?parameter=verificaPiva"
+								target="_blank" *ngIf="element.failedCheck" [attr.i18nKey]="'FLEET-MANAGER.VERIFYVAT'">
+								<mat-icon style="color: #eed202;"
+									matTooltip="{{'FLEET-MANAGER.VERIFYVAT' | translate }}">warning</mat-icon>
+							</a>
 						</mat-cell>
 					</ng-container>
 
@@ -112,10 +118,10 @@
 							{{element.fiscalCode}}
 							<a matSuffix mat-icon-button
 								href="https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCf"
-								target="_blank" *ngIf="element.companyType === 'ENTE'"
+								target="_blank" *ngIf="element.companyType === 'ENTE' || element.failedCheck"
 								[attr.i18nKey]="'FLEET-MANAGER.VERIFYCF'">
-								<mat-icon style="color: #0066CC;"
-									matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">verified_user</mat-icon>
+								<mat-icon style="color: #eed202;"
+									matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">warning</mat-icon>
 							</a>
 						</mat-cell>
 					</ng-container>

@@ -10,6 +10,7 @@ import { LiveStreamService } from 'src/app/services/live-stream.service';
 import { FirenzeMapUtils } from 'src/app/shared/utils/map/Firenze-map.utils';
 import { TIMEREFRESH } from '../domain/bus-firenze-constants';
 import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
+import GeoJSON from 'ol/format/GeoJSON';
 
 @Component({
   selector: 'app-real-time',
@@ -30,7 +31,7 @@ export class RealTimeComponent {
   public layersPopup = [FirenzeMapUtils.layerEnum.POINT_REAL_TIME];
 
   private subscription: Subscription[] = [];
-  private geometry: Geometry[] = [];
+  private geometry: Geometry[] | GeoJSON[] = [];
   private interval: any;
   private map: Map;
 
@@ -96,10 +97,7 @@ export class RealTimeComponent {
 
   private drawGeom(): void {
     this.geometry.forEach(geom => {
-      geom.coordinates.forEach(cord => {
-        const geoJson = this.createGeoJSON({ coordinates: [cord] });
-        this.mapChild.viewGeometry(geoJson, FirenzeMapUtils.layerEnum.CHARGE_POLYGON, FirenzeMapUtils.style.POLYGON_SELECTOR);
-      });
+      this.mapChild.viewGeometry(geom, FirenzeMapUtils.layerEnum.CHARGE_POLYGON, FirenzeMapUtils.style.POLYGON_SELECTOR);
     });
     this.mapChild.zoomToLayer(FirenzeMapUtils.layerEnum.CHARGE_POLYGON, 12);
   }
@@ -208,25 +206,6 @@ export class RealTimeComponent {
     );
 
     MapUtils.Control.SetControls(this.map, [activeVehicle, warningVehicle, errorVehicle]);
-  }
-
-  private createGeoJSON(geom: any): any {
-    const geoJSON = {
-      type: 'FeatureCollection',
-      features: [
-        {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'Polygon',
-            coordinates: [geom.coordinates[0][0].map((coord: Coordinate) => {
-              return MapUtils.transform3857([coord[0], coord[1]]);
-            })]
-          }
-        }
-      ]
-    };
-    return geoJSON;
   }
 
 }

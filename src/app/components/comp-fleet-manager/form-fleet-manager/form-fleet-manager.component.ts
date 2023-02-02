@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,30 +14,12 @@ import { euroNations, FLEETMNG_TYPE, worldNations } from '../../domain/bus-firen
 import { FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
+import { ModalCheckComponent } from './modal-check/modal-check.component';
 
 @Component({
   selector: 'app-form-fleet-manager',
   templateUrl: './form-fleet-manager.component.html',
-  styleUrls: ['./form-fleet-manager.component.css'],
-  animations: [
-    trigger('slideInOut', [
-      state(
-        'on',
-        style({
-          opacity: 1
-        })
-      ),
-      state(
-        'off',
-        style({
-          height: '0',
-          opacity: 0
-        })
-      ),
-      transition('on => off', animate('400ms')),
-      transition('off => on', animate('400ms')),
-    ]),
-  ],
+  styleUrls: ['./form-fleet-manager.component.css']
 })
 export class FormFleetManagerComponent implements OnInit, OnDestroy {
   @Input() register = false;
@@ -63,6 +44,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public completeUp = true;
   public completeDown = true;
 
+  private failedCheck: boolean;
   private euroNations = euroNations;
   private subscription: Subscription[] = [];
 
@@ -307,21 +289,35 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     if (!this.formGroup.controls.ctrlpIva.invalid && this.isEuropeNat && !this.roleFleetManager) {
       const pIva = this.formGroup.get('ctrlpIva').value;
       const nat = this.formGroup.get('ctrlNat').value;
-      this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
       this.completePiva = false;
       this.subscription.push((await this.registerService.checkVatNumber(nat, pIva, this.register ? true : false)).subscribe({
         next: (vatVerify) => {
-          if (!vatVerify.valid) {
-            this.formGroup.controls.ctrlpIva.setErrors({ invalid: true });
-          } else {
-            this.formGroup.controls.ctrlpIva.setErrors(null);
+          if (vatVerify.valid) { // p.iva valida
+            this.snackBar.showMessage('FLEET-MANAGER.VAT_VERIFY', 'INFO');
             const companyName = vatVerify.name.substring(0, 35);
             this.formGroup.patchValue({
               ctrlCompanyName: companyName
             });
+            this.failedCheck = false;
           }
         },
-        error: () => this.completePiva = true,
+        error: (error) => { // p.iva non valida o servizio down
+          const ref = this.dialog.open(ModalCheckComponent, {
+            width: '40%',
+            height: '40%',
+            data: { i18nKey: error.error.i18nKey, vat: pIva }
+          });
+          ref.afterClosed().subscribe(
+            (resp) => {
+              if (!resp) {
+                this.formGroup.patchValue({ ctrlpIva: '' });
+              } else { // utente accetta p.iva non valida sul servizio
+                this.failedCheck = true;
+              }
+            }
+          );
+          this.completePiva = true;
+        },
         complete: () => this.completePiva = true
       }));
     }
@@ -340,25 +336,39 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         }
       } else if (userType === this.fleetType.ente) {
-        if ((fiscalCode.charAt(0) === '8' || fiscalCode.charAt(0) === '9') && fiscalCode.length === 11) {
+        if (fiscalCode.length === 11) {
           this.formGroup.controls.ctrlCF.setErrors(null);
         } else {
           this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         }
       } else {
         const nat = this.formGroup.get('ctrlNat').value;
-        this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
         this.completePiva2 = false;
         this.subscription.push((await this.registerService.checkVatNumber(nat, fiscalCode, this.register ? true : false))
           .subscribe({
-            next: (vatVerify) => {
-              if (!vatVerify.valid) {
-                this.formGroup.controls.ctrlCF.setErrors({ invalid: true });
-              } else {
-                this.formGroup.controls.ctrlCF.setErrors(null);
+            next: (vatVerify) => { // p.iva valida
+              if (vatVerify.valid) {
+                this.snackBar.showMessage('FLEET-MANAGER.FISCALCODE_VERIFY', 'INFO');
+                this.failedCheck = false;
               }
             },
-            error: () => this.completePiva2 = true,
+            error: (error) => { // p.iva non valida o servizio down
+              const ref = this.dialog.open(ModalCheckComponent, {
+                width: '40%',
+                height: '40%',
+                data: { i18nKey: error.error.i18nKey, fiscalCode: fiscalCode }
+              });
+              ref.afterClosed().subscribe(
+                (resp) => {
+                  if (!resp) {
+                    this.formGroup.patchValue({ ctrlCF: '' });
+                  } else { // utente accetta p.iva non valida sul servizio
+                    this.failedCheck = true;
+                  }
+                }
+              );
+              this.completePiva2 = true;
+            },
             complete: () => this.completePiva2 = true
           }));
       }
@@ -419,6 +429,8 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     fleetManager.cap = this.formGroup.get('ctrlCAP').value;
     fleetManager.country = this.formGroup.get('ctrlNat').value;
     fleetManager.extraUE = !this.isEuropeNat;
+    // se è un edit e non è stata modificata la p.iva o c.f. lascia l'esistente altrimenti prende il valore di failedCheck
+    fleetManager.failedCheck = this.data ? (this.failedCheck === undefined ? this.data.failedCheck : this.failedCheck) : this.failedCheck;
     fleetManager.contacts = [];
 
     const office = { code: 2, value: this.formGroup.get('ctrlOffice').value };
