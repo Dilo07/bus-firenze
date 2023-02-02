@@ -1,23 +1,15 @@
 <mat-card fxLayout="column" fxLayoutGap="10px">
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
-        <mat-card-title *ngIf="!data && !register" fxFlexOffset="5">
+        <mat-card-title *ngIf="!data && !register">
             {{'FLEET-MANAGER.MESSAGE_NEW' | translate}}</mat-card-title>
-        <mat-card-title *ngIf="data && !roleFleetManager" fxFlexOffset="5">
+        <mat-card-title *ngIf="data && !roleFleetManager">
             {{'FLEET-MANAGER.MESSAGE_EDIT' | translate}}</mat-card-title>
-        <mat-card-title *ngIf="data && roleFleetManager" fxFlexOffset="5">
+        <mat-card-title *ngIf="data && roleFleetManager">
             {{'FLEET-MANAGER.MESSAGE_VIEW' | translate}}</mat-card-title>
-        <mat-card-title *ngIf="register" fxFlexOffset="5">
+        <mat-card-title *ngIf="register">
             {{'FLEET-MANAGER.REGISTRATION' | translate}}
         </mat-card-title>
-        <!-- <button mat-icon-button (click)="helper = helper === 'on' ? 'off' : 'on'">
-            <mat-icon>
-                <span [ngClass]="helper === 'on' ? 'icon-delete' : 'icon-info'"></span>
-            </mat-icon>
-        </button> -->
     </div>
-    <!-- <div [@slideInOut]="helper">
-        <app-expansion-info (callForm)="downloadTemplate()"></app-expansion-info> component expansion-info
-    </div> -->
     <app-expansion-info (callForm)="downloadTemplate()"></app-expansion-info> <!-- component expansion-info -->
     <mat-progress-bar mode="indeterminate" *ngIf="!completeUp"></mat-progress-bar>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
@@ -138,7 +130,7 @@
                             *ngIf="(userSel === fleetType.aziendaPrivata || userSel === fleetType.pubblicaAmm) && formGroup.get('ctrlNat').value === 'IT'">
                             <mat-label>
                                 {{(userSel === fleetType.aziendaPrivata ? 'FLEET-MANAGER.DESTCODE' :
-                                'FLEET-MANAGER.IPACODE') | translate}}
+                                'FLEET-MANAGER.UNIQUECODE') | translate}}
                             </mat-label>
                             <input matInput type="text" formControlName="ctrlDest"
                                 [required]="(userSel === fleetType.aziendaPrivata || userSel === fleetType.pubblicaAmm) && formGroup.get('ctrlNat').value === 'IT'"
@@ -146,7 +138,7 @@
                                 [maxlength]="userSel === fleetType.aziendaPrivata ? 7 : userSel === fleetType.pubblicaAmm ? 6 : null"
                                 [readonly]="data && roleFleetManager">
                             <mat-error>{{(userSel === fleetType.aziendaPrivata ?
-                                'FLEET-MANAGER.INSERT_DEST' : 'FLEET-MANAGER.INSERT_IPA') | translate}}</mat-error>
+                                'FLEET-MANAGER.INSERT_DEST' : 'FLEET-MANAGER.INSERT_UNIQUECODE') | translate}}</mat-error>
                         </mat-form-field>
                     </div>
                     <div fxLayout="row wrap" fxLayoutGap="20px">

@@ -16,32 +16,10 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 
 const routes: Routes = [
   {
-    path: '', component: FleetManagerComponent, canActivate: [AuthGuard],
-    data: {
-      roles: [ROLES.MOVYON, ROLES.OPER_MOVYON],
-      breadcrumb: [
-        {
-          label: 'Fleet manager',
-          url: ''
-        }
-      ]
-    }
+    path: '', component: FleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
-    path: 'real-time',
-    loadChildren: () => import('../comp-real-time/real-time.module').then(m => m.RealTimeModule),
-    data: {
-      breadcrumb: [
-        {
-          label: 'Fleet manager',
-          url: '/manage'
-        },
-        {
-          label: 'Real time',
-          url: ''
-        }
-      ]
-    }
+    path: 'real-time', loadChildren: () => import('../comp-real-time/real-time.module').then(m => m.RealTimeModule)
   },
   {
     path: 'form-Fleet',
@@ -57,37 +35,11 @@ const routes: Routes = [
   },
   {
     path: 'drivers',
-    component: DriversComponent, canActivate: [AuthGuard],
-    data: {
-      roles: [ROLES.MOVYON],
-      breadcrumb: [
-        {
-          label: 'Fleet manager',
-          url: '/manage'
-        },
-        {
-          label: 'Drivers',
-          url: ''
-        }
-      ]
-    }
+    component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON] }
   },
   {
     path: 'vehicles',
-    component: VehiclesComponent, canActivate: [AuthGuard],
-    data: {
-      roles: [ROLES.MOVYON, ROLES.OPER_MOVYON],
-      breadcrumb: [
-        {
-          label: 'Fleet manager',
-          url: '/manage'
-        },
-        {
-          label: 'Vehicles',
-          url: ''
-        }
-      ]
-    },
+    component: VehiclesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
     path: 'vehicles/statistic', // per raggiungere le statistiche da fm

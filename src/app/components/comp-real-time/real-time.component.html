@@ -1,14 +1,14 @@
 <mat-card>
+	<div fxLayout="row wrap" fxLayoutAlign="space-between">
+		<mat-card-title>Real Time</mat-card-title>
+		<span *ngIf="fleetManager">
+			<button mat-button class="backButton" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
+				(click)="backFromRealTime()">
+				{{'FLEET-MANAGER.BACK' | translate}}</button>
+		</span>
+	</div>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<div fxLayout="row wrap" fxLayoutAlign="space-between">
-				<mat-card-title>Real Time</mat-card-title>
-				<span *ngIf="fleetManager">
-					<button mat-button class="backButton" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
-						(click)="backFromRealTime()">
-						{{'FLEET-MANAGER.BACK' | translate}}</button>
-				</span>
-			</div>
 			<mat-card style="background-color: #E4F1F5;">
 				<mat-card-content fxLayout="row wrap" fxLayoutGap="20px">
 					<mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-lg="25" fxFlex.gt-md="25"

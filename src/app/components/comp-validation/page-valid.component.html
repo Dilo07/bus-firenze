@@ -1,9 +1,9 @@
 <mat-card>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-card-title>{{'MENU.Validation' | translate}}
+        </mat-card-title>
+    </div>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
-        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-            <mat-card-title>{{'MENU.Validation' | translate}}
-            </mat-card-title>
-        </div>
         <mat-tab-group mat-align-tabs="center" [selectedIndex]="index" (selectedTabChange)="onTabChanged($event)">
             <mat-tab label="{{'MENU.Valid-Fleet-manager' | translate}}">
                 <app-comp-fleet-manager [isValidFleet]="true" *ngIf="index === 0"></app-comp-fleet-manager>

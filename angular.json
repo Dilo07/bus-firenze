@@ -31,7 +31,8 @@
               "keycloak-js",
               "pdfjs-dist/build/pdf",
               "pdfjs-dist/web/pdf_viewer",
-              "file-saver"
+              "file-saver",
+              "xml-utils/find-tags-by-name.js"
             ],
             "assets": [
               "src/favicon.ico",

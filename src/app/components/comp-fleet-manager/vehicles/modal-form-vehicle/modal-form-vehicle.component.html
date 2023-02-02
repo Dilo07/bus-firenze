@@ -1,16 +1,10 @@
 <mat-card>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-card-title>
+            {{ (data.vehicle ? 'VEHICLE.EDIT' : 'VEHICLE.NEW') | translate }}
+        </mat-card-title>
+    </div>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
-        <div fxLayout="row wrap" fxLayoutAlign="space-between">
-            <mat-card-title>
-                {{ (data.vehicle ? 'VEHICLE.EDIT' : 'VEHICLE.NEW') | translate }}
-            </mat-card-title>
-            <!-- <button mat-icon-button (click)="helper = helper === 'on' ? 'off' : 'on'">
-                <mat-icon><span [ngClass]="helper === 'on' ? 'icon-delete' : 'icon-info'"></span></mat-icon>
-            </button> -->
-        </div>
-        <!-- <div [@slideInOut]="helper">
-            <app-expansion-info-vehicle></app-expansion-info-vehicle>
-        </div> -->
         <app-expansion-info-vehicle></app-expansion-info-vehicle>
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
         <form [formGroup]="formGroup" fxLayout="column" fxLayoutGap="10px">
