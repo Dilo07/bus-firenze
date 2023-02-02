@@ -132,9 +132,11 @@
         "NAME": "Nome",
         "SURNAME": "Cognome",
         "FISCALCODE": "Codice fiscale",
+        "FISCALCODE_VERIFY": "Codice fiscale verificato",
         "VAT_NUMBER": "Partita Iva",
+        "VAT_VERIFY": "Partita iva verificata",
         "COMPANY_NAME": "Ragione Sociale",
-        "IPACODE": "Codice Ipa",
+        "UNIQUECODE": "Codice univoco",
         "DESTCODE": "Codice destinatario",
         "CELL": "N. Cellulare",
         "OFFICE": "N. Ufficio",
@@ -154,7 +156,7 @@
         "INSERT_CITY": "Inserisci una Città",
         "INSERT_DISTRICT": "Inserisci una provincia corretta",
         "INSERT_POSTAL_CODE": "Inserisci un CAP",
-        "INSERT_IPA": "Inserisci un codice ipa corretto",
+        "INSERT_UNIQUECODE": "Inserisci un codice univoco corretto",
         "INSERT_DEST": "Inserisci un codice destinatario corretto",
         "VEHICLESIZE": "N° Veicoli",
         "CONTACT": "Contatto",
@@ -179,6 +181,7 @@
         "CHANGE_COMMERCEREG": "Modifica visura camerale",
         "SUCCESS_COMMERCEREG": "Visura camerale caricata correttamente",
         "VERIFYCF": "Verifica codice fiscale",
+        "VERIFYVAT": "Verifica p.iva",
         "USERTYPE": "Tipo di azienda",
         "TEXTFILE": "* Per creare il fleet manager è necessario allegare tutti i file richiesti",
         "SELECT": "Seleziona un Fleet Manager",
@@ -198,7 +201,7 @@
         "CONTRACT": "Contratto",
         "BUYING": "Acquisto",
         "RENT": "Noleggio",
-        "FORM-INFO":"Istruzioni per la registrazione di un nuovo veicolo",
+        "FORM-INFO": "Istruzioni per la registrazione di un nuovo veicolo",
         "STEP-1": "compila il form presente in questa pagina.",
         "STEP-2": "scansionare il libretto di circolazione e caricarlo (obbligatorio) mediante il pulsante ",
         "STEP-3": "effettua il pagamento del deposito cauzionale e carica la ricevuta mediante il pulsante ",
@@ -318,7 +321,9 @@
         "UPLOAD_FILE": "Carica file",
         "UPLOAD_SUCCESS": "File caricato correttamente",
         "ATTENTION_PLATE1": "Attenzione: verrà rimosso il veicolo con targa",
-        "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita."
+        "ATTENTION_PLATE2": "e verrà aggiunto un nuovo veicolo con la targa inserita.",
+        "TEST_FAIL": "Collaudo fallito",
+        "TEST_PASS": "Collaudo passato"
     },
     "REAL-TIME": {
         "NOT-FOUND": "Non trovato",
@@ -399,7 +404,7 @@
         "REMOVE_CONFIRM": "Sei sicuro di voler terminare questo ticket?",
         "REMOVE_SUCCESS": "Ticket terminato correttamente",
         "VIEW_HISTORY": "Vedi storico",
-        "HISTORY" : "Storico",
+        "HISTORY": "Storico",
         "ACTIVE": "Ticket attivi",
         "MANAGE": "Gestisci ticket",
         "LPN": "Targa",
@@ -457,7 +462,7 @@
         "EMITTED": "Penali emesse",
         "DATE": "Seleziona una data",
         "SELECT": "Seleziona il tipo di penale da applicare",
-        "SUCCESS":"Penale aggiunta con successo",
+        "SUCCESS": "Penale aggiunta con successo",
         "SEARCH": "Ricerca per targa",
         "TYPE": "Tipo di penale",
         "PENAL_DATE": "Data penale",
@@ -592,6 +597,10 @@
         "penalty": {
             "add": "Errore nell'aggiunta penale",
             "duplicate": "non si possono aggiungere due penali dello stesso tipo sullo stesso veicolo lo stesso giorno"
+        },
+        "vies": {
+            "invalid": "Partita iva non valida, vuoi comunque inserire questo valore?",
+            "unavailable": "Servizio di verifica partita iva non valido, vuoi comunque inserire questo valore?"
         },
         "ines": {
             "request": "Servizi ines non raggiungibili",

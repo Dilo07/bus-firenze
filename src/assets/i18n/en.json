@@ -132,9 +132,11 @@
         "NAME": "Name",
         "SURNAME": "Surname",
         "FISCALCODE": "Fiscale code",
+        "FISCALCODE_VERIFY": "Fiscal code verified",
         "VAT_NUMBER": "VAT Number",
+        "VAT_VERIFY": "Vat number verify",
         "COMPANY_NAME": "Company Name",
-        "IPACODE": "Ipa code",
+        "UNIQUECODE": "Unique code",
         "DESTCODE": "Receiver code",
         "CELL": "Mobile num.",
         "OFFICE": "Office num.",
@@ -154,7 +156,7 @@
         "INSERT_CITY": "Insert a City",
         "INSERT_DISTRICT": "Insert a correct district",
         "INSERT_POSTAL_CODE": "Insert a Postal Code",
-        "INSERT_IPA": "Insert a correct ipa code",
+        "INSERT_UNIQUECODE": "Insert a correct unique code",
         "INSERT_DEST": "Insert a correct receiver code",
         "VEHICLESIZE": "# Vehicles",
         "CONTACT": "Contact",
@@ -179,6 +181,7 @@
         "CHANGE_COMMERCEREG": "Edit commerce registration",
         "SUCCESS_COMMERCEREG": "Commerce registration upload correctly",
         "VERIFYCF": "Verify fiscal code",
+        "VERIFYVAT": "Verify vat number",
         "USERTYPE": "Company type",
         "TEXTFILE": "* To creare the fleet manager you need attach the requested file",
         "SELECT": "Select a Fleet Manager",
@@ -198,7 +201,7 @@
         "CONTRACT": "Contract",
         "BUYING": "Buying",
         "RENT": "Rent",
-        "FORM-INFO":"Instruction for new vehicle registration",
+        "FORM-INFO": "Instruction for new vehicle registration",
         "STEP-1": "fill out the form on this page.",
         "STEP-2": "scan the vehicle registration document and upload it (mandatory) using the button ",
         "STEP-3": "make the payment of the security deposit and upload the receipt using the button ",
@@ -318,7 +321,9 @@
         "UPLOAD_FILE": "Upload file",
         "UPLOAD_SUCCESS": "File uploaded correctly",
         "ATTENTION_PLATE1": "Attention: Will be remove the vehicle with plate",
-        "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number."
+        "ATTENTION_PLATE2": "and will be add a new vehicle with the inserted plate number.",
+        "TEST_FAIL": "Test fail",
+        "TEST_PASS": "Test pass"
     },
     "REAL-TIME": {
         "NOT-FOUND": "Not found",
@@ -399,7 +404,7 @@
         "REMOVE_CONFIRM": "Are you sure to terminate this ticket?",
         "REMOVE_SUCCESS": "Ticket correctly terminated",
         "VIEW_HISTORY": "View history",
-        "HISTORY" : "History",
+        "HISTORY": "History",
         "ACTIVE": "Active ticket",
         "MANAGE": "Manage ticket",
         "LPN": "Plate",
@@ -457,7 +462,7 @@
         "EMITTED": "Emitted penalties",
         "DATE": "Select a date",
         "SELECT": "Select the penale tpye to add",
-        "SUCCESS":"Penal added successfully",
+        "SUCCESS": "Penal added successfully",
         "SEARCH": "Search for plate",
         "TYPE": "Penal type",
         "PENAL_DATE": "Penal date",
@@ -592,6 +597,10 @@
         "penalty": {
             "add": "Error in add penalty",
             "duplicate": "Duplicate penalty for the vehicle"
+        },
+        "vies": {
+            "invalid": "Invalid vat number, do you still want to enter this value?",
+            "unavailable": "Service vat verify unavailable,  do you still want to enter this value?"
         },
         "ines": {
             "request": "Ines service unavailable",
