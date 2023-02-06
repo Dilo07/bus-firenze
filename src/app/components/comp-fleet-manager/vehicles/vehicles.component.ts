@@ -7,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { InstallerService } from 'src/app/services/installer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
@@ -37,6 +37,16 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
     .mat-column-consent { max-width: 10%;}
     .mat-column-actions { max-width: 20%; display: table-column;}
   }
+  .cardDriver {
+    background-color: #133775;
+  }
+  .white {
+    color: white;
+  }
+  .icon-assignment:before {
+    color: white;
+    font-weight: bold;
+  }
   .icon-assignment-grey:before {
     color: grey;
     font-weight: bold;
@@ -53,6 +63,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public fleetManager: FleetManager;
   public vehicleLpn: string;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
+  public vehicleListConnect: Observable<any>;
   public displayedColumns = ['id', 'plate', 'nat', 'certificateId', 'euroClass', 'obuId', 'consent', 'actions'];
   public search: FormGroup;
   public complete = true;
@@ -94,14 +105,16 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     const keyword = this.search.get('ctrlSearch').value;
     const onlyActive = this.search.get('onlyActive').value;
     // in caso di op_movyon movyon passa l'id altrimento no
-    this.vehicleService.getVehiclesById(onlyActive, this.fleetManager?.id, keyword).subscribe(
-      data => {
+    this.vehicleService.getVehiclesById(onlyActive, this.fleetManager?.id, keyword).subscribe({
+      next: (data) => {
         this.vehicleList.data = data;
+        this.vehicleListConnect = this.vehicleList.connect();
         this.vehicleList.sort = this.sort;
         this.vehicleList.paginator = this.paginator;
       },
-      () => this.complete = true,
-      () => this.complete = true);
+      error: () => this.complete = true,
+      complete: () => this.complete = true
+    });
   }
 
   public addVehicle(): void {

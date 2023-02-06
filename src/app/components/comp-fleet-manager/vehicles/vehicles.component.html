@@ -6,8 +6,7 @@
 				(click)="backToValidVehicle()">
 				{{'FLEET-MANAGER.BACK' |translate}}
 			</button>
-			<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'"
-				(click)="addVehicle()">
+			<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'" (click)="addVehicle()">
 				{{'FLEET-MANAGER.NEW' | translate}}
 			</button>
 			<button mat-button class="downloadButtons" [matMenuTriggerFor]="menuDownload"
@@ -37,7 +36,88 @@
 				</mat-slide-toggle>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div class="mat-elevation-z8 example-container"
+			<div fxLayout="row wrap" fxLayoutAlign="center">
+				<mat-card *ngFor="let element of vehicleListConnect | async" class="cardDriver" fxFlex="100"
+					fxFlex.gt-xs="100" fxFlex.gt-lg="20" fxFlex.gt-md="20">
+					<mat-card-title class="white">ID {{element.id}}
+					</mat-card-title>
+					<mat-card-content>
+						<mat-card-subtitle class="white">{{'VEHICLE.LPN' | translate}}:
+							{{element.lpn}}</mat-card-subtitle>
+						<mat-card-subtitle class="white">{{'VEHICLE.LPN_NAT' | translate}}:
+							<span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
+						</mat-card-subtitle>
+						<mat-card-subtitle class="white">
+							{{'VEHICLE.CERTIFICATE' | translate}}:
+							<button mat-icon-button [disabled]="!element.certificateId"
+								[attr.i18nKey]="'VEHICLE.CERTIFICATE'"
+								(click)="viewCertificate(element.id, element.certificateId)">
+								<mat-icon
+									matTooltip="{{(element.certificateId ? 'VEHICLE.CERTIFICATE' : 'VEHICLE.NOCERTIFICATE') | translate}}">
+									<span class="icon-assignment"
+										[ngClass]="element.certificateId ? null : 'icon-assignment-grey'">
+									</span>
+								</mat-icon>
+							</button>
+						</mat-card-subtitle>
+						<mat-card-subtitle class="white">{{'VEHICLE.EURO-CLASS' | translate}}:
+							{{element.euroClass}}</mat-card-subtitle>
+						<mat-card-subtitle class="white">obuId: {{element.obuId}}</mat-card-subtitle>
+						<mat-card-subtitle class="white">{{'VEHICLE.CONSENT' | translate}}:
+							{{ (element.allowContacted ? 'VEHICLE.CONSENTYES' : 'VEHICLE.CONSENTNO') | translate}}
+						</mat-card-subtitle>
+						<ng-container *ngIf="!element.deleted else deleted">
+							<div fxLayout="row" fxLayoutAlign="end">
+								<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
+									[attr.i18nKey]="'menu'">
+									<mat-icon style="color: white;">more_horiz</mat-icon>
+								</button>
+								<button mat-icon-button matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
+									[attr.i18nKey]="'COMMON.ACTION.DELETE'"
+									(click)="deleteVehicle(element.id, element.valid)">
+									<mat-icon><span class="icon-delete"></span></mat-icon>
+								</button>
+							</div>
+							<mat-menu #actionsMenuManage="matMenu" class="menu-color">
+								<button mat-menu-item [attr.i18nKey]="'COMMON.ACTION.EDIT'"
+									(click)="editVehicle(element)">
+									<mat-icon><span class="icon-edit"></span></mat-icon>
+									{{'COMMON.ACTION.EDIT' | translate}}
+								</button>
+								<button mat-menu-item [routerLink]="['statistic']"
+									[state]="{vehicle: element, fleetManager: fleetManager}"
+									[attr.i18nKey]="'STATISTIC.VEHICLE'">
+									<mat-icon><span class="icon-statistic font-size-30"></span></mat-icon>
+									{{'STATISTIC.VEHICLE' | translate}}
+								</button>
+								<button *ngIf="element.hardware" mat-menu-item [attr.i18nKey]="'VEHICLE.DOWNLOAD'"
+									(click)="downloadManualPdf(element.hardware)">
+									<mat-icon><span class="icon-download"></span></mat-icon>
+									{{'VEHICLE.DOWNLOAD' | translate}}
+								</button>
+								<button *ngIf="element.documents | hasDeposit: true" mat-menu-item
+									[attr.i18nKey]="'VEHICLE.DRIVER_ASSOCIATION'"
+									(click)="associationDriver(element.id)">
+									<mat-icon><span class="icon-refresh"></span></mat-icon>
+									{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}
+								</button>
+							</mat-menu>
+						</ng-container>
+						<ng-template #deleted>
+							<div fxLayout="row" fxLayoutAlign="end">
+								<button mat-icon-button [routerLink]="['statistic']"
+									[state]="{vehicle: element, fleetManager: fleetManager}"
+									[attr.i18nKey]="'STATISTIC.VEHICLE'">
+									<mat-icon matTooltip="{{'STATISTIC.VEHICLE' | translate}}">
+										<span class="icon-statistic font-size-30"></span>
+									</mat-icon>
+								</button>
+							</div>
+						</ng-template>
+					</mat-card-content>
+				</mat-card>
+			</div>
+			<!-- <div class="mat-elevation-z8 example-container"
 				[style.display]="vehicleList.data.length === 0 ? 'none' : ''">
 				<mat-table [dataSource]="vehicleList" class="mat-elevation-z8" matSort matSortActive="id"
 					matSortDirection="asc">
@@ -151,7 +231,7 @@
 						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
 						<mat-cell *matCellDef="let element" style="text-align: end;">
 							<ng-container *ngIf="!element.deleted else deleted">
-								<!--attivi-->
+								
 								<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
 									[attr.i18nKey]="'menu'">
 									<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
@@ -187,7 +267,7 @@
 								</button>
 							</ng-container>
 							<ng-template #deleted>
-								<!--eliminati-->
+								
 								<button mat-icon-button [routerLink]="['statistic']"
 									[state]="{vehicle: element, fleetManager: fleetManager}"
 									[attr.i18nKey]="'STATISTIC.VEHICLE'">
@@ -204,7 +284,7 @@
 					<mat-row *matRowDef="let row; columns: displayedColumns;"
 						[ngClass]="row.deleted ? 'obuDisactive' : ''" class="hover-row"></mat-row>
 				</mat-table>
-			</div>
+			</div> -->
 			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"
 				[pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 			<div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
