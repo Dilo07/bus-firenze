@@ -225,6 +225,7 @@
         "EUROPEAN-GROUP": "Categoria",
         "EXPIRED": "Veicolo scaduto",
         "WILLEXPIRE": "Il veicolo scadrà in data",
+        "INVALID": "Veicolo non validato da movyon",
         "UNKNOWN": "Veicolo sconosciuto su ines",
         "CONSENT": "Consenso contratto",
         "DATE_ASSOCIATION": "Data associazione",

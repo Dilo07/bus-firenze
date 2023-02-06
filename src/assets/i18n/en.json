@@ -225,6 +225,7 @@
         "EUROPEAN-GROUP": "Category",
         "EXPIRED": "Vehicle expired ",
         "WILLEXPIRE": "Vehicle will expire at",
+        "INVALID": "Veicolo not valid on movyon",
         "UNKNOWN": "Vehicle unknow on ines",
         "CONSENT": "Contract consent",
         "DATE_ASSOCIATION": "Date association",

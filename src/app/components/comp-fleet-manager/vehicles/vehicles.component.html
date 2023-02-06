@@ -65,6 +65,11 @@
 								{{element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year }}">warning
 								</mat-icon>
 							</button>
+							<button *ngIf="!element.valid" mat-icon-button [disabled]="true"
+								[attr.i18nKey]="'VEHICLE.INVALID'">
+								<mat-icon style="color: #eed202; opacity: 0.8;" matTooltip="{{'VEHICLE.INVALID' | translate}}">warning
+								</mat-icon>
+							</button>
 							<button *ngIf="element.status === statusVehicle.unknown" mat-icon-button [disabled]="true"
 								[attr.i18nKey]="'VEHICLE.UNKNOWN'">
 								<mat-icon style="color: #9c8b0979; opacity: 0.8;"
