@@ -27,7 +27,7 @@ import { AssociationDriversVehiclesComponent } from './modal-association-drivers
     .mat-column-mobile { max-width: 20%;}
     .mat-column-actions { max-width: 20%; display: table-column;}
   }
-  .cardDriver {
+  /*.cardDriver {
     background-color: #313775;
   }
   .white {
@@ -35,7 +35,7 @@ import { AssociationDriversVehiclesComponent } from './modal-association-drivers
   }
   .icon-car:before {
     color: white;
-  }
+  }*/
   `
   ]
 })

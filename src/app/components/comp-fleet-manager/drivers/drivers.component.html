@@ -24,7 +24,7 @@
 				</mat-form-field>
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div fxLayout="row wrap" fxLayoutAlign="center">
+			<!-- <div fxLayout="row wrap" fxLayoutAlign="center">
 				<mat-card *ngFor="let element of dataSource.data" class="cardDriver" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="20" fxFlex.gt-md="20">
 					<mat-card-title class="white">{{element.name}} {{element.surname}}
 					</mat-card-title>
@@ -38,8 +38,8 @@
 						</button>
 					</mat-card-content>
 				</mat-card>
-			</div>
-			<!-- <div class="mat-elevation-z8 example-container"
+			</div> -->
+			<div class="mat-elevation-z8 example-container"
 				[style.display]="dataSource.data.length === 0 ? 'none' : ''">
 				<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="name"
 					matSortDirection="asc">
@@ -112,7 +112,7 @@
 				</mat-table>
 			</div> 
 			<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
-				[pageSizeOptions]="[5, 10, 25]"></mat-paginator>-->
+				[pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 			<div *ngIf="dataSource.data.length === 0 && complete"> {{'DRIVERS.NO_DATA' | translate}}</div>
 		</div>
 	</mat-card-content>
