@@ -600,7 +600,8 @@
             "duplicate": "Duplicate penalty for the vehicle"
         },
         "vies": {
-            "invalid": "Invalid vat number, do you still want to enter this value?",
+            "vat_invalid": " Invalid vat number, do you still want to enter this value?",
+            "fc_invalid": " Invalid fiscal codefiscale, do you still want to enter this value?",
             "unavailable": "Service vat verify unavailable,  do you still want to enter this value?"
         },
         "ines": {

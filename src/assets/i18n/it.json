@@ -600,7 +600,8 @@
             "duplicate": "non si possono aggiungere due penali dello stesso tipo sullo stesso veicolo lo stesso giorno"
         },
         "vies": {
-            "invalid": "Partita iva non valida, vuoi comunque inserire questo valore?",
+            "vat_invalid": " Partita iva non valida, vuoi comunque inserire questo valore?",
+            "fc_invalid": " Codice fiscale non valido, vuoi comunque inserire questo valore?",
             "unavailable": "Servizio di verifica partita iva non valido, vuoi comunque inserire questo valore?"
         },
         "ines": {
