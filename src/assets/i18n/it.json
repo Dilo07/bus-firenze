@@ -482,6 +482,8 @@
         "DELTA_MERGEABLE": "Canone mensile periodico",
         "UNINSTALL": "Disinstallazione obu",
         "MISSED_APPOINTMENT": "Mancato appuntamento",
+        "MISSING_OBU": "Trattenimento deposito cauzionale per non restituzione OBU",
+        "DAMAGE": "Trattenimento deposito cauzionale per danneggiamento OBU",
         "CANCELLED_APPOINTMENT": "Appuntamento cancellato entro 24h",
         "REVERSAL": "Nota di credito",
         "CHANGE": "Sostituzione obu",
@@ -593,7 +595,8 @@
             "remove": "non è possibile rimuovere l'obu",
             "installer": "L'installer non ha installato questo obu",
             "associate_to_other_domains": "L'obu da sostituire è associato ad un altro dominio, rimuovilo da tutti i domini",
-            "ticket": "Non è possibile rimuovere un OBU da un veicolo con un abbonamento attivo associato"
+            "ticket": "Non è possibile rimuovere un OBU da un veicolo con un abbonamento attivo associato",
+            "bl": "Obu dichiarato smarrito"
         },
         "penalty": {
             "add": "Errore nell'aggiunta penale",

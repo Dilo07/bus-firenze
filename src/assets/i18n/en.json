@@ -482,6 +482,8 @@
         "DELTA_MERGEABLE": "Periodic monthly fee",
         "UNINSTALL": "Uninstall obu",
         "MISSED_APPOINTMENT": "Missed appointment",
+        "MISSING_OBU": "Billing item for not return OBU",
+        "DAMAGE": "Billing item for not damage OBU",
         "CANCELLED_APPOINTMENT": "Appointment cancelled within 24h",
         "REVERSAL": "Credit note",
         "CHANGE": "Change obu",
@@ -593,7 +595,8 @@
             "remove": "Cannot remove the obu",
             "installer": "Installer didn't install this obu",
             "associate_to_other_domains": "The obu to be replaced is associated to another domain, remove it from all domains",
-            "ticket": "Not is possible remove a OBU from vehicle with active ticket"
+            "ticket": "Not is possible remove a OBU from vehicle with active ticket",
+            "bl": "Obu declared losed"
         },
         "penalty": {
             "add": "Error in add penalty",

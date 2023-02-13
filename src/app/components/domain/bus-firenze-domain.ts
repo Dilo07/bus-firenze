@@ -69,6 +69,7 @@ export class Vehicle {
   status: string;
   documents: DocumentVehicle[];
   documentsObu: DocumentObu[];
+  valid: boolean;
 }
 
 export interface DocumentVehicle {
