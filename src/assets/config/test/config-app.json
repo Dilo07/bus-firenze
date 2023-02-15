@@ -32,10 +32,9 @@
       "nameShop": "Web Korner",
       "mail": "helpdesk@webkorner.it",
       "mobileNumber": "055 0981016",
-      "contactRangeStart": "08:30",
-      "contactRangeEnd": "18:00",
+      "contactRange": "Lun - Ven, 08:30 - 18:30",
       "address": "via Fratelli Alinari, 80, 52025 Montevarchi AR"
-    }
+    }    
   ],
   "modules": [
     {

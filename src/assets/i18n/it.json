@@ -431,7 +431,7 @@
     "REPAIR-SHOP": {
         "TITLE": "Per l'installazione delle On Board Unit è possibile rivolgersi ai seguenti partner di Movyon. \nL'installazione avverrà in luogo e data da concordare tra le parti e nella maniera più conveniente possibile per il Fleet Manager.",
         "TELEPHON": "Telefono",
-        "RANGE": "dal lunedì al venerdì"
+        "RANGE": "Orari"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",

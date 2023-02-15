@@ -5,10 +5,6 @@ import { RepairShops } from '../domain/bus-firenze-domain';
   selector: 'app-repair-shop',
   templateUrl: './repair-shop.component.html',
   styles: [`
-  a {
-    color: black;
-    text-decoration: none;
-  }
   .backgroundImgCustom{
     z-index: 1;
     background: url('src/assets/images/image_movyon2.png') no-repeat right;
@@ -17,6 +13,10 @@ import { RepairShops } from '../domain/bus-firenze-domain';
   .backgroundImgCustom2{
     z-index: 1;
     background: url('src/assets/images/image_movyon2.png') 90% 30% no-repeat;
+  }
+
+  .white {
+    color: white;
   }
   `
   ]

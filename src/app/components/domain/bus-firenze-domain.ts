@@ -132,8 +132,7 @@ export interface RepairShops {
   surname: string;
   mail: string;
   mobileNumber: string;
-  contactRangeStart: number;
-  contactRangeEnd: number;
+  contactRange: string;
   nameShop: string;
   address: string;
 }
