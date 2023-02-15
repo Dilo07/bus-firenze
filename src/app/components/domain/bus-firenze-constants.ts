@@ -75,13 +75,6 @@ export const worldNations = [
   { value: 'VU', text: 'Vanuatu' }, { value: 'VE', text: 'Venezuela' }, { value: 'VN', text: 'Viet Nam' },
   { value: 'WF', text: 'Wallis And Futuna' }, { value: 'YE', text: 'Yemen' }, { value: 'ZM', text: 'Zambia' }, { value: 'ZW', text: 'Zimbabwe' }];
 
-export const STATUS_VEHICLE = Object.freeze({
-  deleted: 'DELETED',
-  temp: 'TEMP',
-  registered: 'REGISTERED',
-  unknown: 'UNKNOWN'
-});
-
 export const CONTRACT_TYPE = {
   rent: 'RENT',
   buy: 'BUY'

@@ -38,12 +38,35 @@
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<div fxLayout="row wrap" fxLayoutAlign="center">
 				<mat-card *ngFor="let element of vehicleListConnect | async" class="cardDriver" fxFlex="100"
-					fxFlex.gt-xs="100" fxFlex.gt-lg="20" fxFlex.gt-md="20">
-					<mat-card-title class="white">ID {{element.id}}
+					fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+					<mat-card-title class="white">
+						ID {{element.id}}
 					</mat-card-title>
 					<mat-card-content>
 						<mat-card-subtitle class="white">{{'VEHICLE.LPN' | translate}}:
 							{{element.lpn}}</mat-card-subtitle>
+						<mat-card-subtitle class="white">{{'VEHICLE.STATUS' | translate}}:
+							<span *ngIf="element.status === 'DELETED'" style="color: #F54236;">
+								{{'VEHICLE.EXPIRED' | translate}}
+								<button *ngIf="element.status === 'DELETED'" mat-icon-button
+									[attr.i18nKey]="'VEHICLE.REFRESH_EXPDATE'" (click)="updateStatus(element.id)">
+									<mat-icon matTooltip="{{'VEHICLE.REFRESH_EXPDATE' | translate}}">
+										<span class="icon-refresh"></span>
+									</mat-icon>
+								</button>
+							</span>
+							<span *ngIf="element.status === 'TEMP'" style="color: #eed202;">
+								{{'VEHICLE.WILLEXPIRE' | translate}}
+								{{element.expiresAt?.day + '/' + element.expiresAt?.month + '/' +
+								element.expiresAt?.year }}
+							</span>
+							<span *ngIf="element.status === 'REGISTERED'" style="color: #4CAE50;">
+								{{'VEHICLE.ACTIVE' | translate}}
+							</span>
+							<span *ngIf="element.status === 'UNKNOWN'" style="color: #eed202;">
+								{{'VEHICLE.UNKNOWN' | translate}}
+							</span>
+						</mat-card-subtitle>
 						<mat-card-subtitle class="white">{{'VEHICLE.LPN_NAT' | translate}}:
 							<span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
 						</mat-card-subtitle>
@@ -285,8 +308,8 @@
 						[ngClass]="row.deleted ? 'obuDisactive' : ''" class="hover-row"></mat-row>
 				</mat-table>
 			</div> -->
-			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"
-				[pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="9"
+				[pageSizeOptions]="[6, 9, 12]"></mat-paginator>
 			<div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
 		</div>
 	</mat-card-content>

@@ -7,11 +7,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { InstallerService } from 'src/app/services/installer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
 import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from '../drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
@@ -54,6 +53,9 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   .icon-warning:before {
     color: red;
   }
+  .icon-refresh:before {
+    color: white;
+  }
   `],
 })
 export class VehiclesComponent implements OnInit, OnDestroy {
@@ -63,11 +65,10 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public fleetManager: FleetManager;
   public vehicleLpn: string;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
-  public vehicleListConnect: Observable<any>;
+  public vehicleListConnect: BehaviorSubject<Vehicle[]>;
   public displayedColumns = ['id', 'plate', 'nat', 'certificateId', 'euroClass', 'obuId', 'consent', 'actions'];
   public search: FormGroup;
   public complete = true;
-  public statusVehicle = STATUS_VEHICLE;
   public src: FileViewer = { type: '', url: '', fileName: '' };
 
   private subscription: Subscription[] = [];
@@ -109,7 +110,6 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       next: (data) => {
         this.vehicleList.data = data;
         this.vehicleListConnect = this.vehicleList.connect();
-        this.vehicleList.sort = this.sort;
         this.vehicleList.paginator = this.paginator;
       },
       error: () => this.complete = true,
@@ -170,13 +170,13 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   }
 
   public updateStatus(vehicleId: number): void {
-    this.vehicleService.updateStatusVehicle(vehicleId).subscribe({
+    this.subscription.push(this.vehicleService.updateStatusVehicle(vehicleId).subscribe({
       complete: () => this.getVehiclesByManagerId()
-    });
+    }));
   }
 
   public associationDriver(vehicleId: number): void {
-    this.driverService.getDriversByVehicle(vehicleId, this.fleetManager?.id).subscribe(
+    this.subscription.push(this.driverService.getDriversByVehicle(vehicleId, this.fleetManager?.id).subscribe(
       drivers => {
         this.dialog.open(AssociationDriversVehiclesComponent, {
           width: '80%',
@@ -184,7 +184,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
           data: { driverVehicle: drivers, idVehicle: vehicleId, fleetManagerId: this.fleetManager?.id },
           autoFocus: false
         });
-      });
+      }));
   }
 
   public downloadManualPdf(device: number): void {
@@ -243,11 +243,11 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
       this.complete = true;
     } else {
-      this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file, this.fleetManager?.id).subscribe(
-        () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
-        () => this.complete = true,
-        () => { this.getVehiclesByManagerId(); this.complete = true; }
-      ));
+      this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file, this.fleetManager?.id).subscribe({
+        next: () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
+        error: () => this.complete = true,
+        complete: () => { this.getVehiclesByManagerId(); this.complete = true; }
+      }));
     }
   }
 

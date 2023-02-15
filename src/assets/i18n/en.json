@@ -221,6 +221,7 @@
         "DISABLED": "Disabled at ",
         "LPN": "Plate",
         "LPN_NAT": "Country",
+        "STATUS": "Status vehicle",
         "EURO-CLASS": "EuroClass",
         "EUROPEAN-GROUP": "Category",
         "EXPIRED": "Vehicle expired ",

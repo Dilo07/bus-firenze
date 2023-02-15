@@ -66,7 +66,9 @@ export class Vehicle {
   hardware: number;
   contractType: string;
   allowContacted: boolean;
-  status: string;
+  deleted: boolean;
+  valid: boolean;
+  status: 'REGISTERED' | 'TEMP' | 'DELETED' | 'UNKNOWN';
   documents: DocumentVehicle[];
   documentsObu: DocumentObu[];
 }
