@@ -46,38 +46,38 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   ],
   providers: [
     // app
-    { provide: 'iban', useValue: 'iban'},
+    { provide: 'iban', useValue: 'iban' },
     {
       provide: 'ibanData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['iban', ConfigInitService]
     },
-    { provide: 'static_page', useValue: 'static_page'},
+    { provide: 'static_page', useValue: 'static_page' },
     {
       provide: 'static_pageData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['static_page', ConfigInitService]
     },
-    { provide: 'modules', useValue: 'modules'},
+    { provide: 'modules', useValue: 'modules' },
     {
       provide: 'modulesData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['modules', ConfigInitService]
     },
-    { provide: 'repair_shop', useValue: 'repair_shop'},
+    { provide: 'repair_shop', useValue: 'repair_shop' },
     {
       provide: 'repair_shopData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['repair_shop', ConfigInitService]
     },
-    { provide: 'hideActiveTicket', useValue: 'hideActiveTicket'},
+    { provide: 'hideActiveTicket', useValue: 'hideActiveTicket' },
     {
       provide: 'hideActiveTicketData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['hideActiveTicket', ConfigInitService]
     },
-    { provide: 'hideBilling', useValue: 'hideBilling'},
+    { provide: 'hideBilling', useValue: 'hideBilling' },
     {
       provide: 'hideBillingData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['hideBilling', ConfigInitService]
     },
     // npt-net
-    { provide: 'viewOuter', useValue: 'viewOuter'},
+    { provide: 'viewOuter', useValue: 'viewOuter' },
     {
       provide: 'viewOuterData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['viewOuter', ConfigInitService]
@@ -87,9 +87,15 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     { provide: 'menuService', useClass: MenuItemService },
     { provide: 'header', useValue: environment.header },
     { provide: 'footer', useValue: environment.footer },
-    { provide: 'dashboard', useValue: '/dashboard'},
+    { provide: 'dashboard', useValue: '/dashboard' },
     { provide: 'env', useValue: environment.security },
-    { provide: LocationStrategy, useClass: HashLocationStrategy},
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    // npt obu
+    { provide: 'timeOutTest', useValue: 'timeOutTest' },
+    {
+      provide: 'timeOutTestData',
+      useFactory: getPropertyFromConfig, multi: false, deps: ['timeOutTest', ConfigInitService]
+    }
   ],
   bootstrap: [AppComponent]
 })
