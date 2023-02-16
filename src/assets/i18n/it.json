@@ -586,6 +586,9 @@
             "not_found": "Ticket non trovato",
             "extend": "Impossibile esterndere il ticket"
         },
+        "testing": {
+            "store": "Al momento non è possibile recuperare lo stato dell'obu"
+        },
         "obu": {
             "not_found": "Obu Id non presente",
             "not_associated": "L'obu non è associato a un veicolo",

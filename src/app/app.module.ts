@@ -89,13 +89,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     { provide: 'footer', useValue: environment.footer },
     { provide: 'dashboard', useValue: '/dashboard' },
     { provide: 'env', useValue: environment.security },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
     // npt obu
     { provide: 'timeOutTest', useValue: 'timeOutTest' },
     {
       provide: 'timeOutTestData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['timeOutTest', ConfigInitService]
-    }
+    },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent]
 })

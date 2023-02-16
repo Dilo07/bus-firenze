@@ -586,6 +586,9 @@
             "not_found": "Ticket not found",
             "extend": "Cannot extend ticket"
         },
+        "testing": {
+            "store": "State obu not available"
+        },
         "obu": {
             "not_found": "Obu Id doesn't exist",
             "not_associated": "Failed to retrieve vehicle associated to obu",
