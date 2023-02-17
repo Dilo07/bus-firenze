@@ -11,7 +11,7 @@
   "rangeDateStatisticVehicle": null,
   "hideActiveTicket": false,
   "hideBilling": false,
-  "timeOutTest": 300,
+  "timeOutTest": 2400,
   "recatchaKey": "6LdiEkMiAAAAAJKC6CZfGhRS0FIGNs3kPLhQ2hpO",
   "no_auth": {
     "roles": [
