@@ -91,15 +91,14 @@ export class ManageTicketComponent implements OnInit {
       confirm => {
         if (confirm) {
           this.complete = false;
-          this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManagerId).subscribe(
-            () => null,
-            () => this.complete = true,
-            () => {
+          this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManagerId).subscribe({
+            error: () => this.complete = true,
+            complete: () => {
               this.getActiveTicket();
               this.snackBar.showMessage('TICKET.REMOVE_SUCCESS', 'INFO');
               this.complete = true;
             }
-          );
+          });
         }
       }
     );

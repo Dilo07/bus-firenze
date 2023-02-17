@@ -23,7 +23,7 @@
                 <mat-cell *matCellDef="let element" style="text-align: end;">
                     <button mat-icon-button matTooltip="{{'TICKET.ADD' | translate}}" [attr.i18nKey]="'TICKET.ADD'"
                         (click)="modalTicket(element.id)">
-                        <mat-icon style="color: #0066CC;">receipt_long</mat-icon>
+                        <mat-icon><span class="icon-ticket"></span></mat-icon>
                     </button>
                 </mat-cell>
             </ng-container>

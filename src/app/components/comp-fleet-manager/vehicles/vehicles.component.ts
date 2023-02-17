@@ -42,19 +42,9 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   .white {
     color: white;
   }
-  .icon-assignment:before {
-    color: white;
-    font-weight: bold;
-  }
   .icon-assignment-grey:before {
     color: grey;
     font-weight: bold;
-  }
-  .icon-warning:before {
-    color: red;
-  }
-  .icon-refresh:before {
-    color: white;
   }
   `],
 })

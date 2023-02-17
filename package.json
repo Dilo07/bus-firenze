@@ -29,7 +29,7 @@
     "@npt/npt-map": "^13.0.24",
     "@npt/npt-net": "^13.0.24",
     "@npt/npt-obu": "^13.0.24",
-    "@npt/npt-template": "^13.0.24",
+    "@npt/npt-template": "file:../npt-npt-template-13.0.26.tgz",
     "codice-fiscale-js": "^2.3.15",
     "intl-tel-input": "17.0.15",
     "libphonenumber-js": "1.9.43",

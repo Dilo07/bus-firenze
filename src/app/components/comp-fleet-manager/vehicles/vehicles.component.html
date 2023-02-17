@@ -40,6 +40,13 @@
 				<mat-card *ngFor="let element of vehicleListConnect | async" class="cardDriver" fxFlex="100"
 					fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
 					<mat-card-title class="white">
+						<mat-icon> <!-- colore icona-->
+							<span [class]="element.status === 'DELETED' ? 'icon-Pin-rounded redIcon' :
+							element.status === 'TEMP' ? 'icon-Pin-rounded yellowIcon' :
+							element.status === 'REGISTERED' ? 'icon-Pin-rounded greenIcon' : 
+							'icon-Pin-rounded yellowIcon'">
+							</span>
+						</mat-icon>
 						ID {{element.id}}
 					</mat-card-title>
 					<mat-card-content>
@@ -51,7 +58,7 @@
 								<button *ngIf="element.status === 'DELETED'" mat-icon-button
 									[attr.i18nKey]="'VEHICLE.REFRESH_EXPDATE'" (click)="updateStatus(element.id)">
 									<mat-icon matTooltip="{{'VEHICLE.REFRESH_EXPDATE' | translate}}">
-										<span class="icon-refresh"></span>
+										<span class="icon-refresh whiteIcon"></span>
 									</mat-icon>
 								</button>
 							</span>
@@ -77,7 +84,7 @@
 								(click)="viewCertificate(element.id, element.certificateId)">
 								<mat-icon
 									matTooltip="{{(element.certificateId ? 'VEHICLE.CERTIFICATE' : 'VEHICLE.NOCERTIFICATE') | translate}}">
-									<span class="icon-assignment"
+									<span class="icon-assignment whiteIcon"
 										[ngClass]="element.certificateId ? null : 'icon-assignment-grey'">
 									</span>
 								</mat-icon>
@@ -93,12 +100,12 @@
 							<div fxLayout="row" fxLayoutAlign="end">
 								<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
 									[attr.i18nKey]="'menu'">
-									<mat-icon style="color: white;">more_horiz</mat-icon>
+									<mat-icon><span class="icon-Horizontal-dots whiteIcon"></span></mat-icon>
 								</button>
 								<button mat-icon-button matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
 									[attr.i18nKey]="'COMMON.ACTION.DELETE'"
 									(click)="deleteVehicle(element.id, element.valid)">
-									<mat-icon><span class="icon-delete"></span></mat-icon>
+									<mat-icon><span class="icon-Bin whiteIcon"></span></mat-icon>
 								</button>
 							</div>
 							<mat-menu #actionsMenuManage="matMenu" class="menu-color">

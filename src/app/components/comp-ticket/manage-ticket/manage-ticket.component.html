@@ -98,17 +98,18 @@
                 <mat-cell *matCellDef="let element" style="text-align: end;">
                     <button mat-icon-button matTooltip="{{'TICKET.END' | translate}}"
                         *ngIf="element.ticketSubscription && !element.dateDel" [attr.i18nKey]="'TICKET.END'">
-                        <mat-icon style="color: #0066CC;" (click)="removeTicket(element.ticketId, element.vehicleId)">
+                        <mat-icon style="color: #133775;" (click)="removeTicket(element.ticketId, element.vehicleId)">
                             pan_tool</mat-icon>
                     </button>
                     <button mat-icon-button matTooltip="{{'TICKET.CANCEL' | translate}}"
                         *ngIf="!element.dateSink && !element.dateDel" [attr.i18nKey]="'TICKET.CANCEL'">
-                        <mat-icon style="color: #0066CC;" (click)="removeTicket(element.ticketId, element.vehicleId)">
+                        <mat-icon style="color: #133775;" (click)="removeTicket(element.ticketId, element.vehicleId)">
                             event_busy</mat-icon>
                     </button>
                     <button mat-icon-button matTooltip="{{'TICKET.ADD' | translate}}" *ngIf="!element.dateDel"
                         [attr.i18nKey]="'TICKET.ADD'">
-                        <mat-icon style="color: #0066CC;" (click)="modalTicket(element.vehicleId)">receipt_long
+                        <mat-icon (click)="modalTicket(element.vehicleId)">
+                            <span class="icon-ticket"></span>
                         </mat-icon>
                     </button>
                 </mat-cell>

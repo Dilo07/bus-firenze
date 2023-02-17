@@ -169,6 +169,22 @@ mat-card {
 }
 
 /* icons */
+.whiteIcon:before {
+    color: white;
+}
+
+.redIcon:before {
+    color: #F54236;
+}
+
+.greenIcon:before {
+    color: #4CAE50;
+}
+
+.yellowIcon:before {
+    color: #eed202;
+}
+
 .font-size-20 {
     font-size: 20px !important;
 }
