@@ -225,6 +225,7 @@
         "EUROPEAN-GROUP": "Categoria",
         "EXPIRED": "Veicolo scaduto",
         "WILLEXPIRE": "Il veicolo scadrà in data",
+        "INVALID": "Veicolo non validato da movyon",
         "UNKNOWN": "Veicolo sconosciuto su ines",
         "CONSENT": "Consenso contratto",
         "DATE_ASSOCIATION": "Data associazione",
@@ -481,6 +482,8 @@
         "DELTA_MERGEABLE": "Canone mensile periodico",
         "UNINSTALL": "Disinstallazione obu",
         "MISSED_APPOINTMENT": "Mancato appuntamento",
+        "MISSING_OBU": "Trattenimento deposito cauzionale per non restituzione OBU",
+        "DAMAGE": "Trattenimento deposito cauzionale per danneggiamento OBU",
         "CANCELLED_APPOINTMENT": "Appuntamento cancellato entro 24h",
         "REVERSAL": "Nota di credito",
         "CHANGE": "Sostituzione obu",
@@ -583,6 +586,9 @@
             "not_found": "Ticket non trovato",
             "extend": "Impossibile esterndere il ticket"
         },
+        "testing": {
+            "store": "Al momento non è possibile recuperare lo stato dell'obu"
+        },
         "obu": {
             "not_found": "Obu Id non presente",
             "not_associated": "L'obu non è associato a un veicolo",
@@ -592,14 +598,16 @@
             "remove": "non è possibile rimuovere l'obu",
             "installer": "L'installer non ha installato questo obu",
             "associate_to_other_domains": "L'obu da sostituire è associato ad un altro dominio, rimuovilo da tutti i domini",
-            "ticket": "Non è possibile rimuovere un OBU da un veicolo con un abbonamento attivo associato"
+            "ticket": "Non è possibile rimuovere un OBU da un veicolo con un abbonamento attivo associato",
+            "bl": "Obu dichiarato smarrito"
         },
         "penalty": {
             "add": "Errore nell'aggiunta penale",
             "duplicate": "non si possono aggiungere due penali dello stesso tipo sullo stesso veicolo lo stesso giorno"
         },
         "vies": {
-            "invalid": "Partita iva non valida, vuoi comunque inserire questo valore?",
+            "vat_invalid": " Partita iva non valida, vuoi comunque inserire questo valore?",
+            "fc_invalid": " Codice fiscale non valido, vuoi comunque inserire questo valore?",
             "unavailable": "Servizio di verifica partita iva non valido, vuoi comunque inserire questo valore?"
         },
         "ines": {

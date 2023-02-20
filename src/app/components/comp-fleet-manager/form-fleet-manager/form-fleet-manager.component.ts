@@ -302,20 +302,22 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
           }
         },
         error: (error) => { // p.iva non valida o servizio down
-          const ref = this.dialog.open(ModalCheckComponent, {
-            width: '40%',
-            height: '40%',
-            data: { i18nKey: error.error.i18nKey, vat: pIva }
-          });
-          ref.afterClosed().subscribe(
-            (resp) => {
-              if (!resp) {
-                this.formGroup.patchValue({ ctrlpIva: '' });
-              } else { // utente accetta p.iva non valida sul servizio
-                this.failedCheck = true;
+          if (error.error.confirm) {
+            const ref = this.dialog.open(ModalCheckComponent, {
+              width: '40%',
+              height: '40%',
+              data: { vat: pIva }
+            });
+            ref.afterClosed().subscribe(
+              (resp) => {
+                if (!resp) {
+                  this.formGroup.patchValue({ ctrlpIva: '' });
+                } else { // utente accetta p.iva non valida sul servizio
+                  this.failedCheck = true;
+                }
               }
-            }
-          );
+            );
+          }
           this.completePiva = true;
         },
         complete: () => this.completePiva = true
@@ -353,20 +355,22 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
               }
             },
             error: (error) => { // p.iva non valida o servizio down
-              const ref = this.dialog.open(ModalCheckComponent, {
-                width: '40%',
-                height: '40%',
-                data: { i18nKey: error.error.i18nKey, fiscalCode: fiscalCode }
-              });
-              ref.afterClosed().subscribe(
-                (resp) => {
-                  if (!resp) {
-                    this.formGroup.patchValue({ ctrlCF: '' });
-                  } else { // utente accetta p.iva non valida sul servizio
-                    this.failedCheck = true;
+              if (error.error.confirm) {
+                const ref = this.dialog.open(ModalCheckComponent, {
+                  width: '40%',
+                  height: '40%',
+                  data: { fiscalCode: fiscalCode }
+                });
+                ref.afterClosed().subscribe(
+                  (resp) => {
+                    if (!resp) {
+                      this.formGroup.patchValue({ ctrlCF: '' });
+                    } else { // utente accetta p.iva non valida sul servizio
+                      this.failedCheck = true;
+                    }
                   }
-                }
-              );
+                );
+              }
               this.completePiva2 = true;
             },
             complete: () => this.completePiva2 = true

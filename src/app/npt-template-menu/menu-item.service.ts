@@ -8,15 +8,14 @@ export const ROLES = Object.freeze({
   INSTALLER: 'installer',
   MOVYON: 'movyon',
   OPER_MOVYON: 'opmovyon',
-  FLEETMNG: 'fleet',
-  UNUSUED: 'unusued'
+  FLEETMNG: 'fleet'
 });
 
 const SUBMENU_ROUTES = [
   { state: 'fleet-manager-manage', name: 'Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'deposit', name: 'Deposit', icon: 'euro_symbol', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] },
-  { state: 'billing', name: 'Billing', icon: 'receipt_long', roles: [ROLES.UNUSUED] },
-  { state: 'penalties', name: 'Penalties', icon: 'back_hand', roles: [ROLES.UNUSUED] },
+  { state: 'billing', name: 'Billing', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG]  },
+  { state: 'penalties', name: 'Penalties', icon: 'back_hand', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG]  },
   { state: 'fleet-manager-valid', name: 'Valid-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicle-valid', name: 'Vehicle-valid', icon: 'directions_car', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
   { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
