@@ -1,4 +1,5 @@
 import { Coordinate } from '@npt/npt-map';
+import { type } from 'os';
 
 export class FleetManager {
   id: number;
@@ -68,10 +69,12 @@ export class Vehicle {
   allowContacted: boolean;
   deleted: boolean;
   valid: boolean;
-  status: 'REGISTERED' | 'TEMP' | 'DELETED' | 'UNKNOWN';
+  status: VehicleStatus;
   documents: DocumentVehicle[];
   documentsObu: DocumentObu[];
 }
+
+export type VehicleStatus = 'REGISTERED' | 'TEMP' | 'DELETED' | 'UNKNOWN';
 
 export interface DocumentVehicle {
   fileId: number;

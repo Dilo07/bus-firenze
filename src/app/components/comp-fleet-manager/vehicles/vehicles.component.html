@@ -24,16 +24,22 @@
 		<div fxLayout="column" fxLayoutGap="20px">
 			<app-panel-statistic [fleetManager]="fleetManager"></app-panel-statistic>
 			<form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
-				<mat-form-field appearance="outline" fxFlex="80">
+				<mat-form-field appearance="outline" fxFlex="70">
 					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>
 					<input matInput type="search" formControlName="ctrlSearch" placeholder="cerca" autocomplete="off">
 					<button matPrefix mat-icon-button (click)="getVehiclesByManagerId()">
 						<mat-icon>search</mat-icon>
 					</button>
 				</mat-form-field>
-				<mat-slide-toggle formControlName="onlyActive" (change)="getVehiclesByManagerId()">
+				<mat-radio-group fxLayoutGap="10px">
+					<mat-radio-button value="1">Tutti </mat-radio-button>
+					<mat-radio-button value="2">Attivi</mat-radio-button>
+					<mat-radio-button value="3">Scaduti</mat-radio-button>
+					<mat-radio-button value="4">Cancellati</mat-radio-button>
+				</mat-radio-group>
+				<!-- <mat-slide-toggle formControlName="onlyActive" (change)="getVehiclesByManagerId()">
 					{{(search.controls['onlyActive'].value ? 'VEHICLE.ONLY_ACTIVE' : 'VEHICLE.ALL') | translate}}
-				</mat-slide-toggle>
+				</mat-slide-toggle> -->
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<div fxLayout="row wrap" fxLayoutAlign="center">
@@ -41,7 +47,7 @@
 					fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
 					<mat-card-title class="white">
 						<mat-icon> <!-- colore icona-->
-							<span [class]="element.status === 'DELETED' ? 'icon-Pin-rounded redIcon' :
+							<span [class]="element.status === 'DELETED' || element.deleted ? 'icon-Pin-rounded redIcon' :
 							element.status === 'TEMP' ? 'icon-Pin-rounded yellowIcon' :
 							element.status === 'REGISTERED' ? 'icon-Pin-rounded greenIcon' : 
 							'icon-Pin-rounded yellowIcon'">
@@ -62,12 +68,15 @@
 									</mat-icon>
 								</button>
 							</span>
-							<span *ngIf="element.status === 'TEMP'" style="color: #eed202;">
+							<span *ngIf="element.deleted" style="color: #F54236;">
+								{{'VEHICLE.DELETED' | translate}}
+							</span>
+							<span *ngIf="element.status === 'TEMP' && !element.deleted" style="color: #eed202;">
 								{{'VEHICLE.WILLEXPIRE' | translate}}
 								{{element.expiresAt?.day + '/' + element.expiresAt?.month + '/' +
 								element.expiresAt?.year }}
 							</span>
-							<span *ngIf="element.status === 'REGISTERED'" style="color: #4CAE50;">
+							<span *ngIf="element.status === 'REGISTERED' && !element.deleted" style="color: #4CAE50;">
 								{{'VEHICLE.ACTIVE' | translate}}
 							</span>
 							<span *ngIf="element.status === 'UNKNOWN'" style="color: #eed202;">
@@ -139,7 +148,7 @@
 									[state]="{vehicle: element, fleetManager: fleetManager}"
 									[attr.i18nKey]="'STATISTIC.VEHICLE'">
 									<mat-icon matTooltip="{{'STATISTIC.VEHICLE' | translate}}">
-										<span class="icon-statistic font-size-30"></span>
+										<span class="icon-Graph whiteIcon"></span>
 									</mat-icon>
 								</button>
 							</div>
