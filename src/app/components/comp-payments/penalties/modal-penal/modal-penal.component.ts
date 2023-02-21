@@ -16,6 +16,7 @@ export class ModalPenalComponent implements OnInit {
   public formGroup: FormGroup;
   public listPenalType: PenalType[];
   public complete = true;
+  public maxDate = moment().toDate();
 
   constructor(
     public dialogRef: MatDialogRef<ModalPenalComponent>,
