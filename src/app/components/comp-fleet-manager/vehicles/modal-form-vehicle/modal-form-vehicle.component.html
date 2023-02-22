@@ -80,7 +80,7 @@
                         {{'VEHICLE.ERROR_NEGATIVE' | translate}}</mat-error>
                 </mat-form-field>
             </div>
-            <div *ngIf="!this.data?.vehicle.valid">
+            <div *ngIf="!this.data.vehicle?.valid">
                 <mat-checkbox formControlName="ctrlConsent"></mat-checkbox>
                 {{'VEHICLE.CONSENT_TEXT' | translate}}
             </div>
