@@ -18,7 +18,7 @@
                     fxFlex.gt-xs="100">
                     <mat-label>{{'PENALTIES.DATE' | translate}}</mat-label>
                     <input matInput placeholder="{{'MODAL-FORM.DATE' | translate}}" [matDatepicker]="pickerDate"
-                        (focus)="pickerDate.open()" formControlName="datePenal">
+                        [max]="maxDate" (focus)="pickerDate.open()" formControlName="datePenal">
                     <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
                     <mat-datepicker #pickerDate></mat-datepicker>
                 </mat-form-field>

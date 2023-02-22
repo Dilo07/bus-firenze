@@ -6,8 +6,7 @@
 				(click)="backToValidVehicle()">
 				{{'FLEET-MANAGER.BACK' |translate}}
 			</button>
-			<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'"
-				(click)="addVehicle()">
+			<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'" (click)="addVehicle()">
 				{{'FLEET-MANAGER.NEW' | translate}}
 			</button>
 			<button mat-button class="downloadButtons" [matMenuTriggerFor]="menuDownload"
@@ -67,7 +66,8 @@
 							</button>
 							<button *ngIf="!element.valid" mat-icon-button [disabled]="true"
 								[attr.i18nKey]="'VEHICLE.INVALID'">
-								<mat-icon style="color: #eed202; opacity: 0.8;" matTooltip="{{'VEHICLE.INVALID' | translate}}">warning
+								<mat-icon style="color: #eed202; opacity: 0.8;"
+									matTooltip="{{'VEHICLE.INVALID' | translate}}">warning
 								</mat-icon>
 							</button>
 							<button *ngIf="element.status === statusVehicle.unknown" mat-icon-button [disabled]="true"
@@ -159,7 +159,7 @@
 								<!--attivi-->
 								<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
 									[attr.i18nKey]="'menu'">
-									<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
+									<mat-icon><span class="icon-Horizontal-dots"></span></mat-icon>
 								</button>
 								<mat-menu #actionsMenuManage="matMenu" class="menu-color">
 									<button mat-menu-item [attr.i18nKey]="'COMMON.ACTION.EDIT'"
