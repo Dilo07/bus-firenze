@@ -38,6 +38,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Output() public callRefreshTableFleet = new EventEmitter();
   @Output() public viewDeposit = new EventEmitter<{ vehicleId: number; documents: DocumentVehicle[] }>();
   @Output() public viewCertificate = new EventEmitter<{ vehicleId: number; certificateId: number }>();
+  @Output() public updateCertificate = new EventEmitter<{ vehicleId: number; $event: any}>();
   public dataSource = new MatTableDataSource<Vehicle>();
   public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'certificateId', 'type', 'actions'];
 

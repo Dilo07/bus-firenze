@@ -2,7 +2,8 @@
 	<mat-card-content fxLayout="column" fxLayoutGap="20px">
 		<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 		<div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
-			<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows matSortActive="id" matSortDirection="asc">
+			<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows matSortActive="id"
+				matSortDirection="asc">
 				<ng-container matColumnDef="expandButton">
 					<mat-header-cell *matHeaderCellDef></mat-header-cell>
 					<mat-cell *matCellDef="let element">
@@ -24,14 +25,16 @@
 					</mat-cell>
 				</ng-container>
 				<ng-container matColumnDef="name">
-					<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.NAME' | translate}} </mat-header-cell>
+					<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.NAME' |
+						translate}} </mat-header-cell>
 					<mat-cell *matCellDef="let element">
 						<span class="mobile-label">{{'FLEET-MANAGER.NAME' | translate}}</span>
 						{{element.name}}
 					</mat-cell>
 				</ng-container>
 				<ng-container matColumnDef="surname">
-					<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.SURNAME' | translate}} </mat-header-cell>
+					<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.SURNAME' |
+						translate}} </mat-header-cell>
 					<mat-cell *matCellDef="let element">
 						<span class="mobile-label">{{'FLEET-MANAGER.SURNAME' | translate}}</span>
 						{{element.surname}}
@@ -70,8 +73,9 @@
 										<app-verify-vehicles *ngIf="expandedElement === element"
 											(callRefreshTableFleet)="callFleetDeposit()"
 											(viewDeposit)="viewDeposit($event)"
-											(viewCertificate)="viewCertificate($event)" [disableViewPdf]="complete"
-											[fleet]="expandedElement">
+											(viewCertificate)="viewCertificate($event)"
+											(updateCertificate)="uploadCertificate($event.vehicleId, $event.$event)"
+											[disableViewPdf]="complete" [fleet]="expandedElement">
 										</app-verify-vehicles>
 										<!--component-->
 									</ng-template>

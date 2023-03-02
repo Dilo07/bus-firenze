@@ -37,14 +37,23 @@
                             [ngClass]="element.certificateId ? null : 'icon-assignment-grey'"></span>
                     </mat-icon>
                 </button>
+                <input style="display: none" type="file" #fileInput accept="application/pdf, image/jpeg, image/png"
+                    (change)="updateCertificate.emit({vehicleId: element.id, $event})">
+                <button mat-icon-button *ngIf="!element.certificateId" (click)="fileInput.click()">
+                    <mat-icon matTooltip=" {{'VEHICLE.CERTIFICATE_MODIFY' | translate}}">
+                        <span class="icon-edit"></span>
+                    </mat-icon>
+                </button>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="type">
             <mat-header-cell *matHeaderCellDef> {{'VEHICLE.TYPE_DOC' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                <span class="mobile-label">{{'VEHICLE.TYPE_DOC' | translate}}</span>
-                {{ 'VEHICLE.' + (element.documents | documentToValid) | translate}}
+                <ng-container *ngIf="element.documents | documentToValid">
+                    <span class="mobile-label">{{'VEHICLE.TYPE_DOC' | translate}}</span>
+                    {{ 'VEHICLE.' + (element.documents | documentToValid) | translate}}
+                </ng-container>
             </mat-cell>
         </ng-container>
 
@@ -52,7 +61,8 @@
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span>
-                    <button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}" [disabled]="!disableViewPdf"
+                    <button *ngIf="element.documents | documentToValid" mat-icon-button
+                        matTooltip="{{'OBU.VIEW_FILE' | translate}}" [disabled]="!disableViewPdf"
                         [attr.i18nKey]="'OBU.VIEW_FILE'"
                         (click)="viewDeposit.emit({vehicleId: element.id, documents: element.documents})">
                         <mat-icon><span class="icon-document_search"></span></mat-icon>
