@@ -74,7 +74,7 @@
 											(callRefreshTableFleet)="callFleetDeposit()"
 											(viewDeposit)="viewDeposit($event)"
 											(viewCertificate)="viewCertificate($event)"
-											(updateCertificate)="uploadCertificate($event.vehicleId, $event.$event)"
+											(updateCertificate)="uploadCertificate($event.vehicleId, $event.event, element.id)"
 											[disableViewPdf]="complete" [fleet]="expandedElement">
 										</app-verify-vehicles>
 										<!--component-->

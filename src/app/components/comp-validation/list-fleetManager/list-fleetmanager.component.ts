@@ -143,7 +143,7 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
       }));
   }
 
-  public uploadCertificate(vehicleId: number, event: any): void {
+  public uploadCertificate(vehicleId: number, event: any, fleetManagerId: number): void {
     this.complete = false;
     const file = event.target.files[0];
     const type = event.target.files[0].type;
@@ -155,7 +155,7 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
       /* this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR'); */
       this.complete = true;
     } else {
-      this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file).subscribe(
+      this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file, fleetManagerId).subscribe(
         /* () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO') */
         () => this.complete = true,
         () => this.complete = true

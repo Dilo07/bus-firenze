@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { DepositType, DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
@@ -28,6 +28,11 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
     color: grey;
     font-weight: bold;
   }
+
+  .icon-rule-grey:before {
+    color: grey;
+    font-weight: bold;
+  }
   `
   ]
 })
@@ -38,7 +43,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Output() public callRefreshTableFleet = new EventEmitter();
   @Output() public viewDeposit = new EventEmitter<{ vehicleId: number; documents: DocumentVehicle[] }>();
   @Output() public viewCertificate = new EventEmitter<{ vehicleId: number; certificateId: number }>();
-  @Output() public updateCertificate = new EventEmitter<{ vehicleId: number; $event: any}>();
+  @Output() public updateCertificate = new EventEmitter<{ vehicleId: number; event: any }>();
   public dataSource = new MatTableDataSource<Vehicle>();
   public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'certificateId', 'type', 'actions'];
 
@@ -71,10 +76,11 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
     dialogRef.afterClosed().subscribe(
       confirm => {
         if (confirm) {
-          let depositType: string;
+          let depositType: DepositType;
           documents.map(document => {
             if (!document.valid) { depositType = document.type; }
           });
+          if (!depositType) { depositType = 'cert'; }
           this.subscription.push(this.vehicleService.validVehicle(this.fleet.id, vehicleId, depositType, true).subscribe({
             next: () => this.snackBar.showMessage('VEHICLE.VALID_SUCCESS', 'INFO'),
             complete: () => this.getVehicles()
@@ -84,6 +90,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
     );
   }
 
+  // naviga nella pagina veicoli passando il fleet manager e la targa veicolo
   public verifyVehicle(lpn: string): void {
     this.router.navigate(['../manage/vehicles'], { state: { fleetManager: this.fleet, vehicleLpn: lpn } });
   }

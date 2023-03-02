@@ -73,7 +73,7 @@ export class RequestDateValidPipe implements PipeTransform {
 })
 export class DocumentToValidPipe implements PipeTransform {
 
-  transform(documents: DocumentVehicle[]): string {
+  transform(documents: DocumentVehicle[]): DepositType {
     let documentType = null;
     documents.map(document => {
       if (!document.valid) { documentType = document.type; }

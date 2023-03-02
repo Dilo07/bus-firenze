@@ -113,11 +113,8 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  uploadCertificate(vehicleId: number, file: File, fleetManagerId?: number): Observable<void> {
-    let url = '';
-    if (fleetManagerId) {
-      url = '/' + fleetManagerId;
-    }
+  uploadCertificate(vehicleId: number, file: File, fleetManagerId: number): Observable<void> {
+    const url = '/' + fleetManagerId;
     const formData = new FormData();
     formData.append('file', file);
 
