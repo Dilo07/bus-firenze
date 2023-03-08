@@ -87,9 +87,9 @@ export class DocumentToValidPipe implements PipeTransform {
   name: 'documentRemObu'
 })
 export class DocumentRemoveObu implements PipeTransform {
-  transform(documents: DocumentObu[]): DocumentObu {
+  transform(documentsObu: DocumentObu[]): DocumentObu {
     let documentObu = null;
-    documentObu = documents.find(
+    documentObu = documentsObu.find(
       (value: DocumentObu) => (value.type === 'remObu' || value.type === 'remObuFree' || value.type === 'remObuFail' || value.type === 'missingObu')
     );
     return documentObu;
