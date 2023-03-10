@@ -145,7 +145,7 @@
 										<mat-icon><span class="icon-driver"></span></mat-icon>
 										{{'DRIVERS.TITLE' | translate}}
 									</button>
-									<button mat-menu-item [routerLink]="['vehicles']" [state]="{fleetManager: element}"
+									<button mat-menu-item [routerLink]="['vehicles/:' + element.name]" [state]="{fleetManager: element}"
 										[attr.i18nKey]="'VEHICLE.TITLE'">
 										<mat-icon><span class="icon-car"></span></mat-icon>
 										{{'VEHICLE.TITLE' | translate}}

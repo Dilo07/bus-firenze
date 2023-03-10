@@ -74,7 +74,7 @@ export class Vehicle {
   documentsObu: DocumentObu[];
 }
 
-export type VehicleStatus = 'REGISTERED' | 'TEMP' | 'DELETED' | 'UNKNOWN';
+export type VehicleStatus = 'ALL' | 'REGISTERED' | 'TEMP' | 'DELETED' | 'UNKNOWN';
 
 export interface DocumentVehicle {
   fileId: number;

@@ -1,6 +1,7 @@
 <mat-card>
 	<div fxLayout="row wrap" fxLayoutAlign="space-between">
 		<mat-card-title>{{'VEHICLE.TITLE' | translate}}</mat-card-title>
+		<app-ng-dynamic-breadcrumb [bgColor]="'white'" [fontSize]="'14px'" style="height: 1px;"></app-ng-dynamic-breadcrumb>
 		<span fxLayoutGap="20px">
 			<button mat-button class="backButton" *ngIf="fleetManager" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
 				(click)="backToValidVehicle()">
@@ -31,15 +32,12 @@
 						<mat-icon>search</mat-icon>
 					</button>
 				</mat-form-field>
-				<mat-radio-group fxLayoutGap="10px">
-					<mat-radio-button value="1">Tutti </mat-radio-button>
-					<mat-radio-button value="2">Attivi</mat-radio-button>
-					<mat-radio-button value="3">Scaduti</mat-radio-button>
-					<mat-radio-button value="4">Cancellati</mat-radio-button>
+				<mat-radio-group fxLayoutGap="10px" formControlName="ctrlStatus" (change)="filterDataSourceStatus($event.value)">
+					<mat-radio-button [value]="'ALL'">{{'VEHICLE.ALL' | translate}}</mat-radio-button>
+					<mat-radio-button [value]="'REGISTERED'">{{'VEHICLE.STATE_ACTIVE' | translate}}</mat-radio-button>
+					<mat-radio-button [value]="'TEMP'">{{'VEHICLE.STATE_TEMP' | translate}}</mat-radio-button>
+					<mat-radio-button [value]="'DELETED'">{{'VEHICLE.STATE_EXP' | translate}}</mat-radio-button>
 				</mat-radio-group>
-				<!-- <mat-slide-toggle formControlName="onlyActive" (change)="getVehiclesByManagerId()">
-					{{(search.controls['onlyActive'].value ? 'VEHICLE.ONLY_ACTIVE' : 'VEHICLE.ALL') | translate}}
-				</mat-slide-toggle> -->
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<div fxLayout="row wrap" fxLayoutAlign="center">
@@ -156,174 +154,6 @@
 					</mat-card-content>
 				</mat-card>
 			</div>
-			<!-- <div class="mat-elevation-z8 example-container"
-				[style.display]="vehicleList.data.length === 0 ? 'none' : ''">
-				<mat-table [dataSource]="vehicleList" class="mat-elevation-z8" matSort matSortActive="id"
-					matSortDirection="asc">
-					<ng-container matColumnDef="id">
-						<mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
-						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">id</span>
-							{{element.id}}
-							<button *ngIf="element.status === statusVehicle.deleted" mat-icon-button [disabled]="true"
-								[attr.i18nKey]="'VEHICLE.EXPIRED'">
-								<mat-icon
-									matTooltip="{{'VEHICLE.EXPIRED' | translate}} {{element.expiresAt ? '(' + element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year + ')' : '' }}">
-									<span class="icon-warning"></span>
-								</mat-icon>
-							</button>
-							<button *ngIf="element.status === statusVehicle.deleted" mat-icon-button
-								[attr.i18nKey]="'VEHICLE.REFRESH_EXPDATE'" (click)="updateStatus(element.id)">
-								<mat-icon matTooltip="{{'VEHICLE.REFRESH_EXPDATE' | translate}}">
-									<span class="icon-refresh"></span>
-								</mat-icon>
-							</button>
-							<button *ngIf="element.status === statusVehicle.temp" mat-icon-button [disabled]="true"
-								[attr.i18nKey]="'VEHICLE.WILLEXPIRE'">
-								<mat-icon style="color: #eed202; opacity: 0.8;" matTooltip="{{'VEHICLE.WILLEXPIRE' | translate}}
-								{{element.expiresAt?.day + '/' + element.expiresAt?.month + '/' + element.expiresAt?.year }}">warning
-								</mat-icon>
-							</button>
-							<button *ngIf="element.status === statusVehicle.unknown" mat-icon-button [disabled]="true"
-								[attr.i18nKey]="'VEHICLE.UNKNOWN'">
-								<mat-icon style="color: #9c8b0979; opacity: 0.8;"
-									matTooltip="{{'VEHICLE.UNKNOWN' | translate}}">
-									warning_amber
-								</mat-icon>
-							</button>
-							<button *ngIf="element.deleted" mat-icon-button [disabled]="true"
-								[attr.i18nKey]="'VEHICLE.DISABLED'">
-								<mat-icon style="color: #8f9a27"
-									matTooltip="{{('VEHICLE.DISABLED' | translate) +  (element.deleted | date : 'dd/MM/yyyy')}}">
-									disabled_by_default</mat-icon>
-							</button>
-						</mat-cell>
-					</ng-container>
-
-					<ng-container matColumnDef="plate">
-						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
-						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
-							{{ element.lpn}}
-						</mat-cell>
-					</ng-container>
-
-					<ng-container matColumnDef="nat">
-						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
-						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
-							<span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
-						</mat-cell>
-					</ng-container>
-
-					<ng-container matColumnDef="certificateId">
-						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.CERTIFICATE' | translate}} </mat-header-cell>
-						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">{{'VEHICLE.CERTIFICATE' | translate}}</span>
-							<button mat-icon-button [disabled]="!element.certificateId"
-								[attr.i18nKey]="'VEHICLE.CERTIFICATE'"
-								(click)="viewCertificate(element.id, element.certificateId)">
-								<mat-icon
-									matTooltip="{{(element.certificateId ? 'VEHICLE.CERTIFICATE' : 'VEHICLE.NOCERTIFICATE') | translate}}">
-									<span class="icon-assignment"
-										[ngClass]="element.certificateId ? null : 'icon-assignment-grey'">
-									</span>
-								</mat-icon>
-							</button>
-							<input style="display: none" type="file" #fileInput
-								accept="application/pdf, image/jpeg, image/png"
-								(change)="uploadCertificate(element.id, $event)">
-							<button mat-icon-button *ngIf="fleetManager && !element.deleted"
-								(click)="fileInput.click()">
-								<mat-icon matTooltip=" {{'VEHICLE.CERTIFICATE_MODIFY' | translate}}">
-									<span class="icon-edit"></span>
-								</mat-icon>
-							</button>
-						</mat-cell>
-					</ng-container>
-
-					<ng-container matColumnDef="euroClass">
-						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.EURO-CLASS' | translate}} </mat-header-cell>
-						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">{{'VEHICLE.EURO-CLASS' | translate}}</span>
-							{{ element.euroClass}}
-						</mat-cell>
-					</ng-container>
-
-					<ng-container matColumnDef="obuId">
-						<mat-header-cell *matHeaderCellDef> obuId </mat-header-cell>
-						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">obuId</span>
-							{{ element.obuId}}
-						</mat-cell>
-					</ng-container>
-
-					<ng-container matColumnDef="consent">
-						<mat-header-cell *matHeaderCellDef> {{'VEHICLE.CONSENT' | translate}}</mat-header-cell>
-						<mat-cell *matCellDef="let element">
-							<span class="mobile-label">{{'VEHICLE.CONSENT' | translate}}</span>
-							{{ (element.allowContacted ? 'VEHICLE.CONSENTYES' : 'VEHICLE.CONSENTNO') | translate}}
-						</mat-cell>
-					</ng-container>
-
-					<ng-container matColumnDef="actions">
-						<mat-header-cell *matHeaderCellDef> </mat-header-cell>
-						<mat-cell *matCellDef="let element" style="text-align: end;">
-							<ng-container *ngIf="!element.deleted else deleted">
-								
-								<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
-									[attr.i18nKey]="'menu'">
-									<mat-icon style="color: #1C3775;">more_horiz</mat-icon>
-								</button>
-								<mat-menu #actionsMenuManage="matMenu" class="menu-color">
-									<button mat-menu-item [attr.i18nKey]="'COMMON.ACTION.EDIT'"
-										(click)="editVehicle(element)">
-										<mat-icon><span class="icon-edit"></span></mat-icon>
-										{{'COMMON.ACTION.EDIT' | translate}}
-									</button>
-									<button mat-menu-item [routerLink]="['statistic']"
-										[state]="{vehicle: element, fleetManager: fleetManager}"
-										[attr.i18nKey]="'STATISTIC.VEHICLE'">
-										<mat-icon><span class="icon-statistic font-size-30"></span></mat-icon>
-										{{'STATISTIC.VEHICLE' | translate}}
-									</button>
-									<button *ngIf="element.hardware" mat-menu-item [attr.i18nKey]="'VEHICLE.DOWNLOAD'"
-										(click)="downloadManualPdf(element.hardware)">
-										<mat-icon><span class="icon-download"></span></mat-icon>
-										{{'VEHICLE.DOWNLOAD' | translate}}
-									</button>
-									<button *ngIf="element.documents | hasDeposit: true" mat-menu-item
-										[attr.i18nKey]="'VEHICLE.DRIVER_ASSOCIATION'"
-										(click)="associationDriver(element.id)">
-										<mat-icon><span class="icon-refresh"></span></mat-icon>
-										{{'VEHICLE.DRIVER_ASSOCIATION' | translate}}
-									</button>
-								</mat-menu>
-								<button mat-icon-button matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
-									[attr.i18nKey]="'COMMON.ACTION.DELETE'"
-									(click)="deleteVehicle(element.id, element.valid)">
-									<mat-icon><span class="icon-delete"></span></mat-icon>
-								</button>
-							</ng-container>
-							<ng-template #deleted>
-								
-								<button mat-icon-button [routerLink]="['statistic']"
-									[state]="{vehicle: element, fleetManager: fleetManager}"
-									[attr.i18nKey]="'STATISTIC.VEHICLE'">
-									<mat-icon matTooltip="{{'STATISTIC.VEHICLE' | translate}}">
-										<span class="icon-statistic font-size-30"></span>
-									</mat-icon>
-								</button>
-							</ng-template>
-						</mat-cell>
-					</ng-container>
-
-					<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true">
-					</mat-header-row>
-					<mat-row *matRowDef="let row; columns: displayedColumns;"
-						[ngClass]="row.deleted ? 'obuDisactive' : ''" class="hover-row"></mat-row>
-				</mat-table>
-			</div> -->
 			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="9"
 				[pageSizeOptions]="[6, 9, 12]"></mat-paginator>
 			<div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>

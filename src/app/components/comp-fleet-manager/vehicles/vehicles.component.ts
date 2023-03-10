@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
+import { NgDynamicBreadcrumbService } from 'ng-dynamic-breadcrumb';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { InstallerService } from 'src/app/services/installer.service';
@@ -60,6 +61,8 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public search: FormGroup;
   public complete = true;
   public src: FileViewer = { type: '', url: '', fileName: '' };
+  public defaultStatus: VehicleStatus = 'REGISTERED';
+  public onlyActive = true;
 
   private subscription: Subscription[] = [];
 
@@ -70,7 +73,8 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     private installerService: InstallerService,
     private driverService: DriverService,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private ngDynamicBreadcrumbService: NgDynamicBreadcrumbService) {
     // se è utente movyon op movyon fleetManager sarà valorizzato in caso di ruolo fleetmanger no
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
     // se arriva da validazione veicoli viene valorizzata la targa in vehicleLpn
@@ -80,9 +84,13 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.search = this.formBuilder.group({
       ctrlSearch: [this.vehicleLpn],
-      onlyActive: [true]
+      ctrlStatus: ['REGISTERED']
     });
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
+    if (this.fleetManager) {
+      const breadcrumb =  {customFleet: this.fleetManager.name};
+      this.ngDynamicBreadcrumbService.updateBreadcrumbLabels(breadcrumb);
+    }
   }
 
   ngOnDestroy(): void {
@@ -94,16 +102,19 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public getVehiclesByManagerId(): void {
     this.complete = false;
     const keyword = this.search.get('ctrlSearch').value;
-    const onlyActive = this.search.get('onlyActive').value;
+    const status = this.search.get('ctrlStatus').value;
     // in caso di op_movyon movyon passa l'id altrimento no
-    this.vehicleService.getVehiclesById(onlyActive, this.fleetManager?.id, keyword).subscribe({
+    this.vehicleService.getVehiclesById(this.onlyActive, this.fleetManager?.id, keyword).subscribe({
       next: (data) => {
         this.vehicleList.data = data;
         this.vehicleListConnect = this.vehicleList.connect();
         this.vehicleList.paginator = this.paginator;
+        this.vehicleList.filterPredicate = (data: Vehicle, filter: string) => {
+          return data.status === filter;
+        };
       },
       error: () => this.complete = true,
-      complete: () => this.complete = true
+      complete: () => (this.filterDataSourceStatus(status), this.complete = true)
     });
   }
 
@@ -249,9 +260,21 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     }
   }
 
-/*   public filterDataSourceStatus(status: VehicleStatus[]): void {
-    this.vehicleList.data = this.vehicleList.data.filter((vehicle) => status.includes(vehicle.status));
-  } */
+  public filterDataSourceStatus(status: VehicleStatus): void {
+    if (status === 'ALL') {
+      if (this.onlyActive) {
+        this.onlyActive = false;
+        this.getVehiclesByManagerId();
+      }
+      this.vehicleList.filter = '';
+    } else {
+      if (!this.onlyActive) {
+        this.onlyActive = true;
+        this.getVehiclesByManagerId();
+      }
+      this.vehicleList.filter = status;
+    }
+  }
 
   private resetSearchField(): void {
     this.search.patchValue({

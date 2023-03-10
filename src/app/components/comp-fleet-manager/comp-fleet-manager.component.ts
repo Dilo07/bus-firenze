@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { FileViewer, IAuthenticationService, SessionService, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
@@ -60,10 +61,13 @@ export class FleetManagerComponent implements OnInit {
     private fleetManagerService: FleetManagerService,
     private formBuilder: FormBuilder,
     private sessionService: SessionService,
+    private route: ActivatedRoute,
     @Inject('authService') private authService: IAuthenticationService) { }
 
   ngOnInit(): void {
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
+    const fleetName = this.route.snapshot.paramMap.get('fleetName'); // arriva il parametro dai veicoli
+    if (fleetName) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, fleetName.replace(':', '')); }
     this.search = this.formBuilder.group({
       ctrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.fleetManageSearch)],
     });
@@ -71,7 +75,7 @@ export class FleetManagerComponent implements OnInit {
   }
 
   public callGetFleetManager(): void {
-    const search = this.search?.get('ctrlSearch').value;
+    const search = this.search?.get('ctrlSearch').value ? this.search?.get('ctrlSearch').value.trim() : '';
     this.complete = false;
     const currentSize = this.offset * this.limit;
     this.subscription.push(this.fleetManagerService.searchFleetManager(

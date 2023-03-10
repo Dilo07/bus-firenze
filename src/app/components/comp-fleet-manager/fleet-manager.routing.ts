@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@npt/npt-template';
-import { DriveGuard } from 'src/app/core/guards/driverGuard';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
-import { AnagraphicFleetManagerComponent } from './anagraphic-fleet-manager/anagraphic-fleet-manager.component';
 import { FleetManagerComponent } from './comp-fleet-manager.component';
-import { AnagraphicDriverComponent } from './drivers/anagraphic-driver/anagraphic-driver.component';
-import { AssociationVehiclesComponent } from './drivers/association-vehicles/association-vehicles.component';
 import { DriversComponent } from './drivers/drivers.component';
 import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
 import { FleetDocumentsComponent } from './fleet-documents/fleet-documents.component';
@@ -16,7 +12,12 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 
 const routes: Routes = [
   {
-    path: '', component: FleetManagerComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
+    path: '', component: FleetManagerComponent, canActivate: [AuthGuard],
+    data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
+  },
+  {
+    path: '/:fleetName', component: FleetManagerComponent, canActivate: [AuthGuard],
+    data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
     path: 'real-time', loadChildren: () => import('../comp-real-time/real-time.module').then(m => m.RealTimeModule)
@@ -38,8 +39,26 @@ const routes: Routes = [
     component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON] }
   },
   {
-    path: 'vehicles',
-    component: VehiclesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
+    path: 'vehicles/:fleetName',
+    component: VehiclesComponent, canActivate: [AuthGuard],
+    data: {
+      roles: [ROLES.MOVYON, ROLES.OPER_MOVYON],
+      title: 'vehicles',
+      breadcrumb: [
+        {
+          label: 'Fleet manager',
+          url: '/manage'
+        },
+        {
+          label: 'Fleet manager {{customFleet}}',
+          url: '/manage/:fleetName'
+        },
+        {
+          label: 'Vehicle',
+          url: ''
+        }
+      ]
+    }
   },
   {
     path: 'vehicles/statistic', // per raggiungere le statistiche da fm
