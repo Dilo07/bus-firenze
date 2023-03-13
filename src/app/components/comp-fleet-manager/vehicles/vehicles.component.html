@@ -23,7 +23,6 @@
 	</div>
 	<mat-card-content>
 		<div fxLayout="column" fxLayoutGap="20px">
-			<app-panel-statistic [fleetManager]="fleetManager"></app-panel-statistic>
 			<form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
 				<mat-form-field appearance="outline" fxFlex="70">
 					<mat-label>{{'VEHICLE.SEARCH' | translate}}</mat-label>
@@ -157,6 +156,7 @@
 			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="9"
 				[pageSizeOptions]="[6, 9, 12]"></mat-paginator>
 			<div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
+			<app-panel-statistic [fleetManager]="fleetManager"></app-panel-statistic>
 		</div>
 	</mat-card-content>
 </mat-card>

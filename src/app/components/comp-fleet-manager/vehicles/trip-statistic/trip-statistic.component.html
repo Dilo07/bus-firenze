@@ -1,15 +1,13 @@
-<mat-card>
-    <mat-card-content fxLayout="row wrap" fxLayoutGap="20px">
-        <div>
-            <h3>{{'STATISTIC.KM_STATISTIC' | translate}}</h3>
-            <p> {{vehicleStatTrip?.innerLength / 1000 | number: '1.0-1'}} km</p>
-        </div>
-        <div>
-            <h3>{{'STATISTIC.DURATION_STATISTIC' | translate}} (HH:mm:ss)</h3>
-            <p>
-                {{vehicleStatTrip?.innerDuration > 0 ? (vehicleStatTrip?.innerDuration * 1000 | date : 'HH:mm:ss' :'UTC'):
-                vehicleStatTrip?.innerDuration }}
-            </p>
-        </div>
-    </mat-card-content>
-</mat-card>
+<div fxLayout="row wrap" fxLayoutGap="20px">
+    <div>
+        <!-- <h4>{{'STATISTIC.KM_STATISTIC' | translate}}</h4> -->
+        <p> {{'STATISTIC.KM_STATISTIC' | translate}}: {{vehicleStatTrip?.innerLength / 1000 | number: '1.0-1'}} km</p>
+    </div>
+    <div>
+        <!-- <h4>{{'STATISTIC.DURATION_STATISTIC' | translate}} (HH:mm:ss)</h4> -->
+        <p>{{'STATISTIC.DURATION_STATISTIC' | translate}} (HH:mm:ss):
+            {{vehicleStatTrip?.innerDuration > 0 ? (vehicleStatTrip?.innerDuration * 1000 | date : 'HH:mm:ss' :'UTC'):
+            vehicleStatTrip?.innerDuration }}
+        </p>
+    </div>
+</div>
