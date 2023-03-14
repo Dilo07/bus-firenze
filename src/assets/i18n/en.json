@@ -93,12 +93,12 @@
         "CLEAN": "Clean",
         "SEARCH": "Search Here",
         "NO_DATA": "Nobody Fleet manager present",
-        "FORM-INFO": "Instructions for fleet manager registration",
+        "FORM-INFO": "Instructions for Fleet Manager registration",
         "STEP-1": "Download the ",
         "NEED_DOC": "application form",
-        "STEP-2": "fill in and sign the application form downloaded.",
-        "STEP-3": "once you have filled out the form, enter the data in the registration form on this page.",
-        "STEP-4": "upload the scan of the completed and signed application form using the button ",
+        "STEP-2": "Fill in and sign the application form downloaded.",
+        "STEP-3": "Once you have filled out the form, enter the data in the registration form on this page.",
+        "STEP-4": "Upload the scan of the completed and signed application form using the button ",
         "STEP-5": "To complete the registration, this form requires the verification of the mobile number by sending an OTP code.",
         "INITIAL MESSAGE": "Insert a new Fleet Manager or search for an existing one",
         "MESSAGE_NEW": "Insert the data of new Fleet Manager",
@@ -109,7 +109,7 @@
         "REGISTRATION_SMS": "We sent sms at number: ",
         "REGISTRATION_OTP": "OTP code",
         "REGISTRATION_ERROROTP": "OTP code invalid",
-        "CONFIRM_REGISTRATION": "Once the form is confirmed, movyon will verify the inserted data. You will receive an mail to log in. Do you want continue?",
+        "CONFIRM_REGISTRATION": "Once the form is confirmed, Movyon will verify the inserted data. You will receive an mail to log in. Do you want continue?",
         "EDIT": "Edit",
         "DELETE": "Delete",
         "VALID": "Valid",
@@ -171,7 +171,7 @@
         "reqForm": "Membership form",
         "idDoc": "Identity card",
         "comReg": "Commerce registration",
-        "UPLOAD_FILE": "Upload form",
+        "UPLOAD_FILE": "Upload form.",
         "CHANGE_FILE": "Edit form",
         "SUCCESS_FILE": "Module upload correctly",
         "UPLOAD_IDENTIYCRD": "Upload identity card",
@@ -226,6 +226,7 @@
         "EUROPEAN-GROUP": "Category",
         "EXPIRED": "Vehicle expired ",
         "WILLEXPIRE": "Vehicle will expire at",
+        "INVALID": "Veicolo not valid on Movyon",
         "UNKNOWN": "Vehicle unknow on ines",
         "CONSENT": "Contract consent",
         "DATE_ASSOCIATION": "Date association",
@@ -485,6 +486,8 @@
         "DELTA_MERGEABLE": "Periodic monthly fee",
         "UNINSTALL": "Uninstall obu",
         "MISSED_APPOINTMENT": "Missed appointment",
+        "MISSING_OBU": "Billing item for not return OBU",
+        "DAMAGE": "Billing item for not damage OBU",
         "CANCELLED_APPOINTMENT": "Appointment cancelled within 24h",
         "REVERSAL": "Credit note",
         "CHANGE": "Change obu",
@@ -587,6 +590,9 @@
             "not_found": "Ticket not found",
             "extend": "Cannot extend ticket"
         },
+        "testing": {
+            "store": "State obu not available"
+        },
         "obu": {
             "not_found": "Obu Id doesn't exist",
             "not_associated": "Failed to retrieve vehicle associated to obu",
@@ -596,14 +602,16 @@
             "remove": "Cannot remove the obu",
             "installer": "Installer didn't install this obu",
             "associate_to_other_domains": "The obu to be replaced is associated to another domain, remove it from all domains",
-            "ticket": "Not is possible remove a OBU from vehicle with active ticket"
+            "ticket": "Not is possible remove a OBU from vehicle with active ticket",
+            "bl": "Obu declared losed"
         },
         "penalty": {
             "add": "Error in add penalty",
             "duplicate": "Duplicate penalty for the vehicle"
         },
         "vies": {
-            "invalid": "Invalid vat number, do you still want to enter this value?",
+            "vat_invalid": " Vat number not verified, do you still want to enter this value?",
+            "fc_invalid": " Invalid fiscal codefiscale, do you still want to enter this value?",
             "unavailable": "Service vat verify unavailable,  do you still want to enter this value?"
         },
         "ines": {

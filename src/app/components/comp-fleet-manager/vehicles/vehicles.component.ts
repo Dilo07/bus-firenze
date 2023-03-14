@@ -153,13 +153,13 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((respConfirm) => {
       if (respConfirm) {
         const file = respConfirm.file ? respConfirm.file : null;
-        this.vehicleService.deleteVehicle(vehicleId, file, this.fleetManager?.id).subscribe({
+        this.subscription.push(this.vehicleService.deleteVehicle(vehicleId, file, this.fleetManager?.id).subscribe({
           next: () => this.snackBar.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
           complete: () => {
             this.getVehiclesByManagerId();
             this.resetSearchField();
           }
-        });
+        }));
       }
     });
   }

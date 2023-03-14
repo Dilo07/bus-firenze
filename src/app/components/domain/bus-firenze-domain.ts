@@ -72,6 +72,7 @@ export class Vehicle {
   status: VehicleStatus;
   documents: DocumentVehicle[];
   documentsObu: DocumentObu[];
+  valid: boolean;
 }
 
 export type VehicleStatus = 'ALL' | 'REGISTERED' | 'TEMP' | 'DELETED' | 'UNKNOWN';
@@ -89,7 +90,7 @@ export interface DocumentObu {
   type: DepositType;
 }
 
-export type DepositType = 'deposit' | 'revoke' | 'retention' | 'request' | 'remObu' | 'remObuFree' | 'remObuFail' | 'missingObu';
+export type DepositType = 'deposit' | 'revoke' | 'retention' | 'request' | 'remObu' | 'remObuFree' | 'remObuFail' | 'missingObu' | 'cert';
 
 export class VehicleTripPersistence {
   ticketNumber: string;

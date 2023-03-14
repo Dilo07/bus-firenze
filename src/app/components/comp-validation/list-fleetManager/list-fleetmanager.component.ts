@@ -142,4 +142,24 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
         complete: () => this.complete = true
       }));
   }
+
+  public uploadCertificate(vehicleId: number, event: any, fleetManagerId: number): void {
+    this.complete = false;
+    const file = event.target.files[0];
+    const type = event.target.files[0].type;
+    const size = event.target.files[0].size;
+    if (type !== 'application/pdf') { // formato errato
+      /* this.snackBar.showMessage('FLEET-MANAGER.ERROR_TYPE', 'ERROR'); */
+      this.complete = true;
+    } else if (size > 2097152) { // dimensione massima
+      /* this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR'); */
+      this.complete = true;
+    } else {
+      this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file, fleetManagerId).subscribe(
+        /* () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO') */
+        () => this.complete = true,
+        () => this.complete = true
+      ));
+    }
+  }
 }

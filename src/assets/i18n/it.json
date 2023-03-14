@@ -93,11 +93,11 @@
         "CLEAN": "Ripulisci",
         "SEARCH": "Cerca",
         "NO_DATA": "Nessun Fleet manager presente",
-        "FORM-INFO": "Istruzioni per la registrazione fleet manager",
-        "STEP-1": "scarica il ",
+        "FORM-INFO": "Istruzioni per la registrazione Fleet Manager",
+        "STEP-1": "Scarica il ",
         "NEED_DOC": "modulo di adesione",
-        "STEP-2": "compila e firma il modulo di adesione scaricato.",
-        "STEP-3": "una volta compilato il modulo inserisci i dati nel form di registrazione presente in questa pagina.",
+        "STEP-2": "Compila e firma il modulo di adesione scaricato.",
+        "STEP-3": "Una volta compilato il modulo inserisci i dati nel form di registrazione presente in questa pagina.",
         "STEP-4": "carica la scansione del modulo di adesione compilato e firmato mediante il pulsante ",
         "STEP-5": "Per completare la registrazione, in questo form è richiesta la verifica del numero di cellulare mediante l'invio di un codice OTP.",
         "INITIAL MESSAGE": "Inserisci un nuovo Fleet-Manager o cercane uno esistente",
@@ -109,7 +109,7 @@
         "REGISTRATION_SMS": "Abbiamo inviato un sms al numero: ",
         "REGISTRATION_OTP": "Codice OTP",
         "REGISTRATION_ERROROTP": "Codice OTP non valido",
-        "CONFIRM_REGISTRATION": "Una volta confermata la registrazione movyon verificherà i dati. Riceverai una mail per eseguire l'accesso. Vuoi proseguire?",
+        "CONFIRM_REGISTRATION": "Una volta confermata la registrazione Movyon verificherà i dati. Riceverai una mail per eseguire l'accesso. Vuoi proseguire?",
         "EDIT": "Modifica",
         "DELETE": "Cancella",
         "VALID": "Valida",
@@ -171,7 +171,7 @@
         "reqForm": "Modulo adesione",
         "idDoc": "Carta d'identità",
         "comReg": "Visura camerale",
-        "UPLOAD_FILE": "Carica modulo",
+        "UPLOAD_FILE": "Carica modulo.",
         "CHANGE_FILE": "Modifica modulo",
         "SUCCESS_FILE": "Modulo caricato correttamente",
         "UPLOAD_IDENTIYCRD": "Carica carta d'identità",
@@ -226,6 +226,7 @@
         "EUROPEAN-GROUP": "Categoria",
         "EXPIRED": "Veicolo scaduto",
         "WILLEXPIRE": "Il veicolo scadrà in data",
+        "INVALID": "Veicolo non validato da Movyon",
         "UNKNOWN": "Veicolo sconosciuto su ines",
         "CONSENT": "Consenso contratto",
         "DATE_ASSOCIATION": "Data associazione",
@@ -485,6 +486,8 @@
         "DELTA_MERGEABLE": "Canone mensile periodico",
         "UNINSTALL": "Disinstallazione obu",
         "MISSED_APPOINTMENT": "Mancato appuntamento",
+        "MISSING_OBU": "Trattenimento deposito cauzionale per non restituzione OBU",
+        "DAMAGE": "Trattenimento deposito cauzionale per danneggiamento OBU",
         "CANCELLED_APPOINTMENT": "Appuntamento cancellato entro 24h",
         "REVERSAL": "Nota di credito",
         "CHANGE": "Sostituzione obu",
@@ -587,6 +590,9 @@
             "not_found": "Ticket non trovato",
             "extend": "Impossibile esterndere il ticket"
         },
+        "testing": {
+            "store": "Al momento non è possibile recuperare lo stato dell'obu"
+        },
         "obu": {
             "not_found": "Obu Id non presente",
             "not_associated": "L'obu non è associato a un veicolo",
@@ -596,14 +602,16 @@
             "remove": "non è possibile rimuovere l'obu",
             "installer": "L'installer non ha installato questo obu",
             "associate_to_other_domains": "L'obu da sostituire è associato ad un altro dominio, rimuovilo da tutti i domini",
-            "ticket": "Non è possibile rimuovere un OBU da un veicolo con un abbonamento attivo associato"
+            "ticket": "Non è possibile rimuovere un OBU da un veicolo con un abbonamento attivo associato",
+            "bl": "Obu dichiarato smarrito"
         },
         "penalty": {
             "add": "Errore nell'aggiunta penale",
             "duplicate": "non si possono aggiungere due penali dello stesso tipo sullo stesso veicolo lo stesso giorno"
         },
         "vies": {
-            "invalid": "Partita iva non valida, vuoi comunque inserire questo valore?",
+            "vat_invalid": " Partita iva non verificata, vuoi comunque inserire questo valore?",
+            "fc_invalid": " Codice fiscale non valido, vuoi comunque inserire questo valore?",
             "unavailable": "Servizio di verifica partita iva non valido, vuoi comunque inserire questo valore?"
         },
         "ines": {
