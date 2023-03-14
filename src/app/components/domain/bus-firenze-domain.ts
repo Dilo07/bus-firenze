@@ -72,7 +72,6 @@ export class Vehicle {
   status: VehicleStatus;
   documents: DocumentVehicle[];
   documentsObu: DocumentObu[];
-  valid: boolean;
 }
 
 export type VehicleStatus = 'ALL' | 'REGISTERED' | 'TEMP' | 'DELETED' | 'UNKNOWN';
