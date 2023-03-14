@@ -3,6 +3,7 @@
 		<mat-card-title>{{'VEHICLE.TITLE' | translate}}</mat-card-title>
 		<app-ng-dynamic-breadcrumb [bgColor]="'white'" [fontSize]="'14px'" style="height: 1px;"></app-ng-dynamic-breadcrumb>
 		<span fxLayoutGap="20px">
+			<button mat-button (click)="scroll(stat)">{{'STATISTIC.VEHICLE' | translate}}</button>
 			<button mat-button class="backButton" *ngIf="fleetManager" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
 				(click)="backToValidVehicle()">
 				{{'FLEET-MANAGER.BACK' |translate}}
@@ -10,9 +11,10 @@
 			<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'" (click)="addVehicle()">
 				{{'FLEET-MANAGER.NEW' | translate}}
 			</button>
-			<button mat-button class="downloadButtons" [matMenuTriggerFor]="menuDownload"
+			<button mat-button class="backButton" [matMenuTriggerFor]="menuDownload"
 				[attr.i18nKey]="'VEHICLE.DOWNLOAD'">
 				{{'VEHICLE.DOWNLOAD' | translate}}
+				<mat-icon><span class="icon-Chevron-Down"></span></mat-icon>
 			</button>
 		</span>
 		<mat-menu #menuDownload="matMenu">
@@ -156,7 +158,9 @@
 			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="9"
 				[pageSizeOptions]="[6, 9, 12]"></mat-paginator>
 			<div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
-			<app-panel-statistic [fleetManager]="fleetManager"></app-panel-statistic>
+			<div #stat>
+				<app-panel-statistic [fleetManager]="fleetManager"></app-panel-statistic>
+			</div>
 		</div>
 	</mat-card-content>
 </mat-card>

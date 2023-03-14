@@ -276,6 +276,10 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     }
   }
 
+  public scroll(element: HTMLElement): void{
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+
   private resetSearchField(): void {
     this.search.patchValue({
       ctrlSearch: ''
