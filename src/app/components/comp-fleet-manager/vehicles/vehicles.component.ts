@@ -37,12 +37,6 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
     .mat-column-consent { max-width: 10%;}
     .mat-column-actions { max-width: 20%; display: table-column;}
   }
-  .cardDriver {
-    background-color: #133775;
-  }
-  .white {
-    color: white;
-  }
   .icon-assignment-grey:before {
     color: grey;
     font-weight: bold;

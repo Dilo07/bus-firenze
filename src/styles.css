@@ -78,6 +78,16 @@ mat-card {
     border-radius: 10px;
 }
 
+/* cards */
+
+.cardStyle {
+    background-color: #133775;
+}
+
+.white {
+    color: white;
+}
+
 /* mat-form-field hover */
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
