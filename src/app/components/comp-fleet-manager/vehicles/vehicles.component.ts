@@ -7,7 +7,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { FileViewer, NptBreadcrumbComponent, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
-import { NgDynamicBreadcrumbService } from 'ng-dynamic-breadcrumb';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { InstallerService } from 'src/app/services/installer.service';
@@ -68,8 +67,7 @@ export class VehiclesComponent implements OnInit, OnDestroy, AfterViewInit {
     private installerService: InstallerService,
     private driverService: DriverService,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog,
-    private ngDynamicBreadcrumbService: NgDynamicBreadcrumbService) {
+    private dialog: MatDialog) {
     // se è utente movyon op movyon fleetManager sarà valorizzato in caso di ruolo fleetmanger no
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
     // se arriva da validazione veicoli viene valorizzata la targa in vehicleLpn
