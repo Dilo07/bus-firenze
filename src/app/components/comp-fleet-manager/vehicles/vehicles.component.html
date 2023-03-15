@@ -1,7 +1,7 @@
 <mat-card>
 	<div fxLayout="row wrap" fxLayoutAlign="space-between">
 		<mat-card-title>{{'VEHICLE.TITLE' | translate}}</mat-card-title>
-		<app-ng-dynamic-breadcrumb [bgColor]="'white'" [fontSize]="'14px'" style="height: 1px;"></app-ng-dynamic-breadcrumb>
+		<lib-breadcrumb [bgColor]="'white'" [fontSize]="'14px'" style="height: 1px;"></lib-breadcrumb>
 		<span fxLayoutGap="20px">
 			<button mat-button (click)="scroll(stat)">{{'STATISTIC.VEHICLE' | translate}}</button>
 			<button mat-button class="backButton" *ngIf="fleetManager" [attr.i18nKey]="'FLEET-MANAGER.BACK'"

@@ -16,10 +16,6 @@ const routes: Routes = [
     data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
-    path: '/:fleetName', component: FleetManagerComponent, canActivate: [AuthGuard],
-    data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
-  },
-  {
     path: 'real-time', loadChildren: () => import('../comp-real-time/real-time.module').then(m => m.RealTimeModule)
   },
   {
@@ -39,7 +35,7 @@ const routes: Routes = [
     component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON] }
   },
   {
-    path: 'vehicles/:fleetName',
+    path: 'vehicles',
     component: VehiclesComponent, canActivate: [AuthGuard],
     data: {
       roles: [ROLES.MOVYON, ROLES.OPER_MOVYON],
@@ -51,7 +47,8 @@ const routes: Routes = [
         },
         {
           label: 'Fleet manager {{customFleet}}',
-          url: '/manage/:fleetName'
+          url: '/manage',
+          state: '{{customFleetState}}'
         },
         {
           label: 'Vehicle',

@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FileViewer, IAuthenticationService, SessionService, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
@@ -54,21 +54,25 @@ export class FleetManagerComponent implements OnInit {
   private columnOrder: ColumnSort = { active: 'id', direction: 1 };
   private endTable = false;
   private subscription: Subscription[] = [];
+  private fleetManagerName: string;
 
   constructor(
+    private router: Router,
     private dialog: MatDialog,
     private snackBar: SnackBar,
     private fleetManagerService: FleetManagerService,
     private formBuilder: FormBuilder,
     private sessionService: SessionService,
     private route: ActivatedRoute,
-    @Inject('authService') private authService: IAuthenticationService) { }
+    @Inject('authService') private authService: IAuthenticationService) {
+    this.fleetManagerName = this.router.getCurrentNavigation()?.extras.state?.stateBreadCurmb as string;
+  }
 
   ngOnInit(): void {
     /* verifica se è un ruolo opmovyon */
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
-    const fleetName = this.route.snapshot.paramMap.get('fleetName'); // arriva il parametro dai veicoli
-    if (fleetName) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, fleetName.replace(':', '')); }
+    // se arriva lo state dal breadcrumb aggiorna la ricerca
+    if (this.fleetManagerName) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, this.fleetManagerName); }
     this.search = this.formBuilder.group({
       ctrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.fleetManageSearch)],
     });

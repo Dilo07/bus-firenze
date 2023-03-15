@@ -1,12 +1,12 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
+import { FileViewer, NptBreadcrumbComponent, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
 import { NgDynamicBreadcrumbService } from 'ng-dynamic-breadcrumb';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
@@ -43,7 +43,8 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   }
   `],
 })
-export class VehiclesComponent implements OnInit, OnDestroy {
+export class VehiclesComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild(NptBreadcrumbComponent) breadcrumb: NptBreadcrumbComponent;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -81,9 +82,12 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       ctrlStatus: ['REGISTERED']
     });
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
+  }
+
+  ngAfterViewInit(): void {
     if (this.fleetManager) {
-      const breadcrumb =  {customFleet: this.fleetManager.name};
-      this.ngDynamicBreadcrumbService.updateBreadcrumbLabels(breadcrumb);
+      this.breadcrumb.updateBreadCrumbLabel({ customFleet: this.fleetManager.name });
+      this.breadcrumb.updateBreadCrumbState({ customFleetState: this.fleetManager.name });
     }
   }
 
@@ -270,7 +274,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     }
   }
 
-  public scroll(element: HTMLElement): void{
+  public scroll(element: HTMLElement): void {
     element.scrollIntoView({ behavior: "smooth" });
   }
 

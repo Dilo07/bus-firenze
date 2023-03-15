@@ -25,10 +25,6 @@ const routes: Routes = [
     loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
   },
   {
-    path: 'manage/:fleetName',
-    loadChildren: () => import('./components/comp-fleet-manager/fleet-manager.module').then(m => m.FleetManagerModule)
-  },
-  {
     path: '', // fm role -> anagraphic, vehicle
     loadChildren: () => import('./components/comp-fleet-manager/redirect-fleet-role/redirect-fleet.module').then(m => m.RedirectFleetModule)
   },
