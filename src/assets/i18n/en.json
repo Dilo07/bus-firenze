@@ -392,7 +392,7 @@
     },
     "TICKET": {
         "INSERT": "Insert a ticket",
-        "NO_DATA": "No vehicles present",
+        "NO_DATA": "No ticket present",
         "EXPIRED": "Ticket expired at",
         "WILLEXPIRE": "The ticket will expire at",
         "INSERT_contrassegno": "Insert a correct ticket",
@@ -411,6 +411,7 @@
         "VIEW_HISTORY": "View history",
         "HISTORY": "History",
         "ACTIVE": "Active ticket",
+        "INACTIVE": "Inactive ticket",
         "MANAGE": "Manage ticket",
         "LPN": "Plate",
         "LPN_NAT": "Country",

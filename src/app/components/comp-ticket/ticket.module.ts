@@ -11,13 +11,15 @@ import { ModalTestTicketComponent } from './modal-test-ticket/modal-test-ticket.
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes.module';
 import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
 import { PageTicketComponent } from './page-ticket.component';
+import { ManageTicketRefComponent } from './manage-ticket-ref/manage-ticket-ref.component';
 
 @NgModule({
   declarations: [
     AddTicketComponent,
     ManageTicketComponent,
     ModalTestTicketComponent,
-    PageTicketComponent
+    PageTicketComponent,
+    ManageTicketRefComponent
   ],
   imports: [
     CommonModule,

@@ -164,6 +164,11 @@ export interface Ticket {
   code: string;
 }
 
+export interface VehicleWithoutTicket {
+  id: number;
+  displayName: string;
+}
+
 export interface User {
   id: number;
   name: string;

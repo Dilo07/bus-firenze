@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Ticket } from '../../domain/bus-firenze-domain';
+import { Ticket, VehicleWithoutTicket } from '../../domain/bus-firenze-domain';
 import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket.component';
 import { IAuthenticationService } from '@npt/npt-template';
 
@@ -22,7 +22,7 @@ export class AddTicketComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() public fleetManagerId: number;
-  public dataSource = new MatTableDataSource<Ticket>();
+  public dataSource = new MatTableDataSource<VehicleWithoutTicket>();
   public displayedColumns = ['id', 'displayName', 'actions'];
   public complete = true;
 
