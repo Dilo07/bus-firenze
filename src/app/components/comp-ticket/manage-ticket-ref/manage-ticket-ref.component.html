@@ -3,7 +3,7 @@
         <mat-radio-button [value]="true">{{'TICKET.ACTIVE' | translate}}</mat-radio-button>
         <mat-radio-button [value]="false">{{'TICKET.INACTIVE' | translate}}</mat-radio-button>
     </mat-radio-group>
-    <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100"
+    <mat-form-field appearance="outline" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100"
         *ngIf="!formGroup.get('ctrlActive').value">
         <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
         <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
@@ -18,7 +18,8 @@
             [attr.i18nKey]="'FLEET-MANAGER.BACK'">
             {{'FLEET-MANAGER.BACK' | translate}}
         </button>
-        <button mat-button class="actionButtons" [attr.i18nKey]="'TICKET.ADD'" *ngIf="vehicles.length">{{'TICKET.ADD' | translate}}</button>
+        <button mat-button class="actionButtons" [attr.i18nKey]="'TICKET.ADD'" *ngIf="vehicles.length"
+            (click)="modalTicket()">{{'TICKET.ADD' | translate}}</button>
     </div>
 </form>
 <mat-progress-bar *ngIf="!complete" mode="indeterminate"></mat-progress-bar>

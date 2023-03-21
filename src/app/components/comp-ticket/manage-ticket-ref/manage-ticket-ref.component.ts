@@ -10,6 +10,7 @@ import { TicketService } from 'src/app/services/ticket.service';
 import { CompleteFleetManager, Ticket, Vehicle, VehicleWithoutTicket } from '../../domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { BehaviorSubject } from 'rxjs';
+import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket.component';
 
 @Component({
   selector: 'app-manage-ticket-ref',
@@ -68,6 +69,18 @@ export class ManageTicketRefComponent implements OnInit {
       },
       error: () => this.complete = true,
       complete: () => this.complete = true
+    });
+  }
+
+  public modalTicket(): void {
+    const dialogRef = this.dialog.open(ModalTestTicketComponent, {
+      width: '60%',
+      height: '70%',
+      data: { vehicleList: this.vehicles, fleetManagerId: this.fleetManagerId, extend: false },
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe(save => {
+      if (save) { this.getVehicle(); }
     });
   }
 

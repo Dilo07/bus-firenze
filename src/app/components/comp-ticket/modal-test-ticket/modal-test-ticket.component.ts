@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { TICKETS_TYPE } from '../../domain/bus-firenze-constants';
-import { Ticket } from '../../domain/bus-firenze-domain';
+import { Ticket, VehicleWithoutTicket } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-modal-test-ticket',
@@ -33,7 +33,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number; fleetManagerId: number; extend: boolean },
+    @Inject(MAT_DIALOG_DATA) public data: { vehicleList: VehicleWithoutTicket[]; vehicleId: number; fleetManagerId: number; extend: boolean },
     @Inject('authService') private authService: IAuthenticationService,
     @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {
@@ -48,6 +48,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
       ctrlYear: [moment().year()],
       ctrlActive: [false]
     });
+    if (!this.data.extend) { this.formGroup.addControl('ctrlVehicle', this.formBuilder.control('', Validators.required)); }
   }
 
   ngOnDestroy(): void {
@@ -88,14 +89,14 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
       } else if (this.ticketType === this.ticketsType.voucher) {
         ticketTest = this.formGroup.get('ctrlVoucher').value;
       }
-      console.log(ticketTest);
-      this.subscription.push(this.ticketService.checkTicket(this.data.vehicleId, ticketTest).subscribe(
-        (infoTicket) => {
+      const vehicleId = this.data.extend ? this.data.vehicleId : this.formGroup.get('ctrlVehicle').value;
+      this.subscription.push(this.ticketService.checkTicket(vehicleId, ticketTest).subscribe({
+        next: (infoTicket) => {
           this.validTicket.valid = true;
           this.validTicket.ticket = infoTicket;
         },
-        () => this.validTicket.valid = false
-      ));
+        error: () => this.validTicket.valid = false
+      }));
     }
   }
 
