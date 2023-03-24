@@ -26,9 +26,13 @@
 <div fxLayout="row wrap" fxLayoutAlign="start">
     <mat-card *ngFor="let element of ticketsConnect | async" class="cardStyle" fxFlex="100" fxFlex.gt-xs="100"
         fxFlex.gt-lg="30" fxFlex.gt-md="30">
-        <mat-card-title class="white">
-            Ticket {{element.ticketId}}
+        <mat-card-title class="white" fxLayout="row" fxLayoutAlign="space-between center">
+            <ng-container>Ticket {{element.ticketId}}</ng-container>
+            <button mat-icon-button (click)="modalTicket(element.vehicleId)">
+                <mat-icon><span class="icon-Plus whiteIcon"></span></mat-icon>
+            </button>
         </mat-card-title>
+
         <mat-card-content>
             <mat-card-subtitle class="white">
                 {{'TICKET.TYPE' | translate}}: <b>{{element.type}}</b>

@@ -72,15 +72,23 @@ export class ManageTicketRefComponent implements OnInit {
     });
   }
 
-  public modalTicket(): void {
+  public modalTicket(vehicleId?: number): void {
+    let dataValue = null;
+    if (vehicleId) {
+      // caso di aggiunta ticket ad un ticket già esistente
+      dataValue = { vehicleId: vehicleId, fleetManagerId: this.fleetManagerId, extend: true };
+    } else {
+      // caso di aggiunta di un ticket ad un vehicle che non ha ticket
+      dataValue = { vehicleList: this.vehicles, fleetManagerId: this.fleetManagerId, extend: false };
+    }
     const dialogRef = this.dialog.open(ModalTestTicketComponent, {
       width: '60%',
-      height: '70%',
-      data: { vehicleList: this.vehicles, fleetManagerId: this.fleetManagerId, extend: false },
+      height: '80%',
+      data: dataValue,
       autoFocus: false
     });
     dialogRef.afterClosed().subscribe(save => {
-      if (save) { this.getVehicle(); }
+      if (save) { this.getActiveTicket(); this.getVehicle(); }
     });
   }
 

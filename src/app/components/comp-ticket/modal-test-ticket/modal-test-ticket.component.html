@@ -14,7 +14,7 @@
                     {{'TICKET.' + ticketsType.voucher | translate}}</mat-radio-button>
             </mat-radio-group>
         </div>
-        <form [formGroup]="formGroup" *ngIf="ticketType">
+        <form [formGroup]="formGroup">
             <div *ngIf="validTicket.valid" style="color: green; text-align: center;">
                 {{validTicket.ticket.ticketId}} {{'TICKET.VERIFIED' | translate}} <br>
                 {{'TICKET.TYPE' | translate}}: {{'TICKET.' + validTicket.ticket.type | translate}}

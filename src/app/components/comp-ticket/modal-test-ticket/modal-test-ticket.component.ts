@@ -12,17 +12,12 @@ import { Ticket, VehicleWithoutTicket } from '../../domain/bus-firenze-domain';
 @Component({
   selector: 'app-modal-test-ticket',
   templateUrl: './modal-test-ticket.component.html',
-  styles: [`
-  mat-button-toggle-group {
-    flex-wrap: wrap;
-  }
-  `
-  ]
+  styles: [` `]
 })
 export class ModalTestTicketComponent implements OnInit, OnDestroy {
   public formGroup: FormGroup;
   public validTicket: { valid: boolean; ticket: Ticket } = { valid: false, ticket: null };
-  public ticketType: string;
+  public ticketType = 'contrassegno';
   public ticketsType = TICKETS_TYPE;
 
   private roleDriver: boolean;
@@ -103,9 +98,10 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
   public addTicket(): void {
     const ticketSave = this.validTicket.ticket.ticketId;
     const delayed = this.formGroup.get('ctrlActive').value;
+    const vehicleId = this.data.extend ? this.data.vehicleId : this.formGroup.get('ctrlVehicle').value;
     this.subscription.push(this.ticketService.addTicket(
       this.roleDriver,
-      this.data.vehicleId,
+      vehicleId,
       ticketSave,
       delayed,
       this.data.extend,
