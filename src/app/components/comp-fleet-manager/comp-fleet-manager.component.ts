@@ -63,6 +63,7 @@ export class FleetManagerComponent implements OnInit {
     @Inject('authService') private authService: IAuthenticationService) { }
 
   ngOnInit(): void {
+    /* verifica se è un ruolo opmovyon */
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
     this.search = this.formBuilder.group({
       ctrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.fleetManageSearch)],
@@ -103,6 +104,7 @@ export class FleetManagerComponent implements OnInit {
     if (!this.isValidFleet) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, search); }
   }
 
+  /* evento al cambio pagina */
   public pageChanged(event: PageEvent): void {
     this.offset = event.pageIndex;
     this.limit = event.pageSize;
@@ -165,8 +167,9 @@ export class FleetManagerComponent implements OnInit {
         fileId = document.fileId;
       }
     });
-    this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe(
-      (data: HttpResponse<Blob>) => {
+    // ottiene il file selezionato
+    this.subscription.push(this.fleetManagerService.getFleetDocument(fleetManagerId, fileId).subscribe({
+      next: (data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const URL = window.URL.createObjectURL(data.body);
           const contentDispositionHeader = data.headers.get('Content-Disposition');
@@ -190,11 +193,12 @@ export class FleetManagerComponent implements OnInit {
           };
         }
       },
-      () => this.complete = true,
-      () => this.complete = true
-    ));
+      error: () => this.complete = true,
+      complete: () => this.complete = true
+    }));
   }
 
+  // quando avviene un cambio sorting viene fatto il reset e poi richiamata l'api in base al sorting selezionato
   public sortData(event: { active: string; direction: string }): void {
     this.columnOrder.active = event.active;
     this.columnOrder.direction = event.direction === 'asc' ? 1 : -1;

@@ -94,14 +94,14 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     const keyword = this.search.get('ctrlSearch').value;
     const onlyActive = this.search.get('onlyActive').value;
     // in caso di op_movyon movyon passa l'id altrimento no
-    this.vehicleService.getVehiclesById(onlyActive, this.fleetManager?.id, keyword).subscribe(
+    this.subscription.push(this.vehicleService.getVehiclesById(onlyActive, this.fleetManager?.id, keyword).subscribe(
       data => {
         this.vehicleList.data = data;
         this.vehicleList.sort = this.sort;
         this.vehicleList.paginator = this.paginator;
       },
       () => this.complete = true,
-      () => this.complete = true);
+      () => this.complete = true));
   }
 
   public addVehicle(): void {
@@ -145,13 +145,13 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((respConfirm) => {
       if (respConfirm) {
         const file = respConfirm.file ? respConfirm.file : null;
-        this.vehicleService.deleteVehicle(vehicleId, file, this.fleetManager?.id).subscribe({
+        this.subscription.push(this.vehicleService.deleteVehicle(vehicleId, file, this.fleetManager?.id).subscribe({
           next: () => this.snackBar.showMessage('VEHICLE.DELETE_SUCCESS', 'INFO'),
           complete: () => {
             this.getVehiclesByManagerId();
             this.resetSearchField();
           }
-        });
+        }));
       }
     });
   }

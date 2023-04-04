@@ -37,14 +37,23 @@
                             [ngClass]="element.certificateId ? null : 'icon-assignment-grey'"></span>
                     </mat-icon>
                 </button>
+                <input style="display: none" type="file" #fileInput accept="application/pdf, image/jpeg, image/png"
+                    (change)="updateCertificate.emit({vehicleId: element.id, event: $event})">
+                <button mat-icon-button *ngIf="!element.certificateId" (click)="fileInput.click()">
+                    <mat-icon matTooltip=" {{'VEHICLE.CERTIFICATE_MODIFY' | translate}}">
+                        <span class="icon-edit"></span>
+                    </mat-icon>
+                </button>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="type">
             <mat-header-cell *matHeaderCellDef> {{'VEHICLE.TYPE_DOC' | translate}} </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                <span class="mobile-label">{{'VEHICLE.TYPE_DOC' | translate}}</span>
-                {{ 'VEHICLE.' + (element.documents | documentToValid) | translate}}
+                <ng-container *ngIf="element.documents | documentToValid">
+                    <span class="mobile-label">{{'VEHICLE.TYPE_DOC' | translate}}</span>
+                    {{ 'VEHICLE.' + (element.documents | documentToValid) | translate}}
+                </ng-container>
             </mat-cell>
         </ng-container>
 
@@ -52,7 +61,8 @@
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <span>
-                    <button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}" [disabled]="!disableViewPdf"
+                    <button *ngIf="element.documents | documentToValid" mat-icon-button
+                        matTooltip="{{'OBU.VIEW_FILE' | translate}}" [disabled]="!disableViewPdf"
                         [attr.i18nKey]="'OBU.VIEW_FILE'"
                         (click)="viewDeposit.emit({vehicleId: element.id, documents: element.documents})">
                         <mat-icon><span class="icon-document_search"></span></mat-icon>
@@ -61,9 +71,13 @@
                         [attr.i18nKey]="'VEHICLE.VERIFY'" (click)="verifyVehicle(element.lpn)">
                         <span class="icon-car font-size-30"></span>
                     </button>
-                    <button mat-icon-button matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
-                        [attr.i18nKey]="'FLEET-MANAGER.VALID'" (click)="validVehicle(element.id, element.documents)">
-                        <span class="icon-rule font-size-30"></span>
+                    <button mat-icon-button [disabled]="!element.certificateId" [attr.i18nKey]="'FLEET-MANAGER.VALID'"
+                        (click)="validVehicle(element.id, element.documents)">
+                        <mat-icon
+                            matTooltip="{{(element.certificateId ? 'FLEET-MANAGER.VALID' : 'VEHICLE.NOCERTIFICATE') | translate}}">
+                            <span class="icon-rule font-size-30"
+                                [ngClass]="element.certificateId ? null : 'icon-rule-grey'"></span>
+                        </mat-icon>
                     </button>
                 </span>
             </mat-cell>
