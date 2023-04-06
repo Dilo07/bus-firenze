@@ -90,6 +90,7 @@ export class VehiclesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
+    this.vehicleList.disconnect();
     this.subscription.forEach(subscription => {
       subscription.unsubscribe();
     });

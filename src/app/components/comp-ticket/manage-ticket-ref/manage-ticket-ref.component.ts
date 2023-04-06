@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -17,7 +17,7 @@ import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket
   templateUrl: './manage-ticket-ref.component.html',
   styleUrls: ['./manage-ticket-ref.component.css']
 })
-export class ManageTicketRefComponent implements OnInit {
+export class ManageTicketRefComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() public fleetManagerId: number;
@@ -49,6 +49,10 @@ export class ManageTicketRefComponent implements OnInit {
     await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
     this.getActiveTicket();
     this.getVehicle();
+  }
+
+  ngOnDestroy(): void {
+    this.dataSource.disconnect();
   }
 
   public getActiveTicket(): void {
