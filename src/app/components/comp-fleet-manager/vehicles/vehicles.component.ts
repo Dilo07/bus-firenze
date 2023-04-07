@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { FileViewer, NptBreadcrumbComponent, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
+import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { InstallerService } from 'src/app/services/installer.service';
@@ -42,8 +42,8 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   }
   `],
 })
-export class VehiclesComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild(NptBreadcrumbComponent) breadcrumb: NptBreadcrumbComponent;
+export class VehiclesComponent implements OnInit, OnDestroy {
+  /* @ViewChild(NptBreadcrumbComponent) breadcrumb: NptBreadcrumbComponent; */
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -82,12 +82,12 @@ export class VehiclesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
   }
 
-  ngAfterViewInit(): void {
+  /* ngAfterViewInit(): void {
     if (this.fleetManager) {
       this.breadcrumb.updateBreadCrumbLabel({ customFleet: this.fleetManager.name });
       this.breadcrumb.updateBreadCrumbState({ customFleetState: this.fleetManager.name });
     }
-  }
+  } */
 
   ngOnDestroy(): void {
     this.vehicleList.disconnect();

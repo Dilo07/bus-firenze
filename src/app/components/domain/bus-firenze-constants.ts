@@ -108,15 +108,15 @@ export const dashboardSettings: DashboardSetting[] = [
     cards: [
       {
         title: 'WELCOME.TITLE-FLEET', content: 'WELCOME.FLEET-MANAGER', icon: 'icon-manage_accounts', color: '#91D6AC',
-        classBackgroundImg: 'backgroundImg1', buttonClass: 'white-button', routing: '../manage'
+        classBackgroundImg: 'backgroundImg1', buttonClass: 'backButton', routing: '../manage'
       },
       {
         title: 'WELCOME.TITLE-OBU', content: 'WELCOME.ADD-OBU', icon: 'icon-obu', color: '#E4F1F5',
-        classBackgroundImg: 'backgroundImg2', buttonClass: 'white-button', routing: '../manage-obu', state: { viewNotAssociated: true }
+        classBackgroundImg: 'backgroundImg2', buttonClass: 'backButton', routing: '../manage-obu', state: { viewNotAssociated: true }
       },
       {
         title: 'MENU.Ticket', content: 'WELCOME.MANAGE-TICKET', icon: 'icon-wysiwyg', color: '#E89CAE',
-        classBackgroundImg: 'backgroundImg3', buttonClass: 'white-button', routing: '../ticket'
+        classBackgroundImg: 'backgroundImg3', buttonClass: 'backButton', routing: '../ticket'
       }
     ]
   },
@@ -125,15 +125,15 @@ export const dashboardSettings: DashboardSetting[] = [
     cards: [
       {
         title: 'WELCOME.TITLE-VEHICLE', content: 'WELCOME.VEHICLE-DRIVER', icon: 'icon-car', color: '#91D6AC',
-        classBackgroundImg: 'backgroundImg3', buttonClass: 'white-button', routing: '../user-driver/association-driver'
+        classBackgroundImg: 'backgroundImg3', buttonClass: 'backButton', routing: '../user-driver/association-driver'
       },
       {
         title: 'WELCOME.TITLE-TICKET', content: 'WELCOME.ADD-TICKET', icon: 'icon-wysiwyg', color: '#E4F1F5',
-        classBackgroundImg: 'backgroundImg1', buttonClass: 'white-button', routing: '../ticket'
+        classBackgroundImg: 'backgroundImg1', buttonClass: 'backButton', routing: '../ticket'
       },
       {
         title: 'WELCOME.TITLE-MANAGE-TICKET', content: 'WELCOME.MANAGE-TICKET', icon: 'icon-wysiwyg', color: '#E89CAE',
-        classBackgroundImg: 'backgroundImg2', buttonClass: 'white-button', routing: '../ticket', state: {index: 1}
+        classBackgroundImg: 'backgroundImg2', buttonClass: 'backButton', routing: '../ticket', state: {index: 1}
       }
     ]
   },
@@ -142,15 +142,15 @@ export const dashboardSettings: DashboardSetting[] = [
     cards: [
       {
         title: 'WELCOME.TITLE-VEHICLE', content: 'WELCOME.VEHICLE', icon: 'icon-car', color: '#91D6AC',
-        classBackgroundImg: 'backgroundImg3', buttonClass: 'white-button', routing: '../vehicles'
+        classBackgroundImg: 'backgroundImg3', buttonClass: 'backButton', routing: '../vehicles'
       },
       {
         title: 'WELCOME.TITLE-TICKET', content: 'WELCOME.ADD-TICKET', icon: 'icon-wysiwyg', color: '#E4F1F5',
-        classBackgroundImg: 'backgroundImg1', buttonClass: 'white-button', routing: '../ticket'
+        classBackgroundImg: 'backgroundImg1', buttonClass: 'backButton', routing: '../ticket'
       },
       {
         title: 'WELCOME.TITLE-MANAGE-TICKET', content: 'WELCOME.MANAGE-TICKET', icon: 'icon-wysiwyg', color: '#E89CAE',
-        classBackgroundImg: 'backgroundImg2', buttonClass: 'white-button', routing: '../ticket', state: {index: 1}
+        classBackgroundImg: 'backgroundImg2', buttonClass: 'backButton', routing: '../ticket', state: {index: 1}
       }
     ]
   },
@@ -159,15 +159,15 @@ export const dashboardSettings: DashboardSetting[] = [
     cards: [
       {
         title: 'WELCOME.TITLE-OBU', content: 'WELCOME.ADD-OBU', icon: 'icon-obu', color: '#91D6AC',
-        classBackgroundImg: 'backgroundImg1', buttonClass: 'white-button', routing: '../manage-obu', state: {viewNotAssociated: true}
+        classBackgroundImg: 'backgroundImg1', buttonClass: 'backButton', routing: '../manage-obu', state: {viewNotAssociated: true}
       },
       {
         title: 'WELCOME.TITLE-TEST', content: 'WELCOME.TEST', icon: 'icon-obu', color: '#E4F1F5',
-        classBackgroundImg: 'backgroundImg2', buttonClass: 'white-button', routing: '../manage-obu', state: {index: 1}
+        classBackgroundImg: 'backgroundImg2', buttonClass: 'backButton', routing: '../manage-obu', state: {index: 1}
       },
       {
         title: 'WELCOME.TITLE-APPOINTMENTS', content: 'WELCOME.APPOINTMENTS', icon: 'icon-appointment', color: '#E89CAE',
-        classBackgroundImg: 'backgroundImg3', buttonClass: 'white-button', routing: '../appointments', state: {index: 1}
+        classBackgroundImg: 'backgroundImg3', buttonClass: 'backButton', routing: '../appointments', state: {index: 1}
       }
     ]
   },
@@ -176,15 +176,15 @@ export const dashboardSettings: DashboardSetting[] = [
     cards: [
       {
         title: 'WELCOME.TITLE-FLEET', content: 'WELCOME.FLEET-MANAGER', icon: 'icon-manage_accounts', color: '#91D6AC',
-        classBackgroundImg: 'backgroundImg1', buttonClass: 'white-button', routing: '../manage-obu'
+        classBackgroundImg: 'backgroundImg1', buttonClass: 'backButton', routing: '../manage-obu'
       },
       {
         title: 'WELCOME.TITLE-VALID-FLEET', content: 'WELCOME.VALID-FLEET', icon: 'icon-rule', color: '#E4F1F5',
-        classBackgroundImg: 'backgroundImg2', buttonClass: 'white-button', routing: '../validation'
+        classBackgroundImg: 'backgroundImg2', buttonClass: 'backButton', routing: '../validation'
       },
       {
         title: 'WELCOME.TITLE-VALID-VEHICLE', content: 'WELCOME.VALID-VEHICLE', icon: 'icon-rule', color: '#E89CAE',
-        classBackgroundImg: 'backgroundImg3', buttonClass: 'white-button', routing: '../validation', state: {index: 1}
+        classBackgroundImg: 'backgroundImg3', buttonClass: 'backButton', routing: '../validation', state: {index: 1}
       }
     ]
   }

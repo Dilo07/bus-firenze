@@ -7,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileViewer, IAuthenticationService, SessionService, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
@@ -17,31 +17,15 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
 @Component({
   selector: 'app-comp-fleet-manager',
   templateUrl: './comp-fleet-manager.component.html',
-  styles: [`
-  table { width: 100%; }
-  @media(min-width: 1180px) {
-    .mat-column-id { max-width: 5%}
-    .mat-column-name { max-width: 8%;}
-    .mat-column-surname { max-width: 8%;}
-    .mat-column-e-mail { max-width: 22%}
-    .mat-column-companyName { max-width: 15%}
-    .mat-column-city { max-width: 12%} /* solo manage */
-    .mat-column-district { max-width: 10%} /* solo manage */
-    .mat-column-pIva { max-width: 10%} /* solo valid */
-    .mat-column-fiscalCode { max-width: 12%} /* solo valid */
-    .mat-column-actions { max-width: 20%; display: table-column; text-align: end;}
-  }
-  ::ng-deep .menu-color {
-    background: #E4F1F5;
-  }
-  `],
+  styleUrls: ['./comp-fleet-manager.component.scss']
 })
 export class FleetManagerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() public isValidFleet = false;
+  @Input() public isValidationFleet = false;
 
   public dataSource = new MatTableDataSource<FleetManager>();
+  public fleetanagersConnect: Observable<FleetManager[]>;
   public fleetManagerList: FleetManager[] = [];
   public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'pIva', 'fiscalCode', 'city', 'district', 'actions'];
   public search: FormGroup;
@@ -85,7 +69,7 @@ export class FleetManagerComponent implements OnInit {
     const currentSize = this.offset * this.limit;
     this.subscription.push(this.fleetManagerService.searchFleetManager(
       search,
-      !this.isValidFleet,
+      !this.isValidationFleet,
       this.offset,
       this.limit,
       this.columnOrder)
@@ -104,12 +88,13 @@ export class FleetManagerComponent implements OnInit {
               this.paginator.length = ((this.offset + 1) * this.limit) + 1;
             }
             this.dataSource.data = data;
+            this.fleetanagersConnect = this.dataSource.connect();
           }
         },
         error: () => this.complete = true,
         complete: () => { this.complete = true; this.unSubscribe(); }
       }));
-    if (!this.isValidFleet) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, search); }
+    if (!this.isValidationFleet) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, search); }
   }
 
   /* evento al cambio pagina */

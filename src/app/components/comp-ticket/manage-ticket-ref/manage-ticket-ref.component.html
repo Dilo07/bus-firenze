@@ -24,32 +24,32 @@
 </form>
 <mat-progress-bar *ngIf="!complete" mode="indeterminate"></mat-progress-bar>
 <div fxLayout="row wrap" fxLayoutAlign="start">
-    <mat-card *ngFor="let element of ticketsConnect | async" class="cardStyle" fxFlex="100" fxFlex.gt-xs="100"
+    <mat-card *ngFor="let element of ticketsConnect | async" class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100"
         fxFlex.gt-lg="30" fxFlex.gt-md="30">
-        <mat-card-title class="white" fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
             <ng-container>Ticket {{element.ticketId}}</ng-container>
             <button mat-icon-button (click)="modalTicket(element.vehicleId)">
-                <mat-icon><span class="icon-Plus whiteIcon"></span></mat-icon>
+                <mat-icon><span class="icon-Plus"></span></mat-icon>
             </button>
         </mat-card-title>
 
         <mat-card-content>
-            <mat-card-subtitle class="white">
+            <mat-card-subtitle>
                 {{'TICKET.TYPE' | translate}}: <b>{{element.type}}</b>
             </mat-card-subtitle>
-            <mat-card-subtitle class="white">
+            <mat-card-subtitle>
                 {{'VEHICLE.LPN' | translate}}: <b>{{element.lpn}} </b> <span
                     [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
             </mat-card-subtitle>
-            <mat-card-subtitle class="white">
+            <mat-card-subtitle>
                 {{'TICKET.DATE_START' | translate}}: <b>{{element.ticketStart ?
                     (element.ticketStart | date: 'dd/MM/yyyy HH:mm') : '-'}}</b>
             </mat-card-subtitle>
-            <mat-card-subtitle class="white">
+            <mat-card-subtitle>
                 {{'TICKET.DATE_END' | translate}}: <b>{{element.ticketEnd ?
                     (element.ticketEnd | date: 'dd/MM/yyyy HH:mm') : '-'}}</b>
             </mat-card-subtitle>
-            <mat-card-subtitle class="white">
+            <mat-card-subtitle>
                 {{'TICKET.ACTIVATION' | translate}}: <b>{{element.dateSink ?
                     (element.dateSink | date: 'dd/MM/yyyy HH:mm') :
                     ('TICKET.ACTIVATION_PHASE' | translate)}}</b>

@@ -7,7 +7,7 @@
                 <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="padding: 30px;">
                     <h4>{{document.name}}</h4>
                     <ng-container>
-                        <button mat-button class="white-button" [attr.i18nKey]="'FLEET-MANAGER.DOWNLOAD_TEMPLATE'"
+                        <button mat-button [attr.i18nKey]="'FLEET-MANAGER.DOWNLOAD_TEMPLATE'"
                             (click)="download(document.path)">{{'FLEET-MANAGER.DOWNLOAD_TEMPLATE' | translate}}</button>
                     </ng-container>
                 </mat-card-content>

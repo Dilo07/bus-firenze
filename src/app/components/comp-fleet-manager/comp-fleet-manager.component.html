@@ -1,5 +1,5 @@
 <mat-card>
-	<div fxLayout="column" fxLayoutGap="20px" *ngIf="!isValidFleet">
+	<div fxLayout="column" fxLayoutGap="20px" *ngIf="!isValidationFleet">
 		<div fxLayout="row wrap" fxLayoutAlign="space-between">
 			<mat-card-title fxLayout="row">{{'MENU.Fleet-manager' | translate}} </mat-card-title>
 			<span>
@@ -20,9 +20,101 @@
 		</form>
 	</div>
 	<mat-card-content>
-		<div fxLayout="column" fxLayoutGap="20px">
+		<div fxLayout="row wrap" fxLayoutAlign="start">
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<div class="mat-elevation-z8 example-container"
+			<mat-card *ngFor="let element of fleetanagersConnect | async" class="mat-card-movyon" fxFlex="100"
+				fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+				<div fxLayout="row" fxLayoutAlign="space-between">
+					<mat-card-header>
+						<mat-card-title> ID {{element.id}} </mat-card-title>
+						<mat-card-title>{{element.name}} {{element.surname}}</mat-card-title>
+					</mat-card-header>
+					<button mat-icon-button *ngIf="!isValidationFleet else validationHeader">
+						<mat-icon><span class="icon-ArrowRight"></span></mat-icon>
+					</button>
+					<ng-template #validationHeader>
+						<button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}"
+							[matMenuTriggerFor]="menuFile" [attr.i18nKey]="'OBU.VIEW_FILE'">
+							<mat-icon><span class="icon-Horizontal-dots"></span></mat-icon>
+						</button>
+						<mat-menu #menuFile="matMenu" class="menu-color">
+							<button mat-menu-item [attr.i18nKey]="'FLEET-MANAGER.reqForm'"
+								(click)="getFleetDocument(element.id, element.documents, 'reqForm')">
+								{{'FLEET-MANAGER.reqForm' | translate}}</button>
+							<button mat-menu-item [attr.i18nKey]="'FLEET-MANAGER.idDoc'"
+								(click)="getFleetDocument(element.id, element.documents, 'idDoc')">
+								{{'FLEET-MANAGER.idDoc' | translate}}</button>
+							<button mat-menu-item [attr.i18nKey]="'FLEET-MANAGER.comReg'"
+								(click)="getFleetDocument(element.id, element.documents, 'comReg')">
+								{{'FLEET-MANAGER.comReg' | translate}}</button>
+						</mat-menu>
+					</ng-template>
+				</div>
+				<mat-card-content>
+					<mat-card-subtitle>
+						E-mail: <b>{{element | findContactValue: 3}}</b>
+					</mat-card-subtitle>
+					<mat-card-subtitle>
+						{{'FLEET-MANAGER.COMPANY_NAME' | translate}}: <b>{{element.companyName}}</b>
+					</mat-card-subtitle>
+					<ng-container *ngIf="!isValidationFleet else validation">
+						<mat-card-subtitle>{{'FLEET-MANAGER.CITY' | translate}}:
+							<b>{{element.city}}</b>
+						</mat-card-subtitle>
+						<mat-card-subtitle>
+							{{'FLEET-MANAGER.DISTRICT' | translate}}: <b>{{element.district}}</b>
+						</mat-card-subtitle>
+					</ng-container>
+					<ng-template #validation>
+						<mat-card-subtitle>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}:
+							<b>{{element.pIva}}</b>
+							<a matSuffix mat-icon-button
+								href="https://telematici.agenziaentrate.gov.it/VerificaPIVA/Scegli.do?parameter=verificaPiva"
+								target="_blank" *ngIf="element.failedCheck" [attr.i18nKey]="'FLEET-MANAGER.VERIFYVAT'">
+								<mat-icon style="color: #eed202;"
+									matTooltip="{{'FLEET-MANAGER.VERIFYVAT' | translate }}">warning</mat-icon>
+							</a>
+						</mat-card-subtitle>
+						<mat-card-subtitle>{{'FLEET-MANAGER.FISCALCODE' | translate}}:
+							<b>{{element.fiscalCode}}</b>
+							<a matSuffix mat-icon-button
+								href="https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCf"
+								target="_blank" *ngIf="element.companyType === 'ENTE' || element.failedCheck"
+								[attr.i18nKey]="'FLEET-MANAGER.VERIFYCF'">
+								<mat-icon style="color: #eed202;"
+									matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">warning</mat-icon>
+							</a>
+						</mat-card-subtitle>
+					</ng-template>
+
+					<mat-card-subtitle>
+						<div fxLayout="row" fxLayoutAlign="end">
+							<button mat-icon-button *ngIf="!isValidationFleet else validationButton"
+								matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
+								[attr.i18nKey]="'COMMON.ACTION.DELETE'" (click)="deleteFleetManager(element.id)">
+								<mat-icon><span class="icon-Bin"></span></mat-icon>
+							</button>
+							<ng-template #validationButton>
+								<button mat-button class="actionIconButtons"
+									matTooltip="{{'FLEET-MANAGER.REFUSE' | translate}}"
+									[attr.i18nKey]="'FLEET-MANAGER.REFUSE'"
+									(click)="validInvalidFleet(element.id, false)">
+									<mat-icon matPrefix><span class="icon-delete"></span></mat-icon>
+									{{'FLEET-MANAGER.REFUSE' | translate}}
+								</button>
+								<button mat-button class="actionIconButtons"
+									matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
+									[attr.i18nKey]="'FLEET-MANAGER.VALID'"
+									(click)="validInvalidFleet(element.id, true)">
+									<mat-icon matPrefix><span class="icon-rule"></span></mat-icon>
+									{{'FLEET-MANAGER.VALID' | translate}}
+								</button>
+							</ng-template>
+						</div>
+					</mat-card-subtitle>
+				</mat-card-content>
+			</mat-card>
+			<!-- <div class="mat-elevation-z8 example-container"
 				[style.display]="fleetManagerList.length === 0 ? 'none' : ''">
 				<mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
 					(matSortChange)="sortData($event)">
@@ -70,7 +162,6 @@
 					</ng-container>
 
 					<ng-container matColumnDef="city">
-						<!-- solo manage table -->
 						<mat-header-cell *matHeaderCellDef [style.display]="isValidFleet ? 'none' : ''">
 							{{'FLEET-MANAGER.CITY' | translate}}
 						</mat-header-cell>
@@ -81,7 +172,6 @@
 					</ng-container>
 
 					<ng-container matColumnDef="district">
-						<!-- solo manage table -->
 						<mat-header-cell *matHeaderCellDef [style.display]="isValidFleet ? 'none' : ''">
 							{{'FLEET-MANAGER.DISTRICT' | translate}}
 						</mat-header-cell>
@@ -92,7 +182,6 @@
 					</ng-container>
 
 					<ng-container matColumnDef="pIva">
-						<!-- solo valid table -->
 						<mat-header-cell *matHeaderCellDef [style.display]="isValidFleet ? '' : 'none'">
 							{{'FLEET-MANAGER.VAT_NUMBER' | translate}}
 						</mat-header-cell>
@@ -109,7 +198,6 @@
 					</ng-container>
 
 					<ng-container matColumnDef="fiscalCode">
-						<!-- solo valid table -->
 						<mat-header-cell *matHeaderCellDef [style.display]="isValidFleet ? '' : 'none'">
 							{{'FLEET-MANAGER.FISCALCODE' | translate}}
 						</mat-header-cell>
@@ -201,10 +289,10 @@
 					</mat-header-row>
 					<mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
 				</mat-table>
-			</div>
-			<mat-paginator [style.display]="fleetManagerList.length === 0 ? 'none' : '' " [pageSize]="10"
-				[pageSizeOptions]="[5, 10, 25]" (page)="pageChanged($event)"></mat-paginator>
-			<div *ngIf="fleetManagerList.length === 0 && complete">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>
+			</div> -->
 		</div>
+		<mat-paginator [style.display]="fleetManagerList.length === 0 ? 'none' : '' " [pageSize]="10"
+			[pageSizeOptions]="[5, 10, 25]" (page)="pageChanged($event)"></mat-paginator>
+		<div *ngIf="fleetManagerList.length === 0 && complete">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>
 	</mat-card-content>
 </mat-card>

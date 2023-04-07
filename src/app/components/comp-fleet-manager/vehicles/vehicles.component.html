@@ -1,7 +1,7 @@
 <mat-card>
 	<div fxLayout="row wrap" fxLayoutAlign="space-between">
 		<mat-card-title>{{'VEHICLE.TITLE' | translate}}</mat-card-title>
-		<lib-breadcrumb [bgColor]="'white'" [fontSize]="'14px'" style="height: 1px;" *ngIf="fleetManager"></lib-breadcrumb>
+		<!-- <lib-breadcrumb [bgColor]="'white'" [fontSize]="'14px'" style="height: 1px;" *ngIf="fleetManager"></lib-breadcrumb> -->
 		<span fxLayoutGap="20px">
 			<button mat-button (click)="scroll(stat)">{{'STATISTIC.VEHICLE' | translate}}</button>
 			<button mat-button class="backButton" *ngIf="fleetManager" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
@@ -42,9 +42,9 @@
 			</form>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<div fxLayout="row wrap" fxLayoutAlign="start">
-				<mat-card *ngFor="let element of vehicleListConnect | async" class="cardStyle" fxFlex="100"
+				<mat-card *ngFor="let element of vehicleListConnect | async" class="mat-card-movyon" fxFlex="100"
 					fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
-					<mat-card-title class="white">
+					<mat-card-title>
 						<mat-icon> <!-- colore icona-->
 							<span [class]="element.status === 'DELETED' || element.deleted ? 'icon-Pin-rounded redIcon' :
 							element.status === 'TEMP' ? 'icon-Pin-rounded yellowIcon' :
@@ -55,15 +55,15 @@
 						ID {{element.id}}
 					</mat-card-title>
 					<mat-card-content>
-						<mat-card-subtitle class="white">{{'VEHICLE.LPN' | translate}}:
+						<mat-card-subtitle>{{'VEHICLE.LPN' | translate}}:
 							{{element.lpn}}</mat-card-subtitle>
-						<mat-card-subtitle class="white">{{'VEHICLE.STATUS' | translate}}:
+						<mat-card-subtitle>{{'VEHICLE.STATUS' | translate}}:
 							<span *ngIf="element.status === 'DELETED'" style="color: #F54236;">
 								{{'VEHICLE.EXPIRED' | translate}}
 								<button *ngIf="element.status === 'DELETED'" mat-icon-button
 									[attr.i18nKey]="'VEHICLE.REFRESH_EXPDATE'" (click)="updateStatus(element.id)">
 									<mat-icon matTooltip="{{'VEHICLE.REFRESH_EXPDATE' | translate}}">
-										<span class="icon-refresh whiteIcon"></span>
+										<span class="icon-refresh"></span>
 									</mat-icon>
 								</button>
 							</span>
@@ -82,38 +82,38 @@
 								{{'VEHICLE.UNKNOWN' | translate}}
 							</span>
 						</mat-card-subtitle>
-						<mat-card-subtitle class="white">{{'VEHICLE.LPN_NAT' | translate}}:
+						<mat-card-subtitle>{{'VEHICLE.LPN_NAT' | translate}}:
 							<span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
 						</mat-card-subtitle>
-						<mat-card-subtitle class="white">
+						<mat-card-subtitle>
 							{{'VEHICLE.CERTIFICATE' | translate}}:
 							<button mat-icon-button [disabled]="!element.certificateId"
 								[attr.i18nKey]="'VEHICLE.CERTIFICATE'"
 								(click)="viewCertificate(element.id, element.certificateId)">
 								<mat-icon
 									matTooltip="{{(element.certificateId ? 'VEHICLE.CERTIFICATE' : 'VEHICLE.NOCERTIFICATE') | translate}}">
-									<span class="icon-assignment whiteIcon"
+									<span class="icon-assignment"
 										[ngClass]="element.certificateId ? null : 'icon-assignment-grey'">
 									</span>
 								</mat-icon>
 							</button>
 						</mat-card-subtitle>
-						<mat-card-subtitle class="white">{{'VEHICLE.EURO-CLASS' | translate}}:
+						<mat-card-subtitle>{{'VEHICLE.EURO-CLASS' | translate}}:
 							{{element.euroClass}}</mat-card-subtitle>
-						<mat-card-subtitle class="white">obuId: {{element.obuId}}</mat-card-subtitle>
-						<mat-card-subtitle class="white">{{'VEHICLE.CONSENT' | translate}}:
+						<mat-card-subtitle>obuId: {{element.obuId}}</mat-card-subtitle>
+						<mat-card-subtitle>{{'VEHICLE.CONSENT' | translate}}:
 							{{ (element.allowContacted ? 'VEHICLE.CONSENTYES' : 'VEHICLE.CONSENTNO') | translate}}
 						</mat-card-subtitle>
 						<ng-container *ngIf="!element.deleted else deleted">
 							<div fxLayout="row" fxLayoutAlign="end">
 								<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
 									[attr.i18nKey]="'menu'">
-									<mat-icon><span class="icon-Horizontal-dots whiteIcon"></span></mat-icon>
+									<mat-icon><span class="icon-Horizontal-dots"></span></mat-icon>
 								</button>
 								<button mat-icon-button matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
 									[attr.i18nKey]="'COMMON.ACTION.DELETE'"
 									(click)="deleteVehicle(element.id, element.valid)">
-									<mat-icon><span class="icon-Bin whiteIcon"></span></mat-icon>
+									<mat-icon><span class="icon-Bin"></span></mat-icon>
 								</button>
 							</div>
 							<mat-menu #actionsMenuManage="matMenu" class="menu-color">
@@ -147,7 +147,7 @@
 									[state]="{vehicle: element, fleetManager: fleetManager}"
 									[attr.i18nKey]="'STATISTIC.VEHICLE'">
 									<mat-icon matTooltip="{{'STATISTIC.VEHICLE' | translate}}">
-										<span class="icon-Graph whiteIcon"></span>
+										<span class="icon-Graph"></span>
 									</mat-icon>
 								</button>
 							</div>
