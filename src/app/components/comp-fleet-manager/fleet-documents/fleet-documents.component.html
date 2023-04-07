@@ -32,6 +32,7 @@
                     </div>
                 </mat-list-item>
             </mat-list>
+            <div *ngIf="documents.length === 0">{{'FLEET-MANAGER.NO_DOCUMENT' | translate}}</div>
         </span>
     </mat-card-content>
 </mat-card>

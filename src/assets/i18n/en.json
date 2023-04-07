@@ -168,6 +168,7 @@
         "DOCUMENT_CONFIRM": "Are you sure to valid this documents?",
         "VALID_DOCUMENTS": "Receipt paper documents",
         "VALID_AT": "Validate at ",
+        "NO_DOCUMENT": "No document presents",
         "reqForm": "Membership form",
         "idDoc": "Identity card",
         "comReg": "Commerce registration",

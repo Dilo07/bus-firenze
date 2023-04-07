@@ -29,7 +29,8 @@
 						<mat-card-title> ID {{element.id}} </mat-card-title>
 						<mat-card-title>{{element.name}} {{element.surname}}</mat-card-title>
 					</mat-card-header>
-					<button mat-icon-button *ngIf="!isValidationFleet else validationHeader">
+					<button mat-icon-button *ngIf="!isValidationFleet else validationHeader"
+						[attr.i18nKey]="'FLEET-MANAGER.SELECTION'" [routerLink]="['selection-card']" [state]="{fleetManager: element}">
 						<mat-icon><span class="icon-ArrowRight"></span></mat-icon>
 					</button>
 					<ng-template #validationHeader>

@@ -30,6 +30,7 @@ import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { FormFieldPersonComponent } from './form-fleet-manager/field-person/form-field-person.component';
 import { ModalCheckComponent } from './form-fleet-manager/modal-check/modal-check.component';
+import { SelectionCardsPageComponent } from './selection-cards-page/selection-cards-page.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { ModalCheckComponent } from './form-fleet-manager/modal-check/modal-chec
     ExpansionInfoVehicleComponent,
     FleetDocumentsComponent,
     FormFieldPersonComponent,
-    ModalCheckComponent
+    ModalCheckComponent,
+    SelectionCardsPageComponent
   ],
   imports: [
     CommonModule,

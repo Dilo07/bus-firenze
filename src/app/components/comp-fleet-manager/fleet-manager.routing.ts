@@ -9,11 +9,16 @@ import { FleetDocumentsComponent } from './fleet-documents/fleet-documents.compo
 import { FormFleetManagerComponent } from './form-fleet-manager/form-fleet-manager.component';
 import { StatisticComponent } from './vehicles/page-statistic/statistic.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
+import { SelectionCardsPageComponent } from './selection-cards-page/selection-cards-page.component';
 
 const routes: Routes = [
   {
     path: '', component: FleetManagerComponent, canActivate: [AuthGuard],
     data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
+  },
+  {
+    path: 'selection-card',
+    component: SelectionCardsPageComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
     path: 'real-time', loadChildren: () => import('../comp-real-time/real-time.module').then(m => m.RealTimeModule)

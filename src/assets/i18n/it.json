@@ -168,6 +168,7 @@
         "DOCUMENT_CONFIRM": "Sei sicuro di voler validare questo documento?",
         "VALID_DOCUMENTS": "Ricezione documenti cartacei",
         "VALID_AT": "Validato il ",
+        "NO_DOCUMENT": "Nessun documento presente",
         "reqForm": "Modulo adesione",
         "idDoc": "Carta d'identità",
         "comReg": "Visura camerale",
