@@ -1,12 +1,12 @@
 import { HttpResponse } from '@angular/common/http';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
+import { Breadcrumb, FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { InstallerService } from 'src/app/services/installer.service';
@@ -43,7 +43,6 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
   `],
 })
 export class VehiclesComponent implements OnInit, OnDestroy {
-  /* @ViewChild(NptBreadcrumbComponent) breadcrumb: NptBreadcrumbComponent; */
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -57,6 +56,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public src: FileViewer = { type: '', url: '', fileName: '' };
   public defaultStatus: VehicleStatus = 'REGISTERED';
   public onlyActive = true;
+  public breadCrumb: Breadcrumb[] = [];
 
   private subscription: Subscription[] = [];
 
@@ -80,14 +80,22 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       ctrlStatus: ['REGISTERED']
     });
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
+    this.breadCrumb = [
+      {
+        label: 'Fleet manager',
+        url: '/manage'
+      },
+      {
+        label: `Fleet manager ${this.fleetManager.name}`,
+        url: '../selection-card',
+        state: {fleetManager: this.fleetManager}
+      },
+      {
+        label: 'Vehicle',
+        url: ''
+      }
+    ];
   }
-
-  /* ngAfterViewInit(): void {
-    if (this.fleetManager) {
-      this.breadcrumb.updateBreadCrumbLabel({ customFleet: this.fleetManager.name });
-      this.breadcrumb.updateBreadCrumbState({ customFleetState: this.fleetManager.name });
-    }
-  } */
 
   ngOnDestroy(): void {
     this.vehicleList.disconnect();

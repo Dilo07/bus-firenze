@@ -49,7 +49,7 @@ export class FleetManagerComponent implements OnInit {
     private sessionService: SessionService,
     private route: ActivatedRoute,
     @Inject('authService') private authService: IAuthenticationService) {
-    this.fleetManagerName = this.router.getCurrentNavigation()?.extras.state?.stateBreadCurmb as string;
+    this.fleetManagerName = this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as string;
   }
 
   ngOnInit(): void {

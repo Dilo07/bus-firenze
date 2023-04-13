@@ -18,7 +18,10 @@ const routes: Routes = [
   },
   {
     path: 'selection-card',
-    component: SelectionCardsPageComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
+    component: SelectionCardsPageComponent, canActivate: [AuthGuard],
+    data: {
+      roles: [ROLES.MOVYON, ROLES.OPER_MOVYON]
+    }
   },
   {
     path: 'real-time', loadChildren: () => import('../comp-real-time/real-time.module').then(m => m.RealTimeModule)
@@ -42,25 +45,7 @@ const routes: Routes = [
   {
     path: 'vehicles',
     component: VehiclesComponent, canActivate: [AuthGuard],
-    data: {
-      roles: [ROLES.MOVYON, ROLES.OPER_MOVYON],
-      title: 'vehicles',
-      breadcrumb: [
-        {
-          label: 'Fleet manager',
-          url: '/manage'
-        },
-        {
-          label: 'Fleet manager {{customFleet}}',
-          url: '/manage',
-          state: '{{customFleetState}}'
-        },
-        {
-          label: 'Vehicle',
-          url: ''
-        }
-      ]
-    }
+    data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
     path: 'vehicles/statistic', // per raggiungere le statistiche da fm
