@@ -80,21 +80,23 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       ctrlStatus: ['REGISTERED']
     });
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
-    this.breadCrumb = [
-      {
-        label: 'Fleet manager',
-        url: '/manage'
-      },
-      {
-        label: `Fleet manager ${this.fleetManager.name}`,
-        url: '../selection-card',
-        state: {fleetManager: this.fleetManager}
-      },
-      {
-        label: 'Vehicle',
-        url: ''
-      }
-    ];
+    if (this.fleetManager) {
+      this.breadCrumb = [
+        {
+          label: 'Fleet manager',
+          url: '/manage'
+        },
+        {
+          label: `Fleet manager ${this.fleetManager.name}`,
+          url: '../selection-card',
+          state: { fleetManager: this.fleetManager }
+        },
+        {
+          label: 'Vehicle',
+          url: ''
+        }
+      ];
+    }
   }
 
   ngOnDestroy(): void {
