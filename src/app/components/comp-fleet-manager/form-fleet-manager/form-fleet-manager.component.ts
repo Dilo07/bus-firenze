@@ -33,6 +33,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public fileCommerceReg: File;
   public roleFleetManager: boolean;
   public isEuropeNat: boolean;
+  public isItalian: boolean;
   public nations = worldNations;
   public filteredList = this.nations.slice();
   public fleetType = FLEETMNG_TYPE;
@@ -127,6 +128,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
 
   public changeFormNat(isFirst?: boolean): void {
     this.isEuropeNat = this.euroNations.includes(this.formGroup.get('ctrlNat').value);
+    this.isItalian = this.formGroup.get('ctrlNat').value === 'IT';
     if (this.isEuropeNat) { // se è europeo
       if (this.formGroup.get('ctrlNat').value === 'IT') {
         this.formGroup.controls.ctrlDistrict.setValidators( // solo lettere (provincia italiana)
