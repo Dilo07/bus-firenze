@@ -108,15 +108,15 @@ export const dashboardSettings: DashboardSetting[] = [
     cards: [
       {
         title: 'WELCOME.TITLE-FLEET', content: 'WELCOME.FLEET-MANAGER', icon: 'icon-manage_accounts',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../manage'
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../manage'
       },
       {
         title: 'WELCOME.TITLE-OBU', content: 'WELCOME.ADD-OBU', icon: 'icon-obu',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../manage-obu', state: { viewNotAssociated: true }
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../manage-obu', state: { viewNotAssociated: true }
       },
       {
         title: 'MENU.Ticket', content: 'WELCOME.MANAGE-TICKET', icon: 'icon-wysiwyg',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../ticket'
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../ticket'
       }
     ]
   },
@@ -125,15 +125,15 @@ export const dashboardSettings: DashboardSetting[] = [
     cards: [
       {
         title: 'WELCOME.TITLE-VEHICLE', content: 'WELCOME.VEHICLE-DRIVER', icon: 'icon-car',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../user-driver/association-driver'
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../user-driver/association-driver'
       },
       {
         title: 'WELCOME.TITLE-TICKET', content: 'WELCOME.ADD-TICKET', icon: 'icon-wysiwyg',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../ticket'
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../ticket'
       },
       {
         title: 'WELCOME.TITLE-MANAGE-TICKET', content: 'WELCOME.MANAGE-TICKET', icon: 'icon-wysiwyg',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../ticket', state: { index: 1 }
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../ticket', state: { index: 1 }
       }
     ]
   },
@@ -142,15 +142,15 @@ export const dashboardSettings: DashboardSetting[] = [
     cards: [
       {
         title: 'WELCOME.TITLE-VEHICLE', content: 'WELCOME.VEHICLE', icon: 'icon-car',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../vehicles'
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../vehicles'
       },
       {
         title: 'WELCOME.TITLE-TICKET', content: 'WELCOME.ADD-TICKET', icon: 'icon-wysiwyg',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../ticket'
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../ticket'
       },
       {
         title: 'WELCOME.TITLE-MANAGE-TICKET', content: 'WELCOME.MANAGE-TICKET', icon: 'icon-wysiwyg',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../ticket', state: { index: 1 }
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../ticket', state: { index: 1 }
       }
     ]
   },
@@ -159,15 +159,15 @@ export const dashboardSettings: DashboardSetting[] = [
     cards: [
       {
         title: 'WELCOME.TITLE-OBU', content: 'WELCOME.ADD-OBU', icon: 'icon-obu',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../manage-obu', state: { viewNotAssociated: true }
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../manage-obu', state: { viewNotAssociated: true }
       },
       {
         title: 'WELCOME.TITLE-TEST', content: 'WELCOME.TEST', icon: 'icon-obu',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../manage-obu', state: { index: 1 }
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../manage-obu', state: { index: 1 }
       },
       {
         title: 'WELCOME.TITLE-APPOINTMENTS', content: 'WELCOME.APPOINTMENTS', icon: 'icon-appointment',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../appointments', state: { index: 1 }
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../appointments', state: { index: 1 }
       }
     ]
   },
@@ -176,15 +176,15 @@ export const dashboardSettings: DashboardSetting[] = [
     cards: [
       {
         title: 'WELCOME.TITLE-FLEET', content: 'WELCOME.FLEET-MANAGER', icon: 'icon-manage_accounts',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../manage-obu'
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../manage-obu'
       },
       {
         title: 'WELCOME.TITLE-VALID-FLEET', content: 'WELCOME.VALID-FLEET', icon: 'icon-rule',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../validation'
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../validation'
       },
       {
         title: 'WELCOME.TITLE-VALID-VEHICLE', content: 'WELCOME.VALID-VEHICLE', icon: 'icon-rule',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButton', routing: '../validation', state: { index: 1 }
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../validation', state: { index: 1 }
       }
     ]
   }

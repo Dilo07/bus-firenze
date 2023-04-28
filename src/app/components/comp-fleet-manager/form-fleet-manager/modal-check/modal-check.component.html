@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
     <p>{{data.vat ? data.vat + ('error.vies.vat_invalid' | translate) : data.fiscalCode + ('error.vies.fc_invalid' | translate)}}</p>
     <div fxLayout="row" fxLayoutGap="20px">
-        <button mat-button class="backButton" [attr.i18nKey]="'no'" (click)="dialogRef.close(false)"> no </button>
+        <button mat-button class="whiteButtons" [attr.i18nKey]="'no'" (click)="dialogRef.close(false)"> no </button>
         <button mat-button class="actionButtons" [attr.i18nKey]="'COMMON.ACTION.YES'" (click)="dialogRef.close(true)">
             {{'COMMON.ACTION.YES' | translate}}
         </button>

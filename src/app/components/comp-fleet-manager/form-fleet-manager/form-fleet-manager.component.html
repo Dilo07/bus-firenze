@@ -218,7 +218,7 @@
         </form>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
             <button mat-button *ngIf="!roleFleetManager" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.CANCEL'"
-                class="backButton">{{'COMMON.ACTION.CANCEL' | translate}}</button>
+                class="whiteButtons">{{'COMMON.ACTION.CANCEL' | translate}}</button>
             <button *ngIf="!data" mat-button libDebounceClick
                 [disabled]="formGroup.invalid || ((register && !verifyOtp))" [attr.i18nKey]="'FLEET-MANAGER.SAVE'"
                 class="actionButtons" (debounceClick)="insertFleetManager()">

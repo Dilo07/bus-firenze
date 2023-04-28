@@ -2,7 +2,7 @@
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
         <mat-card-title>{{'MENU.Ticket' | translate}}
         </mat-card-title>
-        <!-- <button mat-button class="backButton" *ngIf="roleMovyon && !viewFleetTable"
+        <!-- <button mat-button class="whiteButtons" *ngIf="roleMovyon && !viewFleetTable"
             [attr.i18nKey]="'FLEET-MANAGER.BACK'" (click)="viewFleetTable = true">
             {{'FLEET-MANAGER.BACK' | translate}}
         </button> -->
@@ -20,7 +20,7 @@
                     <app-manage-ticket [fleetManagerId]="fmId" *ngIf="index === 1"></app-manage-ticket>
                 </mat-tab>
             </mat-tab-group> -->
-            <app-manage-ticket-ref [fleetManagerId]="fmId" [roleMovyon]="roleMovyon" (callBackButton)="viewFleetTable = true"></app-manage-ticket-ref>
+            <app-manage-ticket-ref [fleetManagerId]="fmId" [roleMovyon]="roleMovyon" (callwhiteButtons)="viewFleetTable = true"></app-manage-ticket-ref>
         </ng-template>
     </mat-card-content>
 </mat-card>

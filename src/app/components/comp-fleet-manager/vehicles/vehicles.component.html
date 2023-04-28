@@ -6,14 +6,14 @@
 		</mat-card-title>
 		<span fxLayoutGap="20px">
 			<button mat-button *ngIf="vehicleList.data.length > 0" (click)="scroll(stat)">{{'STATISTIC.VEHICLE' | translate}}</button>
-			<button mat-button class="backButton" *ngIf="fleetManager" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
+			<button mat-button class="whiteButtons" *ngIf="fleetManager" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
 				(click)="backToValidVehicle()">
 				{{'FLEET-MANAGER.BACK' |translate}}
 			</button>
 			<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'" (click)="addVehicle()">
 				{{'FLEET-MANAGER.NEW' | translate}}
 			</button>
-			<button mat-button class="backButton" [matMenuTriggerFor]="menuDownload"
+			<button mat-button class="whiteButtons" [matMenuTriggerFor]="menuDownload"
 				[attr.i18nKey]="'VEHICLE.DOWNLOAD'">
 				{{'VEHICLE.DOWNLOAD' | translate}}
 				<mat-icon><span class="icon-Chevron-Down"></span></mat-icon>

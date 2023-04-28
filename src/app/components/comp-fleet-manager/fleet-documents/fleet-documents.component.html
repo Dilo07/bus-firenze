@@ -3,7 +3,7 @@
         <mat-card-title>{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
         </mat-card-title>
         <span>
-            <button mat-button class="backButton" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.BACK'">
+            <button mat-button class="whiteButtons" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.BACK'">
                 {{'COMMON.ACTION.BACK' | translate}}
             </button>
         </span>
@@ -37,7 +37,7 @@
                         {{('FLEET-MANAGER.VALID_AT' | translate) + (document.valid | date : 'dd/MM/YYYY')}}
                     </span>
                     <ng-template #noValid>
-                        <button *ngIf="!document.valid" mat-button class="backButton" style="margin: 10px;"
+                        <button *ngIf="!document.valid" mat-button class="whiteButtons" style="margin: 10px;"
                             [attr.i18nKey]="'FLEET-MANAGER.CONFIRM_DOCUMENT'" [disabled]="!complete"
                             (click)="validDocument(document.fileId)">
                             {{'FLEET-MANAGER.CONFIRM_DOCUMENT' | translate}}
