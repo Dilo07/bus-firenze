@@ -87,7 +87,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
           url: '/manage'
         },
         {
-          label: `Fleet manager ${this.fleetManager.name}`,
+          label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
           url: '../selection-card',
           state: { fleetManager: this.fleetManager }
         },

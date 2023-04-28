@@ -11,7 +11,13 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 @Component({
   selector: 'app-modal-fleet-documents',
   templateUrl: './fleet-documents.component.html',
-  styles: [
+  styles: [`
+  .status {
+    border-radius: 28px;
+    color: white;
+    padding: 8px 12px;
+  }
+  `
   ]
 })
 export class FleetDocumentsComponent implements OnDestroy {

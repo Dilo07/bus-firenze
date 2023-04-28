@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NptMapModule } from '@npt/npt-map';
-import { BreadcrumbNptModule, MaterialModule, NptBreadcrumbComponent } from '@npt/npt-template';
+import { BreadcrumbNptModule, MaterialModule } from '@npt/npt-template';
 import { ModalVehicleDetailsComponent } from './modal-vehicle-details/modal-vehicle-details.component';
 import { RealTimeComponent } from './real-time.component';
 import { RealTimeRoutingModule } from './real-time.routing';
