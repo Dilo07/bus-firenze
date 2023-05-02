@@ -24,6 +24,7 @@
                     <ng-container *ngIf="document.valid else invalid">
                         <img src="assets/images/icon_pdf_active.png" alt="pdf"
                             (click)="complete && viewDocument(document.fileId)" style="cursor: pointer;">
+                        <span>{{document.fileName}}</span>
                     </ng-container>
                     <ng-template #invalid>
                         <img src="assets/images/icon_pdf_disabled.png" alt="pdfDisabled">

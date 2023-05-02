@@ -196,6 +196,7 @@ export interface VatValidation {
 
 export interface FleetDocument {
   fileId: number;
+  fileName: string;
   type: FleetDocumentTypes;
   valid: Date;
 }
