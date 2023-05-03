@@ -87,7 +87,7 @@ export class DriversComponent implements OnInit, OnDestroy {
     this.complete = false;
     const keyword = this.search.get('ctrlSearch').value;
     this.subscription.push(
-      this.driverService.getDrivers(keyword, this.fleetManager.id).subscribe({
+      this.driverService.getDrivers(keyword, this.fleetManager?.id).subscribe({
         next: (data) => {
           this.dataSource.data = data;
           this.driverListConnect = this.dataSource.connect();
@@ -120,12 +120,12 @@ export class DriversComponent implements OnInit, OnDestroy {
 
   public associationVehicle(idDriver: number): void {
     this.subscription.push(
-      this.driverService.getVehiclesByDriver(idDriver, this.fleetManager.id).subscribe(
+      this.driverService.getVehiclesByDriver(idDriver, this.fleetManager?.id).subscribe(
         vehicles => {
           const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
             width: '80%',
             height: this.desktopQuery.matches ? '60%' : '80%',
-            data: { driverVehicle: vehicles, idDriver: idDriver, fleetManagerId: this.fleetManager.id },
+            data: { driverVehicle: vehicles, idDriver: idDriver, fleetManagerId: this.fleetManager?.id },
             autoFocus: false
           });
         }));
