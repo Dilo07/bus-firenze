@@ -44,7 +44,7 @@ export class SelectionCardsPageComponent {
         title: 'Autisti',
         subtitle: 'Gestisci gli autisti associati ai veicoli',
         route: 'drivers',
-        state: { fleetManagerId: this.fleetManager.id }
+        state: { fleetManager: this.fleetManager }
       },
       {
         icon: 'icon-Car',
