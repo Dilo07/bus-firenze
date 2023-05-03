@@ -1,6 +1,8 @@
 <mat-card>
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
-        <mat-card-title>{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
+        <mat-card-title>
+            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb" style="height: 1px;"></lib-breadcrumb>
+            {{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
         </mat-card-title>
         <span>
             <button mat-button class="whiteButtons" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.BACK'">
@@ -16,7 +18,7 @@
             <mat-grid-tile> <mat-card-title>Stato</mat-card-title> </mat-grid-tile>
         </mat-grid-list>
         <mat-grid-list cols="3" rowHeight="7:1">
-            <ng-container *ngFor="let document of documents">
+            <ng-container *ngFor="let document of fleetManager.documents">
                 <mat-grid-tile>
                     <h4 style="color: #1C3775;">{{'FLEET-MANAGER.' + document.type | translate}}</h4>
                 </mat-grid-tile>

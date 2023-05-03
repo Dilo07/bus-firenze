@@ -2,10 +2,10 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { FileViewer, ViewFileModalComponent } from '@npt/npt-template';
+import { Breadcrumb, FileViewer, ViewFileModalComponent } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
-import { FleetDocument } from '../../domain/bus-firenze-domain';
+import { FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
@@ -23,8 +23,8 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 export class FleetDocumentsComponent implements OnDestroy {
   public src: FileViewer = { type: '', url: '', fileName: '' };
   public complete = true;
-  public fmId: number;
-  public documents: FleetDocument[];
+  public fleetManager: FleetManager;
+  public breadCrumb: Breadcrumb[];
   private subscription: Subscription[] = [];
 
   constructor(
@@ -32,8 +32,22 @@ export class FleetDocumentsComponent implements OnDestroy {
     private dialog: MatDialog,
     private fleetManagerService: FleetManagerService
   ) {
-    this.fmId = this.router.getCurrentNavigation()?.extras.state?.fmId as number;
-    this.documents = this.router.getCurrentNavigation()?.extras.state?.documents as FleetDocument[];
+    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    this.breadCrumb = [
+      {
+        label: 'Fleet manager',
+        url: '/manage'
+      },
+      {
+        label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+        url: '../selection-card',
+        state: { fleetManager: this.fleetManager }
+      },
+      {
+        label: 'MENU.Documents',
+        url: ''
+      }
+    ];
   }
 
   ngOnDestroy(): void {
@@ -44,7 +58,7 @@ export class FleetDocumentsComponent implements OnDestroy {
 
   public viewDocument(fileId: number): void {
     this.complete = false;
-    this.subscription.push(this.fleetManagerService.getFleetDocument(this.fmId, fileId).subscribe(
+    this.subscription.push(this.fleetManagerService.getFleetDocument(this.fleetManager.id, fileId).subscribe(
       (data: HttpResponse<Blob>) => {
         if (data.body.type === 'application/pdf') { // se è un pdf
           const URL = window.URL.createObjectURL(data.body);
@@ -85,19 +99,18 @@ export class FleetDocumentsComponent implements OnDestroy {
       (confirm) => {
         if (confirm) {
           this.complete = false;
-          this.subscription.push(this.fleetManagerService.validDocumentFleet(this.fmId, fileId).subscribe(
-            () => null,
-            () => this.complete = true,
-            () => (this.refreshFleetDocuments(), this.complete = true)
-          ));
+          this.subscription.push(this.fleetManagerService.validDocumentFleet(this.fleetManager.id, fileId).subscribe({
+            error: () => this.complete = true,
+            complete: () => (this.refreshFleetDocuments(), this.complete = true)
+          }));
         }
       }
     );
   }
 
   private refreshFleetDocuments(): void {
-    this.subscription.push(this.fleetManagerService.getFleetManagerById(this.fmId).subscribe(
-      fleet => this.documents = fleet.documents
+    this.subscription.push(this.fleetManagerService.getFleetManagerById(this.fleetManager.id).subscribe(
+      fleet => this.fleetManager = fleet
     ));
   }
 }

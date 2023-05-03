@@ -27,7 +27,6 @@ export class FleetManagerComponent implements OnInit {
   public dataSource = new MatTableDataSource<FleetManager>();
   public fleetanagersConnect: Observable<FleetManager[]>;
   public fleetManagerList: FleetManager[] = [];
-  public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'pIva', 'fiscalCode', 'city', 'district', 'actions'];
   public search: FormGroup;
   public complete = true;
   public roleOpMovyon: boolean;

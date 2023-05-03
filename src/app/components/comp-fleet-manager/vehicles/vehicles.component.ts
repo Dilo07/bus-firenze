@@ -19,28 +19,7 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
 @Component({
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
-  styles: [`
-  table {
-    width: 100%;
-  }
-  .obuDisactive{
-    opacity: 0.8;
-  }
-  @media(min-width: 1180px) {
-    .mat-column-id { max-width: 10%}
-    .mat-column-plate { max-width: 10%;}
-    .mat-column-nat { max-width: 10%}
-    .mat-column-certificateId { max-width: 10%}
-    .mat-column-euroClass { max-width: 10%;}
-    .mat-column-obuId { max-width: 20%;}
-    .mat-column-consent { max-width: 10%;}
-    .mat-column-actions { max-width: 20%; display: table-column;}
-  }
-  .icon-assignment-grey:before {
-    color: grey;
-    font-weight: bold;
-  }
-  `],
+  styleUrls: ['./vehicles.component.scss']
 })
 export class VehiclesComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
@@ -92,7 +71,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
           state: { fleetManager: this.fleetManager }
         },
         {
-          label: 'Vehicle',
+          label: 'VEHICLE.TITLE',
           url: ''
         }
       ];

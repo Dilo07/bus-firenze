@@ -65,7 +65,7 @@ export class SelectionCardsPageComponent {
         title: 'Documenti cartacei',
         subtitle: 'Gestisci i documenti cartacei del fleet manager',
         route: 'fleet-documents',
-        state: { fmId: this.fleetManager.id, documents: this.fleetManager.documents }
+        state: { fleetManager: this.fleetManager }
       }
     ];
   }
