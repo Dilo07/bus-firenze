@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { MaterialModule, ViewFileComponentsModule } from '@npt/npt-template';
+import { BreadcrumbNptModule, MaterialModule, ViewFileComponentsModule } from '@npt/npt-template';
 import { SharedComponentsModule } from 'src/app/shared/utils/components/shared-components.module';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes.module';
 import { PaymentsRoutingModule } from './payments.routing';
@@ -15,6 +15,7 @@ import { ModalPenalComponent } from './penalties/modal-penal/modal-penal.compone
 import { ListItemsComponent } from './billing-items/list-items/list-items.component';
 import { EmittedPenaltiesComponent } from './penalties/emitted-penalties/emitted-penalties.component';
 import { AddPenaltiesComponent } from './penalties/add-penalties/add-penalties.component';
+import { SelectionCardsComponent } from './selection-cards/selection-cards.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AddPenaltiesComponent } from './penalties/add-penalties/add-penalties.c
     ModalPenalComponent,
     ListItemsComponent,
     EmittedPenaltiesComponent,
-    AddPenaltiesComponent
+    AddPenaltiesComponent,
+    SelectionCardsComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { AddPenaltiesComponent } from './penalties/add-penalties/add-penalties.c
     ReactiveFormsModule,
     SharedComponentsModule,
     ViewFileComponentsModule,
+    BreadcrumbNptModule,
     PipesModule
   ]
 })

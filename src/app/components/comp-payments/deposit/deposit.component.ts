@@ -69,7 +69,7 @@ export class DepositComponent implements OnInit {
     this.complete = false;
     const keyword = this.search.get('ctrlSearch').value;
     const viewAll = this.search.get('ctrlViewAll').value;
-    this.subscription.push(this.vehicleService.getVehicleDeposit(viewAll, this.fleetManager.id, keyword).subscribe({
+    this.subscription.push(this.vehicleService.getVehicleDeposit(viewAll, this.fleetManager?.id, keyword).subscribe({
       next: vehicles => (this.vehicleList.data = vehicles, this.vehicleList.sort = this.sort, this.vehicleList.paginator = this.paginator),
       error: () => this.complete = true,
       complete: () => this.complete = true
@@ -152,11 +152,11 @@ export class DepositComponent implements OnInit {
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
       this.complete = true;
     } else {
-      this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, depositType, file, this.fleetManager.id).subscribe(
-        () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
-        () => this.complete = true,
-        () => { this.getVehicle(); this.complete = true; }
-      ));
+      this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, depositType, file, this.fleetManager?.id).subscribe({
+        next: () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
+        error: () => this.complete = true,
+        complete: () => { this.getVehicle(); this.complete = true; }
+      }));
     }
   }
 

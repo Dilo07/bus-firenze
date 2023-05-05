@@ -57,7 +57,7 @@ export class EmittedPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.formGroup.invalid) {
       const start = moment(this.formGroup.get('ctrlRangeStart').value).format('yyyy-MM-DD');
       const end = moment(this.formGroup.get('ctrlRangeEnd').value).format('yyyy-MM-DD');
-      this.subscription.push(this.billingItemService.getPenaltiesByFmId(start, end, null, this.fleetManager.id).subscribe(
+      this.subscription.push(this.billingItemService.getPenaltiesByFmId(start, end, null, this.fleetManager?.id).subscribe(
         penalties => (this.dataSource.data = penalties, this.dataSource.paginator = this.paginator, this.dataSource.sort = this.sort)
       ));
     }

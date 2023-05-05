@@ -1,46 +1,11 @@
-<mat-card *ngIf="roleMovyon !== undefined">
-    <div fxLayout="row wrap" fxLayoutAlign="space-between">
-        <mat-card-title>{{'MENU.Payments' | translate}}
+<mat-card *ngIf="roleFleet !== undefined">
+    <mat-card-header>
+        <mat-card-title>
+            {{'MENU.Payments' | translate}}
         </mat-card-title>
-        <button mat-button class="whiteButtons" [attr.i18nKey]="'FLEET-MANAGER.BACK'"
-            *ngIf="roleMovyon && !viewFleetTable" (click)="viewFleetTable = true">
-            {{'FLEET-MANAGER.BACK' | translate}}
-        </button>
-    </div>
+        <mat-card-subtitle>{{'FLEET-MANAGER.SELECT' | translate}}</mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
-        <div *ngIf="viewFleetTable else cardSelection">
-            <app-table-fleet (callManageTicket)="viewFleetTable = false; fleetSelect= $event"></app-table-fleet>
-        </div>
-        <ng-template #cardSelection>
-            <!-- <mat-tab-group mat-align-tabs="center" [selectedIndex]="index" (selectedTabChange)="index = $event.index">
-                <mat-tab label="{{'MENU.Deposit' | translate}}">
-                    <app-deposit [fleetManager]="fleetSelect" *ngIf="index === 0"></app-deposit>
-                </mat-tab>
-                <mat-tab label="{{'MENU.Billing' | translate}}" *ngIf="!hideBilling">
-                    <app-billing-items [fleetManager]="fleetSelect" *ngIf="index === 1"></app-billing-items>
-                </mat-tab>
-                <mat-tab label="{{'MENU.Penalties' | translate}}" *ngIf="!roleFleet && !hideBilling">
-                    <app-penalties [fleetManager]="fleetSelect" *ngIf="index === 2"></app-penalties>
-                </mat-tab>
-            </mat-tab-group> -->
-            <div fxLayout="row wrap" fxLayoutAlign="start">
-                <mat-card *ngFor="let card of selectionCards" class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100"
-                    fxFlex.gt-lg="30" fxFlex.gt-md="30">
-                    <mat-card-header>
-                        <mat-card-title fxLayout="row" fxLayoutGap="20px">
-                            <mat-icon><span [class]="card.icon"></span></mat-icon>
-                            <span>{{card.title}}</span>
-                        </mat-card-title>
-                        <mat-card-subtitle>{{card.subtitle}}</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content fxLayout="row" fxLayoutAlign="center">
-                        <button mat-button class="actionButtons" [attr.i18nKey]="card.route" [routerLink]="[card.route]"
-                            [state]="{fleetManager: this.fleetSelect}">
-                            Vai alla pagina
-                        </button>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </ng-template>
+        <div> <app-table-fleet (callManageTicket)="navigateSelection($event)"></app-table-fleet> </div>
     </mat-card-content>
 </mat-card>

@@ -76,7 +76,7 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
     const start = moment(this.formGroup.get('ctrlRangeStart').value).format('yyyy-MM-DD');
     const end = moment(this.formGroup.get('ctrlRangeEnd').value).format('yyyy-MM-DD');
     const billingStatus = this.formGroup.get('ctrlBillingStatus').value;
-    this.subscription.push(this.billingItemsService.getBillingItemsAggregate(start, end, billingStatus, this.fleetManager.id).subscribe({
+    this.subscription.push(this.billingItemsService.getBillingItemsAggregate(start, end, billingStatus, this.fleetManager?.id).subscribe({
       next: items => (this.dataSource.data = items, this.dataSource.sort = this.sort, this.dataSource.paginator = this.paginator),
       error: () => this.complete = true,
       complete: () => this.complete = true
