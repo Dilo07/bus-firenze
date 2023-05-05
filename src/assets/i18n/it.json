@@ -12,6 +12,7 @@
         "TITLE-VALID-FLEET": "Validazione Fleet Manager",
         "TITLE-VALID-VEHICLE": "Validazione veicoli",
         "TITLE-VEHICLE": "Veicoli",
+        "TITLE-DRIVERS": "Autisti",
         "TITLE-TEST": "Collaudi",
         "TITLE-APPOINTMENTS": "Aggiungi appuntamento",
         "VALID-FLEET": "Verifica e approva l’utente Fleet Manager che ha effettuato una registrazione autonoma.",
@@ -22,6 +23,7 @@
         "ADD-OBU": "Assegna un OBU ad un veicolo associato a un Fleet Manager con deposito cauzionale versato.",
         "ADD-TICKET": "Assegna un Ticket rilasciato da SaS a un veicolo associato a un Fleet Manager con OBU installata.",
         "MANAGE-TICKET": "Gestisci un Ticket rilasciato da SaS associato a uno dei tuoi veicoli.",
+        "MANAGE-DRIVERS": "Gestisci i tuoi autisti.",
         "TEST": "Verifica i documenti di collaudo dei veicoli. Effettua una procedura di collaudo per un OBU installata.",
         "APPOINTMENTS": "Inserisci un appuntamento per installare una OBU. Visualizza i dati dei Fleet Manager su cui installare le OBU.",
         "GO": "Vai"

@@ -145,8 +145,8 @@ export const dashboardSettings: DashboardSetting[] = [
         cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../vehicles'
       },
       {
-        title: 'WELCOME.TITLE-TICKET', content: 'WELCOME.ADD-TICKET', icon: 'icon-wysiwyg',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../ticket'
+        title: 'WELCOME.TITLE-DRIVERS', content: 'WELCOME.MANAGE-DRIVERS', icon: 'icon-driver',
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../drivers'
       },
       {
         title: 'WELCOME.TITLE-MANAGE-TICKET', content: 'WELCOME.MANAGE-TICKET', icon: 'icon-wysiwyg',

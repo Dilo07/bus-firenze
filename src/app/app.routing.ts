@@ -38,7 +38,7 @@ const routes: Routes = [
     loadChildren:
       () => import('./components/comp-fleet-manager/redirect-driver-role/redirect-driver-role.module').then(m => m.RedirectDriverRoleModule)
   },
-  {
+/*   {
     path: 'deposit',
     loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule),
   },
@@ -49,7 +49,7 @@ const routes: Routes = [
   {
     path: 'penalties',
     loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule),
-  },
+  }, */
   {
     path: 'payments',
     loadChildren: () => import('./components/comp-payments/payments.module').then(m => m.PaymentsModule)

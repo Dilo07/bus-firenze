@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FleetManager } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-penalties',
@@ -6,12 +8,13 @@ import { Component, Input } from '@angular/core';
   styles: [``]
 })
 export class PenaltiesComponent {
-  @Input() public fleetManagerId: number;
-
+  public fleetManager: FleetManager;
   public keyword = '';
   public filter = '';
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+  }
 
   public applyFilter(event: Event): void {
     this.filter = (event.target as HTMLInputElement).value;

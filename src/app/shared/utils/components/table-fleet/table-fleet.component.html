@@ -17,7 +17,7 @@
                 <mat-card-title>{{element.name}} {{element.surname}}</mat-card-title>
             </mat-card-header>
             <button mat-icon-button [attr.i18nKey]="'FLEET-MANAGER.SELECTION'" [attr.i18nKey]="element.id"
-                (click)="manageTicket(element.id)">
+                (click)="selectFleet(element)">
                 <mat-icon><span class="icon-ArrowRight"></span></mat-icon>
             </button>
         </div>

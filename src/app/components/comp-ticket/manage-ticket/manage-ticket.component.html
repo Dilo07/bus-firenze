@@ -58,3 +58,14 @@
     </mat-card>
     <div *ngIf="dataSource.data.length === 0">{{ 'TICKET.NO_DATA' | translate}}</div>
 </div>
+
+<!-- <button mat-icon-button matTooltip="{{'TICKET.END' | translate}}" *ngIf="element.ticketSubscription && !element.dateDel"
+    [attr.i18nKey]="'TICKET.END'">
+    <mat-icon style="color: #0066CC;" (click)="removeTicket(element.ticketId, element.vehicleId)">
+        pan_tool</mat-icon>
+</button>
+<button mat-icon-button matTooltip="{{'TICKET.CANCEL' | translate}}" *ngIf="!element.dateSink && !element.dateDel"
+    [attr.i18nKey]="'TICKET.CANCEL'">
+    <mat-icon style="color: #0066CC;" (click)="removeTicket(element.ticketId, element.vehicleId)">
+        event_busy</mat-icon>
+</button> -->

@@ -5,10 +5,10 @@
     </mat-card-header>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
         <div *ngIf="viewFleetTable else manageTicket">
-            <app-table-fleet (callManageTicket)="viewFleetTable = false; fmId= $event"></app-table-fleet>
+            <app-table-fleet (callManageTicket)="viewFleetTable = false; fleetManager= $event"></app-table-fleet>
         </div>
         <ng-template #manageTicket>
-            <app-manage-ticket [fleetManagerId]="fmId" [roleMovyon]="roleMovyon" (callBackButton)="viewFleetTable = true"></app-manage-ticket>
+            <app-manage-ticket [fleetManager]="fleetManager" [roleMovyon]="roleMovyon" (callBackButton)="viewFleetTable = true"></app-manage-ticket>
         </ng-template>
     </mat-card-content>
 </mat-card>

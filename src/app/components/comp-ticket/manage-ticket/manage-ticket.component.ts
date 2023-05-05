@@ -7,10 +7,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IAuthenticationService, SnackBar } from '@npt/npt-template';
 import moment from 'moment';
 import { TicketService } from 'src/app/services/ticket.service';
-import { CompleteFleetManager, Ticket, Vehicle, VehicleWithoutTicket } from '../../domain/bus-firenze-domain';
+import { CompleteFleetManager, FleetManager, Ticket, Vehicle, VehicleWithoutTicket } from '../../domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket.component';
+import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-manage-ticket',
@@ -20,7 +21,7 @@ import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket
 export class ManageTicketComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() public fleetManagerId: number;
+  @Input() public fleetManager: FleetManager;
   @Input() public roleMovyon: boolean;
   @Output() public callBackButton = new EventEmitter();
   public roleDriver: boolean;
@@ -32,6 +33,8 @@ export class ManageTicketComponent implements OnInit, OnDestroy {
   public formGroup: FormGroup;
   public maxDate = moment(moment.now()).toDate();
   public vehicles: VehicleWithoutTicket[] = [];
+
+  private subscription: Subscription[] = [];
 
   constructor(
     private ticketService: TicketService,
@@ -52,6 +55,9 @@ export class ManageTicketComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
     this.dataSource.disconnect();
   }
 
@@ -64,7 +70,7 @@ export class ManageTicketComponent implements OnInit, OnDestroy {
       end = moment(this.formGroup.get('ctrlEnd').value).format('yyyy-MM-DD');
     }
     this.complete = false;
-    this.ticketService.getActiveTicket(this.roleDriver, this.fleetManagerId, start, end).subscribe({
+    this.subscription.push(this.ticketService.getActiveTicket(this.roleDriver, this.fleetManager?.id, start, end).subscribe({
       next: (data) => {
         this.dataSource.data = data;
         this.ticketsConnect = this.dataSource.connect();
@@ -73,17 +79,17 @@ export class ManageTicketComponent implements OnInit, OnDestroy {
       },
       error: () => this.complete = true,
       complete: () => this.complete = true
-    });
+    }));
   }
 
   public modalTicket(vehicleId?: number): void {
     let dataValue = null;
     if (vehicleId) {
       // caso di aggiunta ticket ad un ticket già esistente
-      dataValue = { vehicleId: vehicleId, fleetManagerId: this.fleetManagerId, extend: true };
+      dataValue = { vehicleId: vehicleId, fleetManagerId: this.fleetManager?.id, extend: true };
     } else {
       // caso di aggiunta di un ticket ad un vehicle che non ha ticket
-      dataValue = { vehicleList: this.vehicles, fleetManagerId: this.fleetManagerId, extend: false };
+      dataValue = { vehicleList: this.vehicles, fleetManagerId: this.fleetManager?.id, extend: false };
     }
     const dialogRef = this.dialog.open(ModalTestTicketComponent, {
       width: '60%',
@@ -96,9 +102,33 @@ export class ManageTicketComponent implements OnInit, OnDestroy {
     });
   }
 
+  public removeTicket(ticketId: number, vehicleId: number): void {
+    const dialogRef = this.dialog.open(ModalConfirmComponent, {
+      width: '50%',
+      height: '30%',
+      data: { text: 'TICKET.REMOVE_CONFIRM' },
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe(
+      confirm => {
+        if (confirm) {
+          this.complete = false;
+          this.subscription.push(this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManager?.id).subscribe({
+            error: () => this.complete = true,
+            complete: () => {
+              this.getActiveTicket();
+              this.snackBar.showMessage('TICKET.REMOVE_SUCCESS', 'INFO');
+              this.complete = true;
+            }
+          }));
+        }
+      }
+    );
+  }
+
   private getVehicle(): void {
     this.complete = false;
-    this.ticketService.getVehicleNoTicket(this.roleDriver, this.fleetManagerId).subscribe({
+    this.ticketService.getVehicleNoTicket(this.roleDriver, this.fleetManager?.id).subscribe({
       next: (data) => this.vehicles = data,
       error: () => this.complete = true,
       complete: () => this.complete = true

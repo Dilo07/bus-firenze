@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import moment from 'moment';
-import { BillingItems } from 'src/app/components/domain/bus-firenze-domain';
+import { BillingItems, FleetManager } from 'src/app/components/domain/bus-firenze-domain';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { Subscription } from 'rxjs';
 
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   `]
 })
 export class EmittedPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() fleetId: number;
+  @Input() fleetManager: FleetManager;
   @Input() keyword: string;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -57,7 +57,7 @@ export class EmittedPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.formGroup.invalid) {
       const start = moment(this.formGroup.get('ctrlRangeStart').value).format('yyyy-MM-DD');
       const end = moment(this.formGroup.get('ctrlRangeEnd').value).format('yyyy-MM-DD');
-      this.subscription.push(this.billingItemService.getPenaltiesByFmId(start, end, null, this.fleetId).subscribe(
+      this.subscription.push(this.billingItemService.getPenaltiesByFmId(start, end, null, this.fleetManager.id).subscribe(
         penalties => (this.dataSource.data = penalties, this.dataSource.paginator = this.paginator, this.dataSource.sort = this.sort)
       ));
     }

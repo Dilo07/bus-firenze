@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { TICKETS_TYPE } from '../../domain/bus-firenze-constants';
-import { Ticket, VehicleWithoutTicket } from '../../domain/bus-firenze-domain';
+import { FleetManager, Ticket, VehicleWithoutTicket } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-modal-test-ticket',
@@ -28,7 +28,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { vehicleList: VehicleWithoutTicket[]; vehicleId: number; fleetManagerId: number; extend: boolean },
+    @Inject(MAT_DIALOG_DATA) public data: { vehicleList: VehicleWithoutTicket[]; vehicleId: number; fleetManager: FleetManager; extend: boolean },
     @Inject('authService') private authService: IAuthenticationService,
     @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {
@@ -105,7 +105,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
       ticketSave,
       delayed,
       this.data.extend,
-      this.data.fleetManagerId)
+      this.data.fleetManager.id)
       .subscribe({
         next: () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
         complete: () => this.dialogRef.close(true)

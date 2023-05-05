@@ -11,10 +11,10 @@
         </form>
         <mat-tab-group mat-align-tabs="center">
             <mat-tab label="{{'PENALTIES.ADD' | translate}}">
-                <app-add-penalties [fleetId]="fleetManagerId" [keyword]="keyword"></app-add-penalties>
+                <app-add-penalties [fleetManager]="fleetManager" [keyword]="keyword"></app-add-penalties>
             </mat-tab>
             <mat-tab label="{{'PENALTIES.EMITTED' | translate}}">
-                <app-emitted-penalties [fleetId]="fleetManagerId" [keyword]="keyword"></app-emitted-penalties>
+                <app-emitted-penalties [fleetManager]="fleetManager" [keyword]="keyword"></app-emitted-penalties>
             </mat-tab>
         </mat-tab-group>
     </mat-card-content>

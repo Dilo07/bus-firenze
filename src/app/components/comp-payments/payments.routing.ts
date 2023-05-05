@@ -3,9 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@npt/npt-template';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { PagePaymentsComponent } from './page-payments.component';
+import { DepositComponent } from './deposit/deposit.component';
+import { BillingItemsComponent } from './billing-items/billing-items.component';
+import { PenaltiesComponent } from './penalties/penalties.component';
 
 const routes: Routes = [
-  { path: '', component: PagePaymentsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } }
+  { path: '', component: PagePaymentsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } },
+  { path: 'deposit', component: DepositComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } },
+  { path: 'billing', component: BillingItemsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } },
+  { path: 'penalties', component: PenaltiesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } }
 ];
 
 @NgModule({

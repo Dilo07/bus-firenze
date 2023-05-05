@@ -1,15 +1,16 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { InstallerService } from 'src/app/services/installer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DepositType, DocumentObu, DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
+import { DepositType, DocumentObu, DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-deposit',
@@ -36,7 +37,7 @@ import { DepositType, DocumentObu, DocumentVehicle, Vehicle } from '../../domain
 export class DepositComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() public fleetManagerId: number;
+  public fleetManager: FleetManager;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
   public displayedColumns = ['id', 'vehicleState', 'plate', 'nat', 'depositDocument', 'requestDocument', 'testing', 'obuId'];
   public src: FileViewer = { type: '', url: '', fileName: '' };
@@ -46,12 +47,15 @@ export class DepositComponent implements OnInit {
   private subscription: Subscription[] = [];
 
   constructor(
+    private router: Router,
     private vehicleService: VehicleService,
     private installerService: InstallerService,
     private snackBar: SnackBar,
     private formBuilder: FormBuilder,
     private dialog: MatDialog
-  ) { }
+  ) {
+    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+  }
 
   async ngOnInit(): Promise<void> {
     this.search = this.formBuilder.group({
@@ -65,11 +69,11 @@ export class DepositComponent implements OnInit {
     this.complete = false;
     const keyword = this.search.get('ctrlSearch').value;
     const viewAll = this.search.get('ctrlViewAll').value;
-    this.subscription.push(this.vehicleService.getVehicleDeposit(viewAll, this.fleetManagerId, keyword).subscribe(
-      vehicles => (this.vehicleList.data = vehicles, this.vehicleList.sort = this.sort, this.vehicleList.paginator = this.paginator),
-      () => this.complete = true,
-      () => this.complete = true
-    ));
+    this.subscription.push(this.vehicleService.getVehicleDeposit(viewAll, this.fleetManager.id, keyword).subscribe({
+      next: vehicles => (this.vehicleList.data = vehicles, this.vehicleList.sort = this.sort, this.vehicleList.paginator = this.paginator),
+      error: () => this.complete = true,
+      complete: () => this.complete = true
+    }));
   }
 
   public viewDeposit(vehicleId: number, documents: DocumentVehicle[], depositType: DepositType[]): void {
@@ -148,7 +152,7 @@ export class DepositComponent implements OnInit {
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
       this.complete = true;
     } else {
-      this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, depositType, file, this.fleetManagerId).subscribe(
+      this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, depositType, file, this.fleetManager.id).subscribe(
         () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
         () => this.complete = true,
         () => { this.getVehicle(); this.complete = true; }

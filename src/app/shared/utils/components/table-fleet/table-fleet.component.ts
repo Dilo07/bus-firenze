@@ -23,7 +23,7 @@ import { FleetManagerService } from 'src/app/services/fleet-manager.service';
   ]
 })
 export class TableFleetComponent implements OnInit {
-  @Output() public callManageTicket = new EventEmitter<number>();
+  @Output() public callManageTicket = new EventEmitter<FleetManager>();
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -52,8 +52,8 @@ export class TableFleetComponent implements OnInit {
     this.callGetFleetManager();
   }
 
-  public manageTicket(fleetManagerId: number): void {
-    this.callManageTicket.emit(fleetManagerId);
+  public selectFleet(fleetManager: FleetManager): void {
+    this.callManageTicket.emit(fleetManager);
   }
 
   public callGetFleetManager(): void {

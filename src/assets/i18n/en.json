@@ -12,6 +12,7 @@
         "TITLE-VALID-FLEET": "Fleet Manager validation",
         "TITLE-VALID-VEHICLE": "Vehicles validation",
         "TITLE-VEHICLE": "Vehicles",
+        "TITLE-DRIVERS": "Drivers",
         "TITLE-TEST": "Test",
         "TITLE-APPOINTMENTS": "Add appointment",
         "VALID-FLEET": "Check and approve a Fleet Manager that performed the self-registration procedure.",
@@ -22,6 +23,7 @@
         "ADD-OBU": "Assign an OBU to a vehicle belonging to a Fleet Manager; bail was previously paid",
         "ADD-TICKET": "Assign a Ticket sold by SaS to a vehicle belonging to a Fleet Manager with installed OBU.",
         "MANAGE-TICKET": "Manage Tickets sold by SaS assigned to your vehicles.",
+        "MANAGE-DRIVERS": "Manage your drivers.",
         "Test": "Check the inspection documents of vehicles. Perform the inspection procedure on an installed OBU.",
         "APPOINTMENTS": "Insert a new appointment to install an OBU. View main data of Fleet Manager owning the vehicles on which OBUs should be installed.",
         "GO": "Go"

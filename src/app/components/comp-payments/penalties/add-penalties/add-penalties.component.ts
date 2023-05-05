@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SnackBar } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
-import { AddPenal, Vehicle } from 'src/app/components/domain/bus-firenze-domain';
+import { AddPenal, FleetManager, Vehicle } from 'src/app/components/domain/bus-firenze-domain';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { ModalPenalComponent } from '../modal-penal/modal-penal.component';
@@ -22,7 +22,7 @@ import { ModalPenalComponent } from '../modal-penal/modal-penal.component';
   ]
 })
 export class AddPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() fleetId: number;
+  @Input() fleetManager: FleetManager;
   @Input() keyword: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -60,7 +60,7 @@ export class AddPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
   public getVehiclesByManagerId(): void {
     this.viewFleetTable = false;
     this.complete = false;
-    this.subscription.push(this.vehicleService.getVehiclesById(true, this.fleetId, this.keyword).subscribe({
+    this.subscription.push(this.vehicleService.getVehiclesById(true, this.fleetManager.id, this.keyword).subscribe({
       next: (vehicles) => (this.dataSource.data = vehicles, this.dataSource.sort = this.sort, this.dataSource.paginator = this.paginator),
       error: () => this.viewFleetTable = true,
       complete: () => this.complete = true
