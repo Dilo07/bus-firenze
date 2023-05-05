@@ -1,157 +1,60 @@
-<div fxLayout="column" fxLayoutGap="20px" style="margin-top: 20px !important;">
-    <div fxLayout="row wrap" fxLayoutAlign="space-between">
-        <mat-card-title>{{(viewHistoric ? 'TICKET.HISTORY' : 'TICKET.ACTIVE') | translate}}
-        </mat-card-title>
-        <button mat-raised-button class="actionButtons" *ngIf="!roleDriver" [attr.i18nKey]="'TICKET.VIEW_HISTORY'"
-            (click)="switchHistoric()">
-            {{ (viewHistoric ? 'TICKET.ACTIVE' : 'TICKET.VIEW_HISTORY') | translate }}
+<form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+    <mat-radio-group fxLayoutGap="10px" formControlName="ctrlActive" (change)="getActiveTicket()">
+        <mat-radio-button [value]="true">{{'TICKET.ACTIVE' | translate}}</mat-radio-button>
+        <mat-radio-button [value]="false">{{'TICKET.INACTIVE' | translate}}</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field appearance="outline" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100"
+        *ngIf="!formGroup.get('ctrlActive').value">
+        <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
+        <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+            <input matStartDate formControlName="ctrlStart">
+            <input matEndDate formControlName="ctrlEnd" (dateChange)="getActiveTicket()">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <div fxLayoutGap="10px">
+        <button mat-button class="whiteButtons" type="button" *ngIf="roleMovyon" (click)="callBackButton.emit()"
+            [attr.i18nKey]="'FLEET-MANAGER.BACK'">
+            {{'FLEET-MANAGER.BACK' | translate}}
         </button>
+        <button mat-button class="actionButtons" [attr.i18nKey]="'TICKET.ADD'" *ngIf="vehicles.length"
+            (click)="modalTicket()">{{'TICKET.ADD' | translate}}</button>
     </div>
-    <form *ngIf="viewHistoric" [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
-        <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
-            <mat-label>{{'STATISTIC.LABEL-RANGE' | translate}}</mat-label>
-            <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
-                <input matStartDate formControlName="start">
-                <input matEndDate formControlName="end" (dateChange)="changeDate()">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
-        </mat-form-field>
-    </form>
-    <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-    <div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
-        <mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
-            <ng-container matColumnDef="expandButton">
-                <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <span class="mobile-label"></span>
-                    <button mat-icon-button matTooltip="{{'TICKET.DETAILS' | translate}}"
-                        [attr.i18nKey]="'TICKET.DETAILS'"
-                        (click)="expandedElement = expandedElement === element ? null : element">
-                        <mat-icon>
-                            <span
-                                [class]="expandedElement && expandedElement.ticketId === element.ticketId ? 'icon-down_arrow' : 'icon-right_arrow'"></span>
-                        </mat-icon>
-                    </button>
-                </mat-cell>
-            </ng-container>
+</form>
+<mat-progress-bar *ngIf="!complete" mode="indeterminate"></mat-progress-bar>
+<div fxLayout="row wrap" fxLayoutAlign="start">
+    <mat-card *ngFor="let element of ticketsConnect | async" class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100"
+        fxFlex.gt-lg="30" fxFlex.gt-md="30">
+        <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
+            <ng-container>Ticket {{element.ticketId}}</ng-container>
+            <button mat-icon-button (click)="modalTicket(element.vehicleId)">
+                <mat-icon><span class="icon-Plus"></span></mat-icon>
+            </button>
+        </mat-card-title>
 
-            <ng-container matColumnDef="ticketId">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> ticketId </mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">ticketId</span>
-                    {{element.ticketId}}
-                </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="lpn">
-                <mat-header-cell *matHeaderCellDef> {{'TICKET.LPN' | translate}} </mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">{{'TICKET.LPN' | translate}}</span>
-                    {{element.lpn}}
-                </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="lpnNat">
-                <mat-header-cell *matHeaderCellDef> {{'TICKET.LPN_NAT' | translate}} </mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">{{'TICKET.LPN_NAT' | translate}}</span>
-                    <span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
-                </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="ticketStart">
-                <mat-header-cell *matHeaderCellDef> {{'TICKET.DATE_START' | translate}} </mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">{{'TICKET.DATE_START' | translate}}</span>
-                    {{element.ticketStart ? (element.ticketStart | date: 'dd/MM/yyyy HH:mm') : '-'}}
-                </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="ticketEnd">
-                <mat-header-cell *matHeaderCellDef> {{'TICKET.DATE_END' | translate}} </mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">{{'TICKET.DATE_END' | translate}}</span>
-                    {{element.ticketEnd ? (element.ticketEnd | date: 'dd/MM/yyyy HH:mm') : '-'}}
-                </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="type">
-                <mat-header-cell *matHeaderCellDef> {{'TICKET.TYPE' | translate}} </mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">{{'TICKET.TYPE' | translate}}</span>
-                    {{element.type ? ('TICKET.' + element.type | translate) : '-'}}
-                </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="dateSink">
-                <mat-header-cell *matHeaderCellDef> {{'TICKET.ACTIVATION' | translate}} </mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <span class="mobile-label">{{'TICKET.ACTIVATION' | translate}}</span>
-                    {{element.dateSink ? (element.dateSink | date: 'dd/MM/yyyy HH:mm') :
-                    ('TICKET.ACTIVATION_PHASE' | translate)}}
-                </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                <mat-cell *matCellDef="let element" style="text-align: end;">
-                    <button mat-icon-button matTooltip="{{'TICKET.END' | translate}}"
-                        *ngIf="element.ticketSubscription && !element.dateDel" [attr.i18nKey]="'TICKET.END'">
-                        <mat-icon style="color: #133775;" (click)="removeTicket(element.ticketId, element.vehicleId)">
-                            pan_tool</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="{{'TICKET.CANCEL' | translate}}"
-                        *ngIf="!element.dateSink && !element.dateDel" [attr.i18nKey]="'TICKET.CANCEL'">
-                        <mat-icon style="color: #133775;" (click)="removeTicket(element.ticketId, element.vehicleId)">
-                            event_busy</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="{{'TICKET.ADD' | translate}}" *ngIf="!element.dateDel"
-                        [attr.i18nKey]="'TICKET.ADD'">
-                        <mat-icon (click)="modalTicket(element.vehicleId)">
-                            <span class="icon-ticket"></span>
-                        </mat-icon>
-                    </button>
-                </mat-cell>
-            </ng-container>
-
-            <!--Collapse div-->
-            <ng-container matColumnDef="expandedDetail">
-                <mat-cell *matCellDef="let element">
-                    <div class="example-element-detail"
-                        [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
-                        <div class="example-element-description">
-                            <div fxLayout="row" fxLayoutGap="20px">
-                                <div>
-                                    <h5>{{'TICKET.INSERT_BY' | translate}}</h5>
-                                    <p>{{element.userIns.displayName}}</p>
-                                </div>
-                                <div>
-                                    <h5>{{'TICKET.INSERT_AT' | translate}}</h5>
-                                    <p>{{element.dateIns | date: 'dd/MM/yyyy HH:mm'}}</p>
-                                </div>
-                                <div *ngIf="element.ticketSubscription">
-                                    <h5>{{'TICKET.END_BY' | translate}}</h5>
-                                    <p>{{element.userDel.displayName}}</p>
-                                </div>
-                                <div *ngIf="element.ticketSubscription">
-                                    <h5>{{'TICKET.END_AT' | translate}}</h5>
-                                    <p>{{element.dateDel | date: 'dd/MM/yyyy HH:mm'}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </mat-cell>
-            </ng-container>
-
-            <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
-                [class.example-expanded-row]="expandedElement === row"></mat-row>
-            <mat-row [style.display]="expandedElement && expandedElement.ticketId === row.ticketId ? '' : 'none'"
-                *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
-        </mat-table>
-    </div>
-    <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
-    <div *ngIf="dataSource.data.length === 0 && complete">{{ 'TICKET.NO_DATA' | translate}}</div>
+        <mat-card-content>
+            <mat-card-subtitle>
+                {{'TICKET.TYPE' | translate}}: <b>{{element.type}}</b>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+                {{'VEHICLE.LPN' | translate}}: <b>{{element.lpn}} </b> <span
+                    [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+                {{'TICKET.DATE_START' | translate}}: <b>{{element.ticketStart ?
+                    (element.ticketStart | date: 'dd/MM/yyyy HH:mm') : '-'}}</b>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+                {{'TICKET.DATE_END' | translate}}: <b>{{element.ticketEnd ?
+                    (element.ticketEnd | date: 'dd/MM/yyyy HH:mm') : '-'}}</b>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+                {{'TICKET.ACTIVATION' | translate}}: <b>{{element.dateSink ?
+                    (element.dateSink | date: 'dd/MM/yyyy HH:mm') :
+                    ('TICKET.ACTIVATION_PHASE' | translate)}}</b>
+            </mat-card-subtitle>
+        </mat-card-content>
+    </mat-card>
+    <div *ngIf="dataSource.data.length === 0">{{ 'TICKET.NO_DATA' | translate}}</div>
 </div>
