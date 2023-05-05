@@ -1,8 +1,8 @@
 <mat-card *ngIf="roleMovyon !== undefined">
-    <div fxLayout="row wrap" fxLayoutAlign="space-between">
-        <mat-card-title>{{'MENU.Ticket' | translate}}
-        </mat-card-title>
-    </div>
+    <mat-card-header>
+        <mat-card-title>{{'MENU.Ticket' | translate}}</mat-card-title>
+        <mat-card-subtitle *ngIf="viewFleetTable">{{'FLEET-MANAGER.SELECT' | translate}}</mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
         <div *ngIf="viewFleetTable else manageTicket">
             <app-table-fleet (callManageTicket)="viewFleetTable = false; fmId= $event"></app-table-fleet>

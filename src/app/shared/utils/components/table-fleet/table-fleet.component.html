@@ -1,4 +1,3 @@
-<h4 fxLayout="row" fxLayoutAlign="center center">{{'FLEET-MANAGER.SELECT' | translate}}</h4>
 <form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
     <mat-form-field appearance="outline" fxFlex="100">
         <mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
@@ -9,46 +8,25 @@
     </mat-form-field>
 </form>
 <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-<div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
-    <mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc"
-        (matSortChange)="sortData($event)">
-        <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">id</span>
-                {{element.id}}
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.NAME' |
-                translate}} </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">{{'FLEET-MANAGER.NAME' | translate}}</span>
-                {{ element.name}}
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="surname">
-            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{'FLEET-MANAGER.SURNAME' |
-                translate}} </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">{{'FLEET-MANAGER.SURNAME' | translate}}</span>
-                {{ element.surname}}
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="e-mail">
-            <mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">e-mail</span>
-                {{ element | findContactValue: 3}}
-            </mat-cell>
-        </ng-container>
-
-        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row" [attr.i18nKey]="row.id" (click)="manageTicket(row.id)"></mat-row>
-    </mat-table>
+<div fxLayout="row wrap" fxLayoutAlign="start">
+    <mat-card *ngFor="let element of fleetanagersConnect | async" class="mat-card-movyon" fxFlex="100"
+        fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <mat-card-header>
+                <mat-card-title> ID {{element.id}} </mat-card-title>
+                <mat-card-title>{{element.name}} {{element.surname}}</mat-card-title>
+            </mat-card-header>
+            <button mat-icon-button [attr.i18nKey]="'FLEET-MANAGER.SELECTION'" [attr.i18nKey]="element.id"
+                (click)="manageTicket(element.id)">
+                <mat-icon><span class="icon-ArrowRight"></span></mat-icon>
+            </button>
+        </div>
+        <mat-card-content>
+            <mat-card-subtitle>
+                E-mail: <b>{{element | findContactValue: 3}}</b>
+            </mat-card-subtitle>
+        </mat-card-content>
+    </mat-card>
 </div>
 <mat-paginator style="margin-top: 20px;" [style.display]="fleetManagerList.length === 0 ? 'none' : '' " [pageSize]="10"
     [pageSizeOptions]="[5, 10, 25]" (page)="pageChanged($event)"></mat-paginator>
