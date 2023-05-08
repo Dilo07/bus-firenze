@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Breadcrumb, IAuthenticationService } from '@npt/npt-template';
+import { IAuthenticationService } from '@npt/npt-template';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManager } from '../domain/bus-firenze-domain';
 import { Router } from '@angular/router';
@@ -15,14 +15,13 @@ export class PagePaymentsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    @Inject('authService') private authService: IAuthenticationService,
-    @Inject('hideBillingData') public hideBilling: boolean
+    @Inject('authService') private authService: IAuthenticationService
   ) { }
 
   async ngOnInit(): Promise<void> {
     // verifica il ruolo loggato
     await this.authService.getUserRoles().then((res: string[]) => this.roleFleet = res.includes(ROLES.FLEETMNG));
-    if(this.roleFleet){
+    if (this.roleFleet) {// se è un fm va subito alla selection cards
       this.router.navigate(['../payments/selection']);
     }
   }

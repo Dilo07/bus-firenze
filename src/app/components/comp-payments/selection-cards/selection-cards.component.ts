@@ -22,6 +22,9 @@ export class SelectionCardsComponent implements OnInit {
     @Inject('hideBillingData') public hideBilling: boolean
   ) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    if (this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as FleetManager) {
+      this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb;
+    };
   }
 
   async ngOnInit(): Promise<void> {
@@ -31,7 +34,7 @@ export class SelectionCardsComponent implements OnInit {
     this.selectionCards = [
       {
         icon: 'icon-Deposito',
-        title: 'Depositi',
+        title: 'MENU.Deposit',
         subtitle: 'Visualizza tutti i depositi dei veicoli',
         route: 'deposit',
         state: { fleetManager: this.fleetManager }
@@ -40,7 +43,7 @@ export class SelectionCardsComponent implements OnInit {
     if (!this.hideBilling) { // se la property hideBilling è falsa
       this.selectionCards.push({
         icon: 'icon-Documents',
-        title: 'Fatture',
+        title: 'MENU.Billing',
         subtitle: 'Visualizza tutte le fatture',
         route: 'billing',
         state: { fleetManager: this.fleetManager }
@@ -49,8 +52,8 @@ export class SelectionCardsComponent implements OnInit {
     if (this.roleMovyon) { // se è un operatore o admin
       this.selectionCards.push({
         icon: 'icon-Penali',
-        title: 'Penali',
-        subtitle: 'Gestisci tuttel le penali',
+        title: 'MENU.Penalties',
+        subtitle: 'Gestisci tutte le penali',
         route: 'penalties',
         state: { fleetManager: this.fleetManager }
       });

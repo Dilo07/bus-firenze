@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { BILLING_STATUS } from '../../domain/bus-firenze-constants';
 import { BillingItemsAgg, FleetManager } from '../../domain/bus-firenze-domain';
+import { Breadcrumb } from '@npt/npt-template';
 
 @Component({
   selector: 'app-billing-items',
@@ -47,6 +48,7 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
   public maxDate = moment().toDate();
   public formGroup: FormGroup;
   public expandedElement: BillingItemsAgg | null;
+  public breadCrumb: Breadcrumb[] = [];
 
   private subscription: Subscription[] = [];
 
@@ -63,6 +65,21 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
       ctrlRangeEnd: new FormControl(moment().toDate(), Validators.required),
     });
     this.getBillingItems();
+    this.breadCrumb = [
+      {
+        label: 'MENU.Payments',
+        url: '/payments'
+      },
+      {
+        label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+        url: '../selection',
+        state: this.fleetManager
+      },
+      {
+        label: 'MENU.Billing',
+        url: ''
+      }
+    ];
   }
 
   ngOnDestroy(): void {

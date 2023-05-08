@@ -1,5 +1,11 @@
-<div>
-    <div fxLayout="column" fxLayoutGap="20px" style="margin: 20px">
+<mat-card>
+    <mat-card-title>
+        <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+            style="height: 1px;">
+        </lib-breadcrumb>
+        {{'MENU.Deposit' | translate}}
+    </mat-card-title>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
         <form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
             <mat-form-field appearance="outline" fxFlex="75">
                 <mat-label>{{'COMMON.ACTION.SEARCH' | translate}}</mat-label>
@@ -22,7 +28,7 @@
                         {{element.id}}
                     </mat-cell>
                 </ng-container>
-
+    
                 <ng-container matColumnDef="vehicleState">
                     <mat-header-cell *matHeaderCellDef> {{'VEHICLE.STATE' | translate}} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
@@ -30,7 +36,7 @@
                         {{ (element.deleted ? 'VEHICLE.DELETED' : 'VEHICLE.ACTIVE') | translate}}
                     </mat-cell>
                 </ng-container>
-
+    
                 <ng-container matColumnDef="plate">
                     <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
@@ -38,7 +44,7 @@
                         {{ element.lpn}}
                     </mat-cell>
                 </ng-container>
-
+    
                 <ng-container matColumnDef="nat">
                     <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
@@ -46,7 +52,7 @@
                         <span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
                     </mat-cell>
                 </ng-container>
-
+    
                 <ng-container matColumnDef="depositDocument">
                     <mat-header-cell *matHeaderCellDef> {{'VEHICLE.RIC_DEPOSIT' | translate}} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
@@ -80,7 +86,7 @@
                         </button>
                     </mat-cell>
                 </ng-container>
-
+    
                 <ng-container matColumnDef="requestDocument">
                     <mat-header-cell *matHeaderCellDef> {{'VEHICLE.RIM_DEPOSIT' | translate}} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
@@ -106,7 +112,7 @@
                             task_alt</mat-icon>
                     </mat-cell>
                 </ng-container>
-
+    
                 <ng-container matColumnDef="testing">
                     <mat-header-cell *matHeaderCellDef> {{'VEHICLE.REMOVE_TEST' | translate}} </mat-header-cell>
                     <mat-cell *matCellDef="let element">
@@ -129,7 +135,7 @@
                         </ng-container>
                     </mat-cell>
                 </ng-container>
-
+    
                 <ng-container matColumnDef="obuId">
                     <mat-header-cell *matHeaderCellDef> obuId </mat-header-cell>
                     <mat-cell *matCellDef="let element">
@@ -137,7 +143,7 @@
                         {{ element.obuId}}
                     </mat-cell>
                 </ng-container>
-
+    
                 <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
             </mat-table>
@@ -145,6 +151,5 @@
         <mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"
             [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
         <div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
-    </div>
-
-</div>
+    </mat-card-content>
+</mat-card>

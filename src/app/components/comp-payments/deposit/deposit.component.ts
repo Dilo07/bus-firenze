@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
+import { Breadcrumb, FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
 import { Subscription } from 'rxjs';
 import { InstallerService } from 'src/app/services/installer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
@@ -43,6 +43,7 @@ export class DepositComponent implements OnInit {
   public src: FileViewer = { type: '', url: '', fileName: '' };
   public search: FormGroup;
   public complete = true;
+  public breadCrumb: Breadcrumb[] = [];
 
   private subscription: Subscription[] = [];
 
@@ -62,6 +63,21 @@ export class DepositComponent implements OnInit {
       ctrlSearch: [''],
       ctrlViewAll: [false]
     });
+    this.breadCrumb = [
+      {
+        label: 'MENU.Payments',
+        url: '/payments'
+      },
+      {
+        label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+        url: '../selection',
+        state: this.fleetManager
+      },
+      {
+        label: 'MENU.Deposit',
+        url: ''
+      }
+    ];
     this.getVehicle();
   }
 
