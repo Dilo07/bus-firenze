@@ -1,39 +1,50 @@
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="lpn">
-        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
-            {{element.lpn}}
-        </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="lpnNat">
-        <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
-            <span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
-        </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="periodOrDate">
-        <mat-header-cell *matHeaderCellDef>
-            {{((billingType | singleDate) ? 'BILLING_ITEMS.DATE' : 'BILLING_ITEMS.PERIOD') | translate}}
-        </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <span class="mobile-label">
-                {{((billingType | singleDate) ? 'BILLING_ITEMS.DATE' : 'BILLING_ITEMS.PERIOD') | translate}}
-            </span>
-            {{element.startPeriod.day + '/' + element.startPeriod.month + '/' + element.startPeriod.year }}
-            <span *ngIf="!(billingType | singleDate)">
-                &nbsp;- {{ element.endPeriod.day + '/' + element.endPeriod.month + '/' + element.endPeriod.year }}
-            </span>
-        </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="price">
-        <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICE' | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <span class="mobile-label">{{'BILLING_ITEMS.PRICE' | translate}}</span>
-            {{element.price}} €
-        </mat-cell>
-    </ng-container>
-    <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
-</mat-table>
+<mat-card>
+    <mat-card-title>
+        <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+            style="height: 1px;">
+        </lib-breadcrumb>
+        {{'BILLING_ITEMS.DETAIL' | translate}} Id {{gopId}}
+    </mat-card-title>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="lpn">
+                <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN' | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">{{'VEHICLE.LPN' | translate}}</span>
+                    {{element.lpn}}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="lpnNat">
+                <mat-header-cell *matHeaderCellDef> {{'VEHICLE.LPN_NAT' | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">{{'VEHICLE.LPN_NAT' | translate}}</span>
+                    <span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="periodOrDate">
+                <mat-header-cell *matHeaderCellDef>
+                    {{((billingType | singleDate) ? 'BILLING_ITEMS.DATE' : 'BILLING_ITEMS.PERIOD') | translate}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">
+                        {{((billingType | singleDate) ? 'BILLING_ITEMS.DATE' : 'BILLING_ITEMS.PERIOD') | translate}}
+                    </span>
+                    {{element.startPeriod.day + '/' + element.startPeriod.month + '/' + element.startPeriod.year }}
+                    <span *ngIf="!(billingType | singleDate)">
+                        &nbsp;- {{ element.endPeriod.day + '/' + element.endPeriod.month + '/' + element.endPeriod.year
+                        }}
+                    </span>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="price">
+                <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICE' | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">{{'BILLING_ITEMS.PRICE' | translate}}</span>
+                    {{element.price}} €
+                </mat-cell>
+            </ng-container>
+            <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
+        </mat-table>
+    </mat-card-content>
+</mat-card>

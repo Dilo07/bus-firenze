@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -28,21 +27,14 @@ import { Breadcrumb } from '@npt/npt-template';
     .mat-column-priceTot { max-width: 10%;}
   }
   `
-  ],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+  ]
 })
 export class BillingItemsComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   public fleetManager: FleetManager;
   public dataSource = new MatTableDataSource<BillingItemsAgg>();
-  public displayedColumns = ['expandButton', 'nptGopId', 'billingType', 'status', 'price', 'quantity', 'priceTot'];
+  public displayedColumns = ['nptGopId', 'billingType', 'status', 'price', 'quantity', 'priceTot', 'action'];
   public complete = true;
   public billingStatus = [BILLING_STATUS.all, BILLING_STATUS.unknown, BILLING_STATUS.pending, BILLING_STATUS.success, BILLING_STATUS.failed];
   public maxDate = moment().toDate();
@@ -56,6 +48,9 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
     private router: Router,
     private billingItemsService: BillingItemsService) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    if (this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as FleetManager) {
+      this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb;
+    };
   }
 
   async ngOnInit(): Promise<void> {

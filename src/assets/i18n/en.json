@@ -465,6 +465,7 @@
         "PERIOD": "Reference period",
         "DATE": "Billing date",
         "DETAILS": "Billing item details",
+        "DETAIL": "Billing item detail ",
         "CLOSE_DETAILS": "Close details"
     },
     "PENALTIES": {
@@ -495,7 +496,7 @@
         "DAMAGE": "Billing item for not damage OBU",
         "CANCELLED_APPOINTMENT": "Appointment cancelled within 24h",
         "REVERSAL": "Credit note",
-        "CHANGE": "Change obu",
+        "CHANGE_OBU": "Change obu",
         "UNINSTALL_FREE": "Uninstall free",
         "CHANGE_FREE": "Change obu free",
         "5": "Missed appointment",

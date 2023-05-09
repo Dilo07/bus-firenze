@@ -465,6 +465,7 @@
         "PERIOD": "Periodo di riferimento",
         "DATE": "Data fattura",
         "DETAILS": "Dettagli fatture",
+        "DETAIL": "Dettagli fattura ",
         "CLOSE_DETAILS": "Chiudi dettagli"
     },
     "PENALTIES": {
@@ -495,7 +496,7 @@
         "DAMAGE": "Trattenimento deposito cauzionale per danneggiamento OBU",
         "CANCELLED_APPOINTMENT": "Appuntamento cancellato entro 24h",
         "REVERSAL": "Nota di credito",
-        "CHANGE": "Sostituzione obu",
+        "CHANGE_OBU": "Sostituzione obu",
         "UNINSTALL_FREE": "Disinstallazione obu gratuita",
         "CHANGE_FREE": "Sostituzione obu gratuita",
         "5": "Mancato appuntamento",

@@ -40,8 +40,8 @@
         </mat-card>
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
         <mat-table [dataSource]="dataSource" [style.display]="dataSource.data.length === 0 ? 'none' : ''"
-            class="mat-elevation-z8" multiTemplateDataRows matSort matSortActive="nptGopId" matSortDirection="asc">
-            <ng-container matColumnDef="expandButton">
+            class="mat-elevation-z8" matSort matSortActive="nptGopId" matSortDirection="asc">
+            <!-- <ng-container matColumnDef="expandButton">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <button mat-icon-button [attr.i18nKey]="'BILLING_ITEMS.DETAILS'"
@@ -53,7 +53,7 @@
                         </mat-icon>
                     </button>
                 </mat-cell>
-            </ng-container>
+            </ng-container> -->
 
             <ng-container matColumnDef="nptGopId">
                 <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> gop id </mat-header-cell>
@@ -103,23 +103,33 @@
                 </mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button [routerLink]="['../billing-details']"
+                        [state]="{gopId: element.nptGopId, billingType: element.billingType, billingItems: element.items, fleetManager: fleetManager}">
+                        <mat-icon><span class="icon-document_search"></span></mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
             <!--Collapse div-->
-            <ng-container matColumnDef="expandedDetail">
+            <!-- <ng-container matColumnDef="expandedDetail">
                 <mat-cell *matCellDef="let element">
                     <div class="example-element-detail"
                         [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
                         <div class="example-element-description">
                             <app-list-items [billingType]="element.billingType" [billingItems]="element.items">
-                            </app-list-items> <!-- componente -->
+                            </app-list-items>
                         </div>
                     </div>
                 </mat-cell>
-            </ng-container>
+            </ng-container> -->
 
             <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let element; columns: displayedColumns;" class="hover-row"></mat-row>
-            <mat-row [style.display]="expandedElement && expandedElement.nptGopId === row.nptGopId ? '' : 'none'"
-                *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
+            <!--  <mat-row [style.display]="expandedElement && expandedElement.nptGopId === row.nptGopId ? '' : 'none'"
+                *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row> -->
         </mat-table>
         <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
             [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
