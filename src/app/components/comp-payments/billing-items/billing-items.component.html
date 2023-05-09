@@ -10,11 +10,11 @@
             <mat-card-content fxLayout="column" fxLayoutGap="20px">
                 <form [formGroup]="formGroup" style="margin-bottom: 20px;" fxLayout="column" fxLayoutGap="20px">
                     <div fxLayout="row wrap" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
+                        <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
                             <mat-label>{{'COMMON.DATE.RANGE' | translate}}</mat-label>
                             <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
                                 <input matStartDate formControlName="ctrlRangeStart">
-                                <input matEndDate formControlName="ctrlRangeEnd">
+                                <input matEndDate formControlName="ctrlRangeEnd" (dateChange)="getBillingItems()">
                             </mat-date-range-input>
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-date-range-picker #picker></mat-date-range-picker>
@@ -22,18 +22,12 @@
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
                             <mat-label> {{'BILLING_ITEMS.STATUS' | translate}}</mat-label>
-                            <mat-select formControlName="ctrlBillingStatus" required>
+                            <mat-select formControlName="ctrlBillingStatus" required (selectionChange)="getBillingItems()">
                                 <mat-option *ngFor="let status of billingStatus;" [value]="status">
                                     {{'BILLING_STATUS.' + status | translate}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <span>
-                            <button mat-button class="actionButtons" [disabled]="formGroup.invalid"
-                                [attr.i18nKey]="'COMMON.ACTION.SEARCH'" (click)="getBillingItems()">
-                                {{'COMMON.ACTION.SEARCH' | translate}}
-                            </button>
-                        </span>
                     </div>
                 </form>
             </mat-card-content>

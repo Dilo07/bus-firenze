@@ -25,6 +25,7 @@ import { Breadcrumb } from '@npt/npt-template';
     .mat-column-price { max-width: 10%;}
     .mat-column-quantity { max-width: 10%;}
     .mat-column-priceTot { max-width: 10%;}
+    .mat-column-action { display: table-column; text-align: end;}
   }
   `
   ]
@@ -55,7 +56,7 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     this.formGroup = new FormGroup({
-      ctrlBillingStatus: new FormControl(BILLING_STATUS.pending),
+      ctrlBillingStatus: new FormControl(BILLING_STATUS.pending, Validators.required),
       ctrlRangeStart: new FormControl(moment().subtract(30, 'day').toDate(), Validators.required),
       ctrlRangeEnd: new FormControl(moment().toDate(), Validators.required),
     });
@@ -84,15 +85,17 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
   }
 
   public getBillingItems(): void {
-    this.complete = false;
-    const start = moment(this.formGroup.get('ctrlRangeStart').value).format('yyyy-MM-DD');
-    const end = moment(this.formGroup.get('ctrlRangeEnd').value).format('yyyy-MM-DD');
-    const billingStatus = this.formGroup.get('ctrlBillingStatus').value;
-    this.subscription.push(this.billingItemsService.getBillingItemsAggregate(start, end, billingStatus, this.fleetManager?.id).subscribe({
-      next: items => (this.dataSource.data = items, this.dataSource.sort = this.sort, this.dataSource.paginator = this.paginator),
-      error: () => this.complete = true,
-      complete: () => this.complete = true
-    }));
+    if (!this.formGroup.invalid) {
+      this.complete = false;
+      const start = moment(this.formGroup.get('ctrlRangeStart').value).format('yyyy-MM-DD');
+      const end = moment(this.formGroup.get('ctrlRangeEnd').value).format('yyyy-MM-DD');
+      const billingStatus = this.formGroup.get('ctrlBillingStatus').value;
+      this.subscription.push(this.billingItemsService.getBillingItemsAggregate(start, end, billingStatus, this.fleetManager?.id).subscribe({
+        next: items => (this.dataSource.data = items, this.dataSource.sort = this.sort, this.dataSource.paginator = this.paginator),
+        error: () => this.complete = true,
+        complete: () => this.complete = true
+      }));
+    }
   }
 
 }
