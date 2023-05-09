@@ -41,19 +41,6 @@
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
         <mat-table [dataSource]="dataSource" [style.display]="dataSource.data.length === 0 ? 'none' : ''"
             class="mat-elevation-z8" matSort matSortActive="nptGopId" matSortDirection="asc">
-            <!-- <ng-container matColumnDef="expandButton">
-                <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <button mat-icon-button [attr.i18nKey]="'BILLING_ITEMS.DETAILS'"
-                        (click)="expandedElement = expandedElement === element ? null : element;">
-                        <mat-icon style="color: grey"
-                            matTooltip="{{(expandedElement && expandedElement.nptGopId === element.nptGopId ? 'BILLING_ITEMS.CLOSE_DETAILS' : 'BILLING_ITEMS.DETAILS') | translate }}">
-                            <span
-                                [class]="expandedElement && expandedElement.nptGopId === element.nptGopId ? 'icon-down_arrow' : 'icon-right_arrow'"></span>
-                        </mat-icon>
-                    </button>
-                </mat-cell>
-            </ng-container> -->
 
             <ng-container matColumnDef="nptGopId">
                 <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> gop id </mat-header-cell>
@@ -113,23 +100,8 @@
                 </mat-cell>
             </ng-container>
 
-            <!--Collapse div-->
-            <!-- <ng-container matColumnDef="expandedDetail">
-                <mat-cell *matCellDef="let element">
-                    <div class="example-element-detail"
-                        [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
-                        <div class="example-element-description">
-                            <app-list-items [billingType]="element.billingType" [billingItems]="element.items">
-                            </app-list-items>
-                        </div>
-                    </div>
-                </mat-cell>
-            </ng-container> -->
-
             <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let element; columns: displayedColumns;" class="hover-row"></mat-row>
-            <!--  <mat-row [style.display]="expandedElement && expandedElement.nptGopId === row.nptGopId ? '' : 'none'"
-                *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row> -->
         </mat-table>
         <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
             [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
