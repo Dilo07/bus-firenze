@@ -8,7 +8,14 @@
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
         <form [formGroup]="formGroup">
             <div fxLayout="row wrap" fxLayoutGap="20px">
-                <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
+                <mat-form-field appearance="outline" fxFlex.gt-lg="50" fxFlex.gt-md="50" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-label>{{'PENALTIES.SEARCH' | translate}}</mat-label>
+                    <input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
+                    <button matPrefix mat-icon-button (click)="getPenalties()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-label>{{'COMMON.DATE.RANGE' | translate}}</mat-label>
                     <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
                         <input matStartDate formControlName="ctrlRangeStart">
@@ -20,6 +27,7 @@
                 </mat-form-field>
             </div>
         </form>
+        <mat-progress-bar *ngIf="!complete" mode="indeterminate"></mat-progress-bar>
         <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc"
             [style.display]="dataSource.data.length === 0 || dataSource.filteredData.length === 0 ? 'none' : '' ">
             <ng-container matColumnDef="id">

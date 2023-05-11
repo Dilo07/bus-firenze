@@ -26,6 +26,7 @@ export class EmittedPenaltiesComponent implements OnInit, OnDestroy {
   public dataSource = new MatTableDataSource<BillingItems>();
   public displayedColumns = ['id', 'plate', 'date', 'price', 'billingType'];
   public breadCrumb: Breadcrumb[] = [];
+  public complete = true;
 
   private subscription: Subscription[] = [];
 
@@ -40,6 +41,7 @@ export class EmittedPenaltiesComponent implements OnInit, OnDestroy {
     this.formGroup = new FormGroup({
       ctrlRangeStart: new FormControl(moment().subtract(30, 'day').toDate(), Validators.required),
       ctrlRangeEnd: new FormControl(moment().toDate(), Validators.required),
+      ctrlSearch: new FormControl('')
     });
     this.getPenalties();
     this.breadCrumb = [
@@ -72,11 +74,15 @@ export class EmittedPenaltiesComponent implements OnInit, OnDestroy {
 
   public getPenalties(): void {
     if (!this.formGroup.invalid) {
+      this.complete = false;
+      const search = this.formGroup.get('ctrlSearch').value;
       const start = moment(this.formGroup.get('ctrlRangeStart').value).format('yyyy-MM-DD');
       const end = moment(this.formGroup.get('ctrlRangeEnd').value).format('yyyy-MM-DD');
-      this.subscription.push(this.billingItemService.getPenaltiesByFmId(start, end, null, this.fleetManager?.id).subscribe(
-        penalties => (this.dataSource.data = penalties, this.dataSource.paginator = this.paginator, this.dataSource.sort = this.sort)
-      ));
+      this.subscription.push(this.billingItemService.getPenaltiesByFmId(start, end, search, null, this.fleetManager?.id).subscribe({
+        next: (penalties) => (this.dataSource.data = penalties, this.dataSource.paginator = this.paginator, this.dataSource.sort = this.sort),
+        error: () => this.complete = true,
+        complete: () => this.complete = true
+      }));
     }
   }
 
