@@ -7,6 +7,8 @@ import moment from 'moment';
 import { BillingItems, FleetManager } from 'src/app/components/domain/bus-firenze-domain';
 import { BillingItemsService } from 'src/app/services/billing-items.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { Breadcrumb } from '@npt/npt-template';
 
 @Component({
   selector: 'app-emitted-penalties',
@@ -15,21 +17,24 @@ import { Subscription } from 'rxjs';
   .mat-elevation-z8 { margin: 20px; }
   `]
 })
-export class EmittedPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() fleetManager: FleetManager;
-  @Input() keyword: string;
+export class EmittedPenaltiesComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  public fleetManager: FleetManager;
   public maxDate = moment().toDate();
   public formGroup: FormGroup;
   public dataSource = new MatTableDataSource<BillingItems>();
   public displayedColumns = ['id', 'plate', 'date', 'price', 'billingType'];
+  public breadCrumb: Breadcrumb[] = [];
 
   private subscription: Subscription[] = [];
 
   constructor(
+    private router: Router,
     private billingItemService: BillingItemsService
-  ) { }
+  ) {
+    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+  }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -37,14 +42,26 @@ export class EmittedPenaltiesComponent implements OnInit, OnChanges, OnDestroy {
       ctrlRangeEnd: new FormControl(moment().toDate(), Validators.required),
     });
     this.getPenalties();
-  }
-
-  ngOnChanges(): void {
-    // filtra in base al cambio input keyword
-    this.dataSource.filter = this.keyword.trim();
-    this.dataSource.filterPredicate = (data, filter: string): boolean => {
-      return data.lpn.toLowerCase().includes(filter);
-    };
+    this.breadCrumb = [
+      {
+        label: 'MENU.Payments',
+        url: '/payments'
+      },
+      {
+        label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+        url: '../selection',
+        state: this.fleetManager
+      },
+      {
+        label: 'MENU.Penalties',
+        url: '../penalties',
+        state: this.fleetManager
+      },
+      {
+        label: 'PENALTIES.EMITTED',
+        url: ''
+      }
+    ];
   }
 
   ngOnDestroy(): void {

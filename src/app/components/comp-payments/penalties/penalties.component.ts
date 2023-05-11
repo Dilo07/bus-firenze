@@ -11,11 +11,13 @@ import { Breadcrumb } from '@npt/npt-template';
 export class PenaltiesComponent {
   public fleetManager: FleetManager;
   public keyword = '';
-  public filter = '';
   public breadCrumb: Breadcrumb[] = [];
 
   constructor(private router: Router) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    if (this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as FleetManager) {
+      this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb;
+    };
     this.breadCrumb = [
       {
         label: 'MENU.Payments',
@@ -31,9 +33,5 @@ export class PenaltiesComponent {
         url: ''
       }
     ];
-  }
-
-  public applyFilter(event: Event): void {
-    this.filter = (event.target as HTMLInputElement).value;
   }
 }

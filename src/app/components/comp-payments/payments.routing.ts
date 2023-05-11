@@ -8,6 +8,7 @@ import { BillingItemsComponent } from './billing-items/billing-items.component';
 import { PenaltiesComponent } from './penalties/penalties.component';
 import { SelectionCardsComponent } from './selection-cards/selection-cards.component';
 import { ListItemsComponent } from './billing-items/list-items/list-items.component';
+import { EmittedPenaltiesComponent } from './penalties/emitted-penalties/emitted-penalties.component';
 
 const routes: Routes = [
   { path: '', component: PagePaymentsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } },
@@ -25,7 +26,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] }
   },
-  { path: 'penalties', component: PenaltiesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } }
+  { path: 'penalties', component: PenaltiesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } },
+  { path: 'emitted-penalties', component: EmittedPenaltiesComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] } }
 ];
 
 @NgModule({

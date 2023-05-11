@@ -2,8 +2,13 @@
     <mat-card-title>
         <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
             style="height: 1px;">
-        </lib-breadcrumb>
-        {{'MENU.Penalties' | translate}}
+        </lib-breadcrumb><div fxLayout="row wrap" fxLayoutAlign="space-between">
+            {{'MENU.Penalties' | translate}}
+			<button mat-button class="actionButtons" [routerLink]="['../emitted-penalties']"
+				[state]="{ fleetManager: this.fleetManager }" [attr.i18nKey]="'PENALTIES.EMITTED'">
+				{{'PENALTIES.EMITTED' | translate}}
+			</button>
+		</div>
     </mat-card-title>
     <mat-card-content>
         <form>
@@ -15,13 +20,14 @@
                 </button>
             </mat-form-field>
         </form>
-        <mat-tab-group mat-align-tabs="center">
+        <!-- <mat-tab-group mat-align-tabs="center">
             <mat-tab label="{{'PENALTIES.ADD' | translate}}">
                 <app-add-penalties [fleetManager]="fleetManager" [keyword]="keyword"></app-add-penalties>
             </mat-tab>
             <mat-tab label="{{'PENALTIES.EMITTED' | translate}}">
                 <app-emitted-penalties [fleetManager]="fleetManager" [keyword]="keyword"></app-emitted-penalties>
             </mat-tab>
-        </mat-tab-group>
+        </mat-tab-group> -->
+        <app-add-penalties [fleetManager]="fleetManager" [keyword]="keyword"></app-add-penalties>
     </mat-card-content>
 </mat-card>
