@@ -97,14 +97,12 @@
 							</button>
 							<ng-template #validationButton>
 								<button mat-button class="actionIconButtons"
-									matTooltip="{{'FLEET-MANAGER.REFUSE' | translate}}"
 									[attr.i18nKey]="'FLEET-MANAGER.REFUSE'"
 									(click)="validInvalidFleet(element.id, false)">
 									<mat-icon matPrefix><span class="icon-delete"></span></mat-icon>
 									{{'FLEET-MANAGER.REFUSE' | translate}}
 								</button>
 								<button mat-button class="actionIconButtons"
-									matTooltip="{{'FLEET-MANAGER.VALID' | translate}}"
 									[attr.i18nKey]="'FLEET-MANAGER.VALID'"
 									(click)="validInvalidFleet(element.id, true)">
 									<mat-icon matPrefix><span class="icon-rule"></span></mat-icon>
