@@ -11,6 +11,7 @@
   "rangeDateStatisticVehicle": null,
   "hideActiveTicket": false,
   "hideBilling": false,
+  "viewAppointments": false,
   "timeOutTest": 2400,
   "recatchaKey": "6LdiEkMiAAAAAJKC6CZfGhRS0FIGNs3kPLhQ2hpO",
   "no_auth": {
