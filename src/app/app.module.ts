@@ -76,6 +76,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
       provide: 'hideBillingData',
       useFactory: getPropertyFromConfig, multi: false, deps: ['hideBilling', ConfigInitService]
     },
+    { provide: 'viewAppointments', useValue: 'viewAppointments' },
+    {
+      provide: 'viewAppointmentsData',
+      useFactory: getPropertyFromConfig, multi: false, deps: ['viewAppointments', ConfigInitService]
+    },
     // npt-net
     { provide: 'viewOuter', useValue: 'viewOuter' },
     {
