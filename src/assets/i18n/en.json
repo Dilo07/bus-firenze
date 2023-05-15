@@ -103,6 +103,7 @@
         "STEP-4": "Upload the scan of the completed and signed application form using the button ",
         "STEP-5": "To complete the registration, this form requires the verification of the mobile number by sending an OTP code.",
         "INITIAL MESSAGE": "Insert a new Fleet Manager or search for an existing one",
+        "ADD_NEW": "Add new",
         "MESSAGE_NEW": "Insert the data of new Fleet Manager",
         "MESSAGE_VIEW": "Fleet manager information",
         "MESSAGE_EDIT": "Edit the data of the Fleet Manager",

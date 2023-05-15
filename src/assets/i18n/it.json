@@ -103,6 +103,7 @@
         "STEP-4": "Carica la scansione del modulo di adesione compilato e firmato mediante il pulsante ",
         "STEP-5": "Per completare la registrazione, in questo form è richiesta la verifica del numero di cellulare mediante l'invio di un codice OTP.",
         "INITIAL MESSAGE": "Inserisci un nuovo Fleet-Manager o cercane uno esistente",
+        "ADD_NEW": "Aggiungi nuovo",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Fleet Manager",
         "MESSAGE_VIEW": "Informazioni Fleet manager",
         "MESSAGE_EDIT": "Modifica le informazioni del Fleet Manager",
