@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { IMenuItemService, Menu } from '@npt/npt-template';
 
 /* Roles allowed by the application */
@@ -11,21 +11,7 @@ export const ROLES = Object.freeze({
   FLEETMNG: 'fleet'
 });
 
-const SUBMENU_ROUTES = [
-  { state: 'fleet-manager-manage', name: 'Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
-  { state: 'deposit', name: 'Deposit', icon: 'euro_symbol', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] },
-  { state: 'billing', name: 'Billing', icon: 'receipt_long', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG]  },
-  { state: 'penalties', name: 'Penalties', icon: 'back_hand', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG]  },
-  { state: 'fleet-manager-valid', name: 'Valid-Fleet-manager', icon: 'manage_accounts', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
-  { state: 'vehicle-valid', name: 'Vehicle-valid', icon: 'directions_car', roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] },
-  { state: 'vehicles', name: 'Vehicles', icon: 'directions_car', roles: [ROLES.FLEETMNG] },
-  { state: 'drivers', name: 'Drivers', icon: 'airline_seat_recline_normal', roles: [ROLES.FLEETMNG] },
-  { state: 'anagraphic-fleet', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.FLEETMNG] },
-  { state: 'anagraphic-driver', name: 'Anagraphic', icon: 'manage_accounts', roles: [ROLES.DRIVER] },
-  { state: 'association-driver', name: 'Association-vehicles', icon: 'directions_car', roles: [ROLES.DRIVER] }
-];
-
-const MENUITEMS = [
+const menuItems = [
   {
     state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'home', children: [], roles: []
   },
@@ -77,10 +63,6 @@ const MENUITEMS = [
     roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.INSTALLER]
   },
   {
-    state: 'appointments', name: 'Appointment', type: 'link', icon: 'appointment',
-    roles: [ROLES.MOVYON, ROLES.INSTALLER]
-  },
-  {
     state: 'ticket', name: 'Ticket', type: 'link', icon: 'wysiwyg',
     children: [], roles: [ROLES.MOVYON, ROLES.FLEETMNG, ROLES.DRIVER]
   },
@@ -93,7 +75,15 @@ const MENUITEMS = [
 @Injectable()
 export class MenuItemService implements IMenuItemService {
 
+  constructor(@Inject('viewAppointmentsData') public viewAppointments: boolean) { }
+
   getMenuitem(): Menu[] {
-    return MENUITEMS;
+    if (this.viewAppointments) {
+      menuItems.push({
+        state: 'appointments', name: 'Appointment', type: 'link', icon: 'appointment',
+        roles: [ROLES.MOVYON, ROLES.INSTALLER]
+      });
+    }
+    return menuItems;
   }
 }
