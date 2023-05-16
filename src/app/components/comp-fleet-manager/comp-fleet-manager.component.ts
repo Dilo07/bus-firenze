@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FileViewer, IAuthenticationService, SessionService, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
 import { Observable, Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
@@ -46,7 +46,6 @@ export class FleetManagerComponent implements OnInit {
     private fleetManagerService: FleetManagerService,
     private formBuilder: FormBuilder,
     private sessionService: SessionService,
-    private route: ActivatedRoute,
     @Inject('authService') private authService: IAuthenticationService) {
     this.fleetManagerName = this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as string;
   }

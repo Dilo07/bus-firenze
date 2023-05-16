@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Breadcrumb, IAuthenticationService } from '@npt/npt-template';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
-import { FleetManager } from '../../domain/bus-firenze-domain';
+import { FleetManager, SelectionCards } from '../../domain/bus-firenze-domain';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class SelectionCardsComponent implements OnInit {
   public roleMovyon: boolean;
   public roleFleet: boolean;
-  public selectionCards = [];
+  public selectionCards: SelectionCards[] = [];
   public fleetManager: FleetManager;
   public breadCrumb: Breadcrumb[] = [];
 

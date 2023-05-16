@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-firenze-domain';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-fleetmanager',
@@ -36,7 +37,7 @@ import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-fir
 export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @Input() depositWarning: boolean;
+  public depositWarning: boolean;
   public dataSource = new MatTableDataSource<FleetManager>();
   public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile', 'mail'];
   public expandedElement: FleetManager | null;
@@ -48,8 +49,11 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   constructor(
     private fleetService: FleetManagerService,
     private vehicleService: VehicleService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private router: Router
+  ) {
+    this.depositWarning = this.router.getCurrentNavigation()?.extras.state?.depositWarning as boolean;
+  }
 
   ngOnInit(): void {
     this.callFleetDeposit();
@@ -63,11 +67,11 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
 
   public callFleetDeposit(): void {
     this.complete = false;
-    this.fleetService.getFleetDeposit(this.depositWarning).subscribe({
+    this.subscription.push(this.fleetService.getFleetDeposit(this.depositWarning).subscribe({
       next: fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator, this.dataSource.sort = this.sort),
       error: () => this.complete = true,
       complete: () => this.complete = true
-    });
+    }));
   }
 
   public viewDeposit(event: { vehicleId: number; documents: DocumentVehicle[] }): void {

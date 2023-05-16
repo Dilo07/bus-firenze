@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FleetManager } from '../../domain/bus-firenze-domain';
+import { FleetManager, SelectionCards } from '../../domain/bus-firenze-domain';
 import { Breadcrumb } from '@npt/npt-template';
 
 @Component({
@@ -11,7 +11,7 @@ import { Breadcrumb } from '@npt/npt-template';
 })
 export class SelectionCardsPageComponent {
   public fleetManager: FleetManager;
-  public selectionCards = [];
+  public selectionCards: SelectionCards[] = [];
   public breadCrumb: Breadcrumb[] = [];
 
   constructor(

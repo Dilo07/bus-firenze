@@ -1,5 +1,4 @@
 import { Coordinate } from '@npt/npt-map';
-import { type } from 'os';
 
 export class FleetManager {
   id: number;
@@ -244,4 +243,12 @@ export interface PenalType {
 export interface AddPenal {
   penalType: number;
   date: string;
+}
+
+export interface SelectionCards {
+  icon: string;
+  title: string;
+  subtitle: string;
+  route: string;
+  state?: object;
 }

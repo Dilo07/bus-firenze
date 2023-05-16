@@ -1,14 +1,16 @@
 <mat-card>
-	<div fxLayout="column" fxLayoutGap="20px" *ngIf="!isValidationFleet">
-		<div fxLayout="row wrap" fxLayoutAlign="space-between">
-			<mat-card-title fxLayout="row">{{'MENU.Fleet-manager' | translate}} </mat-card-title>
-			<span>
-				<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'"
-					[routerLink]="['form-Fleet']">
-					{{'FLEET-MANAGER.NEW' | translate}}
-				</button>
-			</span>
-		</div>
+	<div fxLayout="row wrap" fxLayoutAlign="space-between" *ngIf="!isValidationFleet else validFleet">
+		<mat-card-title>{{'MENU.Fleet-manager' | translate}} </mat-card-title>
+		<span>
+			<button mat-button class="actionButtons" [attr.i18nKey]="'FLEET-MANAGER.NEW'" [routerLink]="['form-Fleet']">
+				{{'FLEET-MANAGER.NEW' | translate}}
+			</button>
+		</span>
+	</div>
+	<ng-template #validFleet>
+		<mat-card-title>{{'MENU.Valid-Fleet-manager' | translate}}</mat-card-title>
+	</ng-template>
+	<mat-card-content>
 		<form [formGroup]="search" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="20px">
 			<mat-form-field appearance="outline" fxFlex="100">
 				<mat-label>{{'FLEET-MANAGER.SEARCH' | translate}}</mat-label>
@@ -18,8 +20,6 @@
 				</button>
 			</mat-form-field>
 		</form>
-	</div>
-	<mat-card-content>
 		<div fxLayout="row wrap" fxLayoutAlign="start">
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
 			<mat-card *ngFor="let element of fleetanagersConnect | async" class="mat-card-movyon" fxFlex="100"
@@ -30,7 +30,8 @@
 						<mat-card-title>{{element.name}} {{element.surname}}</mat-card-title>
 					</mat-card-header>
 					<button mat-icon-button *ngIf="!isValidationFleet else validationHeader"
-						[attr.i18nKey]="'FLEET-MANAGER.SELECTION'" [routerLink]="['selection-card']" [state]="{fleetManager: element}">
+						[attr.i18nKey]="'FLEET-MANAGER.SELECTION'" [routerLink]="['selection-card']"
+						[state]="{fleetManager: element}">
 						<mat-icon><span class="icon-ArrowRight"></span></mat-icon>
 					</button>
 					<ng-template #validationHeader>
@@ -96,14 +97,12 @@
 								<mat-icon><span class="icon-Bin"></span></mat-icon>
 							</button>
 							<ng-template #validationButton>
-								<button mat-button class="actionIconButtons"
-									[attr.i18nKey]="'FLEET-MANAGER.REFUSE'"
+								<button mat-button class="actionIconButtons" [attr.i18nKey]="'FLEET-MANAGER.REFUSE'"
 									(click)="validInvalidFleet(element.id, false)">
 									<mat-icon matPrefix><span class="icon-delete"></span></mat-icon>
 									{{'FLEET-MANAGER.REFUSE' | translate}}
 								</button>
-								<button mat-button class="actionIconButtons"
-									[attr.i18nKey]="'FLEET-MANAGER.VALID'"
+								<button mat-button class="actionIconButtons" [attr.i18nKey]="'FLEET-MANAGER.VALID'"
 									(click)="validInvalidFleet(element.id, true)">
 									<mat-icon matPrefix><span class="icon-rule"></span></mat-icon>
 									{{'FLEET-MANAGER.VALID' | translate}}
