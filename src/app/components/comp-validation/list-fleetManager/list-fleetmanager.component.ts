@@ -5,8 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FileViewer, ViewFileModalComponent } from '@npt/npt-template';
-import { Subscription } from 'rxjs';
+import { Breadcrumb, FileViewer, ViewFileModalComponent } from '@npt/npt-template';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-firenze-domain';
@@ -39,10 +39,11 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   public depositWarning: boolean;
   public dataSource = new MatTableDataSource<FleetManager>();
+  public fleetListConnect: BehaviorSubject<FleetManager[]>;
   public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile', 'mail'];
-  public expandedElement: FleetManager | null;
   public complete = true;
   public src: FileViewer = { type: '', url: '', fileName: '' };
+  public breadCrumb: Breadcrumb[] = [];
 
   private subscription: Subscription[] = [];
 
@@ -57,6 +58,16 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.callFleetDeposit();
+    this.breadCrumb = [
+      {
+        label: 'MENU.Validation',
+        url: '/validation'
+      },
+      {
+        label: this.depositWarning ? 'MENU.Deposit-valid' : 'MENU.Vehicle-valid',
+        url: ''
+      }
+    ];
   }
 
   ngOnDestroy(): void {
@@ -68,7 +79,12 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   public callFleetDeposit(): void {
     this.complete = false;
     this.subscription.push(this.fleetService.getFleetDeposit(this.depositWarning).subscribe({
-      next: fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator, this.dataSource.sort = this.sort),
+      next: fleetM => {
+        this.dataSource.data = fleetM;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.fleetListConnect = this.dataSource.connect();
+      },
       error: () => this.complete = true,
       complete: () => this.complete = true
     }));

@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SnackBar } from '@npt/npt-template';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { DepositType, DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
@@ -12,29 +12,7 @@ import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.compone
 @Component({
   selector: 'app-verify-vehicles',
   templateUrl: './verify-vehicles.component.html',
-  styles: [`
-  .mat-elevation-z8 {
-    width: 870px;
-    margin: 10px;
-  }
-  @media(min-width: 1180px) {
-    .mat-column-id { max-width: 10%}
-    .mat-column-lpn { max-width: 20%}
-    .mat-column-lpnNat { max-width: 20%}
-    .mat-column-type { max-width: 20%}
-    .mat-column-actions { max-width: 20%; display: table-column; text-align: end;}
-  }
-  .icon-assignment-grey:before {
-    color: grey;
-    font-weight: bold;
-  }
-
-  .icon-rule-grey:before {
-    color: grey;
-    font-weight: bold;
-  }
-  `
-  ]
+  styleUrls: ['./verify-vehicles.component.scss']
 })
 export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
@@ -45,6 +23,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Output() public viewCertificate = new EventEmitter<{ vehicleId: number; certificateId: number }>();
   @Output() public updateCertificate = new EventEmitter<{ vehicleId: number; event: any }>();
   public dataSource = new MatTableDataSource<Vehicle>();
+  public vehicleListConnect: BehaviorSubject<Vehicle[]>;
   public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'certificateId', 'type', 'actions'];
 
   private subscription: Subscription[] = [];
@@ -100,6 +79,7 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
       vehicles => {
         this.dataSource.data = vehicles;
         this.dataSource.sort = this.sort;
+        this.vehicleListConnect = this.dataSource.connect();
         if (this.dataSource.data.length === 0) {
           this.callRefreshTableFleet.emit();
         }

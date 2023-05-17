@@ -4,7 +4,8 @@
             <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
                 style="height: 1px;" *ngIf="roleMovyon">
             </lib-breadcrumb>
-            <span>{{fleetManager ? fleetManager.name + fleetManager.surname + ' (ID' + fleetManager.id + ')' : ('MENU.Payments' | translate)}}</span>
+            <span>{{fleetManager ? fleetManager.name + fleetManager.surname + ' (ID' + fleetManager.id + ')' :
+                ('MENU.Payments' | translate)}}</span>
         </mat-card-title>
     </mat-card-header>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
@@ -21,7 +22,7 @@
                 <mat-card-content fxLayout="row" fxLayoutAlign="center">
                     <button mat-button class="actionButtons" [attr.i18nKey]="card.route"
                         [routerLink]="['../' + card.route]" [state]="card.state">
-                        Vai alla pagina
+                        {{'COMMON.ACTION.GOTOPAGE' | translate}}
                     </button>
                 </mat-card-content>
             </mat-card>

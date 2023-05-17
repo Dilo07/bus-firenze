@@ -62,19 +62,21 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     if (this.fleetManager) {
       this.breadCrumb = [
         {
-          label: 'Fleet manager',
-          url: '/manage'
+          label: this.vehicleLpn ? 'MENU.Vehicle-valid' : 'Fleet manager',
+          url: this.vehicleLpn ? '../../validation/valid-vehicle' : '/manage'
         },
         {
-          label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
-          url: '../selection-card',
+          label: this.vehicleLpn ? 'VEHICLE.TITLE' : `${this.fleetManager.name} ${this.fleetManager.surname}`,
+          url: this.vehicleLpn ? '' : '../selection-card',
           state: { fleetManager: this.fleetManager }
-        },
-        {
-          label: 'VEHICLE.TITLE',
-          url: ''
         }
       ];
+      if (!this.vehicleLpn) { // aggiunge l'ultimo titolo al breadcrumb nel caso venga dalla pagina fleetmanager
+        this.breadCrumb.push({
+          label: 'VEHICLE.TITLE',
+          url: ''
+        });
+      }
     }
   }
 

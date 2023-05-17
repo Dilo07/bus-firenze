@@ -38,7 +38,7 @@
         "Billing": "Billing",
         "Penalties": "Penalties",
         "Validation": "Validation",
-        "Valid-Fleet-manager": "Valid Fleet manager",
+        "Valid-Fleet-manager": "Valid Fleet Manager",
         "Vehicle-valid": "Valid vehicles",
         "Deposit-valid": "Deposit to insert",
         "User-Fleet": "Fleet",
@@ -521,7 +521,8 @@
             "VERIFY": "Verify",
             "CLOSE": "Close",
             "SEARCH": "Search",
-            "COPY": "Copy"
+            "COPY": "Copy",
+            "GOTOPAGE": "Go to page"
         }
     },
     "ERROR": {

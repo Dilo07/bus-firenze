@@ -38,7 +38,7 @@
         "Billing": "Fatture",
         "Penalties": "Penali",
         "Validation": "Validazione",
-        "Valid-Fleet-manager": "Valida Fleet manager",
+        "Valid-Fleet-manager": "Valida Fleet Manager",
         "Vehicle-valid": "Valida veicoli",
         "Deposit-valid": "Depositi da inserire",
         "User-Fleet": "Flotta",
@@ -521,7 +521,8 @@
             "VERIFY": "Verifica",
             "CLOSE": "Chiudi",
             "SEARCH": "Cerca",
-            "COPY": "Copia"
+            "COPY": "Copia",
+            "GOTOPAGE": "Vai alla pagina"
         }
     },
     "ERROR": {

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
-import { MaterialModule, ViewFileComponentsModule } from '@npt/npt-template';
+import { BreadcrumbNptModule, MaterialModule, ViewFileComponentsModule } from '@npt/npt-template';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes.module';
 import { ListFleetmanagerComponent } from './list-fleetManager/list-fleetmanager.component';
 import { SelectionCardValidComponent } from './selection-card-valid.component';
@@ -29,7 +29,8 @@ import { ValidFleetComponent } from './valid-fleet/valid-fleet.component';
     TranslateModule,
     ValidVehiclesRoutingModule,
     PipesModule,
-    FleetManagerModule
+    FleetManagerModule,
+    BreadcrumbNptModule
   ]
 })
 export class ValidVehiclesModule { }

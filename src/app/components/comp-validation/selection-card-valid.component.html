@@ -1,8 +1,6 @@
 <mat-card>
-    <div fxLayout="row wrap" fxLayoutAlign="space-between">
-        <mat-card-title>{{'MENU.Validation' | translate}}
-        </mat-card-title>
-    </div>
+    <mat-card-title>{{'MENU.Validation' | translate}}
+    </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
         <!-- <mat-tab-group mat-align-tabs="center" [selectedIndex]="index" (selectedTabChange)="onTabChanged($event)">
             <mat-tab label="{{'MENU.Valid-Fleet-manager' | translate}}">
@@ -26,9 +24,9 @@
                     <mat-card-subtitle>{{card.subtitle}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content fxLayout="row" fxLayoutAlign="center">
-                    <button mat-button class="actionButtons" [attr.i18nKey]="card.route"
-                        [routerLink]="[card.route]" [state]="card.state">
-                        Vai alla pagina
+                    <button mat-button class="actionButtons" [attr.i18nKey]="card.route" [routerLink]="[card.route]"
+                        [state]="card.state">
+                        {{'COMMON.ACTION.GOTOPAGE' | translate}}
                     </button>
                 </mat-card-content>
             </mat-card>
