@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ColumnSort, FleetManager } from '../components/domain/bus-firenze-domain';
 import { getFleetManager } from './mokup/getFleetmanager';
@@ -74,7 +74,7 @@ export class FleetManagerService {
   getFleetDeposit(depositWarning: boolean): Observable<FleetManager[]> {
     let path = '';
     if (depositWarning) { path = '/warning'; }
-    /* return of(this.fleetMokup); */
+    /* return of(this.fleetManager); */
     return this.http.get<FleetManager[]>(this.apiUrl + '/deposit' + path)
       .pipe(catchError(err => { throw err; }));
   }

@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { DepositType, Vehicle } from '../components/domain/bus-firenze-domain';
+import { DepositType, Vehicle, VehicleWarning } from '../components/domain/bus-firenze-domain';
 
 @Injectable({
   providedIn: 'root'
@@ -72,12 +72,12 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getVehicleWarning(fleetManagerId: number, keyword?: string): Observable<Vehicle[]> {
+  getVehicleWarning(fleetManagerId: number, keyword?: string): Observable<VehicleWarning[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ keyword })
     };
-    return this.http.get<Vehicle[]>(this.apiUrl + `/${fleetManagerId}/deposit/vehicles/warning`, options)
+    return this.http.get<VehicleWarning[]>(this.apiUrl + `/${fleetManagerId}/deposit/vehicles/warning`, options)
       .pipe(catchError(err => { throw err; }));
   }
 

@@ -1,27 +1,3 @@
-.mat-elevation-z8 {
-    width: 870px;
-    margin: 10px;
-}
-@media (min-width: 1180px) {
-    .mat-column-id {
-        max-width: 10%;
-    }
-    .mat-column-lpn {
-        max-width: 20%;
-    }
-    .mat-column-lpnNat {
-        max-width: 20%;
-    }
-    .mat-column-type {
-        max-width: 20%;
-    }
-    .mat-column-actions {
-        max-width: 20%;
-        display: table-column;
-        text-align: end;
-    }
-}
-
 .actionIconButtons:hover:enabled {
     .icon-rule::before {
         color: white;

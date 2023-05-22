@@ -73,6 +73,14 @@ export class Vehicle {
   documentsObu: DocumentObu[];
 }
 
+export interface VehicleWarning {
+  id: string;
+  lpn: string;
+  lpnNat: string;
+  obuId: string;
+  associationDate: { dateTime: Date };
+}
+
 export type VehicleStatus = 'ALL' | 'REGISTERED' | 'TEMP' | 'DELETED' | 'UNKNOWN';
 
 export interface DocumentVehicle {

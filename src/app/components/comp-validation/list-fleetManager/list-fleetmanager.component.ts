@@ -1,38 +1,20 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Breadcrumb, FileViewer, ViewFileModalComponent } from '@npt/npt-template';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-firenze-domain';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-fleetmanager',
   templateUrl: './list-fleetmanager.component.html',
-  styles: [`
-  table { width: 100%; }
-  @media(min-width: 1180px) {
-    .mat-column-expandButton { max-width: 10% }
-    .mat-column-id { max-width: 10%}
-    .mat-column-name { max-width: 10%}
-    .mat-column-surname { max-width: 10%}
-    .mat-column-mobile { max-width: 20%}
-    .mat-column-mail { max-width: 20%}
-  }
-  `],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+  styles: [` `]
 })
 export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,7 +22,6 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   public depositWarning: boolean;
   public dataSource = new MatTableDataSource<FleetManager>();
   public fleetListConnect: BehaviorSubject<FleetManager[]>;
-  public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile', 'mail'];
   public complete = true;
   public src: FileViewer = { type: '', url: '', fileName: '' };
   public breadCrumb: Breadcrumb[] = [];

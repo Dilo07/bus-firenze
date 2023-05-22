@@ -24,7 +24,6 @@ export class VerifyVehiclesComponent implements OnChanges, OnDestroy {
   @Output() public updateCertificate = new EventEmitter<{ vehicleId: number; event: any }>();
   public dataSource = new MatTableDataSource<Vehicle>();
   public vehicleListConnect: BehaviorSubject<Vehicle[]>;
-  public displayedColumns: string[] = ['id', 'lpn', 'lpnNat', 'certificateId', 'type', 'actions'];
 
   private subscription: Subscription[] = [];
 
