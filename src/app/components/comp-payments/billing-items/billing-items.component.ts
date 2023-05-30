@@ -65,17 +65,25 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
       {
         label: 'MENU.Payments',
         url: '/payments'
-      },
-      {
-        label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
-        url: '../selection',
-        state: this.fleetManager
-      },
-      {
-        label: 'MENU.Billing',
-        url: ''
       }
     ];
+    if (this.fleetManager) { // ruolo admin
+      this.breadCrumb.push(
+        {
+          label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+          url: '../selection',
+          state: this.fleetManager
+        },
+        {
+          label: 'MENU.Billing',
+          url: ''
+        });
+    } else { // ruolo fleet manager
+      this.breadCrumb.push({
+        label: 'MENU.Billing',
+        url: ''
+      });
+    }
   }
 
   ngOnDestroy(): void {

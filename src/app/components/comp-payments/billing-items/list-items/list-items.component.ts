@@ -44,20 +44,33 @@ export class ListItemsComponent implements OnInit {
       {
         label: 'MENU.Payments',
         url: '/payments'
-      },
-      {
-        label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
-        url: '../selection',
-        state: this.fleetManager
-      },
-      {
-        label: 'MENU.Billing',
-        url: '../billing',
-        state: this.fleetManager
-      },
-      {
-        label: `${this.translate.instant('BILLING_ITEMS.DETAIL')} Id ${this.gopId}`,
-        url: ''
       });
+    if (this.fleetManager) { // ruolo admin
+      this.breadCrumb.push(
+        {
+          label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+          url: '../selection',
+          state: this.fleetManager
+        },
+        {
+          label: 'MENU.Billing',
+          url: '../billing',
+          state: this.fleetManager
+        },
+        {
+          label: `${this.translate.instant('BILLING_ITEMS.DETAIL')} Id ${this.gopId}`,
+          url: ''
+        });
+    } else { // ruolo fleet manager
+      this.breadCrumb.push(
+        {
+          label: 'MENU.Billing',
+          url: '../billing'
+        },
+        {
+          label: `${this.translate.instant('BILLING_ITEMS.DETAIL')} Id ${this.gopId}`,
+          url: ''
+        });
+    }
   }
 }

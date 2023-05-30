@@ -68,16 +68,24 @@ export class DepositComponent implements OnInit {
         label: 'MENU.Payments',
         url: '/payments'
       },
-      {
-        label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
-        url: '../selection',
-        state: this.fleetManager
-      },
-      {
+    ];
+    if (this.fleetManager) { // ruolo admin
+      this.breadCrumb.push(
+        {
+          label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+          url: '../selection',
+          state: this.fleetManager
+        },
+        {
+          label: 'MENU.Deposit',
+          url: ''
+        });
+    } else { // ruolo fleet manager
+      this.breadCrumb.push({
         label: 'MENU.Deposit',
         url: ''
-      }
-    ];
+      });
+    }
     this.getVehicle();
   }
 
