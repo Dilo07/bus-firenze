@@ -14,6 +14,7 @@ export class SelectionCardsComponent implements OnInit {
   public roleFleet: boolean;
   public selectionCards: SelectionCards[] = [];
   public fleetManager: FleetManager;
+  public fromFleet: boolean;
   public breadCrumb: Breadcrumb[] = [];
 
   constructor(
@@ -22,6 +23,7 @@ export class SelectionCardsComponent implements OnInit {
     @Inject('hideBillingData') public hideBilling: boolean
   ) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    this.fromFleet = this.router.getCurrentNavigation()?.extras.state?.fromFleet as boolean;
     if (this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as FleetManager) {
       this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb;
     };
@@ -59,8 +61,9 @@ export class SelectionCardsComponent implements OnInit {
       });
       this.breadCrumb = [
         {
-          label: 'MENU.Payments',
-          url: '/payments'
+          label: this.fromFleet ? 'MENU.Fleet-manager' : 'MENU.Payments',
+          url: this.fromFleet ? '../../manage/selection-card' : '/payments',
+          state: { fleetManager: this.fleetManager }
         },
         {
           label: `${this.fleetManager.name} ${this.fleetManager.surname}`,

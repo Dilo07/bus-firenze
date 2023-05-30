@@ -54,11 +54,25 @@ export class SelectionCardsPageComponent {
         state: { fleetManager: this.fleetManager }
       },
       {
+        icon: 'icon-Documents',
+        title: 'Pagamenti',
+        subtitle: 'Gestisci i pagamenti associati al fleet manager',
+        route: '../payments/selection',
+        state: { fleetManager: this.fleetManager, fromFleet: true }
+      },
+      {
         icon: 'icon-Pin',
         title: 'Real time',
         subtitle: 'Visualizza i veicoli in tempo reale',
         route: 'real-time',
         state: { fleetManager: this.fleetManager }
+      },
+      {
+        icon: 'icon-Pin',
+        title: 'Ticket',
+        subtitle: 'Visualizza i ticket del fleet manager',
+        route: '../ticket',
+        state: { fleetManager: this.fleetManager, fromFleet: true  }
       },
       {
         icon: 'icon-Documents',
