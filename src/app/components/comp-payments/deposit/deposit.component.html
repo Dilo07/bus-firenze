@@ -19,7 +19,36 @@
             </mat-slide-toggle>
         </form>
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-        <div class="mat-elevation-z8 example-container" [style.display]="vehicleList.data.length === 0 ? 'none' : ''">
+        <div fxLayout="row wrap" fxLayoutAlign="start">
+            <mat-card *ngFor="let element of vehicleListConnect | async" class="mat-card-movyon" fxFlex="100"
+                fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-card-header>
+                        <mat-card-title> ID {{element.id}} </mat-card-title>
+                    </mat-card-header>
+                    <button mat-icon-button [attr.i18nKey]="'VEHICLE.NEEDDOC'"
+                        [matTooltip]="'MENU.Vehicle-document' | translate" [routerLink]="'dep-documents'"
+                        [state]="{vehicle: element, fleetManager: fleetManager, withDoc: search.get('ctrlViewAll').value}">
+                        <mat-icon><span class="icon-ArrowRight"></span></mat-icon>
+                    </button>
+                </div>
+                <mat-card-content>
+                    <mat-card-subtitle>
+                        {{'VEHICLE.LPN' | translate}}: {{element.lpn}}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        {{'VEHICLE.LPN_NAT' | translate}}:
+                        <span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>{{'VEHICLE.STATE' | translate}}:
+                        <span [style.color]="element.deleted ? 'red' : 'green'">
+                            {{ (element.deleted ? 'VEHICLE.DELETED' : 'VEHICLE.ACTIVE') | translate}}
+                        </span></mat-card-subtitle>
+                    <mat-card-subtitle>Obu Id: {{element.obuId}}</mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <!-- <div class="mat-elevation-z8 example-container" [style.display]="vehicleList.data.length === 0 ? 'none' : ''">
             <mat-table [dataSource]="vehicleList" matSort matSortActive="id" matSortDirection="asc">
                 <ng-container matColumnDef="id">
                     <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
@@ -147,7 +176,7 @@
                 <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
             </mat-table>
-        </div>
+        </div> -->
         <mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"
             [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
         <div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>

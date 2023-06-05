@@ -200,6 +200,7 @@
         "ENTE": "Ente"
     },
     "VEHICLE": {
+        "DOCUMENT": "Veicolo",
         "TITLE": "Veicoli",
         "NEW": "Nuovo veicolo",
         "EDIT": "Modifica veicolo",
@@ -265,8 +266,9 @@
         "UPLOAD_DEP": "Carica ricevuta deposito",
         "UPLOAD_SUCC": "Documento caricato correttamente",
         "TEXTLIB": "* Il libretto di circolazione è obbligatorio per la creazione del veicolo",
-        "TEXTIBAN": "* Per effettuare il deposito cauzionale eseguire un versamento sull'IBAN: ",
+        "TEXTIBAN": "Per effettuare il deposito cauzionale eseguire un versamento sull'IBAN: ",
         "TEXTCAUSAL": "- Causale ZTLBUS deposito cauzionale targa (targa del veicolo da registrare)",
+        "TEXTREQUEST": "Allega la richiesta di rimborso deposito",
         "TYPE_DOC": "Tipo documento",
         "RIC_DEPOSIT": "Ricevuta deposito",
         "deposit": "Ricevuta deposito",

@@ -9,6 +9,7 @@ import { PenaltiesComponent } from './penalties/penalties.component';
 import { SelectionCardsComponent } from './selection-cards/selection-cards.component';
 import { ListItemsComponent } from './billing-items/list-items/list-items.component';
 import { EmittedPenaltiesComponent } from './penalties/emitted-penalties/emitted-penalties.component';
+import { DepositDocumentsComponent } from './deposit/deposit-documents/documents.component';
 
 const routes: Routes = [
   { path: '', component: PagePaymentsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } },
@@ -19,6 +20,10 @@ const routes: Routes = [
     data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] }
   },
   { path: 'deposit', component: DepositComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } },
+  {
+    path: 'deposit/dep-documents',
+    component: DepositDocumentsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] }
+  },
   { path: 'billing', component: BillingItemsComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON, ROLES.FLEETMNG] } },
   {
     path: 'billing-details',

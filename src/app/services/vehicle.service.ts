@@ -59,6 +59,11 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  getVehicleById(fleetManagerId: number, vehicleId: number): Observable<Vehicle> {
+    return this.http.get<Vehicle>(this.apiUrl + `/${fleetManagerId}/singleVehicle/${vehicleId}`)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   getVehicleDeposit(all: boolean, fleetManagerId: number, keyword?: string, toVerify?: boolean): Observable<Vehicle[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

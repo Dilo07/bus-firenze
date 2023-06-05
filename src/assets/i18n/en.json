@@ -200,6 +200,7 @@
         "ENTE": "Company"
     },
     "VEHICLE": {
+        "DOCUMENT": "Vehicle",
         "TITLE": "Vehicles",
         "NEW": "New vehicle",
         "EDIT": "Edit vehicle",
@@ -265,8 +266,9 @@
         "UPLOAD_DEP": "Upload deposit file",
         "UPLOAD_SUCC": "Upload document correctly",
         "TEXTLIB": "* The certificate document is mandatory for new vehicle",
-        "TEXTIBAN": "* To make the caution deposit, is request a payment on follow IBAN: ",
+        "TEXTIBAN": "To make the caution deposit, is request a payment on follow IBAN: ",
         "TEXTCAUSAL": "- Causal ZTLBUS caution deposit for plate (vehicle plate)",
+        "TEXTREQUEST": "Attach the refund deposit request",
         "TYPE_DOC": "Document type",
         "RIC_DEPOSIT": "Receive deposit",
         "deposit": "Receive deposit",
@@ -279,7 +281,7 @@
         "DEPOSIT_REQ": "Attach deposit request",
         "VIEW_DEPOSIT_REQ": "View deposit request",
         "REMOVE_TEST": "Remove test",
-        "VIEW_TEST": "Visualizza collaudo",
+        "VIEW_TEST": "View test",
         "VIEW_REMOBU": "view remove test",
         "VALID_CONFIRM": "Are you sure to validate this vehicle?",
         "VALID_SUCCESS": "Vehicle validate correctly",

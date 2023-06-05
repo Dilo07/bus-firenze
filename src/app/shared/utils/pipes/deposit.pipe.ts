@@ -102,10 +102,10 @@ export class DocumentRemoveObu implements PipeTransform {
 })
 
 export class DocumentTypeFind implements PipeTransform {
-  transform(documents: DocumentObu[]): DocumentObu {
+  transform(documents: DocumentVehicle[]): DocumentVehicle {
     let documentObu = null;
     const typeAccept = ['deposit', 'revoke', 'retention'];
-    documentObu = documents.find((value: DocumentObu) => typeAccept.includes(value.type));
+    documentObu = documents.find((value: DocumentVehicle) => typeAccept.includes(value.type));
     return documentObu;
   }
 }

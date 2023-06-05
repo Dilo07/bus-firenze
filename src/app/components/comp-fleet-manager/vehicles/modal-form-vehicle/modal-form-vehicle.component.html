@@ -94,7 +94,7 @@
                     {{(depositDocument ? 'VEHICLE.CHANGE_DEP' : 'VEHICLE.UPLOAD_DEP') | translate}}
                 </button>
                 <p style="font-size: 12px;" *ngIf="iban">
-                    {{'VEHICLE.TEXTIBAN' | translate}}{{iban}}
+                    * {{'VEHICLE.TEXTIBAN' | translate}}{{iban}}
                     <button mat-icon-button [cdkCopyToClipboard]="iban" [attr.i18nKey]="'COMMON.ACTION.COPY'">
                         <mat-icon matTooltip="{{'COMMON.ACTION.COPY' | translate}}">content_copy</mat-icon>
                     </button>

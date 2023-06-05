@@ -16,6 +16,7 @@ import { ListItemsComponent } from './billing-items/list-items/list-items.compon
 import { EmittedPenaltiesComponent } from './penalties/emitted-penalties/emitted-penalties.component';
 import { AddPenaltiesComponent } from './penalties/add-penalties/add-penalties.component';
 import { SelectionCardsComponent } from './selection-cards/selection-cards.component';
+import { DepositDocumentsComponent } from './deposit/deposit-documents/documents.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SelectionCardsComponent } from './selection-cards/selection-cards.compo
     ListItemsComponent,
     EmittedPenaltiesComponent,
     AddPenaltiesComponent,
-    SelectionCardsComponent
+    SelectionCardsComponent,
+    DepositDocumentsComponent
   ],
   imports: [
     CommonModule,

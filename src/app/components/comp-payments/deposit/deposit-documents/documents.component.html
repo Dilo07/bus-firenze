@@ -1,0 +1,116 @@
+<mat-card>
+    <mat-card-title>
+        <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+            style="height: 1px;">
+        </lib-breadcrumb>
+        {{'VEHICLE.DOCUMENT' | translate}} {{vehicle.id}}
+    </mat-card-title>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px" style="margin-top: 20px;">
+        <ng-container *ngIf="!withDocument">
+            <h4 style="color: #1C3775;">Carica documenti</h4>
+            <div fxLayout="row wrap" fxLayoutAlign="start">
+                <mat-card class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="45" fxFlex.gt-md="45">
+                    <mat-card-title fxLayoutAlign="center center">{{'VEHICLE.RIC_DEPOSIT' | translate}}</mat-card-title>
+                    <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+                        {{'VEHICLE.TEXTIBAN' | translate }} {{iban}}
+                        <input style="display: none" type="file" #recDep accept="application/pdf, image/jpeg, image/png"
+                            [attr.i18nKey]="'VEHICLE.ADDDEPOSIT'"
+                            (change)="uploadDeposit(vehicle.id, $event, 'deposit')">
+                        <button mat-button class="uploadButtons" (click)="recDep.click();">
+                            {{'VEHICLE.UPLOAD_DEP' | translate}}
+                        </button>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="45" fxFlex.gt-md="45">
+                    <mat-card-title fxLayoutAlign="center center">{{'VEHICLE.RIM_DEPOSIT' | translate}}</mat-card-title>
+                    <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+                        {{'VEHICLE.TEXTREQUEST' | translate}}
+                        <input style="display: none" type="file" #reqDep accept="application/pdf, image/jpeg, image/png"
+                            [attr.i18nKey]="'VEHICLE.DEPOSIT_REQ'"
+                            (change)="uploadDeposit(vehicle.id, $event, 'request')">
+                        <button mat-button class="uploadButtons" (click)="reqDep.click();">
+                            {{'VEHICLE.UPLOAD_DEP' | translate}}
+                        </button>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </ng-container>
+        <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+        <h4 style="color: #1C3775;">Documenti</h4>
+        <mat-list role="list">
+            <mat-list-item role="listitem">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <button mat-icon-button
+                        (click)="viewDeposit(vehicle.id, vehicle.documents, ['deposit', 'revoke', 'retention'])"
+                        [disabled]="!(vehicle.documents | documentTypeDeposit)" [attr.i18nKey]="'VEHICLE.VIEWDEPOSIT'">
+                        <mat-icon><span class="icon-Password-active"
+                                [ngClass]="(vehicle.documents | documentTypeDeposit) ? null : 'icon-Password-active-grey'"></span></mat-icon>
+                    </button>
+                    <span>Ricevuta deposito</span>
+                    <ng-container *ngIf="vehicle.documents | hasDeposit: true">
+                        <span style="color: green;">
+                            {{('VEHICLE.DEPVALID' | translate) + (vehicle.documents | depositDateValid | date:
+                            'dd/MM/YYYY')}}
+                        </span>
+                        <mat-icon style="margin: 10px; color: green;">
+                            task_alt
+                        </mat-icon>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="(vehicle.documents | documentTypeDeposit) && ((vehicle.documents | documentTypeDeposit).type === 'revoke' || (vehicle.documents | documentTypeDeposit).type === 'retention')">
+                        <span style="color: red;">{{'VEHICLE.DEPREVOKE' | translate}}</span>
+                        <mat-icon style="margin: 10px;">
+                            <span class="icon-delete"></span>
+                        </mat-icon>
+                    </ng-container>
+                </div>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <button mat-icon-button (click)="viewDeposit(vehicle.id, vehicle.documents, ['request'])"
+                        [disabled]="!(vehicle.documents | hasRequest: false)"
+                        [attr.i18nKey]="'VEHICLE.VIEW_DEPOSIT_REQ'">
+                        <mat-icon><span class="icon-Password-active"
+                                [ngClass]="(vehicle.documents | hasRequest: false) ? null : 'icon-Password-active-grey'"></span>
+                        </mat-icon>
+                    </button>
+                    <span>Rimborso deposito</span>
+                    <ng-container *ngIf="vehicle.documents | requestDateValid">
+                        <span style="margin: 10px; color: green;">
+                            {{('VEHICLE.REQVALID' | translate) + (vehicle.documents | requestDateValid | date:
+                            'dd/MM/YYYY')}}
+                        </span>
+                    </ng-container>
+                </div>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <ng-container *ngIf="(vehicle.documentsObu | documentRemObu) as documentRead else noTest">
+                        <button mat-icon-button (click)="viewDocObu(vehicle.id, documentRead)"
+                            [attr.i18nKey]="'VEHICLE.VIEW_REMOBU'">
+                            <mat-icon><span class="icon-Password-active"></span></mat-icon>
+                        </button>
+                        <span>Collaudo</span>
+                        <ng-container
+                            *ngIf="(documentRead.type === 'remObuFail' || documentRead.type === 'missingObu') else doneIcon">
+                            <span style="color: red;">{{'OBU.TEST_FAIL' | translate}}</span>
+                            <mat-icon style="margin: 10px;">
+                                <span class="icon-delete"></span>
+                            </mat-icon>
+                        </ng-container>
+                        <ng-template #doneIcon>
+                            <span style="color: green">{{'OBU.TEST_PASS' | translate}}</span>
+                            <mat-icon style="margin: 10px; color: green">task_alt</mat-icon>
+                        </ng-template>
+                    </ng-container>
+                    <ng-template #noTest>
+                        <button mat-icon-button [disabled]="true">
+                            <mat-icon><span class="icon-Password-active icon-Password-active-grey"></span></mat-icon>
+                        </button>
+                        <span>Collaudo</span>
+                    </ng-template>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
