@@ -164,10 +164,6 @@ export const dashboardSettings: DashboardSetting[] = [
       {
         title: 'WELCOME.TITLE-TEST', content: 'WELCOME.TEST', icon: 'icon-obu',
         cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../manage-obu', state: { index: 1 }
-      },
-      {
-        title: 'WELCOME.TITLE-APPOINTMENTS', content: 'WELCOME.APPOINTMENTS', icon: 'icon-appointment',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../appointments', state: { index: 1 }
       }
     ]
   },
