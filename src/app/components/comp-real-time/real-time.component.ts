@@ -1,16 +1,17 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Coordinate, MapUtils, NptMapComponent } from '@npt/npt-map';
+import { MapUtils, NptMapComponent } from '@npt/npt-map';
 import { Geometry } from '@npt/npt-net';
+import { Breadcrumb } from '@npt/npt-template';
 import moment from 'moment';
 import Map from 'ol/Map';
+import GeoJSON from 'ol/format/GeoJSON';
 import { Subscription } from 'rxjs';
 import { LiveStreamService } from 'src/app/services/live-stream.service';
 import { FirenzeMapUtils } from 'src/app/shared/utils/map/Firenze-map.utils';
 import { TIMEREFRESH } from '../domain/bus-firenze-constants';
 import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
-import GeoJSON from 'ol/format/GeoJSON';
 
 @Component({
   selector: 'app-real-time',
@@ -29,6 +30,7 @@ export class RealTimeComponent {
   public actualTime = RefreshOption.time5minutes;
   public times: RefreshInterface[] = TIMEREFRESH;
   public layersPopup = [FirenzeMapUtils.layerEnum.POINT_REAL_TIME];
+  public breadCrumb: Breadcrumb[] = [];
 
   private subscription: Subscription[] = [];
   private geometry: Geometry[] | GeoJSON[] = [];
@@ -41,13 +43,14 @@ export class RealTimeComponent {
     private cdr: ChangeDetectorRef,
     private translate: TranslateService) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    this.createBreadCrumb();
   }
 
   public onMapReady(event: any): void {
     this.map = event;
     this.complete = false;
-    this.getGeom();
-    /* this.getTrip(); */
+    /* this.getGeom(); */
+    this.getTrip();
     this.setMapControls();
   }
 
@@ -78,9 +81,23 @@ export class RealTimeComponent {
     this.callInterval();
   }
 
-  public backFromRealTime(): void {
+  public createBreadCrumb(): void {
     if (this.fleetManager) {
-      this.router.navigate(['../manage'], { state: { fleetManager: this.fleetManager } });
+      this.breadCrumb = [
+        {
+          label: 'Fleet manager',
+          url: '/manage'
+        },
+        {
+          label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+          url: '../selection-card',
+          state: {fleetManager: this.fleetManager}
+        },
+        {
+          label: 'Real Time',
+          url: ''
+        }
+      ];
     }
   }
 

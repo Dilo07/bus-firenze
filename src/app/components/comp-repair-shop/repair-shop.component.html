@@ -1,28 +1,20 @@
-<div fxLayout="column">
-    <mat-card-title style="margin-left: 2%;">{{'MENU.Repair-shop' | translate}}</mat-card-title>
-    <div fxLayout="row" fxLayoutAlign="center">
-        <mat-card style="border: 3px solid #1C3775; border-radius: 10px;" fxFlex.gt-lg="80" fxFlex.gt-md="80"
-            fxFlex.gt-xs="100">
-            <mat-card-content>
-                <div style="white-space: pre-wrap;">{{'REPAIR-SHOP.TITLE' | translate}}</div>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div fxLayout="row wrap" fxLayoutAlign="center" *ngFor="let repairShop of repairShops">
-        <mat-card style="background-color: #91D6AC; z-index: 3;" class="backgroundImgCustom" fxFlex.gt-lg="50"
-            fxFlex.gt-md="50" fxFlex.gt-xs="100">
-            <mat-card-content>
-                <b>{{repairShop.nameShop}}</b><br>
-                E-mail: {{repairShop.mail}}<br>
-                {{'REPAIR-SHOP.TELEPHON' | translate}}: {{repairShop.mobileNumber}}
-            </mat-card-content>
-        </mat-card>
-        <mat-card style="background-color: #E89CAE; z-index: 3;" class="backgroundImgCustom2" fxFlex.gt-lg="30"
-            fxFlex.gt-md="30" fxFlex.gt-xs="100">
-            <mat-card-content *ngIf="repairShop.contactRangeStart">
-                {{'REPAIR-SHOP.RANGE' | translate}}<br>
-                {{repairShop.contactRangeStart}} - {{repairShop.contactRangeEnd}}
-            </mat-card-content>
-        </mat-card>
-    </div>
-</div>
+<mat-card>
+    <mat-card-title>{{'MENU.Repair-shop' | translate}}</mat-card-title>
+    <mat-card-subtitle style="white-space: pre-wrap; color: #1C3775;">
+        {{'REPAIR-SHOP.TITLE' | translate}}</mat-card-subtitle>
+    <mat-card-content>
+        <div fxLayout="row wrap">
+            <mat-card *ngFor="let repairShop of repairShops" class="mat-card-movyon-blue" fxFlex="100"
+                fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
+                <mat-card-content class="white">
+                    <b>{{repairShop.nameShop}}</b><br>
+                    <div>
+                        <b>E-mail:</b> {{repairShop.mail}}<br>
+                        <b>{{'REPAIR-SHOP.TELEPHON' | translate}}:</b> {{repairShop.mobileNumber}}<br>
+                        <b>{{'REPAIR-SHOP.RANGE' | translate}}:</b> {{repairShop.contactRange}}
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>

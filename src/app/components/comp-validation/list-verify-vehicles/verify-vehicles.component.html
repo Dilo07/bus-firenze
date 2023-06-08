@@ -1,4 +1,42 @@
-<div class="example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
+<div fxLayout="row wrap" fxLayoutAlign="start">
+    <mat-card *ngFor="let element of vehicleListConnect | async" class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100"
+        fxFlex.gt-lg="20" fxFlex.gt-md="20">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+            <mat-card-title>ID {{element.id}} </mat-card-title>
+            <button mat-icon-button matTooltip="{{'VEHICLE.VERIFY' | translate}}" [attr.i18nKey]="'VEHICLE.VERIFY'"
+                (click)="verifyVehicle(element.lpn)">
+                <mat-icon><span class="icon-ArrowRight"></span></mat-icon>
+            </button>
+        </div>
+        <mat-card-content>
+            <mat-card-subtitle>{{'VEHICLE.LPN' | translate}}: {{element.lpn}}</mat-card-subtitle>
+            <mat-card-subtitle>{{'VEHICLE.LPN_NAT' | translate}}:
+                <span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
+            </mat-card-subtitle>
+            <mat-card-subtitle>{{'VEHICLE.CERTIFICATE' | translate}}:
+                <button mat-icon-button [attr.i18nKey]="'VEHICLE.CERTIFICATE'"
+                    (click)="viewCertificate.emit({vehicleId: element.id, certificateId: element.certificateId})">
+                    <mat-icon><span class="icon-assignment"></span></mat-icon>
+                </button>
+            </mat-card-subtitle>
+            <mat-card-subtitle>{{ 'VEHICLE.' + (element.documents | documentToValid) | translate}}:
+                <button *ngIf="element.documents | documentToValid" mat-icon-button [disabled]="!disableViewPdf"
+                    [attr.i18nKey]="'OBU.VIEW_FILE'"
+                    (click)="viewDeposit.emit({vehicleId: element.id, documents: element.documents})">
+                    <mat-icon><span class="icon-assignment"></span></mat-icon>
+                </button>
+            </mat-card-subtitle>
+            <div fxLayout="row" fxLayoutAlign="end">
+                <button mat-button class="actionIconButtons" [attr.i18nKey]="'FLEET-MANAGER.VALID'"
+                    (click)="validVehicle(element.id, element.documents)">
+                    <mat-icon matPrefix><span class="icon-rule"></span></mat-icon>
+                    {{'FLEET-MANAGER.VALID' | translate}}
+                </button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<!-- <div class="example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc">
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
@@ -86,4 +124,4 @@
         <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-</div>
+</div> -->

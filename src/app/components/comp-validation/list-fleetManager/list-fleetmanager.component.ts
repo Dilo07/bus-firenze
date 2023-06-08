@@ -1,12 +1,12 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpResponse } from '@angular/common/http';
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FileViewer, ViewFileModalComponent } from '@npt/npt-template';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { Breadcrumb, FileViewer, ViewFileModalComponent } from '@npt/npt-template';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-firenze-domain';
@@ -14,45 +14,41 @@ import { DepositType, DocumentVehicle, FleetManager } from '../../domain/bus-fir
 @Component({
   selector: 'app-list-fleetmanager',
   templateUrl: './list-fleetmanager.component.html',
-  styles: [`
-  table { width: 100%; }
-  @media(min-width: 1180px) {
-    .mat-column-expandButton { max-width: 10% }
-    .mat-column-id { max-width: 10%}
-    .mat-column-name { max-width: 10%}
-    .mat-column-surname { max-width: 10%}
-    .mat-column-mobile { max-width: 20%}
-    .mat-column-mail { max-width: 20%}
-  }
-  `],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+  styles: [` `]
 })
 export class ListFleetmanagerComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @Input() depositWarning: boolean;
+  public depositWarning: boolean;
   public dataSource = new MatTableDataSource<FleetManager>();
-  public displayedColumns = ['expandButton', 'id', 'name', 'surname', 'mobile', 'mail'];
-  public expandedElement: FleetManager | null;
+  public fleetListConnect: BehaviorSubject<FleetManager[]>;
   public complete = true;
   public src: FileViewer = { type: '', url: '', fileName: '' };
+  public breadCrumb: Breadcrumb[] = [];
 
   private subscription: Subscription[] = [];
 
   constructor(
     private fleetService: FleetManagerService,
     private vehicleService: VehicleService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private router: Router
+  ) {
+    this.depositWarning = this.router.getCurrentNavigation()?.extras.state?.depositWarning as boolean;
+  }
 
   ngOnInit(): void {
     this.callFleetDeposit();
+    this.breadCrumb = [
+      {
+        label: 'MENU.Validation',
+        url: '/validation'
+      },
+      {
+        label: this.depositWarning ? 'MENU.Deposit-valid' : 'MENU.Vehicle-valid',
+        url: ''
+      }
+    ];
   }
 
   ngOnDestroy(): void {
@@ -63,11 +59,16 @@ export class ListFleetmanagerComponent implements OnInit, OnDestroy {
 
   public callFleetDeposit(): void {
     this.complete = false;
-    this.fleetService.getFleetDeposit(this.depositWarning).subscribe({
-      next: fleetM => (this.dataSource.data = fleetM, this.dataSource.paginator = this.paginator, this.dataSource.sort = this.sort),
+    this.subscription.push(this.fleetService.getFleetDeposit(this.depositWarning).subscribe({
+      next: fleetM => {
+        this.dataSource.data = fleetM;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.fleetListConnect = this.dataSource.connect();
+      },
       error: () => this.complete = true,
       complete: () => this.complete = true
-    });
+    }));
   }
 
   public viewDeposit(event: { vehicleId: number; documents: DocumentVehicle[] }): void {

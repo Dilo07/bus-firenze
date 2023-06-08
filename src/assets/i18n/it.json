@@ -12,6 +12,7 @@
         "TITLE-VALID-FLEET": "Validazione Fleet Manager",
         "TITLE-VALID-VEHICLE": "Validazione veicoli",
         "TITLE-VEHICLE": "Veicoli",
+        "TITLE-DRIVERS": "Autisti",
         "TITLE-TEST": "Collaudi",
         "TITLE-APPOINTMENTS": "Aggiungi appuntamento",
         "VALID-FLEET": "Verifica e approva l’utente Fleet Manager che ha effettuato una registrazione autonoma.",
@@ -22,6 +23,7 @@
         "ADD-OBU": "Assegna un OBU ad un veicolo associato a un Fleet Manager con deposito cauzionale versato.",
         "ADD-TICKET": "Assegna un Ticket rilasciato da SaS a un veicolo associato a un Fleet Manager con OBU installata.",
         "MANAGE-TICKET": "Gestisci un Ticket rilasciato da SaS associato a uno dei tuoi veicoli.",
+        "MANAGE-DRIVERS": "Gestisci i tuoi autisti.",
         "TEST": "Verifica i documenti di collaudo dei veicoli. Effettua una procedura di collaudo per un OBU installata.",
         "APPOINTMENTS": "Inserisci un appuntamento per installare una OBU. Visualizza i dati dei Fleet Manager su cui installare le OBU.",
         "GO": "Vai"
@@ -36,7 +38,7 @@
         "Billing": "Fatture",
         "Penalties": "Penali",
         "Validation": "Validazione",
-        "Valid-Fleet-manager": "Valida Fleet manager",
+        "Valid-Fleet-manager": "Valida Fleet Manager",
         "Vehicle-valid": "Valida veicoli",
         "Deposit-valid": "Depositi da inserire",
         "User-Fleet": "Flotta",
@@ -101,6 +103,7 @@
         "STEP-4": "Carica la scansione del modulo di adesione compilato e firmato mediante il pulsante ",
         "STEP-5": "Per completare la registrazione, in questo form è richiesta la verifica del numero di cellulare mediante l'invio di un codice OTP.",
         "INITIAL MESSAGE": "Inserisci un nuovo Fleet-Manager o cercane uno esistente",
+        "ADD_NEW": "Aggiungi nuovo",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Fleet Manager",
         "MESSAGE_VIEW": "Informazioni Fleet manager",
         "MESSAGE_EDIT": "Modifica le informazioni del Fleet Manager",
@@ -166,8 +169,10 @@
         "MOBILE_VERIFIED": "numero verificato",
         "DOWNLOAD_TEMPLATE": "Scarica file",
         "DOCUMENT_CONFIRM": "Sei sicuro di voler validare questo documento?",
-        "VALID_DOCUMENTS": "Ricezione documenti cartacei",
+        "VALID_DOCUMENTS": "Documenti cartacei",
+        "CONFIRM_DOCUMENT": "Conferma ricezione",
         "VALID_AT": "Validato il ",
+        "NO_DOCUMENT": "Nessun documento presente",
         "reqForm": "Modulo adesione",
         "idDoc": "Carta d'identità",
         "comReg": "Visura camerale",
@@ -195,6 +200,7 @@
         "ENTE": "Ente"
     },
     "VEHICLE": {
+        "DOCUMENT": "Veicolo",
         "TITLE": "Veicoli",
         "NEW": "Nuovo veicolo",
         "EDIT": "Modifica veicolo",
@@ -221,6 +227,7 @@
         "DISABLED": "Disabilitato il ",
         "LPN": "Targa",
         "LPN_NAT": "Nazione",
+        "STATUS": "Stato veicolo",
         "EURO-CLASS": "EuroClass",
         "EUROPEAN-GROUP": "Categoria",
         "EXPIRED": "Veicolo scaduto",
@@ -232,6 +239,9 @@
         "AXIS": "Numero di Assi",
         "WEIGHT": "Massa complessiva a pieno carico (kg)",
         "STATE": "Stato veicolo",
+        "STATE_ACTIVE": "Attivi",
+        "STATE_TEMP": "In scadenza",
+        "STATE_EXP": "Scaduti",
         "DELETED": "Cancellato",
         "ACTIVE": "Attivo",
         "REFRESH_EXPDATE": "Aggiorna scadenza",
@@ -256,8 +266,9 @@
         "UPLOAD_DEP": "Carica ricevuta deposito",
         "UPLOAD_SUCC": "Documento caricato correttamente",
         "TEXTLIB": "* Il libretto di circolazione è obbligatorio per la creazione del veicolo",
-        "TEXTIBAN": "* Per effettuare il deposito cauzionale eseguire un versamento sull'IBAN: ",
+        "TEXTIBAN": "Per effettuare il deposito cauzionale eseguire un versamento sull'IBAN: ",
         "TEXTCAUSAL": "- Causale ZTLBUS deposito cauzionale targa (targa del veicolo da registrare)",
+        "TEXTREQUEST": "Allega la richiesta di rimborso deposito",
         "TYPE_DOC": "Tipo documento",
         "RIC_DEPOSIT": "Ricevuta deposito",
         "deposit": "Ricevuta deposito",
@@ -335,11 +346,11 @@
         "ERRORVEHICLE": "Veicoli scaduti o senza ticket",
         "NO_DATA": "Nessun veicolo nell'area",
         "REFRESH": "Aggiorna",
-        "STOP": "Ferma aggiornamento",
-        "PLAY": "Avvia refresh",
+        "STOP": "Stop",
+        "PLAY": "Avvia",
         "MAP": "Mappa in tempo reale",
         "TABLE": "Tabella in tempo reale",
-        "SELECT": "Seleziona il tempo di aggiornamento ",
+        "SELECT": "Seleziona il tempo di aggiornamento per visualizzare i veicoli sulla mappa, oppure clicca aggiorna per effettuarlo manualmente.",
         "1 Minute": "Ogni minuto",
         "5 Minutes": "5 Minuti",
         "10 Minutes": "10 Minuti",
@@ -388,7 +399,7 @@
     },
     "TICKET": {
         "INSERT": "Inserisci un ticket",
-        "NO_DATA": "Nessun veicolo presente",
+        "NO_DATA": "Nessun ticket presente",
         "EXPIRED": "Ticket scaduto in data",
         "WILLEXPIRE": "Il ticket scadrà in data",
         "INSERT_contrassegno": "Inserisci un contrassegno corretto",
@@ -406,7 +417,8 @@
         "REMOVE_SUCCESS": "Ticket terminato correttamente",
         "VIEW_HISTORY": "Vedi storico",
         "HISTORY": "Storico",
-        "ACTIVE": "Ticket attivi",
+        "ACTIVE": "Attivi",
+        "INACTIVE": "Non attivi",
         "MANAGE": "Gestisci ticket",
         "LPN": "Targa",
         "LPN_NAT": "Nazione",
@@ -432,7 +444,7 @@
     "REPAIR-SHOP": {
         "TITLE": "Per l'installazione delle On Board Unit è possibile rivolgersi ai seguenti partner di Movyon. \nL'installazione avverrà in luogo e data da concordare tra le parti e nella maniera più conveniente possibile per il Fleet Manager.",
         "TELEPHON": "Telefono",
-        "RANGE": "dal lunedì al venerdì"
+        "RANGE": "Orari"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Autoveicolo (classe M1)",
@@ -456,6 +468,7 @@
         "PERIOD": "Periodo di riferimento",
         "DATE": "Data fattura",
         "DETAILS": "Dettagli fatture",
+        "DETAIL": "Dettagli fattura ",
         "CLOSE_DETAILS": "Chiudi dettagli"
     },
     "PENALTIES": {
@@ -486,7 +499,7 @@
         "DAMAGE": "Trattenimento deposito cauzionale per danneggiamento OBU",
         "CANCELLED_APPOINTMENT": "Appuntamento cancellato entro 24h",
         "REVERSAL": "Nota di credito",
-        "CHANGE": "Sostituzione obu",
+        "CHANGE_OBU": "Sostituzione obu",
         "UNINSTALL_FREE": "Disinstallazione obu gratuita",
         "CHANGE_FREE": "Sostituzione obu gratuita",
         "5": "Mancato appuntamento",
@@ -510,7 +523,8 @@
             "VERIFY": "Verifica",
             "CLOSE": "Chiudi",
             "SEARCH": "Cerca",
-            "COPY": "Copia"
+            "COPY": "Copia",
+            "GOTOPAGE": "Vai alla pagina"
         }
     },
     "ERROR": {

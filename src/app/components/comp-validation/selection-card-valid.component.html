@@ -1,0 +1,35 @@
+<mat-card>
+    <mat-card-title>{{'MENU.Validation' | translate}}
+    </mat-card-title>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <!-- <mat-tab-group mat-align-tabs="center" [selectedIndex]="index" (selectedTabChange)="onTabChanged($event)">
+            <mat-tab label="{{'MENU.Valid-Fleet-manager' | translate}}">
+                <app-comp-fleet-manager [isValidationFleet]="true" *ngIf="index === 0"></app-comp-fleet-manager>
+            </mat-tab>
+            <mat-tab label="{{'MENU.Vehicle-valid' | translate}}">
+                <app-list-fleetmanager [depositWarning]="false" *ngIf="index === 1"></app-list-fleetmanager>
+            </mat-tab>
+            <mat-tab label="{{'MENU.Deposit-valid' | translate}}">
+                <app-list-fleetmanager [depositWarning]="true" *ngIf="index === 2"></app-list-fleetmanager>
+            </mat-tab>
+        </mat-tab-group> -->
+        <div fxLayout="row wrap" fxLayoutAlign="start">
+            <mat-card *ngFor="let card of selectionCards" class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100"
+                fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <mat-card-header>
+                    <mat-card-title fxLayout="row" fxLayoutGap="20px">
+                        <mat-icon><span [class]="card.icon"></span></mat-icon>
+                        <span>{{card.title | translate}}</span>
+                    </mat-card-title>
+                    <mat-card-subtitle>{{card.subtitle}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content fxLayout="row" fxLayoutAlign="center">
+                    <button mat-button class="actionButtons" [attr.i18nKey]="card.route" [routerLink]="[card.route]"
+                        [state]="card.state">
+                        {{'COMMON.ACTION.GOTOPAGE' | translate}}
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>

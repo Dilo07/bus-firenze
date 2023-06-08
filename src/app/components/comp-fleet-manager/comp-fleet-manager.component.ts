@@ -5,8 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FileViewer, IAuthenticationService, SessionService, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { Breadcrumb, FileViewer, IAuthenticationService, SessionService, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
+import { Observable, Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
@@ -16,68 +17,68 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
 @Component({
   selector: 'app-comp-fleet-manager',
   templateUrl: './comp-fleet-manager.component.html',
-  styles: [`
-  table { width: 100%; }
-  @media(min-width: 1180px) {
-    .mat-column-id { max-width: 5%}
-    .mat-column-name { max-width: 8%;}
-    .mat-column-surname { max-width: 8%;}
-    .mat-column-e-mail { max-width: 22%}
-    .mat-column-companyName { max-width: 15%}
-    .mat-column-city { max-width: 12%} /* solo manage */
-    .mat-column-district { max-width: 10%} /* solo manage */
-    .mat-column-pIva { max-width: 10%} /* solo valid */
-    .mat-column-fiscalCode { max-width: 12%} /* solo valid */
-    .mat-column-actions { max-width: 20%; display: table-column; text-align: end;}
-  }
-  ::ng-deep .menu-color {
-    background: #E4F1F5;
-  }
-  `],
+  styleUrls: ['./comp-fleet-manager.component.scss']
 })
 export class FleetManagerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() public isValidFleet = false;
+  @Input() public isValidationFleet = false;
 
   public dataSource = new MatTableDataSource<FleetManager>();
+  public fleetanagersConnect: Observable<FleetManager[]>;
   public fleetManagerList: FleetManager[] = [];
-  public displayedColumns = ['id', 'name', 'surname', 'e-mail', 'companyName', 'pIva', 'fiscalCode', 'city', 'district', 'actions'];
   public search: FormGroup;
   public complete = true;
   public roleOpMovyon: boolean;
   public src: FileViewer = { type: '', url: '', fileName: '' };
+  public breadCrumb: Breadcrumb[] = [];
 
   private offset = 0;
   private limit = 10;
   private columnOrder: ColumnSort = { active: 'id', direction: 1 };
   private endTable = false;
   private subscription: Subscription[] = [];
+  private fleetManagerName: string;
 
   constructor(
+    private router: Router,
     private dialog: MatDialog,
     private snackBar: SnackBar,
     private fleetManagerService: FleetManagerService,
     private formBuilder: FormBuilder,
     private sessionService: SessionService,
-    @Inject('authService') private authService: IAuthenticationService) { }
+    @Inject('authService') private authService: IAuthenticationService) {
+    this.fleetManagerName = this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as string;
+  }
 
   ngOnInit(): void {
     /* verifica se è un ruolo opmovyon */
     this.authService.getUserRoles().then((res: string[]) => this.roleOpMovyon = res.includes(ROLES.OPER_MOVYON));
+    // se arriva lo state dal breadcrumb aggiorna la ricerca
+    if (this.fleetManagerName) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, this.fleetManagerName); }
     this.search = this.formBuilder.group({
       ctrlSearch: [this.sessionService.getSessionStorage(FIRENZE_SESSION.fleetManageSearch)],
     });
+    this.breadCrumb = [
+      {
+        label: 'MENU.Validation',
+        url: '../'
+      },
+      {
+        label: 'MENU.Valid-Fleet-manager',
+        url: ''
+      }
+    ];
     this.callGetFleetManager();
   }
 
   public callGetFleetManager(): void {
-    const search = this.search?.get('ctrlSearch').value;
+    const search = this.search?.get('ctrlSearch').value ? this.search?.get('ctrlSearch').value.trim() : '';
     this.complete = false;
     const currentSize = this.offset * this.limit;
     this.subscription.push(this.fleetManagerService.searchFleetManager(
       search,
-      !this.isValidFleet,
+      !this.isValidationFleet,
       this.offset,
       this.limit,
       this.columnOrder)
@@ -96,12 +97,13 @@ export class FleetManagerComponent implements OnInit {
               this.paginator.length = ((this.offset + 1) * this.limit) + 1;
             }
             this.dataSource.data = data;
+            this.fleetanagersConnect = this.dataSource.connect();
           }
         },
         error: () => this.complete = true,
         complete: () => { this.complete = true; this.unSubscribe(); }
       }));
-    if (!this.isValidFleet) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, search); }
+    if (!this.isValidationFleet) { this.sessionService.setSessionStorage(FIRENZE_SESSION.fleetManageSearch, search); }
   }
 
   /* evento al cambio pagina */

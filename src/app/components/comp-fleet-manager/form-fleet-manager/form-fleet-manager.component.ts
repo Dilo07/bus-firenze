@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IAuthenticationService, SnackBar } from '@npt/npt-template';
+import { Breadcrumb, IAuthenticationService, SnackBar } from '@npt/npt-template';
 import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
@@ -44,6 +44,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public helper: 'on' | 'off';
   public completeUp = true;
   public completeDown = true;
+  public breadCrumb: Breadcrumb[] = [];
 
   private failedCheck: boolean;
   private euroNations = euroNations;
@@ -91,6 +92,21 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       const phoneNumber = parsePhoneNumber(this.formGroup.get('ctrlCell').value);
       this.dialCode = phoneNumber.countryCallingCode;
       this.helper = 'off';
+      this.breadCrumb = [
+        {
+          label: 'Fleet manager',
+          url: '/manage'
+        },
+        {
+          label: `${this.data.name} ${this.data.surname}`,
+          url: '../selection-card',
+          state: { fleetManager: this.data }
+        },
+        {
+          label: 'ACCOUNT.PROFILE',
+          url: ''
+        }
+      ];
     } else {
       this.formGroup = this.formBuilder.group({
         ctrlContractCode: [''],
@@ -116,6 +132,16 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
       });
       this.userSel = this.fleetType.aziendaPrivata;
       this.helper = 'on';
+      this.breadCrumb = [
+        {
+          label: 'Fleet manager',
+          url: '/manage'
+        },
+        {
+          label: 'FLEET-MANAGER.ADD_NEW',
+          url: ''
+        }
+      ];
     }
     this.changeFormNat(true);
   }

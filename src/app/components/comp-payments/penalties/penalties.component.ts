@@ -1,4 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FleetManager } from '../../domain/bus-firenze-domain';
+import { Breadcrumb } from '@npt/npt-template';
 
 @Component({
   selector: 'app-penalties',
@@ -6,14 +9,29 @@ import { Component, Input } from '@angular/core';
   styles: [``]
 })
 export class PenaltiesComponent {
-  @Input() public fleetManagerId: number;
-
+  public fleetManager: FleetManager;
   public keyword = '';
-  public filter = '';
+  public breadCrumb: Breadcrumb[] = [];
 
-  constructor() { }
-
-  public applyFilter(event: Event): void {
-    this.filter = (event.target as HTMLInputElement).value;
+  constructor(private router: Router) {
+    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    if (this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as FleetManager) {
+      this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb;
+    };
+    this.breadCrumb = [
+      {
+        label: 'MENU.Payments',
+        url: '/payments'
+      },
+      {
+        label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+        url: '../selection',
+        state: this.fleetManager
+      },
+      {
+        label: 'MENU.Penalties',
+        url: ''
+      }
+    ];
   }
 }

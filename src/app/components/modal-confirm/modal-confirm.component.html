@@ -7,7 +7,7 @@
         <button mat-button class="uploadButtons" (click)="depositInput.click()">{{data.uploadDoc | translate}}</button>
     </span>
     <div fxLayout="row" fxLayoutGap="20px">
-        <button mat-button class="backButton" [attr.i18nKey]="'no'" (click)="dialogRef.close(false)"> no </button>
+        <button mat-button class="whiteButtons" [attr.i18nKey]="'no'" (click)="dialogRef.close(false)"> no </button>
         <button mat-button class="actionButtons" [attr.i18nKey]="'COMMON.ACTION.YES'"
             (click)="dialogRef.close(fileDeposit ? {file: fileDeposit} : true)">
             {{'COMMON.ACTION.YES' | translate}}
@@ -22,7 +22,7 @@
             <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>
         </mat-form-field>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
-            <button mat-button class="backButton" (click)="dialogRef.close(false)"
+            <button mat-button class="whiteButtons" (click)="dialogRef.close(false)"
                 [attr.i18nKey]="'COMMON.ACTION.BACK'"> {{'COMMON.ACTION.BACK' | translate}}
             </button>
             <button mat-button class="actionButtons" (click)="dialogRef.close(contractCode.value)"

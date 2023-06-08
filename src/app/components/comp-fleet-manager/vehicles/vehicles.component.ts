@@ -6,13 +6,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
-import { Subscription } from 'rxjs';
+import { Breadcrumb, FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { InstallerService } from 'src/app/services/installer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { STATUS_VEHICLE } from '../../domain/bus-firenze-constants';
-import { FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { FleetManager, Vehicle, VehicleStatus } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from '../drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehicle.component';
@@ -20,31 +19,7 @@ import { ModalFormVehicleComponent } from './modal-form-vehicle/modal-form-vehic
 @Component({
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
-  styles: [`
-  table {
-    width: 100%;
-  }
-  .obuDisactive{
-    opacity: 0.8;
-  }
-  @media(min-width: 1180px) {
-    .mat-column-id { max-width: 10%}
-    .mat-column-plate { max-width: 10%;}
-    .mat-column-nat { max-width: 10%}
-    .mat-column-certificateId { max-width: 10%}
-    .mat-column-euroClass { max-width: 10%;}
-    .mat-column-obuId { max-width: 20%;}
-    .mat-column-consent { max-width: 10%;}
-    .mat-column-actions { max-width: 20%; display: table-column;}
-  }
-  .icon-assignment-grey:before {
-    color: grey;
-    font-weight: bold;
-  }
-  .icon-warning:before {
-    color: red;
-  }
-  `],
+  styleUrls: ['./vehicles.component.scss']
 })
 export class VehiclesComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
@@ -53,11 +28,14 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public fleetManager: FleetManager;
   public vehicleLpn: string;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
+  public vehicleListConnect: BehaviorSubject<Vehicle[]>;
   public displayedColumns = ['id', 'plate', 'nat', 'certificateId', 'euroClass', 'obuId', 'consent', 'actions'];
   public search: FormGroup;
   public complete = true;
-  public statusVehicle = STATUS_VEHICLE;
   public src: FileViewer = { type: '', url: '', fileName: '' };
+  public defaultStatus: VehicleStatus = 'REGISTERED';
+  public onlyActive = true;
+  public breadCrumb: Breadcrumb[] = [];
 
   private subscription: Subscription[] = [];
 
@@ -78,12 +56,32 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.search = this.formBuilder.group({
       ctrlSearch: [this.vehicleLpn],
-      onlyActive: [true]
+      ctrlStatus: ['REGISTERED']
     });
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
+    if (this.fleetManager) {
+      this.breadCrumb = [
+        {
+          label: this.vehicleLpn ? 'MENU.Vehicle-valid' : 'Fleet manager',
+          url: this.vehicleLpn ? '../../validation/valid-vehicle' : '/manage'
+        },
+        {
+          label: this.vehicleLpn ? 'VEHICLE.TITLE' : `${this.fleetManager.name} ${this.fleetManager.surname}`,
+          url: this.vehicleLpn ? '' : '../selection-card',
+          state: { fleetManager: this.fleetManager }
+        }
+      ];
+      if (!this.vehicleLpn) { // aggiunge l'ultimo titolo al breadcrumb nel caso venga dalla pagina fleetmanager
+        this.breadCrumb.push({
+          label: 'VEHICLE.TITLE',
+          url: ''
+        });
+      }
+    }
   }
 
   ngOnDestroy(): void {
+    this.vehicleList.disconnect();
     this.subscription.forEach(subscription => {
       subscription.unsubscribe();
     });
@@ -92,16 +90,20 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public getVehiclesByManagerId(): void {
     this.complete = false;
     const keyword = this.search.get('ctrlSearch').value;
-    const onlyActive = this.search.get('onlyActive').value;
+    const status = this.search.get('ctrlStatus').value;
     // in caso di op_movyon movyon passa l'id altrimento no
-    this.subscription.push(this.vehicleService.getVehiclesById(onlyActive, this.fleetManager?.id, keyword).subscribe(
-      data => {
+    this.vehicleService.getVehiclesById(this.onlyActive, this.fleetManager?.id, keyword).subscribe({
+      next: (data) => {
         this.vehicleList.data = data;
-        this.vehicleList.sort = this.sort;
+        this.vehicleListConnect = this.vehicleList.connect();
         this.vehicleList.paginator = this.paginator;
+        this.vehicleList.filterPredicate = (data: Vehicle, filter: string) => {
+          return data.status === filter;
+        };
       },
-      () => this.complete = true,
-      () => this.complete = true));
+      error: () => this.complete = true,
+      complete: () => (this.filterDataSourceStatus(status), this.complete = true)
+    });
   }
 
   public addVehicle(): void {
@@ -157,13 +159,13 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   }
 
   public updateStatus(vehicleId: number): void {
-    this.vehicleService.updateStatusVehicle(vehicleId).subscribe({
+    this.subscription.push(this.vehicleService.updateStatusVehicle(vehicleId).subscribe({
       complete: () => this.getVehiclesByManagerId()
-    });
+    }));
   }
 
   public associationDriver(vehicleId: number): void {
-    this.driverService.getDriversByVehicle(vehicleId, this.fleetManager?.id).subscribe(
+    this.subscription.push(this.driverService.getDriversByVehicle(vehicleId, this.fleetManager?.id).subscribe(
       drivers => {
         this.dialog.open(AssociationDriversVehiclesComponent, {
           width: '80%',
@@ -171,7 +173,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
           data: { driverVehicle: drivers, idVehicle: vehicleId, fleetManagerId: this.fleetManager?.id },
           autoFocus: false
         });
-      });
+      }));
   }
 
   public downloadManualPdf(device: number): void {
@@ -230,11 +232,11 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
       this.complete = true;
     } else {
-      this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file, this.fleetManager?.id).subscribe(
-        () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
-        () => this.complete = true,
-        () => { this.getVehiclesByManagerId(); this.complete = true; }
-      ));
+      this.subscription.push(this.vehicleService.uploadCertificate(vehicleId, file, this.fleetManager?.id).subscribe({
+        next: () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
+        error: () => this.complete = true,
+        complete: () => { this.getVehiclesByManagerId(); this.complete = true; }
+      }));
     }
   }
 
@@ -244,6 +246,26 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(['manage']);
     }
+  }
+
+  public filterDataSourceStatus(status: VehicleStatus): void {
+    if (status === 'ALL') {
+      if (this.onlyActive) {
+        this.onlyActive = false;
+        this.getVehiclesByManagerId();
+      }
+      this.vehicleList.filter = '';
+    } else {
+      if (!this.onlyActive) {
+        this.onlyActive = true;
+        this.getVehiclesByManagerId();
+      }
+      this.vehicleList.filter = status;
+    }
+  }
+
+  public scroll(element: HTMLElement): void {
+    element.scrollIntoView({ behavior: "smooth" });
   }
 
   private resetSearchField(): void {

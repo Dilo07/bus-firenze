@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IAuthenticationService, SnackBar } from '@npt/npt-template';
 import { CountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
-import { Driver } from 'src/app/components/domain/bus-firenze-domain';
+import { Driver, FleetManager } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service';
@@ -24,7 +24,7 @@ import { ModalOTPComponent } from '../../register-page/modal-otp/modal-otp.compo
 })
 export class FormDriverComponent implements OnInit, OnDestroy {
   @Input() driver: Driver;
-  @Input() fleetManagerId: number;
+  @Input() fleetManager: FleetManager;
   @Input() cellularRequired: boolean;
   public formGroup: FormGroup;
   public roleDriver: boolean;
@@ -45,7 +45,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     @Inject('authService') private authService: IAuthenticationService,
   ) {
     this.driver = this.router.getCurrentNavigation()?.extras.state?.driver as Driver;
-    this.fleetManagerId = this.router.getCurrentNavigation()?.extras.state?.fleetManagerId as number;
+    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
     this.cellularRequired = this.router.getCurrentNavigation()?.extras.state?.cellularRequired as boolean;
   }
 
@@ -117,13 +117,13 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     newDriver.contacts = [];
     const mail = { code: 3, value: this.formGroup.get('ctrlMail').value };
     newDriver.contacts.push(mail);
-    this.driverService.addDriver(newDriver, this.fleetManagerId).subscribe({
+    this.driverService.addDriver(newDriver, this.fleetManager.id).subscribe({
       error: () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
       complete: () => {
         this.snackBar.showMessage('DRIVERS.ADD_SUCCESS', 'INFO');
         if (!this.roleDriver) {
-          const url = this.fleetManagerId ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
-          this.router.navigate([url], { state: { fleetManagerId: this.fleetManagerId } });
+          const url = this.fleetManager.id ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
+          this.router.navigate([url], { state: { fleetManagerId: this.fleetManager.id } });
         }
       }
     });
@@ -143,7 +143,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     this.driverService.editDriver(
       editDriver,
       this.roleDriver ? null : editDriver.id,
-      this.roleDriver ? null : this.fleetManagerId)
+      this.roleDriver ? null : this.fleetManager.id)
       .subscribe({
         error: () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
         complete: () => {
@@ -153,8 +153,8 @@ export class FormDriverComponent implements OnInit, OnDestroy {
             this.cellularRequired = false;
           }
           if (!this.roleDriver) {
-            const url = this.fleetManagerId ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
-            this.router.navigate([url], { state: { fleetManagerId: this.fleetManagerId } });
+            const url = this.fleetManager.id ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
+            this.router.navigate([url], { state: { fleetManagerId: this.fleetManager.id } });
           }
         }
       });

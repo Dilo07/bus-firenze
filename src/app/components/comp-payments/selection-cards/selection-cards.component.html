@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+                style="height: 1px;" *ngIf="roleMovyon">
+            </lib-breadcrumb>
+            <span>{{fleetManager ? fleetManager.name + ' ' + fleetManager.surname + ' (ID' + fleetManager.id + ')' :
+                ('MENU.Payments' | translate)}}</span>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <div fxLayout="row wrap" fxLayoutAlign="start">
+            <mat-card *ngFor="let card of selectionCards" class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100"
+                fxFlex.gt-lg="30" fxFlex.gt-md="30">
+                <mat-card-header>
+                    <mat-card-title fxLayout="row" fxLayoutGap="20px">
+                        <mat-icon><span [class]="card.icon"></span></mat-icon>
+                        <span>{{card.title | translate}}</span>
+                    </mat-card-title>
+                    <mat-card-subtitle>{{card.subtitle}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content fxLayout="row" fxLayoutAlign="center">
+                    <button mat-button class="actionButtons" [attr.i18nKey]="card.route"
+                        [routerLink]="['../' + card.route]" [state]="card.state">
+                        {{'COMMON.ACTION.GOTOPAGE' | translate}}
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>

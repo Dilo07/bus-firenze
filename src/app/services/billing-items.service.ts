@@ -26,10 +26,10 @@ export class BillingItemsService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  getPenaltiesByFmId(start: string, end: string, billingStatus: string, fmId: number): Observable<BillingItems[]> {
+  getPenaltiesByFmId(start: string, end: string, keywords: string, billingStatus: string, fmId: number): Observable<BillingItems[]> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: HttpUtils.createHttpParams({ start, end, status: billingStatus })
+      params: HttpUtils.createHttpParams({ start, end, keywords, status: billingStatus })
     };
 
     return this.http.get<BillingItems[]>(this.apiUrl + `/penalties/${fmId}`, options)

@@ -1,0 +1,46 @@
+@media (min-width: 1180px) {
+    .mat-column-id {
+        max-width: 5%;
+    }
+    .mat-column-name {
+        max-width: 8%;
+    }
+    .mat-column-surname {
+        max-width: 8%;
+    }
+    .mat-column-e-mail {
+        max-width: 22%;
+    }
+    .mat-column-companyName {
+        max-width: 15%;
+    }
+    .mat-column-city {
+        max-width: 12%;
+    } /* solo manage */
+    .mat-column-district {
+        max-width: 10%;
+    } /* solo manage */
+    .mat-column-pIva {
+        max-width: 10%;
+    } /* solo valid */
+    .mat-column-fiscalCode {
+        max-width: 12%;
+    } /* solo valid */
+    .mat-column-actions {
+        max-width: 20%;
+        display: table-column;
+        text-align: end;
+    }
+}
+::ng-deep .menu-color {
+    background: #e4f1f5;
+}
+
+.actionIconButtons:hover:enabled {
+    .icon-rule::before {
+        color: white;
+    }
+    .icon-delete::before {
+        color: white;
+    }
+}

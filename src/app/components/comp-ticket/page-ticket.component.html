@@ -1,25 +1,17 @@
 <mat-card *ngIf="roleMovyon !== undefined">
-    <div fxLayout="row wrap" fxLayoutAlign="space-between">
-        <mat-card-title>{{'MENU.Ticket' | translate}}
-        </mat-card-title>
-        <button mat-button class="backButton" *ngIf="roleMovyon && !viewFleetTable"
-            [attr.i18nKey]="'FLEET-MANAGER.BACK'" (click)="viewFleetTable = true">
-            {{'FLEET-MANAGER.BACK' | translate}}
-        </button>
-    </div>
+    <mat-card-header>
+        <mat-card-title>
+            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+				style="height: 1px;" *ngIf="fromFleet"></lib-breadcrumb>
+            {{'MENU.Ticket' | translate}}</mat-card-title>
+        <mat-card-subtitle *ngIf="viewFleetTable">{{'FLEET-MANAGER.SELECT' | translate}}</mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
-        <div *ngIf="viewFleetTable else vehicleTicket">
-            <app-table-fleet (callManageTicket)="viewFleetTable = false; fmId= $event"></app-table-fleet>
+        <div *ngIf="viewFleetTable else manageTicket">
+            <app-table-fleet (callManageTicket)="viewFleetTable = false; fleetManager= $event"></app-table-fleet>
         </div>
-        <ng-template #vehicleTicket>
-            <mat-tab-group mat-align-tabs="center" [selectedIndex]="index" (selectedTabChange)="index = $event.index">
-                <mat-tab label="{{'TICKET.ADD' | translate}}">
-                    <app-add-ticket [fleetManagerId]="fmId" *ngIf="index === 0"></app-add-ticket>
-                </mat-tab>
-                <mat-tab label="{{'TICKET.MANAGE' | translate}}">
-                    <app-manage-ticket [fleetManagerId]="fmId" *ngIf="index === 1"></app-manage-ticket>
-                </mat-tab>
-            </mat-tab-group>
+        <ng-template #manageTicket>
+            <app-manage-ticket [fleetManager]="fleetManager" [roleMovyon]="roleMovyon" (callBackButton)="viewFleetTable = true"></app-manage-ticket>
         </ng-template>
     </mat-card-content>
 </mat-card>

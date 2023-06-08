@@ -1,8 +1,11 @@
 <mat-card fxLayout="column" fxLayoutGap="10px">
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
         <mat-card-title *ngIf="!data && !register">
-            {{'FLEET-MANAGER.MESSAGE_NEW' | translate}}</mat-card-title>
+            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb" style="height: 1px;"></lib-breadcrumb>
+            {{'FLEET-MANAGER.MESSAGE_NEW' | translate}}
+        </mat-card-title>
         <mat-card-title *ngIf="data && !roleFleetManager">
+            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb" style="height: 1px;"></lib-breadcrumb>
             {{'FLEET-MANAGER.MESSAGE_EDIT' | translate}}</mat-card-title>
         <mat-card-title *ngIf="data && roleFleetManager">
             {{'FLEET-MANAGER.MESSAGE_VIEW' | translate}}</mat-card-title>
@@ -10,7 +13,7 @@
             {{'FLEET-MANAGER.REGISTRATION' | translate}}
         </mat-card-title>
     </div>
-    <app-expansion-info (callForm)="downloadTemplate()"></app-expansion-info> <!-- component expansion-info -->
+    <app-expansion-info (callForm)="downloadTemplate()" *ngIf="!data"></app-expansion-info> <!-- component expansion-info -->
     <mat-progress-bar mode="indeterminate" *ngIf="!completeUp"></mat-progress-bar>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
         <form [formGroup]="formGroup" fxLayout="column">
@@ -218,7 +221,7 @@
         </form>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
             <button mat-button *ngIf="!roleFleetManager" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.CANCEL'"
-                class="backButton">{{'COMMON.ACTION.CANCEL' | translate}}</button>
+                class="whiteButtons">{{'COMMON.ACTION.CANCEL' | translate}}</button>
             <button *ngIf="!data" mat-button libDebounceClick
                 [disabled]="formGroup.invalid || ((register && !verifyOtp))" [attr.i18nKey]="'FLEET-MANAGER.SAVE'"
                 class="actionButtons" (debounceClick)="insertFleetManager()">

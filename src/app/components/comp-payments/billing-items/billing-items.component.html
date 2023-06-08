@@ -1,120 +1,104 @@
-<div fxLayout="column" fxLayoutGap="20px">
-    <mat-card>
-        <mat-card-content fxLayout="column" fxLayoutGap="20px">
-            <form [formGroup]="formGroup" style="margin-bottom: 20px;" fxLayout="column" fxLayoutGap="20px">
-                <div fxLayout="row wrap" fxLayoutGap="20px">
-                    <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="80">
-                        <mat-label>{{'COMMON.DATE.RANGE' | translate}}</mat-label>
-                        <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
-                            <input matStartDate formControlName="ctrlRangeStart">
-                            <input matEndDate formControlName="ctrlRangeEnd">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker></mat-date-range-picker>
-                        <mat-error>{{'COMMON.DATE.INVALID' | translate}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
-                        <mat-label> {{'BILLING_ITEMS.STATUS' | translate}}</mat-label>
-                        <mat-select formControlName="ctrlBillingStatus" required>
-                            <mat-option *ngFor="let status of billingStatus;" [value]="status">
-                                {{'BILLING_STATUS.' + status | translate}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <span>
-                        <button mat-button class="actionButtons" [disabled]="formGroup.invalid"
-                            [attr.i18nKey]="'COMMON.ACTION.SEARCH'" (click)="getBillingItems()">
-                            {{'COMMON.ACTION.SEARCH' | translate}}
-                        </button>
-                    </span>
-                </div>
-            </form>
-        </mat-card-content>
-    </mat-card>
-    <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-    <mat-table [dataSource]="dataSource" [style.display]="dataSource.data.length === 0 ? 'none' : ''"
-        class="mat-elevation-z8" multiTemplateDataRows matSort matSortActive="nptGopId" matSortDirection="asc">
-        <ng-container matColumnDef="expandButton">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <button mat-icon-button [attr.i18nKey]="'BILLING_ITEMS.DETAILS'"
-                    (click)="expandedElement = expandedElement === element ? null : element;">
-                    <mat-icon style="color: grey"
-                        matTooltip="{{(expandedElement && expandedElement.nptGopId === element.nptGopId ? 'BILLING_ITEMS.CLOSE_DETAILS' : 'BILLING_ITEMS.DETAILS') | translate }}">
-                        <span
-                            [class]="expandedElement && expandedElement.nptGopId === element.nptGopId ? 'icon-down_arrow' : 'icon-right_arrow'"></span>
-                    </mat-icon>
-                </button>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="nptGopId">
-            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> gop id </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">gop id</span>
-                {{element.nptGopId}}
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="billingType">
-            <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.TYPE' | translate }} </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">{{'BILLING_ITEMS.TYPE' | translate }}</span>
-                {{'BILLING_TYPE.' + element.billingType | translate}}
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-            <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.STATUS' | translate }} </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">{{'BILLING_ITEMS.STATUS' | translate }}</span>
-                {{'BILLING_STATUS.' + element.billingStatus | translate}}
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="price">
-            <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICE_UNIT' | translate }} </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">{{'BILLING_ITEMS.PRICE_UNIT' | translate }}</span>
-                {{element.price}} €
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="quantity">
-            <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.QUANTITY' | translate }} </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">{{'BILLING_ITEMS.QUANTITY' | translate }}</span>
-                {{element.quantity}}
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="priceTot">
-            <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICETOT' | translate }} </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <span class="mobile-label">{{'BILLING_ITEMS.PRICETOT' | translate }}</span>
-                {{element.priceTot}} €
-            </mat-cell>
-        </ng-container>
-
-        <!--Collapse div-->
-        <ng-container matColumnDef="expandedDetail">
-            <mat-cell *matCellDef="let element">
-                <div class="example-element-detail"
-                    [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
-                    <div class="example-element-description">
-                        <app-list-items [billingType]="element.billingType" [billingItems]="element.items">
-                        </app-list-items> <!-- componente -->
+<mat-card>
+    <mat-card-title>
+        <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+            style="height: 1px;">
+        </lib-breadcrumb>
+        {{'MENU.Billing' | translate}}
+    </mat-card-title>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <mat-card>
+            <mat-card-content fxLayout="column" fxLayoutGap="20px">
+                <form [formGroup]="formGroup" style="margin-bottom: 20px;" fxLayout="column" fxLayoutGap="20px">
+                    <div fxLayout="row wrap" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100">
+                            <mat-label>{{'COMMON.DATE.RANGE' | translate}}</mat-label>
+                            <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+                                <input matStartDate formControlName="ctrlRangeStart">
+                                <input matEndDate formControlName="ctrlRangeEnd" (dateChange)="getBillingItems()">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                            <mat-error>{{'COMMON.DATE.INVALID' | translate}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
+                            <mat-label> {{'BILLING_ITEMS.STATUS' | translate}}</mat-label>
+                            <mat-select formControlName="ctrlBillingStatus" required (selectionChange)="getBillingItems()">
+                                <mat-option *ngFor="let status of billingStatus;" [value]="status">
+                                    {{'BILLING_STATUS.' + status | translate}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
-                </div>
-            </mat-cell>
-        </ng-container>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+        <mat-table [dataSource]="dataSource" [style.display]="dataSource.data.length === 0 ? 'none' : ''"
+            class="mat-elevation-z8" matSort matSortActive="nptGopId" matSortDirection="asc">
 
-        <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let element; columns: displayedColumns;" class="hover-row"></mat-row>
-        <mat-row [style.display]="expandedElement && expandedElement.nptGopId === row.nptGopId ? '' : 'none'"
-            *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
-    </mat-table>
-    <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
-    <div *ngIf="dataSource.data.length === 0 && complete"> {{'BILLING_ITEMS.NO_DATA' | translate}}</div>
-</div>
+            <ng-container matColumnDef="nptGopId">
+                <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> gop id </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">gop id</span>
+                    {{element.nptGopId}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="billingType">
+                <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.TYPE' | translate }} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">{{'BILLING_ITEMS.TYPE' | translate }}</span>
+                    {{'BILLING_TYPE.' + element.billingType | translate}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.STATUS' | translate }} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">{{'BILLING_ITEMS.STATUS' | translate }}</span>
+                    {{'BILLING_STATUS.' + element.billingStatus | translate}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICE_UNIT' | translate }} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">{{'BILLING_ITEMS.PRICE_UNIT' | translate }}</span>
+                    {{element.price}} €
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+                <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.QUANTITY' | translate }} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">{{'BILLING_ITEMS.QUANTITY' | translate }}</span>
+                    {{element.quantity}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="priceTot">
+                <mat-header-cell *matHeaderCellDef> {{'BILLING_ITEMS.PRICETOT' | translate }} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">{{'BILLING_ITEMS.PRICETOT' | translate }}</span>
+                    {{element.priceTot}} €
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button [routerLink]="['../billing-details']"
+                        [state]="{gopId: element.nptGopId, billingType: element.billingType, billingItems: element.items, fleetManager: fleetManager}">
+                        <mat-icon><span class="icon-document_search"></span></mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let element; columns: displayedColumns;" class="hover-row"></mat-row>
+        </mat-table>
+        <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+        <div *ngIf="dataSource.data.length === 0 && complete"> {{'BILLING_ITEMS.NO_DATA' | translate}}</div>
+    </mat-card-content>
+</mat-card>

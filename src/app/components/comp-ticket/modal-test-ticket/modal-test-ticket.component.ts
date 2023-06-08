@@ -7,22 +7,17 @@ import { Subscription } from 'rxjs';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { TICKETS_TYPE } from '../../domain/bus-firenze-constants';
-import { Ticket } from '../../domain/bus-firenze-domain';
+import { FleetManager, Ticket, VehicleWithoutTicket } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-modal-test-ticket',
   templateUrl: './modal-test-ticket.component.html',
-  styles: [`
-  mat-button-toggle-group {
-    flex-wrap: wrap;
-  }
-  `
-  ]
+  styles: [` `]
 })
 export class ModalTestTicketComponent implements OnInit, OnDestroy {
   public formGroup: FormGroup;
   public validTicket: { valid: boolean; ticket: Ticket } = { valid: false, ticket: null };
-  public ticketType: string;
+  public ticketType = 'contrassegno';
   public ticketsType = TICKETS_TYPE;
 
   private roleDriver: boolean;
@@ -33,7 +28,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { vehicleId: number; fleetManagerId: number; extend: boolean },
+    @Inject(MAT_DIALOG_DATA) public data: { vehicleList: VehicleWithoutTicket[]; vehicleId: number; fleetManager: FleetManager; extend: boolean },
     @Inject('authService') private authService: IAuthenticationService,
     @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {
@@ -48,6 +43,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
       ctrlYear: [moment().year()],
       ctrlActive: [false]
     });
+    if (!this.data.extend) { this.formGroup.addControl('ctrlVehicle', this.formBuilder.control('', Validators.required)); }
   }
 
   ngOnDestroy(): void {
@@ -88,27 +84,28 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
       } else if (this.ticketType === this.ticketsType.voucher) {
         ticketTest = this.formGroup.get('ctrlVoucher').value;
       }
-      console.log(ticketTest);
-      this.subscription.push(this.ticketService.checkTicket(this.data.vehicleId, ticketTest).subscribe(
-        (infoTicket) => {
+      const vehicleId = this.data.extend ? this.data.vehicleId : this.formGroup.get('ctrlVehicle').value;
+      this.subscription.push(this.ticketService.checkTicket(vehicleId, ticketTest).subscribe({
+        next: (infoTicket) => {
           this.validTicket.valid = true;
           this.validTicket.ticket = infoTicket;
         },
-        () => this.validTicket.valid = false
-      ));
+        error: () => this.validTicket.valid = false
+      }));
     }
   }
 
   public addTicket(): void {
     const ticketSave = this.validTicket.ticket.ticketId;
     const delayed = this.formGroup.get('ctrlActive').value;
+    const vehicleId = this.data.extend ? this.data.vehicleId : this.formGroup.get('ctrlVehicle').value;
     this.subscription.push(this.ticketService.addTicket(
       this.roleDriver,
-      this.data.vehicleId,
+      vehicleId,
       ticketSave,
       delayed,
       this.data.extend,
-      this.data.fleetManagerId)
+      this.data.fleetManager.id)
       .subscribe({
         next: () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
         complete: () => this.dialogRef.close(true)

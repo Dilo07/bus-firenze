@@ -1,15 +1,16 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { Breadcrumb, FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
+import { Observable, Subscription } from 'rxjs';
 import { InstallerService } from 'src/app/services/installer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DepositType, DocumentObu, DocumentVehicle, Vehicle } from '../../domain/bus-firenze-domain';
+import { DepositType, DocumentObu, DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-deposit',
@@ -36,28 +37,59 @@ import { DepositType, DocumentObu, DocumentVehicle, Vehicle } from '../../domain
 export class DepositComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() public fleetManagerId: number;
+  public fleetManager: FleetManager;
   public vehicleList = new MatTableDataSource<Vehicle>([]);
+  public vehicleListConnect: Observable<Vehicle[]>;
   public displayedColumns = ['id', 'vehicleState', 'plate', 'nat', 'depositDocument', 'requestDocument', 'testing', 'obuId'];
   public src: FileViewer = { type: '', url: '', fileName: '' };
   public search: FormGroup;
   public complete = true;
+  public breadCrumb: Breadcrumb[] = [];
 
   private subscription: Subscription[] = [];
 
   constructor(
+    private router: Router,
     private vehicleService: VehicleService,
     private installerService: InstallerService,
     private snackBar: SnackBar,
     private formBuilder: FormBuilder,
     private dialog: MatDialog
-  ) { }
+  ) {
+    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    if (this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as FleetManager) {
+      this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb;
+    };
+  }
 
   async ngOnInit(): Promise<void> {
     this.search = this.formBuilder.group({
       ctrlSearch: [''],
       ctrlViewAll: [false]
     });
+    this.breadCrumb = [
+      {
+        label: 'MENU.Payments',
+        url: '/payments'
+      },
+    ];
+    if (this.fleetManager) { // ruolo admin
+      this.breadCrumb.push(
+        {
+          label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+          url: '../selection',
+          state: this.fleetManager
+        },
+        {
+          label: 'MENU.Deposit',
+          url: ''
+        });
+    } else { // ruolo fleet manager
+      this.breadCrumb.push({
+        label: 'MENU.Deposit',
+        url: ''
+      });
+    }
     this.getVehicle();
   }
 
@@ -65,80 +97,17 @@ export class DepositComponent implements OnInit {
     this.complete = false;
     const keyword = this.search.get('ctrlSearch').value;
     const viewAll = this.search.get('ctrlViewAll').value;
-    this.subscription.push(this.vehicleService.getVehicleDeposit(viewAll, this.fleetManagerId, keyword).subscribe(
-      vehicles => (this.vehicleList.data = vehicles, this.vehicleList.sort = this.sort, this.vehicleList.paginator = this.paginator),
-      () => this.complete = true,
-      () => this.complete = true
-    ));
+    this.subscription.push(this.vehicleService.getVehicleDeposit(viewAll, this.fleetManager?.id, keyword).subscribe({
+      next: vehicles => (
+        this.vehicleList.data = vehicles,
+        this.vehicleListConnect = this.vehicleList.connect(),
+        this.vehicleList.sort = this.sort,
+        this.vehicleList.paginator = this.paginator),
+      error: () => this.complete = true,
+      complete: () => this.complete = true
+    }));
   }
 
-  public viewDeposit(vehicleId: number, documents: DocumentVehicle[], depositType: DepositType[]): void {
-    this.complete = false;
-    const documentFind: DocumentVehicle = documents.find((document) => depositType.includes(document.type));
-    this.subscription.push(this.vehicleService.getDeposit(vehicleId, documentFind.type, documentFind.fileId)
-      .subscribe({
-        next: (data: HttpResponse<Blob>) => {
-          if (data.body.type === 'application/pdf') { // se è un pdf
-            const objectUrl = window.URL.createObjectURL(data.body);
-            const contentDispositionHeader = data.headers.get('Content-Disposition');
-            const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
-            this.dialog.open(ViewFileModalComponent, {
-              width: '50%',
-              height: '90%',
-              autoFocus: false,
-              data: { url: objectUrl, type: data.body.type, fileName: filename }
-            });
-          } else { // altrimenti se è un'immagine
-            const reader = new FileReader();
-            reader.readAsDataURL(data.body);
-            reader.onload = () => {
-              this.dialog.open(ViewFileModalComponent, {
-                width: '50%',
-                height: '90%',
-                autoFocus: false,
-                data: { url: reader.result, type: data.body.type, fileName: '' }
-              });
-            };
-          }
-        },
-        error: () => this.complete = true,
-        complete: () => this.complete = true
-      }));
-  }
-
-  public viewDocObu(vehicleId: number, documentsObu: DocumentObu): void {
-    this.complete = false;
-    // prende il primo documento
-    this.subscription.push(this.installerService.getDocObu(vehicleId, documentsObu.obuId, documentsObu.type, documentsObu.fileId)
-      .subscribe({
-        next: (data: HttpResponse<Blob>) => {
-          if (data.body.type === 'application/pdf') { // se è un pdf
-            const objectUrl = window.URL.createObjectURL(data.body);
-            const contentDispositionHeader = data.headers.get('Content-Disposition');
-            const filename = contentDispositionHeader.split(';')[1].trim().split('=')[1].replace(/"/g, '');
-            this.dialog.open(ViewFileModalComponent, {
-              width: '50%',
-              height: '90%',
-              autoFocus: false,
-              data: { url: objectUrl, type: data.body.type, fileName: filename }
-            });
-          } else { // altrimenti se è un'immagine
-            const reader = new FileReader();
-            reader.readAsDataURL(data.body);
-            reader.onload = () => {
-              this.dialog.open(ViewFileModalComponent, {
-                width: '50%',
-                height: '90%',
-                autoFocus: false,
-                data: { url: reader.result, type: data.body.type, fileName: '' }
-              });
-            };
-          }
-        },
-        error: () => this.complete = true,
-        complete: () => this.complete = true
-      }));
-  }
 
   public uploadDeposit(vehicleId: number, event: any, depositType: DepositType): void {
     this.complete = false;
@@ -148,11 +117,11 @@ export class DepositComponent implements OnInit {
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
       this.complete = true;
     } else {
-      this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, depositType, file, this.fleetManagerId).subscribe(
-        () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
-        () => this.complete = true,
-        () => { this.getVehicle(); this.complete = true; }
-      ));
+      this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, depositType, file, this.fleetManager?.id).subscribe({
+        next: () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
+        error: () => this.complete = true,
+        complete: () => { this.getVehicle(); this.complete = true; }
+      }));
     }
   }
 

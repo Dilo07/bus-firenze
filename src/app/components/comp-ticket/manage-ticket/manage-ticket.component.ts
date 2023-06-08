@@ -1,55 +1,40 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IAuthenticationService, SnackBar } from '@npt/npt-template';
 import moment from 'moment';
-import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { TicketService } from 'src/app/services/ticket.service';
-import { CompleteFleetManager, Ticket } from '../../domain/bus-firenze-domain';
-import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
+import { CompleteFleetManager, FleetManager, Ticket, Vehicle, VehicleWithoutTicket } from '../../domain/bus-firenze-domain';
+import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { ModalTestTicketComponent } from '../modal-test-ticket/modal-test-ticket.component';
+import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-manage-ticket',
   templateUrl: './manage-ticket.component.html',
-  styles: [`
-  .example-container { margin: 10px; }
-  @media(min-width: 1180px) {
-    .mat-column-expandButton { max-width: 5%}
-    .mat-column-ticketId { max-width: 15%;}
-    .mat-column-lpn { max-width: 10%}
-    .mat-column-ticketStart { max-width: 20%;}
-    .mat-column-ticketEnd { max-width: 20%;}
-    .mat-column-dateSink { max-width: 20%;}
-    .mat-column-actions { max-width: 10%; display: table-column;}
-  }
-  `],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+  styleUrls: ['./manage-ticket.component.css']
 })
-export class ManageTicketComponent implements OnInit {
+export class ManageTicketComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() public fleetManagerId: number;
+  @Input() public fleetManager: FleetManager;
+  @Input() public roleMovyon: boolean;
+  @Output() public callBackButton = new EventEmitter();
   public roleDriver: boolean;
   public viewHistoric = false;
   public dataSource = new MatTableDataSource<Ticket>();
-  public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'lpnNat', 'ticketStart', 'ticketEnd', 'type', 'dateSink', 'actions'];
+  public ticketsConnect: BehaviorSubject<Ticket[]>;
+  public displayedColumns = ['expandButton', 'ticketId', 'lpn', 'lpnNat', 'ticketStart', 'ticketEnd', 'type', 'dateSink'];
   public complete = true;
-  public expandedElement: CompleteFleetManager | null;
   public formGroup: FormGroup;
   public maxDate = moment(moment.now()).toDate();
-  public start: string;
-  public end: string;
+  public vehicles: VehicleWithoutTicket[] = [];
+
+  private subscription: Subscription[] = [];
 
   constructor(
     private ticketService: TicketService,
@@ -59,25 +44,62 @@ export class ManageTicketComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
     this.formGroup = new FormGroup({
-      start: new FormControl(''),
-      end: new FormControl(''),
+      ctrlActive: new FormControl(true),
+      ctrlStart: new FormControl(moment(moment.now()).subtract(1, 'month').toDate()),
+      ctrlEnd: new FormControl(moment(moment.now()).toDate()),
     });
+    await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
     this.getActiveTicket();
+    this.getVehicle();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+    this.dataSource.disconnect();
   }
 
   public getActiveTicket(): void {
+    let start = null;
+    let end = null;
+    if (!this.formGroup.get('ctrlActive').value) {
+      if (!this.formGroup.get('ctrlStart').value || !this.formGroup.get('ctrlEnd').value) { return; }
+      start = moment(this.formGroup.get('ctrlStart').value).format('yyyy-MM-DD');
+      end = moment(this.formGroup.get('ctrlEnd').value).format('yyyy-MM-DD');
+    }
     this.complete = false;
-    this.ticketService.getActiveTicket(this.roleDriver, this.fleetManagerId, this.start, this.end).subscribe(
-      data => {
+    this.subscription.push(this.ticketService.getActiveTicket(this.roleDriver, this.fleetManager?.id, start, end).subscribe({
+      next: (data) => {
         this.dataSource.data = data;
+        this.ticketsConnect = this.dataSource.connect();
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
-      () => this.complete = true,
-      () => this.complete = true
-    );
+      error: () => this.complete = true,
+      complete: () => this.complete = true
+    }));
+  }
+
+  public modalTicket(vehicleId?: number): void {
+    let dataValue = null;
+    if (vehicleId) {
+      // caso di aggiunta ticket ad un ticket già esistente
+      dataValue = { vehicleId: vehicleId, fleetManagerId: this.fleetManager?.id, extend: true };
+    } else {
+      // caso di aggiunta di un ticket ad un vehicle che non ha ticket
+      dataValue = { vehicleList: this.vehicles, fleetManagerId: this.fleetManager?.id, extend: false };
+    }
+    const dialogRef = this.dialog.open(ModalTestTicketComponent, {
+      width: '60%',
+      height: '80%',
+      data: dataValue,
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe(save => {
+      if (save) { this.getActiveTicket(); this.getVehicle(); }
+    });
   }
 
   public removeTicket(ticketId: number, vehicleId: number): void {
@@ -91,60 +113,26 @@ export class ManageTicketComponent implements OnInit {
       confirm => {
         if (confirm) {
           this.complete = false;
-          this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManagerId).subscribe(
-            () => null,
-            () => this.complete = true,
-            () => {
+          this.subscription.push(this.ticketService.removeTicket(ticketId, vehicleId, this.roleDriver, this.fleetManager?.id).subscribe({
+            error: () => this.complete = true,
+            complete: () => {
               this.getActiveTicket();
               this.snackBar.showMessage('TICKET.REMOVE_SUCCESS', 'INFO');
               this.complete = true;
             }
-          );
+          }));
         }
       }
     );
   }
 
-  public modalTicket(vehicleId: number): void {
-    const dialogRef = this.dialog.open(ModalTestTicketComponent, {
-      width: '90%',
-      height: '80%',
-      data: { vehicleId: vehicleId, fleetManagerId: this.fleetManagerId, extend: true }
+  private getVehicle(): void {
+    this.complete = false;
+    this.ticketService.getVehicleNoTicket(this.roleDriver, this.fleetManager?.id).subscribe({
+      next: (data) => this.vehicles = data,
+      error: () => this.complete = true,
+      complete: () => this.complete = true
     });
-    dialogRef.afterClosed().subscribe(save => {
-      if (save) {
-        this.getActiveTicket();
-      }
-    });
-  }
-
-  public changeDate(): void {
-    this.start = '';
-    this.end = '';
-    if (this.formGroup.get('end').value) {
-      this.start = moment(this.formGroup.get('start').value).format('yyyy-MM-DD');
-      this.end = moment(this.formGroup.get('end').value).format('yyyy-MM-DD');
-      this.getActiveTicket();
-    }
-  }
-
-  public switchHistoric(): void {
-    if (this.viewHistoric) {
-      this.resetDate();
-      this.viewHistoric = false;
-      this.getActiveTicket();
-    } else {
-      this.viewHistoric = true;
-    }
-  }
-
-  private resetDate(): void {
-    this.formGroup.patchValue({
-      start: '',
-      end: ''
-    });
-    this.start = '';
-    this.end = '';
   }
 
 }

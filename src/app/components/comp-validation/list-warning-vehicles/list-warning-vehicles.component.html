@@ -1,4 +1,21 @@
-<div class="example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
+<div fxLayout="row wrap" fxLayoutAlign="start">
+    <mat-card *ngFor="let element of vehicleListConnect | async" class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100"
+        fxFlex.gt-lg="20" fxFlex.gt-md="20">
+        <mat-card-content>
+            <mat-card-subtitle>Id: {{element.id}}</mat-card-subtitle>
+            <mat-card-subtitle>{{'VEHICLE.LPN' | translate}}: {{element.lpn}}</mat-card-subtitle>
+            <mat-card-subtitle>{{'VEHICLE.LPN_NAT' | translate}}:
+                <span [ngClass]="'fi fi-' + element.lpnNat.toLowerCase()"></span>
+            </mat-card-subtitle>
+            <mat-card-subtitle>Obu Id: {{element.obuId}}</mat-card-subtitle>
+            <mat-card-subtitle>{{'VEHICLE.DATE_ASSOCIATION' | translate}}:
+                {{ element.associationDate.dateTime | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+<!-- <div class="example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc">
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> id </mat-header-cell>
@@ -43,4 +60,4 @@
         <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-</div>
+</div> -->

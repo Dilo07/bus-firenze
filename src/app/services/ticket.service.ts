@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Ticket } from '../components/domain/bus-firenze-domain';
+import { Ticket, VehicleWithoutTicket } from '../components/domain/bus-firenze-domain';
 import { activeTicket } from './mokup/getTicket';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class TicketService {
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
 
-  getVehicleNoTicket(isDriver: boolean, fleetManagerId?: number): Observable<Ticket[]> {
+  getVehicleNoTicket(isDriver: boolean, fleetManagerId?: number): Observable<VehicleWithoutTicket[]> {
     let url = '';
     if (isDriver) {
       url = '/' + 'driver';
@@ -24,7 +24,7 @@ export class TicketService {
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
-    return this.http.get<Ticket[]>(this.apiUrl + url + '/ticket/vehicles/')
+    return this.http.get<VehicleWithoutTicket[]>(this.apiUrl + url + '/ticket/vehicles/')
       .pipe(catchError(err => { throw err; }));
   }
 

@@ -1,17 +1,25 @@
-<div fxLayout="column" fxFlexOffset="2">
+<mat-card>
     <mat-card-title>{{'MENU.Documents' | translate}}</mat-card-title>
-    <div fxLayout="row wrap" fxLayoutAlign="center center">
-        <ng-container *ngFor="let document of modules; let i = index">
-            <mat-card [style.background-color]="colors[i%colors.length]" [ngClass]="classImages[i%classImages.length]"
-                fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-card-content fxLayout="column" fxLayoutAlign="center center" style="padding: 30px;">
-                    <h4>{{document.name}}</h4>
-                    <ng-container>
-                        <button mat-button class="white-button" [attr.i18nKey]="'FLEET-MANAGER.DOWNLOAD_TEMPLATE'"
-                            (click)="download(document.path)">{{'FLEET-MANAGER.DOWNLOAD_TEMPLATE' | translate}}</button>
-                    </ng-container>
-                </mat-card-content>
-            </mat-card>
-        </ng-container>
-    </div>
-</div>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-button class="actionButtons" (click)="download()" [disabled]="documentSelect.length === 0">scarica selezione</button>
+        </div>
+        <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+        <div fxLayout="row wrap" fxLayoutAlign="center center">
+            <ng-container *ngFor="let document of modules; let i = index">
+                <mat-card class="mat-card-movyon-blue" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100"
+                    fxFlex="100">
+                    <mat-card-subtitle fxLayout="column">
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <div>{{document.name}}</div>
+                            <mat-checkbox color="white" (change)="select($event, document.path)"></mat-checkbox>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="end" style="padding-top: 20px;">
+                            <mat-icon style="cursor: pointer;" (click)="download(document.path)"><span class="icon-Download"></span></mat-icon>
+                        </div>
+                    </mat-card-subtitle>
+                </mat-card>
+            </ng-container>
+        </div>
+    </mat-card-content>
+</mat-card>

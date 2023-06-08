@@ -3,13 +3,12 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SnackBar } from '@npt/npt-template';
-import { Subscription } from 'rxjs';
+import { Breadcrumb, SnackBar } from '@npt/npt-template';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
-import { Driver } from '../../domain/bus-firenze-domain';
+import { Driver, FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from './modal-association-drivers-vehicles/association-drivers-vehicles.component';
 
@@ -31,14 +30,13 @@ import { AssociationDriversVehiclesComponent } from './modal-association-drivers
   ]
 })
 export class DriversComponent implements OnInit, OnDestroy {
-  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
   public search: FormGroup;
-  public fleetManagerId: number;
+  public fleetManager: FleetManager;
   public dataSource = new MatTableDataSource<Driver>();
-  public displayedColumns = ['name', 'surname', 'e-mail', 'mobile', 'actions'];
+  public driverListConnect: BehaviorSubject<Driver[]>;
+  public breadCrumb: Breadcrumb[];
   public complete = true;
 
   private subscription: Subscription[] = [];
@@ -51,7 +49,7 @@ export class DriversComponent implements OnInit, OnDestroy {
     private driverService: DriverService,
     private formBuilder: FormBuilder,
     private media: MediaMatcher) {
-    this.fleetManagerId = this.router.getCurrentNavigation()?.extras.state?.fleetManagerId as number;
+    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
     this.desktopQuery = this.media.matchMedia('(min-width: 768px)'); // se è un tablet o schermo grande
   }
 
@@ -60,6 +58,23 @@ export class DriversComponent implements OnInit, OnDestroy {
       ctrlSearch: [''],
     });
     this.getDrivers();
+    if (this.fleetManager) {
+      this.breadCrumb = [
+        {
+          label: 'Fleet manager',
+          url: '/manage'
+        },
+        {
+          label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+          url: '../selection-card',
+          state: { fleetManager: this.fleetManager }
+        },
+        {
+          label: 'DRIVERS.TITLE',
+          url: ''
+        }
+      ];
+    }
   }
 
   ngOnDestroy(): void {
@@ -72,10 +87,10 @@ export class DriversComponent implements OnInit, OnDestroy {
     this.complete = false;
     const keyword = this.search.get('ctrlSearch').value;
     this.subscription.push(
-      this.driverService.getDrivers(keyword, this.fleetManagerId).subscribe({
+      this.driverService.getDrivers(keyword, this.fleetManager?.id).subscribe({
         next: (data) => {
           this.dataSource.data = data;
-          this.dataSource.sort = this.sort;
+          this.driverListConnect = this.dataSource.connect();
           this.dataSource.paginator = this.paginator;
         },
         error: () => this.complete = true,
@@ -92,7 +107,7 @@ export class DriversComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe((confirm) => {
       if (confirm) {
-        this.driverService.deleteDriver(idDriver, this.fleetManagerId).subscribe({
+        this.driverService.deleteDriver(idDriver, this.fleetManager?.id).subscribe({
           next: () => this.snackBar.showMessage('DRIVERS.DELETE_SUCCESS', 'INFO'),
           complete: () => {
             this.getDrivers();
@@ -105,12 +120,12 @@ export class DriversComponent implements OnInit, OnDestroy {
 
   public associationVehicle(idDriver: number): void {
     this.subscription.push(
-      this.driverService.getVehiclesByDriver(idDriver, this.fleetManagerId).subscribe(
+      this.driverService.getVehiclesByDriver(idDriver, this.fleetManager?.id).subscribe(
         vehicles => {
           const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
             width: '80%',
             height: this.desktopQuery.matches ? '60%' : '80%',
-            data: { driverVehicle: vehicles, idDriver: idDriver, fleetManagerId: this.fleetManagerId },
+            data: { driverVehicle: vehicles, idDriver: idDriver, fleetManagerId: this.fleetManager?.id },
             autoFocus: false
           });
         }));

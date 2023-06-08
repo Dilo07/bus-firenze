@@ -38,9 +38,8 @@
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let element" style="text-align: end;">
-                <button mat-icon-button matTooltip="{{'PENALTIES.ADD' | translate}}" [attr.i18nKey]="'PENALTIES.ADD'"
-                    (click)="modalPenal(element.id, element.fleetManagerId)">
-                    <mat-icon><span class="icon-edit"></span></mat-icon>
+                <button mat-button style="color: #1C3775; margin: 10px;" (click)="modalPenal(element.id, element.fleetManagerId)">
+                    {{'PENALTIES.ADD' | translate}}
                 </button>
             </mat-cell>
         </ng-container>
