@@ -1,11 +1,13 @@
 <mat-card fxLayout="column" fxLayoutGap="10px">
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
         <mat-card-title *ngIf="!data && !register">
-            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb" style="height: 1px;"></lib-breadcrumb>
+            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+                style="height: 1px;"></lib-breadcrumb>
             {{'FLEET-MANAGER.MESSAGE_NEW' | translate}}
         </mat-card-title>
         <mat-card-title *ngIf="data && !roleFleetManager">
-            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb" style="height: 1px;"></lib-breadcrumb>
+            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+                style="height: 1px;"></lib-breadcrumb>
             {{'FLEET-MANAGER.MESSAGE_EDIT' | translate}}</mat-card-title>
         <mat-card-title *ngIf="data && roleFleetManager">
             {{'FLEET-MANAGER.MESSAGE_VIEW' | translate}}</mat-card-title>
@@ -13,7 +15,8 @@
             {{'FLEET-MANAGER.REGISTRATION' | translate}}
         </mat-card-title>
     </div>
-    <app-expansion-info (callForm)="downloadTemplate()" *ngIf="!data"></app-expansion-info> <!-- component expansion-info -->
+    <app-expansion-info (callForm)="downloadTemplate()" *ngIf="!data"></app-expansion-info>
+    <!-- component expansion-info -->
     <mat-progress-bar mode="indeterminate" *ngIf="!completeUp"></mat-progress-bar>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
         <form [formGroup]="formGroup" fxLayout="column">
@@ -109,14 +112,15 @@
                             <mat-label>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</mat-label>
                             <input matInput type="text" formControlName="ctrlpIva" maxlength="11"
                                 [readonly]="data && roleFleetManager" [required]="isEuropeNat"
-                                (focusout)="pivaValidator()">
+                                (keydown.space)="$event.preventDefault()" (focusout)="pivaValidator()">
                             <mat-error> {{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
                             <mat-progress-bar mode="indeterminate" *ngIf="!completePiva"></mat-progress-bar>
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
                             fxFlex.gt-md="25" [style.visibility]="isEuropeNat ? '' : 'hidden'">
                             <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="ctrlCF" (focusout)="pivaOrFcValidator()"
+                            <input matInput type="text" formControlName="ctrlCF"
+                                (keydown.space)="$event.preventDefault()" (focusout)="pivaOrFcValidator()"
                                 [required]="isEuropeNat" [readonly]="data && roleFleetManager"
                                 [maxlength]="userSel === fleetType.dittaIndividuale ? 16 : 11">
                             <a matSuffix mat-icon-button *ngIf="userSel === fleetType.ente"
@@ -141,7 +145,8 @@
                                 [maxlength]="userSel === fleetType.aziendaPrivata ? 7 : userSel === fleetType.pubblicaAmm ? 6 : null"
                                 [readonly]="data && roleFleetManager">
                             <mat-error>{{(userSel === fleetType.aziendaPrivata ?
-                                'FLEET-MANAGER.INSERT_DEST' : 'FLEET-MANAGER.INSERT_UNIQUECODE') | translate}}</mat-error>
+                                'FLEET-MANAGER.INSERT_DEST' : 'FLEET-MANAGER.INSERT_UNIQUECODE') |
+                                translate}}</mat-error>
                         </mat-form-field>
                     </div>
                     <div fxLayout="row wrap" fxLayoutGap="20px">
