@@ -49,8 +49,8 @@ export class RealTimeComponent {
   public onMapReady(event: any): void {
     this.map = event;
     this.complete = false;
-    /* this.getGeom(); */
-    this.getTrip();
+    this.getGeom();
+    /* this.getTrip(); */
     this.setMapControls();
   }
 
