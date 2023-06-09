@@ -34,7 +34,7 @@ export class FleetManagerComponent implements OnInit {
   public breadCrumb: Breadcrumb[] = [];
 
   private offset = 0;
-  private limit = 10;
+  private limit = 6;
   private columnOrder: ColumnSort = { active: 'id', direction: 1 };
   private endTable = false;
   private subscription: Subscription[] = [];

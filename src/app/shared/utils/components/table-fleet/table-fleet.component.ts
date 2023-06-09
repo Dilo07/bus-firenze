@@ -37,7 +37,7 @@ export class TableFleetComponent implements OnInit {
 
   private columnOrder: ColumnSort = { active: 'id', direction: 1 };
   private offset = 0;
-  private limit = 10;
+  private limit = 6;
   private subscription: Subscription[] = [];
 
   constructor(

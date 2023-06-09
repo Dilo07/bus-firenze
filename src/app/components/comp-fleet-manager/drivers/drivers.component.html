@@ -137,8 +137,8 @@
 							<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 						</mat-table>
 					</div> -->
-			<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
-				[pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+			<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="6"
+				[pageSizeOptions]="[6, 12, 24]"></mat-paginator>
 			<div *ngIf="dataSource.data.length === 0 && complete"> {{'DRIVERS.NO_DATA' | translate}}</div>
 		</div>
 	</mat-card-content>

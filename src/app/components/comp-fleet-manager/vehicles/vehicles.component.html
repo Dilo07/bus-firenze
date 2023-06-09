@@ -161,8 +161,8 @@
 					</mat-card-content>
 				</mat-card>
 			</div>
-			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="9"
-				[pageSizeOptions]="[6, 9, 12]"></mat-paginator>
+			<mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="6"
+				[pageSizeOptions]="[6, 12, 24]"></mat-paginator>
 			<div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
 			<div #stat>
 				<app-panel-statistic *ngIf="complete && vehicleList.data.length > 0"

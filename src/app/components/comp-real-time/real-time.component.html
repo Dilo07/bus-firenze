@@ -1,8 +1,8 @@
 <mat-card>
 	<div fxLayout="row wrap" fxLayoutAlign="space-between">
 		<mat-card-title>
-			<lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb" style="height: 1px;"
-            *ngIf="fleetManager"></lib-breadcrumb>
+			<lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+				style="height: 1px;" *ngIf="fleetManager"></lib-breadcrumb>
 			Real Time
 		</mat-card-title>
 	</div>
@@ -54,8 +54,8 @@
 				</mat-form-field>
 				<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
 					<ng-container>
-						<button mat-button class="actionIconButtons"
-							[attr.i18nKey]="'REAL-TIME.REFRESH'" (click)="getTrip()">
+						<button mat-button class="actionIconButtons" [attr.i18nKey]="'REAL-TIME.REFRESH'"
+							(click)="getTrip()">
 							{{'REAL-TIME.REFRESH' | translate}}
 							<mat-icon>refresh</mat-icon>
 						</button>
@@ -64,8 +64,8 @@
 							{{'REAL-TIME.STOP' | translate}}
 							<mat-icon>stop</mat-icon>
 						</button>
-						<button mat-button class="actionIconButtons" [disabled]="stop"
-							[attr.i18nKey]="'REAL-TIME.PLAY'" (click)="stopPlayRefresh()">
+						<button mat-button class="actionIconButtons" [disabled]="stop" [attr.i18nKey]="'REAL-TIME.PLAY'"
+							(click)="stopPlayRefresh()">
 							{{'REAL-TIME.PLAY' | translate}}
 							<mat-icon>play_arrow</mat-icon>
 						</button>
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 			<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-			<mat-tab-group mat-align-tabs="center">
+			<!-- <mat-tab-group mat-align-tabs="center">
 				<mat-tab label="{{'REAL-TIME.MAP' | translate}}">
 					<mat-card fxFlex.gt-lg="100" fxFlex.gt-md="100" fxFlex.gt-xs="100" fxFlex="100">
 						<lib-npt-map [zoom]=15 [center]="center" [usePopUp]=true [typeEvent]="'click'"
@@ -89,7 +89,31 @@
 						</mat-card-content>
 					</mat-card>
 				</mat-tab>
-			</mat-tab-group>
+			</mat-tab-group> -->
+			<div fxLayout="row">
+				<div fxFlex="20" [@slideInOut]="detailsBar">
+					<span fxLayoutAlign="end">
+						<button mat-icon-button (click)="detailsBar = detailsBar === 'on' ? 'off' : 'on'">
+							<mat-icon>{{detailsBar === 'on' ? 'close' : 'chevron_right'}}</mat-icon>
+						</button>
+					</span>
+					<div fxLayout="column" *ngIf="detailsBar  === 'on'">
+						<ng-container *ngFor="let trip of vehicleTrip">
+							<mat-card class="mat-card-movyon card-real-time">
+								<mat-card-content>
+									<mat-card-subtitle><b>OBU ID: {{trip.obuId}}</b></mat-card-subtitle>
+									<mat-card-subtitle><b>{{'COMMON.DATE.START' | translate}}: </b>{{trip.start | date : 'dd/MM/YYYY HH:mm'}}</mat-card-subtitle>
+									<mat-card-subtitle><b>{{'COMMON.DATE.END' | translate}}: </b>{{trip.end | date : 'dd/MM/YYYY HH:mm'}}</mat-card-subtitle>
+									<mat-card-subtitle><b>{{'REAL-TIME.TICKET' | translate}}: </b>{{trip.ticketNumber}}</mat-card-subtitle>
+								</mat-card-content>
+							</mat-card>
+						</ng-container>
+					</div>
+				</div>
+				<lib-npt-map fxFlex="80" [@maxWidth]="detailsBar" [zoom]=15 [center]="center" [usePopUp]=true [typeEvent]="'click'"
+					[layerToCheck]="layersPopup" (mapReady)="onMapReady($event)">
+				</lib-npt-map>
+			</div>
 		</div>
 	</mat-card-content>
 </mat-card>

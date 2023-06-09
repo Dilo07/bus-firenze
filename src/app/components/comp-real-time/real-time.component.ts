@@ -12,11 +12,53 @@ import { LiveStreamService } from 'src/app/services/live-stream.service';
 import { FirenzeMapUtils } from 'src/app/shared/utils/map/Firenze-map.utils';
 import { TIMEREFRESH } from '../domain/bus-firenze-constants';
 import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-real-time',
   templateUrl: './real-time.component.html',
-  styles: [``],
+  styles: [`
+  .card-real-time {
+    margin: 2px;
+  }
+  `],
+  animations: [
+    trigger('slideInOut', [
+      state(
+        'on',
+        style({
+          'zIndex': '10',
+          'max-width': '20%',
+          'box-shadow': '0px 4px 16px rgba(0, 0, 0, 0.25)'
+        })
+      ),
+      state(
+        'off',
+        style({
+          'max-width': '2%',
+          'box-shadow': '0px 4px 16px rgba(0, 0, 0, 0.25)'
+        })
+      ),
+      transition('on => off', animate('500ms')),
+      transition('off => on', animate('500ms')),
+    ]),
+    trigger('maxWidth', [
+      state(
+        'on',
+        style({
+          'max-width': '80%',
+        })
+      ),
+      state(
+        'off',
+        style({
+          'max-width': '100%',
+        })
+      ),
+      transition('on => off', animate('500ms')),
+      transition('off => on', animate('500ms')),
+    ])
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RealTimeComponent {
@@ -31,6 +73,7 @@ export class RealTimeComponent {
   public times: RefreshInterface[] = TIMEREFRESH;
   public layersPopup = [FirenzeMapUtils.layerEnum.POINT_REAL_TIME];
   public breadCrumb: Breadcrumb[] = [];
+  public detailsBar: 'on' | 'off' = 'on';
 
   private subscription: Subscription[] = [];
   private geometry: Geometry[] | GeoJSON[] = [];
@@ -49,8 +92,8 @@ export class RealTimeComponent {
   public onMapReady(event: any): void {
     this.map = event;
     this.complete = false;
-    this.getGeom();
-    /* this.getTrip(); */
+    /* this.getGeom(); */
+    this.getTrip();
     this.setMapControls();
   }
 

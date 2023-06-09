@@ -26,8 +26,8 @@ export class LiveStreamService {
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
-    return this.http.get<VehicleTripPersistence[]>(this.apiUrl + '/live' + url + '/inner')
-      .pipe(catchError(err => { throw err; }));
-    /* return of(this.getVehicleTrip); */
+   /*  return this.http.get<VehicleTripPersistence[]>(this.apiUrl + '/live' + url + '/inner')
+      .pipe(catchError(err => { throw err; })); */
+    return of(this.getVehicleTrip);
   }
 }
