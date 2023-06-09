@@ -1,7 +1,35 @@
 <mat-card>
+	<mat-card-title>
+		<lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+			style="height: 1px;"></lib-breadcrumb>
+		{{(depositWarning ? 'MENU.Deposit-valid' : 'MENU.Vehicle-valid') | translate}}
+	</mat-card-title>
 	<mat-card-content fxLayout="column" fxLayoutGap="20px">
 		<mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-		<div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
+		<ng-container *ngFor="let element of fleetListConnect | async">
+			<mat-card class="mat-card-movyon-blue">
+				<mat-card-content fxLayout="row" fxLayoutGap="20px">
+					<span> <b>Id:</b> {{element.id}} </span>
+					<span> <b>{{'FLEET-MANAGER.SURNAME' | translate}}:</b> {{element.surname}} </span>
+					<span> <b>{{'FLEET-MANAGER.NAME' | translate}}:</b> {{element.name}} </span>
+					<span> <b>{{'FLEET-MANAGER.CELL' | translate}}:</b> {{element | findContactValue: 1}}</span>
+					<span> <b>e-mail:</b> {{element | findContactValue: 3}}</span>
+				</mat-card-content>
+			</mat-card>
+			<ng-container *ngIf="depositWarning else verifyVehicles">
+				<app-warning-vehicles [idFleet]="element.id"></app-warning-vehicles>
+			</ng-container>
+			<ng-template #verifyVehicles>
+				<app-verify-vehicles
+					(callRefreshTableFleet)="callFleetDeposit()"
+					(viewDeposit)="viewDeposit($event)"
+					(viewCertificate)="viewCertificate($event)"
+					(updateCertificate)="uploadCertificate($event.vehicleId, $event.event, element.id)"
+					[disableViewPdf]="complete" [fleet]="element">
+				</app-verify-vehicles>
+			</ng-template>
+		</ng-container>
+		<!-- <div class="mat-elevation-z8 example-container" [style.display]="dataSource.data.length === 0 ? 'none' : ''">
 			<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows matSortActive="id"
 				matSortDirection="asc">
 				<ng-container matColumnDef="expandButton">
@@ -57,7 +85,6 @@
 					</mat-cell>
 				</ng-container>
 
-				<!--Collapse div-->
 				<ng-container matColumnDef="expandedDetail">
 					<mat-cell *matCellDef="let element">
 						<div class="example-element-detail"
@@ -67,7 +94,6 @@
 									<ng-container *ngIf="depositWarning else verifyVehicles">
 										<app-warning-vehicles *ngIf="expandedElement === element"
 											[idFleet]="expandedElement.id"></app-warning-vehicles>
-										<!--component-->
 									</ng-container>
 									<ng-template #verifyVehicles>
 										<app-verify-vehicles *ngIf="expandedElement === element"
@@ -77,7 +103,6 @@
 											(updateCertificate)="uploadCertificate($event.vehicleId, $event.event, element.id)"
 											[disableViewPdf]="complete" [fleet]="expandedElement">
 										</app-verify-vehicles>
-										<!--component-->
 									</ng-template>
 								</span>
 							</div>
@@ -90,9 +115,8 @@
 				<mat-row [style.display]="expandedElement && expandedElement.id === row.id ? '' : 'none'"
 					*matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
 			</mat-table>
-		</div>
-		<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
-			[pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+		</div>-->
+		<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="2"></mat-paginator>
 		<div *ngIf="dataSource.data.length === 0">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>
 	</mat-card-content>
 </mat-card>

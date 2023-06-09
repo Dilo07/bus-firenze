@@ -2,7 +2,7 @@
   "keycloak_url": "https://n4800038.gruppo.autostrade.it",
   "keycloak_realm": "bus-firenze-dev-realm",
   "keycloak_clientId": "bus-firenze-locale-id",
-  "be_url": "https://n4800035.gruppo.autostrade.it/busfirenze-services",
+  "be_url": "http://localhost:9093",
   "context_app": "",
   "register_url": "#/register",
   "static_page": false,
@@ -34,10 +34,9 @@
       "nameShop": "Web Korner",
       "mail": "helpdesk@webkorner.it",
       "mobileNumber": "055 0981016",
-      "contactRangeStart": "08:30",
-      "contactRangeEnd": "18:00",
+      "contactRange": "Lun - Ven, 08:30 - 18:30",
       "address": "via Fratelli Alinari, 80, 52025 Montevarchi AR"
-    }
+    }    
   ],
   "modules": [
     {

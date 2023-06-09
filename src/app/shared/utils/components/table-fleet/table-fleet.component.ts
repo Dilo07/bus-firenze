@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ColumnSort, FleetManager } from 'src/app/components/domain/bus-firenze-domain';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 
@@ -23,13 +23,13 @@ import { FleetManagerService } from 'src/app/services/fleet-manager.service';
   ]
 })
 export class TableFleetComponent implements OnInit {
-  @Output() public callManageTicket = new EventEmitter<number>();
+  @Output() public callManageTicket = new EventEmitter<FleetManager>();
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public dataSource = new MatTableDataSource<FleetManager>();
   public fleetManagerList: FleetManager[] = [];
-  public displayedColumns = ['id', 'name', 'surname', 'e-mail'];
+  public fleetanagersConnect: Observable<FleetManager[]>;
   public complete = true;
   public search: FormGroup;
 
@@ -52,8 +52,8 @@ export class TableFleetComponent implements OnInit {
     this.callGetFleetManager();
   }
 
-  public manageTicket(fleetManagerId: number): void {
-    this.callManageTicket.emit(fleetManagerId);
+  public selectFleet(fleetManager: FleetManager): void {
+    this.callManageTicket.emit(fleetManager);
   }
 
   public callGetFleetManager(): void {
@@ -78,6 +78,7 @@ export class TableFleetComponent implements OnInit {
               this.paginator.length = ((this.offset + 1) * this.limit) + 1;
             }
             this.dataSource.data = data;
+            this.fleetanagersConnect = this.dataSource.connect();
           },
           error: () => this.complete = true,
           complete: () => { this.complete = true; this.unSubscribe(); }

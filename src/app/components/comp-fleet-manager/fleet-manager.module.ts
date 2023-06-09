@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NptMapModule } from '@npt/npt-map';
-import { DebounceClickModule, MaterialModule, ViewFileComponentsModule } from '@npt/npt-template';
+import { BreadcrumbNptModule, DebounceClickModule, MaterialModule, ViewFileComponentsModule } from '@npt/npt-template';
 import { MatSelectFilterModule } from 'mat-select-filter';
 import { PipesModule } from 'src/app/shared/utils/pipes/pipes.module';
 import { Ng2telinputDirective } from '../directive/ng2telinput.directive';
@@ -30,6 +30,7 @@ import { TripStatisticComponent } from './vehicles/trip-statistic/trip-statistic
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { FormFieldPersonComponent } from './form-fleet-manager/field-person/form-field-person.component';
 import { ModalCheckComponent } from './form-fleet-manager/modal-check/modal-check.component';
+import { SelectionCardsPageComponent } from './selection-cards-page/selection-cards-page.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { ModalCheckComponent } from './form-fleet-manager/modal-check/modal-chec
     ExpansionInfoVehicleComponent,
     FleetDocumentsComponent,
     FormFieldPersonComponent,
-    ModalCheckComponent
+    ModalCheckComponent,
+    SelectionCardsPageComponent
   ],
   imports: [
     CommonModule,
@@ -69,6 +71,7 @@ import { ModalCheckComponent } from './form-fleet-manager/modal-check/modal-chec
     TranslateModule,
     NptMapModule,
     FleetManagerRoutingModule,
+    BreadcrumbNptModule,
     PipesModule
   ],
   exports: [FleetManagerComponent]

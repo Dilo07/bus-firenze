@@ -1,37 +1,53 @@
 <mat-card>
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
-        <mat-card-title>{{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
+        <mat-card-title>
+            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb" style="height: 1px;"></lib-breadcrumb>
+            {{'FLEET-MANAGER.VALID_DOCUMENTS' | translate}}
         </mat-card-title>
         <span>
-            <button mat-button class="backButton" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.BACK'">
+            <button mat-button class="whiteButtons" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.BACK'">
                 {{'COMMON.ACTION.BACK' | translate}}
             </button>
         </span>
     </div>
     <mat-card-content fxLayout="column" fxLayoutAlign="center">
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-        <span fxLayoutAlign="center">
-            <mat-list role="list">
-                <mat-list-item role="listitem" *ngFor="let document of documents">
-                    <div matLine>
-                        {{'FLEET-MANAGER.' + document.type | translate}}
-                        <button mat-icon-button matTooltip="{{'OBU.VIEW_FILE' | translate}}" [disabled]="!complete"
-                            [attr.i18nKey]="'OBU.VIEW_FILE'" (click)="viewDocument(document.fileId)">
-                            <mat-icon><span class="icon-document_search"></span></mat-icon>
-                        </button>
-                        <button mat-icon-button *ngIf="!document.valid else viewDate"
-                            matTooltip="{{'FLEET-MANAGER.VALID' | translate}}" [attr.i18nKey]="'FLEET-MANAGER.VALID'"
-                            [disabled]="!complete" (click)="validDocument(document.fileId)">
-                            <mat-icon><span class="icon-rule"></span></mat-icon>
-                        </button>
-                        <ng-template #viewDate>
-                            <span style="color: green;">
-                                {{('FLEET-MANAGER.VALID_AT' | translate) + (document.valid | date : 'dd/MM/YYYY')}}
-                            </span>
-                        </ng-template>
+        <mat-grid-list cols="3" rowHeight="7:1">
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile> <mat-card-title> Documenti caricati </mat-card-title> </mat-grid-tile>
+            <mat-grid-tile> <mat-card-title>Stato</mat-card-title> </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="3" rowHeight="7:1">
+            <ng-container *ngFor="let document of fleetManager.documents">
+                <mat-grid-tile>
+                    <h4 style="color: #1C3775;">{{'FLEET-MANAGER.' + document.type | translate}}</h4>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <ng-container *ngIf="document.valid else invalid">
+                        <img src="assets/images/icon_pdf_active.png" alt="pdf"
+                            (click)="complete && viewDocument(document.fileId)" style="cursor: pointer;">
+                        <span>{{document.fileName}}</span>
+                    </ng-container>
+                    <ng-template #invalid>
+                        <img src="assets/images/icon_pdf_disabled.png" alt="pdfDisabled">
+                    </ng-template>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div [style.background-color]="document.valid ? '#4CAE50' : '#FFBF07'" class="status">
+                        {{document.valid ? 'ricevuto' : 'in attesa di invio'}}
                     </div>
-                </mat-list-item>
-            </mat-list>
-        </span>
+                    <span *ngIf="document.valid else noValid" style="color: #4CAE50; margin: 10px;">
+                        {{('FLEET-MANAGER.VALID_AT' | translate) + (document.valid | date : 'dd/MM/YYYY')}}
+                    </span>
+                    <ng-template #noValid>
+                        <button *ngIf="!document.valid" mat-button class="whiteButtons" style="margin: 10px;"
+                            [attr.i18nKey]="'FLEET-MANAGER.CONFIRM_DOCUMENT'" [disabled]="!complete"
+                            (click)="validDocument(document.fileId)">
+                            {{'FLEET-MANAGER.CONFIRM_DOCUMENT' | translate}}
+                        </button>
+                    </ng-template>
+                </mat-grid-tile>
+            </ng-container>
+        </mat-grid-list>
     </mat-card-content>
 </mat-card>

@@ -25,7 +25,7 @@ export class AssociationDriversVehiclesComponent implements OnDestroy {
     private driverService: DriverService,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<AssociationDriversVehiclesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { driverVehicle: DriverVehicle[]; idVehicle: number; idDriver: number; fleetManagerId: number }
+    @Inject(MAT_DIALOG_DATA) public data: { driverVehicle: DriverVehicle[]; idVehicle: number; idDriver: number; fleetManagerId?: number }
   ) { }
 
   ngOnDestroy(): void {

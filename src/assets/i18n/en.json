@@ -12,6 +12,7 @@
         "TITLE-VALID-FLEET": "Fleet Manager validation",
         "TITLE-VALID-VEHICLE": "Vehicles validation",
         "TITLE-VEHICLE": "Vehicles",
+        "TITLE-DRIVERS": "Drivers",
         "TITLE-TEST": "Test",
         "TITLE-APPOINTMENTS": "Add appointment",
         "VALID-FLEET": "Check and approve a Fleet Manager that performed the self-registration procedure.",
@@ -22,6 +23,7 @@
         "ADD-OBU": "Assign an OBU to a vehicle belonging to a Fleet Manager; bail was previously paid",
         "ADD-TICKET": "Assign a Ticket sold by SaS to a vehicle belonging to a Fleet Manager with installed OBU.",
         "MANAGE-TICKET": "Manage Tickets sold by SaS assigned to your vehicles.",
+        "MANAGE-DRIVERS": "Manage your drivers.",
         "Test": "Check the inspection documents of vehicles. Perform the inspection procedure on an installed OBU.",
         "APPOINTMENTS": "Insert a new appointment to install an OBU. View main data of Fleet Manager owning the vehicles on which OBUs should be installed.",
         "GO": "Go"
@@ -36,7 +38,7 @@
         "Billing": "Billing",
         "Penalties": "Penalties",
         "Validation": "Validation",
-        "Valid-Fleet-manager": "Valid Fleet manager",
+        "Valid-Fleet-manager": "Valid Fleet Manager",
         "Vehicle-valid": "Valid vehicles",
         "Deposit-valid": "Deposit to insert",
         "User-Fleet": "Fleet",
@@ -101,6 +103,7 @@
         "STEP-4": "Upload the scan of the completed and signed application form using the button ",
         "STEP-5": "To complete the registration, this form requires the verification of the mobile number by sending an OTP code.",
         "INITIAL MESSAGE": "Insert a new Fleet Manager or search for an existing one",
+        "ADD_NEW": "Add new",
         "MESSAGE_NEW": "Insert the data of new Fleet Manager",
         "MESSAGE_VIEW": "Fleet manager information",
         "MESSAGE_EDIT": "Edit the data of the Fleet Manager",
@@ -166,8 +169,10 @@
         "MOBILE_VERIFIED": "mobile verified",
         "DOWNLOAD_TEMPLATE": "Download file",
         "DOCUMENT_CONFIRM": "Are you sure to valid this documents?",
-        "VALID_DOCUMENTS": "Receipt paper documents",
+        "VALID_DOCUMENTS": "Paper documents",
+        "CONFIRM_DOCUMENT": "Document receipt confirmation",
         "VALID_AT": "Validate at ",
+        "NO_DOCUMENT": "No document presents",
         "reqForm": "Membership form",
         "idDoc": "Identity card",
         "comReg": "Commerce registration",
@@ -195,6 +200,7 @@
         "ENTE": "Company"
     },
     "VEHICLE": {
+        "DOCUMENT": "Vehicle",
         "TITLE": "Vehicles",
         "NEW": "New vehicle",
         "EDIT": "Edit vehicle",
@@ -221,6 +227,7 @@
         "DISABLED": "Disabled at ",
         "LPN": "Plate",
         "LPN_NAT": "Country",
+        "STATUS": "Status vehicle",
         "EURO-CLASS": "EuroClass",
         "EUROPEAN-GROUP": "Category",
         "EXPIRED": "Vehicle expired ",
@@ -232,6 +239,9 @@
         "AXIS": "Axis Number",
         "WEIGHT": "Total mass fully loaded (Kg)",
         "STATE": "Vehicle state",
+        "STATE_ACTIVE": "Active",
+        "STATE_TEMP": "Expiring",
+        "STATE_EXP": "Expired",
         "DELETED": "Deleted",
         "ACTIVE": "Active",
         "REFRESH_EXPDATE": "Refresh expiry date",
@@ -256,8 +266,9 @@
         "UPLOAD_DEP": "Upload deposit file",
         "UPLOAD_SUCC": "Upload document correctly",
         "TEXTLIB": "* The certificate document is mandatory for new vehicle",
-        "TEXTIBAN": "* To make the caution deposit, is request a payment on follow IBAN: ",
+        "TEXTIBAN": "To make the caution deposit, is request a payment on follow IBAN: ",
         "TEXTCAUSAL": "- Causal ZTLBUS caution deposit for plate (vehicle plate)",
+        "TEXTREQUEST": "Attach the refund deposit request",
         "TYPE_DOC": "Document type",
         "RIC_DEPOSIT": "Receive deposit",
         "deposit": "Receive deposit",
@@ -270,7 +281,7 @@
         "DEPOSIT_REQ": "Attach deposit request",
         "VIEW_DEPOSIT_REQ": "View deposit request",
         "REMOVE_TEST": "Remove test",
-        "VIEW_TEST": "Visualizza collaudo",
+        "VIEW_TEST": "View test",
         "VIEW_REMOBU": "view remove test",
         "VALID_CONFIRM": "Are you sure to validate this vehicle?",
         "VALID_SUCCESS": "Vehicle validate correctly",
@@ -335,11 +346,11 @@
         "ERRORVEHICLE": "Expired vehicles or without ticket",
         "NO_DATA": "No vehicle in area",
         "REFRESH": "Refresh",
-        "STOP": "Stop refresh",
-        "PLAY": "Play refresh",
+        "STOP": "Stop",
+        "PLAY": "Play",
         "MAP": "Real-Time Map",
         "TABLE": "Real-Time Table",
-        "SELECT": "Select Time of Map refresh",
+        "SELECT": "Select the refresh time to view the vehicles on the map, or click refresh to do it manually.",
         "1 Minute": "One Minute",
         "5 Minutes": "5 Minutes",
         "10 Minutes": "10 Minutes",
@@ -388,7 +399,7 @@
     },
     "TICKET": {
         "INSERT": "Insert a ticket",
-        "NO_DATA": "No vehicles present",
+        "NO_DATA": "No ticket present",
         "EXPIRED": "Ticket expired at",
         "WILLEXPIRE": "The ticket will expire at",
         "INSERT_contrassegno": "Insert a correct ticket",
@@ -407,6 +418,7 @@
         "VIEW_HISTORY": "View history",
         "HISTORY": "History",
         "ACTIVE": "Active ticket",
+        "INACTIVE": "Inactive ticket",
         "MANAGE": "Manage ticket",
         "LPN": "Plate",
         "LPN_NAT": "Country",
@@ -432,7 +444,7 @@
     "REPAIR-SHOP": {
         "TITLE": "For On Board Unit installation it is possible to contact the following Movyon partners. \nThe installation will take place at a place and date to be agreed between the parties and in the most convenient way possible for the Fleet Manager.",
         "TELEPHON": "Telephone",
-        "RANGE": "Monday to Friday"
+        "RANGE": "Time"
     },
     "EUROPEAN_VEHICLE": {
         "GROUP1": "Car (class M1)",
@@ -456,6 +468,7 @@
         "PERIOD": "Reference period",
         "DATE": "Billing date",
         "DETAILS": "Billing item details",
+        "DETAIL": "Billing item detail ",
         "CLOSE_DETAILS": "Close details"
     },
     "PENALTIES": {
@@ -486,7 +499,7 @@
         "DAMAGE": "Billing item for not damage OBU",
         "CANCELLED_APPOINTMENT": "Appointment cancelled within 24h",
         "REVERSAL": "Credit note",
-        "CHANGE": "Change obu",
+        "CHANGE_OBU": "Change obu",
         "UNINSTALL_FREE": "Uninstall free",
         "CHANGE_FREE": "Change obu free",
         "5": "Missed appointment",
@@ -510,7 +523,8 @@
             "VERIFY": "Verify",
             "CLOSE": "Close",
             "SEARCH": "Search",
-            "COPY": "Copy"
+            "COPY": "Copy",
+            "GOTOPAGE": "Go to page"
         }
     },
     "ERROR": {

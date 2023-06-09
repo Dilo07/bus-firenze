@@ -66,11 +66,22 @@ export class Vehicle {
   hardware: number;
   contractType: string;
   allowContacted: boolean;
-  status: string;
+  deleted: boolean;
+  valid: boolean;
+  status: VehicleStatus;
   documents: DocumentVehicle[];
   documentsObu: DocumentObu[];
-  valid: boolean;
 }
+
+export interface VehicleWarning {
+  id: string;
+  lpn: string;
+  lpnNat: string;
+  obuId: string;
+  associationDate: { dateTime: Date };
+}
+
+export type VehicleStatus = 'ALL' | 'REGISTERED' | 'TEMP' | 'DELETED' | 'UNKNOWN';
 
 export interface DocumentVehicle {
   fileId: number;
@@ -133,8 +144,7 @@ export interface RepairShops {
   surname: string;
   mail: string;
   mobileNumber: string;
-  contactRangeStart: number;
-  contactRangeEnd: number;
+  contactRange: string;
   nameShop: string;
   address: string;
 }
@@ -159,6 +169,11 @@ export interface Ticket {
   ticketSubscription: boolean;
   type: string;
   code: string;
+}
+
+export interface VehicleWithoutTicket {
+  id: number;
+  displayName: string;
 }
 
 export interface User {
@@ -188,6 +203,7 @@ export interface VatValidation {
 
 export interface FleetDocument {
   fileId: number;
+  fileName: string;
   type: FleetDocumentTypes;
   valid: Date;
 }
@@ -235,4 +251,12 @@ export interface PenalType {
 export interface AddPenal {
   penalType: number;
   date: string;
+}
+
+export interface SelectionCards {
+  icon: string;
+  title: string;
+  subtitle: string;
+  route: string;
+  state?: object;
 }
