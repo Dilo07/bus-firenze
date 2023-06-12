@@ -124,20 +124,47 @@ html, body {
     border-radius: 2px;
 }
 
-.material-icons {
+/* .material-icons {
     display: none;
-}
+} */
 
 #activeVehicle {
-    background-color: #91D6AC;
+    color: #1C3775;
+    background-color: white;
+    width: 130px;
+    .icon-Pin-rounded::before {
+        color: #4CAE50;
+    }
+    &:hover {
+        border: 2px solid #1C3775;
+        border-radius: 2px;
+    }
 }
 
 #warningVehicle {
-    background-color: #BBBCBC;
+    color: #1C3775;
+    background-color: white;
+    width: 180px;
+    .icon-Pin-rounded::before {
+        color: #FFBF07;
+    }
+    &:hover {
+        border: 2px solid #1C3775;
+        border-radius: 2px;
+    }
 }
 
 #errorVehicle {
-    background-color: #E89CAE;
+    color: #1C3775;
+    background-color: white;
+    width: 230px;
+    .icon-Pin-rounded::before {
+        color: #F54236;
+    }
+    &:hover {
+        border: 2px solid #1C3775;
+        border-radius: 2px;
+    }
 }
 
 /* slide toogle  */

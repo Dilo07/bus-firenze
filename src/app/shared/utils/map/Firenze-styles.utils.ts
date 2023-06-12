@@ -10,7 +10,7 @@ export const COLOR = {
   LIGHT_BLUE: 'rgb(102, 204, 255, 0.8)',
   GREY: 'rgb(187, 188, 188, 0.8)',
   RED: 'rgb(232, 156, 174, 0.8)',
-  YELLOW: 'rgb(255, 255, 0, 0.7)',
+  YELLOW: 'rgb(255, 191, 7, 0.7)',
   BLUE: 'rgb(0, 0, 255, 0.8)',
   BLACK: 'rgba(0, 0, 0, 1)',
 };
@@ -67,7 +67,7 @@ export const expstyle: any = {
   SECTION_LINKS: MapUtils.Style.StyleLineString(COLOR.LIGHT_GREEN, 14),
   SECTION_LINKS_GREEN: MapUtils.Style.StyleLineString(COLOR.GREEN, 14),
   SECTION_LINKS_ERROR: MapUtils.Style.StyleLineString(COLOR.RED, 14),
-  SECTION_LINKS_WARNING: MapUtils.Style.StyleLineString(COLOR.GREY, 14),
+  SECTION_LINKS_WARNING: MapUtils.Style.StyleLineString(COLOR.YELLOW, 14),
   SECTION_LINKS_LIGHT: MapUtils.Style.StyleLineString(COLOR.LIGHT_BLUE, 14),
   SECTION_COUNTER: MapUtils.Style.StyleLineString,
   ARROW_BLUE: StyleArrowBlue,

@@ -53,10 +53,10 @@
 					fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
 					<mat-card-title>
 						<mat-icon> <!-- colore icona-->
-							<span [class]="element.status === 'DELETED' || element.deleted ? 'icon-Pin-rounded redIcon' :
-							element.status === 'TEMP' ? 'icon-Pin-rounded yellowIcon' :
-							element.status === 'REGISTERED' ? 'icon-Pin-rounded greenIcon' : 
-							'icon-Pin-rounded yellowIcon'">
+							<span class="icon-Pin-rounded" [class]="element.status === 'DELETED' || element.deleted ? 'redIcon' :
+							element.status === 'TEMP' ? 'yellowIcon' :
+							element.status === 'REGISTERED' ? 'greenIcon' : 
+							'yellowIcon'">
 							</span>
 						</mat-icon>
 						ID {{element.id}}
