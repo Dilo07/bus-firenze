@@ -20,7 +20,7 @@
         <mat-grid-list cols="3" rowHeight="7:1">
             <ng-container *ngFor="let document of fleetManager.documents">
                 <mat-grid-tile>
-                    <h4 style="color: #1C3775;">{{'FLEET-MANAGER.' + document.type | translate}}</h4>
+                    <h4>{{'FLEET-MANAGER.' + document.type | translate}}</h4>
                 </mat-grid-tile>
                 <mat-grid-tile>
                     <ng-container *ngIf="document.valid else invalid">

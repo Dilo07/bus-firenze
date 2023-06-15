@@ -1,3 +1,73 @@
-<div *ngIf="fleetManager">
+<mat-card>
+    <mat-card-title>{{'FLEET-MANAGER.MESSAGE_VIEW' | translate}}</mat-card-title>
+    <mat-card-content>
+        <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
+    </mat-card-content>
+    <mat-card style="background-color: #E4F1F5;" *ngIf="fleetManager">
+        <mat-card-title>{{'FLEET-MANAGER.PERSONREF' | translate}}</mat-card-title>
+        <mat-card-content fxLayout="row wrap" fxLayoutGap="50px">
+            <div>
+                <h4>{{'FLEET-MANAGER.NAME' | translate}}</h4>
+                <p>{{fleetManager.name}}</p>
+            </div>
+            <div>
+                <h4>{{'FLEET-MANAGER.SURNAME' | translate}}</h4>
+                <p>{{fleetManager.surname}}</p>
+            </div>
+            <div>
+                <h4>E-mail</h4>
+                <p>{{fleetManager | findContactValue: 3}}</p>
+            </div>
+            <div>
+                <h4>{{'FLEET-MANAGER.CELL' | translate}}</h4>
+                <p>{{fleetManager | findContactValue: 1}}</p>
+            </div>
+            <div>
+                <h4>{{'FLEET-MANAGER.OFFICE' | translate}}</h4>
+                <p>{{fleetManager | findContactValue: 2}}</p>
+            </div>
+        </mat-card-content>
+        <mat-card-title>{{'USERTYPE.' + fleetManager.companyType| translate}}</mat-card-title>
+        <mat-card-content fxLayout="row wrap" fxLayoutGap="50px">
+            <div>
+                <h4>{{'FLEET-MANAGER.NATIONALITY' | translate}}</h4>
+                <p>
+                    <span [ngClass]="'fi fi-' + fleetManager.country.toLowerCase()"></span>
+                    {{fleetManager.country}}
+                </p>
+            </div>
+            <div>
+                <h4>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</h4>
+                <p>{{fleetManager.pIva}}</p>
+            </div>
+            <div>
+                <h4>{{'FLEET-MANAGER.FISCALCODE' | translate}}</h4>
+                <p>{{fleetManager.fiscalCode}}</p>
+            </div>
+            <div *ngIf="fleetManager.codeDest">
+                <h4>{{'FLEET-MANAGER.DESTCODE' | translate}}</h4>
+                <p>{{fleetManager.codeDest}}</p>
+            </div>
+            
+            <div>
+                <h4>{{'FLEET-MANAGER.ADDRESS' | translate}}</h4>
+                <p>{{fleetManager.address}}</p>
+            </div>
+            <div>
+                <h4>{{'FLEET-MANAGER.CITY' | translate}}</h4>
+                <p>{{fleetManager.city}}</p>
+            </div>
+            <div>
+                <h4>{{'FLEET-MANAGER.DISTRICT' | translate}}</h4>
+                <p>{{fleetManager.district}}</p>
+            </div>
+            <div>
+                <h4>{{'FLEET-MANAGER.POSTAL_CODE' | translate}}</h4>
+                <p>{{fleetManager.cap}}</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</mat-card>
+<!-- <div *ngIf="fleetManager">
     <app-form-fleet-manager [data]="fleetManager"></app-form-fleet-manager>
-</div>
+</div> -->

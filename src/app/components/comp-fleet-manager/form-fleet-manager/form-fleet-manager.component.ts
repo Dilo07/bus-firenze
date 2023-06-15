@@ -31,7 +31,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public fileModule: File;
   public fileIdentityCard: File;
   public fileCommerceReg: File;
-  public roleFleetManager: boolean;
   public isEuropeNat: boolean;
   public isItalian: boolean;
   public nations = worldNations;
@@ -62,17 +61,14 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     this.data = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
   }
 
-  async ngOnInit(): Promise<void> {
-    if (!this.register) {
-      await this.authService.getUserRoles().then((res: string[]) => this.roleFleetManager = res.includes(ROLES.FLEETMNG));
-    }
+  ngOnInit(): void {
     // se ci sono dati è un edit form altrimenti è un add form
     if (this.data) {
       // cf, p.iva validator sono valorizzati in base alla nation
       this.formGroup = this.formBuilder.group({
         ctrlContractCode: [this.data.contractCode],
         ctrlSapCode: [this.data.idSap],
-        ctrlUser: [{ value: this.data.companyType, disabled: this.roleFleetManager ? true : false }, Validators.required],
+        ctrlUser: [this.data.companyType, Validators.required],
         ctrlDest: [this.data.codeDest],
         ctrlName: [this.data.name, Validators.required],
         ctrlSurname: [this.data.surname, Validators.required],
@@ -86,7 +82,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ctrlCity: [this.data.city, Validators.required],
         ctrlDistrict: [this.data.district],
         ctrlCAP: [this.data.cap],
-        ctrlNat: [{ value: this.data.country, disabled: this.roleFleetManager ? true : false }, Validators.required]
+        ctrlNat: [this.data.country, Validators.required]
       });
       this.userSel = this.data.companyType;
       const phoneNumber = parsePhoneNumber(this.formGroup.get('ctrlCell').value);
@@ -314,7 +310,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public async pivaValidator(): Promise<void> {
-    if (!this.formGroup.controls.ctrlpIva.invalid && this.isEuropeNat && !this.roleFleetManager) {
+    if (!this.formGroup.controls.ctrlpIva.invalid && this.isEuropeNat) {
       const pIva = this.formGroup.get('ctrlpIva').value;
       const nat = this.formGroup.get('ctrlNat').value;
       this.completePiva = false;
@@ -356,7 +352,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public async pivaOrFcValidator(): Promise<void> {
     const fiscalCode = this.formGroup.get('ctrlCF').value;
     const userType = this.formGroup.get('ctrlUser').value;
-    if (!this.formGroup.controls.ctrlCF.invalid && !this.roleFleetManager) {
+    if (!this.formGroup.controls.ctrlCF.invalid) {
       if (userType === this.fleetType.dittaIndividuale) {
         const codiceFiscale = require('codice-fiscale-js');
         this.formGroup.patchValue({ ctrlCF: fiscalCode.toUpperCase() });

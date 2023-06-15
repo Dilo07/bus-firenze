@@ -1,16 +1,14 @@
-<mat-card fxLayout="column" fxLayoutGap="10px">
+<mat-card fxLayout="column" fxLayoutGap="10px" [style.background-color]="data ? 'none' : '#E4F1F5'">
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
         <mat-card-title *ngIf="!data && !register">
-            <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
+            <lib-breadcrumb [bgColor]="'#E4F1F5'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
                 style="height: 1px;"></lib-breadcrumb>
             {{'FLEET-MANAGER.MESSAGE_NEW' | translate}}
         </mat-card-title>
-        <mat-card-title *ngIf="data && !roleFleetManager">
+        <mat-card-title *ngIf="data">
             <lib-breadcrumb [bgColor]="'white'" [fontColor]="'#1C3775'" [fontSize]="'14px'" [breadcrumb]="breadCrumb"
                 style="height: 1px;"></lib-breadcrumb>
             {{'FLEET-MANAGER.MESSAGE_EDIT' | translate}}</mat-card-title>
-        <mat-card-title *ngIf="data && roleFleetManager">
-            {{'FLEET-MANAGER.MESSAGE_VIEW' | translate}}</mat-card-title>
         <mat-card-title *ngIf="register">
             {{'FLEET-MANAGER.REGISTRATION' | translate}}
         </mat-card-title>
@@ -19,62 +17,22 @@
     <!-- component expansion-info -->
     <mat-progress-bar mode="indeterminate" *ngIf="!completeUp"></mat-progress-bar>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
-        <form [formGroup]="formGroup" fxLayout="column">
-            <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+        <form [formGroup]="formGroup" fxLayout="column" fxLayoutGap="20px">
+            <div fxLayout="row wrap" fxLayoutGap="10px">
                 <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
-                    *ngIf="!roleFleetManager && !register">
+                    *ngIf="!register">
                     <mat-label>{{'FLEET-MANAGER.CONTRACT_CODE' | translate}}</mat-label>
                     <input matInput type="text" formControlName="ctrlContractCode" required minlength="7" maxlength="7"
                         [readonly]="data?.name">
                     <mat-error>{{'FLEET-MANAGER.INSERT_CONTRACT_CODE' | translate}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30"
-                    *ngIf="!roleFleetManager && !register && data">
+                    *ngIf="!register && data">
                     <mat-label>{{'FLEET-MANAGER.SAP_CODE' | translate}}</mat-label>
                     <input matInput type="text" formControlName="ctrlSapCode" readonly>
                 </mat-form-field>
-            </div>
-            <mat-card style="border-style: groove;">
-                <mat-card-content>
-                    <mat-card-title>{{'FLEET-MANAGER.PERSONREF' | translate}}</mat-card-title>
-                    <app-form-field-person [personForm]="formGroup" [readOnlyName]="data && roleFleetManager"
-                        [readlOnlyMail]="$any(!register && data?.name)"
-                        [opacity]="!register && data?.name ? '0.5' : ''"></app-form-field-person>
-                    <!--component-->
-                    <div fxLayout="row wrap" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
-                            fxFlex.gt-md="30">
-                            <mat-label>{{'FLEET-MANAGER.CELL' | translate}}</mat-label>
-                            <input matInput type="text" appNg2TelInput
-                                [ng2TelInputOptions]="{initialCountry: 'it', separateDialCode: true}"
-                                (countryChange)="countryMobileChange($event)" formControlName="ctrlCell"
-                                autocomplete="off" maxlength="25" required
-                                [readonly]="(verifyOtp && register) || (!register && data?.name)"
-                                [style.opacity]="!register && data ? '0.5' : ''">
-                            <button matSuffix mat-icon-button libDebounceClick
-                                matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}" [debounceTime]="1000"
-                                [attr.i18nKey]="'FLEET-MANAGER.VERIFY_MOBILE'"
-                                *ngIf="register && !formGroup.get('ctrlCell').invalid && !verifyOtp"
-                                (debounceClick)="modalOTP()">
-                                <mat-icon>mobile_screen_share</mat-icon>
-                            </button>
-                            <mat-icon matSuffix *ngIf="register && verifyOtp"
-                                matTooltip="{{'FLEET-MANAGER.MOBILE_VERIFIED' | translate}}" style="color: green;">done
-                            </mat-icon>
-                            <mat-error>{{'FLEET-MANAGER.INSERT_CELL' | translate}}</mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
-                            fxFlex.gt-md="30">
-                            <mat-label>{{'FLEET-MANAGER.OFFICE' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="ctrlOffice" maxlength="100"
-                                [readonly]="data && roleFleetManager">
-                        </mat-form-field>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-            <div fxLayout="row wrap" fxLayoutAlign="center">
-                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="100"
-                    fxFlex.gt-md="100">
+                <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                    fxFlex.gt-md="30">
                     <mat-label>{{'FLEET-MANAGER.USERTYPE' | translate}}</mat-label>
                     <mat-select formControlName="ctrlUser" required
                         (selectionChange)="userSel=$event.value; formGroup.patchValue({ ctrlNat: 'IT' }); changeFormNat();">
@@ -84,117 +42,135 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <mat-card style="border-style: groove;">
-                <mat-card-content>
-                    <mat-card-title>
-                        {{'FLEET-MANAGER.DATA' | translate}} {{('USERTYPE.' + userSel) | translate}}
-                    </mat-card-title>
-                    <div fxLayout="row wrap" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="10"
-                            fxFlex.gt-md="10" *ngIf="userSel === fleetType.aziendaPrivata">
-                            <mat-label>{{'FLEET-MANAGER.NATIONALITY' | translate}}</mat-label>
-                            <mat-select formControlName="ctrlNat" required (selectionChange)="changeFormNat()">
-                                <mat-select-filter [displayMember]="'text'" [array]="nations"
-                                    (filteredReturn)="filteredList = $event.length > 0 ? $event : filteredList">
-                                </mat-select-filter>
-                                <mat-option *ngFor="let nation of filteredList" [value]="nation.value">
-                                    <span [ngClass]="'fi fi-' + nation.value.toLowerCase()"></span>
-                                    {{nation.text | translate}}
-                                </mat-option>
-                                <mat-select-trigger>
-                                    <span [ngClass]="'fi fi-' + formGroup.get('ctrlNat').value?.toLowerCase()"></span>
-                                    {{formGroup.get('ctrlNat').value}}
-                                </mat-select-trigger>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
-                            fxFlex.gt-md="25">
-                            <mat-label>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="ctrlpIva" maxlength="11"
-                                [readonly]="data && roleFleetManager" [required]="isEuropeNat"
-                                (keydown.space)="$event.preventDefault()" (focusout)="pivaValidator()">
-                            <mat-error> {{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
-                            <mat-progress-bar mode="indeterminate" *ngIf="!completePiva"></mat-progress-bar>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
-                            fxFlex.gt-md="25" [style.visibility]="isEuropeNat ? '' : 'hidden'">
-                            <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="ctrlCF"
-                                (keydown.space)="$event.preventDefault()" (focusout)="pivaOrFcValidator()"
-                                [required]="isEuropeNat" [readonly]="data && roleFleetManager"
-                                [maxlength]="userSel === fleetType.dittaIndividuale ? 16 : 11">
-                            <a matSuffix mat-icon-button *ngIf="userSel === fleetType.ente"
-                                href="https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCf"
-                                target="_blank" [attr.i18nKey]="'FLEET-MANAGER.VERIFYCF'">
-                                <mat-icon matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">verified_user
-                                </mat-icon>
-                            </a>
-                            <mat-error>{{'FLEET-MANAGER.INSERT_FISCALCODE' | translate}}</mat-error>
-                            <mat-progress-bar mode="indeterminate" *ngIf="!completePiva2"></mat-progress-bar>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
-                            fxFlex.gt-md="25"
-                            *ngIf="(userSel === fleetType.aziendaPrivata || userSel === fleetType.pubblicaAmm) && isItalian">
-                            <mat-label>
-                                {{(userSel === fleetType.aziendaPrivata ? 'FLEET-MANAGER.DESTCODE' :
-                                'FLEET-MANAGER.UNIQUECODE') | translate}}
-                            </mat-label>
-                            <input matInput type="text" formControlName="ctrlDest"
-                                [required]="(userSel === fleetType.aziendaPrivata || userSel === fleetType.pubblicaAmm) && isItalian"
-                                [minlength]="userSel === fleetType.aziendaPrivata ? 7 : userSel === fleetType.pubblicaAmm ? 6 : null"
-                                [maxlength]="userSel === fleetType.aziendaPrivata ? 7 : userSel === fleetType.pubblicaAmm ? 6 : null"
-                                [readonly]="data && roleFleetManager">
-                            <mat-error>{{(userSel === fleetType.aziendaPrivata ?
-                                'FLEET-MANAGER.INSERT_DEST' : 'FLEET-MANAGER.INSERT_UNIQUECODE') |
-                                translate}}</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row wrap" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
-                            fxFlex.gt-md="18">
-                            <mat-label>{{'FLEET-MANAGER.COMPANY_NAME' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="ctrlCompanyName" maxlength="35" required
-                                [readonly]="data && roleFleetManager">
-                            <mat-error>{{'FLEET-MANAGER.INSERT_COMPANY_NAME' | translate}}</mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
-                            fxFlex.gt-md="18">
-                            <mat-label>{{'FLEET-MANAGER.ADDRESS' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="ctrlAddress" maxlength="60" required
-                                [readonly]="data && roleFleetManager">
-                            <mat-error>{{'FLEET-MANAGER.INSERT_ADDRESS' | translate}}</mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
-                            fxFlex.gt-md="18">
-                            <mat-label>{{'FLEET-MANAGER.CITY' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="ctrlCity" maxlength="35" required
-                                [readonly]="data && roleFleetManager">
-                            <mat-error>{{'FLEET-MANAGER.INSERT_CITY' | translate}}</mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
-                            fxFlex.gt-md="18" *ngIf="isItalian">
-                            <mat-label>{{'FLEET-MANAGER.DISTRICT' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="ctrlDistrict" required
-                                [readonly]="data && roleFleetManager">
-                            <mat-error>{{'FLEET-MANAGER.INSERT_DISTRICT' | translate}}</mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
-                            fxFlex.gt-md="18" [style.visibility]="isEuropeNat ? '' : 'hidden'">
-                            <mat-label>{{'FLEET-MANAGER.POSTAL_CODE' | translate}}</mat-label>
-                            <input matInput type="text" formControlName="ctrlCAP" [maxlength]="isItalian ? 5 : 10"
-                                [required]="isEuropeNat" [readonly]="data && roleFleetManager">
-                            <mat-error>{{'FLEET-MANAGER.INSERT_POSTAL_CODE' | translate}}</mat-error>
-                        </mat-form-field>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-            <ng-container *ngIf="!data">
-                <div fxLayout="column" fxLayoutAlign="center center" style="font-size: 12px;">
-                    <span>{{fileModule?.name}}</span>
-                    <span>{{fileIdentityCard?.name}}</span>
-                    <span>{{fileCommerceReg?.name}}</span>
+            <div>
+                <mat-card-title>{{'FLEET-MANAGER.PERSONREF' | translate}}</mat-card-title>
+                <app-form-field-person [personForm]="formGroup" [readlOnlyMail]="$any(!register && data?.name)"
+                    [opacity]="!register && data?.name ? '0.5' : ''"></app-form-field-person><!--component-->
+                <div fxLayout="row wrap" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                        fxFlex.gt-md="30">
+                        <mat-label>{{'FLEET-MANAGER.CELL' | translate}}</mat-label>
+                        <input matInput type="text" appNg2TelInput
+                            [ng2TelInputOptions]="{initialCountry: 'it', separateDialCode: true}"
+                            (countryChange)="countryMobileChange($event)" formControlName="ctrlCell" autocomplete="off"
+                            maxlength="25" required [readonly]="(verifyOtp && register) || (!register && data?.name)"
+                            [style.opacity]="!register && data ? '0.5' : ''">
+                        <button matSuffix mat-icon-button libDebounceClick
+                            matTooltip="{{'FLEET-MANAGER.VERIFY_MOBILE' | translate}}" [debounceTime]="1000"
+                            [attr.i18nKey]="'FLEET-MANAGER.VERIFY_MOBILE'"
+                            *ngIf="register && !formGroup.get('ctrlCell').invalid && !verifyOtp"
+                            (debounceClick)="modalOTP()">
+                            <mat-icon>mobile_screen_share</mat-icon>
+                        </button>
+                        <mat-icon matSuffix *ngIf="register && verifyOtp"
+                            matTooltip="{{'FLEET-MANAGER.MOBILE_VERIFIED' | translate}}" style="color: green;">done
+                        </mat-icon>
+                        <mat-error>{{'FLEET-MANAGER.INSERT_CELL' | translate}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30"
+                        fxFlex.gt-md="30">
+                        <mat-label>{{'FLEET-MANAGER.OFFICE' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="ctrlOffice" maxlength="100">
+                    </mat-form-field>
                 </div>
-                <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+            </div>
+            <div>
+                <mat-card-title>
+                    {{'FLEET-MANAGER.DATA' | translate}} {{('USERTYPE.' + userSel) | translate}}
+                </mat-card-title>
+                <div fxLayout="row wrap" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="10"
+                        fxFlex.gt-md="10" *ngIf="userSel === fleetType.aziendaPrivata">
+                        <mat-label>{{'FLEET-MANAGER.NATIONALITY' | translate}}</mat-label>
+                        <mat-select formControlName="ctrlNat" required (selectionChange)="changeFormNat()">
+                            <mat-select-filter [displayMember]="'text'" [array]="nations"
+                                (filteredReturn)="filteredList = $event.length > 0 ? $event : filteredList">
+                            </mat-select-filter>
+                            <mat-option *ngFor="let nation of filteredList" [value]="nation.value">
+                                <span [ngClass]="'fi fi-' + nation.value.toLowerCase()"></span>
+                                {{nation.text | translate}}
+                            </mat-option>
+                            <mat-select-trigger>
+                                <span [ngClass]="'fi fi-' + formGroup.get('ctrlNat').value?.toLowerCase()"></span>
+                                {{formGroup.get('ctrlNat').value}}
+                            </mat-select-trigger>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
+                        fxFlex.gt-md="25">
+                        <mat-label>{{'FLEET-MANAGER.VAT_NUMBER' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="ctrlpIva" maxlength="11" [required]="isEuropeNat"
+                            (keydown.space)="$event.preventDefault()" (focusout)="pivaValidator()">
+                        <mat-error> {{'FLEET-MANAGER.INSERT_VAT_NUMBER' | translate}}</mat-error>
+                        <mat-progress-bar mode="indeterminate" *ngIf="!completePiva"></mat-progress-bar>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
+                        fxFlex.gt-md="25" [style.visibility]="isEuropeNat ? '' : 'hidden'">
+                        <mat-label>{{'FLEET-MANAGER.FISCALCODE' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="ctrlCF" (keydown.space)="$event.preventDefault()"
+                            (focusout)="pivaOrFcValidator()" [required]="isEuropeNat"
+                            [maxlength]="userSel === fleetType.dittaIndividuale ? 16 : 11">
+                        <a matSuffix mat-icon-button *ngIf="userSel === fleetType.ente"
+                            href="https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCf"
+                            target="_blank" [attr.i18nKey]="'FLEET-MANAGER.VERIFYCF'">
+                            <mat-icon matTooltip="{{'FLEET-MANAGER.VERIFYCF' | translate }}">verified_user
+                            </mat-icon>
+                        </a>
+                        <mat-error>{{'FLEET-MANAGER.INSERT_FISCALCODE' | translate}}</mat-error>
+                        <mat-progress-bar mode="indeterminate" *ngIf="!completePiva2"></mat-progress-bar>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="25"
+                        fxFlex.gt-md="25"
+                        *ngIf="(userSel === fleetType.aziendaPrivata || userSel === fleetType.pubblicaAmm) && isItalian">
+                        <mat-label>
+                            {{(userSel === fleetType.aziendaPrivata ? 'FLEET-MANAGER.DESTCODE' :
+                            'FLEET-MANAGER.UNIQUECODE') | translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="ctrlDest"
+                            [required]="(userSel === fleetType.aziendaPrivata || userSel === fleetType.pubblicaAmm) && isItalian"
+                            [minlength]="userSel === fleetType.aziendaPrivata ? 7 : userSel === fleetType.pubblicaAmm ? 6 : null"
+                            [maxlength]="userSel === fleetType.aziendaPrivata ? 7 : userSel === fleetType.pubblicaAmm ? 6 : null">
+                        <mat-error>{{(userSel === fleetType.aziendaPrivata ?
+                            'FLEET-MANAGER.INSERT_DEST' : 'FLEET-MANAGER.INSERT_UNIQUECODE') |
+                            translate}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row wrap" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
+                        fxFlex.gt-md="18">
+                        <mat-label>{{'FLEET-MANAGER.COMPANY_NAME' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="ctrlCompanyName" maxlength="35" required>
+                        <mat-error>{{'FLEET-MANAGER.INSERT_COMPANY_NAME' | translate}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
+                        fxFlex.gt-md="18">
+                        <mat-label>{{'FLEET-MANAGER.ADDRESS' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="ctrlAddress" maxlength="60" required>
+                        <mat-error>{{'FLEET-MANAGER.INSERT_ADDRESS' | translate}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
+                        fxFlex.gt-md="18">
+                        <mat-label>{{'FLEET-MANAGER.CITY' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="ctrlCity" maxlength="35" required>
+                        <mat-error>{{'FLEET-MANAGER.INSERT_CITY' | translate}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
+                        fxFlex.gt-md="18" *ngIf="isItalian">
+                        <mat-label>{{'FLEET-MANAGER.DISTRICT' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="ctrlDistrict" required>
+                        <mat-error>{{'FLEET-MANAGER.INSERT_DISTRICT' | translate}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="18"
+                        fxFlex.gt-md="18" [style.visibility]="isEuropeNat ? '' : 'hidden'">
+                        <mat-label>{{'FLEET-MANAGER.POSTAL_CODE' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="ctrlCAP" [maxlength]="isItalian ? 5 : 10"
+                            [required]="isEuropeNat">
+                        <mat-error>{{'FLEET-MANAGER.INSERT_POSTAL_CODE' | translate}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <ng-container *ngIf="!data">
+                <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center">
                     <input style="display: none" type="file" formControlName="ctrlFileModule" #inpFileModule
                         accept="application/pdf, image/jpeg, image/png"
                         (change)="uploadFile($any($event.target).files, 1)">
@@ -204,17 +180,54 @@
                     <input style="display: none" type="file" formControlName="ctrlFileCommerceReg" #InpFileCommerceReg
                         accept="application/pdf, image/jpeg, image/png"
                         (change)="uploadFile($any($event.target).files, 3)">
-                    <button mat-button class="uploadButtons" (click)="inpFileModule.click()">
-                        {{(fileModule ? 'FLEET-MANAGER.CHANGE_FILE' : 'FLEET-MANAGER.UPLOAD_FILE') | translate}}
-                    </button>
-                    <button mat-button class="uploadButtons" (click)="InpFileIdentityCard.click()">
-                        {{(fileIdentityCard ? 'FLEET-MANAGER.CHANGE_IDENTIYCRD' :
-                        'FLEET-MANAGER.UPLOAD_IDENTIYCRD') | translate}}
-                    </button>
-                    <button mat-button class="uploadButtons" (click)="InpFileCommerceReg.click()">
-                        {{(fileCommerceReg ? 'FLEET-MANAGER.CHANGE_COMMERCEREG' :
-                        'FLEET-MANAGER.UPLOAD_COMMERCEREG') | translate}}
-                    </button>
+                    <div fxLayout="row" fxLayoutAlign="space-around">
+                        <span>{{'FLEET-MANAGER.reqForm' | translate}}</span>
+                        <button *ngIf="!fileModule else existfileModule" mat-button class="uploadButtons"
+                            (click)="inpFileModule.click()">
+                            {{'FLEET-MANAGER.UPLOAD_FILE' | translate}}
+                        </button>
+                        <ng-template #existfileModule>
+                            <div>
+                                <span>{{fileModule?.name}}</span>
+                                <button mat-icon-button
+                                    (click)="fileModule = null; formGroup.patchValue({ ctrlFileModule: '' });">
+                                    <mat-icon><span class="icon-Close"></span></mat-icon>
+                                </button>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="space-around">
+                        <span>{{'FLEET-MANAGER.idDoc' | translate}}</span>
+                        <button *ngIf="!fileIdentityCard else existFileIdentityCard" mat-button class="uploadButtons"
+                            (click)="InpFileIdentityCard.click()">
+                            {{ 'FLEET-MANAGER.UPLOAD_IDENTIYCRD' | translate}}
+                        </button>
+                        <ng-template #existFileIdentityCard>
+                            <div>
+                                <span>{{fileIdentityCard?.name}}</span>
+                                <button mat-icon-button
+                                    (click)="fileIdentityCard = null; formGroup.patchValue({ ctrlFileIdentityCrd: '' });">
+                                    <mat-icon><span class="icon-Close"></span></mat-icon>
+                                </button>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="space-around">
+                        <span>{{'FLEET-MANAGER.comReg' | translate}}</span>
+                        <button *ngIf="!fileCommerceReg else existFileCommerceReg" mat-button class="uploadButtons"
+                            (click)="InpFileCommerceReg.click()">
+                            {{ 'FLEET-MANAGER.UPLOAD_COMMERCEREG' | translate}}
+                        </button>
+                        <ng-template #existFileCommerceReg>
+                            <div>
+                                <span>{{fileCommerceReg?.name}}</span>
+                                <button mat-icon-button
+                                    (click)="fileCommerceReg = null; formGroup.patchValue({ ctrlFileCommerceReg: '' });">
+                                    <mat-icon><span class="icon-Close"></span></mat-icon>
+                                </button>
+                            </div>
+                        </ng-template>
+                    </div>
                 </div>
                 <p style="font-size: 12px;" fxLayout="row" fxLayoutAlign="center">
                     {{'FLEET-MANAGER.TEXTFILE' | translate}}</p>
@@ -225,14 +238,14 @@
             </ng-container>
         </form>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <button mat-button *ngIf="!roleFleetManager" [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.CANCEL'"
+            <button mat-button [routerLink]="['../']" [attr.i18nKey]="'COMMON.ACTION.CANCEL'"
                 class="whiteButtons">{{'COMMON.ACTION.CANCEL' | translate}}</button>
             <button *ngIf="!data" mat-button libDebounceClick
                 [disabled]="formGroup.invalid || ((register && !verifyOtp))" [attr.i18nKey]="'FLEET-MANAGER.SAVE'"
                 class="actionButtons" (debounceClick)="insertFleetManager()">
                 {{'FLEET-MANAGER.SAVE' | translate}}
             </button>
-            <button *ngIf="data && !roleFleetManager" mat-button libDebounceClick
+            <button *ngIf="data" mat-button libDebounceClick
                 [disabled]="formGroup.invalid || !formGroup.dirty" [attr.i18nKey]="'FLEET-MANAGER.EDIT'"
                 class="actionButtons" (debounceClick)="updateFleetManager()">
                 {{'FLEET-MANAGER.EDIT' | translate}}</button>

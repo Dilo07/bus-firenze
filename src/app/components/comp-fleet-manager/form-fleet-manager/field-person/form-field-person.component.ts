@@ -9,7 +9,6 @@ import { FormGroup } from '@angular/forms';
 })
 export class FormFieldPersonComponent {
   @Input() personForm: FormGroup;
-  @Input() readOnlyName: boolean;
   @Input() readlOnlyMail: boolean;
   @Input() opacity: string;
 
