@@ -14,7 +14,7 @@ import { AnagraphicDriverComponent } from './drivers/anagraphic-driver/anagraphi
 import { AssociationVehiclesComponent } from './drivers/association-vehicles/association-vehicles.component';
 import { DriversComponent } from './drivers/drivers.component';
 import { AssociationDriversVehiclesComponent } from './drivers/modal-association-drivers-vehicles/association-drivers-vehicles.component';
-import { FormDriverComponent } from './drivers/modal-form-driver/form-driver.component';
+import { FormDriverComponent } from './drivers/details-form-driver/form-driver.component';
 import { FleetDocumentsComponent } from './fleet-documents/fleet-documents.component';
 import { FleetManagerRoutingModule } from './fleet-manager.routing';
 import { ExpansionInfoComponent } from './form-fleet-manager/expansion-info/expansion-info.component';
@@ -31,6 +31,8 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { FormFieldPersonComponent } from './form-fleet-manager/field-person/form-field-person.component';
 import { ModalCheckComponent } from './form-fleet-manager/modal-check/modal-check.component';
 import { SelectionCardsPageComponent } from './selection-cards-page/selection-cards-page.component';
+import { FormFieldDriverComponent } from './drivers/details-form-driver/form-field-driver/form-field-driver.component';
+import { ModalNewDriverComponent } from './drivers/details-form-driver/modal-new-driver/modal-new-driver.component';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { SelectionCardsPageComponent } from './selection-cards-page/selection-ca
     FleetDocumentsComponent,
     FormFieldPersonComponent,
     ModalCheckComponent,
-    SelectionCardsPageComponent
+    SelectionCardsPageComponent,
+    FormFieldDriverComponent,
+    ModalNewDriverComponent
   ],
   imports: [
     CommonModule,

@@ -11,6 +11,7 @@ import { DriverService } from 'src/app/services/driver.service';
 import { Driver, FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { AssociationDriversVehiclesComponent } from './modal-association-drivers-vehicles/association-drivers-vehicles.component';
+import { ModalNewDriverComponent } from './details-form-driver/modal-new-driver/modal-new-driver.component';
 
 @Component({
   selector: 'app-drivers',
@@ -50,6 +51,9 @@ export class DriversComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private media: MediaMatcher) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    if (this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as FleetManager) {
+      this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb.fleetManager;
+    };
     this.desktopQuery = this.media.matchMedia('(min-width: 768px)'); // se è un tablet o schermo grande
   }
 
@@ -101,7 +105,7 @@ export class DriversComponent implements OnInit, OnDestroy {
   public deleteDriver(idDriver: number): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: this.desktopQuery.matches ? '30%' : '100%',
-      height: this.desktopQuery.matches ? '20%' : '30%',
+      height: this.desktopQuery.matches ? '30%' : '30%',
       data: { text: 'DRIVERS.DELETE_CONFIRM' },
       autoFocus: false
     });
@@ -129,6 +133,18 @@ export class DriversComponent implements OnInit, OnDestroy {
             autoFocus: false
           });
         }));
+  }
+
+  public openModal(): void {
+    const dialogRef = this.dialog.open(ModalNewDriverComponent, {
+      width: '60%',
+      height: '60%',
+      data: { fleetManager: this.fleetManager },
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe((resp) => {
+      if (resp) { this.getDrivers(); }
+    });
   }
 
   private resetSearchField(): void {

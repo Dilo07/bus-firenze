@@ -4,8 +4,7 @@
 			style="height: 1px;" *ngIf="fleetManager"></lib-breadcrumb>
 		<div fxLayout="row wrap" fxLayoutAlign="space-between">
 			{{'DRIVERS.TITLE' | translate}}
-			<button mat-button class="actionButtons" [routerLink]="['../form-Driver']"
-				[state]="{ driver: null, fleetManager: this.fleetManager }" [attr.i18nKey]="'DRIVERS.NEW'">
+			<button mat-button class="actionButtons" [attr.i18nKey]="'DRIVERS.NEW'" (click)="openModal()">
 				{{'DRIVERS.NEW' | translate}}
 			</button>
 		</div>
@@ -29,10 +28,11 @@
 						<mat-card-title>
 							{{element.name}} {{element.surname}}
 						</mat-card-title>
-						<!-- <button mat-icon-button [attr.i18nKey]="'DRIVERS.VEHICLES_ASSOCIATION'"
-							(click)="associationVehicle(element.id)">
+						<button mat-icon-button [routerLink]="['../form-Driver']"
+							[state]="{driver: element, fleetManager: fleetManager}"
+							[attr.i18nKey]="'COMMON.ACTION.EDIT'">
 							<mat-icon><span class="icon-ArrowRight"></span></mat-icon>
-						</button> -->
+						</button>
 					</div>
 					<mat-card-content>
 						<mat-card-subtitle>E-mail: {{element | findContactValue: 3}} </mat-card-subtitle>

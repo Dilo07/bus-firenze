@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IAuthenticationService, SnackBar } from '@npt/npt-template';
+import { Breadcrumb, IAuthenticationService, SnackBar } from '@npt/npt-template';
 import { CountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
 import { Driver, FleetManager } from 'src/app/components/domain/bus-firenze-domain';
@@ -30,6 +30,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   public roleDriver: boolean;
   public verifyOtp = false;
   public dialCode: CountryCallingCode = '39';
+  public breadCrumb: Breadcrumb[] = [];
 
   private subscription: Subscription[] = [];
   private cellForm: string;
@@ -69,6 +70,28 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     }
     if (this.roleDriver) {
       this.formGroup.addControl('CtrlCell', this.formBuilder.control(this.findContactValue(1), Validators.required));
+    }
+    if (this.fleetManager && this.driver) {
+      this.breadCrumb = [
+        {
+          label: 'Fleet manager',
+          url: '/manage'
+        },
+        {
+          label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+          url: '../selection-card',
+          state: { fleetManager: this.fleetManager }
+        },
+        {
+          label: 'DRIVERS.TITLE',
+          url: '../drivers',
+          state: { fleetManager: this.fleetManager }
+        },
+        {
+          label: `${this.driver.name} ${this.driver.surname}`,
+          url: ''
+        },
+      ];
     }
   }
 
@@ -110,28 +133,10 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     }));
   }
 
-  public addDriver(): void {
-    const newDriver = new Driver();
-    newDriver.name = this.formGroup.get('ctrlName').value;
-    newDriver.surname = this.formGroup.get('ctrlSurname').value;
-    newDriver.contacts = [];
-    const mail = { code: 3, value: this.formGroup.get('ctrlMail').value };
-    newDriver.contacts.push(mail);
-    this.driverService.addDriver(newDriver, this.fleetManager.id).subscribe({
-      error: () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
-      complete: () => {
-        this.snackBar.showMessage('DRIVERS.ADD_SUCCESS', 'INFO');
-        if (!this.roleDriver) {
-          const url = this.fleetManager.id ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
-          this.router.navigate([url], { state: { fleetManagerId: this.fleetManager.id } });
-        }
-      }
-    });
-  }
-
   public editDriver(): void {
-    const editDriver = this.driver;
+    const editDriver = new Driver();
     const mobile = this.findContactValue(1);
+    editDriver.id = this.driver.id;
     editDriver.name = this.formGroup.get('ctrlName').value;
     editDriver.surname = this.formGroup.get('ctrlSurname').value;
     editDriver.contacts = [];
@@ -154,7 +159,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
           }
           if (!this.roleDriver) {
             const url = this.fleetManager.id ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
-            this.router.navigate([url], { state: { fleetManagerId: this.fleetManager.id } });
+            this.router.navigate([url], { state: { fleetManager: this.fleetManager } });
           }
         }
       });
