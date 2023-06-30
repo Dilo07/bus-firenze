@@ -15,12 +15,7 @@ import { ModalOTPComponent } from '../../register-page/modal-otp/modal-otp.compo
 @Component({
   selector: 'app-form-driver',
   templateUrl: './form-driver.component.html',
-  styles: [`
-  ::ng-deep .iti__flag-container {
-    top: 20px !important;
-  }
-  `
-  ]
+  styleUrls: ['./form-driver.component.scss' ]
 })
 export class FormDriverComponent implements OnInit, OnDestroy {
   @Input() driver: Driver;

@@ -1,7 +1,7 @@
 <mat-card-title fxLayout="row" fxLayoutAlign="center">{{'DRIVERS.MESSAGE_NEW' | translate}}</mat-card-title>
 <div>
     <form [formGroup]="formGroup">
-        <app-form-field-driver [personForm]="formGroup" [isNew]="true"></app-form-field-driver>
+        <app-form-field-driver [personForm]="formGroup" [centerLabel]="true"></app-form-field-driver>
     </form>
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
         <button mat-button class="whiteButtons" [attr.i18nKey]="'COMMON.ACTION.CANCEL'" (click)="dialogRef.close(false)">

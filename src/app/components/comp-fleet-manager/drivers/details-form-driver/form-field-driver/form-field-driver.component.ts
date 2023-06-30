@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class FormFieldDriverComponent {
   @Input() personForm: FormGroup;
-  @Input() isNew = false;
+  @Input() centerLabel = false;
 
   constructor() { }
 
