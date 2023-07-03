@@ -10,14 +10,7 @@ import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 @Component({
   selector: 'app-association-vehicles',
   templateUrl: './association-vehicles.component.html',
-  styles: [`
-  .actionIconButtons:hover:enabled {
-    .icon-Pencil::before {
-        color: white;
-    }
-  }
-  `
-  ]
+  styleUrls: ['./association-vehicles.component.scss']
 })
 export class AssociationVehiclesComponent implements OnInit, OnDestroy {
   @Input() public vehiclesAssociated: DriverVehicle[] = [];
