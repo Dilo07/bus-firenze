@@ -39,15 +39,15 @@
 						<mat-card-subtitle>{{'FLEET-MANAGER.CELL' | translate}}: {{element | findContactValue: 1}}
 						</mat-card-subtitle>
 						<div fxLayout="row" fxLayoutAlign="end">
-							<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
+							<!-- <button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
 								[attr.i18nKey]="'menu'">
 								<mat-icon><span class="icon-Horizontal-dots"></span></mat-icon>
-							</button>
+							</button> -->
 							<button mat-icon-button matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
 								[attr.i18nKey]="'COMMON.ACTION.DELETE'" (click)="deleteDriver(element.id)">
 								<mat-icon><span class="icon-Bin"></span></mat-icon>
 							</button>
-							<mat-menu #actionsMenuManage="matMenu" class="menu-color">
+							<!-- <mat-menu #actionsMenuManage="matMenu" class="menu-color">
 								<button mat-menu-item [attr.i18nKey]="'DRIVERS.VEHICLES_ASSOCIATION'"
 									(click)="associationVehicle(element.id)">
 									<mat-icon><span class="icon-refresh"></span></mat-icon>
@@ -59,7 +59,7 @@
 									<mat-icon><span class="icon-edit"></span></mat-icon>
 									{{'COMMON.ACTION.EDIT' | translate}}
 								</button>
-							</mat-menu>
+							</mat-menu> -->
 						</div>
 					</mat-card-content>
 				</mat-card>

@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Breadcrumb, IAuthenticationService, SnackBar } from '@npt/npt-template';
 import { CountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
-import { Driver, FleetManager } from 'src/app/components/domain/bus-firenze-domain';
+import { Driver, DriverVehicle, FleetManager } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service';
@@ -15,7 +15,7 @@ import { ModalOTPComponent } from '../../register-page/modal-otp/modal-otp.compo
 @Component({
   selector: 'app-form-driver',
   templateUrl: './form-driver.component.html',
-  styleUrls: ['./form-driver.component.scss' ]
+  styleUrls: ['./form-driver.component.scss']
 })
 export class FormDriverComponent implements OnInit, OnDestroy {
   @Input() driver: Driver;
@@ -26,6 +26,8 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   public verifyOtp = false;
   public dialCode: CountryCallingCode = '39';
   public breadCrumb: Breadcrumb[] = [];
+  public vehiclesAssociated: DriverVehicle[] = [];
+  public vehiclesDriver: DriverVehicle[] = [];
 
   private subscription: Subscription[] = [];
   private cellForm: string;
@@ -53,6 +55,9 @@ export class FormDriverComponent implements OnInit, OnDestroy {
         ctrlSurname: [this.driver.surname, Validators.required],
         ctrlMail: [this.findContactValue(3), Validators.email]
       });
+      if (this.fleetManager) {
+        this.getVehicleAssociated();
+      }
     } else {
       this.formGroup = this.formBuilder.group({
         ctrlName: ['', Validators.required],
@@ -162,6 +167,14 @@ export class FormDriverComponent implements OnInit, OnDestroy {
 
   public onCountryChange(evt: any): void {
     this.dialCode = evt.dialCode;
+  }
+
+  private getVehicleAssociated(): void {
+    this.subscription.push(
+      this.driverService.getVehiclesByDriver(this.driver.id, this.fleetManager?.id).subscribe(
+        vehicles => (
+          this.vehiclesDriver = vehicles, // tutti i veicoli
+          this.vehiclesAssociated = vehicles.filter(vehicle => vehicle.dateIns))));
   }
 
   private findContactValue(code: number): string {

@@ -10,7 +10,6 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { DriverService } from 'src/app/services/driver.service';
 import { Driver, FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
-import { AssociationDriversVehiclesComponent } from './modal-association-drivers-vehicles/association-drivers-vehicles.component';
 import { ModalNewDriverComponent } from './details-form-driver/modal-new-driver/modal-new-driver.component';
 
 @Component({
@@ -120,19 +119,6 @@ export class DriversComponent implements OnInit, OnDestroy {
         });
       }
     });
-  }
-
-  public associationVehicle(idDriver: number): void {
-    this.subscription.push(
-      this.driverService.getVehiclesByDriver(idDriver, this.fleetManager?.id).subscribe(
-        vehicles => {
-          const dialogRef = this.dialog.open(AssociationDriversVehiclesComponent, {
-            width: '80%',
-            height: this.desktopQuery.matches ? '60%' : '80%',
-            data: { driverVehicle: vehicles, idDriver: idDriver, fleetManagerId: this.fleetManager?.id },
-            autoFocus: false
-          });
-        }));
   }
 
   public openModal(): void {

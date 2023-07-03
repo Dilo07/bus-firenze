@@ -297,6 +297,7 @@
         "TITLE": "Drivers",
         "NEW": "New",
         "NO_DATA": "Nobody drivers present",
+        "INFO": "Driver information",
         "MESSAGE_NEW": "Insert new driver informations",
         "MESSAGE_EDIT": "Edit the driver informations",
         "MESSAGE_MOBILE": "Attenction! You must verify mobile number",

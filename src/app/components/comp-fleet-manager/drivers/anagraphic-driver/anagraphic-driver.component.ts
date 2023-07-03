@@ -6,8 +6,7 @@ import { DriverService } from 'src/app/services/driver.service';
 @Component({
   selector: 'app-anagraphic-driver',
   templateUrl: './anagraphic-driver.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class AnagraphicDriverComponent implements OnInit, OnDestroy {
   public complete = true;

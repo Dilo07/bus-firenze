@@ -1,11 +1,12 @@
-<mat-card>
+<mat-card class="mat-card-movyon">
+	<mat-card-title fxLayout="row" fxLayoutAlign="space-between">
+		{{'DRIVERS.ASSOCIATION' | translate}}
+		<button mat-button class="actionIconButtons" [attr.i18nKey]="'COMMON.ACTION.EDIT'" (click)="openModal()">
+			{{'COMMON.ACTION.EDIT' | translate}}
+			<mat-icon matSuffix><span class="icon-Pencil"></span></mat-icon>
+		</button>
+	</mat-card-title>
 	<mat-card-content>
-		<div fxLayout="row wrap" fxLayoutAlign="space-between">
-			<mat-card-title fxLayout="row">{{'DRIVERS.ASSOCIATION' | translate}}</mat-card-title>
-			<button mat-button class="actionButtons" [attr.i18nKey]="'COMMON.ACTION.EDIT'" (click)="openModal()">
-				{{'COMMON.ACTION.EDIT' | translate}}</button>
-		</div>
-		<hr>
 		<h4 fxLayout="row" fxLayoutAlign="center">
 			{{'DRIVERS.ASSOCIATION_PLATE' | translate}} - {{'DRIVERS.ASSOCIATION_DATE' | translate}}
 		</h4>

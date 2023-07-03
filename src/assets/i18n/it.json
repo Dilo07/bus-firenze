@@ -297,6 +297,7 @@
         "TITLE": "Autisti",
         "NEW": "Nuovo",
         "NO_DATA": "Nessun autista presente",
+        "INFO": "Informazioni autista",
         "MESSAGE_NEW": "Inserisci le informazioni del nuovo Driver",
         "MESSAGE_EDIT": "Modifica le informazioni del Driver",
         "MESSAGE_MOBILE": "Attenzione! è necessario verificare il numero di cellulare",
