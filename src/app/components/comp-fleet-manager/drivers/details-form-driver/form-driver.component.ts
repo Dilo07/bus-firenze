@@ -44,7 +44,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   ) {
     this.driver = this.router.getCurrentNavigation()?.extras.state?.driver as Driver;
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
-    this.cellularRequired = this.router.getCurrentNavigation()?.extras.state?.cellularRequired as boolean;
+    this.cellularRequired = this.router.getCurrentNavigation()?.extras.state?.cellularRequired as boolean; // obbligo inserimento num cellulare
   }
 
   async ngOnInit(): Promise<void> {

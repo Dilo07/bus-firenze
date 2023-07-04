@@ -61,7 +61,7 @@ export class DriversComponent implements OnInit, OnDestroy {
       ctrlSearch: [''],
     });
     this.getDrivers();
-    if (this.fleetManager) {
+    if (this.fleetManager) { // solo se op movyon o admin
       this.breadCrumb = [
         {
           label: 'Fleet manager',

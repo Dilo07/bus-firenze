@@ -39,104 +39,14 @@
 						<mat-card-subtitle>{{'FLEET-MANAGER.CELL' | translate}}: {{element | findContactValue: 1}}
 						</mat-card-subtitle>
 						<div fxLayout="row" fxLayoutAlign="end">
-							<!-- <button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
-								[attr.i18nKey]="'menu'">
-								<mat-icon><span class="icon-Horizontal-dots"></span></mat-icon>
-							</button> -->
 							<button mat-icon-button matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
 								[attr.i18nKey]="'COMMON.ACTION.DELETE'" (click)="deleteDriver(element.id)">
 								<mat-icon><span class="icon-Bin"></span></mat-icon>
 							</button>
-							<!-- <mat-menu #actionsMenuManage="matMenu" class="menu-color">
-								<button mat-menu-item [attr.i18nKey]="'DRIVERS.VEHICLES_ASSOCIATION'"
-									(click)="associationVehicle(element.id)">
-									<mat-icon><span class="icon-refresh"></span></mat-icon>
-									{{'DRIVERS.VEHICLES_ASSOCIATION' | translate}}
-								</button>
-								<button mat-menu-item [routerLink]="['../form-Driver']"
-									[state]="{driver: element, fleetManager: fleetManager}"
-									[attr.i18nKey]="'COMMON.ACTION.EDIT'">
-									<mat-icon><span class="icon-edit"></span></mat-icon>
-									{{'COMMON.ACTION.EDIT' | translate}}
-								</button>
-							</mat-menu> -->
 						</div>
 					</mat-card-content>
 				</mat-card>
 			</div>
-			<!-- <div class="mat-elevation-z8 example-container"
-						[style.display]="dataSource.data.length === 0 ? 'none' : ''">
-						<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="name"
-							matSortDirection="asc">
-							<ng-container matColumnDef="name">
-								<mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-									{{'FLEET-MANAGER.NAME' | translate}}
-								</mat-header-cell>
-								<mat-cell *matCellDef="let element">
-									<span class="mobile-label">{{'FLEET-MANAGER.NAME' | translate}}</span>
-									{{element.name}}
-								</mat-cell>
-							</ng-container>
-
-							<ng-container matColumnDef="surname">
-								<mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-									{{'FLEET-MANAGER.SURNAME' | translate}}
-								</mat-header-cell>
-								<mat-cell *matCellDef="let element">
-									<span class="mobile-label">{{'FLEET-MANAGER.SURNAME' | translate}}</span>
-									{{element.surname}}
-								</mat-cell>
-							</ng-container>
-
-							<ng-container matColumnDef="e-mail">
-								<mat-header-cell *matHeaderCellDef> e-mail </mat-header-cell>
-								<mat-cell *matCellDef="let element">
-									<span class="mobile-label">e-mail</span>
-									{{element | findContactValue: 3}}
-								</mat-cell>
-							</ng-container>
-
-							<ng-container matColumnDef="mobile">
-								<mat-header-cell *matHeaderCellDef> {{'FLEET-MANAGER.CELL' | translate}}
-								</mat-header-cell>
-								<mat-cell *matCellDef="let element">
-									<span class="mobile-label">{{'FLEET-MANAGER.CELL' | translate}}</span>
-									{{element | findContactValue: 1}}
-								</mat-cell>
-							</ng-container>
-
-							<ng-container matColumnDef="actions">
-								<mat-header-cell *matHeaderCellDef> </mat-header-cell>
-								<mat-cell *matCellDef="let element" style="text-align: end;">
-									<button mat-icon-button matTooltip="menu" [matMenuTriggerFor]="actionsMenuManage"
-										[attr.i18nKey]="'menu'">
-										<mat-icon><span class="icon-Horizontal-dots"></span></mat-icon>
-									</button>
-									<mat-menu #actionsMenuManage="matMenu" class="menu-color">
-										<button mat-menu-item [attr.i18nKey]="'DRIVERS.VEHICLES_ASSOCIATION'"
-											(click)="associationVehicle(element.id)">
-											<mat-icon><span class="icon-refresh"></span></mat-icon>
-											{{'DRIVERS.VEHICLES_ASSOCIATION' | translate}}
-										</button>
-										<button mat-menu-item [routerLink]="['../form-Driver']"
-											[state]="{driver: element, fleetManagerId: fleetManagerId}"
-											[attr.i18nKey]="'COMMON.ACTION.EDIT'">
-											<mat-icon><span class="icon-edit"></span></mat-icon>
-											{{'COMMON.ACTION.EDIT' | translate}}
-										</button>
-									</mat-menu>
-									<button mat-icon-button matTooltip="{{'COMMON.ACTION.DELETE' | translate}}"
-										[attr.i18nKey]="'COMMON.ACTION.DELETE'" (click)="deleteDriver(element.id)">
-										<mat-icon><span class="icon-delete"></span></mat-icon>
-									</button>
-								</mat-cell>
-							</ng-container>
-
-							<mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns; sticky: true">
-							</mat-header-row>
-							<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-						</mat-table>
-					</div> -->
 			<mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="6"
 				[pageSizeOptions]="[6, 12, 24]"></mat-paginator>
 			<div *ngIf="dataSource.data.length === 0 && complete"> {{'DRIVERS.NO_DATA' | translate}}</div>

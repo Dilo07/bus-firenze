@@ -29,7 +29,7 @@ export class AssociationVehiclesComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
-    if (this.roleDriver) {
+    if (this.roleDriver) { // se è un driver chiama l'api
       this.getVehiclesDriver();
     }
   }
