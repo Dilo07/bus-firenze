@@ -7,6 +7,7 @@ import {
 } from './deposit.pipe';
 import { FindContactValuePipe } from './find-contact-value.pipe';
 import { SingleDatePipe } from './single-date.pipe';
+import { StatusVehiclePipe } from './status-vehicle.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SingleDatePipe } from './single-date.pipe';
     RequestDateValidPipe,
     DocumentRemoveObu,
     DocumentTypeFind,
-    SingleDatePipe
+    SingleDatePipe,
+    StatusVehiclePipe
   ],
   imports: [CommonModule],
   exports: [
@@ -30,7 +32,8 @@ import { SingleDatePipe } from './single-date.pipe';
     RequestDateValidPipe,
     DocumentRemoveObu,
     DocumentTypeFind,
-    SingleDatePipe
+    SingleDatePipe,
+    StatusVehiclePipe
   ]
 })
 export class PipesModule { }

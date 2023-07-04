@@ -19,6 +19,7 @@ export class LiveStreamService {
   getGeometryLive(): Observable<Geometry[]> {
     return this.http.get<Geometry[]>(this.apiUrl + '/live/inner/geom')
       .pipe(catchError(err => { throw err; }));
+    /* return of([]); */
   }
 
   getStreamLive(fleetManagerId?: number): Observable<VehicleTripPersistence[]> {

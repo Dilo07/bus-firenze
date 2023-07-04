@@ -11,6 +11,7 @@ import { FleetManager } from '../../domain/bus-firenze-domain';
 })
 export class AnagraphicFleetManagerComponent implements OnInit, OnDestroy {
   public fleetManager: FleetManager;
+  public complete = true;
 
   private subscription: Subscription[] = [];
 
@@ -19,9 +20,12 @@ export class AnagraphicFleetManagerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.subscription.push(this.fleetManagerService.getFleetManagerInfo().subscribe(
-      data => this.fleetManager = data
-    ));
+    this.complete = false;
+    this.subscription.push(this.fleetManagerService.getFleetManagerInfo().subscribe({
+      next: (data) => this.fleetManager = data,
+      error: () => this.complete = true,
+      complete: () => this.complete = true,
+    }));
   }
 
   ngOnDestroy(): void {

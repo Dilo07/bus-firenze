@@ -9,6 +9,8 @@ import { ModalVehicleDetailsComponent } from './modal-vehicle-details/modal-vehi
 import { RealTimeComponent } from './real-time.component';
 import { RealTimeRoutingModule } from './real-time.routing';
 import { TableRealTimeComponent } from './table-real-time/table-real-time.component';
+import { PipesModule } from 'src/app/shared/utils/pipes/pipes.module';
+import { StatusVehiclePipe } from 'src/app/shared/utils/pipes/status-vehicle.pipe';
 
 
 @NgModule({
@@ -16,6 +18,9 @@ import { TableRealTimeComponent } from './table-real-time/table-real-time.compon
     RealTimeComponent,
     TableRealTimeComponent,
     ModalVehicleDetailsComponent
+  ],
+  providers: [
+    StatusVehiclePipe
   ],
   imports: [
     CommonModule,
@@ -26,7 +31,8 @@ import { TableRealTimeComponent } from './table-real-time/table-real-time.compon
     FlexLayoutModule,
     TranslateModule,
     RealTimeRoutingModule,
-    BreadcrumbNptModule
+    BreadcrumbNptModule,
+    PipesModule
   ]
 })
 export class RealTimeModule { }

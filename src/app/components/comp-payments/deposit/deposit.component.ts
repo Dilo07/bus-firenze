@@ -1,16 +1,13 @@
-import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Breadcrumb, FileViewer, SnackBar, ViewFileModalComponent } from '@npt/npt-template';
+import { Breadcrumb, FileViewer, SnackBar } from '@npt/npt-template';
 import { Observable, Subscription } from 'rxjs';
-import { InstallerService } from 'src/app/services/installer.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { DepositType, DocumentObu, DocumentVehicle, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { DepositType, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
 
 @Component({
   selector: 'app-deposit',
@@ -51,10 +48,8 @@ export class DepositComponent implements OnInit {
   constructor(
     private router: Router,
     private vehicleService: VehicleService,
-    private installerService: InstallerService,
     private snackBar: SnackBar,
-    private formBuilder: FormBuilder,
-    private dialog: MatDialog
+    private formBuilder: FormBuilder
   ) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
     if (this.router.getCurrentNavigation()?.extras.state?.stateBreadCrumb as FleetManager) {

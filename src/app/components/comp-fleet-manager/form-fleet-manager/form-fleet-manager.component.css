@@ -1,3 +1,7 @@
 ::ng-deep .iti__flag-container {
     top: 20px !important;
 }
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+}
