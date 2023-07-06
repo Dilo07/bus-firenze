@@ -291,7 +291,9 @@
         "REQVALID": "Richiesta deposito validata il ",
         "OPEN": "Apri veicoli",
         "CLOSE": "Chiudi veicoli",
-        "VERIFY": "Verifica veicolo"
+        "VERIFY": "Verifica veicolo",
+        "SENDMAIL": "Invia mail di avviso",
+        "CONFIRMAIL": "Sei sicuro di voler inviare la mail di avviso?"
     },
     "DRIVERS": {
         "TITLE": "Autisti",
@@ -539,6 +541,9 @@
         "generic": "Errore lato server",
         "alert": {
             "send": "Errore invio messaggio di allerta"
+        },
+        "mail": {
+            "send": "Errore invio mail"
         },
         "notification": {
             "send": "Errore invio notifiche"

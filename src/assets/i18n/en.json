@@ -291,7 +291,9 @@
         "REQVALID": "Deposit request validate at ",
         "OPEN": "Open vehicles",
         "CLOSE": "Close vehicles",
-        "VERIFY": "Verify vehicle"
+        "VERIFY": "Verify vehicle",
+        "SENDMAIL": "Invia mail di avviso",
+        "CONFIRMAIL": "Are you sure to send the warning deposit mail?"
     },
     "DRIVERS": {
         "TITLE": "Drivers",
@@ -538,10 +540,13 @@
     "error": {
         "generic": "Error server side",
         "alert": {
-            "send": "Errore nell'invio messaggio"
+            "send": "Error nell'invio messaggio"
+        },
+        "mail": {
+            "send": "Error on sending mail"
         },
         "notification": {
-            "send": "Errore nell'invio notifica"
+            "send": "Error on send notification"
         },
         "code": {
             "lang": "Lang not supported",
