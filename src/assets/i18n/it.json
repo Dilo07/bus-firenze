@@ -319,6 +319,7 @@
         "DELETE_CONFIRM": "Sei sicuro di voler cancellare questo autista?"
     },
     "OBU": {
+        "TITLES": "Gestione obu",
         "ASSIGN": "Assegna Obu",
         "ASSIGN_SUCCESS": "Obu assegnato correttamente",
         "CHANGE": "Cambia Obu",

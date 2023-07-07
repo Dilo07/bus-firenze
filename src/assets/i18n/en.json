@@ -319,6 +319,7 @@
         "DELETE_CONFIRM": "Are you sure of delete this driver?"
     },
     "OBU": {
+        "TITLES": "Manage obu",
         "ASSIGN": "Assign Obu",
         "ASSIGN_SUCCESS": "Obu assign correctly",
         "CHANGE": "Change Obu",
