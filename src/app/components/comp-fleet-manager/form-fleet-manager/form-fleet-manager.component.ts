@@ -1,16 +1,15 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Breadcrumb, IAuthenticationService, SnackBar } from '@npt/npt-template';
+import { Breadcrumb, SnackBar } from '@npt/npt-template';
 import parsePhoneNumber, { CountryCallingCode } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
-import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { FleetManagerService } from 'src/app/services/fleet-manager.service';
 import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service';
-import { euroNations, FLEETMNG_TYPE, worldNations } from '../../domain/bus-firenze-constants';
+import { FLEETMNG_TYPE, euroNations, worldNations } from '../../domain/bus-firenze-constants';
 import { FleetManager } from '../../domain/bus-firenze-domain';
 import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 import { ModalOTPComponent } from '../register-page/modal-otp/modal-otp.component';
@@ -31,7 +30,6 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public fileModule: File;
   public fileIdentityCard: File;
   public fileCommerceReg: File;
-  public roleFleetManager: boolean;
   public isEuropeNat: boolean;
   public isItalian: boolean;
   public nations = worldNations;
@@ -57,22 +55,18 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
     private snackBar: SnackBar,
     private registerService: NoAuthRegisterService,
     private translateService: TranslateService,
-    private fleetManagerService: FleetManagerService,
-    @Inject('authService') private authService: IAuthenticationService) {
+    private fleetManagerService: FleetManagerService) {
     this.data = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
   }
 
-  async ngOnInit(): Promise<void> {
-    if (!this.register) {
-      await this.authService.getUserRoles().then((res: string[]) => this.roleFleetManager = res.includes(ROLES.FLEETMNG));
-    }
+  ngOnInit(): void {
     // se ci sono dati è un edit form altrimenti è un add form
     if (this.data) {
       // cf, p.iva validator sono valorizzati in base alla nation
       this.formGroup = this.formBuilder.group({
         ctrlContractCode: [this.data.contractCode],
         ctrlSapCode: [this.data.idSap],
-        ctrlUser: [{ value: this.data.companyType, disabled: this.roleFleetManager ? true : false }, Validators.required],
+        ctrlUser: [this.data.companyType, Validators.required],
         ctrlDest: [this.data.codeDest],
         ctrlName: [this.data.name, Validators.required],
         ctrlSurname: [this.data.surname, Validators.required],
@@ -86,7 +80,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
         ctrlCity: [this.data.city, Validators.required],
         ctrlDistrict: [this.data.district],
         ctrlCAP: [this.data.cap],
-        ctrlNat: [{ value: this.data.country, disabled: this.roleFleetManager ? true : false }, Validators.required]
+        ctrlNat: [this.data.country, Validators.required]
       });
       this.userSel = this.data.companyType;
       const phoneNumber = parsePhoneNumber(this.formGroup.get('ctrlCell').value);
@@ -314,7 +308,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   }
 
   public async pivaValidator(): Promise<void> {
-    if (!this.formGroup.controls.ctrlpIva.invalid && this.isEuropeNat && !this.roleFleetManager) {
+    if (!this.formGroup.controls.ctrlpIva.invalid && this.isEuropeNat) {
       const pIva = this.formGroup.get('ctrlpIva').value;
       const nat = this.formGroup.get('ctrlNat').value;
       this.completePiva = false;
@@ -356,7 +350,7 @@ export class FormFleetManagerComponent implements OnInit, OnDestroy {
   public async pivaOrFcValidator(): Promise<void> {
     const fiscalCode = this.formGroup.get('ctrlCF').value;
     const userType = this.formGroup.get('ctrlUser').value;
-    if (!this.formGroup.controls.ctrlCF.invalid && !this.roleFleetManager) {
+    if (!this.formGroup.controls.ctrlCF.invalid) {
       if (userType === this.fleetType.dittaIndividuale) {
         const codiceFiscale = require('codice-fiscale-js');
         this.formGroup.patchValue({ ctrlCF: fiscalCode.toUpperCase() });

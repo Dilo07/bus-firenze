@@ -12,11 +12,56 @@ import { LiveStreamService } from 'src/app/services/live-stream.service';
 import { FirenzeMapUtils } from 'src/app/shared/utils/map/Firenze-map.utils';
 import { TIMEREFRESH } from '../domain/bus-firenze-constants';
 import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Button } from '@npt/npt-map/lib/utils/control.utils';
+import { StatusVehiclePipe } from 'src/app/shared/utils/pipes/status-vehicle.pipe';
 
 @Component({
   selector: 'app-real-time',
   templateUrl: './real-time.component.html',
-  styles: [``],
+  styles: [`
+  .card-real-time {
+    margin: 2px;
+  }
+  `],
+  animations: [
+    trigger('slideInOut', [
+      state(
+        'on',
+        style({
+          'overflow-y': 'auto',
+          'max-height': '600px',
+          'max-width': '20%',
+          'box-shadow': '0px 4px 16px rgba(0, 0, 0, 0.25)'
+        })
+      ),
+      state(
+        'off',
+        style({
+          'max-width': '2%',
+          'box-shadow': '0px 4px 16px rgba(0, 0, 0, 0.25)'
+        })
+      ),
+      transition('on => off', animate('500ms')),
+      transition('off => on', animate('500ms')),
+    ]),
+    trigger('maxWidth', [
+      state(
+        'on',
+        style({
+          'max-width': '80%',
+        })
+      ),
+      state(
+        'off',
+        style({
+          'max-width': '100%',
+        })
+      ),
+      transition('on => off', animate('500ms')),
+      transition('off => on', animate('500ms')),
+    ])
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RealTimeComponent {
@@ -25,22 +70,28 @@ export class RealTimeComponent {
   public fleetManager: FleetManager;
   public complete = true;
   public vehicleTrip: VehicleTripPersistence[] = [];
+  public filteredTrip: VehicleTripPersistence[] = [];
   public center = [11.206119915108518, 43.81031349352526];
   public stop = true;
   public actualTime = RefreshOption.time5minutes;
   public times: RefreshInterface[] = TIMEREFRESH;
   public layersPopup = [FirenzeMapUtils.layerEnum.POINT_REAL_TIME];
   public breadCrumb: Breadcrumb[] = [];
+  public detailsBar: 'on' | 'off' = 'on';
 
   private subscription: Subscription[] = [];
   private geometry: Geometry[] | GeoJSON[] = [];
   private interval: any;
   private map: Map;
+  private activeVehicle: Button;
+  private warningVehicle: Button;
+  private errorVehicle: Button;
 
   constructor(
     private router: Router,
     private liveStreamService: LiveStreamService,
     private cdr: ChangeDetectorRef,
+    private pipeStateVehicle: StatusVehiclePipe,
     private translate: TranslateService) {
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
     this.createBreadCrumb();
@@ -50,17 +101,14 @@ export class RealTimeComponent {
     this.map = event;
     this.complete = false;
     this.getGeom();
-    /* this.getTrip(); */
     this.setMapControls();
   }
 
   public getTrip(): void {
-    this.mapChild.removeLayers([FirenzeMapUtils.layerEnum.LINE_REAL_TIME, FirenzeMapUtils.layerEnum.POINT_REAL_TIME]);
     this.subscription.push(this.liveStreamService.getStreamLive(this.fleetManager?.id).subscribe({
       next: (trip) => {
         this.vehicleTrip = trip;
         this.drawLine();
-        this.drawPoint();
       },
       error: () => (this.complete = true, this.cdr.markForCheck()),
       complete: () => (this.complete = true, this.cdr.markForCheck())
@@ -91,7 +139,7 @@ export class RealTimeComponent {
         {
           label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
           url: '../selection-card',
-          state: {fleetManager: this.fleetManager}
+          state: { fleetManager: this.fleetManager }
         },
         {
           label: 'Real Time',
@@ -121,10 +169,41 @@ export class RealTimeComponent {
 
 
   private drawLine(): void {
-    this.vehicleTrip.forEach(trip => {
+    this.filteredTrip = [];
+    this.mapChild.removeLayers([FirenzeMapUtils.layerEnum.LINE_REAL_TIME, FirenzeMapUtils.layerEnum.POINT_REAL_TIME]);
+    const attributeActive = document.getElementById('activeVehicle')?.getAttribute('selected');
+    const attributeWarning = document.getElementById('warningVehicle')?.getAttribute('selected');
+    const attributeError = document.getElementById('errorVehicle')?.getAttribute('selected');
+    this.vehicleTrip.forEach((trip) => {
+      if ((!attributeActive || attributeActive === 'selected') && this.pipeStateVehicle.transform(trip) === 'greenIcon') {
+        this.filteredTrip.push(trip);
+      }
+      if ((!attributeWarning || attributeWarning === 'selected') && this.pipeStateVehicle.transform(trip) === 'yellowIcon') {
+        this.filteredTrip.push(trip);
+      }
+      if ((!attributeError || attributeError === 'selected') && this.pipeStateVehicle.transform(trip) === 'redIcon') {
+        this.filteredTrip.push(trip);
+      }
+    });
+    this.filteredTrip.forEach(trip => {
       const style = this.getStyle(trip);
       this.mapChild.drawLine([trip.shape.points], FirenzeMapUtils.layerEnum.LINE_REAL_TIME, style);
     });
+    this.drawPoint(this.filteredTrip);
+  }
+
+  private drawPoint(vehicleTrip: VehicleTripPersistence[]): void {
+    vehicleTrip.forEach(trip => {
+      const length = trip.shape.points.coordinates.length;
+      // se c'è solo un punto non disegna l'arrowblue
+      if (length > 1) {
+        const rotation = this.calculateRotation(trip);
+        const text = this.generateText(trip);
+        this.mapChild.drawPoint([trip.shape.points.coordinates[length - 1].x, trip.shape.points.coordinates[length - 1].y],
+          FirenzeMapUtils.layerEnum.POINT_REAL_TIME, FirenzeMapUtils.style.ARROW_BLUE(rotation), text, true);
+      }
+    });
+    this.cdr.markForCheck();
   }
 
   private getStyle(trip: VehicleTripPersistence): string {
@@ -137,19 +216,6 @@ export class RealTimeComponent {
     } else {
       return FirenzeMapUtils.style.SECTION_LINKS;
     }
-  }
-
-  private drawPoint(): void {
-    this.vehicleTrip.forEach(trip => {
-      const length = trip.shape.points.coordinates.length;
-      // se c'è solo un punto non disegna l'arrowblue
-      if (length > 1) {
-        const rotation = this.calculateRotation(trip);
-        const text = this.generateText(trip);
-        this.mapChild.drawPoint([trip.shape.points.coordinates[length - 1].x, trip.shape.points.coordinates[length - 1].y],
-          FirenzeMapUtils.layerEnum.POINT_REAL_TIME, FirenzeMapUtils.style.ARROW_BLUE(rotation), text, true);
-      }
-    });
   }
 
   private calculateRotation(trip: VehicleTripPersistence): number {
@@ -195,34 +261,50 @@ export class RealTimeComponent {
   }
 
   private setMapControls(): void {
-    const activeVehicle = new MapUtils.Control.Enum.BUTTON(
+    this.activeVehicle = new MapUtils.Control.Enum.BUTTON(
       'activeVehicle',
       this.translate.instant('REAL-TIME.ACTIVEVEHICLE'),
       '40px',
-      null,
-      null,
-      true
+      'icon-Pin-rounded',
+      () => this.selectUnselectButton('activeVehicle'),
+      false,
+      '350px'
     );
 
-    const warningVehicle = new MapUtils.Control.Enum.BUTTON(
+    this.warningVehicle = new MapUtils.Control.Enum.BUTTON(
       'warningVehicle',
       this.translate.instant('REAL-TIME.WARNINGVEHICLE'),
-      '80px',
-      null,
-      null,
-      true
+      '40px',
+      'icon-Pin-rounded',
+      () => this.selectUnselectButton('warningVehicle'),
+      false,
+      '500px'
     );
 
-    const errorVehicle = new MapUtils.Control.Enum.BUTTON(
+    this.errorVehicle = new MapUtils.Control.Enum.BUTTON(
       'errorVehicle',
       this.translate.instant('REAL-TIME.ERRORVEHICLE'),
-      '120px',
-      null,
-      null,
-      true
+      '40px',
+      'icon-Pin-rounded',
+      () => this.selectUnselectButton('errorVehicle'),
+      false,
+      '700px'
     );
 
-    MapUtils.Control.SetControls(this.map, [activeVehicle, warningVehicle, errorVehicle]);
+    MapUtils.Control.SetControls(this.map, [this.activeVehicle, this.warningVehicle, this.errorVehicle]);
+  }
+
+  private selectUnselectButton(id: string): void {
+    const element = document.getElementById(id);
+    const attribute = element.getAttribute('selected');
+    if (!attribute || attribute === 'selected') {
+      element.setAttribute('selected', 'unselected');
+      document.getElementById(id).style.opacity = '0.64';
+    } else if (attribute === 'unselected') {
+      element.setAttribute('selected', 'selected');
+      document.getElementById(id).style.opacity = '1';
+    }
+    this.drawLine();
   }
 
 }

@@ -1,0 +1,13 @@
+::ng-deep .iti__flag-container {
+    top: 20px !important;
+}
+.border-info {
+    border: 1px solid #1c3775;
+    border-radius: 10px;
+    padding: 20px;
+}
+.actionIconButtons:hover:enabled {
+    .icon-Pencil::before {
+        color: white;
+    }
+}

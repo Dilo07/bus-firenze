@@ -28,6 +28,6 @@
         </mat-card-content>
     </mat-card>
 </div>
-<mat-paginator style="margin-top: 20px;" [style.display]="fleetManagerList.length === 0 ? 'none' : '' " [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 25]" (page)="pageChanged($event)"></mat-paginator>
+<mat-paginator style="margin-top: 20px;" [style.display]="fleetManagerList.length === 0 ? 'none' : '' " [pageSize]="6"
+    [pageSizeOptions]="[6, 12, 24]" (page)="pageChanged($event)"></mat-paginator>
 <div *ngIf="fleetManagerList.length === 0 && complete">{{ 'FLEET-MANAGER.NO_DATA' | translate}}</div>

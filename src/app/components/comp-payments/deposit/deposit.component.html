@@ -7,16 +7,17 @@
     </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
         <form [formGroup]="search" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="20px">
-            <mat-form-field appearance="outline" fxFlex="75">
+            <mat-form-field appearance="outline" fxFlex="100">
                 <mat-label>{{'COMMON.ACTION.SEARCH' | translate}}</mat-label>
                 <input matInput type="search" formControlName="ctrlSearch" autocomplete="off">
                 <button matPrefix mat-icon-button (click)="getVehicle()">
                     <mat-icon>search</mat-icon>
                 </button>
             </mat-form-field>
-            <mat-slide-toggle formControlName="ctrlViewAll" (change)="getVehicle()">
-                {{ (search.get('ctrlViewAll').value ? 'VEHICLE.WITHDOC' : 'VEHICLE.NEEDDOC') | translate}}
-            </mat-slide-toggle>
+            <mat-radio-group fxLayoutGap="10px" formControlName="ctrlViewAll" (change)="getVehicle()">
+                <mat-radio-button [value]="true">{{'VEHICLE.WITHDOC' | translate}}</mat-radio-button>
+                <mat-radio-button [value]="false">{{'VEHICLE.NEEDDOC' | translate}}</mat-radio-button>
+            </mat-radio-group>
         </form>
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
         <div fxLayout="row wrap" fxLayoutAlign="start">
@@ -177,8 +178,8 @@
                 <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
             </mat-table>
         </div> -->
-        <mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+        <mat-paginator [style.display]="vehicleList.data.length === 0 ? 'none' : '' " [pageSize]="6"
+            [pageSizeOptions]="[6, 12, 24]"></mat-paginator>
         <div *ngIf="vehicleList.data.length === 0 && complete"> {{'VEHICLE.NO_DATA' | translate}}</div>
     </mat-card-content>
 </mat-card>

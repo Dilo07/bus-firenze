@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IAuthenticationService, SnackBar } from '@npt/npt-template';
+import { Breadcrumb, IAuthenticationService, SnackBar } from '@npt/npt-template';
 import { CountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
 import { Subscription } from 'rxjs';
-import { Driver, FleetManager } from 'src/app/components/domain/bus-firenze-domain';
+import { Driver, DriverVehicle, FleetManager } from 'src/app/components/domain/bus-firenze-domain';
 import { ROLES } from 'src/app/npt-template-menu/menu-item.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { NoAuthRegisterService } from 'src/app/services/noAuth-register.service';
@@ -15,12 +15,7 @@ import { ModalOTPComponent } from '../../register-page/modal-otp/modal-otp.compo
 @Component({
   selector: 'app-form-driver',
   templateUrl: './form-driver.component.html',
-  styles: [`
-  ::ng-deep .iti__flag-container {
-    top: 20px !important;
-  }
-  `
-  ]
+  styleUrls: ['./form-driver.component.scss']
 })
 export class FormDriverComponent implements OnInit, OnDestroy {
   @Input() driver: Driver;
@@ -30,6 +25,9 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   public roleDriver: boolean;
   public verifyOtp = false;
   public dialCode: CountryCallingCode = '39';
+  public breadCrumb: Breadcrumb[] = [];
+  public vehiclesAssociated: DriverVehicle[] = [];
+  public vehiclesDriver: DriverVehicle[] = [];
 
   private subscription: Subscription[] = [];
   private cellForm: string;
@@ -46,7 +44,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
   ) {
     this.driver = this.router.getCurrentNavigation()?.extras.state?.driver as Driver;
     this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
-    this.cellularRequired = this.router.getCurrentNavigation()?.extras.state?.cellularRequired as boolean;
+    this.cellularRequired = this.router.getCurrentNavigation()?.extras.state?.cellularRequired as boolean; // obbligo inserimento num cellulare
   }
 
   async ngOnInit(): Promise<void> {
@@ -57,6 +55,9 @@ export class FormDriverComponent implements OnInit, OnDestroy {
         ctrlSurname: [this.driver.surname, Validators.required],
         ctrlMail: [this.findContactValue(3), Validators.email]
       });
+      if (this.fleetManager) {
+        this.getVehicleAssociated();
+      }
     } else {
       this.formGroup = this.formBuilder.group({
         ctrlName: ['', Validators.required],
@@ -69,6 +70,28 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     }
     if (this.roleDriver) {
       this.formGroup.addControl('CtrlCell', this.formBuilder.control(this.findContactValue(1), Validators.required));
+    }
+    if (this.fleetManager && this.driver) {
+      this.breadCrumb = [
+        {
+          label: 'Fleet manager',
+          url: '/manage'
+        },
+        {
+          label: `${this.fleetManager.name} ${this.fleetManager.surname}`,
+          url: '../selection-card',
+          state: { fleetManager: this.fleetManager }
+        },
+        {
+          label: 'DRIVERS.TITLE',
+          url: '../drivers',
+          state: { fleetManager: this.fleetManager }
+        },
+        {
+          label: `${this.driver.name} ${this.driver.surname}`,
+          url: ''
+        },
+      ];
     }
   }
 
@@ -110,28 +133,10 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     }));
   }
 
-  public addDriver(): void {
-    const newDriver = new Driver();
-    newDriver.name = this.formGroup.get('ctrlName').value;
-    newDriver.surname = this.formGroup.get('ctrlSurname').value;
-    newDriver.contacts = [];
-    const mail = { code: 3, value: this.formGroup.get('ctrlMail').value };
-    newDriver.contacts.push(mail);
-    this.driverService.addDriver(newDriver, this.fleetManager.id).subscribe({
-      error: () => this.snackBar.showMessage('DRIVERS.ADD_ERROR', 'ERROR'),
-      complete: () => {
-        this.snackBar.showMessage('DRIVERS.ADD_SUCCESS', 'INFO');
-        if (!this.roleDriver) {
-          const url = this.fleetManager.id ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
-          this.router.navigate([url], { state: { fleetManagerId: this.fleetManager.id } });
-        }
-      }
-    });
-  }
-
   public editDriver(): void {
-    const editDriver = this.driver;
+    const editDriver = new Driver();
     const mobile = this.findContactValue(1);
+    editDriver.id = this.driver.id;
     editDriver.name = this.formGroup.get('ctrlName').value;
     editDriver.surname = this.formGroup.get('ctrlSurname').value;
     editDriver.contacts = [];
@@ -154,7 +159,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
           }
           if (!this.roleDriver) {
             const url = this.fleetManager.id ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
-            this.router.navigate([url], { state: { fleetManagerId: this.fleetManager.id } });
+            this.router.navigate([url], { state: { fleetManager: this.fleetManager } });
           }
         }
       });
@@ -162,6 +167,14 @@ export class FormDriverComponent implements OnInit, OnDestroy {
 
   public onCountryChange(evt: any): void {
     this.dialCode = evt.dialCode;
+  }
+
+  private getVehicleAssociated(): void {
+    this.subscription.push(
+      this.driverService.getVehiclesByDriver(this.driver.id, this.fleetManager?.id).subscribe(
+        vehicles => (
+          this.vehiclesDriver = vehicles, // tutti i veicoli
+          this.vehiclesAssociated = vehicles.filter(vehicle => vehicle.dateIns))));
   }
 
   private findContactValue(code: number): string {

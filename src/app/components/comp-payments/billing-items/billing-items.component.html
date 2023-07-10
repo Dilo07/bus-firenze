@@ -22,7 +22,8 @@
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100">
                             <mat-label> {{'BILLING_ITEMS.STATUS' | translate}}</mat-label>
-                            <mat-select formControlName="ctrlBillingStatus" required (selectionChange)="getBillingItems()">
+                            <mat-select formControlName="ctrlBillingStatus" required
+                                (selectionChange)="getBillingItems()">
                                 <mat-option *ngFor="let status of billingStatus;" [value]="status">
                                     {{'BILLING_STATUS.' + status | translate}}
                                 </mat-option>
@@ -97,8 +98,8 @@
             <mat-header-row class="mobileHeader" *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let element; columns: displayedColumns;" class="hover-row"></mat-row>
         </mat-table>
-        <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+        <mat-paginator [style.display]="dataSource.data.length === 0 ? 'none' : '' " [pageSize]="6"
+            [pageSizeOptions]="[6, 12, 24]"></mat-paginator>
         <div *ngIf="dataSource.data.length === 0 && complete"> {{'BILLING_ITEMS.NO_DATA' | translate}}</div>
     </mat-card-content>
 </mat-card>

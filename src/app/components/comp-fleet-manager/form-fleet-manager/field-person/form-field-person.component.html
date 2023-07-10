@@ -1,12 +1,12 @@
 <div [formGroup]="personForm" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start">
     <mat-form-field fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30" appearance="outline">
         <mat-label>{{'FLEET-MANAGER.NAME' | translate}}</mat-label>
-        <input matInput type="text" formControlName="ctrlName" maxlength="40" required [readonly]="readOnlyName">
+        <input matInput type="text" formControlName="ctrlName" maxlength="40" required>
         <mat-error>{{'FLEET-MANAGER.INSERT_NAME' | translate}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">
         <mat-label>{{'FLEET-MANAGER.SURNAME' | translate}}</mat-label>
-        <input matInput type="text" formControlName="ctrlSurname" maxlength="40" required [readonly]="readOnlyName">
+        <input matInput type="text" formControlName="ctrlSurname" maxlength="40" required>
         <mat-error>{{'FLEET-MANAGER.INSERT_SURNAME' | translate}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="30" fxFlex.gt-md="30">

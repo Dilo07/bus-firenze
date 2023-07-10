@@ -7,7 +7,7 @@
     </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" style="margin-top: 20px;">
         <ng-container *ngIf="!withDocument">
-            <h4 style="color: #1C3775;">Carica documenti</h4>
+            <h4>Carica documenti</h4>
             <div fxLayout="row wrap" fxLayoutAlign="start">
                 <mat-card class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="45" fxFlex.gt-md="45">
                     <mat-card-title fxLayoutAlign="center center">{{'VEHICLE.RIC_DEPOSIT' | translate}}</mat-card-title>
@@ -36,7 +36,7 @@
             </div>
         </ng-container>
         <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-        <h4 style="color: #1C3775;">Documenti</h4>
+        <h4>Documenti</h4>
         <mat-list role="list">
             <mat-list-item role="listitem">
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">

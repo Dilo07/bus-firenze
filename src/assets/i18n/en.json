@@ -291,12 +291,15 @@
         "REQVALID": "Deposit request validate at ",
         "OPEN": "Open vehicles",
         "CLOSE": "Close vehicles",
-        "VERIFY": "Verify vehicle"
+        "VERIFY": "Verify vehicle",
+        "SENDMAIL": "Send advice mail to fleet manager",
+        "CONFIRMAIL": "Are you sure to send the warning deposit mail?"
     },
     "DRIVERS": {
         "TITLE": "Drivers",
         "NEW": "New",
         "NO_DATA": "Nobody drivers present",
+        "INFO": "Driver information",
         "MESSAGE_NEW": "Insert new driver informations",
         "MESSAGE_EDIT": "Edit the driver informations",
         "MESSAGE_MOBILE": "Attenction! You must verify mobile number",
@@ -316,6 +319,7 @@
         "DELETE_CONFIRM": "Are you sure of delete this driver?"
     },
     "OBU": {
+        "TITLES": "Manage obu",
         "ASSIGN": "Assign Obu",
         "ASSIGN_SUCCESS": "Obu assign correctly",
         "CHANGE": "Change Obu",
@@ -344,6 +348,9 @@
         "ACTIVEVEHICLE": "Active vehicles",
         "WARNINGVEHICLE": "Expiring vehicles",
         "ERRORVEHICLE": "Expired vehicles or without ticket",
+        "ACTIVE": "Active",
+        "WARNING": "On expiring scadenza",
+        "EXPIRED": "Expired",
         "NO_DATA": "No vehicle in area",
         "REFRESH": "Refresh",
         "STOP": "Stop",
@@ -534,10 +541,13 @@
     "error": {
         "generic": "Error server side",
         "alert": {
-            "send": "Errore nell'invio messaggio"
+            "send": "Error nell'invio messaggio"
+        },
+        "mail": {
+            "send": "Error on sending mail"
         },
         "notification": {
-            "send": "Errore nell'invio notifica"
+            "send": "Error on send notification"
         },
         "code": {
             "lang": "Lang not supported",
