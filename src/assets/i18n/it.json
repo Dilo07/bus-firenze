@@ -292,7 +292,7 @@
         "OPEN": "Apri veicoli",
         "CLOSE": "Chiudi veicoli",
         "VERIFY": "Verifica veicolo",
-        "SENDMAIL": "Invia mail di avviso",
+        "SENDMAIL": "Invia mail di avviso al fleet manager",
         "CONFIRMAIL": "Sei sicuro di voler inviare la mail di avviso?"
     },
     "DRIVERS": {

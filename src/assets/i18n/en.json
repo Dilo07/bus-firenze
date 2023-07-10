@@ -292,7 +292,7 @@
         "OPEN": "Open vehicles",
         "CLOSE": "Close vehicles",
         "VERIFY": "Verify vehicle",
-        "SENDMAIL": "Invia mail di avviso",
+        "SENDMAIL": "Send advice mail to fleet manager",
         "CONFIRMAIL": "Are you sure to send the warning deposit mail?"
     },
     "DRIVERS": {
