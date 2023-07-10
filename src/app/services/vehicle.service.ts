@@ -86,6 +86,11 @@ export class VehicleService {
       .pipe(catchError(err => { throw err; }));
   }
 
+  sendAdviceToWarningVehicle(vehicleId: string): Observable<void> {
+    return this.http.get<void>(this.apiUrl + `/${vehicleId}/deposit/vehicles/sendWarningMail`)
+      .pipe(catchError(err => { throw err; }));
+  }
+
   getVehicleByObu(obuId: string, fleetManagerId?: number): Observable<Vehicle> {
     let url = '';
     if (fleetManagerId) {

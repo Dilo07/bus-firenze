@@ -291,7 +291,9 @@
         "REQVALID": "Deposit request validate at ",
         "OPEN": "Open vehicles",
         "CLOSE": "Close vehicles",
-        "VERIFY": "Verify vehicle"
+        "VERIFY": "Verify vehicle",
+        "SENDMAIL": "Send advice mail to fleet manager",
+        "CONFIRMAIL": "Are you sure to send the warning deposit mail?"
     },
     "DRIVERS": {
         "TITLE": "Drivers",
@@ -317,6 +319,7 @@
         "DELETE_CONFIRM": "Are you sure of delete this driver?"
     },
     "OBU": {
+        "TITLES": "Manage obu",
         "ASSIGN": "Assign Obu",
         "ASSIGN_SUCCESS": "Obu assign correctly",
         "CHANGE": "Change Obu",
@@ -538,10 +541,13 @@
     "error": {
         "generic": "Error server side",
         "alert": {
-            "send": "Errore nell'invio messaggio"
+            "send": "Error nell'invio messaggio"
+        },
+        "mail": {
+            "send": "Error on sending mail"
         },
         "notification": {
-            "send": "Errore nell'invio notifica"
+            "send": "Error on send notification"
         },
         "code": {
             "lang": "Lang not supported",

@@ -291,7 +291,9 @@
         "REQVALID": "Richiesta deposito validata il ",
         "OPEN": "Apri veicoli",
         "CLOSE": "Chiudi veicoli",
-        "VERIFY": "Verifica veicolo"
+        "VERIFY": "Verifica veicolo",
+        "SENDMAIL": "Invia mail di avviso al fleet manager",
+        "CONFIRMAIL": "Sei sicuro di voler inviare la mail di avviso?"
     },
     "DRIVERS": {
         "TITLE": "Autisti",
@@ -317,6 +319,7 @@
         "DELETE_CONFIRM": "Sei sicuro di voler cancellare questo autista?"
     },
     "OBU": {
+        "TITLES": "Gestione obu",
         "ASSIGN": "Assegna Obu",
         "ASSIGN_SUCCESS": "Obu assegnato correttamente",
         "CHANGE": "Cambia Obu",
@@ -539,6 +542,9 @@
         "generic": "Errore lato server",
         "alert": {
             "send": "Errore invio messaggio di allerta"
+        },
+        "mail": {
+            "send": "Errore invio mail"
         },
         "notification": {
             "send": "Errore invio notifiche"

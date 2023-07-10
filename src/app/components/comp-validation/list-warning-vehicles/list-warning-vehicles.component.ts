@@ -1,9 +1,11 @@
 import { Component, Input, OnChanges, OnDestroy, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { VehicleWarning } from '../../domain/bus-firenze-domain';
+import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-warning-vehicles',
@@ -18,7 +20,7 @@ export class ListWarningVehiclesComponent implements OnChanges, OnDestroy {
 
   private subscription: Subscription[] = [];
 
-  constructor(private vehicleService: VehicleService) { }
+  constructor(private vehicleService: VehicleService, private dialog: MatDialog) { }
 
   ngOnChanges(): void {
     this.getVehicles();
@@ -38,6 +40,22 @@ export class ListWarningVehiclesComponent implements OnChanges, OnDestroy {
         this.vehicleListConnect = this.dataSource.connect();
       }
     ));
+  }
+
+  public sendMail(vehicleId: string): void {
+    const dialogRef = this.dialog.open(ModalConfirmComponent, {
+      width: '50%',
+      height: '30%',
+      data: { text: 'VEHICLE.CONFIRMAIL' },
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.subscription.push(this.vehicleService.sendAdviceToWarningVehicle(vehicleId).subscribe());
+        }
+      }
+    );
   }
 
 }
