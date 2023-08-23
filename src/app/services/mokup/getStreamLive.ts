@@ -1,6 +1,6 @@
 import { VehicleTripPersistence } from 'src/app/components/domain/bus-firenze-domain';
 
-export const vehicleTrip: VehicleTripPersistence[] = [
+export const vehicleTrip: Partial<VehicleTripPersistence>[] = [
   {
     ticketNumber: 'error', ticketExpiresAt: 1673123668000, id: 1,
     obuId: '000010000000003', start: 1673123668000, end: 1673123668000, type: 'multipolygon',

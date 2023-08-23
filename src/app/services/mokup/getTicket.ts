@@ -1,6 +1,6 @@
 import { Ticket } from 'src/app/components/domain/bus-firenze-domain';
 
-export const activeTicket: Ticket[] = [
+export const activeTicket: Partial<Ticket>[] = [
   {
     ticketId: '1',
     vehicleId: 1,
