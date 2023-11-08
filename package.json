@@ -7,7 +7,7 @@
     "start-dev": "ng serve --base-href /bus-firenze-gui/",
     "build": "npm install && ng build --configuration production --source-map --base-href /bus-firenze-gui/",
     "build-aws": "npm install && ng build --configuration production --source-map",
-    "tag": "npm version patch --​no-git-tag-version",
+    "bump-version": "npm version --no-git-tag-version patch",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

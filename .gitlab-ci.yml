@@ -1,0 +1,6 @@
+# Import shared CI config
+
+include:
+  - project: 'npt/npt-sdlc-templates'
+    ref: 'main'
+    file: 'templates/npm-deployable-aws.yml'
