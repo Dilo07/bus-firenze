@@ -17,9 +17,9 @@ export class LiveStreamService {
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
   getGeometryLive(): Observable<Geometry[]> {
-    /* return this.http.get<Geometry[]>(this.apiUrl + '/live/inner/geom')
-      .pipe(catchError(err => { throw err; })); */
-    return of([]);
+    return this.http.get<Geometry[]>(this.apiUrl + '/live/inner/geom')
+      .pipe(catchError(err => { throw err; }));
+    /* return of([]); */
   }
 
   getStreamLive(fleetManagerId?: number): Observable<VehicleTripPersistence[]> {
@@ -27,8 +27,8 @@ export class LiveStreamService {
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
-/*     return this.http.get<VehicleTripPersistence[]>(this.apiUrl + '/live' + url + '/inner')
-      .pipe(catchError(err => { throw err; })); */
-    return of(this.getVehicleTrip);
+    return this.http.get<VehicleTripPersistence[]>(this.apiUrl + '/live' + url + '/inner')
+      .pipe(catchError(err => { throw err; }));
+    /* return of(this.getVehicleTrip); */
   }
 }
