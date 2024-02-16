@@ -105,7 +105,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
       ticketSave,
       delayed,
       this.data.extend,
-      this.data.fleetManager.id)
+      this.data.fleetManager?.id)
       .subscribe({
         next: () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
         complete: () => this.dialogRef.close(true)
