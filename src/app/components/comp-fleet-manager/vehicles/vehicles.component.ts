@@ -56,7 +56,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.search = this.formBuilder.group({
       ctrlSearch: [this.vehicleLpn],
-      ctrlStatus: ['REGISTERED']
+      ctrlStatus: [this.vehicleLpn ? 'ALL' : 'REGISTERED']
     });
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
     if (this.fleetManager) {
