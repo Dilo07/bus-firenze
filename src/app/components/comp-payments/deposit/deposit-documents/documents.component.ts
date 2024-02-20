@@ -139,9 +139,9 @@ export class DepositDocumentsComponent implements OnInit {
   }
 
   public uploadDeposit(vehicleId: number, event: any, depositType: DepositType): void {
-    this.complete = false;
     const file = event.target.files[0];
     const size = event.target.files[0].size;
+    this.complete = false;
     if (size > 2097152) { // dimensione massima
       this.snackBar.showMessage('FLEET-MANAGER.ERROR_SIZE', 'ERROR');
       this.complete = true;
@@ -149,14 +149,16 @@ export class DepositDocumentsComponent implements OnInit {
       this.subscription.push(this.vehicleService.uploadDeposit(vehicleId, depositType, file, this.fleetManager?.id).subscribe({
         next: () => this.snackBar.showMessage('VEHICLE.UPLOAD_SUCC', 'INFO'),
         error: () => this.complete = true,
-        complete: () => { this.getSingleVehicle(); this.complete = true; }
+        complete: () => this.getSingleVehicle()
       }));
     }
   }
 
   private getSingleVehicle(): void {
-    this.subscription.push(this.vehicleService.getVehicleById(this.fleetManager.id, this.vehicle.id).subscribe(
-      (vehicle) => this.vehicle = vehicle
-    ));
+    this.subscription.push(this.vehicleService.getVehicleById(this.fleetManager.id, this.vehicle.id).subscribe({
+      next: (vehicle) => this.vehicle = vehicle,
+      error: () => this.complete = true,
+      complete: () => this.complete = true
+    }));
   }
 }

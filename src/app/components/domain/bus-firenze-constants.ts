@@ -176,11 +176,11 @@ export const dashboardSettings: DashboardSetting[] = [
       },
       {
         title: 'WELCOME.TITLE-VALID-FLEET', content: 'WELCOME.VALID-FLEET', icon: 'icon-rule',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../validation'
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../validation/valid-fleet'
       },
       {
         title: 'WELCOME.TITLE-VALID-VEHICLE', content: 'WELCOME.VALID-VEHICLE', icon: 'icon-rule',
-        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../validation', state: { index: 1 }
+        cardClass: 'mat-card-movyon-blue', buttonClass: 'whiteButtons', routing: '../validation/valid-vehicle', state: { index: 1 }
       }
     ]
   }
