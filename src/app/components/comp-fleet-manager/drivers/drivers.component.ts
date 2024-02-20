@@ -125,7 +125,7 @@ export class DriversComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ModalNewDriverComponent, {
       width: '60%',
       height: '70%',
-      data: { fleetManager: this.fleetManager },
+      data: { fleetManager: this.fleetManager, countDriver: this.dataSource.data.length },
       autoFocus: false
     });
     dialogRef.afterClosed().subscribe((resp) => {

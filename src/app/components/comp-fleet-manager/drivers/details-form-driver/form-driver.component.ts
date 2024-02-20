@@ -51,19 +51,13 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     await this.authService.getUserRoles().then((res: string[]) => this.roleDriver = res.includes(ROLES.DRIVER));
     if (this.driver) {
       this.formGroup = this.formBuilder.group({
-        ctrlName: [this.driver.name, Validators.required],
-        ctrlSurname: [this.driver.surname, Validators.required],
-        ctrlMail: [this.findContactValue(3), Validators.email]
+        ctrlName: [this.driver.name],
+        ctrlSurname: [this.driver.surname],
+        ctrlMail: [this.findContactValue(3), [Validators.required, Validators.email]]
       });
       if (this.fleetManager) {
         this.getVehicleAssociated();
       }
-    } else {
-      this.formGroup = this.formBuilder.group({
-        ctrlName: ['', Validators.required],
-        ctrlSurname: ['', Validators.required],
-        ctrlMail: ['', Validators.email]
-      });
     }
     if (this.cellularRequired) {
       this.formGroup.addControl('CtrlCell', this.formBuilder.control('', Validators.required));
@@ -148,7 +142,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     this.driverService.editDriver(
       editDriver,
       this.roleDriver ? null : editDriver.id,
-      this.roleDriver ? null : this.fleetManager.id)
+      this.roleDriver ? null : this.fleetManager?.id)
       .subscribe({
         error: () => this.snackBar.showMessage('DRIVERS.EDIT_ERROR', 'ERROR'),
         complete: () => {
@@ -158,7 +152,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
             this.cellularRequired = false;
           }
           if (!this.roleDriver) {
-            const url = this.fleetManager.id ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
+            const url = this.fleetManager?.id ? 'manage/drivers' : '/drivers'; // caso in cui sia movyon o fm
             this.router.navigate([url], { state: { fleetManager: this.fleetManager } });
           }
         }
