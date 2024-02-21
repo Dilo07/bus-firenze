@@ -6,10 +6,11 @@
         {{'VEHICLE.DOCUMENT' | translate}} {{vehicle.id}}
     </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" style="margin-top: 20px;">
-        <ng-container *ngIf="!withDocument">
-            <h4>Carica documenti</h4>
+        <ng-container>
+            <!-- <h4>Carica documenti</h4> -->
             <div fxLayout="row wrap" fxLayoutAlign="start">
-                <mat-card class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="45" fxFlex.gt-md="45">
+                <mat-card *ngIf="!vehicle.deleted && !(vehicle.documents | hasDeposit: true)" class="mat-card-movyon"
+                    fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="45" fxFlex.gt-md="45">
                     <mat-card-title fxLayoutAlign="center center">{{'VEHICLE.RIC_DEPOSIT' | translate}}</mat-card-title>
                     <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
                         {{'VEHICLE.TEXTIBAN' | translate }} {{iban}}
@@ -21,7 +22,8 @@
                         </button>
                     </mat-card-content>
                 </mat-card>
-                <mat-card class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="45" fxFlex.gt-md="45">
+                <mat-card *ngIf="vehicle.deleted && !(vehicle.documents | hasRequest: true) && vehicle.valid"
+                    class="mat-card-movyon" fxFlex="100" fxFlex.gt-xs="100" fxFlex.gt-lg="45" fxFlex.gt-md="45">
                     <mat-card-title fxLayoutAlign="center center">{{'VEHICLE.RIM_DEPOSIT' | translate}}</mat-card-title>
                     <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
                         {{'VEHICLE.TEXTREQUEST' | translate}}
