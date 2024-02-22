@@ -155,7 +155,7 @@ export class FleetManagerComponent implements OnInit {
       if (contractCode) {
         this.subscription.push(this.fleetManagerService.validInvalidFleetManager(id, valid, valid ? contractCode : null).subscribe({
           next: () => this.snackBar.showMessage(valid ? 'FLEET-MANAGER.VALID_SUCCESS' : 'FLEET-MANAGER.DELETE_SUCCESS', 'INFO'),
-          complete: () => this.callGetFleetManager()
+          complete: () => this.refreshTable()
         }));
       }
     });

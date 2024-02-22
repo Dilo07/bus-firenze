@@ -75,7 +75,7 @@ export class TicketService {
       .pipe(catchError(err => { throw err; }));
   }
 
-  removeTicket(ticketId: number, vehicleId: number, isDriver: boolean, fleetManagerId: number): Observable<void> {
+  removeTicket(ticketId: string, vehicleId: number, isDriver: boolean, fleetManagerId: number): Observable<void> {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: HttpUtils.createHttpParams({ ticketId })

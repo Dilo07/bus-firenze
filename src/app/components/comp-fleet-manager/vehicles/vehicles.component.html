@@ -54,12 +54,15 @@
 					<mat-card-title>
 						<mat-icon> <!-- colore icona-->
 							<span class="icon-Pin-rounded" [class]="element.status === 'DELETED' || element.deleted ? 'redIcon' :
-							element.status === 'TEMP' ? 'yellowIcon' :
+							element.status === 'TEMP' || !element.valid ? 'yellowIcon' :
 							element.status === 'REGISTERED' ? 'greenIcon' : 
 							'yellowIcon'">
 							</span>
 						</mat-icon>
 						ID {{element.id}}
+						<mat-icon *ngIf="!element.valid" matTooltip="{{'VEHICLE.INVALID' | translate}}">
+							<span class="icon-Allert"></span>
+						</mat-icon>
 					</mat-card-title>
 					<mat-card-content>
 						<mat-card-subtitle>{{'VEHICLE.LPN' | translate}}: {{element.lpn}}</mat-card-subtitle>

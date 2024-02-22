@@ -8,6 +8,7 @@ import { Breadcrumb, FileViewer, SnackBar } from '@npt/npt-template';
 import { Observable, Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { DepositType, FleetManager, Vehicle } from '../../domain/bus-firenze-domain';
+import { FIRENZE_SESSION } from 'src/app/shared/constants/Firenze-session.constants';
 
 @Component({
   selector: 'app-deposit',
@@ -57,10 +58,13 @@ export class DepositComponent implements OnInit {
     };
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    var valueRadio = JSON.parse(sessionStorage.getItem(FIRENZE_SESSION.depositDocumentRadio));
     this.search = this.formBuilder.group({
       ctrlSearch: [''],
-      ctrlViewAll: [false]
+      ctrlViewAll: [
+        valueRadio ? valueRadio : false
+      ]
     });
     this.breadCrumb = [
       {
@@ -89,6 +93,7 @@ export class DepositComponent implements OnInit {
   }
 
   public getVehicle(): void {
+    sessionStorage.setItem(FIRENZE_SESSION.depositDocumentRadio, this.search.get('ctrlViewAll').value);
     this.complete = false;
     const keyword = this.search.get('ctrlSearch').value;
     const viewAll = this.search.get('ctrlViewAll').value;

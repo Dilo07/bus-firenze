@@ -31,10 +31,10 @@
   "iban": "0193PAGA034",
   "repair_shop": [
     {
-      "nameShop": "Web Korner",
-      "mail": "helpdesk@webkorner.it",
+      "nameShop": "WeTech's",
+      "mail": "helpdesk@wetechs.it",
       "mobileNumber": "055 0981016",
-      "contactRange": "Lun - Ven, 08:30 - 18:30",
+      "contactRange": "Lun - Ven, 08:30 - 18:00",
       "address": "via Fratelli Alinari, 80, 52025 Montevarchi AR"
     }    
   ],

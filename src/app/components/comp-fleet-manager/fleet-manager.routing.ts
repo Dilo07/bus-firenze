@@ -11,6 +11,7 @@ import { StatisticComponent } from './vehicles/page-statistic/statistic.componen
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { SelectionCardsPageComponent } from './selection-cards-page/selection-cards-page.component';
 
+// rotte admin
 const routes: Routes = [
   {
     path: '', component: FleetManagerComponent, canActivate: [AuthGuard],
@@ -36,11 +37,11 @@ const routes: Routes = [
   },
   {
     path: 'form-Driver',
-    component: FormDriverComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON] }
+    component: FormDriverComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
     path: 'drivers',
-    component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON] }
+    component: DriversComponent, canActivate: [AuthGuard], data: { roles: [ROLES.MOVYON, ROLES.OPER_MOVYON] }
   },
   {
     path: 'vehicles',

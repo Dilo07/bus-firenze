@@ -15,6 +15,7 @@
             </mat-card-subtitle>
             <mat-card-subtitle>{{'VEHICLE.CERTIFICATE' | translate}}:
                 <button mat-icon-button [attr.i18nKey]="'VEHICLE.CERTIFICATE'"
+                    [disabled]="!disableViewPdf"
                     (click)="viewCertificate.emit({vehicleId: element.id, certificateId: element.certificateId})">
                     <mat-icon><span class="icon-assignment"></span></mat-icon>
                 </button>

@@ -102,7 +102,7 @@ export class ManageTicketComponent implements OnInit, OnDestroy {
     });
   }
 
-  public removeTicket(ticketId: number, vehicleId: number): void {
+  public removeTicket(ticketId: string, vehicleId: number): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '50%',
       height: '30%',
