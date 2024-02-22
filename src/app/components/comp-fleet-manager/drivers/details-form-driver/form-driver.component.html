@@ -9,8 +9,8 @@
     </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" *ngIf="formGroup">
         <app-association-vehicles [vehiclesAssociated]="vehiclesAssociated" [vehicles]="vehiclesDriver"
-            [idDriver]="this.driver.id" [fleetManagerId]="this.fleetManager.id"
-            *ngIf="fleetManager"></app-association-vehicles>
+            [idDriver]="this.driver.id" [fleetManagerId]="fleetManager?.id" *ngIf="!roleDriver">
+        </app-association-vehicles>
         <mat-card class="mat-card-movyon">
             <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
                 {{'DRIVERS.INFO' | translate}}

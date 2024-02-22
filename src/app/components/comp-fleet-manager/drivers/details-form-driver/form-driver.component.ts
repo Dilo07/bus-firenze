@@ -43,7 +43,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
     @Inject('authService') private authService: IAuthenticationService,
   ) {
     this.driver = this.router.getCurrentNavigation()?.extras.state?.driver as Driver;
-    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager;
+    this.fleetManager = this.router.getCurrentNavigation()?.extras.state?.fleetManager as FleetManager; // op o movyon
     this.cellularRequired = this.router.getCurrentNavigation()?.extras.state?.cellularRequired as boolean; // obbligo inserimento num cellulare
   }
 
@@ -55,9 +55,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
         ctrlSurname: [this.driver.surname],
         ctrlMail: [this.findContactValue(3), [Validators.required, Validators.email]]
       });
-      if (this.fleetManager) {
-        this.getVehicleAssociated();
-      }
+      this.getVehicleAssociated();
     }
     if (this.cellularRequired) {
       this.formGroup.addControl('CtrlCell', this.formBuilder.control('', Validators.required));
@@ -165,7 +163,7 @@ export class FormDriverComponent implements OnInit, OnDestroy {
 
   private getVehicleAssociated(): void {
     this.subscription.push(
-      this.driverService.getVehiclesByDriver(this.driver.id, this.fleetManager?.id).subscribe(
+      this.driverService.getVehiclesByDriver(this.roleDriver ? null : this.driver.id, this.fleetManager?.id).subscribe(
         vehicles => (
           this.vehiclesDriver = vehicles, // tutti i veicoli
           this.vehiclesAssociated = vehicles.filter(vehicle => vehicle.dateIns))));

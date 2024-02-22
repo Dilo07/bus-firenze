@@ -31,7 +31,6 @@ import { ModalNewDriverComponent } from './details-form-driver/modal-new-driver/
 })
 export class DriversComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
   public search: FormGroup;
   public fleetManager: FleetManager;
   public dataSource = new MatTableDataSource<Driver>();
