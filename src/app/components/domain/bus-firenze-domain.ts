@@ -49,28 +49,32 @@ export interface DriverVehicle {
 }
 
 export class Vehicle {
-  id: number;
-  fleetManagerId: number;
-  certificateId: number;
-  lpn: string;
-  lpnNat: string;
   euroClass: number;
+  fleetManagerId: number;
   europeanGroup: number;
   europeanGroupLabel: string;
-  expiresAt: LocalDate;
   numAxis: number;
   maxWeight: number;
-  associationDate: Date;
-  appointmentDate: Date;
+  associationId: number;
+  associationDate: number;
   obuId: string;
   hardware: number;
+  installer: any;
+  fileId: any;
+  appointmentDate: any;
+  deleted: any;
+  status: string;
+  expiresAt: any;
   contractType: string;
   allowContacted: boolean;
-  deleted: boolean;
+  certificateId: number;
   valid: boolean;
-  status: VehicleStatus;
+  id: number;
+  lpn: string;
+  lpnNat: string;
   documents: DocumentVehicle[];
   documentsObu: DocumentObu[];
+  parentId: any;
 }
 
 export interface VehicleWarning {
@@ -85,8 +89,8 @@ export type VehicleStatus = 'ALL' | 'REGISTERED' | 'TEMP' | 'DELETED' | 'UNKNOWN
 
 export interface DocumentVehicle {
   fileId: number;
-  valid: Date;
-  sink: Date;
+  valid: number;
+  sink: number;
   type: DepositType;
 }
 

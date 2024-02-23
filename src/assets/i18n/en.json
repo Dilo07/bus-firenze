@@ -345,6 +345,7 @@
     "REAL-TIME": {
         "NOT-FOUND": "Not found",
         "TICKET": "Ticket",
+        "TICKET_EXPIRED": "Ticket expired",
         "VEHICLES": "Vehicles number",
         "ACTIVEVEHICLE": "Active vehicles",
         "WARNINGVEHICLE": "Expiring vehicles",
@@ -362,7 +363,9 @@
         "1 Minute": "One Minute",
         "5 Minutes": "5 Minutes",
         "10 Minutes": "10 Minutes",
-        "30 Minutes": "30 Minutes"
+        "30 Minutes": "30 Minutes",
+        "EXPAND": "Expand",
+        "CLOSE": "Close"
     },
     "STATISTIC": {
         "TITLE": "Statistic",

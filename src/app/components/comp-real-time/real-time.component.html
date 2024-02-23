@@ -92,31 +92,53 @@
 			</mat-tab-group> -->
 			<div fxLayout="row">
 				<div fxFlex="20" [@slideInOut]="detailsBar">
-					<span fxLayoutAlign="end">
-						<button mat-icon-button (click)="detailsBar = detailsBar === 'on' ? 'off' : 'on'">
-							<mat-icon>{{detailsBar === 'on' ? 'close' : 'chevron_right'}}</mat-icon>
-						</button>
-					</span>
-					<div fxLayout="column" *ngIf="detailsBar  === 'on'">
-						<ng-container *ngFor="let trip of filteredTrip">
-							<mat-card class="mat-card-movyon card-real-time">
-								<mat-card-content>
-									<mat-card-subtitle><b>OBU ID: {{trip.obuId}}</b></mat-card-subtitle>
-									<mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
-										<mat-icon><span class="icon-Pin-rounded" [ngClass]="trip | statusVehicle"></span></mat-icon>
-										<b>{{((trip | statusVehicle) === 'redIcon' ? 'REAL-TIME.EXPIRED' :
-											(trip | statusVehicle) === 'yellowIcon' ? 'REAL-TIME.WARNING' : 'REAL-TIME.ACTIVE') | translate}}</b>
-									</mat-card-subtitle>
-									<mat-card-subtitle><b>{{'COMMON.DATE.START' | translate}}: </b>{{trip.start | date : 'dd/MM/YYYY HH:mm'}}</mat-card-subtitle>
-									<mat-card-subtitle><b>{{'COMMON.DATE.END' | translate}}: </b>{{trip.end | date : 'dd/MM/YYYY HH:mm'}}</mat-card-subtitle>
-									<mat-card-subtitle><b>{{'REAL-TIME.TICKET' | translate}}: </b>{{trip.ticketNumber}}</mat-card-subtitle>
-								</mat-card-content>
-							</mat-card>
-						</ng-container>
-					</div>
+					<ng-scrollbar [autoHeightDisabled]="false">
+						<span fxLayoutAlign="end">
+							<button mat-icon-button
+								matTooltip="{{(detailsBar  === 'on' ? 'REAL-TIME.CLOSE' : 'REAL-TIME.EXPAND') | translate }}"
+								(click)="detailsBar = detailsBar === 'on' ? 'off' : 'on'">
+								<mat-icon>{{detailsBar === 'on' ? 'close' : 'chevron_right'}}</mat-icon>
+							</button>
+						</span>
+						<div fxLayout="column" *ngIf="detailsBar  === 'on'">
+							<ng-container *ngFor="let trip of filteredTrip">
+								<mat-card class="mat-card-movyon card-real-time">
+									<mat-card-content>
+										<mat-card-subtitle><b>OBU ID: {{trip.obuId}}</b></mat-card-subtitle>
+										<mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+											<mat-icon><span class="icon-Pin-rounded"
+													[ngClass]="trip | statusVehicle"></span></mat-icon>
+											<b>{{((trip | statusVehicle) === 'redIcon' ? 'REAL-TIME.EXPIRED' :
+												(trip | statusVehicle) === 'yellowIcon' ? 'REAL-TIME.WARNING' :
+												'REAL-TIME.ACTIVE') | translate}}</b>
+										</mat-card-subtitle>
+										<mat-card-subtitle><b>{{'COMMON.DATE.START' | translate}}: </b>
+											{{trip.start | date : 'dd/MM/YYYY HH:mm'}}</mat-card-subtitle>
+										<mat-card-subtitle><b>{{'COMMON.DATE.END' | translate}}: </b>
+											{{trip.end | date : 'dd/MM/YYYY HH:mm'}}</mat-card-subtitle>
+										<mat-card-subtitle><b>{{'REAL-TIME.TICKET' | translate}}:
+											</b>{{trip.ticketNumber}}</mat-card-subtitle>
+										<mat-card-subtitle><b>{{'REAL-TIME.TICKET_EXPIRED' | translate}}:
+											</b>{{trip.ticketExpiresAt | date : 'dd/MM/YYYY HH:mm'}}</mat-card-subtitle>
+										<mat-card-subtitle>
+											<b>{{'VEHICLE.DETAILS' | translate }}</b>
+											<button mat-icon-button (click)="getVehicleDetails(trip.obuId)">
+												<mat-icon>
+													<span [ngClass]="vehicleDetails?.obuId === trip.obuId ? 'icon-up_arrow' : 'icon-down_arrow'"></span>
+												</mat-icon>
+											</button>
+										</mat-card-subtitle>
+										<ng-container *ngIf="vehicleDetails?.obuId === trip.obuId">
+											<app-vehicle-details [vehicleInfo]="vehicleDetails"></app-vehicle-details>
+										</ng-container>
+									</mat-card-content>
+								</mat-card>
+							</ng-container>
+						</div>
+					</ng-scrollbar>
 				</div>
-				<lib-npt-map fxFlex="80" [@maxWidth]="detailsBar" [zoom]=15 [center]="center" [usePopUp]=true [typeEvent]="'click'"
-					[layerToCheck]="layersPopup" (mapReady)="onMapReady($event)">
+				<lib-npt-map fxFlex="80" [@maxWidth]="detailsBar" [zoom]=15 [center]="center" [usePopUp]=true
+					[typeEvent]="'click'" [layerToCheck]="layersPopup" (mapReady)="onMapReady($event)">
 				</lib-npt-map>
 			</div>
 		</div>

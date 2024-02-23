@@ -1,15 +1,18 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { HttpUtils } from '@npt/npt-template';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DepositType, Vehicle, VehicleWarning } from '../components/domain/bus-firenze-domain';
+import { vehicleDetails002, vehicleDetails209 } from './mokup/getStreamLive';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
   private apiUrl = this.url + '/api/vehicle';
+  private vehicleDetails002 = vehicleDetails002;
+  private vehicleDetails209 = vehicleDetails209;
 
   constructor(private http: HttpClient, @Inject('beUrl') private url: string) { }
 
@@ -96,6 +99,11 @@ export class VehicleService {
     if (fleetManagerId) {
       url = '/' + fleetManagerId;
     }
+    /* if (obuId === '000490000086209') {
+      return of(vehicleDetails209);
+    } else {
+      return of(vehicleDetails002);
+    } */
     return this.http.get<Vehicle>(this.apiUrl + url + '/vehicle/' + obuId)
       .pipe(catchError(err => { throw err; }));
   }
