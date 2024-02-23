@@ -6,6 +6,8 @@
         <mat-card-subtitle>{{'FLEET-MANAGER.SELECT' | translate}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content fxLayout="column" fxLayoutGap="20px">
-        <div> <app-table-fleet (callManageTicket)="navigateSelection($event)"></app-table-fleet> </div>
+        <app-table-fleet [searchValue]="searchFleet" (callManageTicket)="navigateSelection($event)"
+            (saveSearch)="saveFleetSearch($event)">
+        </app-table-fleet>
     </mat-card-content>
 </mat-card>

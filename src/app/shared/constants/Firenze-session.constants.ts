@@ -1,3 +1,5 @@
 export const FIRENZE_SESSION = Object.freeze({
-  fleetManageSearch: 'fleet-search-manage'
+  fleetManageSearch: 'fleet-search-manage',
+  fleetPaymentSearch: 'fleet-search-payment',
+  depositDocumentRadio: 'deposit-document-radio'
 });

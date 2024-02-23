@@ -56,7 +56,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.search = this.formBuilder.group({
       ctrlSearch: [this.vehicleLpn],
-      ctrlStatus: ['REGISTERED']
+      ctrlStatus: [this.vehicleLpn ? 'ALL' : 'REGISTERED']
     });
     this.getVehiclesByManagerId(); // sia per fleet che op_movyon
     if (this.fleetManager) {
@@ -242,7 +242,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
 
   public backToValidVehicle(): void {
     if (this.vehicleLpn) {
-      this.router.navigate(['validation'], { state: { index: 1 } });
+      this.router.navigate(['validation/valid-vehicle'], { state: { index: 1 } });
     } else {
       this.router.navigate(['manage']);
     }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RedirectFleetRoutingModule } from './redirect-fleet-routing.module';
+import { RedirectFleetRoutingModule } from './redirect-fleet.routing';
 
 
 @NgModule({

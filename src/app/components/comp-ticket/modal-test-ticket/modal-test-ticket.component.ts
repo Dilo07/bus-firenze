@@ -28,7 +28,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private snackBar: SnackBar,
     public dialogRef: MatDialogRef<ModalTestTicketComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { vehicleList: VehicleWithoutTicket[]; vehicleId: number; fleetManager: FleetManager; extend: boolean },
+    @Inject(MAT_DIALOG_DATA) public data: { vehicleList: VehicleWithoutTicket[]; vehicleId: number; fleetManagerId: number; extend: boolean },
     @Inject('authService') private authService: IAuthenticationService,
     @Inject('hideActiveTicketData') public hideActiveTicket: boolean
   ) {
@@ -105,7 +105,7 @@ export class ModalTestTicketComponent implements OnInit, OnDestroy {
       ticketSave,
       delayed,
       this.data.extend,
-      this.data.fleetManager.id)
+      this.data.fleetManagerId)
       .subscribe({
         next: () => this.snackBar.showMessage('TICKET.ADD_SUCCESS', 'INFO'),
         complete: () => this.dialogRef.close(true)

@@ -135,6 +135,7 @@
         "NAME": "Nome",
         "SURNAME": "Cognome",
         "FISCALCODE": "Codice fiscale",
+        "MAIL": "Email aziendale",
         "FISCALCODE_VERIFY": "Codice fiscale verificato",
         "VAT_NUMBER": "Partita Iva",
         "VAT_VERIFY": "Partita iva verificata",

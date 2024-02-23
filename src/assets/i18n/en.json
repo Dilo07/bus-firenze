@@ -136,6 +136,7 @@
         "SURNAME": "Surname",
         "FISCALCODE": "Fiscale code",
         "FISCALCODE_VERIFY": "Fiscal code verified",
+        "MAIL": "Company email",
         "VAT_NUMBER": "VAT Number",
         "VAT_VERIFY": "Vat number verify",
         "COMPANY_NAME": "Company Name",

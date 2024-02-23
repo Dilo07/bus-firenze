@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -23,9 +23,11 @@ import { FleetManagerService } from 'src/app/services/fleet-manager.service';
   ]
 })
 export class TableFleetComponent implements OnInit {
+  @Output() public saveSearch = new EventEmitter<string>();
   @Output() public callManageTicket = new EventEmitter<FleetManager>();
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @Input() searchValue = '';
 
   public dataSource = new MatTableDataSource<FleetManager>();
   public fleetManagerList: FleetManager[] = [];
@@ -47,7 +49,7 @@ export class TableFleetComponent implements OnInit {
 
   ngOnInit(): void {
     this.search = this.formBuilder.group({
-      ctrlSearch: [''],
+      ctrlSearch: [this.searchValue]
     });
     this.callGetFleetManager();
   }
@@ -58,6 +60,7 @@ export class TableFleetComponent implements OnInit {
 
   public callGetFleetManager(): void {
     const search = this.search.get('ctrlSearch').value;
+    this.saveSearch.emit(search ? search : '');
     this.complete = false;
     const currentSize = this.offset * this.limit;
     this.subscription.push(

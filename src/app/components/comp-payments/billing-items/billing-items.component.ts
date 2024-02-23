@@ -56,7 +56,7 @@ export class BillingItemsComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     this.formGroup = new FormGroup({
-      ctrlBillingStatus: new FormControl(BILLING_STATUS.pending, Validators.required),
+      ctrlBillingStatus: new FormControl(BILLING_STATUS.all, Validators.required),
       ctrlRangeStart: new FormControl(moment().subtract(30, 'day').toDate(), Validators.required),
       ctrlRangeEnd: new FormControl(moment().toDate(), Validators.required),
     });
