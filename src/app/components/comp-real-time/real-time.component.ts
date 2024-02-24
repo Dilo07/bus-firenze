@@ -11,10 +11,11 @@ import { Subscription } from 'rxjs';
 import { LiveStreamService } from 'src/app/services/live-stream.service';
 import { FirenzeMapUtils } from 'src/app/shared/utils/map/Firenze-map.utils';
 import { TIMEREFRESH } from '../domain/bus-firenze-constants';
-import { FleetManager, RefreshInterface, RefreshOption, VehicleTripPersistence } from '../domain/bus-firenze-domain';
+import { FleetManager, RefreshInterface, RefreshOption, Vehicle, VehicleTripPersistence } from '../domain/bus-firenze-domain';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Button } from '@npt/npt-map/lib/utils/control.utils';
 import { StatusVehiclePipe } from 'src/app/shared/utils/pipes/status-vehicle.pipe';
+import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-real-time',
@@ -31,14 +32,14 @@ import { StatusVehiclePipe } from 'src/app/shared/utils/pipes/status-vehicle.pip
         style({
           'overflow-y': 'auto',
           'max-height': '600px',
-          'max-width': '20%',
+          'max-width': '22%',
           'box-shadow': '0px 4px 16px rgba(0, 0, 0, 0.25)'
         })
       ),
       state(
         'off',
         style({
-          'max-width': '2%',
+          'max-width': '3%',
           'box-shadow': '0px 4px 16px rgba(0, 0, 0, 0.25)'
         })
       ),
@@ -77,7 +78,8 @@ export class RealTimeComponent {
   public times: RefreshInterface[] = TIMEREFRESH;
   public layersPopup = [FirenzeMapUtils.layerEnum.POINT_REAL_TIME];
   public breadCrumb: Breadcrumb[] = [];
-  public detailsBar: 'on' | 'off' = 'on';
+  public detailsBar: 'on' | 'off' = 'off';
+  public vehicleDetails: Vehicle;
 
   private subscription: Subscription[] = [];
   private geometry: Geometry[] | GeoJSON[] = [];
@@ -89,6 +91,7 @@ export class RealTimeComponent {
 
   constructor(
     private router: Router,
+    private fleetManagerService: VehicleService,
     private liveStreamService: LiveStreamService,
     private cdr: ChangeDetectorRef,
     private pipeStateVehicle: StatusVehiclePipe,
@@ -108,6 +111,7 @@ export class RealTimeComponent {
     this.subscription.push(this.liveStreamService.getStreamLive(this.fleetManager?.id).subscribe({
       next: (trip) => {
         this.vehicleTrip = trip;
+        trip.length > 0 ? this.detailsBar = 'on' : this.detailsBar = 'off';
         this.drawLine();
       },
       error: () => (this.complete = true, this.cdr.markForCheck()),
@@ -149,6 +153,20 @@ export class RealTimeComponent {
     }
   }
 
+  public getVehicleDetails(obuId: string): void {
+    if (this.vehicleDetails?.obuId === obuId) {
+      this.vehicleDetails = null;
+    } else {
+      this.subscription.push(this.fleetManagerService.getVehicleByObu(obuId, this.fleetManager?.id).subscribe({
+        next: (data: Vehicle) => {
+          this.vehicleDetails = data;
+        },
+        error: () => this.complete = true,
+        complete: () => this.complete = true
+      }));
+    }
+  }
+
   private getGeom(): void {
     this.subscription.push(this.liveStreamService.getGeometryLive().subscribe({
       next: (geom) => {
@@ -175,6 +193,7 @@ export class RealTimeComponent {
     const attributeWarning = document.getElementById('warningVehicle')?.getAttribute('selected');
     const attributeError = document.getElementById('errorVehicle')?.getAttribute('selected');
     this.vehicleTrip.forEach((trip) => {
+      // verifico che il filtro sia select o falso e che il trip sia attivo - in scadenza - scaduto senza ticket
       if ((!attributeActive || attributeActive === 'selected') && this.pipeStateVehicle.transform(trip) === 'greenIcon') {
         this.filteredTrip.push(trip);
       }
@@ -268,7 +287,7 @@ export class RealTimeComponent {
       'icon-Pin-rounded',
       () => this.selectUnselectButton('activeVehicle'),
       false,
-      '350px'
+      '250px'
     );
 
     this.warningVehicle = new MapUtils.Control.Enum.BUTTON(
@@ -278,7 +297,7 @@ export class RealTimeComponent {
       'icon-Pin-rounded',
       () => this.selectUnselectButton('warningVehicle'),
       false,
-      '500px'
+      '400px'
     );
 
     this.errorVehicle = new MapUtils.Control.Enum.BUTTON(
@@ -288,7 +307,7 @@ export class RealTimeComponent {
       'icon-Pin-rounded',
       () => this.selectUnselectButton('errorVehicle'),
       false,
-      '700px'
+      '600px'
     );
 
     MapUtils.Control.SetControls(this.map, [this.activeVehicle, this.warningVehicle, this.errorVehicle]);

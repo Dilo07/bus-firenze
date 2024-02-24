@@ -344,11 +344,12 @@
     },
     "REAL-TIME": {
         "NOT-FOUND": "Non trovato",
-        "TICKET": "ticket",
+        "TICKET": "Ticket",
+        "TICKET_EXPIRED": "Scadenza",
         "VEHICLES": "Numero veicoli",
-        "ACTIVEVEHICLE": "Veicoli attivi",
-        "WARNINGVEHICLE": "Veicoli in scadenza",
-        "ERRORVEHICLE": "Veicoli scaduti/senza ticket",
+        "ACTIVEVEHICLE": "Ticket attivi",
+        "WARNINGVEHICLE": "Ticket in scadenza",
+        "ERRORVEHICLE": "Ticket scaduti/senza ticket",
         "ACTIVE": "Attivo",
         "WARNING": "In scadenza",
         "EXPIRED": "Scaduto",
@@ -362,7 +363,9 @@
         "1 Minute": "Ogni minuto",
         "5 Minutes": "5 Minuti",
         "10 Minutes": "10 Minuti",
-        "30 Minutes": "30 Minuti"
+        "30 Minutes": "30 Minuti",
+        "EXPAND": "Espandi",
+        "CLOSE": "Chiudi"
     },
     "STATISTIC": {
         "TITLE": "Statistiche",

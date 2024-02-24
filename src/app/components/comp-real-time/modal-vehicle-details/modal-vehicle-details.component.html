@@ -1,49 +1,19 @@
-<div fxLayout="column" fxLayoutGap="20px">
-    <mat-card-title fxLayout="row" fxLayoutAlign="center center"> {{'VEHICLE.DETAILS' | translate}}</mat-card-title>
-    <mat-progress-bar mode="indeterminate" *ngIf="!complete"></mat-progress-bar>
-    <div fxLayout="row wrap" fxLayoutAlign="center center">
-        <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
-            <mat-card-content>
-                <mat-card-title>{{'VEHICLE.DATE_ASSOCIATION' | translate}}</mat-card-title>
-                <mat-card-subtitle>{{vehicleInfo?.associationDate | date : 'dd/MM/YYYY'}}</mat-card-subtitle>
-            </mat-card-content>
-        </mat-card>
-        <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
-            <mat-card-content>
-                <mat-card-title>{{'VEHICLE.WEIGHT' | translate }}</mat-card-title>
-                <mat-card-subtitle> {{vehicleInfo?.maxWeight}} </mat-card-subtitle>
-            </mat-card-content>
-        </mat-card>
-        <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
-            <mat-card-content>
-                <mat-card-title>{{'VEHICLE.AXIS' | translate }}</mat-card-title>
-                <mat-card-subtitle> {{vehicleInfo?.numAxis}} </mat-card-subtitle>
-            </mat-card-content>
-        </mat-card>
-        <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
-            <mat-card-content>
-                <mat-card-title>{{'VEHICLE.LPN' | translate}}</mat-card-title>
-                <mat-card-subtitle> {{vehicleInfo?.lpn}} </mat-card-subtitle>
-            </mat-card-content>
-        </mat-card>
-        <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
-            <mat-card-content>
-                <mat-card-title>{{'VEHICLE.LPN_NAT' | translate }}</mat-card-title>
-                <mat-card-subtitle> <span [ngClass]="'fi fi-' + vehicleInfo?.lpnNat.toLowerCase()"></span>
-                </mat-card-subtitle>
-            </mat-card-content>
-        </mat-card>
-        <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
-            <mat-card-content>
-                <mat-card-title>{{'VEHICLE.EURO-CLASS' | translate }}</mat-card-title>
-                <mat-card-subtitle> {{vehicleInfo?.euroClass}} </mat-card-subtitle>
-            </mat-card-content>
-        </mat-card>
-        <mat-card fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
-            <mat-card-content>
-                <mat-card-title>{{'VEHICLE.EUROPEAN-GROUP' | translate }}</mat-card-title>
-                <mat-card-subtitle> {{vehicleInfo?.europeanGroupLabel | translate}} </mat-card-subtitle>
-            </mat-card-content>
-        </mat-card>
-    </div>
-</div>
+<mat-card-subtitle><b>{{'VEHICLE.DATE_ASSOCIATION' | translate }}: </b>
+    {{vehicleInfo?.associationDate | date : 'dd/MM/YYYY'}}
+</mat-card-subtitle>
+<mat-card-subtitle><b>{{'VEHICLE.LPN' | translate}}: </b>
+    {{vehicleInfo.lpn}} 
+    <span [ngClass]="'fi fi-' + vehicleInfo.lpnNat.toLowerCase()"></span>
+</mat-card-subtitle>
+<mat-card-subtitle><b>{{'VEHICLE.EURO-CLASS' | translate }}: </b>
+    {{vehicleInfo?.euroClass}}
+</mat-card-subtitle>
+<mat-card-subtitle><b>{{'VEHICLE.EUROPEAN-GROUP' | translate }}: </b>
+    {{vehicleInfo?.europeanGroupLabel | translate}}
+</mat-card-subtitle>
+<mat-card-subtitle><b>{{'VEHICLE.AXIS' | translate }}: </b>
+    {{vehicleInfo?.numAxis}}
+</mat-card-subtitle>
+<mat-card-subtitle><b>{{'VEHICLE.WEIGHT' | translate }}: </b>
+    {{vehicleInfo?.maxWeight}}
+</mat-card-subtitle>
